@@ -115,7 +115,7 @@
     { 
       "id": "col",
       "title": "Colosal PC 2.6",
-      "img": "../src/img/colosal.png"
+      "img": "/img/colosal.png"
     },
     {
       "id": "kim",
