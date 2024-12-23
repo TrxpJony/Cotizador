@@ -183,24 +183,74 @@ ul li label {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+  /* Ajustes generales para pantallas pequeñas (como iPhone) */
   .door-container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Centra los elementos en pantallas pequeñas */
+    padding: 10px; /* Añade un poco de padding */
   }
 
   .door-frame, .parts-list {
-    width: 100%; /* Hace que ambas ocupen el 100% en pantallas pequeñas */
+    width: 100%; /* Ocupa todo el ancho disponible */
     margin: 0;
     padding: 15px;
+    box-sizing: border-box; /* Asegura que padding no afecte el tamaño total */
   }
 
   .dimensions-form {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+    padding: 15px 0;
   }
 
   .dimensions-form label {
     margin-bottom: 10px;
+    font-size: 14px; /* Ajusta el tamaño de la fuente para pantallas pequeñas */
+  }
+
+  .dimensions-form input {
+    width: 100%; /* Hace que los inputs ocupen todo el ancho */
+    padding: 8px;
+    font-size: 14px; /* Ajusta el tamaño de la fuente de los inputs */
+  }
+
+  /* Asegura que los elementos de la lista de partes estén bien organizados */
+  .parts-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos de la lista */
+    width: 100%;
+  }
+
+  .parts-list .part {
+    margin-bottom: 10px;
+    width: 100%; /* Asegura que cada parte ocupe el ancho completo */
+  }
+
+  /* Ajusta imágenes para que no excedan el tamaño en pantallas pequeñas */
+  .door-frame img {
+    max-width: 100%; /* Hace que las imágenes sean responsivas */
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Ajustes específicos para pantallas más pequeñas como las de iPhones más pequeños */
+  .door-container {
+    padding: 5px; /* Reduce el padding en pantallas muy pequeñas */
+  }
+
+  .door-frame, .parts-list {
+    padding: 10px; /* Ajusta el padding */
+  }
+
+  .dimensions-form label {
+    font-size: 12px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+  }
+
+  .dimensions-form input {
+    font-size: 12px; /* Ajusta el tamaño de la fuente de los inputs */
   }
 }
 
@@ -224,4 +274,5 @@ ul li label {
     font-family: Arial, sans-serif;
   }
 }
+
 
