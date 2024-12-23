@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import kimbayaImage from '../../../img/kimbaya.png'; // Importar la imagen
+import kimbayaImage from '../../../img/kimxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
