@@ -1,0 +1,12 @@
+/* Asegúrate de que el contenedor principal ocupe toda la pantalla */
+.min-h-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* El footer se mantendrá en la parte inferior */
+  footer {
+    margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo */
+  }
+  

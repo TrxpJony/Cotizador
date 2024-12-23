@@ -1,0 +1,795 @@
+{
+  "vidrio": [
+    {
+      "id": "cp1",
+      "title": "Colosal PC 2.6",
+      "tipo": "XO - OX",
+      "categoria": "colosalpc26",
+      "img": "../src/img/colox.png"
+    },
+    {
+      "id": "cp2",
+      "title": "Colosal PC 2.6",
+      "tipo": "XX",
+      "categoria": "colosalpc26",
+      "img": "../src/img/colxx.png"
+    },
+    {
+      "id": "cp3",
+      "title": "Colosal PC 2.6",
+      "tipo": "XXX",
+      "categoria": "colosalpc26",
+      "img": "../src/img/colxxx.png"
+    },
+    {
+      "id": "cp4",
+      "title": "Colosal PC 2.6",
+      "tipo": "OXXO",
+      "categoria": "colosalpc26",
+      "img": "../src/img/coloxxo.png"
+    },
+
+    {
+      "id": "kim1",
+      "title":"Kimbaya",
+      "tipo": "XO - OX",
+      "categoria":"kimbaya",
+      "img":"../src/img/kimxo.png"
+    },
+    {
+      "id": "kim2",
+      "title":"Kimbaya",
+      "tipo":"XXX",
+      "categoria":"kimbaya",
+      "img":"../src/img/kimxxx.png"
+    },
+    {
+      "id": "s741",
+      "title": "Sistema 744",
+      "tipo": "XO - OX",
+      "categoria": "sistema744",
+      "img": "../src/img/colox.png"
+    },
+    {      
+      "id": "s80251",
+      "title": "Sistema 8025",
+      "tipo": "XO - OX",
+      "categoria": "sistema8025",
+      "img": "../src/img/colox.png"
+    },
+    {
+      "id": "a201",
+      "title": "Astral 2.0",
+      "tipo": "XO - OX",
+      "categoria": "astral20",
+      "img": "../src/img/colox.png"
+    },
+    {
+      "id": "a202",
+      "title": "Astral 2.0",
+      "tipo": "XX",
+      "categoria": "astral20",
+      "img": "../src/img/colxx.png"
+    },
+    {
+      "id": "a171",
+      "title": "Astral 1.7",
+      "tipo": "XO - OX",
+      "categoria": "astral17",
+      "img": "../src/img/colox.png"
+    },
+    {
+      "id": "c3451",
+      "title": "Colosal 345",
+      "tipo": "XO - OX",
+      "categoria": "colosal345",
+      "img": "../src/img/colosal3.png"
+    },
+    {
+      "id": 5,
+      "title":"Tairona",
+      "categoria":"tairona",
+      "img":"../src/img/tairona.png"
+    },
+    {
+      "id": 7,
+      "title":"Zinu",
+      "categoria":"Zinu",
+      "img":"../src/img/zinu.png"
+    },
+    {
+      "id": 8,
+      "title":"Awa",
+      "categoria":"Awa",
+      "img":"../src/img/awa.png"
+    },
+    {
+      "id": 9,
+      "title":"Sideral 2.4",
+      "categoria":"sideral",
+      "img":"../src/img/sideral2.png"
+    }
+    
+      ],
+    "categoria": [
+    { 
+      "id": "col",
+      "title": "Colosal PC 2.6",
+      "img": "../src/img/colosal.png"
+    },
+    {
+      "id": "kim",
+      "title": "Kimbaya",
+      "img": "../src/img/kimbaya.png"
+    },
+    {
+      "id": "744",
+      "title": "Sistema 744",
+      "img": "../src/img/sistema744.png"
+    },
+    {
+      "id": "8025",
+      "title": "Sistema 8025",
+      "img": "../src/img/sistema8025.png"
+    },
+    {
+      "id": "ast",
+      "title": "Astral 2.0",
+      "img": "../src/img/astral20.png"
+    },
+    {
+    "id": "ast17",
+    "title": "Astral 1.7",
+    "img": "../src/img/astral.png"
+  },
+  {
+    "id": "c345",
+    "title": "Colosal 345",
+    "img": "../src/img/colosal3.png" 
+  },
+  {
+    "id": "com",
+    "title": "Comet X",
+    "img": "../src/img/cometx.png"
+  },
+  {
+    "id": "gal",
+    "title": "Galaxy Pro",
+    "img": "../src/img/galaxypro.png"
+  },
+  {
+    "id": "sol",
+    "title": "Solaris V2",
+    "img": "../src/img/solarisv2.png"
+  },
+  {
+    "id": "orb",
+    "title": "Orbital Eclipse",
+    "img": "../src/img/orbitaleclipse.png"
+  },
+  {
+    "id": "luna",
+    "title": "Lunar Nova",
+    "img": "../src/img/lunarnova.png"
+  },
+  {
+    "id": "astro",
+    "title": "Astro Nexus",
+    "img": "../src/img/astronexus.png"
+  },
+  {
+    "id": "nova",
+    "title": "Nova Strike",
+    "img": "../src/img/novastrike.png"
+  },
+  {
+    "id": "cel",
+    "title": "Celestial 4.0",
+    "img": "../src/img/celestial40.png"
+  },
+  {
+    "id": "stella",
+    "title": "Stellar Drift",
+    "img": "../src/img/stellardrift.png"
+  },
+  {
+    "id": "quasar",
+    "title": "Quasar Prime",
+    "img": "../src/img/quasarprime.png"
+  },
+  {
+    "id": "eclipse",
+    "title": "Eclipse 3D",
+    "img": "../src/img/eclipse3d.png"
+  },
+  {
+    "id": "cosmo",
+    "title": "Cosmic Vortex",
+    "img": "../src/img/cosmicvortex.png"
+  },
+  {
+    "id": "starlight",
+    "title": "Starlight Radiance",
+    "img": "../src/img/starlightradiance.png"
+  },
+  {
+    "id": "aurora",
+    "title": "Aurora 5.0",
+    "img": "../src/img/aurora50.png"
+  },
+  {
+    "id": "andromeda",
+    "title": "Andromeda 2024",
+    "img": "../src/img/andromeda2024.png"
+  },
+  {
+    "id": "pulsar",
+    "title": "Pulsar X",
+    "img": "../src/img/pulsarx.png"
+  },
+  {
+    "id": "nebulae",
+    "title": "Nebulae Infinity",
+    "img": "../src/img/nebulaeinfinity.png"
+  },
+  {
+    "id": "eon",
+    "title": "Eon Horizon",
+    "img": "../src/img/eonhorizon.png"
+  },
+  {
+    "id": "hyperion",
+    "title": "Hyperion Nova",
+    "img": "../src/img/hyperionnova.png"
+  },
+  {
+    "id": "zenith",
+    "title": "Zenith Blaze",
+    "img": "../src/img/zenithblaze.png"
+  },
+  {
+    "id": "galactic",
+    "title": "Galactic Odyssey",
+    "img": "../src/img/galacticodyssey.png"
+  },
+  {
+    "id": "astralis",
+    "title": "Astralis Core",
+    "img": "../src/img/astraliscore.png"
+  },
+  {
+    "id": "pulse",
+    "title": "Pulse Nebula",
+    "img": "../src/img/pulsenebula.png"
+  },
+  {
+    "id": "orbit",
+    "title": "Orbiton Prime",
+    "img": "../src/img/orbitonprime.png"
+  },
+  {
+    "id": "stratos",
+    "title": "Stratos Vortex",
+    "img": "../src/img/stratosvortex.png"
+  },
+  {
+    "id": "vortex",
+    "title": "Vortex Alpha",
+    "img": "../src/img/vortexalpha.png"
+  },
+  {
+    "id": "interstellar",
+    "title": "Interstellar Flux",
+    "img": "../src/img/interstellarflux.png"
+  },
+  {
+    "id": "nebulaX",
+    "title": "Nebula X",
+    "img": "../src/img/nebulax.png"
+  },
+  {
+    "id": "meteor",
+    "title": "Meteor Storm",
+    "img": "../src/img/meteorstorm.png"
+  },
+  {
+    "id": "galaxyx",
+    "title": "Galaxy Xtreme",
+    "img": "../src/img/galaxyxtreme.png"
+  },
+  {
+    "id": "cosmos",
+    "title": "Cosmos Nova",
+    "img": "../src/img/cosmosnova.png"
+  },
+  {
+    "id": "nova3",
+    "title": "Nova 3.0",
+    "img": "../src/img/nova30.png"
+  },
+  {
+    "id": "pulsarX",
+    "title": "Pulsar Xtreme",
+    "img": "../src/img/pulsarxtreme.png"
+  },
+  {
+    "id": "orion",
+    "title": "Orion Nebula",
+    "img": "../src/img/orionnebula.png"
+  },
+  {
+    "id": "apollo",
+    "title": "Apollo Horizon",
+    "img": "../src/img/apollohorizon.png"
+  },
+  {
+    "id": "nebulaX5",
+    "title": "Nebula X5",
+    "img": "../src/img/nebulax5.png"
+  },
+  {
+    "id": "quanta",
+    "title": "Quanta Nova",
+    "img": "../src/img/quanta.png"
+  },
+  {
+    "id": "stellarX",
+    "title": "Stellar Eclipse",
+    "img": "../src/img/stellarEclipse.png"
+  },
+  {
+    "id": "supernova",
+    "title": "Supernova Prime",
+    "img": "../src/img/supernovaprime.png"
+  },
+  {
+    "id": "cosmicX",
+    "title": "Cosmic Vortex X",
+    "img": "../src/img/cosmicvortexx.png"
+  },
+  {
+    "id": "lunarX",
+    "title": "Lunar Eclipse X",
+    "img": "../src/img/lunareclipseX.png"
+  },
+  {
+    "id": "solarX",
+    "title": "Solar Flare X",
+    "img": "../src/img/solarflareX.png"
+  },
+  {
+    "id": "xenon",
+    "title": "Xenon Nova",
+    "img": "../src/img/xenonnova.png"
+  },
+  {
+    "id": "vortexX",
+    "title": "Vortex X2",
+    "img": "../src/img/vortexx2.png"
+  },
+  {
+    "id": "orionX",
+    "title": "Orion Star",
+    "img": "../src/img/orionstar.png"
+  },
+  {
+    "id": "stellarPrime",
+    "title": "Stellar Prime",
+    "img": "../src/img/stellarprime.png"
+  },
+  {
+    "id": "eclipseX",
+    "title": "Eclipse Nova",
+    "img": "../src/img/eclipsenova.png"
+  },
+  {
+    "id": "supernovaX",
+    "title": "Supernova Xcel",
+    "img": "../src/img/supernovaxcel.png"
+  },
+  {
+    "id": "lunaPrime",
+    "title": "Luna Prime",
+    "img": "../src/img/lunaprime.png"
+  },
+  {
+    "id": "cometPrime",
+    "title": "Comet Prime",
+    "img": "../src/img/cometprime.png"
+  },
+  {
+    "id": "neutron",
+    "title": "Neutron Pulse",
+    "img": "../src/img/neutronpulse.png"
+  },
+  {
+    "id": "astron",
+    "title": "Astron Wave",
+    "img": "../src/img/astronwave.png"
+  },
+  {
+    "id": "cosmicPrime",
+    "title": "Cosmic Prime",
+    "img": "../src/img/cosmicprime.png"
+  },
+  {
+    "id": "fusionX",
+    "title": "Fusion Eclipse",
+    "img": "../src/img/fusioneclipse.png"
+  },
+  {
+    "id": "starNova",
+    "title": "Star Nova",
+    "img": "../src/img/starnova.png"
+  },
+  {
+    "id": "galaxyVortex",
+    "title": "Galaxy Vortex",
+    "img": "../src/img/galaxyvortex.png"
+  },
+  {
+    "id": "cosmoX",
+    "title": "Cosmo Hypernova",
+    "img": "../src/img/cosmohypernova.png"
+  },
+  {
+    "id": "intergalactic",
+    "title": "Intergalactic Fusion",
+    "img": "../src/img/intergalacticfusion.png"
+  },
+    {
+      "id": "vortexX",
+      "title": "Vortex X2",
+      "img": "../src/img/vortexx2.png"
+    },
+    {
+      "id": "orionX",
+      "title": "Orion Star",
+      "img": "../src/img/orionstar.png"
+    },
+    {
+      "id": "stellarPrime",
+      "title": "Stellar Prime",
+      "img": "../src/img/stellarprime.png"
+    },
+    {
+      "id": "eclipseX",
+      "title": "Eclipse Nova",
+      "img": "../src/img/eclipsenova.png"
+    },
+    {
+      "id": "supernovaX",
+      "title": "Supernova Xcel",
+      "img": "../src/img/supernovaxcel.png"
+    },
+    {
+      "id": "lunaPrime",
+      "title": "Luna Prime",
+      "img": "../src/img/lunaprime.png"
+    },
+    {
+      "id": "cometPrime",
+      "title": "Comet Prime",
+      "img": "../src/img/cometprime.png"
+    },
+    {
+      "id": "neutron",
+      "title": "Neutron Pulse",
+      "img": "../src/img/neutronpulse.png"
+    },
+    {
+      "id": "astron",
+      "title": "Astron Wave",
+      "img": "../src/img/astronwave.png"
+    },
+    {
+      "id": "cosmicPrime",
+      "title": "Cosmic Prime",
+      "img": "../src/img/cosmicprime.png"
+    },
+    {
+      "id": "fusionX",
+      "title": "Fusion Eclipse",
+      "img": "../src/img/fusioneclipse.png"
+    },
+    {
+      "id": "starNova",
+      "title": "Star Nova",
+      "img": "../src/img/starnova.png"
+    },
+    {
+      "id": "galaxyVortex",
+      "title": "Galaxy Vortex",
+      "img": "../src/img/galaxyvortex.png"
+    },
+    {
+      "id": "cosmoX",
+      "title": "Cosmo Hypernova",
+      "img": "../src/img/cosmohypernova.png"
+    },
+    {
+      "id": "intergalactic",
+      "title": "Intergalactic Fusion",
+      "img": "../src/img/intergalacticfusion.png"
+    },
+    {
+      "id": "astralV3",
+      "title": "Astral Vision 3.0",
+      "img": "../src/img/astralvision30.png"
+    },
+    {
+      "id": "nebulaV3",
+      "title": "Nebula Vortex 3.0",
+      "img": "../src/img/nebulavortex30.png"
+    },
+    {
+      "id": "solarX",
+      "title": "Solar Eclipse X",
+      "img": "../src/img/solareclipseX.png"
+    },
+    {
+      "id": "cosmicVortex",
+      "title": "Cosmic Vortex 5",
+      "img": "../src/img/cosmicvortex5.png"
+    },
+    {
+      "id": "lunarNova",
+      "title": "Lunar Nova X",
+      "img": "../src/img/lunarnovax.png"
+    },
+    {
+      "id": "hypernovaX2",
+      "title": "Hypernova X2",
+      "img": "../src/img/hypernovax2.png"
+    },
+    {
+      "id": "quasarNova",
+      "title": "Quasar Nova X",
+      "img": "../src/img/quasarnovax.png"
+    },
+    {
+      "id": "starCore",
+      "title": "Star Core 4.0",
+      "img": "../src/img/starcore40.png"
+    },
+    {
+      "id": "orbitXtreme",
+      "title": "Orbit Xtreme V2",
+      "img": "../src/img/orbitxtremev2.png"
+    },
+    {
+      "id": "celestialX",
+      "title": "Celestial Xcel",
+      "img": "../src/img/celestialxcel.png"
+    },
+    {
+      "id": "novaCore",
+      "title": "Nova Core 2025",
+      "img": "../src/img/novacore2025.png"
+    },
+    {
+      "id": "eclipseXtreme",
+      "title": "Eclipse Xtreme",
+      "img": "../src/img/eclipsextreme.png"
+    },
+    {
+      "id": "stellarNova",
+      "title": "Stellar Nova V2",
+      "img": "../src/img/stellarnovav2.png"
+    },
+    {
+      "id": "astroVortex",
+      "title": "Astro Vortex 6.0",
+      "img": "../src/img/astrovortex60.png"
+    },
+    {
+      "id": "galaxyXcel",
+      "title": "Galaxy Xcel V2",
+      "img": "../src/img/galaxyxcelv2.png"
+    },
+    {
+      "id": "stellaX",
+      "title": "Stella X",
+      "img": "../src/img/stellax.png"
+    },
+    {
+      "id": "novaPrime",
+      "title": "Nova Prime X2",
+      "img": "../src/img/novaprimeX2.png"
+    },
+    {
+      "id": "eclipseNova",
+      "title": "Eclipse Nova Pro",
+      "img": "../src/img/eclipsenovapro.png"
+    },
+    {
+      "id": "cosmicStorm",
+      "title": "Cosmic Storm V4",
+      "img": "../src/img/cosmicstormV4.png"
+    },
+    {
+      "id": "astroCore",
+      "title": "Astro Core X",
+      "img": "../src/img/astrocorex.png"
+    },
+    {
+      "id": "lunarVortex",
+      "title": "Lunar Vortex 2.0",
+      "img": "../src/img/lunarvortex20.png"
+    },
+    {
+      "id": "solarPrime",
+      "title": "Solar Prime V3",
+      "img": "../src/img/solarprimeV3.png"
+    },
+    {
+      "id": "starPulse",
+      "title": "Star Pulse X",
+      "img": "../src/img/starpulsex.png"
+    },
+    {
+      "id": "astralForce",
+      "title": "Astral Force 5.0",
+      "img": "../src/img/astralforce50.png"
+    },
+    {
+      "id": "quantaNova",
+      "title": "Quanta Nova Pro",
+      "img": "../src/img/quantanovapro.png"
+    },
+    {
+      "id": "galaxyEclipse",
+      "title": "Galaxy Eclipse V2",
+      "img": "../src/img/galaxyeclipseV2.png"
+    },
+    {
+      "id": "stellarPulse",
+      "title": "Stellar Pulse 4.0",
+      "img": "../src/img/stellarpulse40.png"
+    },
+    {
+      "id": "pulsarPrime",
+      "title": "Pulsar Prime X",
+      "img": "../src/img/pulsarprimeX.png"
+    },
+    {
+      "id": "orbitNova",
+      "title": "Orbit Nova 2.0",
+      "img": "../src/img/orbitnova20.png"
+    },
+    {
+      "id": "neutronStorm",
+      "title": "Neutron Storm X",
+      "img": "../src/img/neutronstormX.png"
+    }
+  
+    
+    ],
+    "precios": {
+      "cabezalcol": 25000,
+      "sillarcol": 30000,
+      "jambacol": 25000,
+      "horizontalSuperiorcol": 17000,
+      "horizontalInferiorFijacol": 27000,
+      "horizontalInferiorMovilcol": 27000,
+      "traslapecol": 25000,
+      "enganchecol": 32000,
+      "engancheReforzadocol": 10,
+      "guiaSimplecol": 22000,
+      "guiaDoblecol": 30000,
+      "complementoCabezalcol": 22000,
+      "complementoJambacol": 20000,
+      "adaptadorcol": 24000,
+
+      "marcoPerimetralkim": 25000,
+      "pistaRodamientokal": 30000,
+      "pistaRodamientokim": 22000,
+      "complementoSuperiorkim": 35000,
+      "verticalHorizontaleskim": 30000,
+      "enganchekim": 25000,
+      "verticalHorizontalesCakim":22000,
+      "engancheVidrioCakim": 20000,
+
+      "cabezalast": 22000,
+      "sillarast": 28000,
+      "sillarAlfajiaast": 27000,
+      "jambaast": 24000,
+      "horizontalSuperiorast": 16000,
+      "horizontalInferiorMovilast": 25000,
+      "horizontalInferiorFijaast": 25000,
+      "traslapeast": 23000,
+      "engancheast": 30000,
+
+      "cabezal744": 12000,
+      "sillar744": 12000,
+      "jamba744": 12000,
+      "horizontalSuperior744": 9000,
+      "horizontalInferior744": 15000,
+      "traslape744": 15000,
+      "enganche744": 15000,
+
+      "cabezal8025": 19000,
+      "sillar8025": 17000,
+      "jamba8025": 19000,
+      "horizontalSuperior8025": 16000,
+      "horizontalInferior8025": 26000,
+      "traslape8025": 18000,
+      "enganche8025": 19000,
+
+      "marcoPerimetralCol345": 25000,
+      "perimetralNaveCol345": 29000,
+      "engancheCol345":34000,
+      "manodeObra": 70000,
+      "empaquecol": 2000,
+      "empaquekim": 2000,
+      "empaqueast": 2000,
+      "empaque744":1500,
+      "felpacol": 400
+    },
+    "accesorios": {
+      "kitCierrecol": 22000,
+      "kitCierreConLlavecol": 23000,
+      "rodamientoSimple70col": 12500,
+      "rodamientoDoble140col": 19000,
+      "rodamientoSimple30": 33000,
+      "rodamientoDoble80": 57000,
+
+      "Kit8Escuadras" : 32000,
+      "kit4Anclas" : 20000,
+      "kit4Alza" : 20000,
+      "kit4Tapa" : 25000,
+      "kit2Cortavientos" : 22000,
+      "kit4Seguros" : 15000,
+      "rodamientoNave" : 25000,
+      "guiaSuperior" : 32000,
+
+      "escuadraEnsamblekim": 25000,
+      "espumaSelloSukim": 12000,
+      "espumaSelloInkim": 10000,
+      "sifonSistemaskim": 18000,
+      "kit6kim": 20000,
+      "kit2kim": 10000,
+      "topeskim": 10000,
+      "espumaTapaGuiakim": 5000,
+      "portaEsponjakim": 25000,
+      "tapaEntrecierrekim": 22000,
+      "kitHojaFijakim": 30000,
+      "rodamientoSimplekim": 33000,
+      "rodamientoDoblekim": 57000,
+      "kitPuntoCierrekim": 12000,
+      "kitManijakim": 80000,
+      "kitManijaConLlavekim": 130000,
+      "empaqueBurbujakim": 10000,
+
+      "kitCierreast": 21000,
+      "rodamiento80ast": 13000,
+      "rodamiento40ast": 6500,
+      "rodamientoNave22ast": 5000,
+
+      "kitCierrecol345": 22000,
+      "kitCierreConLlavecol345": 23000,
+      "Kit8Escuadrascol345": 12000,
+      "kit4Anclascol345": 10000,
+      "kit4Alzacol345": 12000,
+      "kit4Tapacol345": 11000,
+      "kit2Cortavientoscol345": 10000,
+      "kit4Seguroscol345": 8000,
+
+      "kitCierre744": 10000,
+      "rodamientoSimple744": 4000,
+
+      "kitCierre8025": 10000,
+      "kitCierreConLlave8025": 40000,
+      "rodamientoSimple8025": 8000,
+
+      "guiaSuperiorangeo": 32000,
+      "pletinaPoliamida": 50000,
+      "cajaDeflectora": 57000,
+      "cubetaAngeo": 6600
+    },
+    "utilitarios": {
+      "tornillos": 100,
+      "silicona": 10000
+    }
+
+}

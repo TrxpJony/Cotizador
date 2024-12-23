@@ -1,0 +1,227 @@
+/* General Body and Background */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f9; /* Light gray background */
+  color: #333; /* Dark text for readability */
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for the whole page */
+.door-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+  
+}
+
+/* Section for the door frame */
+.door-frame {
+  width: 45.5%; /* Aumenta el ancho al 60% */
+  background-color: #ffffff; /* Fondo blanco para el contenido principal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* Puedes eliminar esto si no quieres espacio entre las secciones */
+}
+
+.filter-frame {
+  width: 80%; /* Reducido a un 60% del ancho */
+  background-color: #ffffff; /* Fondo blanco */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+  padding: 15px; /* Menos espacio interno para hacerlo más compacto */
+  border-radius: 8px; /* Borde redondeado */
+ /*display: flex;*/
+  flex-direction: column;
+  align-items: center; /* Asegura que los elementos se alineen en una columna */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+
+.filter-frame-page {
+  width: 80%; /* Aumenta el ancho al 80% */
+  background-color: #ffffff; /* Fondo blanco para el contenido principal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+.card-frame{
+  width: 80%; /* Aumenta el ancho al 80% */
+  padding: 0px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+/* Dimensions form */
+.dimensions-form {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.dimensions-form label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.dimensions-form input {
+  padding: 8px;
+  width: 120px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.dimensions-form input:focus {
+  outline: none;
+  border-color: #00bcd4; /* Cyan blue border on focus */
+}
+
+/* Image styling */
+.door-image {
+  width: 60%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+/* Dimensions display */
+.dimensions-display {
+  margin-top: 10px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.dimensions-display p {
+  color: #555;
+}
+
+/* Parts list section */
+.parts-list {
+  width: 35%; /* Aumenta el ancho al 35% */
+  padding: 20px;
+  /*background-color: #ffffff;*/
+  border-radius: 8px;
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+}
+
+.parts-list h1 {
+  font-size: 1.8em;
+  color: #00bcd4;
+  margin-bottom: 10px;
+}
+
+.parts-list h2 {
+  font-size: 1.4em;
+  color: #333;
+  margin-top: 20px;
+}
+
+.parts-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.parts-list li {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+/* Accessories section */
+h2 {
+  margin-top: 30px;
+  color: #333;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+select {
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 100%;
+}
+
+select:focus {
+  border-color: #00bcd4; /* Cyan blue border on focus */
+}
+
+ul li {
+  margin-bottom: 15px;
+}
+
+ul li label {
+  font-size: 1.1em;
+}
+
+/* Extra information section */
+.extra-info {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .door-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .door-frame, .parts-list {
+    width: 100%; /* Hace que ambas ocupen el 100% en pantallas pequeñas */
+    margin: 0;
+    padding: 15px;
+  }
+
+  .dimensions-form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dimensions-form label {
+    margin-bottom: 10px;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden; /* Oculta todo */
+  }
+
+  .receipt, .receipt * {
+    visibility: visible; /* Asegura que solo el contenido del recibo sea visible */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .receipt {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+}
+
