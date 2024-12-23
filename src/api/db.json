@@ -120,32 +120,32 @@
     {
       "id": "kim",
       "title": "Kimbaya",
-      "img": "../src/img/kimbaya.png"
+      "img": "/img/kimbaya.png"
     },
     {
       "id": "744",
       "title": "Sistema 744",
-      "img": "../src/img/sistema744.png"
+      "img": "/img/sistema744.png"
     },
     {
       "id": "8025",
       "title": "Sistema 8025",
-      "img": "../src/img/sistema8025.png"
+      "img": "/img/sistema8025.png"
     },
     {
       "id": "ast",
       "title": "Astral 2.0",
-      "img": "../src/img/astral20.png"
+      "img": "/img/astral20.png"
     },
     {
     "id": "ast17",
     "title": "Astral 1.7",
-    "img": "../src/img/astral.png"
+    "img": "/img/astral.png"
   },
   {
     "id": "c345",
     "title": "Colosal 345",
-    "img": "../src/img/colosal3.png" 
+    "img": "/img/colosal3.png" 
   },
   {
     "id": "com",
