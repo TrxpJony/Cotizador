@@ -666,12 +666,12 @@ const generatePDF = () => {
           <TableCell>{totalWidth} mm</TableCell>
           <TableCell>${sillarastPrice.toFixed(2)}</TableCell>
         </TableRow>
-        <TableRow key="3">
+        <TableRow key="4">
           <TableCell><strong>Sillar Alfajia un Riel:</strong></TableCell>
           <TableCell>{totalWidth} mm</TableCell>
           <TableCell>${sillarAlfajiaastPrice.toFixed(2)}</TableCell>
         </TableRow>
-        <TableRow key="4">
+        <TableRow key="5">
           <TableCell><strong>Jambaast:</strong></TableCell>
           <TableCell>{doubleHeight} mm (2)</TableCell>
           <TableCell>${jambaastPrice.toFixed(2)}</TableCell>
