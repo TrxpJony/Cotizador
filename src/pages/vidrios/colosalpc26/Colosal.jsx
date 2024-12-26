@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
-import preciosData from 'https://api-cotizador.vercel.app/';
+import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
 const Colosal = () => {
