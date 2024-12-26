@@ -467,6 +467,13 @@ const handleGlassChange = (e) => {
       });
       // Mostramos el total formateado
       doc.text(formattedTotal, 150, 220); // Total
+
+      // Total puertas
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      
+      doc.text('Cantidad de puertas', 20, 215); // Título Total
+      doc.text(`${puertas.length}`, 20, 220);
             // Guardamos el archivo PDF
             doc.save('Cotizacion-Colosalpc2.6.pdf'); // Guardamos el archivo con el nombre
           };
