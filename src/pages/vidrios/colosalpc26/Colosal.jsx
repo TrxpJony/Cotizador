@@ -5,7 +5,7 @@ import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@
 import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
-import logo from '../../../../src/img/logo.png'
+import logo from 'https://api-cotizador.vercel.app/'
 
 const Colosal = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
