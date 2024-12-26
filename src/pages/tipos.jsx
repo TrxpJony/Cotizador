@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'http://localhost:3001/categoria';
+const baseUrl = 'https://api-cotizador.vercel.app/categoria';
 
 export function Tipos() {
   const [list, setList] = useState([]); // Datos de la API
