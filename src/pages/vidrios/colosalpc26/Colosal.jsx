@@ -287,197 +287,85 @@ const Colosal = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-
-    // Colores de la empresa
     const cyanBlue = '#00b5e2';
     const lightGray = '#d3d3d3';
-
-
-
-    // Agregamos el logo o nombre de la empresa en la parte superior (opcional)
-    doc.addImage(logo, 'PNG', 20, 10, 40, 20); // x, y, ancho, alto del logo
-    doc.setFontSize(14); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-
-    // Fecha de creación
     const currentDate = new Date().toLocaleDateString();
-    doc.setFontSize(8); // Tamaño de fuente más pequeño para la fecha
-    doc.setTextColor('black');
-    doc.text(`Fecha de creación: ${currentDate}`, 150, 20); // Fecha a la derecha
 
-    // Agregamos un borde y un fondo gris claro a los encabezados
-    doc.setFillColor(lightGray);
-    doc.rect(20, 30, 170, 8, 'F'); // Fondo gris en la cabecera
-    doc.setTextColor('white');
-    doc.setFontSize(10); // Texto más pequeño en el encabezado
-    doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34); // Texto blanco en la cabecera
+    const addTableRow = (doc, y, label, size, price) => {
+      doc.text(label, 20, y);
+      doc.text(size, 120, y);
+      doc.text(price, 170, y);
+    };
 
-    // Marco
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Marco', 20, 45); // Título de la sección Marco
+    const addSection = (doc, title, y) => {
+      doc.setFontSize(12);
+      doc.setTextColor(cyanBlue);
+      doc.text(title, 20, y);
+      doc.setFontSize(10);
+      doc.setTextColor('black');
+    };
 
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 50);
-    doc.text('Tamaño', 120, 50);
-    doc.text('Precio', 170, 50);
-
-    doc.setFontSize(10); // Texto más pequeño para los detalles
-    doc.setTextColor('black');
-
-    doc.text(`Cabezal:`, 20, 55);
-    doc.text(`${componentTotals.cabezal.totalSize} mm`, 120, 55);
-    doc.text(`${componentTotals.cabezal.totalPrice.toFixed(2)}`, 170, 55);
-    doc.text(`Sillar:`, 20, 60);
-    doc.text(`${componentTotals.sillar.totalSize} mm`, 120, 60);
-    doc.text(`${componentTotals.sillar.totalPrice.toFixed(2)}`, 170, 60);
-    doc.text(`Jamba:`, 20, 65);
-    doc.text(`${componentTotals.jamba.totalSize} mm`, 120, 65);
-    doc.text(`${componentTotals.jamba.totalPrice.toFixed(2)}`, 170, 65);
-
-    // Nave
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Nave', 20, 75); // Título de la sección Nave
-
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 80);
-    doc.text('Tamaño', 120, 80);
-    doc.text('Precio', 170, 80);
-
-    doc.setFontSize(10); // Texto más pequeño para los detalles
-    doc.setTextColor('black');
-
-    doc.text(`Horizontal Superior:`, 20, 85);
-    doc.text(`${componentTotals.horizontalSuperior.totalSize} mm`, 120, 85);
-    doc.text(`${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`, 170, 85);
-    doc.text(`Horizontal Inferior Fija:`, 20, 90);
-    doc.text(`${componentTotals.horizontalInferiorFija.totalSize} mm`, 120, 90);
-    doc.text(`${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`, 170, 90);
-    doc.text(`Horizontal Inferior Móvil:`, 20, 95);
-    doc.text(`${componentTotals.horizontalInferiorMovil.totalSize} mm`, 120, 95);
-    doc.text(`${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`, 170, 95);
-    doc.text(`Traslape:`, 20, 100);
-    doc.text(`${componentTotals.traslape.totalSize} mm`, 120, 100);
-    doc.text(`${componentTotals.traslape.totalPrice.toFixed(2)}`, 170, 100);
-    doc.text(`Enganche:`, 20, 105);
-    doc.text(`${componentTotals.enganche.totalSize} mm`, 120, 105);
-    doc.text(`${componentTotals.enganche.totalPrice.toFixed(2)}`, 170, 105);
-
-
-    // Tabla Accesorios
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Accesorios', 20, 115); // Título de la sección Empaque
-
-    // Tabla de Accesorios
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 120);
-    doc.text('Cantidad', 120, 120);
-    doc.text('Precio', 170, 120);
-
-    doc.text(`Kit de Cierre:`, 20, 125);
-    doc.text(`${accessoryTotals.kitCierre.cantidad}`, 120, 125);
-    doc.text(`${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`, 170, 125);
-
-    doc.text(`Kit de Cierre con Llave:`, 20, 130);
-    doc.text(`${accessoryTotals.kitCierreConLlave.cantidad}`, 120, 130);
-    doc.text(`${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`, 170, 130);
-
-    doc.text(`Cubeta de Angeo Negra:`, 20, 135);
-    doc.text(`${accessoryTotals.cubetaAngeo.cantidad}`, 120, 135);
-    doc.text(`${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`, 170, 135);
-
-    doc.text(`Rodamiento Simple en Agujas:`, 20, 140);
-    doc.text(`${accessoryTotals.rodamientoSimple.cantidad}`, 120, 140);
-    doc.text(`${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`, 170, 140);
-
-    doc.text(`Rodamiento Doble en Agujas:`, 20, 145);
-    doc.text(`${accessoryTotals.rodamientoDoble.cantidad}`, 120, 145);
-    doc.text(`${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`, 170, 145);
-
-    doc.text(`Caja Deflectora:`, 20, 150);
-    doc.text(`${accessoryTotals.cajaDeflectora.cantidad}`, 120, 150);
-    doc.text(`${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`, 170, 150);
-
-    // Tabla Empaque
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Empaque', 20, 160); // Título de la sección Empaque
-
-    // Tabla de Empaque
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 165);
-    doc.text('Tamaño', 120, 165);
-    doc.text('Precio', 170, 165);
-
-    doc.text(`Empaque (Alto):`, 20, 170);
-    doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 170);
-
-    doc.text(`Empaque (Ancho):`, 20, 175);
-    doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 175);
-    doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 172.5);
-
-    doc.text(`Felpa 5.00 x 7.00:`, 20, 180);
-    doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 180);
-    doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 180);
-
-    // Tabla Utilitarios
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Utilitarios', 20, 190); // Título de la sección Empaque
-
-    // Tabla de Utilitarios
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 195);
-    doc.text('cantidad', 120, 195);
-    doc.text('Precio', 170, 195);
-
-    doc.text(`Torinillos:`, 20, 200);
-    doc.text(`${componentTotals.tornillos.cantidad}`, 120, 200);
-    doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 200);
-
-    doc.text(`Silicona:`, 20, 205);
-    doc.text(`${componentTotals.silicona.cantidad}`, 120, 205);
-    doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 205);
-
-    // Total
+    doc.addImage(logo, 'PNG', 20, 10, 40, 20);
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 215); // Título Total
+    doc.setFontSize(8);
+    doc.setTextColor('black');
+    doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+    doc.setFillColor(lightGray);
+    doc.rect(20, 30, 170, 8, 'F');
+    doc.setTextColor('white');
+    doc.setFontSize(10);
+    doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34);
 
+    addSection(doc, 'Marco', 45);
+    addTableRow(doc, 55, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Sillar:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 65, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Nave', 75);
+    addTableRow(doc, 85, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 95, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 100, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 105, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Accesorios', 115);
+    addTableRow(doc, 125, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 140, 'Rodamiento Simple en Agujas:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 145, 'Rodamiento Doble en Agujas:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 150, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Empaque', 160);
+    addTableRow(doc, 170, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 175, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 180, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Utilitarios', 190);
+    addTableRow(doc, 200, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 205, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.text('Total', 170, 215);
     doc.setFontSize(16);
     doc.setTextColor('black');
-    // Formateamos el total con separadores de miles y el símbolo de moneda
     const formattedTotal = totalSum.toLocaleString('en-US', {
       style: 'currency',
       currency: 'COP',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    // Mostramos el total formateado
-    doc.text(formattedTotal, 150, 220); // Total
+    doc.text(formattedTotal, 150, 220);
 
-    // Total puertas
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-
-    doc.text('Cantidad de puertas', 20, 215); // Título Total
+    doc.text('Cantidad de puertas', 20, 215);
     doc.text(`${puertas.length}`, 20, 220);
-    // Guardamos el archivo PDF
-    doc.save('Cotizacion-Colosalpc2.6.pdf'); // Guardamos el archivo con el nombre
-  };
 
+    doc.save('Cotizacion-Colosalpc2.6.pdf');
+  };
 
   const getPriceDisplay = () => {
     if (accessories.kitCierrecol) {

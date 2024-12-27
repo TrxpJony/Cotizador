@@ -22,6 +22,8 @@ import Sistema8025 from './pages/vidrios/sistema8025/sistema8025';
 import { Astral17page } from './pages/categorias/astral17page';
 import { Colosal345page } from './pages/categorias/colosal345page';
 import Astral20xx from './pages/vidrios/astral20/Astral20xx';
+import { Sistema3890page } from './pages/categorias/sistema3890page';
+import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
 
 
 export const AcmeLogo = () => {
@@ -72,6 +74,8 @@ function App() {
           <Route path='744/s741' element={<Sistema744 />} />
           <Route path='8025' element={<Sistema8025page />} />
           <Route path='8025/s80251' element={<Sistema8025/>} />
+          <Route path='s3890' element={<Sistema3890page/>} />
+          <Route path='s3890/s38901' element={<Sistema3890/>} />
           <Route path='kim' element={<Kimbayapage />} />
           <Route path='kim/kim1' element={<Kymbaya />} />
           <Route path='tipos' element={<Tipos/>}/>

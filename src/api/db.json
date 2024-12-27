@@ -53,11 +53,17 @@
       "marcoPerimetralCol345": 25000,
       "perimetralNaveCol345": 29000,
       "engancheCol345":34000,
+
+      "aln1101s3890":50000,
+      "aln1102s3890":26000,
+      "enchape3890":72000,
+
       "manodeObra": 70000,
       "empaquecol": 2000,
       "empaquekim": 2000,
       "empaqueast": 2000,
       "empaque744":1500,
+      "empaque3890":1200,
       "felpacol": 400
     },
     "accesorios": {
@@ -115,6 +121,9 @@
       "kitCierre8025": 10000,
       "kitCierreConLlave8025": 40000,
       "rodamientoSimple8025": 8000,
+
+      "kitCierre3890": 10000,
+      "kitCierreConLlave3890": 40000,
 
       "guiaSuperiorangeo": 32000,
       "pletinaPoliamida": 50000,
