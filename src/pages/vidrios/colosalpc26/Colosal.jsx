@@ -646,24 +646,23 @@ const Colosal = () => {
         <Table aria-label="tabla utilitarios">
           <TableHeader>
             <TableColumn><h1>Utilitarios</h1></TableColumn>
-            <TableColumn></TableColumn>
+            <TableColumn><h1>Cantidad</h1></TableColumn>
+            <TableColumn><h1>Precio</h1></TableColumn>
           </TableHeader>
           <TableBody>
             <TableRow key="1">
               <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Cantidad</h2></strong></TableCell>
               <TableCell><strong><h2>Precio</h2></strong></TableCell>
             </TableRow>
             <TableRow key="2">
-              <TableCell>
-                <strong> Tornillos (44)</strong>
-              </TableCell>
+              <TableCell><strong> Tornillos</strong></TableCell>
+              <TableCell>44</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
-
             <TableRow key="3">
-              <TableCell>
-                <strong> Silicona</strong>
-              </TableCell>
+              <TableCell><strong> Silicona</strong></TableCell>
+              <TableCell>1</TableCell>
               <TableCell>$ {siliconaPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
