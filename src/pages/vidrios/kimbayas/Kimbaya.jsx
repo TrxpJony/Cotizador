@@ -107,39 +107,16 @@ const Kimbaya = () => {
   const [selectAll, setSelectAll] = useState(false);
 
   const handleAccessoryChange = (e) => {
-    const { name, checked, type } = e.target;
+    const { name, checked } = e.target;
     if (name === 'selectAll') {
       setSelectAll(checked);
       setAccessories((prev) => {
         const updatedAccessories = {};
         for (const key in prev) {
-          // Desmarcar las opciones de radio
-          if (key === 'rodamientoSimplekim' || key === 'rodamientoDoblekim' || key === 'kitManijakim' || key === 'kitManijaConLlavekim') {
-            updatedAccessories[key] = false;
-          } else {
-            updatedAccessories[key] = checked;
-          }
+          updatedAccessories[key] = checked;
         }
         return updatedAccessories;
       });
-    } else if (type === 'radio') {
-      if (name === 'rodamientoSimplekim' || name === 'rodamientoDoblekim') {
-        setAccessories((prev) => ({
-          ...prev,
-          rodamientoSimplekim: name === 'rodamientoSimplekim' ? checked : false,
-          rodamientoDoblekim: name === 'rodamientoDoblekim' ? checked : false,
-        }));
-      } else if (name === 'kitManijakim' || name === 'kitManijaConLlavekim') {
-        setAccessories((prev) => ({
-          ...prev,
-          kitManijakim: name === 'kitManijakim' ? checked : false,
-          kitManijaConLlavekim: name === 'kitManijaConLlavekim' ? checked : false,
-        }));
-      } else {
-        setAccessories({
-          [name]: checked,
-        });
-      }
     } else {
       setAccessories((prev) => ({
         ...prev,
@@ -329,15 +306,14 @@ const Kimbaya = () => {
       },
 
     }));
-    
 
     setAccessoryTotals((prevTotals) => ({
       ...prevTotals,
-     escuadraEnsamble: accessories.escuadraEnsamblekim
+      escuadraEnsamble: accessories.escuadraEnsamblekim
         ? {
-            cantidad: prevTotals.escuadraEnsamble.cantidad + 1,
-            totalPrice: prevTotals.escuadraEnsamble.totalPrice + escuadraEnsamblekimPrice,
-          }
+          cantidad: prevTotals.escuadraEnsamble.cantidad + 1,
+          totalPrice: prevTotals.escuadraEnsamble.totalPrice + escuadraEnsamblekimPrice,
+        }
         : prevTotals.escuadraEnsamble,
       espumaSelloSu: accessories.espumaSelloSukim
         ? {
@@ -495,53 +471,14 @@ const Kimbaya = () => {
           totalPrice: prevTotals.empaqueBurbuja.totalPrice + empaqueBurbujakimPrice,
         }
         : prevTotals.empaqueBurbuja,
+
       // Añade lógica para otros accesorios si es necesario.
     }));
 
-  
+
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
-    setSelectAll(false);
-    setAccessories({
-      escuadraEnsamblekim: false,
-      escuadraHoja: false,
-      escuadraMovil: false,
-      espumaSelloSukim: false,
-      espumaSelloInkim: false,
-      sifonSistemaskim: false,
-      kit6kim: false,
-      kit6H: false,
-      kit6M: false,
-      kit2kim: false,
-      kit2H: false,
-      kit2M: false,
-      topeskim: false,
-      topesH: false,
-      topesM: false,
-      espumaTapaGuiakim: false,
-      espumaTapaH: false,
-      espumaTapaM: false,
-      portaEsponjakim: false,
-      portaEsponjaH: false,
-      portaEsponjaM: false,
-      tapaEntrecierrekim: false,
-      tapaCierreH: false,
-      tapaCierreM: false,
-      kitHojaFijakimkim: false,
-      rodamientoSimplekim: false,
-      rodamientoDoblekim: false,
-      kitPuntoCierrekim: false,
-      kitManijakim: false,
-      kitManijaConLlavekim: false,
-      pletinaPoliamida: false,
-      empaqueBurbujakim: false,
-      cajaDeflectora: false,
-      kitHojaFijakim: false,
-      felpa: '',
-    });
-  
-  
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -691,29 +628,26 @@ const Kimbaya = () => {
     // Tabla de Accesorios Marco
     doc.setFontSize(10);
     doc.setTextColor('black');
-    
+
     doc.text('Pieza', 20, 120);
     doc.text('Precio', 170, 120);
 
     doc.text(`Escuadra Ensamble Marco:`, 20, 125);
-    doc.text(`${accessoryTotals.escuadraEnsamble.cantidad}`, 120, 125);
+    doc.text(`${accessoryTotals.escuadraEnsamble.cantidad}`)
     doc.text(`${accessoryTotals.escuadraEnsamble.totalPrice.toFixed(2)}`, 170, 125);
 
     doc.text(`Espuma Sello Superior:`, 20, 130);
-    doc.text(`${accessoryTotals.espumaSelloSu.cantidad}`, 120, 130)
+    doc.text(`${accessoryTotals.espumaSelloSu.cantidad}`)
     doc.text(`${accessoryTotals.espumaSelloSu.totalPrice.toFixed(2)}`, 170, 130);
 
     doc.text(`Espuma Sello Inferior:`, 20, 135);
-    doc.text(`${accessoryTotals.espumaSelloIn.cantidad}`, 120, 135);
-    doc.text(`${accessoryTotals.espumaSelloIn.totalPrice.toFixed(2)}`, 170, 135);
+    doc.text(`${espumaSelloInkimPrice.toFixed(2)}`, 170, 135);
 
     doc.text(`Sifon Sistemas Eurovitral:`, 20, 140);
-    doc.text(`${accessoryTotals.sifonSistemas.cantidad}`, 120, 140);
-    doc.text(`${accessoryTotals.sifonSistemas.totalPrice.toFixed(2)}`, 170, 140);
+    doc.text(`${sifonSistemaskimPrice.toFixed(2)}`, 170, 140);
 
     doc.text(`Caja Deflectora:`, 20, 145);
-    doc.text(`${accessoryTotals.cajaDeflectora.cantidad}`, 120, 145);
-    doc.text(`${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`, 170, 145);
+    doc.text(`${cajaDeflectoraPrice.toFixed(2)}`, 170, 145);
 
     // Tabla Accesorios de Hoja fija
     doc.setFontSize(12); // Título más pequeño
@@ -728,29 +662,22 @@ const Kimbaya = () => {
     doc.text('Precio', 170, 160);
 
     doc.text(`Escuadra Ensamble Hoja Fija:`, 20, 165);
-    doc.text(`${accessoryTotals.escuadraEnsambleHoja.cantidad}`, 120, 165);
-    doc.text(`${accessoryTotals.escuadraEnsambleHoja.totalPrice.toFixed(2)}`, 170, 165);
+    doc.text(`${escuadraHojaPrice.toFixed(2)}`, 170, 165);
     doc.text(`Kit de 6 Escuadras de Alineación Hoja Fija:`, 20, 170);
-    doc.text(`${accessoryTotals.kit6H.cantidad}`, 120, 170);
-    doc.text(`${accessoryTotals.kit6H.totalPrice.toFixed(2)}`, 170, 170);
+    doc.text(`${kit6HPrice.toFixed(2)}`, 170, 170);
     doc.text(`Kit de 2 Escuadras de Alineacion con Guia:`, 20, 175);
-    doc.text(`${accessoryTotals.kit2H.cantidad}`, 120, 175);
-    doc.text(`${accessoryTotals.kit2H.totalPrice.toFixed(2)}`, 170, 175);
+    doc.text(`${topesHPrice.toFixed(2)}`, 170, 175);
     doc.text(`Topes Para Hojas:`, 20, 180);
-    doc.text(`${accessoryTotals.topesH.cantidad}`, 120, 180);
-    doc.text(`${accessoryTotals.topesH.totalPrice.toFixed(2)}`, 170, 180);
+    doc.text(`${topesHPrice.toFixed(2)}`, 170, 180);
     doc.text(`Espuma Tapa Guia Superior/Inferior:`, 20, 185);
-    doc.text(`${accessoryTotals.espumaTapaH.cantidad}`, 120, 185);
-    doc.text(`${accessoryTotals.espumaTapaH.totalPrice.toFixed(2)}`, 170, 185);
+    doc.text(`${espumaTapaHPrice.toFixed(2)}`, 170, 185);
     doc.text(`Tapa y Tapete Porta Esponja Superior e Inferior`, 20, 190);
-    doc.text(`${accessoryTotals.portaEsponjaH.cantidad}`, 120, 190);
-    doc.text(`${accessoryTotals.portaEsponjaH.totalPrice.toFixed(2)}`, 170, 190);
+    doc.text(`${portaEsponjaHPrice.toFixed(2)}`, 170, 190);
     doc.text(`Tapa Entrecierre Supeior e Inferior:`, 20, 195);
-    doc.text(`${accessoryTotals.tapaCierreH.cantidad}`, 120, 195);
-    doc.text(`${accessoryTotals.tapaCierreH.totalPrice.toFixed(2)}`, 170, 195);
+    doc.text(`${tapaCierreHPrice.toFixed(2)}`, 170, 195);
     doc.text(`Kit Hoja Fija:`, 20, 200);
-    doc.text(`${accessoryTotals.kitHojaFija.cantidad}`, 120, 200);
-    doc.text(`${accessoryTotals.kitHojaFija.totalPrice.toFixed(2)}`, 170, 200);
+    doc.text(`${kitHojaFijakimPrice.toFixed(2)}`, 170, 200);
+
 
     // Tabla accesorios hoja mobil
     doc.setFontSize(12); // Título más pequeño
@@ -765,34 +692,23 @@ const Kimbaya = () => {
     doc.text('Precio', 170, 215);
 
     doc.text(`Escuadra Ensamble Hoja Mobil:`, 20, 220);
-    doc.text(`${accessoryTotals.escuadraEnsambleMovil.cantidad}`, 120, 220);
-    doc.text(`${accessoryTotals.escuadraEnsambleMovil.totalPrice.toFixed(2)}`, 170, 220);
+    doc.text(`${escuadraMovilPrice.toFixed(2)}`, 170, 220);
     doc.text(`Kit de 6 Escuadras de Alineación Hoja Mobil:`, 20, 225);
-    doc.text(`${accessoryTotals.kit6M.cantidad}`, 120, 225);
-    doc.text(`${accessoryTotals.kit6M.totalPrice.toFixed(2)}`, 170, 225);
+    doc.text(`${kit6MPrice.toFixed(2)}`, 170, 225);
     doc.text(`Kit de 2 Escuadras de Alineacion con Guia:`, 20, 230);
-    doc.text(`${accessoryTotals.kit2M.cantidad}`, 120, 230);
-    doc.text(`${accessoryTotals.kit2M.totalPrice.toFixed(2)}`, 170, 230);
+    doc.text(`${kit2MPrice.toFixed(2)}`, 170, 230);
     doc.text(`Topes Para Hojas:`, 20, 235);
-    doc.text(`${accessoryTotals.topesM.cantidad}`, 120, 235);
-    doc.text(`${accessoryTotals.topesM.totalPrice.toFixed(2)}`, 170, 235);
+    doc.text(`${topesMPrice.toFixed(2)}`, 170, 235);
     doc.text(`Espuma Tapa Guia Superior/Inferior:`, 20, 240);
-    doc.text(`${accessoryTotals.espumaTapaM.cantidad}`, 120, 240);
-    doc.text(`${accessoryTotals.espumaTapaM.totalPrice.toFixed(2)}`, 170, 240);
+    doc.text(`${espumaTapaMPrice.toFixed(2)}`, 170, 240);
     doc.text(`Tapa y Tapete Porta Esponja Superior e Inferior`, 20, 245);
-    doc.text(`${accessoryTotals.portaEsponjaM.cantidad}`, 120, 245);
-    doc.text(`${accessoryTotals.portaEsponjaM.totalPrice.toFixed(2)}`, 170, 245);
+    doc.text(`${portaEsponjaMPrice.toFixed(2)}`, 170, 245);
     doc.text(`Tapa Entrecierre Supeior e Inferior:`, 20, 250);
-    doc.text(`${accessoryTotals.tapaCierreM.cantidad}`, 120, 250);
-    doc.text(`${accessoryTotals.tapaCierreM.totalPrice.toFixed(2)}`, 170, 250);
+    doc.text(`${tapaCierreMPrice.toFixed(2)}`, 170, 250);
     doc.text(`Rodamiento Simple en Aguja 100 Kilos:`, 20, 255);
-    doc.text(`${accessoryTotals.rodamientoSimple.cantidad}`, 120, 255);
-    doc.text(`${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`, 170, 255);
+    doc.text(`${rodamientoSimplekimPrice.toFixed(2)}`, 170, 255);
     doc.text(`Rodamiento Doble en Aguja 200 Kilos:`, 20, 260);
-    doc.text(`${accessoryTotals.rodamientoDoble.cantidad}`, 120, 260);
-    doc.text(`${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`, 170, 260);
-
-    //añadimos otra pagina
+    doc.text(`${rodamientoDoblekimPrice.toFixed(2)}`, 170, 260);
     doc.addPage(2)
 
     // Tabla accesorios 
@@ -808,20 +724,15 @@ const Kimbaya = () => {
     doc.text('Precio', 170, 25);
 
     doc.text(`Kit Punto de Cierre:`, 20, 30);
-    doc.text(`${accessoryTotals.kitPuntoCierre.cantidad}`, 120, 30);
-    doc.text(`${accessoryTotals.kitPuntoCierre.totalPrice.toFixed(2)}`, 170, 30);
+    doc.text(`${kitPuntoCierrekimPrice.toFixed(2)}`, 170, 30);
     doc.text(`Kit Manija Bidireccional con Transmision:`, 20, 35);
-    doc.text(`${accessoryTotals.kitManija.cantidad}`, 120, 35);
-    doc.text(`${accessoryTotals.kitManija.totalPrice.toFixed(2)}`, 170, 35);
+    doc.text(`${kitManijakimPrice.toFixed(2)}`, 170, 35);
     doc.text(`Kit Manija Bidireccional con Transmision con Llave:`, 20, 40);
-    doc.text(`${accessoryTotals.kitManijaConLlave.cantidad}`, 120, 40);
-    doc.text(`${accessoryTotals.kitManijaConLlave.totalPrice.toFixed(2)}`, 170, 40);
+    doc.text(`${kitManijaConLlavekimPrice.toFixed(2)}`, 170, 40);
     doc.text(`Pletina de Poliamida Negra:`, 20, 45);
-    doc.text(`${accessoryTotals.pletinaPoliamida.cantidad}`, 120, 45);
-    doc.text(`${accessoryTotals.pletinaPoliamida.totalPrice.toFixed(2)}`, 170, 45);
+    doc.text(`${pletinaPoliamidaPrice.toFixed(2)}`, 170, 45);
     doc.text(`Empaque Burbuja Sello X 250M`, 20, 50);
-    doc.text(`${accessoryTotals.empaqueBurbuja.cantidad}`, 120, 50);
-    doc.text(`${accessoryTotals.empaqueBurbuja.totalPrice.toFixed(2)}`, 170, 50);
+    doc.text(`${empaqueBurbujakimPrice.toFixed(2)}`, 170, 50);
 
     // Tabla Empaque
     doc.setFontSize(12); // Título más pequeño
@@ -835,60 +746,39 @@ const Kimbaya = () => {
     doc.text('Pieza', 20, 65);
     doc.text('Tamaño', 120, 65);
     doc.text('Precio', 170, 65);
-
     doc.text(`Empaque (Alto):`, 20, 70);
-    doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 70);
+    doc.text(`${empaquekimHeight} mm`, 120, 70)
     doc.text(`Empaque (Ancho):`, 20, 75);
-    doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 75);
-    doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 72.5);
+    doc.text(`${empaquekimWidth} mm`, 120, 75);
+    doc.text(`${empaquekimPrice.toFixed(2)}`, 170, 72.5);
     doc.text(`Felpa 5.00 x 7.00:`, 20, 80);
-    doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 80);
-    doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 80);
+    doc.text(`${totFelpa} mm`, 120, 80);
+    doc.text(`${felpaPrice.toFixed(2)}`, 170, 80);
 
-    // Tabla Utilitarios
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Utilitarios', 20, 90); // Título de la sección Empaque
+    doc.text(`Torinillos:`, 20, 200);
+    doc.text(`16`, 120, 200);
+    doc.text(`${tornillosPrice.toFixed(2)}`, 170, 200);
 
-    // Tabla de Utilitarios
-    doc.setFontSize(10);
-    doc.setTextColor('black');
+    doc.text(`Silicona:`, 20, 205);
+    doc.text(`${siliconaPrice.toFixed(2)}`, 170, 205);
 
-    doc.text('Pieza', 20, 95);
-    doc.text('cantidad', 120, 95);
-    doc.text('Precio', 170, 95);
-
-    doc.text(`Torinillos:`, 20, 100);
-    doc.text(`${componentTotals.tornillos.cantidad}`, 120, 100);
-    doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 100);
-    doc.text(`Silicona:`, 20, 105);
-    doc.text(`${componentTotals.silicona.cantidad}`, 120, 105);
-    doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 105);
 
     // Total
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 115); // Título Total
+    doc.text('Total', 170, 90); // Título Total
 
     doc.setFontSize(16);
     doc.setTextColor('black');
     // Formateamos el total con separadores de miles y el símbolo de moneda
-    const formattedTotal = totalSum.toLocaleString('en-US', {
+    const formattedTotal = totalPrice.toLocaleString('en-US', {
       style: 'currency',
       currency: 'COP',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    doc.text(formattedTotal, 150, 120); // Total
-
-    // Total puertas
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-
-    doc.text('Cantidad de puertas', 20, 115); // Título Total
-    doc.text(`${puertas.length}`, 20, 120);
-
-
+    // Mostramos el total formateado
+    doc.text(formattedTotal, 150, 95); // Total
     // Guardamos el archivo PDF
     doc.save('cotizacion-marco.pdf'); // Guardamos el archivo con el nombre
   };
@@ -1513,7 +1403,7 @@ const Kimbaya = () => {
             <TableRow key="9">
               <TableCell><input
                 type="radio"
-                name="rodamientoSimplekim"
+                name="rodamiento"
                 checked={accessories.rodamientoSimplekim}
                 onChange={handleChange}
               />
@@ -1521,7 +1411,7 @@ const Kimbaya = () => {
                 <br />
                 <input
                   type="radio"
-                  name="rodamientoDoblekim"
+                  name="rodamiento"
                   checked={accessories.rodamientoDoblekim}
                   onChange={handleChange}
                 />
@@ -1556,7 +1446,7 @@ const Kimbaya = () => {
             <TableRow key="3">
               <TableCell><input
                 type="radio"
-                name="kitManijakim"
+                name="kitManija"
                 value="Kit de Cierre"
                 checked={accessories.kitManijakim}
                 onChange={handleChange}
@@ -1565,7 +1455,7 @@ const Kimbaya = () => {
                 <br />
                 <input
                   type="radio"
-                  name="kitManijaConLlavekim"
+                  name="kitManija"
                   value="Kit de Manija con Llave"
                   checked={accessories.kitManijaConLlavekim}
                   onChange={handleChange}

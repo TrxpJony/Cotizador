@@ -97,6 +97,11 @@ const Sistema3890 = () => {
   const tornillosPrice = utilitaryPrices.tornillos * 44;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
+  const enchapeWidth = 90;
+
+  const enchapePieces = Math.floor(totalWidth / enchapeWidth);
+  const enchapeTotalPrice = accessories.enchape ? enchapePieces * prices.enchape3890 : 0;
+
   const [componentTotals, setComponentTotals] = useState({
     aln1101: { totalSize: 0, totalPrice: 0 },
     aln1102: { totalSize: 0, totalPrice: 0 },
@@ -132,6 +137,10 @@ const Sistema3890 = () => {
       aln1102: {
         totalSize: prevTotals.aln1102.totalSize + parseFloat(totalWidth),
         totalPrice: prevTotals.aln1102.totalPrice + aln1102s3890Price,
+      },
+      enchape: {
+        totalSize: prevTotals.enchape.totalSize + enchapePieces,
+        totalPrice: prevTotals.enchape.totalPrice + enchapeTotalPrice,
       },
       empaque: {
         totalSize: prevTotals.empaque.totalSize + parseFloat(empaque3890Height),
@@ -175,7 +184,7 @@ const Sistema3890 = () => {
 
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
-    setAccessories({ kitCierre3890: false, kitCierreConLlave3890: false }); // Reiniciar accesorios
+    setAccessories({ kitCierre3890: false, kitCierreConLlave3890: false, enchape: false }); // Reiniciar accesorios
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -194,8 +203,8 @@ const Sistema3890 = () => {
     empaque3890Price +
     tornillosPrice +
     siliconaPrice +
-
-    (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
+    enchapeTotalPrice + // Add enchape total price
+    (glassPrice ? parseFloat(glassPrice) : 0); // Precio del vidrio
 
   const generatePDF = () => {
     const doc = new jsPDF();
@@ -232,7 +241,7 @@ const Sistema3890 = () => {
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'ALN: 1101 Tubular:', `${componentTotals.aln1101.totalSize} mm`, `${componentTotals.aln1101.totalPrice.toFixed(2)}`);
     addTableRow(doc, 55, 'ALN: 1102 Tubular', `${componentTotals.aln1102.totalSize} mm`, `${componentTotals.aln1102.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 60, 'Enchape:', `${componentTotals.aln1101.totalSize} mm`, `${componentTotals.aln1102.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Enchape:', `${componentTotals.enchape.totalSize} Piezas `, `${componentTotals.enchape.totalPrice.toFixed(2)}`);
 
     addSection(doc, 'Accesorios', 70);
     addTableRow(doc, 75, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
@@ -400,8 +409,8 @@ const Sistema3890 = () => {
             </TableRow>
             <TableRow key="4">
               <TableCell><strong>Enchape:</strong></TableCell>
-              <TableCell>{doubleHeight} mm (2)</TableCell>
-              <TableCell>${aln1102s3890Price.toFixed(2)}</TableCell>
+              <TableCell>({enchapePieces} piezas)</TableCell>
+              <TableCell>${enchapeTotalPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -438,6 +447,18 @@ const Sistema3890 = () => {
                 Kit de Cierre con Llave
               </TableCell>
               <TableCell>$ {getPriceDisplay()}</TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell>
+                <input
+                  type="checkbox"
+                  name="enchape"
+                  checked={accessories.enchape}
+                  onChange={handleChange}
+                />
+                Enchape
+              </TableCell>
+              <TableCell>$ {enchapeTotalPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

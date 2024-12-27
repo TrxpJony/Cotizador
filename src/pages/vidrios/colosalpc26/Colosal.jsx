@@ -318,37 +318,37 @@ const Colosal = () => {
     doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34);
 
     addSection(doc, 'Marco', 45);
-    addTableRow(doc, 55, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 60, 'Sillar:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 65, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 55, 'Sillar:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Nave', 75);
-    addTableRow(doc, 85, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 90, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 95, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 100, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 105, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Nave', 70);
+    addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 80, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 85, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 95, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Accesorios', 115);
-    addTableRow(doc, 125, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 130, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 135, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 140, 'Rodamiento Simple en Agujas:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 145, 'Rodamiento Doble en Agujas:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 150, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Accesorios', 105);
+    addTableRow(doc, 110, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 115, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 120, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 125, 'Rodamiento Simple en Agujas:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Rodamiento Doble en Agujas:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Empaque', 160);
-    addTableRow(doc, 170, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-    addTableRow(doc, 175, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 180, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Empaque', 145);
+    addTableRow(doc, 150, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 155, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 160, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Utilitarios', 190);
-    addTableRow(doc, 200, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 205, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Utilitarios', 170);
+    addTableRow(doc, 175, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 215);
+    doc.text('Total', 170, 190);
     doc.setFontSize(16);
     doc.setTextColor('black');
     const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -357,12 +357,12 @@ const Colosal = () => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    doc.text(formattedTotal, 150, 220);
+    doc.text(formattedTotal, 150, 195);
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Cantidad de puertas', 20, 215);
-    doc.text(`${puertas.length}`, 20, 220);
+    doc.text('Cantidad de puertas', 20, 190);
+    doc.text(`${puertas.length}`, 20, 195);
 
     doc.save('Cotizacion-Colosalpc2.6.pdf');
   };
