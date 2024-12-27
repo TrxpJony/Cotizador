@@ -31,11 +31,15 @@ const navigate = useNavigate(); // Inicializar useNavigate
    
 const [prices, setPrices] = useState({});
 const [accessoryPrices, setAccessoryPrices] = useState({});
+const [utilitaryPrices, setUtilitaryPrices] = useState({});
+const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
+
 
 
 useEffect(() => {
   setPrices(preciosData.precios);
   setAccessoryPrices(preciosData.accesorios);
+  setUtilitaryPrices(preciosData.utilitarios);
 }, []);
   
 
@@ -115,6 +119,167 @@ const handleGlassChange = (e) => {
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
   const manodeObraPrice =  prices.manodeObra * area;
 
+  const tornillosPrice = utilitaryPrices.tornillos * 44;
+  const siliconaPrice = utilitaryPrices.silicona * 1;
+
+  const [componentTotals, setComponentTotals] = useState({
+    sillar: { totalSize: 0, totalPrice: 0 },
+    cabezal: { totalSize: 0, totalPrice: 0 },
+    jamba: { totalSize: 0, totalPrice: 0 },
+    horizontalSuperior: { totalSize: 0, totalPrice: 0 },
+    horizontalInferiorFija: { totalSize: 0, totalPrice: 0 },
+    horizontalInferiorMovil: { totalSize: 0, totalPrice: 0 },
+    traslape: { totalSize: 0, totalPrice: 0 },
+    enganche: { totalSize: 0, totalPrice: 0 },
+    empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
+    felpa: { totalSize: 0, totalPrice: 0 },
+    tornillos: { cantidad: 0, totalPrice: 0 },
+    silicona: { cantidad: 0, totalPrice: 0 },
+    // Puedes añadir más componentes aquí si es necesario.
+  });
+
+  const [accessoryTotals, setAccessoryTotals] = useState({
+    kitCierre: { cantidad: 0, totalPrice: 0 },
+    cubetaAngeo: { cantidad: 0, totalPrice: 0},
+    rodamiento80: { cantidad: 0, totalPrice: 0},
+    rodamiento40: { cantidad: 0, totalPrice: 0},
+    rodamiento22: { cantidad: 0, totalPrice: 0},
+    guiaSuperior: { cantidad: 0, totalPrice: 0},
+    cajaDeflectora: { cantidad: 0, totalPrice: 0},
+    // Agrega otros accesorios aquí si es necesario.
+  });
+
+
+  const handleAddDoor = () => {
+    const nuevaPuerta = {
+      dimensions: { ...dimensions },
+      accessories: { ...accessories },
+      price: totalPrice,
+    };
+
+    // Actualizar totales del sillar
+    setComponentTotals((prevTotals) => ({
+      ...prevTotals,
+      sillar: {
+        totalSize: prevTotals.sillar.totalSize + parseFloat(totalWidth), // Sumar tamaño
+        totalPrice: prevTotals.sillar.totalPrice + sillarastPrice, // Sumar precio
+      },
+      cabezal: {
+        totalSize: prevTotals.cabezal.totalSize + parseFloat(totalWidth),
+        totalPrice: prevTotals.cabezal.totalPrice + cabezalastPrice,
+      },
+      sillarAlfajia: {
+        totalSize: prevTotals.sillar.totalSize + parseFloat(totalWidth), // Sumar tamaño
+        totalPrice: prevTotals.sillar.totalPrice + sillarAlfajiaastPrice, // Sumar precio
+      },
+      jamba: {
+        totalSize: prevTotals.jamba.totalSize + parseFloat(doubleHeight),
+        totalPrice: prevTotals.jamba.totalPrice + jambaastPrice,
+      },
+      horizontalSuperior: {
+        totalSize: prevTotals.horizontalSuperior.totalSize + parseFloat(doubleHalfWidth),
+        totalPrice: prevTotals.horizontalSuperior.totalPrice + horizontalSuperiorastPrice,
+      },
+      horizontalInferiorFija: {
+        totalSize: prevTotals.horizontalInferiorFija.totalSize + parseFloat(halfWidth),
+        totalPrice: prevTotals.horizontalInferiorFija.totalPrice + horizontalInferiorFijaastPrice,
+      },
+      horizontalInferiorMovil: {
+        totalSize: prevTotals.horizontalInferiorMovil.totalSize + parseFloat(halfWidth),
+        totalPrice: prevTotals.horizontalInferiorMovil.totalPrice + horizontalInferiorMovilastPrice,
+      },
+      traslape: {
+        totalSize: prevTotals.traslape.totalSize + parseFloat(doubleHeight),
+        totalPrice: prevTotals.traslape.totalPrice + traslapeastPrice,
+      },
+      enganche: {
+        totalSize: prevTotals.enganche.totalSize + parseFloat(doubleHeight),
+        totalPrice: prevTotals.enganche.totalPrice + engancheastPrice,
+      },
+      empaque: {
+        totalSize: prevTotals.empaque.totalSize + parseFloat(empaqueastHeight),
+        totalSize2: prevTotals.empaque.totalSize + parseFloat(empaqueastWidth),
+        totalPrice: prevTotals.empaque.totalPrice + empaqueastPrice,
+      },
+      felpa: {
+        totalSize: prevTotals.felpa.totalSize + parseFloat(totFelpa),
+        totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
+      },
+      tornillos: {
+        cantidad: prevTotals.tornillos.cantidad + 44,
+        totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
+      },
+      silicona: {
+        cantidad: prevTotals.silicona.cantidad + 1,
+        totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
+      },
+
+    }));
+
+    setAccessoryTotals((prevTotals) => ({
+      ...prevTotals,
+      kitCierre: accessories.kitCierreast
+        ? {
+          cantidad: prevTotals.kitCierre.cantidad + 1,
+          totalPrice: prevTotals.kitCierre.totalPrice + kitCierreastPrice,
+        }
+        : prevTotals.kitCierre,
+      rodamiento80: accessories.rodamiento80ast
+        ? {
+          cantidad: prevTotals.rodamiento80.cantidad + 2,
+          totalPrice: prevTotals.rodamiento80.totalPrice + rodamiento80astPrice,
+        }
+        : prevTotals.rodamiento80,
+      rodamiento40: accessories.rodamiento40ast
+        ? {
+          cantidad: prevTotals.rodamiento40.cantidad + 2,
+          totalPrice: prevTotals.rodamiento40.totalPrice + rodamiento40astPrice,
+        }
+        : prevTotals.rodamiento40,
+      cubetaAngeo: accessories.cubetaAngeo
+        ? {
+          cantidad: prevTotals.cubetaAngeo.cantidad + 1,
+          totalPrice: prevTotals.cubetaAngeo.totalPrice + cubetaAngeoPrice,
+        }
+        : prevTotals.cubetaAngeo,
+      cajaDeflectora: accessories.cajaDeflectora
+        ? {
+          cantidad: prevTotals.cajaDeflectora.cantidad + 1,
+          totalPrice: prevTotals.cajaDeflectora.totalPrice + cajaDeflectoraPrice,
+        }
+        : prevTotals.cajaDeflectora,
+      rodamiento22: accessories.rodamientoNave22ast
+        ? {
+          cantidad: prevTotals.rodamiento22.cantidad + 1,
+          totalPrice: prevTotals.rodamiento22.totalPrice + rodamientoNave22astPrice,
+        }
+        : prevTotals.rodamiento22,
+      guiaSuperior: accessories.guiaSuperiorangeo
+        ? {
+          cantidad: prevTotals.guiaSuperior.cantidad + 1,
+          totalPrice: prevTotals.guiaSuperior.totalPrice + guiaSuperiorangeoPrice,
+        }
+        : prevTotals.guiaSuperior,
+
+
+
+
+      // Añade lógica para otros accesorios si es necesario.
+    }));
+
+
+    setPuertas((prev) => [...prev, nuevaPuerta]);
+    setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
+    setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
+  };
+
+  const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
+  const totalArea = puertas.reduce(
+    (acc, puerta) =>
+      acc + (puerta.dimensions.width * puerta.dimensions.height) / 1000000,
+    0
+  );
+
   const totalPrice =
     cabezalastPrice +
     sillarastPrice +
@@ -134,6 +299,8 @@ const handleGlassChange = (e) => {
     guiaSuperiorangeoPrice+
     felpaPrice+
     empaqueastPrice+
+    tornillosPrice +
+    siliconaPrice +
     (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
 
 
@@ -162,7 +329,7 @@ const generatePDF = () => {
       doc.rect(20, 30, 170, 8, 'F'); // Fondo gris en la cabecera
       doc.setTextColor('white');
       doc.setFontSize(10); // Texto más pequeño en el encabezado
-      doc.text('Detalle de la cotización Astral 1.7 XO-OX', 70, 34); // Texto blanco en la cabecera
+      doc.text('Detalle de la cotización Astral 2.0 XO-OX', 70, 34); // Texto blanco en la cabecera
     
       // Marco
       doc.setFontSize(12); // Título más pequeño
@@ -180,17 +347,17 @@ const generatePDF = () => {
       doc.setTextColor('black');
 
       doc.text(`Cabezal:`, 20, 55);
-      doc.text(`${totalWidth} mm`, 120, 55);
-      doc.text(`${cabezalastPrice.toFixed(2)}`, 170, 55);
+      doc.text(`${componentTotals.cabezal.totalSize} mm`, 120, 55);
+      doc.text(`${componentTotals.cabezal.totalPrice.toFixed(2)}`, 170, 55);
       doc.text(`Sillar un Riel:`, 20, 60);
-      doc.text(`${totalWidth} mm`, 120, 60);
-      doc.text(`${sillarastPrice.toFixed(2)}`, 170, 60);
+      doc.text(`${componentTotals.sillar.totalSize} mm`, 120, 60);
+      doc.text(`${componentTotals.sillar.totalPrice.toFixed(2)}`, 170, 60);
       doc.text(`Sillar Alfajia un Riel:`, 20, 65);
-      doc.text(`${totalWidth} mm`, 120, 65);
-      doc.text(`${sillarAlfajiaastPrice.toFixed(2)}`, 170, 65);
+      doc.text(`${componentTotals.sillarAlfajia.totalSize} mm`, 120, 65);
+      doc.text(`${componentTotals.sillarAlfajia.totalPrice.toFixed(2)}`, 170, 65);
       doc.text(`Jamba:`, 20, 70);
-      doc.text(`${doubleHeight} mm (2)`, 120, 70);
-      doc.text(`${jambaastPrice.toFixed(2)}`, 170, 70);
+      doc.text(`${componentTotals.jamba.totalSize} mm `, 120, 70);
+      doc.text(`${componentTotals.jamba.totalPrice.toFixed(2)}`, 170, 70);
 
       // Nave
       doc.setFontSize(12); // Título más pequeño
@@ -208,20 +375,20 @@ const generatePDF = () => {
       doc.setTextColor('black');
 
       doc.text(`Horizontal Superior:`, 20, 90);
-      doc.text(`${doubleHalfWidth} mm (2)`, 120, 90);
-      doc.text(`${horizontalSuperiorastPrice.toFixed(2)}`, 170, 90);
+      doc.text(`${componentTotals.horizontalSuperior.totalSize} mm `, 120, 90);
+      doc.text(`${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`, 170, 90);
       doc.text(`Horizontal Inferior Fija:`, 20, 95);
-      doc.text(`${halfWidth} mm`, 120, 95);
-      doc.text(`${horizontalInferiorFijaastPrice.toFixed(2)}`, 170, 95);
+      doc.text(`${componentTotals.horizontalInferiorFija.totalSize} mm`, 120, 95);
+      doc.text(`${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`, 170, 95);
       doc.text(`Horizontal Inferior Móvil:`, 20, 100);
-      doc.text(`${halfWidth} mm`, 120, 100);
-      doc.text(`${horizontalInferiorMovilastPrice.toFixed(2)}`, 170, 100);
+      doc.text(`${componentTotals.horizontalInferiorMovil.totalSize} mm`, 120, 100);
+      doc.text(`${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`, 170, 100);
       doc.text(`Traslape:`, 20, 105);
-      doc.text(`${doubleHeight} mm (2)`, 120, 105);
-      doc.text(`${traslapeastPrice.toFixed(2)}`, 170, 105);
+      doc.text(`${componentTotals.traslape.totalSize} mm `, 120, 105);
+      doc.text(`${componentTotals.traslape.totalPrice.toFixed(2)}`, 170, 105);
       doc.text(`Enganche:`, 20, 110);
-      doc.text(`${doubleHeight} mm (2)`, 120, 110);
-      doc.text(`${engancheastPrice.toFixed(2)}`, 170, 110);
+      doc.text(`${componentTotals.enganche.totalSize} mm `, 120, 110);
+      doc.text(`${componentTotals.enganche.totalPrice.toFixed(2)}`, 170, 110);
 
 
       // Tabla Accesorios
@@ -234,85 +401,104 @@ const generatePDF = () => {
       doc.setTextColor('black');
 
       doc.text('Pieza', 20, 125);
+      doc.text('Cantidad', 120, 125);
       doc.text('Precio', 170, 125);
       
       doc.text(`Kit de Cierre:`, 20, 130);
-      doc.text(`${kitCierreastPrice.toFixed(2)}`, 170, 130);
+      doc.text(`${accessoryTotals.kitCierre.cantidad}`, 120, 130);
+      doc.text(`${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`, 170, 130);
       doc.text(`Cubeta de Angeo Negra:`, 20, 135);
-      doc.text(`${cubetaAngeoPrice.toFixed(2)}`, 170, 135);
+      doc.text(`${accessoryTotals.cubetaAngeo.cantidad}`, 120, 135);
+      doc.text(`${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`, 170, 135);
       doc.text(`Rodamiento 80 Kilos en Agujas:`, 20, 140);
-      doc.text(`${rodamiento80astPrice.toFixed(2)}`, 170, 140);
+      doc.text(`${accessoryTotals.rodamiento80.cantidad}`, 120, 140);
+      doc.text(`${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`, 170, 140);
       doc.text(`Rodamiento 40 Kilos en Agujas:`, 20, 145);
-      doc.text(`${rodamiento40astPrice.toFixed(2)}`, 170, 145);
+      doc.text(`${accessoryTotals.rodamiento40.cantidad}`, 120, 145);
+      doc.text(`${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`, 170, 145);
       doc.text(`Caja Deflectora:`, 20, 150);
-      doc.text(`${cajaDeflectoraPrice.toFixed(2)}`, 170, 150);
+      doc.text(`${accessoryTotals.cajaDeflectora.cantidad}`, 120, 150);
+      doc.text(`${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`, 170, 150);
       doc.text(`Rodamiento 22 Kilos en Bolas Para Naves:`, 20, 155);
-      doc.text(`${rodamientoNave22astPrice.toFixed(2)}`, 170, 155);
+      doc.text(`${accessoryTotals.rodamiento22.cantidad}`, 120, 155);
+      doc.text(`${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`, 170, 155);
+      doc.text(`Guia Superior Angeo Linea Universal:`, 20, 160);
+      doc.text(`${accessoryTotals.guiaSuperior.cantidad}`, 120, 160);
+      doc.text(`${accessoryTotals.guiaSuperior.totalPrice.toFixed(2)}`, 170, 160);
 
       // Tabla Empaque
       doc.setFontSize(12); // Título más pequeño
       doc.setTextColor(cyanBlue);
-      doc.text('Empaque', 20, 165); // Título de la sección Empaque
+      doc.text('Empaque', 20, 170); // Título de la sección Empaque
       
       // Tabla de Empaque
       doc.setFontSize(10);
       doc.setTextColor('black');
       
-      doc.text('Pieza', 20, 170);
-      doc.text('Tamaño', 120, 170);
-      doc.text('Precio', 170, 170);
+      doc.text('Pieza', 20, 175);
+      doc.text('Tamaño', 120, 175);
+      doc.text('Precio', 170, 175);
 
-      doc.text(`Empaque (Alto):`, 20, 175);
-      doc.text(`${empaqueastHeight} mm`, 120, 175);
+      doc.text(`Empaque (Alto):`, 20, 180);
+      doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 180);
 
-      doc.text(`Empaque (Ancho):`, 20, 180);
-      doc.text(`${empaqueastWidth} mm`, 120, 180);
-      doc.text(`${empaqueastPrice.toFixed(2)}`, 170, 175.5);
+      doc.text(`Empaque (Ancho):`, 20, 185);
+      doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 185);
+      doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 182.5);
 
-      doc.text(`Felpa 5.00 x 7.00:`, 20, 185);
-      doc.text(`${totFelpa} mm`, 120, 185);
-      doc.text(`${felpaPrice.toFixed(2)}`, 170, 185);
+      doc.text(`Felpa 5.00 x 7.00:`, 20, 190);
+      doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 190);
+      doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 190);
 
-      /*/ Tabla Utilitarios
-      doc.setFontSize(12); // Título más pequeño
-      doc.setTextColor(cyanBlue);
-      doc.text('Utilitarios', 20, 190); // Título de la sección Empaque
+     // Tabla Utilitarios
+     doc.setFontSize(12); // Título más pequeño
+     doc.setTextColor(cyanBlue);
+     doc.text('Utilitarios', 20, 200); // Título de la sección Empaque
 
-      // Tabla de Utilitarios
-      doc.setFontSize(10);
-      doc.setTextColor('black');
+     // Tabla de Utilitarios
+     doc.setFontSize(10);
+     doc.setTextColor('black');
 
-      doc.text('Pieza', 20, 195);
-      doc.text('cantidad', 120, 195);
-      doc.text('Precio', 170, 195);
+     doc.text('Pieza', 20, 205);
+     doc.text('cantidad', 120, 205);
+     doc.text('Precio', 170, 205);
 
-      doc.text(`Torinillos:`, 20, 200);
-      doc.text(`16`, 120, 200);
-      doc.text(`${tornillosPrice.toFixed(2)}`, 170, 200);
+     doc.text(`Torinillos:`, 20, 210);
+     doc.text(`${componentTotals.tornillos.cantidad}`, 120, 210);
+     doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 210);
 
-      doc.text(`Silicona:`, 20, 205);
-      doc.text(`${siliconaPrice.toFixed(2)}`, 170, 205);
-*/
+     doc.text(`Silicona:`, 20, 215);
+     doc.text(`${componentTotals.silicona.cantidad}`, 120, 215);
+     doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 215);
+
       // Total
       doc.setFontSize(14);
       doc.setTextColor(cyanBlue);
-      doc.text('Total', 170, 195); // Título Total
+      doc.text('Total', 170, 225); // Título Total
 
       doc.setFontSize(16);
       doc.setTextColor('black');
       // Formateamos el total con separadores de miles y el símbolo de moneda
-      const formattedTotal = totalPrice.toLocaleString('en-US', {
+      const formattedTotal = totalSum.toLocaleString('en-US', {
         style: 'currency',
         currency: 'COP',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
       // Mostramos el total formateado
-      doc.text(formattedTotal, 150, 200); // Total
-            // Guardamos el archivo PDF
-            doc.save('cotizacion-marco.pdf'); // Guardamos el archivo con el nombre
-          };
+      doc.text(formattedTotal, 150, 230); // Total
 
+      // Total puertas
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      
+      doc.text('Cantidad de puertas', 20, 225); // Título Total
+      doc.text(`${puertas.length}`, 20, 230);
+      
+
+            // Guardamos el archivo PDF
+            doc.save('Cotizacion-Astral1.7.pdf'); // Guardamos el archivo con el nombre
+          };
 
 
     const getPriceDisplay = () => {
@@ -406,18 +592,60 @@ const generatePDF = () => {
           <br />
         </div>
 
-                 {/* Botón para regresar */}
-                 <button 
-          onClick={() => navigate(-1)} 
-          className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          >
-            Regresar
-         </button>
+        <div className="container mx-auto p-4">
+          {/* Botón Agregar Puerta */}
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={handleAddDoor}
+              className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+            >
+              Agregar Puerta
+            </button>
+          </div>
+
+          {/* Resumen de Puertas */}
+          <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen de Puertas</h2>
+            <ul className="list-disc pl-5 mb-4">
+              {puertas.map((puerta, index) => (
+                <li key={index} className="mb-2 text-gray-600">
+                  <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                  <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="text-gray-700">
+              <p>
+                <strong>Total Puertas:</strong> {puertas.length}
+              </p>
+              <p>
+                <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+              </p>
+              <p>
+                <strong>Precio Total:</strong>{" "}
+                <span className="text-cyan-600 font-bold">
+                  ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          {/* Botón Regresar */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={() => navigate(-1)}
+              className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+            >
+              Regresar
+            </button>
+          </div>
+        </div>
+
       </div>
           <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>ASTRAL 1.7</h1></strong>
+        <strong><h1>ASTRAL 1.7 XO-OX</h1></strong>
         <Table aria-label="TABLA MARCO">
       <TableHeader>
         <TableColumn><h1>Marco</h1></TableColumn>
@@ -436,16 +664,16 @@ const generatePDF = () => {
           <TableCell>${cabezalastPrice.toFixed(2)}</TableCell>
         </TableRow>
         <TableRow key="3">
-          <TableCell><strong>Sillarast un Riel:</strong></TableCell>
+          <TableCell><strong>Sillar un Riel:</strong></TableCell>
           <TableCell>{totalWidth} mm</TableCell>
           <TableCell>${sillarastPrice.toFixed(2)}</TableCell>
         </TableRow>
-        <TableRow key="3">
-          <TableCell><strong>Sillarast Alfajia un Riel:</strong></TableCell>
+        <TableRow key="4">
+          <TableCell><strong>Sillar Alfajia un Riel:</strong></TableCell>
           <TableCell>{totalWidth} mm</TableCell>
           <TableCell>${sillarAlfajiaastPrice.toFixed(2)}</TableCell>
         </TableRow>
-        <TableRow key="4">
+        <TableRow key="5">
           <TableCell><strong>Jamba:</strong></TableCell>
           <TableCell>{doubleHeight} mm (2)</TableCell>
           <TableCell>${jambaastPrice.toFixed(2)}</TableCell>
@@ -579,9 +807,9 @@ const generatePDF = () => {
       </TableBody>
     </Table>
     <br />
-    <Table aria-label="TABLA EMPAQUEast">
+    <Table aria-label="TABLA EMPAQUE">
       <TableHeader>
-        <TableColumn><h1>Empaqueast</h1></TableColumn>
+        <TableColumn><h1>Empaque</h1></TableColumn>
         <TableColumn></TableColumn>
         <TableColumn></TableColumn>
       </TableHeader>
@@ -608,6 +836,32 @@ const generatePDF = () => {
       </TableBody>
     </Table>
      <br />
+     <Table aria-label="tabla utilitarios">
+          <TableHeader>
+            <TableColumn><h1>Utilitarios</h1></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell>
+                <strong> Tornillos (44)</strong>
+              </TableCell>
+              <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
+            </TableRow>
+
+            <TableRow key="3">
+              <TableCell>
+                <strong> Silicona</strong>
+              </TableCell>
+              <TableCell>$ {siliconaPrice.toFixed(2)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>  
+        <br />
      
      <Table aria-label="Tabla Vidrio">
   <TableHeader>

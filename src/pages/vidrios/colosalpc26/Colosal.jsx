@@ -282,7 +282,6 @@ const Colosal = () => {
     empaquecolPrice +
     tornillosPrice +
     siliconaPrice +
-
     (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
 
   const generatePDF = () => {
@@ -643,35 +642,6 @@ const Colosal = () => {
           </TableBody>
         </Table>
 
-        <br />
-        <Table aria-label="TABLA EMPAQUE">
-          <TableHeader>
-            <TableColumn><h1>Empaque</h1></TableColumn>
-            <TableColumn></TableColumn>
-            <TableColumn></TableColumn>
-          </TableHeader>
-          <TableBody>
-            <TableRow key="1">
-              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-              <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
-              <TableCell><strong><h2>Precio</h2></strong></TableCell>
-            </TableRow>
-            <TableRow key="2">
-              <TableCell><strong>Empaque (Alto):
-                <br />
-                Empaque (Ancho): </strong></TableCell>
-              <TableCell>{empaquecolHeight} mm
-                <br /> {empaquecolWidth} mm
-              </TableCell>
-              <TableCell>${empaquecolPrice.toFixed(2)}</TableCell>
-            </TableRow>
-            <TableRow key="3">
-              <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
-              <TableCell>{totFelpa} mm</TableCell>
-              <TableCell>${felpaPrice.toFixed(2)}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
         <br />
         <Table aria-label="tabla utilitarios">
           <TableHeader>
