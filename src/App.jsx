@@ -28,6 +28,8 @@ import Kimbayaxxx from './pages/vidrios/kimbayas/Kimbayaxxx';
 import { Zinupage } from './pages/categorias/zinypage';
 import Zinux from './pages/vidrios/zinu/zinux';
 import Zinuox from './pages/vidrios/zinu/zinuox';
+import { Sideralpage } from './pages/categorias/sideralPage';
+import Sideralx from './pages/vidrios/sideral/sideralx';
 
 
 export const AcmeLogo = () => {
@@ -86,6 +88,8 @@ function App() {
           <Route path='zin' element={<Zinupage />} />
           <Route path='zin/zin1' element={<Zinux />} />
           <Route path='zin/zin2' element={<Zinuox />} />
+          <Route path='sid' element={<Sideralpage />} />
+          <Route path='sid/sid1' element={<Sideralx/>} />
           <Route path='tipos' element={<Tipos/>}/>
           
 
