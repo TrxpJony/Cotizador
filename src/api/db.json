@@ -58,10 +58,11 @@
       "aln1102s3890":26000,
       "enchape3890":12000,
 
-      "marcoPerimetralZinu": 25000,
+      "marcoPerimetralZinu": 22000,
       "perimetralNaveZinu": 20000,
       "pisaVidrioZinu": 17000,
       "verticalHorizontalesCaZinu": 19000,
+      "divisorZinu": 16000,
 
       "manodeObra": 70000,
       "empaquecol": 2000,
