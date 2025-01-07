@@ -58,12 +58,18 @@
       "aln1102s3890":26000,
       "enchape3890":12000,
 
+      "marcoPerimetralZinu": 25000,
+      "perimetralNaveZinu": 20000,
+      "pisaVidrioZinu": 17000,
+      "verticalHorizontalesCaZinu": 19000,
+
       "manodeObra": 70000,
       "empaquecol": 2000,
       "empaquekim": 2000,
       "empaqueast": 2000,
       "empaque744":1500,
       "empaque3890":1200,
+      "empaqueZinu": 1500,
       "felpacol": 400
     },
     "accesorios": {
@@ -125,6 +131,16 @@
 
       "kitCierre3890": 10000,
       "kitCierreConLlave3890": 40000,
+
+      "escuadraEnsambleZinu": 25000,
+      "escuadraEnsambleHZinu": 25000,
+      "bisagra2Zinu": 8000,
+      "cierreHZinu": 15000,
+      "soporteHZinu": 5000,
+      "limitador150Zinu": 20000,
+      "limitador220Zinu": 25000,
+      "kitCierreZinu": 10000,
+      "kitCierreConLlaveZinu": 40000,
 
       "guiaSuperiorangeo": 32000,
       "pletinaPoliamida": 50000,

@@ -25,6 +25,8 @@ import Astral20xx from './pages/vidrios/astral20/Astral20xx';
 import { Sistema3890page } from './pages/categorias/sistema3890page';
 import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
 import Kimbayaxxx from './pages/vidrios/kimbayas/Kimbayaxxx';
+import { Zinupage } from './pages/categorias/zinypage';
+import Zinux from './pages/vidrios/zinu/zinux';
 
 
 export const AcmeLogo = () => {
@@ -80,7 +82,10 @@ function App() {
           <Route path='kim' element={<Kimbayapage />} />
           <Route path='kim/kim1' element={<Kymbaya />} />
           <Route path='kim/kim2' element={<Kimbayaxxx/>}/>
+          <Route path='zin' element={<Zinupage />} />
+          <Route path='zin/zin1' element={<Zinux />} />
           <Route path='tipos' element={<Tipos/>}/>
+          
 
         </Routes>
       </div>
