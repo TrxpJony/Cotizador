@@ -24,11 +24,12 @@ import { Colosal345page } from './pages/categorias/colosal345page';
 import Astral20xx from './pages/vidrios/astral20/Astral20xx';
 import { Sistema3890page } from './pages/categorias/sistema3890page';
 import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
+import Kimbayaxxx from './pages/vidrios/kimbayas/Kimbayaxxx';
 
 
 export const AcmeLogo = () => {
   return (
-      <img src={logo} alt="Acme Logo" height="85" width="85" />
+      <img src={logo}  alt="Acme Logo" height="85" width="85" />
 
   );
 };
@@ -78,6 +79,7 @@ function App() {
           <Route path='s3890/s38901' element={<Sistema3890/>} />
           <Route path='kim' element={<Kimbayapage />} />
           <Route path='kim/kim1' element={<Kymbaya />} />
+          <Route path='kim/kim2' element={<Kimbayaxxx/>}/>
           <Route path='tipos' element={<Tipos/>}/>
 
         </Routes>
