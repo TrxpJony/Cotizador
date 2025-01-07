@@ -14,6 +14,7 @@ const Sistema8025 = () => {
       kitCierre8025: false,
       kitCierreConLlave8025: false,
       rodamientoSimple8025: false,
+      rodamientoDoble8025: false,
       felpa: '',
     });
   
@@ -50,7 +51,15 @@ const Sistema8025 = () => {
           kitCierre8025: name === 'kitCierre8025' ? checked : false,
           kitCierreConLlave8025: name === 'kitCierreConLlave8025' ? checked : false,
         }));
-      } 
+      } else if (name === 'rodamientoSimple8025' || name === 'rodamientoDoble8025') {
+        setAccessories((prev) => ({
+          ...prev,
+          rodamientoSimple8025: name === 'rodamientoSimple8025' ? checked : false,
+          rodamientoDoble8025: name === 'rodamientoDoble8025' ? checked : false,
+        }));
+      } else {
+        setAccessories((prev) => ({ ...prev, [name]: value }));
+      }
     } else {
       setAccessories((prev) => ({ ...prev, [name]: value }));
     }
@@ -94,6 +103,7 @@ const Sistema8025 = () => {
     const kitCierre8025Price = accessories.kitCierre8025 ? accessoryPrices.kitCierre8025 : 0;
     const kitCierreConLlave8025Price = accessories.kitCierreConLlave8025? accessoryPrices.kitCierreConLlave8025: 0;
     const rodamientoSimple8025Price = accessories.rodamientoSimple8025 ? accessoryPrices.rodamientoSimple8025 * 2 : 0;
+    const rodamientoDoble8025Price = accessories.rodamientoDoble8025 ? accessoryPrices.rodamientoDoble8025 * 2 : 0;
     const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
     const manodeObraPrice =  prices.manodeObra * area;
   
@@ -197,7 +207,13 @@ const Sistema8025 = () => {
             cantidad: prevTotals.rodamientoSimple.cantidad + 2,
             totalPrice: prevTotals.rodamientoSimple.totalPrice + rodamientoSimple8025Price,
           }
-        : prevTotals.rodamientoSimple,
+        : prevTotals.rodamientoDoble,
+        rodamientoDoble: accessories.rodamientoDoble8025
+        ? {
+            cantidad: prevTotals.rodamientoDoble.cantidad + 2,
+            totalPrice: prevTotals.rodamientoDoble.totalPrice + rodamientoDoble8025Price,
+          }
+        : prevTotals.rodamientoDoble,
 
       // Añade lógica para otros accesorios si es necesario.
     }));
@@ -226,6 +242,7 @@ const Sistema8025 = () => {
       kitCierre8025Price +
       kitCierreConLlave8025Price +
       rodamientoSimple8025Price +
+      rodamientoDoble8025Price +
       felpaPrice+
       empaque744Price+
       tornillosPrice+
@@ -336,57 +353,61 @@ const Sistema8025 = () => {
         doc.text(`${accessoryTotals.rodamientoSimple.cantidad}`, 120, 130);
         doc.text(`${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`, 170, 130);
 
+        doc.text(`Rodamiento Doble:`, 20, 135);
+        doc.text(`${accessoryTotals.rodamientoDoble.cantidad}`, 120, 135);
+        doc.text(`${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`, 170, 135);
+
         // Tabla Empaque
         doc.setFontSize(12); // Título más pequeño
         doc.setTextColor(cyanBlue);
-        doc.text('Empaque', 20, 135); // Título de la sección Empaque
+        doc.text('Empaque', 20, 145); // Título de la sección Empaque
         
         // Tabla de Empaque
         doc.setFontSize(10);
         doc.setTextColor('black');
         
-        doc.text('Pieza', 20, 145);
-        doc.text('Tamaño', 120, 145);
-        doc.text('Precio', 170, 145);
+        doc.text('Pieza', 20, 150);
+        doc.text('Tamaño', 120, 150);
+        doc.text('Precio', 170, 150);
   
-        doc.text(`Empaque (Alto):`, 20, 150);
-        doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 150);
+        doc.text(`Empaque (Alto):`, 20, 155);
+        doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 155);
   
-        doc.text(`Empaque (Ancho):`, 20, 155);
-        doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 155);
-        doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 152.5);
+        doc.text(`Empaque (Ancho):`, 20, 160);
+        doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 160);
+        doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 157.5);
   
-        doc.text(`Felpa 5.00 x 7.00:`, 20, 160);
-        doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 160);
-        doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 160);
+        doc.text(`Felpa 5.00 x 7.00:`, 20, 165);
+        doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 165);
+        doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 165);
   
   
         // Tabla Utilitarios
         doc.setFontSize(12); // Título más pequeño
         doc.setTextColor(cyanBlue);
-        doc.text('Utilitarios', 20, 170); // Título de la sección Empaque
+        doc.text('Utilitarios', 20, 175); // Título de la sección Empaque
   
         // Tabla de Utilitarios
         doc.setFontSize(10);
         doc.setTextColor('black');
   
-        doc.text('Pieza', 20, 175);
-        doc.text('cantidad', 120, 175);
-        doc.text('Precio', 170, 175);
+        doc.text('Pieza', 20, 180);
+        doc.text('cantidad', 120, 180);
+        doc.text('Precio', 170, 180);
   
-        doc.text(`Torinillos:`, 20, 180);
-        doc.text(`${componentTotals.tornillos.cantidad}`, 120, 180);
-        doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 180);
+        doc.text(`Torinillos:`, 20, 185);
+        doc.text(`${componentTotals.tornillos.cantidad}`, 120, 185);
+        doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 185);
 
-        doc.text(`Silicona:`, 20, 185);
-        doc.text(`${componentTotals.silicona.cantidad}`, 120, 185);
-        doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 185);
+        doc.text(`Silicona:`, 20, 190);
+        doc.text(`${componentTotals.silicona.cantidad}`, 120, 190);
+        doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 190);
 
   
         // Total
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 195); // Título Total
+        doc.text('Total', 170, 200); // Título Total
   
         doc.setFontSize(16);
         doc.setTextColor('black');
@@ -397,14 +418,14 @@ const Sistema8025 = () => {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 200); // Total
+        doc.text(formattedTotal, 150, 205); // Total
 
         // Total puertas
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
 
-        doc.text('Cantidad de puertas', 20, 195); // Título Total
-        doc.text(`${puertas.length}`, 20, 200);
+        doc.text('Cantidad de puertas', 20, 200); // Título Total
+        doc.text(`${puertas.length}`, 20, 205);
 
         // Mostramos el total formateado
 
@@ -425,10 +446,11 @@ const Sistema8025 = () => {
         const getRodamientoPrice = () => {
           if (accessories.rodamientoSimple8025) {
             return `$${rodamientoSimple8025Price.toFixed(2)}`; // Mostrar precio si 'rodamientoSimple8025' está seleccionado
+          } else if (accessories.rodamientoDoble8025) {
+            return `$${rodamientoDoble8025Price.toFixed(2)}`; // Mostrar precio si 'rodamientoDoble8025' está seleccionado
           }
           return ''; // Si no se selecciona ningún radio button, no mostrar precio
         };
-        
         
   
     return (
@@ -628,12 +650,20 @@ const Sistema8025 = () => {
           </TableRow>
           <TableRow key="3">
             <TableCell><input
-              type="checkbox"
+              type="radio"
               name="rodamientoSimple8025"
               checked={accessories.rodamientoSimple8025}
               onChange={handleChange}
               />
               Rodamiento Simple en Agujas (2)
+              <br />
+              <input
+              type="radio"
+              name="rodamientoDoble8025"
+              checked={accessories.rodamientoDoble8025}
+              onChange={handleChange}
+              />
+              Rodamiento Doble (2)
               </TableCell>
             <TableCell>$ {getRodamientoPrice()}</TableCell>
           </TableRow>
