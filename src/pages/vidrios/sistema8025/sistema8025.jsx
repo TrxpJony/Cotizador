@@ -129,6 +129,7 @@ const Sistema8025 = () => {
       kitCierre: { cantidad: 0, totalPrice: 0 },
       kitCierreConLlave: { cantidad: 0, totalPrice: 0 },
       rodamientoSimple: { cantidad: 0, totalPrice: 0},
+      rodamientoDoble: { cantidad: 0, totalPrice: 0},
       // Agrega otros accesorios aquí si es necesario.
     });
 
@@ -207,7 +208,7 @@ const Sistema8025 = () => {
             cantidad: prevTotals.rodamientoSimple.cantidad + 2,
             totalPrice: prevTotals.rodamientoSimple.totalPrice + rodamientoSimple8025Price,
           }
-        : prevTotals.rodamientoDoble,
+        : prevTotals.rodamientoSimple,
         rodamientoDoble: accessories.rodamientoDoble8025
         ? {
             cantidad: prevTotals.rodamientoDoble.cantidad + 2,
