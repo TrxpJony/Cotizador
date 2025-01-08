@@ -34,6 +34,7 @@ import Astral20oxxo from './pages/vidrios/astral20/Astral20oxxo';
 import Sideralxo from './pages/vidrios/sideral/sideralxo';
 import Colosal3xxx from './pages/vidrios/colosal345/colosal3xxx';
 import Colosal3oxxo from './pages/vidrios/colosal345/colosal3oxxo';
+import Kimbayaoxxo from './pages/vidrios/kimbayas/Kimbayaoxxo';
 
 
 export const AcmeLogo = () => {
@@ -92,6 +93,7 @@ function App() {
           <Route path='kim' element={<Kimbayapage />} />
           <Route path='kim/kim1' element={<Kymbaya />} />
           <Route path='kim/kim2' element={<Kimbayaxxx/>}/>
+          <Route path='kim/kim3' element={<Kimbayaoxxo/>}/>
           <Route path='zin' element={<Zinupage />} />
           <Route path='zin/zin1' element={<Zinux />} />
           <Route path='zin/zin2' element={<Zinuox />} />

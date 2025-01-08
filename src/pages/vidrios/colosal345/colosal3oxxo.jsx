@@ -703,7 +703,7 @@ const Colosal3oxxo = () => {
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>COLOSAL 345 XO-OX</h1></strong>
+        <strong><h1>COLOSAL 345 OXXO</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>

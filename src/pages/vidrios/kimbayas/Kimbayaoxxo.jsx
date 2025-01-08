@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import kimbayaImage from '../../../img/kimxo.png'; // Importar la imagen
+import kimbayaImage from '../../../img/coloxxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Kimbaya = () => {
+const Kimbayaoxxo = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -135,6 +135,7 @@ const Kimbaya = () => {
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
   const doubleWidth = totalWidth ? totalWidth * 2 : '';
+  const cuadHeight = totalHeight ? totalHeight * 4 : '';
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaquekimHeight = height && width ? height * 4 : '';
   const empaquekimWidth = height && width ? width * 2 : '';
@@ -144,18 +145,20 @@ const Kimbaya = () => {
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralkim = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
   const pistaRodamientokim = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 4) : 0;
-  const verticalHorizontaleskim = (totalWidth && totalHeight) ? ((totalWidth / 2 + 7) * 4 + totalHeight * 2) : 0;
-  const verticalHorizontalesCakim = (totalWidth && totalHeight) ? ((totalWidth / 2 + 7) * 4 + totalHeight * 2) : 0;
+  const verticalHorizontaleskim = (totalWidth && totalHeight) ? ((totalWidth / 4 + 20) * 8 + totalHeight * 4) : 0;
+  const verticalHorizontalesCakim = (totalWidth && totalHeight) ? ((totalWidth / 2 + 7) * 8 + totalHeight * 4) : 0;
+
 
   // Calcular precios
   const pistaRodamientokimPrice = (pistaRodamientokim / 1000) * prices.pistaRodamientokim;
   const marcoPerimetralkimPrice = (marcoPerimetralkim / 1000) * prices.marcoPerimetralkim;
   const pistaRodamientokalPrice = prices.pistaRodamientokal * ((totalWidth / 1000) * 2);
   const complementoSuperiorkimPrice = prices.complementoSuperiorkim * ((totalWidth / 1000) * 2);
-  const enganchekimPrice = prices.enganchekim * (doubleHeight / 1000);
-  const engancheVidrioCakimPrice = prices.engancheVidrioCakim * (doubleHeight / 1000);
+  const enganchekimPrice = prices.enganchekim * (cuadHeight / 1000);
+  const engancheVidrioCakimPrice = prices.engancheVidrioCakim * (totalWidth / 1000);
   const verticalHorizontaleskimPrice = (verticalHorizontaleskim / 1000) * prices.verticalHorizontaleskim;
   const verticalHorizontalesCakimPrice = (verticalHorizontalesCakim / 1000) * prices.verticalHorizontalesCakim;
+  const adaptadorKimPrice = prices.adaptadorKim * (totalHeight / 1000);
 
 
   const escuadraEnsamblekimPrice = accessories.escuadraEnsamblekim ? accessoryPrices.escuadraEnsamblekim : 0;
@@ -203,6 +206,7 @@ const Kimbaya = () => {
     pistaRodamientokim: { totalSize: 0, totalPrice: 0 },
     complementoSuperior: { totalSize: 0, totalPrice: 0 },
     verticalHorizontales: { totalSize: 0, totalPrice: 0 },
+    adaptador: { totalSize: 0, totalPrice: 0 },
     enganche: { totalSize: 0, totalPrice: 0 },
     verticalHorizontalesCa: { totalSize: 0, totalPrice: 0 },
     engancheCa: { totalSize: 0, totalPrice: 0 },
@@ -279,12 +283,16 @@ const Kimbaya = () => {
         totalSize: prevTotals.verticalHorizontalesCa.totalSize + parseFloat(verticalHorizontalesCakim),
         totalPrice: prevTotals.verticalHorizontalesCa.totalPrice + verticalHorizontalesCakimPrice,
       },
+      adaptador: {
+        totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
+        totalPrice: prevTotals.adaptador.totalPrice + adaptadorKimPrice
+      },
       enganche: {
         totalSize: prevTotals.enganche.totalSize + parseFloat(doubleHeight),
         totalPrice: prevTotals.enganche.totalPrice + enganchekimPrice,
       },
       engancheCa: {
-        totalSize: prevTotals.engancheCa.totalSize + parseFloat(doubleHeight),
+        totalSize: prevTotals.engancheCa.totalSize + parseFloat(totalWidth),
         totalPrice: prevTotals.engancheCa.totalPrice + engancheVidrioCakimPrice,
       },
       empaque: {
@@ -502,6 +510,7 @@ const Kimbaya = () => {
     complementoSuperiorkimPrice +
     verticalHorizontaleskimPrice +
     verticalHorizontalesCakimPrice +
+    adaptadorKimPrice +
     felpaPrice +
     empaquekimPrice +
 
@@ -930,7 +939,7 @@ const Kimbaya = () => {
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>KIMBAYA</h1></strong>
+        <strong><h1>KIMBAYA OXXO</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -997,8 +1006,13 @@ const Kimbaya = () => {
             </TableRow>
             <TableRow key="5">
               <TableCell><strong>Enganche Vidrio Camara:</strong> </TableCell>
-              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>{totalWidth} mm (2) </TableCell>
               <TableCell>${engancheVidrioCakimPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="6">
+              <TableCell><strong>Adaptador:</strong> </TableCell>
+              <TableCell>{totalHeight} mm </TableCell>
+              <TableCell>${adaptadorKimPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -1475,4 +1489,4 @@ const Kimbaya = () => {
   );
 };
 
-export default Kimbaya;
+export default Kimbayaoxxo;
