@@ -197,7 +197,7 @@ const Kimbayaoxxo = () => {
   const pletinaPoliamidaPrice = accessories.pletinaPoliamida ? accessoryPrices.pletinaPoliamida : 0;
   const empaqueBurbujakimPrice = accessories.empaqueBurbujakim ? accessoryPrices.empaqueBurbujakim : 0;
 
-  const tornillosPrice = utilitaryPrices.tornillos * 44;
+  const tornillosPrice = utilitaryPrices.tornillos * 76;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
   const [componentTotals, setComponentTotals] = useState({
@@ -305,7 +305,7 @@ const Kimbayaoxxo = () => {
         totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
       },
       tornillos: {
-        cantidad: prevTotals.tornillos.cantidad + 44,
+        cantidad: prevTotals.tornillos.cantidad + 76,
         totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
       },
       silicona: {
@@ -1381,7 +1381,7 @@ const Kimbayaoxxo = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong> Tornillos</strong></TableCell>
-              <TableCell>44</TableCell>
+              <TableCell>76</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">

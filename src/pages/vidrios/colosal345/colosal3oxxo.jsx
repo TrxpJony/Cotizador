@@ -125,7 +125,7 @@ const Colosal3oxxo = () => {
   const cajaDeflectoraPrice = accessories.cajaDeflectora ? accessoryPrices.cajaDeflectora : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
   const manodeObraPrice = prices.manodeObra * area;
-  const tornillosPrice = utilitaryPrices.tornillos * 44;
+  const tornillosPrice = utilitaryPrices.tornillos * 76;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
   const [componentTotals, setComponentTotals] = useState({
@@ -193,7 +193,7 @@ const Colosal3oxxo = () => {
         totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
       },
       tornillos: {
-        cantidad: prevTotals.tornillos.cantidad + 44,
+        cantidad: prevTotals.tornillos.cantidad + 76,
         totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
       },
       silicona: {
@@ -906,7 +906,7 @@ const Colosal3oxxo = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong> Tornillos</strong></TableCell>
-              <TableCell>44</TableCell>
+              <TableCell>76</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">

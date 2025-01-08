@@ -35,6 +35,7 @@ import Sideralxo from './pages/vidrios/sideral/sideralxo';
 import Colosal3xxx from './pages/vidrios/colosal345/colosal3xxx';
 import Colosal3oxxo from './pages/vidrios/colosal345/colosal3oxxo';
 import Kimbayaoxxo from './pages/vidrios/kimbayas/Kimbayaoxxo';
+import Astral20xox from './pages/vidrios/astral20/Astral20xox';
 
 
 export const AcmeLogo = () => {
@@ -78,6 +79,7 @@ function App() {
           <Route path='ast/a201' element={<Astral20 />} />
           <Route path='ast/a202' element={<Astral20xx />} />
           <Route path='ast/a203' element={<Astral20oxxo />} />
+          <Route path='ast/a204' element={<Astral20xox />} />
           <Route path='ast17' element={<Astral17page />} />
           <Route path='ast17/a171' element={<Astral17 />} />
           <Route path='c345' element={<Colosal345page />} />
