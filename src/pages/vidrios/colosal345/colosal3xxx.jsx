@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosal3Image from '../../../img/colox.png'; // Importar la imagen
+import colosal3Image from '../../../img/colxxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import preciosData from '../../../api/db.json';
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import logo from '../../../../src/img/logo.png'
 
-const Colosal3 = () => {
+const Colosal3xxx = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -94,7 +94,7 @@ const Colosal3 = () => {
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
-  //const doubleHalfWidth = halfWidth ? halfWidth * 2 : '';
+  const cuadHeight = totalHeight ? totalHeight * 4 : '';
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaquecolHeight = height && width ? height * 4 : '';
   const empaquecolWidth = height && width ? width * 2 : '';
@@ -103,12 +103,12 @@ const Colosal3 = () => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * prices.empaquecol; // Precio total del empaquecol
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralCol345 = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
-  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 2 + 13) * 4 + totalHeight * 4) : 0;
+  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 3 + 13) * 6 + totalHeight * 6) : 0;
   // Calcular precios
 
   const marcoPerimetralCol345Price = (marcoPerimetralCol345 / 1000) * prices.marcoPerimetralCol345;
   const perimetralNaveCol345Price = (perimetralNaveCol345 / 1000) * prices.perimetralNaveCol345;
-  const engancheCol345Price = prices.engancheCol345 * (doubleHeight / 1000);
+  const engancheCol345Price = prices.engancheCol345 * (cuadHeight / 1000);
 
   const kitCierrecol345Price = accessories.kitCierrecol345 ? accessoryPrices.kitCierrecol345 : 0;
   const kitCierreConLlavecol345Price = accessories.kitCierreConLlavecol345 ? accessoryPrices.kitCierreConLlavecol345 : 0;
@@ -174,7 +174,7 @@ const Colosal3 = () => {
         totalPrice: prevTotals.perimetralNave.totalPrice + perimetralNaveCol345Price, // Sumar precio
       },
       enganche: {
-        totalSize: prevTotals.enganche.totalSize + parseFloat(doubleHeight),
+        totalSize: prevTotals.enganche.totalSize + parseFloat(cuadHeight),
         totalPrice: prevTotals.enganche.totalPrice + engancheCol345Price,
       },
       empaque: {
@@ -358,7 +358,7 @@ const Colosal3 = () => {
     doc.setTextColor('black');
 
     doc.text(`Marco Perimetral:`, 20, 55);
-    doc.text(`${componentTotals.marcoPerimetral.totalSize} mm`, 120, 55);
+    doc.text(`${componentTotals.marcoPerimetral.totalSize} mm (4)`, 120, 55);
     doc.text(`${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`, 170, 55);
 
     // Nave
@@ -377,10 +377,10 @@ const Colosal3 = () => {
     doc.setTextColor('black');
 
     doc.text(`Perimetral Nave:`, 20, 75);
-    doc.text(`${componentTotals.perimetralNave.totalSize} mm`, 120, 75);
+    doc.text(`${componentTotals.perimetralNave.totalSize} mm (12)`, 120, 75);
     doc.text(`${componentTotals.perimetralNave.totalPrice.toFixed(2)}`, 170, 75);
     doc.text(`Enganche:`, 20, 80);
-    doc.text(`${componentTotals.enganche.totalSize} mm `, 120, 80);
+    doc.text(`${componentTotals.enganche.totalSize} mm (4)`, 120, 80);
     doc.text(`${componentTotals.enganche.totalPrice.toFixed(2)}`, 170, 80);
 
 
@@ -731,12 +731,12 @@ const Colosal3 = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Nave:</strong></TableCell>
-              <TableCell>{perimetralNaveCol345} mm (8)</TableCell>
+              <TableCell>{perimetralNaveCol345} mm (12)</TableCell>
               <TableCell>${perimetralNaveCol345Price.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Enganche:</strong> </TableCell>
-              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>{doubleHeight} mm (4) </TableCell>
               <TableCell>${engancheCol345Price.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
@@ -1003,4 +1003,4 @@ const Colosal3 = () => {
   );
 };
 
-export default Colosal3;
+export default Colosal3xxx;
