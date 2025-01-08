@@ -109,7 +109,7 @@ const Sideralx = () => {
     const escuadraEnsambleSidPrice = accessoryPrices.escuadraEnsambleSid;
     const escuadraEnsambleMSidPrice = accessoryPrices.escuadraEnsambleMSid;
 
-    const tornillosPrice = utilitaryPrices.tornillos * 44;
+    const tornillosPrice = utilitaryPrices.tornillos * 28;
     const siliconaPrice = utilitaryPrices.silicona * 1;
 
     const [componentTotals, setComponentTotals] = useState({
@@ -179,7 +179,7 @@ const Sideralx = () => {
                 totalPrice: prevTotals.escuadraEnsambleM.totalPrice + escuadraEnsambleMSidPrice,
             },
             tornillos: {
-                cantidad: prevTotals.tornillos.cantidad + 44,
+                cantidad: prevTotals.tornillos.cantidad + 28,
                 totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
             },
             silicona: {
@@ -569,7 +569,7 @@ const Sideralx = () => {
                         </TableRow>
                         <TableRow key="2">
                             <TableCell>
-                                <strong> Tornillos (44)</strong>
+                                <strong> Tornillos (28)</strong>
                             </TableCell>
                             <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
                         </TableRow>

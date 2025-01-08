@@ -532,257 +532,122 @@ const Kimbaya = () => {
     kitManijaConLlavekimPrice +
     pletinaPoliamidaPrice +
     empaqueBurbujakimPrice +
+
+    tornillosPrice+
+    siliconaPrice+
     (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
 
 
 
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-
-    // Colores de la empresa
-    const cyanBlue = '#00b5e2';
-    const lightGray = '#d3d3d3';
-
-
-
-    // Agregamos el logo o nombre de la empresa en la parte superior (opcional)
-    doc.addImage(logo, 'PNG', 20, 10, 40, 20); // x, y, ancho, alto del logo
-    doc.setFontSize(14); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-
-    // Fecha de creación
-    const currentDate = new Date().toLocaleDateString();
-    doc.setFontSize(8); // Tamaño de fuente más pequeño para la fecha
-    doc.setTextColor('black');
-    doc.text(`Fecha de creación: ${currentDate}`, 150, 20); // Fecha a la derecha
-
-    // Agregamos un borde y un fondo gris claro a los encabezados
-    doc.setFillColor(lightGray);
-    doc.rect(20, 30, 170, 8, 'F'); // Fondo gris en la cabecera
-    doc.setTextColor('white');
-    doc.setFontSize(10); // Texto más pequeño en el encabezado
-    doc.text('Detalle de la cotización Kimbaya', 70, 34); // Texto blanco en la cabecera
-
-    // Marco
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Marco', 20, 45); // Título de la sección Marco
-
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 50);
-    doc.text('Tamaño', 120, 50);
-    doc.text('Precio', 170, 50);
-
-    doc.setFontSize(10); // Texto más pequeño para los detalles
-    doc.setTextColor('black');
-
-    doc.text(`Marco Perimetral:`, 20, 55);
-    doc.text(`${componentTotals.marcoPerimetral.totalSize}`, 120, 55);
-    doc.text(`${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`, 170, 55);
-    doc.text(`Pista Rodamiento Kalima:`, 20, 60);
-    doc.text(`${componentTotals.pistaRodamientokal.totalSize}`, 120, 60);
-    doc.text(`${componentTotals.pistaRodamientokal.totalPrice.toFixed(2)}`, 170, 60);
-    doc.text(`Pista Rodamiento Kimbaya:`, 20, 65);
-    doc.text(`${componentTotals.pistaRodamientokim.totalSize} `, 120, 65);
-    doc.text(`${componentTotals.pistaRodamientokim.totalPrice.toFixed(2)}`, 170, 65);
-    doc.text(`Complemento Marco Superior:`, 20, 70);
-    doc.text(`${componentTotals.complementoSuperior.totalSize} `, 120, 70);
-    doc.text(`${componentTotals.complementoSuperior.totalPrice.toFixed(2)}`, 170, 70);
-
-    // Nave
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Nave', 20, 80); // Título de la sección Nave
-
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 85);
-    doc.text('Tamaño', 120, 85);
-    doc.text('Precio', 170, 85);
-
-    doc.setFontSize(10); // Texto más pequeño para los detalles
-    doc.setTextColor('black');
-
-    doc.text(`Vertical Horizontal Vidrio`, 20, 90);
-    doc.text(`${componentTotals.verticalHorizontales.totalSize} mm`, 120, 90);
-    doc.text(`${componentTotals.verticalHorizontales.totalPrice.toFixed(2)}`, 170, 90);
-    doc.text(`Enganche Vidrio:`, 20, 95);
-    doc.text(`${componentTotals.enganche.totalSize} mm`, 120, 95);
-    doc.text(`${componentTotals.enganche.totalPrice.toFixed(2)}`, 170, 95);
-    doc.text(`Vertical Horizontales Vidrio Camara:`, 20, 100);
-    doc.text(`${componentTotals.verticalHorizontalesCa.totalSize} mm`, 120, 100);
-    doc.text(`${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`, 170, 100);
-    doc.text(`Enganche Vidrio Camara:`, 20, 105);
-    doc.text(`${componentTotals.engancheCa.totalSize} mm`, 120, 105);
-    doc.text(`${componentTotals.engancheCa.totalPrice.toFixed(2)}`, 170, 105);
-
-    // Tabla Accesorios Marco
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Accesorios de Marco', 20, 115); // Título de la sección Empaque
-
-    // Tabla de Accesorios Marco
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 120);
-    doc.text('Precio', 170, 120);
-
-    doc.text(`Escuadra Ensamble Marco:`, 20, 125);
-    doc.text(`${accessoryTotals.escuadraEnsamble.cantidad}`)
-    doc.text(`${accessoryTotals.escuadraEnsamble.totalPrice.toFixed(2)}`, 170, 125);
-
-    doc.text(`Espuma Sello Superior:`, 20, 130);
-    doc.text(`${accessoryTotals.espumaSelloSu.cantidad}`)
-    doc.text(`${accessoryTotals.espumaSelloSu.totalPrice.toFixed(2)}`, 170, 130);
-
-    doc.text(`Espuma Sello Inferior:`, 20, 135);
-    doc.text(`${espumaSelloInkimPrice.toFixed(2)}`, 170, 135);
-
-    doc.text(`Sifon Sistemas Eurovitral:`, 20, 140);
-    doc.text(`${sifonSistemaskimPrice.toFixed(2)}`, 170, 140);
-
-    doc.text(`Caja Deflectora:`, 20, 145);
-    doc.text(`${cajaDeflectoraPrice.toFixed(2)}`, 170, 145);
-
-    // Tabla Accesorios de Hoja fija
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Accesorios de Hoja Fija', 20, 155); // Título de la sección Empaque
-
-    // Tabla de Empaque
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 160);
-    doc.text('Precio', 170, 160);
-
-    doc.text(`Escuadra Ensamble Hoja Fija:`, 20, 165);
-    doc.text(`${escuadraHojaPrice.toFixed(2)}`, 170, 165);
-    doc.text(`Kit de 6 Escuadras de Alineación Hoja Fija:`, 20, 170);
-    doc.text(`${kit6HPrice.toFixed(2)}`, 170, 170);
-    doc.text(`Kit de 2 Escuadras de Alineacion con Guia:`, 20, 175);
-    doc.text(`${topesHPrice.toFixed(2)}`, 170, 175);
-    doc.text(`Topes Para Hojas:`, 20, 180);
-    doc.text(`${topesHPrice.toFixed(2)}`, 170, 180);
-    doc.text(`Espuma Tapa Guia Superior/Inferior:`, 20, 185);
-    doc.text(`${espumaTapaHPrice.toFixed(2)}`, 170, 185);
-    doc.text(`Tapa y Tapete Porta Esponja Superior e Inferior`, 20, 190);
-    doc.text(`${portaEsponjaHPrice.toFixed(2)}`, 170, 190);
-    doc.text(`Tapa Entrecierre Supeior e Inferior:`, 20, 195);
-    doc.text(`${tapaCierreHPrice.toFixed(2)}`, 170, 195);
-    doc.text(`Kit Hoja Fija:`, 20, 200);
-    doc.text(`${kitHojaFijakimPrice.toFixed(2)}`, 170, 200);
-
-
-    // Tabla accesorios hoja mobil
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Accesorios de Hoja Mobil', 20, 210); // Título de la sección Empaque
-
-    // Tabla accesorios hoja mobil
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 215);
-    doc.text('Precio', 170, 215);
-
-    doc.text(`Escuadra Ensamble Hoja Mobil:`, 20, 220);
-    doc.text(`${escuadraMovilPrice.toFixed(2)}`, 170, 220);
-    doc.text(`Kit de 6 Escuadras de Alineación Hoja Mobil:`, 20, 225);
-    doc.text(`${kit6MPrice.toFixed(2)}`, 170, 225);
-    doc.text(`Kit de 2 Escuadras de Alineacion con Guia:`, 20, 230);
-    doc.text(`${kit2MPrice.toFixed(2)}`, 170, 230);
-    doc.text(`Topes Para Hojas:`, 20, 235);
-    doc.text(`${topesMPrice.toFixed(2)}`, 170, 235);
-    doc.text(`Espuma Tapa Guia Superior/Inferior:`, 20, 240);
-    doc.text(`${espumaTapaMPrice.toFixed(2)}`, 170, 240);
-    doc.text(`Tapa y Tapete Porta Esponja Superior e Inferior`, 20, 245);
-    doc.text(`${portaEsponjaMPrice.toFixed(2)}`, 170, 245);
-    doc.text(`Tapa Entrecierre Supeior e Inferior:`, 20, 250);
-    doc.text(`${tapaCierreMPrice.toFixed(2)}`, 170, 250);
-    doc.text(`Rodamiento Simple en Aguja 100 Kilos:`, 20, 255);
-    doc.text(`${rodamientoSimplekimPrice.toFixed(2)}`, 170, 255);
-    doc.text(`Rodamiento Doble en Aguja 200 Kilos:`, 20, 260);
-    doc.text(`${rodamientoDoblekimPrice.toFixed(2)}`, 170, 260);
-    doc.addPage(2)
-
-    // Tabla accesorios 
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Accesorios de Hoja Mobil', 20, 20); // Título de la sección Empaque
-
-    // Tabla accesorios 
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 25);
-    doc.text('Precio', 170, 25);
-
-    doc.text(`Kit Punto de Cierre:`, 20, 30);
-    doc.text(`${kitPuntoCierrekimPrice.toFixed(2)}`, 170, 30);
-    doc.text(`Kit Manija Bidireccional con Transmision:`, 20, 35);
-    doc.text(`${kitManijakimPrice.toFixed(2)}`, 170, 35);
-    doc.text(`Kit Manija Bidireccional con Transmision con Llave:`, 20, 40);
-    doc.text(`${kitManijaConLlavekimPrice.toFixed(2)}`, 170, 40);
-    doc.text(`Pletina de Poliamida Negra:`, 20, 45);
-    doc.text(`${pletinaPoliamidaPrice.toFixed(2)}`, 170, 45);
-    doc.text(`Empaque Burbuja Sello X 250M`, 20, 50);
-    doc.text(`${empaqueBurbujakimPrice.toFixed(2)}`, 170, 50);
-
-    // Tabla Empaque
-    doc.setFontSize(12); // Título más pequeño
-    doc.setTextColor(cyanBlue);
-    doc.text('Empaque', 20, 60); // Título de la sección Empaque
-
-    // Tabla de Empaque
-    doc.setFontSize(10);
-    doc.setTextColor('black');
-
-    doc.text('Pieza', 20, 65);
-    doc.text('Tamaño', 120, 65);
-    doc.text('Precio', 170, 65);
-    doc.text(`Empaque (Alto):`, 20, 70);
-    doc.text(`${empaquekimHeight} mm`, 120, 70)
-    doc.text(`Empaque (Ancho):`, 20, 75);
-    doc.text(`${empaquekimWidth} mm`, 120, 75);
-    doc.text(`${empaquekimPrice.toFixed(2)}`, 170, 72.5);
-    doc.text(`Felpa 5.00 x 7.00:`, 20, 80);
-    doc.text(`${totFelpa} mm`, 120, 80);
-    doc.text(`${felpaPrice.toFixed(2)}`, 170, 80);
-
-    doc.text(`Torinillos:`, 20, 200);
-    doc.text(`16`, 120, 200);
-    doc.text(`${tornillosPrice.toFixed(2)}`, 170, 200);
-
-    doc.text(`Silicona:`, 20, 205);
-    doc.text(`${siliconaPrice.toFixed(2)}`, 170, 205);
-
-
-    // Total
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 90); // Título Total
-
-    doc.setFontSize(16);
-    doc.setTextColor('black');
-    // Formateamos el total con separadores de miles y el símbolo de moneda
-    const formattedTotal = totalPrice.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    // Mostramos el total formateado
-    doc.text(formattedTotal, 150, 95); // Total
-    // Guardamos el archivo PDF
-    doc.save('cotizacion-marco.pdf'); // Guardamos el archivo con el nombre
-  };
-
+ const generatePDF = () => {
+       const doc = new jsPDF();
+       const cyanBlue = '#00b5e2';
+       const lightGray = '#d3d3d3';
+       const currentDate = new Date().toLocaleDateString();
+   
+       const addTableRow = (doc, y, label, size, price) => {
+         doc.text(label, 20, y);
+         doc.text(size, 120, y);
+         doc.text(price, 170, y);
+       };
+   
+       const addSection = (doc, title, y) => {
+         doc.setFontSize(12);
+         doc.setTextColor(cyanBlue);
+         doc.text(title, 20, y);
+         doc.setFontSize(10);
+         doc.setTextColor('black');
+       };
+   
+       doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.setFontSize(8);
+       doc.setTextColor('black');
+       doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+       doc.setFillColor(lightGray);
+       doc.rect(20, 30, 170, 8, 'F');
+       doc.setTextColor('white');
+       doc.setFontSize(10);
+       doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34);
+   
+       addSection(doc, 'Marco', 45);
+       addTableRow(doc, 50, 'Marco Perimetral:', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 55, 'Pista Rodamiento Kalima:', `${componentTotals.pistaRodamientokal.totalSize} mm`, `${componentTotals.pistaRodamientokal.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 60, 'Pista Rodamiento Kim:', `${componentTotals.pistaRodamientokim.totalSize} mm`, `${componentTotals.pistaRodamientokim.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 65, 'Complemento Superior Marco:', `${componentTotals.complementoSuperior.totalSize} mm`, `${componentTotals.complementoSuperior.totalPrice.toFixed(2)}`);
+ 
+       addSection(doc, 'Nave', 70);
+       addTableRow(doc, 75, 'Vertical Horizontales:', `${componentTotals.verticalHorizontales.totalSize} mm`, `${componentTotals.verticalHorizontales.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 80, 'Enganche Vidrio:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 85, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 90, 'Enganche Vidrio Camara:', `${componentTotals.engancheCa.totalSize} mm`, `${componentTotals.engancheCa.totalPrice.toFixed(2)}`);
+ 
+       addSection(doc, 'Accesorios Marco', 95);
+       addTableRow(doc, 100, 'Escuadra Ensamble Marco:', `${accessoryTotals.escuadraEnsamble.cantidad}`, `${accessoryTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 105, 'Espuma Sello Superior:', `${accessoryTotals.espumaSelloSu.cantidad}`, `${accessoryTotals.espumaSelloSu.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 110, 'Espuma Sello Inferior:', `${accessoryTotals.espumaSelloIn.cantidad}`, `${accessoryTotals.espumaSelloIn.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 115, 'Sifon Sistemas Eurovitral:', `${accessoryTotals.sifonSistemas.cantidad}`, `${accessoryTotals.sifonSistemas.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 120, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+ 
+       addSection(doc, 'Accesorios Hoja Fija', 125);
+       addTableRow(doc, 130, 'Escuadra Ensamble Hoja fija:', `${accessoryTotals.escuadraEnsambleHoja.cantidad}`, `${accessoryTotals.escuadraEnsambleHoja.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 135, 'Kit de 6 Escuadras de Alineación Hoja fija:', `${accessoryTotals.kit6H.cantidad}`, `${accessoryTotals.kit6H.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 140, 'Kit de 2 Escuadras de Alineación con Guia:', `${accessoryTotals.kit2H.cantidad}`, `${accessoryTotals.kit2H.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 145, 'Topes Para Hojas:', `${accessoryTotals.topesH.cantidad}`, `${accessoryTotals.topesH.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 150, 'Espuma Tapa Guia Superior/Inferior:', `${accessoryTotals.espumaTapaH.cantidad}`, `${accessoryTotals.espumaTapaH.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 155, 'Tapa y Taperte Porta Esponja Superior e Inferior:', `${accessoryTotals.portaEsponjaH.cantidad}`, `${accessoryTotals.portaEsponjaH.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 160, 'Tapa Entrecierre Superior e Inferior:', `${accessoryTotals.tapaCierreH.cantidad}`, `${accessoryTotals.tapaCierreH.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 165, 'Kit de Hoja Fija:', `${accessoryTotals.kitHojaFija.cantidad}`, `${accessoryTotals.kitHojaFija.totalPrice.toFixed(2)}`);
+       
+       addSection(doc, 'Accesorios Hoja Movil', 170);
+       addTableRow(doc, 175, 'Escuadra Ensamble Hoja Movil:', `${accessoryTotals.escuadraEnsambleMovil.cantidad}`, `${accessoryTotals.escuadraEnsambleMovil.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 180, 'Kit de 6 Escuadras de Alineación Hoja Movil:', `${accessoryTotals.kit6M.cantidad}`, `${accessoryTotals.kit6M.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 185, 'Kit de 2 Escuadras de Alineación con Guia:', `${accessoryTotals.kit2M.cantidad}`, `${accessoryTotals.kit2M.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 190, 'Topes Para Hojas:', `${accessoryTotals.topesM.cantidad}`, `${accessoryTotals.topesM.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 195, 'Espuma Tapa Guia Superior/Inferior:', `${accessoryTotals.espumaTapaM.cantidad}`, `${accessoryTotals.espumaTapaM.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 200, 'Tapa y Taperte Porta Esponja Superior e Inferior:', `${accessoryTotals.portaEsponjaM.cantidad}`, `${accessoryTotals.portaEsponjaM.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 205, 'Tapa Entrecierre Superior e Inferior:', `${accessoryTotals.tapaCierreM.cantidad}`, `${accessoryTotals.tapaCierreM.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 210, 'Rodamiento Simple:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 215, 'Rodamiento Doble:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
+ 
+       addSection(doc, 'Accesorios', 220);
+       addTableRow(doc, 225, 'Kit Punto Cierre:', `${accessoryTotals.kitPuntoCierre.cantidad}`, `${accessoryTotals.kitPuntoCierre.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 230, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitManija.cantidad}`, `${accessoryTotals.kitManija.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 235, 'Kit Manija Bidireccional con Transmision con Llave:', `${accessoryTotals.kitManijaConLlave.cantidad}`, `${accessoryTotals.kitManijaConLlave.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 240, 'Pletina Poliamida:', `${accessoryTotals.pletinaPoliamida.cantidad}`, `${accessoryTotals.pletinaPoliamida.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 245, 'Empaque Burbuja:', `${accessoryTotals.empaqueBurbuja.cantidad}`, `${accessoryTotals.empaqueBurbuja.totalPrice.toFixed(2)}`);
+ 
+       addSection(doc, 'Empaque', 250);
+       addTableRow(doc, 255, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+       addTableRow(doc, 260, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 265, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Utilitarios', 270);
+       addTableRow(doc, 275, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 280, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+   
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.text('Total', 170, 285);
+       doc.setFontSize(16);
+       doc.setTextColor('black');
+       const formattedTotal = totalSum.toLocaleString('en-US', {
+         style: 'currency',
+         currency: 'COP',
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2
+       });
+       doc.text(formattedTotal, 150, 290);
+   
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.text('Cantidad de puertas', 20, 285);
+       doc.text(`${puertas.length}`, 20, 290);
+   
+       doc.save('Cotizacion-Colosalpc2.6.pdf');
+     };
 
   const getPriceDisplay = () => {
     if (accessories.kitManijakim) {
@@ -1488,9 +1353,35 @@ const Kimbaya = () => {
         </Table>
 
         <br />
+        <Table aria-label="tabla utilitarios">
+          <TableHeader>
+            <TableColumn><h1>Utilitarios</h1></TableColumn>
+            <TableColumn><h1>Cantidad</h1></TableColumn>
+            <TableColumn><h1>Precio</h1></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Cantidad</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell><strong> Tornillos</strong></TableCell>
+              <TableCell>44</TableCell>
+              <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell><strong> Silicona</strong></TableCell>
+              <TableCell>1</TableCell>
+              <TableCell>$ {siliconaPrice.toFixed(2)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
+        <br />
         <Table aria-label="TABLA EMPAQUEkim">
           <TableHeader>
-            <TableColumn><h1>Empaquekim</h1></TableColumn>
+            <TableColumn><h1>Empaque</h1></TableColumn>
             <TableColumn></TableColumn>
             <TableColumn></TableColumn>
           </TableHeader>
@@ -1501,9 +1392,9 @@ const Kimbaya = () => {
               <TableCell><strong><h2>Precio</h2></strong></TableCell>
             </TableRow>
             <TableRow key="2">
-              <TableCell><strong>Empaquekim (Alto):
+              <TableCell><strong>Empaque (Alto):
                 <br />
-                Empaquekim (Ancho): </strong></TableCell>
+                Empaque  (Ancho): </strong></TableCell>
               <TableCell>{empaquekimHeight} mm
                 <br /> {empaquekimWidth} mm
               </TableCell>

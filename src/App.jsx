@@ -30,6 +30,7 @@ import Zinux from './pages/vidrios/zinu/zinux';
 import Zinuox from './pages/vidrios/zinu/zinuox';
 import { Sideralpage } from './pages/categorias/sideralPage';
 import Sideralx from './pages/vidrios/sideral/sideralx';
+import Astral20oxxo from './pages/vidrios/astral20/Astral20oxxo';
 
 
 export const AcmeLogo = () => {
@@ -72,6 +73,7 @@ function App() {
           <Route path='ast' element={<Astral20page/>}/>
           <Route path='ast/a201' element={<Astral20 />} />
           <Route path='ast/a202' element={<Astral20xx />} />
+          <Route path='ast/a203' element={<Astral20oxxo />} />
           <Route path='ast17' element={<Astral17page />} />
           <Route path='ast17/a171' element={<Astral17 />} />
           <Route path='c345' element={<Colosal345page />} />
