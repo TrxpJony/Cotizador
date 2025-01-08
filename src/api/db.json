@@ -14,6 +14,7 @@
     "complementoCabezalcol": 22000,
     "complementoJambacol": 20000,
     "adaptadorcol": 24000,
+
     "marcoPerimetralkim": 25000,
     "pistaRodamientokal": 10000,
     "pistaRodamientokim": 8000,
@@ -22,7 +23,8 @@
     "enganchekim": 25000,
     "verticalHorizontalesCakim": 9000,
     "engancheVidrioCakim": 20000,
-    "adaptadorKim": 24000, 
+    "adaptadorKim": 24000,
+
     "cabezalast": 22000,
     "sillarast": 28000,
     "sillarAlfajiaast": 27000,
@@ -33,6 +35,7 @@
     "traslapeast": 23000,
     "engancheast": 30000,
     "adaptadorReforzadoast": 10000,
+
     "cabezal744": 12000,
     "sillar744": 12000,
     "jamba744": 12000,
@@ -40,6 +43,7 @@
     "horizontalInferior744": 15000,
     "traslape744": 15000,
     "enganche744": 15000,
+
     "cabezal8025": 19000,
     "sillar8025": 17000,
     "jamba8025": 19000,
@@ -47,23 +51,35 @@
     "horizontalInferior8025": 26000,
     "traslape8025": 18000,
     "enganche8025": 19000,
+
     "marcoPerimetralCol345": 25000,
     "perimetralNaveCol345": 29000,
     "engancheCol345": 34000,
     "adaptadorCol345": 12000,
+
     "aln1101s3890": 50000,
     "aln1102s3890": 26000,
     "enchape3890": 12000,
+
     "marcoPerimetralZinu": 22000,
     "perimetralNaveZinu": 20000,
     "pisaVidrioZinu": 17000,
     "verticalHorizontalesCaZinu": 19000,
     "divisorZinu": 16000,
+
+    "marcoPerimetralTairona": 22000,
+    "perimetralNaveTairona": 20000,
+    "pisaVidrioTairona": 17000,
+    "verticalHorizontalesCaTairona": 19000,
+    "adaptadorTairona": 16000,
+    
+
     "marcoPerimetralSid": 21000,
     "horizontalFelperosSid": 20000,
     "verticalSid": 15000,
     "verticalReforzadoSid": 22000,
     "adaptadorSid": 15000,
+
     "manodeObra": 70000,
     "empaquecol": 2000,
     "empaquekim": 2000,
@@ -71,6 +87,7 @@
     "empaque744": 1500,
     "empaque3890": 1200,
     "empaqueZinu": 1500,
+    "empaqueTairona": 1500,
     "empaqueSid": 1500,
     "felpacol": 400
   },
@@ -79,6 +96,7 @@
     "kitCierreConLlavecol": 23000,
     "rodamientoSimple70col": 12500,
     "rodamientoDoble140col": 19000,
+
     "rodamientoSimple30": 33000,
     "rodamientoDoble80": 57000,
     "Kit8Escuadras": 32000,
@@ -106,10 +124,12 @@
     "kitManijakim": 80000,
     "kitManijaConLlavekim": 130000,
     "empaqueBurbujakim": 10000,
+
     "kitCierreast": 21000,
     "rodamiento80ast": 13000,
     "rodamiento40ast": 6500,
     "rodamientoNave22ast": 5000,
+
     "kitCierrecol345": 22000,
     "kitCierreConLlavecol345": 23000,
     "Kit8Escuadrascol345": 12000,
@@ -118,14 +138,18 @@
     "kit4Tapacol345": 11000,
     "kit2Cortavientoscol345": 10000,
     "kit4Seguroscol345": 8000,
+
     "kitCierre744": 10000,
     "rodamientoSimple744": 4000,
+
     "kitCierre8025": 10000,
     "kitCierreConLlave8025": 40000,
     "rodamientoSimple8025": 8000,
     "rodamientoDoble8025": 19000,
+
     "kitCierre3890": 10000,
     "kitCierreConLlave3890": 40000,
+
     "escuadraEnsambleZinu": 25000,
     "escuadraEnsambleHZinu": 25000,
     "bisagra2Zinu": 8000,
@@ -135,6 +159,19 @@
     "limitador220Zinu": 25000,
     "kitCierreZinu": 10000,
     "kitCierreConLlaveZinu": 40000,
+    
+    "escuadraEnsambleTairona": 25000,
+    "escuadraEnsambleHTairona": 25000,
+    "bisagra2Tairona": 9000,
+    "bisagra3Tairona": 9000,
+    "bisagraOcultaTairona": 9000,
+    "cierreHTairona": 15000,
+    "soporteHTairona": 5000,
+    "limitador150Tairona": 20000,
+    "limitador220Tairona": 25000,
+    "kitCierreTairona": 10000,
+    "kitCierreConLlaveTairona": 40000,
+
     "escuadraEnsambleSid": 15000,
     "escuadraEnsambleMSid": 18000,
     "bisagra2Sid": 8000,
@@ -145,6 +182,7 @@
     "terminalesSid": 9000,
     "kit50puntoCierreSid": 15000,
     "kitManijaDobleSid": 45000,
+
     "guiaSuperiorangeo": 32000,
     "pletinaPoliamida": 50000,
     "cajaDeflectora": 57000,

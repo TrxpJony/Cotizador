@@ -36,6 +36,10 @@ import Colosal3xxx from './pages/vidrios/colosal345/colosal3xxx';
 import Colosal3oxxo from './pages/vidrios/colosal345/colosal3oxxo';
 import Kimbayaoxxo from './pages/vidrios/kimbayas/Kimbayaoxxo';
 import Astral20xox from './pages/vidrios/astral20/Astral20xox';
+import Astral17xx from './pages/vidrios/astral17/Astral17xx';
+import Taironax from './pages/vidrios/tairona/taironax';
+import { TaironaPage } from './pages/categorias/taironapage';
+import Taironaxx from './pages/vidrios/tairona/taironaxx';
 
 
 export const AcmeLogo = () => {
@@ -82,6 +86,7 @@ function App() {
           <Route path='ast/a204' element={<Astral20xox />} />
           <Route path='ast17' element={<Astral17page />} />
           <Route path='ast17/a171' element={<Astral17 />} />
+          <Route path='ast17/a172' element={<Astral17xx />} />
           <Route path='c345' element={<Colosal345page />} />
           <Route path='c345/c3451' element={<Colosal3 />} />
           <Route path='c345/c3452' element={<Colosal3xxx />} />
@@ -102,9 +107,10 @@ function App() {
           <Route path='sid' element={<Sideralpage />} />
           <Route path='sid/sid1' element={<Sideralx/>} />
           <Route path='sid/sid2' element={<Sideralxo/>} />
+          <Route path='tai' element={<TaironaPage/>} />
+          <Route path='tai/tai1' element={<Taironax/>} />
+          <Route path='tai/tai2' element={<Taironaxx/>} />
           <Route path='tipos' element={<Tipos/>}/>
-          
-
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
