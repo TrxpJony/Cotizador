@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import sTaironaImage from '../../../img/Zinux.png'; // Importar la imagen
+import sTaironaImage from '../../../img/zinux.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
