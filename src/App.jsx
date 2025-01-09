@@ -40,6 +40,12 @@ import Astral17xx from './pages/vidrios/astral17/Astral17xx';
 import Taironax from './pages/vidrios/tairona/taironax';
 import { TaironaPage } from './pages/categorias/taironapage';
 import Taironaxx from './pages/vidrios/tairona/taironaxx';
+import { AwaPage } from './pages/categorias/awapage';
+import Awa2h from './pages/vidrios/awa/awa1h';
+import Awa3h from './pages/vidrios/awa/awa2h';
+import Awa4h from './pages/vidrios/awa/awa3h';
+import Awa5h from './pages/vidrios/awa/awa4';
+import Awa6h from './pages/vidrios/awa/awa5h';
 
 
 export const AcmeLogo = () => {
@@ -110,6 +116,12 @@ function App() {
           <Route path='tai' element={<TaironaPage/>} />
           <Route path='tai/tai1' element={<Taironax/>} />
           <Route path='tai/tai2' element={<Taironaxx/>} />
+          <Route path='awa' element={<AwaPage/>} />
+          <Route path='awa/awa1' element={<Awa2h/>} />
+          <Route path='awa/awa2' element={<Awa3h/>} />
+          <Route path='awa/awa3' element={<Awa4h/>} />
+          <Route path='awa/awa4' element={<Awa5h/>} />
+          <Route path='awa/awa5' element={<Awa6h/>} />
           <Route path='tipos' element={<Tipos/>}/>
         </Routes>
       </div>

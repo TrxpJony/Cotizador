@@ -80,6 +80,14 @@
     "verticalReforzadoSid": 22000,
     "adaptadorSid": 15000,
 
+    "compensadorAwa":19000,
+    "cabezalAwa": 18000,
+    "verticalInferiorAwa": 18000,
+    "sillarEmpotrarAwa": 14000,
+    "sillaSobreponerAwa": 17000,
+    "perimetralAwa": 12000,
+    "pisavidrioPerimetralAwa": 14000,
+
     "manodeObra": 70000,
     "empaquecol": 2000,
     "empaquekim": 2000,
@@ -89,6 +97,7 @@
     "empaqueZinu": 1500,
     "empaqueTairona": 1500,
     "empaqueSid": 1500,
+    "empaqueAwa":2000,
     "felpacol": 400
   },
   "accesorios": {
@@ -183,8 +192,18 @@
     "kit50puntoCierreSid": 15000,
     "kitManijaDobleSid": 45000,
 
+    "escuadraEnsambleAwa": 12000,
+    "escuadraEnsambleHAwa": 16000,
+    "bisagra3Awa": 12000,
+    "kitRodamientosAwa": 22000,
+    "frenoRodamientoAwa": 12000,
+    "kitGuiaHAwa": 10000,
+    "kitManijaAwa": 80000,
+    "kitManijaConLlaveAwa": 130000,
+
+
     "guiaSuperiorangeo": 32000,
-    "pletinaPoliamida": 50000,
+    "pletinaPoliamida": 20000,
     "cajaDeflectora": 57000,
     "cubetaAngeo": 6600
   },
