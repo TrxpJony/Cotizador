@@ -55,6 +55,10 @@ const Kimbaya = () => {
     glassPrice: '',
   });
 
+  const [manodeObraprices, setmanodeObraprices] = useState({
+    manodeObraPrice: 0,
+  });
+
   const [prices, setPrices] = useState({});
   const [accessoryPrices, setAccessoryPrices] = useState({});
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
@@ -125,12 +129,23 @@ const Kimbaya = () => {
     }
   };
 
+  const handlemanodeObraChange = (e) => {
+    const { name, value } = e.target;
+    setmanodeObraprices((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
 
   const { width, height } = dimensions;
   const totalHeight = height ? height : '';
   const totalWidth = width ? width : '';
 
   const { glassPrice } = glassDimensions;
+  const { glassHeight } = glassDimensions;
+  const { glassWidth } = glassDimensions;
+  const { manodeObraPrice } = manodeObraprices;
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
@@ -164,7 +179,6 @@ const Kimbaya = () => {
   const sifonSistemaskimPrice = accessories.sifonSistemaskim ? accessoryPrices.sifonSistemaskim : 0;
   const cajaDeflectoraPrice = accessories.cajaDeflectora ? accessoryPrices.cajaDeflectora : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-  const manodeObraPrice = prices.manodeObra * area;
 
   //hoja fija
   const escuadraHojaPrice = accessories.escuadraHoja ? accessoryPrices.escuadraEnsamblekim : 0;
@@ -210,6 +224,8 @@ const Kimbaya = () => {
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
+    manodeObra: { totalPrice: 0 },
+    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
     // Puedes añadir más componentes aquí si es necesario.
   });
 
@@ -304,7 +320,14 @@ const Kimbaya = () => {
         cantidad: prevTotals.silicona.cantidad + 1,
         totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
       },
-
+      manodeObra: {
+        totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+      },
+      glass: {
+        totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
+        totalSize2: prevTotals.glass.totalSize + parseFloat(glassWidth),
+        totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
+      }
     }));
 
     setAccessoryTotals((prevTotals) => ({
@@ -474,12 +497,12 @@ const Kimbaya = () => {
 
       // Añade lógica para otros accesorios si es necesario.
     }));
-
-
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
-  };
+    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
+    setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
+   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
   const totalArea = puertas.reduce(
@@ -535,10 +558,8 @@ const Kimbaya = () => {
 
     tornillosPrice+
     siliconaPrice+
-    (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
-
-
-
+    (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
+    (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
  const generatePDF = () => {
        const doc = new jsPDF();
@@ -570,7 +591,7 @@ const Kimbaya = () => {
        doc.rect(20, 30, 170, 8, 'F');
        doc.setTextColor('white');
        doc.setFontSize(10);
-       doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34);
+       doc.text('Detalle de la cotización Kimbaya OX', 70, 34);
    
        addSection(doc, 'Marco', 45);
        addTableRow(doc, 50, 'Marco Perimetral:', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
@@ -627,10 +648,17 @@ const Kimbaya = () => {
        addSection(doc, 'Utilitarios', 270);
        addTableRow(doc, 275, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
        addTableRow(doc, 280, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
-   
+       
+      doc.addPage()
+
+       addSection(doc, 'Extra', 25 );
+       addTableRow(doc, 30, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+       addTableRow(doc, 35, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+       addTableRow(doc, 40, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+       
        doc.setFontSize(14);
        doc.setTextColor(cyanBlue);
-       doc.text('Total', 170, 285);
+       doc.text('Total', 170, 50);
        doc.setFontSize(16);
        doc.setTextColor('black');
        const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -639,14 +667,14 @@ const Kimbaya = () => {
          minimumFractionDigits: 2,
          maximumFractionDigits: 2
        });
-       doc.text(formattedTotal, 150, 290);
+       doc.text(formattedTotal, 150, 55);
    
        doc.setFontSize(14);
        doc.setTextColor(cyanBlue);
-       doc.text('Cantidad de puertas', 20, 285);
-       doc.text(`${puertas.length}`, 20, 290);
+       doc.text('Cantidad de puertas', 20, 50);
+       doc.text(`${puertas.length}`, 20, 55);
    
-       doc.save('Cotizacion-Colosalpc2.6.pdf');
+       doc.save('Cotizacion-Kimbaya.pdf');
      };
 
   const getPriceDisplay = () => {
@@ -835,96 +863,99 @@ const Kimbaya = () => {
   };
 
   return (
-    <div className="door-container">
-      <div className="door-frame">
-        {/* Formulario para el alto y ancho */}
-        <div className="dimensions-form">
-          <label>
-            Alto (mm):
-            <input
-              type="number"
-              name="height"
-              value={height}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-          <label>
-            Ancho (mm):
-            <input
-              type="number"
-              name="width"
-              value={width}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-        </div>
-
-        {/* Imagen */}
-        <img src={kimbayaImage} alt="Puerta Corrediza Colosal" className="door-image" />
-
-        {/* Dimensiones dinámicas */}
-        <div className="dimensions-display">
-          {width && height ? (
-            <>
-              <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
-              <p>Área: {area} m²</p>
-            </>
-          ) : (
-            <p>Ingrese las dimensiones de la puerta en milímetros.</p>
-          )}
-          <br />
-        </div>
-
-        <div className="container mx-auto p-4">
-          {/* Botón Agregar Puerta */}
-          <div className="flex justify-center mb-6">
-            <button
-              onClick={handleAddDoor}
-              className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-            >
-              Agregar Puerta
-            </button>
-          </div>
-
-          {/* Resumen de Puertas */}
-          <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen de Puertas</h2>
-            <ul className="list-disc pl-5 mb-4">
-              {puertas.map((puerta, index) => (
-                <li key={index} className="mb-2 text-gray-600">
-                  <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
-                  <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="text-gray-700">
-              <p>
-                <strong>Total Puertas:</strong> {puertas.length}
-              </p>
-              <p>
-                <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
-              </p>
-              <p>
-                <strong>Precio Total:</strong>{" "}
-                <span className="text-cyan-600 font-bold">
-                  ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* Botón Regresar */}
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => navigate(-1)}
-              className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-            >
-              Regresar
-            </button>
-          </div>
-        </div>
+   <div className="door-container">
+         <div className="door-frame">
+           {/* Formulario para el alto y ancho */}
+           <div className="dimensions-form">
+             <label>
+               Alto (mm):
+               <input
+                 type="number"
+                 name="height"
+                 value={height}
+                 onChange={handleChange}
+                 placeholder="00"
+               />
+             </label>
+             <label>
+               Ancho (mm):
+               <input
+                 type="number"
+                 name="width"
+                 value={width}
+                 onChange={handleChange}
+                 placeholder="00"
+               />
+             </label>
+           </div>
+   
+           {/* Imagen */}
+           <img src={kimbayaImage} alt="Puerta Corrediza Colosal" className="door-image" />
+   
+           {/* Dimensiones dinámicas */}
+           <div className="dimensions-display">
+             {width && height ? (
+               <>
+                 <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
+                 <p>Área: {area} m²</p>
+               </>
+             ) : (
+               <p>Ingrese las dimensiones de la puerta en milímetros.</p>
+             )}
+             <br />
+           </div>
+   
+           <div className="container mx-auto p-4">
+   
+             {/* Resumen de Puertas */}
+             <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+               <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen de Puertas</h2>
+               <ul className="list-disc pl-5 mb-4">
+                 {puertas.map((puerta, index) => (
+                   <li key={index} className="mb-2 text-gray-600">
+                     <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                     <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                   </li>
+                 ))}
+               </ul>
+               <div className="text-gray-700">
+                 <p>
+                   <strong>Total Puertas:</strong> {puertas.length}
+                 </p>
+                 <p>
+                   <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+                 </p>
+                 <p>
+                   <strong>Precio Total:</strong>{" "}
+                   <span className="text-cyan-600 font-bold">
+                     ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                   </span>
+                 </p>
+               </div>
+               <br />
+               <div>
+                 <button
+                   className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                   onClick={generatePDF}
+                 >
+                   Cotizar
+                 </button>
+               </div>
+             </div>
+   
+             {/* Botón Regresar */}
+             <div className="flex justify-end mt-6">
+               {/* Botón Agregar Puerta */}
+               <div className="flex justify-center mb-6">
+                 <button
+                   onClick={() => navigate(-1)}
+                   className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                 >
+                   Regresar
+                 </button>
+               </div>
+             </div>
+           </div>
 
       </div>
       <br />
@@ -1436,7 +1467,6 @@ const Kimbaya = () => {
                   onChange={handleGlassChange}
                 />
               </TableCell>
-
               <TableCell>
                 <input
                   type="number"
@@ -1453,7 +1483,14 @@ const Kimbaya = () => {
             </TableRow>
             <TableRow key="4">
               <TableCell><strong>Área: {area} m²</strong></TableCell>
-              <TableCell>${manodeObraPrice.toFixed(2)}</TableCell>
+              <TableCell>
+                <input
+                  type="number"
+                  name="manodeObraPrice"
+                  value={manodeObraprices.manodeObraPrice || ''}
+                  placeholder="Precio del vidrio"
+                  onChange={handlemanodeObraChange}
+                /></TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -1461,13 +1498,14 @@ const Kimbaya = () => {
         <h2 className="text-right text-2xl font-bold">Total</h2>
         <div className="flex justify-between items-center">
           <button
-            className="bg-[#00bcd4] text-white text-[1.8em] font-bold py-2 px-6 rounded-lg hover:bg-[#0097a7] focus:outline-none transition duration-300"
-            onClick={generatePDF}
+            onClick={handleAddDoor}
+            className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
           >
-            Cotizar
+            Agregar Puerta
           </button>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>
+
 
       </div>
     </div>

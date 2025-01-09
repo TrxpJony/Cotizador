@@ -26,6 +26,9 @@ const Colosaloxxo = () => {
     glassPrice: '',
   });
 
+  const [manodeObraprices, setmanodeObraprices] = useState({
+    manodeObraPrice: 0,
+  });
 
   const [prices, setPrices] = useState({});
   const [accessoryPrices, setAccessoryPrices] = useState({});
@@ -76,6 +79,15 @@ const Colosaloxxo = () => {
     }));
   };
 
+  const handlemanodeObraChange = (e) => {
+    const { name, value } = e.target;
+    setmanodeObraprices((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+
 
   const { width, height } = dimensions;
   const halfWidth = width ? width / 2 : '';
@@ -83,6 +95,9 @@ const Colosaloxxo = () => {
   const totalWidth = width ? width : '';
 
   const { glassPrice } = glassDimensions;
+  const { glassHeight } = glassDimensions;
+  const { glassWidth } = glassDimensions;
+  const { manodeObraPrice } = manodeObraprices;
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
@@ -113,7 +128,6 @@ const Colosaloxxo = () => {
   const rodamientoDoble140colPrice = accessories.rodamientoDoble140col ? accessoryPrices.rodamientoDoble140col * 2 : 0;
   const cajaDeflectoraPrice = accessories.cajaDeflectora ? accessoryPrices.cajaDeflectora : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-  const manodeObraPrice = prices.manodeObra * area;
 
   const tornillosPrice = utilitaryPrices.tornillos * 76;
   const siliconaPrice = utilitaryPrices.silicona * 1;
@@ -127,11 +141,13 @@ const Colosaloxxo = () => {
     horizontalInferiorMovil: { totalSize: 0, totalPrice: 0 },
     traslape: { totalSize: 0, totalPrice: 0 },
     enganche: { totalSize: 0, totalPrice: 0 },
-    adaptador: { totalSize: 0, totalPrice: 0},
+    adaptador: { totalSize: 0, totalPrice: 0 },
     empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
+    manodeObra: { totalPrice: 0 },
+    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
     // Puedes añadir más componentes aquí si es necesario.
   });
 
@@ -188,7 +204,7 @@ const Colosaloxxo = () => {
         totalSize: prevTotals.enganche.totalSize + parseFloat(doubleHeight),
         totalPrice: prevTotals.enganche.totalPrice + enganchecolPrice,
       },
-      adaptador:{
+      adaptador: {
         totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
         totalPrice: prevTotals.adaptador.totalPrice + adaptadorcolPrice,
       },
@@ -209,7 +225,14 @@ const Colosaloxxo = () => {
         cantidad: prevTotals.silicona.cantidad + 1,
         totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
       },
-
+      manodeObra: {
+        totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+      },
+      glass: {
+        totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
+        totalSize2: prevTotals.glass.totalSize + parseFloat(glassWidth),
+        totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
+      }
     }));
 
     setAccessoryTotals((prevTotals) => ({
@@ -250,17 +273,14 @@ const Colosaloxxo = () => {
           totalPrice: prevTotals.cajaDeflectora.totalPrice + cajaDeflectoraPrice,
         }
         : prevTotals.cajaDeflectora,
-
-
-
-
       // Añade lógica para otros accesorios si es necesario.
     }));
-
 
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
+    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
+    setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -290,92 +310,96 @@ const Colosaloxxo = () => {
     empaquecolPrice +
     tornillosPrice +
     siliconaPrice +
-
-
-    (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
+    (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
+    (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
   const generatePDF = () => {
-      const doc = new jsPDF();
-      const cyanBlue = '#00b5e2';
-      const lightGray = '#d3d3d3';
-      const currentDate = new Date().toLocaleDateString();
-  
-      const addTableRow = (doc, y, label, size, price) => {
-        doc.text(label, 20, y);
-        doc.text(size, 120, y);
-        doc.text(price, 170, y);
-      };
-  
-      const addSection = (doc, title, y) => {
-        doc.setFontSize(12);
-        doc.setTextColor(cyanBlue);
-        doc.text(title, 20, y);
-        doc.setFontSize(10);
-        doc.setTextColor('black');
-      };
-  
-      doc.addImage(logo, 'PNG', 20, 10, 40, 20);
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.setFontSize(8);
-      doc.setTextColor('black');
-      doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
-      doc.setFillColor(lightGray);
-      doc.rect(20, 30, 170, 8, 'F');
-      doc.setTextColor('white');
-      doc.setFontSize(10);
-      doc.text('Detalle de la cotización Colosal PC 2.6 XO-OX', 70, 34);
-  
-      addSection(doc, 'Marco', 45);
-      addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 55, 'Sillar:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 60, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Nave', 70);
-      addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 80, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 85, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 90, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 95, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 100,'Adaptador:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Accesorios', 110);
-      addTableRow(doc, 115, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 120, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 125, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 130, 'Rodamiento Simple en Agujas:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 135, 'Rodamiento Doble en Agujas:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 140, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Empaque', 150);
-      addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-      addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Utilitarios', 175);
-      addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
-  
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.text('Total', 170, 195);
-      doc.setFontSize(16);
-      doc.setTextColor('black');
-      const formattedTotal = totalSum.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'COP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-      doc.text(formattedTotal, 150, 200);
-  
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.text('Cantidad de puertas', 20, 195);
-      doc.text(`${puertas.length}`, 20, 200);
-  
-      doc.save('Cotizacion-Colosalpc2.6.pdf');
+    const doc = new jsPDF();
+    const cyanBlue = '#00b5e2';
+    const lightGray = '#d3d3d3';
+    const currentDate = new Date().toLocaleDateString();
+
+    const addTableRow = (doc, y, label, size, price) => {
+      doc.text(label, 20, y);
+      doc.text(size, 120, y);
+      doc.text(price, 170, y);
     };
+
+    const addSection = (doc, title, y) => {
+      doc.setFontSize(12);
+      doc.setTextColor(cyanBlue);
+      doc.text(title, 20, y);
+      doc.setFontSize(10);
+      doc.setTextColor('black');
+    };
+
+    doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.setFontSize(8);
+    doc.setTextColor('black');
+    doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+    doc.setFillColor(lightGray);
+    doc.rect(20, 30, 170, 8, 'F');
+    doc.setTextColor('white');
+    doc.setFontSize(10);
+    doc.text('Detalle de la cotización Colosal PC 2.6 OXXO', 70, 34);
+
+    addSection(doc, 'Marco', 45);
+    addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 55, 'Sillar:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Nave', 70);
+    addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 80, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 85, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 95, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 100, 'Adaptador:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Accesorios', 110);
+    addTableRow(doc, 115, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 120, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 125, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Rodamiento Simple en Agujas:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Rodamiento Doble en Agujas:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 140, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Empaque', 150);
+    addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Utilitarios', 175);
+    addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+
+    addSection(doc, 'Extra', 195);
+    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+    addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.text('Total', 170, 220);
+    doc.setFontSize(16);
+    doc.setTextColor('black');
+    const formattedTotal = totalSum.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    doc.text(formattedTotal, 150, 225);
+
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.text('Cantidad de puertas', 20, 220);
+    doc.text(`${puertas.length}`, 20, 225);
+
+    doc.save('Cotizacion-Colosalpc2.6.pdf');
+  };
 
   const getPriceDisplay = () => {
     if (accessories.kitCierrecol) {
@@ -453,17 +477,8 @@ const Colosaloxxo = () => {
           )}
           <br />
         </div>
-        {/* Botón para regresar */}
+
         <div className="container mx-auto p-4">
-          {/* Botón Agregar Puerta */}
-          <div className="flex justify-center mb-6">
-            <button
-              onClick={handleAddDoor}
-              className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-            >
-              Agregar Puerta
-            </button>
-          </div>
 
           {/* Resumen de Puertas */}
           <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
@@ -490,19 +505,30 @@ const Colosaloxxo = () => {
                 </span>
               </p>
             </div>
+            <br />
+            <div>
+              <button
+                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                onClick={generatePDF}
+              >
+                Cotizar
+              </button>
+            </div>
           </div>
 
           {/* Botón Regresar */}
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => navigate(-1)}
-              className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-            >
-              Regresar
-            </button>
+          <div className="flex justify-end mt-6">
+            {/* Botón Agregar Puerta */}
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => navigate(-1)}
+                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+              >
+                Regresar
+              </button>
+            </div>
           </div>
         </div>
-
 
       </div>
       <br />
@@ -743,7 +769,6 @@ const Colosaloxxo = () => {
                   onChange={handleGlassChange}
                 />
               </TableCell>
-
               <TableCell>
                 <input
                   type="number"
@@ -760,7 +785,14 @@ const Colosaloxxo = () => {
             </TableRow>
             <TableRow key="4">
               <TableCell><strong>Área: {area} m²</strong></TableCell>
-              <TableCell>${manodeObraPrice.toFixed(2)}</TableCell>
+              <TableCell>
+                <input
+                  type="number"
+                  name="manodeObraPrice"
+                  value={manodeObraprices.manodeObraPrice || ''}
+                  placeholder="Precio del vidrio"
+                  onChange={handlemanodeObraChange}
+                /></TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -769,13 +801,15 @@ const Colosaloxxo = () => {
         <h2 className="text-right text-2xl font-bold">Total</h2>
         <div className="flex justify-between items-center">
           <button
-            className="bg-[#00bcd4] text-white text-[1.8em] font-bold py-2 px-6 rounded-lg hover:bg-[#0097a7] focus:outline-none transition duration-300"
-            onClick={generatePDF}
+            onClick={handleAddDoor}
+            className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
           >
-            Cotizar
+            Agregar Puerta
           </button>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>
+
+
       </div>
     </div>
 

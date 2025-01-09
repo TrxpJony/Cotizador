@@ -157,7 +157,6 @@ const Colosal = () => {
     // Agrega otros accesorios aquí si es necesario.
   });
 
-
   const handleAddDoor = () => {
     const nuevaPuerta = {
       dimensions: { ...dimensions },
@@ -267,7 +266,6 @@ const Colosal = () => {
         : prevTotals.cajaDeflectora,
       // Añade lógica para otros accesorios si es necesario.
     }));
-
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
@@ -366,8 +364,8 @@ const Colosal = () => {
     addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
     addSection(doc, 'Extra', 190);
-    addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize}`, ``);
-    addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2}`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+    addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
     addTableRow(doc, 205, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
 
@@ -498,12 +496,12 @@ const Colosal = () => {
             </div>
             <br />
             <div>
-            <button
-              className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-              onClick={generatePDF}
-            >
-              Cotizar
-            </button>
+              <button
+                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                onClick={generatePDF}
+              >
+                Cotizar
+              </button>
             </div>
           </div>
 
