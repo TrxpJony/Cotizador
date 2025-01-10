@@ -24,6 +24,9 @@ const Zinux = () => {
         glassPrice: '',
     });
 
+    const [manodeObraprices, setmanodeObraprices] = useState({
+        manodeObraPrice: 0,
+    });
 
     const [prices, setPrices] = useState({});
     const [accessoryPrices, setAccessoryPrices] = useState({});
@@ -43,28 +46,28 @@ const Zinux = () => {
         const { name, value, type, checked } = e.target;
         setDimensions((prev) => ({ ...prev, [name]: value }));
         if (type === 'checkbox') {
-          setAccessories((prev) => ({ ...prev, [name]: checked }));
+            setAccessories((prev) => ({ ...prev, [name]: checked }));
         } else if (type === 'radio') {
-          // Desmarcar la otra opción cuando se selecciona una nueva
-          if (name === 'kitCierreZinu' || name === 'kitCierreConLlaveZinu') {
-            setAccessories((prev) => ({
-              ...prev,
-              kitCierreZinu: name === 'kitCierreZinu' ? checked : false,
-              kitCierreConLlaveZinu: name === 'kitCierreConLlaveZinu' ? checked : false,
-            }));
-          } else if (name === 'limitador150Zinu' || name === 'limitador220Zinu') {
-            setAccessories((prev) => ({
-              ...prev,
-              limitador150Zinu: name === 'limitador150Zinu' ? checked : false,
-              limitador220Zinu: name === 'limitador220Zinu' ? checked : false,
-            }));
-          } else {
-            setAccessories((prev) => ({ ...prev, [name]: value }));
-          }
+            // Desmarcar la otra opción cuando se selecciona una nueva
+            if (name === 'kitCierreZinu' || name === 'kitCierreConLlaveZinu') {
+                setAccessories((prev) => ({
+                    ...prev,
+                    kitCierreZinu: name === 'kitCierreZinu' ? checked : false,
+                    kitCierreConLlaveZinu: name === 'kitCierreConLlaveZinu' ? checked : false,
+                }));
+            } else if (name === 'limitador150Zinu' || name === 'limitador220Zinu') {
+                setAccessories((prev) => ({
+                    ...prev,
+                    limitador150Zinu: name === 'limitador150Zinu' ? checked : false,
+                    limitador220Zinu: name === 'limitador220Zinu' ? checked : false,
+                }));
+            } else {
+                setAccessories((prev) => ({ ...prev, [name]: value }));
+            }
         } else {
-          setAccessories((prev) => ({ ...prev, [name]: value }));
+            setAccessories((prev) => ({ ...prev, [name]: value }));
         }
-      };
+    };
 
 
     const handleGlassChange = (e) => {
@@ -75,12 +78,22 @@ const Zinux = () => {
         }));
     };
 
+    const handlemanodeObraChange = (e) => {
+        const { name, value } = e.target;
+        setmanodeObraprices((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     const { width, height } = dimensions;
     const totalHeight = height ? height : '';
     const totalWidth = width ? width : '';
 
     const { glassPrice } = glassDimensions;
+    const { glassHeight } = glassDimensions;
+    const { glassWidth } = glassDimensions;
+    const { manodeObraPrice } = manodeObraprices;
 
     // Calcular valores
     const doubleHeight = totalHeight ? totalHeight * 2 : '';
@@ -103,7 +116,6 @@ const Zinux = () => {
     const limitador150ZinuPrice = accessories.limitador150Zinu ? accessoryPrices.limitador150Zinu : 0;
     const limitador220ZinuPrice = accessories.limitador220Zinu ? accessoryPrices.limitador220Zinu : 0;
     const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-    const manodeObraPrice = prices.manodeObra * area;
 
     const escuadraEnsambleZinuPrice = accessoryPrices.escuadraEnsambleZinu;
     const escuadraEnsambleHZinuPrice = accessoryPrices.escuadraEnsambleZinu;
@@ -131,7 +143,8 @@ const Zinux = () => {
         bisagra2: { cantidad: 0, totalPrice: 0 },
         cierreH: { cantidad: 0, totalPrice: 0 },
         soporteH: { cantidad: 0, totalPrice: 0 },
-
+        manodeObra: { totalPrice: 0 },
+        glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
         // Puedes añadir más componentes aquí si es necesario.
     });
 
@@ -207,7 +220,14 @@ const Zinux = () => {
                 cantidad: prevTotals.soporteH.cantidad + 1,
                 totalPrice: prevTotals.soporteH.totalPrice + soporteHZinuPrice,
             },
-
+            manodeObra: {
+                totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+            },
+            glass: {
+                totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
+                totalSize2: prevTotals.glass.totalSize + parseFloat(glassWidth),
+                totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
+            }
         }));
 
         setAccessoryTotals((prevTotals) => ({
@@ -236,16 +256,16 @@ const Zinux = () => {
                     totalPrice: prevTotals.limitador220.totalPrice + limitador220ZinuPrice,
                 }
                 : prevTotals.limitador220,
-        
+
 
 
             // Añade lógica para otros accesorios si es necesario.
         }));
-
-
         setPuertas((prev) => [...prev, nuevaPuerta]);
         setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
-        setAccessories({ kitCierreZinu: false, kitCierreConLlaveZinu: false, enchape: false }); // Reiniciar accesorios
+        setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
+        setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
+        setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
     };
 
     const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -273,7 +293,8 @@ const Zinux = () => {
         empaque3890Price +
         tornillosPrice +
         siliconaPrice +
-        (glassPrice ? parseFloat(glassPrice) : 0); // Precio del vidrio
+        (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
+        (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -309,12 +330,12 @@ const Zinux = () => {
 
         addSection(doc, 'Marco', 45);
         addTableRow(doc, 50, 'Marco Perimentral', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
-        
+
         addSection(doc, 'Nave', 60);
         addTableRow(doc, 65, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
         addTableRow(doc, 70, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
         addTableRow(doc, 75, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
-        
+
 
         addSection(doc, 'Accesorios', 85);
         addTableRow(doc, 90, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
@@ -336,9 +357,14 @@ const Zinux = () => {
         addTableRow(doc, 170, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
         addTableRow(doc, 175, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
+        addSection(doc, 'Extra', 185);
+        addTableRow(doc, 190, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 195, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 200, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 185);
+        doc.text('Total', 170, 210);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -347,12 +373,12 @@ const Zinux = () => {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 190);
+        doc.text(formattedTotal, 150, 215);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad de puertas', 20, 185);
-        doc.text(`${puertas.length}`, 20, 190);
+        doc.text('Cantidad de puertas', 20, 210);
+        doc.text(`${puertas.length}`, 20, 215);
 
         doc.save('Cotizacion-SistemaZinu.pdf');
     };
@@ -374,11 +400,6 @@ const Zinux = () => {
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
-
-    
-
-
-
 
 
     return (
@@ -425,15 +446,6 @@ const Zinux = () => {
                 </div>
 
                 <div className="container mx-auto p-4">
-                    {/* Botón Agregar Puerta */}
-                    <div className="flex justify-center mb-6">
-                        <button
-                            onClick={handleAddDoor}
-                            className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                        >
-                            Agregar Puerta
-                        </button>
-                    </div>
 
                     {/* Resumen de Puertas */}
                     <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
@@ -460,18 +472,31 @@ const Zinux = () => {
                                 </span>
                             </p>
                         </div>
+                        <br />
+                        <div>
+                            <button
+                                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                                onClick={generatePDF}
+                            >
+                                Cotizar
+                            </button>
+                        </div>
                     </div>
 
                     {/* Botón Regresar */}
-                    <div className="flex justify-center mt-6">
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-                        >
-                            Regresar
-                        </button>
+                    <div className="flex justify-end mt-6">
+                        {/* Botón Agregar Puerta */}
+                        <div className="flex justify-center mb-6">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                            >
+                                Regresar
+                            </button>
+                        </div>
                     </div>
                 </div>
+
 
             </div>
             <br />
@@ -693,7 +718,6 @@ const Zinux = () => {
                                     onChange={handleGlassChange}
                                 />
                             </TableCell>
-
                             <TableCell>
                                 <input
                                     type="number"
@@ -710,26 +734,32 @@ const Zinux = () => {
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Área: {area} m²</strong></TableCell>
-                            <TableCell>${manodeObraPrice.toFixed(2)}</TableCell>
+                            <TableCell>
+                                <input
+                                    type="number"
+                                    name="manodeObraPrice"
+                                    value={manodeObraprices.manodeObraPrice || ''}
+                                    placeholder="Precio del vidrio"
+                                    onChange={handlemanodeObraChange}
+                                /></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
 
-
                 <h2 className="text-right text-2xl font-bold">Total</h2>
                 <div className="flex justify-between items-center">
                     <button
-                        className="bg-[#00bcd4] text-white text-[1.8em] font-bold py-2 px-6 rounded-lg hover:bg-[#0097a7] focus:outline-none transition duration-300"
-                        onClick={generatePDF}
+                        onClick={handleAddDoor}
+                        className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                     >
-                        Cotizar
+                        Agregar Puerta
                     </button>
                     <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                 </div>
 
-
             </div>
         </div>
+
 
     );
 };

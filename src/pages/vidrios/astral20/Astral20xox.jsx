@@ -367,7 +367,7 @@ const Astral20xox = () => {
       addSection(doc, 'Nave', 75);
       addTableRow(doc, 80, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
       addTableRow(doc, 85, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
       addTableRow(doc, 95, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
       addTableRow(doc, 100, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
   

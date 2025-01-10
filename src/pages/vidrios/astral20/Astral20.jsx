@@ -364,36 +364,36 @@ const Astral20 = () => {
     addSection(doc, 'Nave', 75);
     addTableRow(doc, 80, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
     addTableRow(doc, 85, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
     addTableRow(doc, 95, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
     addTableRow(doc, 100, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
 
     addSection(doc, 'Accesorios', 110);
     addTableRow(doc, 115, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
     addTableRow(doc, 120, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 130, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 135, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 140, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 145, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 125, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 140, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Empaque', 155);
-    addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-    addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Empaque', 150);
+    addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Utilitarios', 180);
-    addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Utilitarios', 175);
+    addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Extra', 200);
-    addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-    addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-    addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+    addSection(doc, 'Extra', 195);
+    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+    addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 225);
+    doc.text('Total', 170, 220);
     doc.setFontSize(16);
     doc.setTextColor('black');
     const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -402,14 +402,14 @@ const Astral20 = () => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    doc.text(formattedTotal, 150, 230);
+    doc.text(formattedTotal, 150, 225);
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Cantidad de puertas', 20, 225);
-    doc.text(`${puertas.length}`, 20, 230);
+    doc.text('Cantidad de puertas', 20, 220);
+    doc.text(`${puertas.length}`, 20, 225);
 
-    doc.save('Cotizacion-Colosalpc2.6.pdf');
+    doc.save('Cotizacion-Astral2.0.pdf');
   };
 
   const getPriceDisplay = () => {

@@ -1,14 +1,14 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
 import Astral20Image from '../../../img/colxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 
 const Astral17xx = () => {
-const navigate = useNavigate(); // Inicializar useNavigate
+  const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
     kitCierreast: false,
@@ -26,66 +26,77 @@ const navigate = useNavigate(); // Inicializar useNavigate
     glassHeight: '',
     glassPrice: '',
   });
-  
 
-   
-const [prices, setPrices] = useState({});
-const [accessoryPrices, setAccessoryPrices] = useState({});
-const [utilitaryPrices, setUtilitaryPrices] = useState({});
-const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
+  const [manodeObraprices, setmanodeObraprices] = useState({
+    manodeObraPrice: 0,
+  });
+
+  const [prices, setPrices] = useState({});
+  const [accessoryPrices, setAccessoryPrices] = useState({});
+  const [utilitaryPrices, setUtilitaryPrices] = useState({});
+  const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
 
 
-useEffect(() => {
-  setPrices(preciosData.precios);
-  setAccessoryPrices(preciosData.accesorios);
-  setUtilitaryPrices(preciosData.utilitarios);
-}, []);
-  
+  useEffect(() => {
+    setPrices(preciosData.precios);
+    setAccessoryPrices(preciosData.accesorios);
+    setUtilitaryPrices(preciosData.utilitarios);
+  }, []);
+
 
   // Función que maneja el cambio de valores
-const handleChange = (e) => {
-  const { name, value, type, checked } = e.target;
-  setDimensions((prev) => ({ ...prev, [name]: value }));
-  if (type === 'checkbox') {
-    setAccessories((prev) => ({ ...prev, [name]: checked }));
-  } else if (type === 'radio') {
-    // Desmarcar la otra opción cuando se selecciona una nueva
-    if (name === 'kitCierreast' || name === 'kitCierreastConLlave') {
-      setAccessories((prev) => ({
-        ...prev,
-        kitCierreast: name === 'kitCierreast' ? checked : false,
-        kitCierreastConLlave: name === 'kitCierreastConLlave' ? checked : false,
-      }));
-    } else if (name === 'rodamiento80ast' || name === 'rodamiento40ast') {
-      setAccessories((prev) => ({
-        ...prev,
-        rodamiento80ast: name === 'rodamiento80ast' ? checked : false,
-        rodamiento40ast: name === 'rodamiento40ast' ? checked : false,
-      }));
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setDimensions((prev) => ({ ...prev, [name]: value }));
+    if (type === 'checkbox') {
+      setAccessories((prev) => ({ ...prev, [name]: checked }));
+    } else if (type === 'radio') {
+      // Desmarcar la otra opción cuando se selecciona una nueva
+      if (name === 'kitCierreast' || name === 'kitCierreastConLlave') {
+        setAccessories((prev) => ({
+          ...prev,
+          kitCierreast: name === 'kitCierreast' ? checked : false,
+          kitCierreastConLlave: name === 'kitCierreastConLlave' ? checked : false,
+        }));
+      } else if (name === 'rodamiento80ast' || name === 'rodamiento40ast') {
+        setAccessories((prev) => ({
+          ...prev,
+          rodamiento80ast: name === 'rodamiento80ast' ? checked : false,
+          rodamiento40ast: name === 'rodamiento40ast' ? checked : false,
+        }));
+      } else {
+        setAccessories((prev) => ({ ...prev, [name]: value }));
+      }
     } else {
       setAccessories((prev) => ({ ...prev, [name]: value }));
     }
-  } else {
-    setAccessories((prev) => ({ ...prev, [name]: value }));
-  }
-};
+  };
 
-const handleGlassChange = (e) => {
+  const handleGlassChange = (e) => {
     const { name, value } = e.target;
     setGlassDimensions((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-  
-  
+  const handlemanodeObraChange = (e) => {
+    const { name, value } = e.target;
+    setmanodeObraprices((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const { width, height } = dimensions;
   const halfWidth = width ? width / 2 : '';
   const totalHeight = height ? height : '';
   const totalWidth = width ? width : '';
 
   const { glassPrice } = glassDimensions;
+  const { glassHeight } = glassDimensions;
+  const { glassWidth } = glassDimensions;
+  const { manodeObraPrice } = manodeObraprices;
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
@@ -96,7 +107,7 @@ const handleGlassChange = (e) => {
   const felpaHeight = height && width ? height * 4 : '';
   const felpaWidth = height && width ? width * 2 : '';
   const empaqueastPrice = (empaqueastHeight + empaqueastWidth) / 1000 * prices.empaqueast; // Precio total del empaqueast
-  const totFelpa = (felpaHeight + felpaWidth );
+  const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
   const cabezalastPrice = prices.cabezalast * (totalWidth / 1000);
   const sillarastPrice = prices.sillarast * (totalWidth / 1000);
@@ -115,7 +126,6 @@ const handleGlassChange = (e) => {
   const rodamientoNave22astPrice = accessories.rodamientoNave22ast ? accessoryPrices.rodamientoNave22ast : 0;
   const guiaSuperiorangeoPrice = accessories.guiaSuperiorangeo ? accessoryPrices.guiaSuperiorangeo : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-  const manodeObraPrice =  prices.manodeObra * area;
 
   const tornillosPrice = utilitaryPrices.tornillos * 44;
   const siliconaPrice = utilitaryPrices.silicona * 1;
@@ -133,17 +143,19 @@ const handleGlassChange = (e) => {
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
+    manodeObra: { totalPrice: 0 },
+    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
     // Puedes añadir más componentes aquí si es necesario.
   });
 
   const [accessoryTotals, setAccessoryTotals] = useState({
     kitCierre: { cantidad: 0, totalPrice: 0 },
-    cubetaAngeo: { cantidad: 0, totalPrice: 0},
-    rodamiento80: { cantidad: 0, totalPrice: 0},
-    rodamiento40: { cantidad: 0, totalPrice: 0},
-    rodamiento22: { cantidad: 0, totalPrice: 0},
-    guiaSuperior: { cantidad: 0, totalPrice: 0},
-    cajaDeflectora: { cantidad: 0, totalPrice: 0},
+    cubetaAngeo: { cantidad: 0, totalPrice: 0 },
+    rodamiento80: { cantidad: 0, totalPrice: 0 },
+    rodamiento40: { cantidad: 0, totalPrice: 0 },
+    rodamiento22: { cantidad: 0, totalPrice: 0 },
+    guiaSuperior: { cantidad: 0, totalPrice: 0 },
+    cajaDeflectora: { cantidad: 0, totalPrice: 0 },
     // Agrega otros accesorios aquí si es necesario.
   });
 
@@ -203,7 +215,14 @@ const handleGlassChange = (e) => {
         cantidad: prevTotals.silicona.cantidad + 1,
         totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
       },
-
+      manodeObra: {
+        totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+      },
+      glass: {
+        totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
+        totalSize2: prevTotals.glass.totalSize + parseFloat(glassWidth),
+        totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
+      }
     }));
 
     setAccessoryTotals((prevTotals) => ({
@@ -283,253 +302,148 @@ const handleGlassChange = (e) => {
     rodamiento80astPrice +
     rodamiento40astPrice +
     cajaDeflectoraPrice +
-    rodamientoNave22astPrice+
-    guiaSuperiorangeoPrice+
-    felpaPrice+
-    empaqueastPrice+
+    rodamientoNave22astPrice +
+    guiaSuperiorangeoPrice +
+    felpaPrice +
+    empaqueastPrice +
     tornillosPrice +
     siliconaPrice +
-    (glassPrice ? parseFloat(glassPrice) : 0) // Precio del vidrio
+    (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
+    (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const cyanBlue = '#00b5e2';
+    const lightGray = '#d3d3d3';
+    const currentDate = new Date().toLocaleDateString();
 
-const generatePDF = () => {
-      const doc = new jsPDF();
-      
-      // Colores de la empresa
-      const cyanBlue = '#00b5e2';
-      const lightGray = '#d3d3d3';
+    const addTableRow = (doc, y, label, size, price) => {
+      doc.text(label, 20, y);
+      doc.text(size, 120, y);
+      doc.text(price, 170, y);
+    };
 
-
-      
-      // Agregamos el logo o nombre de la empresa en la parte superior (opcional)
-      doc.addImage(logo, 'PNG', 20, 10, 40, 20); // x, y, ancho, alto del logo
-      doc.setFontSize(14); // Título más pequeño
+    const addSection = (doc, title, y) => {
+      doc.setFontSize(12);
       doc.setTextColor(cyanBlue);
-      
-      // Fecha de creación
-      const currentDate = new Date().toLocaleDateString();
-      doc.setFontSize(8); // Tamaño de fuente más pequeño para la fecha
-      doc.setTextColor('black');
-      doc.text(`Fecha de creación: ${currentDate}`, 150, 20); // Fecha a la derecha
-      
-      // Agregamos un borde y un fondo gris claro a los encabezados
-      doc.setFillColor(lightGray);
-      doc.rect(20, 30, 170, 8, 'F'); // Fondo gris en la cabecera
-      doc.setTextColor('white');
-      doc.setFontSize(10); // Texto más pequeño en el encabezado
-      doc.text('Detalle de la cotización Astral 2.0 XX', 70, 34); // Texto blanco en la cabecera
-    
-      // Marco
-      doc.setFontSize(12); // Título más pequeño
-      doc.setTextColor(cyanBlue);
-      doc.text('Marco', 20, 45); // Título de la sección Marco
-      
+      doc.text(title, 20, y);
       doc.setFontSize(10);
       doc.setTextColor('black');
-      
-      doc.text('Pieza', 20, 50);
-      doc.text('Tamaño', 120, 50);
-      doc.text('Precio', 170, 50);
+    };
 
-      doc.setFontSize(10); // Texto más pequeño para los detalles
-      doc.setTextColor('black');
+    doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.setFontSize(8);
+    doc.setTextColor('black');
+    doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+    doc.setFillColor(lightGray);
+    doc.rect(20, 30, 170, 8, 'F');
+    doc.setTextColor('white');
+    doc.setFontSize(10);
+    doc.text('Detalle de la cotización Astral 2.0 XX', 70, 34);
 
-      doc.text(`Cabezal:`, 20, 55);
-      doc.text(`${componentTotals.cabezal.totalSize} mm`, 120, 55);
-      doc.text(`${componentTotals.cabezal.totalPrice.toFixed(2)}`, 170, 55);
-      doc.text(`Sillar un Riel:`, 20, 60);
-      doc.text(`${componentTotals.sillar.totalSize} mm`, 120, 60);
-      doc.text(`${componentTotals.sillar.totalPrice.toFixed(2)}`, 170, 60);
-      doc.text(`Jamba:`, 20, 65);
-      doc.text(`${componentTotals.jamba.totalSize} mm `, 120, 65);
-      doc.text(`${componentTotals.jamba.totalPrice.toFixed(2)}`, 170, 65);
+    addSection(doc, 'Marco', 45);
+    addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 55, 'Sillar un Riel:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
 
-      // Nave
-      doc.setFontSize(12); // Título más pequeño
-      doc.setTextColor(cyanBlue);
-      doc.text('Nave', 20, 75); // Título de la sección Nave
+    addSection(doc, 'Nave', 70);
+    addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 80, 'Horizontal Inferior:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 85, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
 
-      doc.setFontSize(10);
-      doc.setTextColor('black');
-      
-      doc.text('Pieza', 20, 80);
-      doc.text('Tamaño', 120, 80);
-      doc.text('Precio', 170, 80);
-      
-      doc.setFontSize(10); // Texto más pequeño para los detalles
-      doc.setTextColor('black');
+    addSection(doc, 'Accesorios', 100);
+    addTableRow(doc, 105, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 110, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 115, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 120, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 125, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Guia Superior Angeo Linea Universal', `${accessoryTotals.guiaSuperior.cantidad}`, `${accessoryTotals.guiaSuperior.totalPrice.toFixed(2)}`);
 
-      doc.text(`Horizontal Superior:`, 20, 85);
-      doc.text(`${componentTotals.horizontalSuperior.totalSize} mm `, 120, 85);
-      doc.text(`${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`, 170, 85);
-      doc.text(`Horizontal Inferior Móvil:`, 20, 90);
-      doc.text(`${componentTotals.horizontalInferiorMovil.totalSize} mm`, 120, 90);
-      doc.text(`${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`, 170, 90);
-      doc.text(`Traslape:`, 20, 95);
-      doc.text(`${componentTotals.traslape.totalSize} mm `, 120, 95);
-      doc.text(`${componentTotals.traslape.totalPrice.toFixed(2)}`, 170, 95);
-      doc.text(`Enganche:`, 20, 100);
-      doc.text(`${componentTotals.enganche.totalSize} mm `, 120, 100);
-      doc.text(`${componentTotals.enganche.totalPrice.toFixed(2)}`, 170, 100);
+    addSection(doc, 'Empaque', 145);
+    addTableRow(doc, 150, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 155, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 160, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
+    addSection(doc, 'Utilitarios', 170);
+    addTableRow(doc, 175, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
-      // Tabla Accesorios
-      doc.setFontSize(12); // Título más pequeño
-      doc.setTextColor(cyanBlue);
-      doc.text('Accesorios', 20, 110); // Título de la sección Empaque
-            
-      // Tabla de Accesorios
-      doc.setFontSize(10);
-      doc.setTextColor('black');
+    addSection(doc, 'Extra', 190);
+    addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+    addTableRow(doc, 205, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
-      doc.text('Pieza', 20, 115);
-      doc.text('Cantidad', 120, 115);
-      doc.text('Precio', 170, 115);
-      
-      doc.text(`Kit de Cierre:`, 20, 120);
-      doc.text(`${accessoryTotals.kitCierre.cantidad}`, 120, 120);
-      doc.text(`${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`, 170, 120);
-      doc.text(`Cubeta de Angeo Negra:`, 20, 125);
-      doc.text(`${accessoryTotals.cubetaAngeo.cantidad}`, 120, 125);
-      doc.text(`${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`, 170, 125);
-      doc.text(`Rodamiento 80 Kilos en Agujas:`, 20, 130);
-      doc.text(`${accessoryTotals.rodamiento80.cantidad}`, 120, 130);
-      doc.text(`${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`, 170, 130);
-      doc.text(`Rodamiento 40 Kilos en Agujas:`, 20, 135);
-      doc.text(`${accessoryTotals.rodamiento40.cantidad}`, 120, 135);
-      doc.text(`${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`, 170, 135);
-      doc.text(`Caja Deflectora:`, 20, 140);
-      doc.text(`${accessoryTotals.cajaDeflectora.cantidad}`, 120, 140);
-      doc.text(`${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`, 170, 140);
-      doc.text(`Rodamiento 22 Kilos en Bolas Para Naves:`, 20, 145);
-      doc.text(`${accessoryTotals.rodamiento22.cantidad}`, 120, 145);
-      doc.text(`${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`, 170, 145);
-      doc.text(`Guia Superior Angeo Linea Universal:`, 20, 150);
-      doc.text(`${accessoryTotals.guiaSuperior.cantidad}`, 120, 150);
-      doc.text(`${accessoryTotals.guiaSuperior.totalPrice.toFixed(2)}`, 170, 150);
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.text('Total', 170, 215);
+    doc.setFontSize(16);
+    doc.setTextColor('black');
+    const formattedTotal = totalSum.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    doc.text(formattedTotal, 150, 220);
 
-      // Tabla Empaque
-      doc.setFontSize(12); // Título más pequeño
-      doc.setTextColor(cyanBlue);
-      doc.text('Empaque', 20, 160); // Título de la sección Empaque
-      
-      // Tabla de Empaque
-      doc.setFontSize(10);
-      doc.setTextColor('black');
-      
-      doc.text('Pieza', 20, 165);
-      doc.text('Tamaño', 120, 165);
-      doc.text('Precio', 170, 165);
+    doc.setFontSize(14);
+    doc.setTextColor(cyanBlue);
+    doc.text('Cantidad de puertas', 20, 215);
+    doc.text(`${puertas.length}`, 20, 220);
 
-      doc.text(`Empaque (Alto):`, 20, 170);
-      doc.text(`${componentTotals.empaque.totalSize} mm`, 120, 170);
+    doc.save('Cotizacion-Astral1.7.pdf');
+  };
 
-      doc.text(`Empaque (Ancho):`, 20, 175);
-      doc.text(`${componentTotals.empaque.totalSize2} mm`, 120, 175);
-      doc.text(`${componentTotals.empaque.totalPrice.toFixed(2)}`, 170, 172.5);
+  const getPriceDisplay = () => {
+    if (accessories.kitCierreast) {
+      return `$${accessoryPrices.kitCierreast.toFixed(2)}`;
+    } else if (accessories.kitCierreastConLlave) {
+      return `$${accessoryPrices.kitCierreastConLlave.toFixed(2)}`;
+    }
+    return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
+  };
 
-      doc.text(`Felpa 5.00 x 7.00:`, 20, 180);
-      doc.text(`${componentTotals.felpa.totalSize} mm`, 120, 180);
-      doc.text(`${componentTotals.felpa.totalPrice.toFixed(2)}`, 170, 180);
+  const getCubetaAngeoPrice = () => {
+    if (accessories.cubetaAngeo) {
+      return `$${accessoryPrices.cubetaAngeo.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
+    }
+    return ''; // Si no está seleccionado, no mostrar precio
+  };
 
-     // Tabla Utilitarios
-     doc.setFontSize(12); // Título más pequeño
-     doc.setTextColor(cyanBlue);
-     doc.text('Utilitarios', 20, 190); // Título de la sección Empaque
-
-     // Tabla de Utilitarios
-     doc.setFontSize(10);
-     doc.setTextColor('black');
-
-     doc.text('Pieza', 20, 195);
-     doc.text('cantidad', 120, 195);
-     doc.text('Precio', 170, 195);
-
-     doc.text(`Torinillos:`, 20, 200);
-     doc.text(`${componentTotals.tornillos.cantidad}`, 120, 200);
-     doc.text(`${componentTotals.tornillos.totalPrice.toFixed(2)}`, 170, 200);
-
-     doc.text(`Silicona:`, 20, 205);
-     doc.text(`${componentTotals.silicona.cantidad}`, 120, 205);
-     doc.text(`${componentTotals.silicona.totalPrice.toFixed(2)}`, 170, 205);
-
-      // Total
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.text('Total', 170, 210); // Título Total
-
-      doc.setFontSize(16);
-      doc.setTextColor('black');
-      // Formateamos el total con separadores de miles y el símbolo de moneda
-      const formattedTotal = totalSum.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'COP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-      // Mostramos el total formateado
-      doc.text(formattedTotal, 150, 215); // Total
-
-      // Total puertas
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      
-      doc.text('Cantidad de puertas', 20, 210); // Título Total
-      doc.text(`${puertas.length}`, 20, 215);
-      
-
-            // Guardamos el archivo PDF
-            doc.save('Cotizacion-Astral1.7-XX.pdf'); // Guardamos el archivo con el nombre
-          };
+  const getRodamientoPrice = () => {
+    if (accessories.rodamiento80ast) {
+      return `$${accessoryPrices.rodamiento80ast.toFixed(2)}`; // Mostrar precio si 'rodamiento80ast' está seleccionado
+    } else if (accessories.rodamiento40ast) {
+      return `$${accessoryPrices.rodamiento40ast.toFixed(2)}`; // Mostrar precio si 'rodamiento40ast' está seleccionado
+    }
+    return ''; // Si no se selecciona ningún radio button, no mostrar precio
+  };
 
 
-    const getPriceDisplay = () => {
-        if (accessories.kitCierreast) {
-          return `$${accessoryPrices.kitCierreast.toFixed(2)}`;
-        } else if (accessories.kitCierreastConLlave) {
-          return `$${accessoryPrices.kitCierreastConLlave.toFixed(2)}`;
-        }
-        return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
-      };
+  const getCajaPrice = () => {
+    if (accessories.cajaDeflectora) {
+      return `$${accessoryPrices.cajaDeflectora.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
+    }
+    return ''; // Si no está seleccionado, no mostrar precio
+  };
 
-      const getCubetaAngeoPrice = () => {
-        if (accessories.cubetaAngeo) {
-          return `$${accessoryPrices.cubetaAngeo.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
-        }
-        return ''; // Si no está seleccionado, no mostrar precio
-      };
-      
-      const getRodamientoPrice = () => {
-        if (accessories.rodamiento80ast) {
-          return `$${accessoryPrices.rodamiento80ast.toFixed(2)}`; // Mostrar precio si 'rodamiento80ast' está seleccionado
-        } else if (accessories.rodamiento40ast) {
-          return `$${accessoryPrices.rodamiento40ast.toFixed(2)}`; // Mostrar precio si 'rodamiento40ast' está seleccionado
-        }
-        return ''; // Si no se selecciona ningún radio button, no mostrar precio
-      };
-      
-      
-      const getCajaPrice = () => {
-        if (accessories.cajaDeflectora) {
-          return `$${accessoryPrices.cajaDeflectora.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
-        }
-        return ''; // Si no está seleccionado, no mostrar precio
-      };
+  const getRodaNavPrice = () => {
+    if (accessories.rodamientoNave22ast) {
+      return `$${accessoryPrices.rodamientoNave22ast.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
+    }
+    return ''; // Si no está seleccionado, no mostrar precio
+  };
 
-      const getRodaNavPrice = () => {
-        if (accessories.rodamientoNave22ast) {
-          return `$${accessoryPrices.rodamientoNave22ast.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
-        }
-        return ''; // Si no está seleccionado, no mostrar precio
-      };
-
-      const getGuiaPrice = () => {
-        if (accessories.guiaSuperiorangeo) {
-          return `$${accessoryPrices.guiaSuperiorangeo.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
-        }
-        return ''; // Si no está seleccionado, no mostrar precio
-      };
-      
+  const getGuiaPrice = () => {
+    if (accessories.guiaSuperiorangeo) {
+      return `$${accessoryPrices.guiaSuperiorangeo.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
+    }
+    return ''; // Si no está seleccionado, no mostrar precio
+  };
 
   return (
     <div className="door-container">
@@ -537,7 +451,7 @@ const generatePDF = () => {
         {/* Formulario para el alto y ancho */}
         <div className="dimensions-form">
           <label>
-            Alto (mm): 
+            Alto (mm):
             <input
               type="number"
               name="height"
@@ -547,7 +461,7 @@ const generatePDF = () => {
             />
           </label>
           <label>
-            Ancho (mm): 
+            Ancho (mm):
             <input
               type="number"
               name="width"
@@ -559,7 +473,7 @@ const generatePDF = () => {
         </div>
 
         {/* Imagen */}
-        <img src={Astral20Image} alt="Puerta ventana corrediza" className="door-image" />
+        <img src={Astral20Image} alt="Puerta Corrediza Colosal" className="door-image" />
 
         {/* Dimensiones dinámicas */}
         <div className="dimensions-display">
@@ -575,15 +489,6 @@ const generatePDF = () => {
         </div>
 
         <div className="container mx-auto p-4">
-          {/* Botón Agregar Puerta */}
-          <div className="flex justify-center mb-6">
-            <button
-              onClick={handleAddDoor}
-              className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-            >
-              Agregar Puerta
-            </button>
-          </div>
 
           {/* Resumen de Puertas */}
           <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
@@ -610,205 +515,217 @@ const generatePDF = () => {
                 </span>
               </p>
             </div>
+            <br />
+            <div>
+              <button
+                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                onClick={generatePDF}
+              >
+                Cotizar
+              </button>
+            </div>
           </div>
 
           {/* Botón Regresar */}
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => navigate(-1)}
-              className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-            >
-              Regresar
-            </button>
+          <div className="flex justify-end mt-6">
+            {/* Botón Agregar Puerta */}
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => navigate(-1)}
+                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+              >
+                Regresar
+              </button>
+            </div>
           </div>
         </div>
 
       </div>
-          <br />
+      <br />
       {/* Lista de partes */}
       <div className="parts-list">
         <strong><h1>ASTRAL 1.7 XO-OX</h1></strong>
         <Table aria-label="TABLA MARCO">
-      <TableHeader>
-        <TableColumn><h1>Marco</h1></TableColumn>
-        <TableColumn></TableColumn>
-        <TableColumn></TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-          <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
-          <TableCell><strong><h2>Precio</h2></strong></TableCell>
-        </TableRow>
-        <TableRow key="2">
-          <TableCell><strong>Cabezal:</strong></TableCell>
-          <TableCell>{totalWidth} mm</TableCell>
-          <TableCell>${cabezalastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="3">
-          <TableCell><strong>Sillar un Riel:</strong></TableCell>
-          <TableCell>{totalWidth} mm</TableCell>
-          <TableCell>${sillarastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell><strong>Jamba:</strong></TableCell>
-          <TableCell>{doubleHeight} mm (2)</TableCell>
-          <TableCell>${jambaastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+          <TableHeader>
+            <TableColumn><h1>Marco</h1></TableColumn>
+            <TableColumn></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell><strong>Cabezal:</strong></TableCell>
+              <TableCell>{totalWidth} mm</TableCell>
+              <TableCell>${cabezalastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell><strong>Sillar un Riel:</strong></TableCell>
+              <TableCell>{totalWidth} mm</TableCell>
+              <TableCell>${sillarastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="4">
+              <TableCell><strong>Jamba:</strong></TableCell>
+              <TableCell>{doubleHeight} mm (2)</TableCell>
+              <TableCell>${jambaastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-    <br />
+        <br />
 
-    <Table aria-label="TABLA NAVE">
-      <TableHeader>
-        <TableColumn><h1>Nave</h1></TableColumn>
-        <TableColumn></TableColumn>
-        <TableColumn></TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-          <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
-          <TableCell><strong><h2>Precio</h2></strong></TableCell>
-        </TableRow>
-        <TableRow key="2">
-          <TableCell><strong>Horizontal Superior:</strong></TableCell>
-          <TableCell>{doubleHalfWidth} mm (2)</TableCell>
-          <TableCell>${horizontalSuperiorastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
-          <TableCell>{doubleHalfWidth} mm (2)</TableCell>
-          <TableCell>${horizontalInferiorMovilastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="5">
-          <TableCell><strong>Traslape:</strong> </TableCell>
-          <TableCell>{doubleHeight} mm (2) </TableCell>
-          <TableCell>${traslapeastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="6">
-          <TableCell><strong>Enganche:</strong> </TableCell>
-          <TableCell>{doubleHeight} mm (2) </TableCell>
-          <TableCell>${engancheastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-    <br />
-    <Table aria-label="tabla accesorios">
-      <TableHeader>
-        <TableColumn><h1>Accesorios</h1></TableColumn>
-        <TableColumn></TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-          <TableCell><strong><h2>Precio</h2></strong></TableCell>
-        </TableRow>
-        <TableRow key="2">
-          <TableCell><input
-        type="checkbox"
-        name="kitCierreast"
-        value="Kit de Cierre"
-        checked={accessories.kitCierreast}
-        onChange={handleChange}
-      />
-      Kit de Cierre
-    </TableCell>
-          <TableCell>$ {getPriceDisplay()}</TableCell>
-        </TableRow>
-        <TableRow key="3">
-          <TableCell><input
-            type="radio"
-            name="rodamiento80ast"
-            checked={accessories.rodamiento80ast}
-            onChange={handleChange}
-            />
-            Rodamiento 80 Kilos en Agujas
-            <br />
-            <input
-            type="radio"
-            name="rodamiento40ast"
-            checked={accessories.rodamiento40ast}
-            onChange={handleChange}
-            />
-            Rodamiento 40 Kilos en Bolas
-            </TableCell>
-          <TableCell>$ {getRodamientoPrice()}</TableCell>
-        </TableRow>
-        <TableRow key="4">
-          <TableCell><input
+        <Table aria-label="TABLA NAVE">
+          <TableHeader>
+            <TableColumn><h1>Nave</h1></TableColumn>
+            <TableColumn></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell><strong>Horizontal Superior:</strong></TableCell>
+              <TableCell>{doubleHalfWidth} mm (2)</TableCell>
+              <TableCell>${horizontalSuperiorastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="4">
+              <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
+              <TableCell>{doubleHalfWidth} mm (2)</TableCell>
+              <TableCell>${horizontalInferiorMovilastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="5">
+              <TableCell><strong>Traslape:</strong> </TableCell>
+              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>${traslapeastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="6">
+              <TableCell><strong>Enganche:</strong> </TableCell>
+              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>${engancheastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <br />
+        <Table aria-label="tabla accesorios">
+          <TableHeader>
+            <TableColumn><h1>Accesorios</h1></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell><input
+                type="checkbox"
+                name="kitCierreast"
+                value="Kit de Cierre"
+                checked={accessories.kitCierreast}
+                onChange={handleChange}
+              />
+                Kit de Cierre
+              </TableCell>
+              <TableCell>$ {getPriceDisplay()}</TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell><input
+                type="radio"
+                name="rodamiento80ast"
+                checked={accessories.rodamiento80ast}
+                onChange={handleChange}
+              />
+                Rodamiento 80 Kilos en Agujas
+                <br />
+                <input
+                  type="radio"
+                  name="rodamiento40ast"
+                  checked={accessories.rodamiento40ast}
+                  onChange={handleChange}
+                />
+                Rodamiento 40 Kilos en Bolas
+              </TableCell>
+              <TableCell>$ {getRodamientoPrice()}</TableCell>
+            </TableRow>
+            <TableRow key="4">
+              <TableCell><input
                 type="checkbox"
                 name="cubetaAngeo"
                 checked={accessories.cubetaAngeo}
                 onChange={handleChange}
-                />
+              />
                 Cubeta de Angeo Negra</TableCell>
-          <TableCell>$ {getCubetaAngeoPrice()}</TableCell>
-        </TableRow>
-        <TableRow key="5">
-          <TableCell><input
-                    type="checkbox"
-                    name="cajaDeflectora"
-                    checked={accessories.cajaDeflectora}
-                    onChange={handleChange}
-                />
+              <TableCell>$ {getCubetaAngeoPrice()}</TableCell>
+            </TableRow>
+            <TableRow key="5">
+              <TableCell><input
+                type="checkbox"
+                name="cajaDeflectora"
+                checked={accessories.cajaDeflectora}
+                onChange={handleChange}
+              />
                 Caja Deflectora</TableCell>
-          <TableCell>$ {getCajaPrice()}</TableCell>
-        </TableRow>
-        <TableRow key="6">
-          <TableCell><input
-                    type="checkbox"
-                    name="rodamientoNave22ast"
-                    checked={accessories.rodamientoNave22ast}
-                    onChange={handleChange}
-                />
+              <TableCell>$ {getCajaPrice()}</TableCell>
+            </TableRow>
+            <TableRow key="6">
+              <TableCell><input
+                type="checkbox"
+                name="rodamientoNave22ast"
+                checked={accessories.rodamientoNave22ast}
+                onChange={handleChange}
+              />
                 Rodamiento 22 Kilos en Bolas Para Nave</TableCell>
-          <TableCell>$ {getRodaNavPrice()}</TableCell>
-        </TableRow>
-        <TableRow key="7">
-          <TableCell><input
-                    type="checkbox"
-                    name="guiaSuperiorangeo"
-                    checked={accessories.guiaSuperiorangeo}
-                    onChange={handleChange}
-                />
+              <TableCell>$ {getRodaNavPrice()}</TableCell>
+            </TableRow>
+            <TableRow key="7">
+              <TableCell><input
+                type="checkbox"
+                name="guiaSuperiorangeo"
+                checked={accessories.guiaSuperiorangeo}
+                onChange={handleChange}
+              />
                 Guia Superior Angeo Linea Universal</TableCell>
-          <TableCell>$ {getGuiaPrice()}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-    <br />
-    <Table aria-label="TABLA EMPAQUE">
-      <TableHeader>
-        <TableColumn><h1>Empaque</h1></TableColumn>
-        <TableColumn></TableColumn>
-        <TableColumn></TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow key="1">
-          <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-          <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
-          <TableCell><strong><h2>Precio</h2></strong></TableCell>
-        </TableRow>
-        <TableRow key="2">
-          <TableCell><strong>Empaqueast (Alto): 
-            <br />
-            Empaqueast (Ancho): </strong></TableCell>
-          <TableCell>{empaqueastHeight} mm
-            <br /> {empaqueastWidth} mm
-          </TableCell>
-          <TableCell>${empaqueastPrice.toFixed(2)}</TableCell>
-        </TableRow>
-        <TableRow key="3">
-          <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
-          <TableCell>{totFelpa} mm</TableCell>
-          <TableCell>${felpaPrice.toFixed(2)}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-     <br />
-     <Table aria-label="tabla utilitarios">
+              <TableCell>$ {getGuiaPrice()}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <br />
+        <Table aria-label="TABLA EMPAQUE">
+          <TableHeader>
+            <TableColumn><h1>Empaque</h1></TableColumn>
+            <TableColumn></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+              <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell><strong>Empaqueast (Alto):
+                <br />
+                Empaqueast (Ancho): </strong></TableCell>
+              <TableCell>{empaqueastHeight} mm
+                <br /> {empaqueastWidth} mm
+              </TableCell>
+              <TableCell>${empaqueastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+              <TableCell>{totFelpa} mm</TableCell>
+              <TableCell>${felpaPrice.toFixed(2)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <br />
+        <Table aria-label="tabla utilitarios">
           <TableHeader>
             <TableColumn><h1>Utilitarios</h1></TableColumn>
             <TableColumn></TableColumn>
@@ -832,72 +749,78 @@ const generatePDF = () => {
               <TableCell>$ {siliconaPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
-        </Table>  
+        </Table>
         <br />
-     
-     <Table aria-label="Tabla Vidrio">
-  <TableHeader>
-    <TableColumn><h1>Vidrio - Mano de Obra</h1></TableColumn>
-    <TableColumn></TableColumn>
-  </TableHeader>
-  <TableBody>
-    <TableRow key="1">
-      <TableCell><strong><h2>Vidrio</h2></strong></TableCell>
-      <TableCell><strong><h2>Precio</h2></strong></TableCell>
-    </TableRow>
-    <TableRow key="2">
-      <TableCell>
-        <input 
-          type="number" 
-          name="glassHeight" 
-          value={glassDimensions.glassHeight} 
-          placeholder="Alto Vidrio en mm" 
-          onChange={handleGlassChange} 
-        />
-        <input 
-          type="number" 
-          name="glassWidth" 
-          value={glassDimensions.glassWidth} 
-          placeholder="Ancho Vidrio en mm" 
-          onChange={handleGlassChange} 
-        />
-      </TableCell>
 
-      <TableCell>
-        <input 
-          type="number" 
-          name="glassPrice" 
-          value={glassDimensions.glassPrice || ''} 
-          placeholder="Precio del vidrio" 
-          onChange={handleGlassChange} 
-        />
-      </TableCell>
-    </TableRow>
-    <TableRow key="3">
-      <TableCell><strong><h2>Mano de Obra</h2></strong></TableCell>
-      <TableCell><strong><h2>Precio</h2></strong></TableCell>
-    </TableRow>
-    <TableRow key="4">
-          <TableCell><strong>Área: {area} m²</strong></TableCell>
-          <TableCell>${manodeObraPrice.toFixed(2)}</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
+        <Table aria-label="Tabla Vidrio">
+          <TableHeader>
+            <TableColumn><h1>Vidrio - Mano de Obra</h1></TableColumn>
+            <TableColumn></TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell><strong><h2>Vidrio</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="2">
+              <TableCell>
+                <input
+                  type="number"
+                  name="glassHeight"
+                  value={glassDimensions.glassHeight}
+                  placeholder="Alto Vidrio en mm"
+                  onChange={handleGlassChange}
+                />
+                <input
+                  type="number"
+                  name="glassWidth"
+                  value={glassDimensions.glassWidth}
+                  placeholder="Ancho Vidrio en mm"
+                  onChange={handleGlassChange}
+                />
+              </TableCell>
+              <TableCell>
+                <input
+                  type="number"
+                  name="glassPrice"
+                  value={glassDimensions.glassPrice || ''}
+                  placeholder="Precio del vidrio"
+                  onChange={handleGlassChange}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow key="3">
+              <TableCell><strong><h2>Mano de Obra</h2></strong></TableCell>
+              <TableCell><strong><h2>Precio</h2></strong></TableCell>
+            </TableRow>
+            <TableRow key="4">
+              <TableCell><strong>Área: {area} m²</strong></TableCell>
+              <TableCell>
+                <input
+                  type="number"
+                  name="manodeObraPrice"
+                  value={manodeObraprices.manodeObraPrice || ''}
+                  placeholder="Precio del vidrio"
+                  onChange={handlemanodeObraChange}
+                /></TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-<h2 className="text-right text-2xl font-bold">Total</h2>
-<div className="flex justify-between items-center">
-  <button
-    className="bg-[#00bcd4] text-white text-[1.8em] font-bold py-2 px-6 rounded-lg hover:bg-[#0097a7] focus:outline-none transition duration-300"
-    onClick={generatePDF}
-  >
-    Cotizar
-  </button>
-  <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-</div>
+        <h2 className="text-right text-2xl font-bold">Total</h2>
+        <div className="flex justify-between items-center">
+          <button
+            onClick={handleAddDoor}
+            className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+          >
+            Agregar Puerta
+          </button>
+          <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+        </div>
 
       </div>
     </div>
-    
+
   );
 };
 

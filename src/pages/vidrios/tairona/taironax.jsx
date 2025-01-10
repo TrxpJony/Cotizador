@@ -24,6 +24,9 @@ const Taironax = () => {
         glassPrice: '',
     });
 
+    const [manodeObraprices, setmanodeObraprices] = useState({
+        manodeObraPrice: 0,
+    });
 
     const [prices, setPrices] = useState({});
     const [accessoryPrices, setAccessoryPrices] = useState({});
@@ -43,28 +46,28 @@ const Taironax = () => {
         const { name, value, type, checked } = e.target;
         setDimensions((prev) => ({ ...prev, [name]: value }));
         if (type === 'checkbox') {
-          setAccessories((prev) => ({ ...prev, [name]: checked }));
+            setAccessories((prev) => ({ ...prev, [name]: checked }));
         } else if (type === 'radio') {
-          // Desmarcar la otra opción cuando se selecciona una nueva
-          if (name === 'kitCierreTairona' || name === 'kitCierreConLlaveTairona') {
-            setAccessories((prev) => ({
-              ...prev,
-              kitCierreTairona: name === 'kitCierreTairona' ? checked : false,
-              kitCierreConLlaveTairona: name === 'kitCierreConLlaveTairona' ? checked : false,
-            }));
-          } else if (name === 'limitador150Tairona' || name === 'limitador220Tairona') {
-            setAccessories((prev) => ({
-              ...prev,
-              limitador150Tairona: name === 'limitador150Tairona' ? checked : false,
-              limitador220Tairona: name === 'limitador220Tairona' ? checked : false,
-            }));
-          } else {
-            setAccessories((prev) => ({ ...prev, [name]: value }));
-          }
+            // Desmarcar la otra opción cuando se selecciona una nueva
+            if (name === 'kitCierreTairona' || name === 'kitCierreConLlaveTairona') {
+                setAccessories((prev) => ({
+                    ...prev,
+                    kitCierreTairona: name === 'kitCierreTairona' ? checked : false,
+                    kitCierreConLlaveTairona: name === 'kitCierreConLlaveTairona' ? checked : false,
+                }));
+            } else if (name === 'limitador150Tairona' || name === 'limitador220Tairona') {
+                setAccessories((prev) => ({
+                    ...prev,
+                    limitador150Tairona: name === 'limitador150Tairona' ? checked : false,
+                    limitador220Tairona: name === 'limitador220Tairona' ? checked : false,
+                }));
+            } else {
+                setAccessories((prev) => ({ ...prev, [name]: value }));
+            }
         } else {
-          setAccessories((prev) => ({ ...prev, [name]: value }));
+            setAccessories((prev) => ({ ...prev, [name]: value }));
         }
-      };
+    };
 
 
     const handleGlassChange = (e) => {
@@ -75,12 +78,22 @@ const Taironax = () => {
         }));
     };
 
+    const handlemanodeObraChange = (e) => {
+        const { name, value } = e.target;
+        setmanodeObraprices((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     const { width, height } = dimensions;
     const totalHeight = height ? height : '';
     const totalWidth = width ? width : '';
 
     const { glassPrice } = glassDimensions;
+    const { glassHeight } = glassDimensions;
+    const { glassWidth } = glassDimensions;
+    const { manodeObraPrice } = manodeObraprices;
 
     // Calcular valores
     const doubleHeight = totalHeight ? totalHeight * 2 : '';
@@ -103,7 +116,6 @@ const Taironax = () => {
     const limitador150TaironaPrice = accessories.limitador150Tairona ? accessoryPrices.limitador150Tairona : 0;
     const limitador220TaironaPrice = accessories.limitador220Tairona ? accessoryPrices.limitador220Tairona : 0;
     const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-    const manodeObraPrice = prices.manodeObra * area;
 
     const escuadraEnsambleTaironaPrice = accessoryPrices.escuadraEnsambleTairona;
     const escuadraEnsambleHTaironaPrice = accessoryPrices.escuadraEnsambleTairona;
@@ -116,9 +128,6 @@ const Taironax = () => {
 
     const tornillosPrice = utilitaryPrices.tornillos * 28;
     const siliconaPrice = utilitaryPrices.silicona * 1;
-
-
-
 
     const [componentTotals, setComponentTotals] = useState({
         marcoPerimetral: { totalSize: 0, totalPrice: 0 },
@@ -136,8 +145,8 @@ const Taironax = () => {
         bisagraOculta: { cantidad: 0, totalPrice: 0 },
         cierreH: { cantidad: 0, totalPrice: 0 },
         soporteH: { cantidad: 0, totalPrice: 0 },
-
-        // Puedes añadir más componentes aquí si es necesario.
+        manodeObra: { totalPrice: 0 },
+        glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
     });
 
     const [accessoryTotals, setAccessoryTotals] = useState({
@@ -220,7 +229,14 @@ const Taironax = () => {
                 cantidad: prevTotals.soporteH.cantidad + 1,
                 totalPrice: prevTotals.soporteH.totalPrice + soporteHTaironaPrice,
             },
-
+            manodeObra: {
+                totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+            },
+            glass: {
+                totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
+                totalSize2: prevTotals.glass.totalSize + parseFloat(glassWidth),
+                totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
+            }
         }));
 
         setAccessoryTotals((prevTotals) => ({
@@ -249,16 +265,14 @@ const Taironax = () => {
                     totalPrice: prevTotals.limitador220.totalPrice + limitador220TaironaPrice,
                 }
                 : prevTotals.limitador220,
-        
-
 
             // Añade lógica para otros accesorios si es necesario.
         }));
-
-
         setPuertas((prev) => [...prev, nuevaPuerta]);
         setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
-        setAccessories({ kitCierreTairona: false, kitCierreConLlaveTairona: false, enchape: false }); // Reiniciar accesorios
+        setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
+        setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
+        setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
     };
 
     const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -288,7 +302,8 @@ const Taironax = () => {
         empaqueTaironaPrice +
         tornillosPrice +
         siliconaPrice +
-        (glassPrice ? parseFloat(glassPrice) : 0); // Precio del vidrio
+        (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
+        (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -324,7 +339,7 @@ const Taironax = () => {
 
         addSection(doc, 'Marco', 45);
         addTableRow(doc, 50, 'Marco Perimentral', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
-        
+
         addSection(doc, 'Nave', 60);
         addTableRow(doc, 65, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
         addTableRow(doc, 70, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
@@ -343,7 +358,7 @@ const Taironax = () => {
         addTableRow(doc, 135, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
         addTableRow(doc, 140, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Empaque',150);
+        addSection(doc, 'Empaque', 150);
         addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
         addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
         addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
@@ -352,9 +367,14 @@ const Taironax = () => {
         addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
         addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
+        addSection(doc, 'Extra', 195);
+        addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 190);
+        doc.text('Total', 170, 220);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -363,12 +383,12 @@ const Taironax = () => {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 195);
+        doc.text(formattedTotal, 150, 225);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad de puertas', 20, 190);
-        doc.text(`${puertas.length}`, 20, 195);
+        doc.text('Cantidad de puertas', 20, 220);
+        doc.text(`${puertas.length}`, 20, 225);
 
         doc.save('Cotizacion-SistemaTairona.pdf');
     };
@@ -390,12 +410,6 @@ const Taironax = () => {
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
-
-    
-
-
-
-
 
     return (
         <div className="door-container">
@@ -441,15 +455,6 @@ const Taironax = () => {
                 </div>
 
                 <div className="container mx-auto p-4">
-                    {/* Botón Agregar Puerta */}
-                    <div className="flex justify-center mb-6">
-                        <button
-                            onClick={handleAddDoor}
-                            className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                        >
-                            Agregar Puerta
-                        </button>
-                    </div>
 
                     {/* Resumen de Puertas */}
                     <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
@@ -476,16 +481,28 @@ const Taironax = () => {
                                 </span>
                             </p>
                         </div>
+                        <br />
+                        <div>
+                            <button
+                                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                                onClick={generatePDF}
+                            >
+                                Cotizar
+                            </button>
+                        </div>
                     </div>
 
                     {/* Botón Regresar */}
-                    <div className="flex justify-center mt-6">
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-                        >
-                            Regresar
-                        </button>
+                    <div className="flex justify-end mt-6">
+                        {/* Botón Agregar Puerta */}
+                        <div className="flex justify-center mb-6">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                            >
+                                Regresar
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -717,7 +734,6 @@ const Taironax = () => {
                                     onChange={handleGlassChange}
                                 />
                             </TableCell>
-
                             <TableCell>
                                 <input
                                     type="number"
@@ -734,23 +750,28 @@ const Taironax = () => {
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Área: {area} m²</strong></TableCell>
-                            <TableCell>${manodeObraPrice.toFixed(2)}</TableCell>
+                            <TableCell>
+                                <input
+                                    type="number"
+                                    name="manodeObraPrice"
+                                    value={manodeObraprices.manodeObraPrice || ''}
+                                    placeholder="Precio del vidrio"
+                                    onChange={handlemanodeObraChange}
+                                /></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
 
-
                 <h2 className="text-right text-2xl font-bold">Total</h2>
                 <div className="flex justify-between items-center">
                     <button
-                        className="bg-[#00bcd4] text-white text-[1.8em] font-bold py-2 px-6 rounded-lg hover:bg-[#0097a7] focus:outline-none transition duration-300"
-                        onClick={generatePDF}
+                        onClick={handleAddDoor}
+                        className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
                     >
-                        Cotizar
+                        Agregar Puerta
                     </button>
                     <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                 </div>
-
 
             </div>
         </div>

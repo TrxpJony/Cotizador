@@ -781,7 +781,6 @@ const Colosal = () => {
           </TableBody>
         </Table>
 
-
         <h2 className="text-right text-2xl font-bold">Total</h2>
         <div className="flex justify-between items-center">
           <button
@@ -792,7 +791,6 @@ const Colosal = () => {
           </button>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>
-
 
       </div>
     </div>

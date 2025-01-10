@@ -350,36 +350,36 @@ const Astral20xx = () => {
     
         addSection(doc, 'Nave', 70);
         addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 80, 'Horizontal Inferior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 80, 'Horizontal Inferior:', `${componentTotals.horizontalInferior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
         addTableRow(doc, 85, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
         addTableRow(doc, 90, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
     
         addSection(doc, 'Accesorios', 100);
-        addTableRow(doc, 110, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 115, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 120, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 125, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 130, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 135, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamientoNave22.cantidad}`, `${accessoryTotals.rodamientoNave22.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 105, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 110, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 115, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 120, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 125, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 130, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamientoNave22.cantidad}`, `${accessoryTotals.rodamientoNave22.totalPrice.toFixed(2)}`);
   
-        addSection(doc, 'Empaque', 145);
-        addTableRow(doc, 150, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-        addTableRow(doc, 155, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 160, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Empaque', 140);
+        addTableRow(doc, 145, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+        addTableRow(doc, 150, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 155, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
     
-        addSection(doc, 'Utilitarios', 170);
-        addTableRow(doc, 175, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Utilitarios', 165);
+        addTableRow(doc, 170, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 175, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
     
-        addSection(doc, 'Extra', 190);
-        addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-        addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-        addTableRow(doc, 205, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+        addSection(doc, 'Extra', 185);
+        addTableRow(doc, 190, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 195, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 200, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
     
     
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 215);
+        doc.text('Total', 170, 210);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -388,14 +388,14 @@ const Astral20xx = () => {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 220);
+        doc.text(formattedTotal, 150, 215);
     
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad de puertas', 20, 215);
-        doc.text(`${puertas.length}`, 20, 220);
+        doc.text('Cantidad de puertas', 20, 210);
+        doc.text(`${puertas.length}`, 20, 215);
     
-        doc.save('Cotizacion-Colosalpc2.6.pdf');
+        doc.save('Cotizacion-Astral2.0.pdf');
       };
 
   const getPriceDisplay = () => {
