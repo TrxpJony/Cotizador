@@ -1,18 +1,8 @@
 import './App.css'
-import { Route, Routes, useLocation } from "react-router-dom"; 
+import { Route, Routes} from "react-router-dom"; 
 import { Home } from "./pages/Home";
 import { Tipos } from './pages/tipos';
-import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
-} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link} from "@nextui-org/react";
 import logo from '../src/img/logo.png'
 import Colosal from './pages/vidrios/colosalpc26/Colosal';
 import Astral17 from './pages/vidrios/astral17/Astral17';
@@ -57,7 +47,6 @@ import Awa4h from './pages/vidrios/awa/awa3h';
 import Awa5h from './pages/vidrios/awa/awa4';
 import Awa6h from './pages/vidrios/awa/awa5h';
 import { Inicio } from './components/Inicio';
-import { Nosotros } from './components/nosotros';
 
 
 export const AcmeLogo = () => {
@@ -68,65 +57,30 @@ export const AcmeLogo = () => {
 };
 
 function App() {
-  const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = [
-    { name: "Inicio", path: "/" },
-    { name: "Acerca de Nosotros", path: "/ti" },
-    { name: "Cotizador", path: "/tipos" },
-  ];
-
-  const isActive = (path) => location.pathname === path;
 
   return (
   
     <>
- <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-        <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit"></p>
-        </NavbarBrand>
-      </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {menuItems.map((item) => (
-            <NavbarItem key={item.name}>
-              <Link
-                className={isActive(item.path) ? "text-cyan-600" : "text-foreground"}
-                href={item.path}
-              >
-                {item.name}
-              </Link>
-            </NavbarItem>
-          ))}
+<Navbar>
+      <NavbarBrand>
+        <AcmeLogo />
+        <p className="font-bold text-inherit"></p>
+      </NavbarBrand>
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">     
+        <NavbarItem >
+          <Link color="foreground" aria-current="page" href="/">
+            Catalogo
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
       </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.name}-${index}`}>
-            <Link
-              className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-              href={item.path}
-              size="lg"
-            >
-              {item.name}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
     </Navbar>
     
       <div className="fondo  min-h-screen container-app">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="inicio" element={<Inicio />} />
-          <Route path="nosotros" element={<Nosotros />} />
           <Route path='tipos/col' element={<Colosalpage/>}/>
           <Route path='tipos/col/cp1' element={<Colosal />} />
           <Route path='tipos/col/cp2' element={<Colosalxx />} />
