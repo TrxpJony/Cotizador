@@ -73,7 +73,7 @@ function App() {
 
   const menuItems = [
     { name: "Inicio", path: "/" },
-    { name: "Acerca de Nosotros", path: "/ti" },
+    { name: "Acerca de Nosotros", path: "/nosotros" },
     { name: "Cotizador", path: "/tipos" },
   ];
 

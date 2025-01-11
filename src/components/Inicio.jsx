@@ -1,4 +1,14 @@
-import cocina3 from '../img/cocina3.png'; // Importar la imagen
+import cocina1 from '../img/img_Principal/cocina3.png'; // Importar la imagen
+import cocina2 from '../img/img_Principal/cocina4.png'
+import cocina3 from '../img/img_Principal/cocina1.png'
+import cocina4 from '../img/img_Principal/cocina5.png'
+import espejo from '../img/img_Principal/espejo.png'
+import espejo2 from '../img/img_Principal/espejo2.png'
+import espejo3 from '../img/img_Principal/espejo3.png'
+import colosal from '../img/img_Principal/vidrio2.png'
+import puerta from '../img/img_Principal/vidrio1.png'
+import luces from '../img/img_Principal/luces.png'
+import luces2 from '../img/img_Principal/luces2.png'
 import { Divider } from "@nextui-org/divider";
 import '../css/colosal.css'; // Archivo CSS para estilos
 
@@ -15,14 +25,14 @@ export function Inicio() {
   return (
     <>
       <br />
-      <div className="relative overflow-hidden bg-white" /*</>style={{ backgroundImage: `url(${cocina3})` }}*/>
+      <div className="relative overflow-hidden bg-white" /*</>style={{ backgroundImage: `url(${cocina1})` }}*/>
         <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="sm:max-w-lg">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Vidrio al Arte SAS
+              <h1 className="text-4xl font-bold tracking-tight text-default-400 sm:text-6xl">
+                Vidrio al <span className="text-cyan-400">Arte SAS</span>
               </h1>
-              <p className="mt-4  text-gray-500">
+              <p className="mt-4  text-default-400">
                 Especialistas en vidrios y espejos personalizados de alta calidad. ¡Confía en nosotros para todas tus necesidades de vidrio y espejo!
               </p>
             </div>
@@ -41,7 +51,7 @@ export function Inicio() {
                     href="/tip"
                     className=" hover:text-cyan-600  "
                   >
-                    Servicios
+                    Productos
                   </a></div>
                 <Divider orientation="vertical" />
                 <div>
@@ -75,37 +85,14 @@ export function Inicio() {
                         <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                           <img
                             alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                            src={colosal}
                             className="size-full object-cover"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
                             alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                            className="size-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                            className="size-full object-cover"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                            className="size-full object-cover"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                            src={puerta}
                             className="size-full object-cover"
                           />
                         </div>
@@ -114,14 +101,37 @@ export function Inicio() {
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
                             alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                            src={espejo3}
                             className="size-full object-cover"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
                             alt=""
-                            src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                            src={espejo}
+                            className="size-full object-cover"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            alt=""
+                            src={espejo2}
+                            className="size-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            alt=""
+                            src={luces}
+                            className="size-full object-cover"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            alt=""
+                            src={luces2}
                             className="size-full object-cover"
                           />
                         </div>
@@ -140,7 +150,7 @@ export function Inicio() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-cyan-400 sm:text-4xl">Nuestros Productos</h2>
-            <p className="mt-4 text-gray-500">
+            <p className="mt-4 text-default-400">
               Vidrio al Arte SAS ofrece una amplia gama de productos de vidrio decorativo y funcional, diseñados para aportar elegancia y estilo a cualquier espacio. Desde puertas y ventanas de vidrio templado hasta espejos personalizados y divisiones para oficinas, nuestros productos combinan calidad y diseño para satisfacer las necesidades de nuestros clientes.
             </p>
 
@@ -148,7 +158,7 @@ export function Inicio() {
               {features.map((feature) => (
                 <div key={feature.name} className="border-t border-gray-200 pt-4">
                   <dt className="font-medium text-cyan-600">{feature.name}</dt>
-                  <dd className="mt-2 text-sm text-gray-500">{feature.description}</dd>
+                  <dd className="mt-2 text-sm text-default-400">{feature.description}</dd>
                 </div>
               ))}
             </dl>
@@ -156,22 +166,22 @@ export function Inicio() {
           <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
             <img
               alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-              src={cocina3}
+              src={cocina1}
               className="rounded-lg bg-gray-100"
             />
             <img
               alt="Top down view of walnut card tray with embedded magnets and card groove."
-              src="https://tailwindui.com/plus/img/ecommerce-images/product-feature-03-detail-02.jpg"
+              src={cocina2}
               className="rounded-lg bg-gray-100"
             />
             <img
               alt="Side of walnut card tray with card groove and recessed card area."
-              src="https://tailwindui.com/plus/img/ecommerce-images/product-feature-03-detail-03.jpg"
+              src={cocina3}
               className="rounded-lg bg-gray-100"
             />
             <img
               alt="Walnut card tray filled with cards and card angled in dedicated groove."
-              src="https://tailwindui.com/plus/img/ecommerce-images/product-feature-03-detail-04.jpg"
+              src={cocina4}
               className="rounded-lg bg-gray-100"
             />
           </div>
