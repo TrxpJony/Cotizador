@@ -53,6 +53,7 @@ import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
 import EspejoRedondo from './pages/espejos/espejoRedondo/espejoRedondo';
+import { TiposAccesorios } from './pages/accesorios/tipos';
 
 
 export const AcmeLogo = () => {
@@ -69,7 +70,7 @@ function App() {
   const menuItems = [
     { name: "Inicio", path: "/" },
     { name: "Acerca de Nosotros", path: "/nosotros" },
-    { name: "Producots", path: "/productos" },
+    { name: "Productos", path: "/productos" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -123,8 +124,6 @@ function App() {
           <Route path="inicio" element={<Inicio />} />
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
-          <Route path="p2" element={<TiposEspejos />} />
-          <Route path="p2/espe1" element={<EspejoRedondo />} />
           <Route path='tipos/col' element={<Colosalpage/>}/>
           <Route path='tipos/col/cp1' element={<Colosal />} />
           <Route path='tipos/col/cp2' element={<Colosalxx />} />
@@ -168,6 +167,9 @@ function App() {
           <Route path='tipos/awa/awa4' element={<Awa5h/>} />
           <Route path='tipos/awa/awa5' element={<Awa6h/>} />
           <Route path='tipos' element={<Tipos/>}/>
+          <Route path="p2" element={<TiposEspejos />} />
+          <Route path="p2/espe1" element={<EspejoRedondo />} />
+          <Route path="p3" element={<TiposAccesorios />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
