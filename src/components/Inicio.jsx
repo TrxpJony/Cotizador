@@ -13,9 +13,8 @@ import { Divider } from "@nextui-org/divider";
 import '../css/colosal.css'; // Archivo CSS para estilos
 
 const links = [
-  { name: 'Productos', href: '/prod' },
+  { name: 'Productos', href: '/productos' },
   { name: 'Acerca de nosotros', href: '/nosotros' },
-  { name: 'Cotizador', href: '/tipos' },
 ]
 
 const stats = [
@@ -115,26 +114,26 @@ export function Inicio() {
                 <div>
                   <br />
                   <a
-                    href="/tip"
+                    href="/tipos"
                     className=" hover:text-cyan-600  "
                   >
-                    Productos
+                    Productos Vitral
                   </a></div>
                 <Divider orientation="vertical" />
                 <div>
                   <br />                   <a
-                    href="/nosotros"
+                    href="/p2"
                     className="hover:text-cyan-600 "
                   >
-                    Acerca de Nosotros
+                    Espejos
                   </a></div>
                 <Divider orientation="vertical" />
                 <div>
                   <br />                   <a
-                    href="/tipos"
+                    href="/productos"
                     className="hover:text-cyan-600 "
                   >
-                    Cotizador
+                    Todos los Productos
                   </a></div>
               </div>
             </div>

@@ -3,9 +3,9 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/categoria';
+const baseUrl = 'https://api-cotizador.vercel.app/Productos';
 
-export function Tipos() {
+export function Productos() {
   const [list, setList] = useState([]); // Datos de la API
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -56,9 +56,9 @@ export function Tipos() {
     <>
       <br />
       <div className="filter-frame">
-      <br />
+        <br />
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                Productos vitral
+                Productos
               </p>
         <br />
         <div className="flex justify-between items-center">
@@ -91,7 +91,7 @@ export function Tipos() {
               key={index}
               isPressable
               shadow="sm"
-              onPress={() => navigate(`${item.id}`)} 
+              onPress={() => navigate(`/${item.id}`)} // Update the navigation path
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">

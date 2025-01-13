@@ -98,7 +98,10 @@
     "empaqueTairona": 1500,
     "empaqueSid": 1500,
     "empaqueAwa":2000,
-    "felpacol": 400
+    "felpacol": 400,
+
+    "espejoRedondo": 80000,
+    "pulido":4000
   },
   "accesorios": {
     "kitCierrecol": 22000,

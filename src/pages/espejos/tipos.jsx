@@ -3,9 +3,9 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/categoria';
+const baseUrl = 'https://api-cotizador.vercel.app/tiposEspejos';
 
-export function Tipos() {
+export function TiposEspejos() {
   const [list, setList] = useState([]); // Datos de la API
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -58,7 +58,7 @@ export function Tipos() {
       <div className="filter-frame">
       <br />
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                Productos vitral
+                Espejos
               </p>
         <br />
         <div className="flex justify-between items-center">

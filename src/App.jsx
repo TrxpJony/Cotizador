@@ -3,16 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Tipos } from './pages/tipos';
 import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
-} from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link,} from "@nextui-org/react";
 import logo from '../src/img/logo.png'
 import Colosal from './pages/vidrios/colosalpc26/Colosal';
 import Astral17 from './pages/vidrios/astral17/Astral17';
@@ -59,6 +50,10 @@ import Awa6h from './pages/vidrios/awa/awa5h';
 import { Inicio } from './components/Inicio';
 import { Nosotros } from './components/nosotros';
 
+import { Productos } from './components/productos';
+import { TiposEspejos } from './pages/espejos/tipos';
+import EspejoRedondo from './pages/espejos/espejoRedondo/espejoRedondo';
+
 
 export const AcmeLogo = () => {
   return (
@@ -74,7 +69,7 @@ function App() {
   const menuItems = [
     { name: "Inicio", path: "/" },
     { name: "Acerca de Nosotros", path: "/nosotros" },
-    { name: "Cotizador", path: "/tipos" },
+    { name: "Producots", path: "/productos" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -127,6 +122,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="inicio" element={<Inicio />} />
           <Route path="nosotros" element={<Nosotros />} />
+          <Route path="productos" element={<Productos />} />
+          <Route path="p2" element={<TiposEspejos />} />
+          <Route path="p2/espe1" element={<EspejoRedondo />} />
           <Route path='tipos/col' element={<Colosalpage/>}/>
           <Route path='tipos/col/cp1' element={<Colosal />} />
           <Route path='tipos/col/cp2' element={<Colosalxx />} />
