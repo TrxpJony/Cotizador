@@ -111,6 +111,15 @@ export function TiposAccesorios() {
             </Card>
           ))}
         </div>
+                {/* Botón Regresar */}
+                <div className="flex justify-end mt-6">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            Regresar
+         </button>
+          </div>
       </div>
       <br />
     </>

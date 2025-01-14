@@ -1,4 +1,3 @@
-
 import '../css/colosal.css'; // Archivo CSS para estilos
 import { GlobeAmericasIcon, EyeIcon } from '@heroicons/react/20/solid'
 import mision from '../img/img_nosotros/vaperso.png'
@@ -10,15 +9,15 @@ const features = [
   {
     name: 'Misión.',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Aprovechar la capacidad organizativa y tecnológica con mano de obra calificada, con la que podamos garantizar un producto de alta calidad acorde a las necesidades de nuestros clientes y a precios competitivos.',
     icon: GlobeAmericasIcon,
   },
   {
     name: 'Visión.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    description: 'En Vidrio al Arte SAS, buscamos ser líderes en el mercado, ofreciendo productos de vidrio y de acero de gran calidad con el reconocimiento de ser la empresa más confiable en el servicio, innovación, calidad, precio y puntualidad para la satisfacción de nuestros clientes.',
     icon: EyeIcon,
   },
-]
+];
 export function Nosotros() {
 
   return (

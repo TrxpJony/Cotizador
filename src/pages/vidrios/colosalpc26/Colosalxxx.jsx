@@ -530,7 +530,6 @@ const Colosalxxx = () => {
 
           {/* Botón Regresar */}
           <div className="flex justify-end mt-6">
-            {/* Botón Agregar Puerta */}
             <div className="flex justify-center mb-6">
               <button
                 onClick={() => navigate(-1)}

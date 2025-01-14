@@ -54,6 +54,7 @@ import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
 import EspejoRedondo from './pages/espejos/espejoRedondo/espejoRedondo';
 import { TiposAccesorios } from './pages/accesorios/tipos';
+import { Servicios } from './components/servicios';
 
 
 export const AcmeLogo = () => {
@@ -70,7 +71,7 @@ function App() {
   const menuItems = [
     { name: "Inicio", path: "/" },
     { name: "Acerca de Nosotros", path: "/nosotros" },
-    { name: "Servicios", path: "/productos" },
+    { name: "Servicios", path: "/servicios" },
     { name: "Productos", path: "/productos" },
   ];
 
@@ -125,6 +126,7 @@ function App() {
           <Route path="inicio" element={<Inicio />} />
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
+          <Route path="servicios" element={<Servicios />} />
           <Route path='tipos/col' element={<Colosalpage/>}/>
           <Route path='tipos/col/cp1' element={<Colosal />} />
           <Route path='tipos/col/cp2' element={<Colosalxx />} />

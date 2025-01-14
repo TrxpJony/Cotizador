@@ -11,6 +11,7 @@
     "start": "json-server --watch src/api/db.json --port 3001"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@nextui-org/react": "^2.6.8",
     "@tailwindcss/forms": "^0.5.9",
