@@ -70,6 +70,7 @@ function App() {
   const menuItems = [
     { name: "Inicio", path: "/" },
     { name: "Acerca de Nosotros", path: "/nosotros" },
+    { name: "Servicios", path: "/productos" },
     { name: "Productos", path: "/productos" },
   ];
 
