@@ -62,28 +62,7 @@ export function Bisagras() {
     };
 
     return (
-        <><div className="flex justify-between items-center">
-            {/* Barra de búsqueda */}
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => filterBySearchTerm(e.target.value)}
-                placeholder="Buscar Categoria"
-                className="peer block w-full sm:w-80 border-b-2 border-gray-400 bg-transparent px-3 py-2 outline-none focus:border-cyan-500 focus:ring-0 focus:placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:focus:border-cyan-500"
-            />
-
-            {/* Componente de paginación */}
-            <div className="flex items-center ">
-                <Pagination showControls
-                    className="text-right mx-2"
-                    initialPage={1}
-                    page={currentPage} // Sincroniza el estado de la página con el componente
-                    total={Math.ceil(filteredList.length / itemsPerPage)}
-                    onChange={(page) => setCurrentPage(page)}
-                    color="primary"
-                />
-            </div>
-        </div>
+        <>
             <br />
             <div className="filter-frame">
                 <br />
