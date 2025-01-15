@@ -58,7 +58,8 @@ import { Servicios } from './components/servicios';
 import { Batientes } from './pages/accesorios/batientes/batientes';
 import { Bisagras } from './pages/accesorios/bisagras/bisagras';
 import { Divisiones } from './pages/accesorios/divisiones/divisiones';
-
+import { Cerraduras } from './pages/accesorios/cerraduras/cerraduras';
+import { Pasadores } from './pages/accesorios/pasadores/pasadores';
 
 export const AcmeLogo = () => {
   return (
@@ -179,6 +180,8 @@ function App() {
           <Route path="p3/ac1" element={<Batientes />} />
           <Route path="p3/ac2" element={<Bisagras />} />
           <Route path="p3/ac3" element={<Divisiones />} />
+          <Route path="p3/ac4" element={<Pasadores />} />
+          <Route path="p3/ac5" element={<Cerraduras />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
