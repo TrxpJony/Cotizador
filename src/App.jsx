@@ -56,6 +56,8 @@ import EspejoRedondo from './pages/espejos/espejoRedondo/espejoRedondo';
 import { TiposAccesorios } from './pages/accesorios/tipos';
 import { Servicios } from './components/servicios';
 import { Batientes } from './pages/accesorios/batientes/batientes';
+import { Bisagras } from './pages/accesorios/bisagras/bisagras';
+import { Divisiones } from './pages/accesorios/divisiones/divisiones';
 
 
 export const AcmeLogo = () => {
@@ -175,6 +177,8 @@ function App() {
           <Route path="p2/espe1" element={<EspejoRedondo />} />
           <Route path="p3" element={<TiposAccesorios />} />
           <Route path="p3/ac1" element={<Batientes />} />
+          <Route path="p3/ac2" element={<Bisagras />} />
+          <Route path="p3/ac3" element={<Divisiones />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">

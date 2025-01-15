@@ -4,9 +4,9 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/batientes';
+const baseUrl = 'https://api-cotizador.vercel.app/bisagras';
 
-export function Batientes() {
+export function Bisagras() {
     const [list, setList] = useState([]); // Datos de la API
     const [filteredList, setFilteredList] = useState([]); // Datos filtrados
     const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -62,12 +62,33 @@ export function Batientes() {
     };
 
     return (
-        <>
+        <><div className="flex justify-between items-center">
+            {/* Barra de búsqueda */}
+            <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => filterBySearchTerm(e.target.value)}
+                placeholder="Buscar Categoria"
+                className="peer block w-full sm:w-80 border-b-2 border-gray-400 bg-transparent px-3 py-2 outline-none focus:border-cyan-500 focus:ring-0 focus:placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:focus:border-cyan-500"
+            />
+
+            {/* Componente de paginación */}
+            <div className="flex items-center ">
+                <Pagination showControls
+                    className="text-right mx-2"
+                    initialPage={1}
+                    page={currentPage} // Sincroniza el estado de la página con el componente
+                    total={Math.ceil(filteredList.length / itemsPerPage)}
+                    onChange={(page) => setCurrentPage(page)}
+                    color="primary"
+                />
+            </div>
+        </div>
             <br />
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Sistemas Batientes
+                    Bisagras Pivotadas
                 </p>
                 <br />
                 <div className="flex justify-between items-center">

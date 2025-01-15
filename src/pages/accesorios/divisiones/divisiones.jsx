@@ -1,12 +1,11 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/batientes';
+const baseUrl = 'https://api-cotizador.vercel.app/divisiones';
 
-export function Batientes() {
+export function Divisiones() {
     const [list, setList] = useState([]); // Datos de la API
     const [filteredList, setFilteredList] = useState([]); // Datos filtrados
     const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -67,7 +66,7 @@ export function Batientes() {
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Sistemas Batientes
+                    Divisiones
                 </p>
                 <br />
                 <div className="flex justify-between items-center">
@@ -115,7 +114,7 @@ export function Batientes() {
                                     height="250px"
                                 />
                             </CardBody>
-                            <b className="overflow-hidden p-2">{item.title}</b>
+                            <b  className="overflow-hidden p-2">{item.title}</b>
                             <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
                                 <p className="text-sm text-gray-900 text-center">{item.description}</p>
                                 <p className="text-sm text-default-400 text-center">Color: {item.color}</p>
@@ -125,7 +124,7 @@ export function Batientes() {
                     ))}
                 </div>
                 {/* Botón Regresar */}
-                <div className="flex justify-end mt-6">
+                <div className="flex justify-between mt-6">
                     <button
                         onClick={() => navigate(-1)}
                         className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
@@ -135,15 +134,15 @@ export function Batientes() {
                 </div>
                 <br />
                 <div className="flex items-center ">
-                    <Pagination showControls
-                        className="text-right mx-2"
-                        initialPage={1}
-                        page={currentPage} // Sincroniza el estado de la página con el componente
-                        total={Math.ceil(filteredList.length / itemsPerPage)}
-                        onChange={(page) => setCurrentPage(page)}
-                        color="primary"
-                    />
-                </div>
+                        <Pagination showControls
+                            className="text-right mx-2"
+                            initialPage={1}
+                            page={currentPage} // Sincroniza el estado de la página con el componente
+                            total={Math.ceil(filteredList.length / itemsPerPage)}
+                            onChange={(page) => setCurrentPage(page)}
+                            color="primary"
+                        />
+                    </div>         
             </div>
             <br />
             {/* Modal */}
@@ -168,7 +167,7 @@ export function Batientes() {
                                     <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio}</b>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button variant="light" onPress={onClose}>
+                                    <Button  variant="light" onPress={onClose}>
                                         Cerrar
                                     </Button>
                                 </ModalFooter>
