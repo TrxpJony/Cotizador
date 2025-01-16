@@ -67,7 +67,7 @@ import { Chupas } from './pages/accesorios/chupas/chupas';
 import { Deslizantes } from './pages/accesorios/deslizantes/Deslizantes';
 import { Lijas } from './pages/accesorios/lijas/lijas';
 import { Discos } from './pages/accesorios/discos/discos';
-import { Maquina } from './pages/accesorios/maquina/Maquina';
+import { Maquina } from './pages/accesorios/maquina/maquinavpp';
 
 export const AcmeLogo = () => {
   return (
