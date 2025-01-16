@@ -63,6 +63,7 @@ import { Pasadores } from './pages/accesorios/pasadores/pasadores';
 import { Soportes } from './pages/accesorios/soportes/soportes';
 import { Brocas } from './pages/accesorios/brocas/brocas';
 import { Manijas } from './pages/accesorios/manijas/manijas';
+import { Chupas } from './pages/accesorios/chupas/chupas';
 
 export const AcmeLogo = () => {
   return (
@@ -188,6 +189,7 @@ function App() {
           <Route path="p3/ac6" element={<Soportes />} />
           <Route path="p3/ac7" element={<Brocas />} />
           <Route path="p3/ac8" element={<Manijas />} />
+          <Route path="p3/ac9" element={<Chupas />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
