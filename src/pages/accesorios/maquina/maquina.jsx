@@ -66,7 +66,7 @@ export function Maquina() {
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Maquina de Disco Amarillo
+                    Maquina de Disco Amarillo rojo
                 </p>
                 <br />
                 <div className="flex justify-between items-center">
