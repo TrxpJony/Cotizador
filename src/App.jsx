@@ -197,7 +197,7 @@ function App() {
           <Route path="p3/ac10" element={<Deslizantes />} />
           <Route path="p3/ac11" element={<Lijas />} />
           <Route path="p3/ac12" element={<Discos />} />
-          <Route path="p3/ac13" element={<Maquina />} />
+          <Route path="p3/ac13" element={<Maquina/>} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
