@@ -71,7 +71,8 @@ import { Maquina } from './pages/accesorios/maquina/maquinavpp';
 import { Herramientas } from './pages/accesorios/herramientas/herramientas';
 import { Fachadas } from './pages/accesorios/fachadas/fachadas';
 import { Adhesivos } from './pages/accesorios/adhesivos/adhesivos';
-import { Fotocurados } from './pages/accesorios/fotocurado/fotocurado';
+import { Fotocurados } from './pages/accesorios/fotocurados/fotocurados';
+
 
 
 export const AcmeLogo = () => {
