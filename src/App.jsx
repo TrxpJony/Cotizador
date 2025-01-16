@@ -69,6 +69,7 @@ import { Lijas } from './pages/accesorios/lijas/lijas';
 import { Discos } from './pages/accesorios/discos/discos';
 import { Maquina } from './pages/accesorios/maquina/maquinavpp';
 import { Herramientas } from './pages/accesorios/herramientas/herramientas';
+import { Fachadas } from './pages/accesorios/fachadas/fachadas';
 
 export const AcmeLogo = () => {
   return (
@@ -200,6 +201,7 @@ function App() {
           <Route path="p3/ac12" element={<Discos />} />
           <Route path="p3/ac13" element={<Maquina/>} />
           <Route path="p3/ac14" element={<Herramientas/>} />
+          <Route path="p3/ac15" element={<Fachadas/>} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
