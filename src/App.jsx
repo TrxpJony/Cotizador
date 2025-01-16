@@ -195,7 +195,7 @@ function App() {
         </span>
         <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
           <li>
-            <a href="#" className="hover:underline me-4 md:me-6">About</a>
+            <a href="#" className="hover:underline me-4 md:me-6">Nosotros</a>
           </li>
           <li>
             <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
@@ -204,7 +204,7 @@ function App() {
             <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
           </li>
           <li>
-            <a href="#" className="hover:underline">Contact</a>
+            <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" className="hover:underline">contacto</a>
           </li>
         </ul>
       </div>
