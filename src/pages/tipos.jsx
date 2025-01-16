@@ -86,7 +86,7 @@ export function Tipos() {
       </div>
       <br />
       <div className="card-frame">
-        <div className="gap-5 grid grid-cols-2 sm:grid-cols-5">
+        <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
           {paginatedList.map((item, index) => (
             <Card
               key={index}
@@ -98,12 +98,12 @@ export function Tipos() {
               <CardBody className="overflow-hidden p-4">
                 <Image
                   alt={item.title}
-                  className="w-full object-cover h-[200px] rounded-t-lg"
+                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
                   radius="lg"
                   shadow="sm"
                   src={item.img}
                   width="100%"
-                  height="250px"
+                  height="auto"
                 />
               </CardBody>
               <CardFooter className="text-small justify-between p-2">
@@ -123,15 +123,15 @@ export function Tipos() {
         </div>
         <br />
         <div className="flex items-center ">
-            <Pagination showControls
-              className="text-right mx-2"
-              initialPage={1}
-              page={currentPage} // Sincroniza el estado de la página con el componente
-              total={Math.ceil(filteredList.length / itemsPerPage)}
-              onChange={(page) => setCurrentPage(page)}
-              color="primary"
-            />
-          </div>
+          <Pagination showControls
+            className="text-right mx-2"
+            initialPage={1}
+            page={currentPage} // Sincroniza el estado de la página con el componente
+            total={Math.ceil(filteredList.length / itemsPerPage)}
+            onChange={(page) => setCurrentPage(page)}
+            color="primary"
+          />
+        </div>
       </div>
       <br />
 

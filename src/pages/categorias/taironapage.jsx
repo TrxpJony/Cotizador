@@ -23,56 +23,56 @@ export function TaironaPage() {
 
   return (
     <>
-    <br />
-    <div className="filter-frame-page">
-  <div className="flex justify-between items-center">
-    <strong>
-      <h1 className="text-[1.8em] text-[#00bcd4] mt-2">SISTEMA TAIRONA TIPOLOGÍAS</h1>
-    </strong>
-  </div>
-</div>
+      <br />
+      <div className="filter-frame-page">
+        <div className="flex justify-between items-center">
+          <strong>
+            <h1 className="text-[1.8em] text-[#00bcd4] mt-2">SISTEMA TAIRONA TIPOLOGÍAS</h1>
+          </strong>
+        </div>
+      </div>
 
-    <br />
-    <div className="card-frame">
-      <div className="gap-5 grid grid-cols-2 sm:grid-cols-5">
-        {filteredList.map((item, index) => (
-          <Card
-          key={index}
-          isPressable
-          shadow="sm"
-          onPress={() => navigate(`${item.id}`)}  // Redirige usando el ID
-          className="nextui-card"
-        >
-          <CardBody className="overflow-hidden p-4">
-            <Image
-              alt={item.title}
-              className="w-full object-cover h-[200px] rounded-t-lg"
-              radius="lg"
+      <br />
+      <div className="card-frame">
+        <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          {filteredList.map((item, index) => (
+            <Card
+              key={index}
+              isPressable
               shadow="sm"
-              src={item.img}
-              width="100%"  // Esto asegura que la imagen se ajuste al ancho completo del contenedor
-              height="200px"  // Establece una altura fija para todas las imágenes
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
-            <p className="text-default-500" >{item.tipo}</p>
-          </CardFooter>
-        </Card>
-        
-        ))}
-        
+              onPress={() => navigate(`${item.id}`)}  // Redirige usando el ID
+              className="nextui-card"
+            >
+              <CardBody className="overflow-hidden p-4">
+                <Image
+                  alt={item.title}
+                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                  radius="lg"
+                  shadow="sm"
+                  src={item.img}
+                  width="100%"
+                  height="auto"
+                />
+              </CardBody>
+              <CardFooter className="text-small justify-between">
+                <b>{item.title}</b>
+                <p className="text-default-500" >{item.tipo}</p>
+              </CardFooter>
+            </Card>
+
+          ))}
+
+        </div>
+        <br />
+        {/* Botón para regresar */}
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        >
+          Regresar
+        </button>
       </div>
       <br />
-      {/* Botón para regresar */}
-      <button 
-          onClick={() => navigate(-1)} 
-          className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-          >
-            Regresar
-         </button>
-    </div>
-    <br />
     </>
   );
 }
