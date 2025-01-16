@@ -206,7 +206,7 @@ function App() {
           <Route path="p3/ac14" element={<Herramientas/>} />
           <Route path="p3/ac15" element={<Fachadas/>} />
           <Route path="p3/ac16" element={<Adhesivos/>} />
-          <Route path="p3/ac16" element={<Fotocurados/>} />
+          <Route path="p3/ac17" element={<Fotocurados/>} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
