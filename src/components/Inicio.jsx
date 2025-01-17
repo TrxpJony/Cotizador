@@ -117,23 +117,23 @@ export function Inicio() {
                 <div>
                   <br />
                   <a
-                    href="/tipos"
+                    href="/Productos"
                     className=" hover:text-cyan-600  "
                   >
-                    Productos Vitral
-                  </a></div>
-                <Divider orientation="vertical" />
-                <div>
-                  <br />                   <a
-                    href="/p2"
-                    className="hover:text-cyan-600 "
-                  >
-                    Espejos
+                    Productos
                   </a></div>
                 <Divider orientation="vertical" />
                 <div>
                   <br />                   <a
                     href="/servicios"
+                    className="hover:text-cyan-600 "
+                  >
+                    Servicios
+                  </a></div>
+                <Divider orientation="vertical" />
+                <div>
+                  <br />                   <a
+                    href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0"
                     className="hover:text-cyan-600 "
                   >
                     Mas Información

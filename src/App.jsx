@@ -79,6 +79,9 @@ import { Luzled12 } from './pages/skyleds/luzled12/luzled12';
 import Login from './admin/login';
 import { Cotizador } from './components/cotizar';
 import { Vitral } from './pages/Vitral';
+import { CatalogoSkylesd } from './pages/skyleds/skyleds';
+import { Luzled12vista } from './pages/skyleds/luzled12/luzled12vista';
+import { Luzled1101vista } from './pages/skyleds/luzled110/luzled110vista';
 
 const cookies = new Cookies();
 
@@ -106,13 +109,13 @@ function App() {
     cookies.remove('rol');
     window.location.href = '/login'; // Redirigir a la página de login o cualquier otra página
   };
-  
+
   const menuItems = [
     { name: "Inicio", path: "/" },
-    { name: "Acerca de Nosotros", path: "/nosotros" },
+    { name: "Sobre Nosotros", path: "/nosotros" },
     { name: "Servicios", path: "/servicios" },
     { name: "Productos", path: "/productos" },
-    { name: userId ? "Cotizar" : "Login", path: userId ? "/cotizar" : "/login" }, // Mostrar según sesión
+    { name: userId ? "Cotizar" : "Cotizar", path: userId ? "/cotizar" : "/login" }, // Mostrar según sesión
   ];
   if (userId) {
     menuItems.push({
@@ -128,65 +131,62 @@ function App() {
 
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen}>
-  <NavbarContent>
-    <NavbarMenuToggle
-      aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-      className="sm:hidden"
-    />
-    <NavbarBrand>
-      <AcmeLogo />
-      <p className="font-bold text-inherit"></p>
-    </NavbarBrand>
-  </NavbarContent>
-
-  <NavbarContent className="hidden sm:flex gap-4" justify="center">
-    {menuItems.map((item) => (
-      <NavbarItem key={item.name}>
-        {item.onClick ? (
-          <button
-            onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-            className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-          >
-            {item.name}
-          </button>
-        ) : (
-          <Link
-            className={isActive(item.path) ? "text-cyan-600" : "text-foreground"}
-            href={item.path}
-          >
-            {item.name}
-          </Link>
-        )}
-      </NavbarItem>
-    ))}
-  </NavbarContent>
-
-  <NavbarContent justify="end">
-  </NavbarContent>
-
-  <NavbarMenu>
-    {menuItems.map((item, index) => (
-      <NavbarMenuItem key={`${item.name}-${index}`}>
-        {item.onClick ? (
-          <button
-            onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-            className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-          >
-            {item.name}
-          </button>
-        ) : (
-          <Link
-            className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-            href={item.path}
-            size="lg"
-          >
-            {item.name}
-          </Link>
-        )}
-      </NavbarMenuItem>
-    ))}
-  </NavbarMenu>
-</Navbar>
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <AcmeLogo />
+            <p className="font-bold text-inherit"></p>
+          </NavbarBrand>
+        </NavbarContent>
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.name}>
+              {item.onClick ? (
+                <button
+                  onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
+                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  className={isActive(item.path) ? "text-cyan-600" : "text-foreground"}
+                  href={item.path}
+                >
+                  {item.name}
+                </Link>
+              )}
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+        <NavbarContent justify="end">
+        </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              {item.onClick ? (
+                <button
+                  onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
+                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
+                >
+                  {item.name}
+                </button>
+              ) : (
+                <Link
+                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
+                  href={item.path}
+                  size="lg"
+                >
+                  {item.name}
+                </Link>
+              )}
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </Navbar>
 
 
       <div className="fondo  min-h-screen container-app">
@@ -201,174 +201,48 @@ function App() {
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
           <Route path="servicios" element={<Servicios />} />
-          <Route
-          path="tipos/col"
-          element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/col/cp1"
-          element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/col/cp2"
-          element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/col/cp3"
-          element={<ProtectedRoute element={<Colosalxxx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/col/cp4"
-          element={<ProtectedRoute element={<Colosaloxxo />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast"
-          element={<ProtectedRoute element={<Astral20page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast/a201"
-          element={<ProtectedRoute element={<Astral20 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast/a202"
-          element={<ProtectedRoute element={<Astral20xx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast/a203"
-          element={<ProtectedRoute element={<Astral20oxxo />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast/a204"
-          element={<ProtectedRoute element={<Astral20xox />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast17"
-          element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast17/a171"
-          element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/ast17/a172"
-          element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/c345"
-          element={<ProtectedRoute element={<Colosal345page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/c345/c3451"
-          element={<ProtectedRoute element={<Colosal3 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/c345/c3452"
-          element={<ProtectedRoute element={<Colosal3xxx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/c345/c3453"
-          element={<ProtectedRoute element={<Colosal3oxxo />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/744"
-          element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/744/s741"
-          element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/8025"
-          element={<ProtectedRoute element={<Sistema8025page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/8025/s80251"
-          element={<ProtectedRoute element={<Sistema8025 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/s3890"
-          element={<ProtectedRoute element={<Sistema3890page />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/s3890/s38901"
-          element={<ProtectedRoute element={<Sistema3890 />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/kim"
-          element={<ProtectedRoute element={<Kimbayapage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/kim/kim1"
-          element={<ProtectedRoute element={<Kymbaya />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/kim/kim2"
-          element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/kim/kim3"
-          element={<ProtectedRoute element={<Kimbayaoxxo />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/zin"
-          element={<ProtectedRoute element={<Zinupage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/zin/zin1"
-          element={<ProtectedRoute element={<Zinux />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/zin/zin2"
-          element={<ProtectedRoute element={<Zinuox />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/sid"
-          element={<ProtectedRoute element={<Sideralpage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/sid/sid1"
-          element={<ProtectedRoute element={<Sideralx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/sid/sid2"
-          element={<ProtectedRoute element={<Sideralxo />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/tai"
-          element={<ProtectedRoute element={<TaironaPage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/tai/tai1"
-          element={<ProtectedRoute element={<Taironax />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/tai/tai2"
-          element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa"
-          element={<ProtectedRoute element={<AwaPage />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa/awa1"
-          element={<ProtectedRoute element={<Awa2h />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa/awa2"
-          element={<ProtectedRoute element={<Awa3h />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa/awa3"
-          element={<ProtectedRoute element={<Awa4h />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa/awa4"
-          element={<ProtectedRoute element={<Awa5h />} allowedRole="cotizador" />}
-        />
-        <Route
-          path="tipos/awa/awa5"
-          element={<ProtectedRoute element={<Awa6h />} allowedRole="cotizador" />}
-        />
+          <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
+          <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
+          <Route path="tipos/col/cp2" element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />} />
+          <Route path="tipos/col/cp3" element={<ProtectedRoute element={<Colosalxxx />} allowedRole="cotizador" />} />
+          <Route path="tipos/col/cp4" element={<ProtectedRoute element={<Colosaloxxo />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast" element={<ProtectedRoute element={<Astral20page />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast/a201" element={<ProtectedRoute element={<Astral20 />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast/a202" element={<ProtectedRoute element={<Astral20xx />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast/a203" element={<ProtectedRoute element={<Astral20oxxo />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast/a204" element={<ProtectedRoute element={<Astral20xox />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast17" element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast17/a171" element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />} />
+          <Route path="tipos/ast17/a172" element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />} />
+          <Route path="tipos/c345" element={<ProtectedRoute element={<Colosal345page />} allowedRole="cotizador" />} />
+          <Route path="tipos/c345/c3451" element={<ProtectedRoute element={<Colosal3 />} allowedRole="cotizador" />} />
+          <Route path="tipos/c345/c3452" element={<ProtectedRoute element={<Colosal3xxx />} allowedRole="cotizador" />} />
+          <Route path="tipos/c345/c3453" element={<ProtectedRoute element={<Colosal3oxxo />} allowedRole="cotizador" />} />
+          <Route path="tipos/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />
+          <Route path="tipos/744/s741" element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />} />
+          <Route path="tipos/8025" element={<ProtectedRoute element={<Sistema8025page />} allowedRole="cotizador" />} />
+          <Route path="tipos/8025/s80251" element={<ProtectedRoute element={<Sistema8025 />} allowedRole="cotizador" />} />
+          <Route path="tipos/s3890" element={<ProtectedRoute element={<Sistema3890page />} allowedRole="cotizador" />} />
+          <Route path="tipos/s3890/s38901" element={<ProtectedRoute element={<Sistema3890 />} allowedRole="cotizador" />} />
+          <Route path="tipos/kim" element={<ProtectedRoute element={<Kimbayapage />} allowedRole="cotizador" />} />
+          <Route path="tipos/kim/kim1" element={<ProtectedRoute element={<Kymbaya />} allowedRole="cotizador" />} />
+          <Route path="tipos/kim/kim2" element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole="cotizador" />} />
+          <Route path="tipos/kim/kim3" element={<ProtectedRoute element={<Kimbayaoxxo />} allowedRole="cotizador" />} />
+          <Route path="tipos/zin" element={<ProtectedRoute element={<Zinupage />} allowedRole="cotizador" />} />
+          <Route path="tipos/zin/zin1" element={<ProtectedRoute element={<Zinux />} allowedRole="cotizador" />} />
+          <Route path="tipos/zin/zin2" element={<ProtectedRoute element={<Zinuox />} allowedRole="cotizador" />} />
+          <Route path="tipos/sid" element={<ProtectedRoute element={<Sideralpage />} allowedRole="cotizador" />} />
+          <Route path="tipos/sid/sid1" element={<ProtectedRoute element={<Sideralx />} allowedRole="cotizador" />} />
+          <Route path="tipos/sid/sid2" element={<ProtectedRoute element={<Sideralxo />} allowedRole="cotizador" />} />
+          <Route path="tipos/tai" element={<ProtectedRoute element={<TaironaPage />} allowedRole="cotizador" />} />
+          <Route path="tipos/tai/tai1" element={<ProtectedRoute element={<Taironax />} allowedRole="cotizador" />} />
+          <Route path="tipos/tai/tai2" element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa" element={<ProtectedRoute element={<AwaPage />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa/awa1" element={<ProtectedRoute element={<Awa2h />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa/awa2" element={<ProtectedRoute element={<Awa3h />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa/awa3" element={<ProtectedRoute element={<Awa4h />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa/awa4" element={<ProtectedRoute element={<Awa5h />} allowedRole="cotizador" />} />
+          <Route path="tipos/awa/awa5" element={<ProtectedRoute element={<Awa6h />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
           <Route path='vitral' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
@@ -392,6 +266,9 @@ function App() {
           <Route path="p3/ac16" element={<Adhesivos />} />
           <Route path="p3/ac17" element={<Fotocurados />} />
           <Route path="p4" element={<TiposSkylesd />} />
+          <Route path="skyleds" element={<CatalogoSkylesd />} />
+          <Route path="led12" element={<Luzled12vista />} />
+          <Route path="led110" element={<Luzled1101vista />} />
           <Route path="p4/sk1" element={<Luzled1101 />} />
           <Route path="p4/sk2" element={<Luzled12 />} />
         </Routes>
@@ -419,6 +296,7 @@ function App() {
       </footer>
       <br />
     </>
+    
   )
 }
 
