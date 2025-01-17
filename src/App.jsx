@@ -77,7 +77,7 @@ import { TiposSkylesd } from './pages/skyleds/tipos';
 import { Luzled1101 } from './pages/skyleds/luzled110/luzled110';
 import { Luzled12 } from './pages/skyleds/luzled12/luzled12';
 import Login from './admin/login';
-import { Cotizador } from './components/Cotizador';
+import { Cotizador } from './components/cotizar';
 import { Vitral } from './pages/Vitral';
 
 const cookies = new Cookies();
