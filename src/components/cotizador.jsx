@@ -3,9 +3,9 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/catalogo';
+const baseUrl = 'https://api-cotizador.vercel.app/Productos';
 
-export function Productos() {
+export function Cotizador() {
   const [list, setList] = useState([]); // Datos de la API
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -13,21 +13,23 @@ export function Productos() {
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(baseUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && Array.isArray(data)) {
-          setList(data);
-          setFilteredList(data);
-        } else {
-          console.error("La respuesta de la API no es un array válido.");
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+   useEffect(() => {
+          fetch(baseUrl)
+              .then((response) => response.json())
+              .then((data) => {
+                  if (data && Array.isArray(data)) {
+                      // Filtrar los datos para que solo se muestren los de categoria ""
+                      const categoriaData = data.filter(item => item.tipo?.toLowerCase() === 'cotizar');
+                      setList(categoriaData);
+                      setFilteredList(categoriaData);
+                  } else {
+                      console.error("La respuesta de la API no es un array válido.");
+                  }
+              })
+              .catch((error) => {
+                  console.error('Error fetching data:', error);
+              });
+      }, []);
 
   // Filtra los datos según el término de búsqueda
   const filterBySearchTerm = (term) => {
