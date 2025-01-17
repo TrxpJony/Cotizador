@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/tiposAccesorios';
+const baseUrl = 'https://api-cotizador.vercel.app/categoria';
 
 export function TiposAccesorios() {
   const [list, setList] = useState([]); // Datos de la API
@@ -18,8 +18,10 @@ export function TiposAccesorios() {
       .then((response) => response.json())
       .then((data) => {
         if (data && Array.isArray(data)) {
-          setList(data);
-          setFilteredList(data);
+          // Filtrar los datos para que solo se muestren los de categoria ""
+          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'accesorios');
+          setList(categoriaData);
+          setFilteredList(categoriaData);
         } else {
           console.error("La respuesta de la API no es un array válido.");
         }

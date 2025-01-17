@@ -18,8 +18,10 @@ export function Tipos() {
       .then((response) => response.json())
       .then((data) => {
         if (data && Array.isArray(data)) {
-          setList(data);
-          setFilteredList(data);
+          // Filtrar los datos para que solo se muestren los de categoria ""
+          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'vitral');
+          setList(categoriaData);
+          setFilteredList(categoriaData);
         } else {
           console.error("La respuesta de la API no es un array válido.");
         }

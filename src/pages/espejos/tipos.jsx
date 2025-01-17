@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/tiposEspejos';
+const baseUrl = 'https://api-cotizador.vercel.app/categoria';
 
 export function TiposEspejos() {
   const [list, setList] = useState([]); // Datos de la API
@@ -18,8 +18,10 @@ export function TiposEspejos() {
       .then((response) => response.json())
       .then((data) => {
         if (data && Array.isArray(data)) {
-          setList(data);
-          setFilteredList(data);
+          // Filtrar los datos para que solo se muestren los de categoria ""
+          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'espejos');
+          setList(categoriaData);
+          setFilteredList(categoriaData);
         } else {
           console.error("La respuesta de la API no es un array válido.");
         }
