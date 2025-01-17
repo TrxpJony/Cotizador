@@ -73,6 +73,7 @@ import { Fachadas } from './pages/accesorios/fachadas/fachadas';
 import { Adhesivos } from './pages/accesorios/adhesivos/adhesivos';
 import { Fotocurados } from './pages/accesorios/fotocurados/fotocurados';
 import { TiposSkylesd } from './pages/skyleds/tipos';
+import { Luzled1101 } from './pages/skyleds/luzled110/luzled110';
 
 
 
@@ -210,6 +211,7 @@ function App() {
           <Route path="p3/ac16" element={<Adhesivos/>} />
           <Route path="p3/ac17" element={<Fotocurados/>} />
           <Route path="p4" element={<TiposSkylesd />} />
+          <Route path="p4/sk1" element={<Luzled1101 />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
