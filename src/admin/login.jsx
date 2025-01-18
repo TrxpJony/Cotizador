@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid'
 
 const cookies = new Cookies();
 const baseUrl = 'https://api-cotizador.vercel.app/usuarios';
@@ -10,31 +11,26 @@ const baseUrl = 'https://api-cotizador.vercel.app/usuarios';
 function Login() {
   const [usuario, setUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
+  const [mostrarContraseña, setMostrarContraseña] = useState(false); // Estado para manejar la visibilidad
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-  
     try {
       const response = await fetch(baseUrl);
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
-  
       const data = await response.json();
-  
       const user = data.find(
         (u) => u.usuario === usuario && u.contraseña === contraseña
       );
-  
       if (user) {
-        // Guardar cookies
         cookies.set('id', user.id, { path: '/' });
         cookies.set('usuario', user.usuario, { path: '/' });
-        cookies.set('rol', user.rol, { path: '/' }); // Guardar rol
-        // Redirigir al usuario
+        cookies.set('rol', user.rol, { path: '/' });
         navigate('/cotizar');
       } else {
         setError('Usuario o contraseña incorrectos.');
@@ -43,6 +39,10 @@ function Login() {
       console.error('Error al conectarse a la API:', err);
       setError(`Error al iniciar sesión: ${err.message}`);
     }
+  };
+
+  const toggleMostrarContraseña = () => {
+    setMostrarContraseña((prevState) => !prevState);
   };
 
   return (
@@ -81,16 +81,25 @@ function Login() {
               <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
                 Contraseña
               </label>
-              <div className="mt-2">
+              <div className="mt-2 relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={mostrarContraseña ? 'text' : 'password'}
                   value={contraseña}
                   onChange={(e) => setContraseña(e.target.value)}
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
                 />
+                {contraseña && (
+                  <button
+                    type="button"
+                    onClick={toggleMostrarContraseña}
+                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                  >
+                    {mostrarContraseña ? <EyeIcon className="h-4 w-4" /> : <EyeSlashIcon className="h-4 w-4" />}
+                  </button>
+                )}
               </div>
             </div>
 

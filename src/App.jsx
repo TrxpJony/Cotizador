@@ -86,6 +86,7 @@ import { Perfiles } from './pages/skyleds/perfiles/perfiles';
 import { PerfilesVista } from './pages/skyleds/perfiles/perfilesvista';
 import { Fuentes } from './pages/skyleds/fuentes/fuentes';
 import { Sensores } from './pages/skyleds/sensores/sensores';
+import { Sensoresc } from './pages/skyleds/sensorec/sensoresc';
 
 const cookies = new Cookies();
 
@@ -279,6 +280,7 @@ function App() {
           <Route path="p4/sk3" element={<ProtectedRoute element={<Perfiles />} allowedRole="cotizador" />} />
           <Route path="sk4" element= {<Fuentes />}/>
           <Route path="sk5" element= {<Sensores />}/>
+          <Route path="sk6" element= {<Sensoresc />}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
