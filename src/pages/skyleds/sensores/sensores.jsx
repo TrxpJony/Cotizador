@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
@@ -5,7 +6,7 @@ import { Pagination } from "@nextui-org/react";
 
 const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
 
-export function Luzled12vista() {
+export function Sensores() {
     const [list, setList] = useState([]); // Datos de la API
     const [filteredList, setFilteredList] = useState([]); // Datos filtrados
     const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -21,7 +22,7 @@ export function Luzled12vista() {
             .then((data) => {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
-                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'luzled12');
+                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'sensores');
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -62,14 +63,13 @@ export function Luzled12vista() {
         onOpen();
     };
 
-
     return (
         <>
             <br />
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Luz Led 12 v
+                    Sensores para Espejo
                 </p>
                 <br />
                 <div className="flex justify-between items-center">
@@ -120,6 +120,7 @@ export function Luzled12vista() {
                             <b className="overflow-hidden p-2">{item.title}</b>
                             <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
                                 <p className="text-sm text-default-400 text-center">{item.color}</p>
+                                <b className="text-lg text-cyan-500 font-bold mt-2">${item.precio}</b>
                             </CardFooter>
                         </Card>
                     ))}
@@ -164,7 +165,8 @@ export function Luzled12vista() {
                                         height="450px"
                                     />
                                     <p>{selectedItem.description}</p>
-                                    <p>Color: {selectedItem.color}</p>          
+                                    <p>Color: {selectedItem.color}</p>
+                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio}</b>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>

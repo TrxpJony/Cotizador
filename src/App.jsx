@@ -85,6 +85,7 @@ import { Luzled1101vista } from './pages/skyleds/luzled110/luzled110vista';
 import { Perfiles } from './pages/skyleds/perfiles/perfiles';
 import { PerfilesVista } from './pages/skyleds/perfiles/perfilesvista';
 import { Fuentes } from './pages/skyleds/fuentes/fuentes';
+import { Sensores } from './pages/skyleds/sensores/sensores';
 
 const cookies = new Cookies();
 
@@ -277,6 +278,7 @@ function App() {
           <Route path="p4/sk2" element={<ProtectedRoute element={<Luzled12 />} allowedRole="cotizador" />} />
           <Route path="p4/sk3" element={<ProtectedRoute element={<Perfiles />} allowedRole="cotizador" />} />
           <Route path="sk4" element= {<Fuentes />}/>
+          <Route path="sk5" element= {<Sensores />}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">

@@ -124,7 +124,7 @@ export function Luzled1101() {
                             </CardBody>
                             <b className="overflow-hidden p-2">{item.title}</b>
                             <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                                <p className="text-sm text-default-400 text-center">Color: {item.color}</p>
+                                <p className="text-sm text-default-400 text-center">{item.color}</p>
                             </CardFooter>
                         </Card>
                     ))}
