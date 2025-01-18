@@ -5,7 +5,7 @@ import { Pagination } from "@nextui-org/react";
 
 const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
 
-export function Luzled1101() {
+export function Perfiles() {
     const [list, setList] = useState([]); // Datos de la API
     const [filteredList, setFilteredList] = useState([]); // Datos filtrados
     const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -22,7 +22,7 @@ export function Luzled1101() {
             .then((data) => {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
-                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'luzled110');
+                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'perfiles');
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -74,7 +74,7 @@ export function Luzled1101() {
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Luz Led 110 v
+                    Perfiles Led con Difuzores
                 </p>
                 <br />
                 <div className="flex justify-between items-center">

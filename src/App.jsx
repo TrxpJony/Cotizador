@@ -82,6 +82,8 @@ import { Vitral } from './pages/Vitral';
 import { CatalogoSkylesd } from './pages/skyleds/skyleds';
 import { Luzled12vista } from './pages/skyleds/luzled12/luzled12vista';
 import { Luzled1101vista } from './pages/skyleds/luzled110/luzled110vista';
+import { Perfiles } from './pages/skyleds/perfiles/perfiles';
+import { PerfilesVista } from './pages/skyleds/perfiles/perfilesvista';
 
 const cookies = new Cookies();
 
@@ -265,12 +267,14 @@ function App() {
           <Route path="p3/ac15" element={<Fachadas />} />
           <Route path="p3/ac16" element={<Adhesivos />} />
           <Route path="p3/ac17" element={<Fotocurados />} />
-          <Route path="p4" element={<TiposSkylesd />} />
           <Route path="skyleds" element={<CatalogoSkylesd />} />
           <Route path="led12" element={<Luzled12vista />} />
           <Route path="led110" element={<Luzled1101vista />} />
-          <Route path="p4/sk1" element={<Luzled1101 />} />
-          <Route path="p4/sk2" element={<Luzled12 />} />
+          <Route path="difusores" element={<PerfilesVista />} />
+          <Route path="p4" element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
+          <Route path="p4/sk1" element={<ProtectedRoute element={<Luzled1101 />} allowedRole='cotizador' />} />
+          <Route path="p4/sk2" element={<ProtectedRoute element={<Luzled12 />} allowedRole="cotizador" />} />
+          <Route path="p4/sk3" element={<ProtectedRoute element={<Perfiles />} allowedRole="cotizador" />} />
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">

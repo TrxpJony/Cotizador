@@ -5,7 +5,7 @@ import { Pagination } from "@nextui-org/react";
 
 const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
 
-export function Luzled1101() {
+export function PerfilesVista() {
     const [list, setList] = useState([]); // Datos de la API
     const [filteredList, setFilteredList] = useState([]); // Datos filtrados
     const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -14,7 +14,6 @@ export function Luzled1101() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const itemsPerPage = 15; // Elementos por página
     const navigate = useNavigate();
-    const [quantity, setQuantity] = useState(0); // Cantidad en mm
 
     useEffect(() => {
         fetch(baseUrl)
@@ -22,7 +21,7 @@ export function Luzled1101() {
             .then((data) => {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
-                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'luzled110');
+                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'perfiles');
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -62,19 +61,13 @@ export function Luzled1101() {
         setSelectedItem(item);
         onOpen();
     };
-
-    // Calcula el precio total basado en la cantidad
-    const calculateTotalPrice = () => {
-        return (quantity / 1000) * selectedItem.precio; // Convertir mm a metros
-    };
-
     return (
         <>
             <br />
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Luz Led 110 v
+                    Perfiles Led con Difuzores
                 </p>
                 <br />
                 <div className="flex justify-between items-center">
@@ -170,21 +163,6 @@ export function Luzled1101() {
                                     />
                                     <p>{selectedItem.description}</p>
                                     <p>Color: {selectedItem.color}</p>
-                                    <b className="text-lg text-cyan-500 font-bold mt-2">Cotizar</b>
-                                    <div className="">
-                                        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
-                                            Cantidad (mm):
-                                        </label>
-                                        <input
-                                            type="number"
-                                            id="quantity"
-
-                                            onChange={(e) => setQuantity(e.target.value)}
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring focus:ring-cyan-500 focus:ring-opacity-50"
-                                            placeholder="ingresa la cantidad en milimetros"
-                                       />
-                                    </div>
-                                    <p className="mt-2 text-lg font-bold">Precio Total: ${calculateTotalPrice().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>
