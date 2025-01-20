@@ -88,6 +88,8 @@ import { Fuentes } from './pages/skyleds/fuentes/fuentes';
 import { Sensores } from './pages/skyleds/sensores/sensores';
 import { Sensoresc } from './pages/skyleds/sensorec/sensoresc';
 import { Sensorese } from './pages/skyleds/sensorese/sensorese';
+import { Espejos } from './pages/espejos/espejos';
+import { Redondos } from './pages/espejos/redondos/redondos';
 
 const cookies = new Cookies();
 
@@ -253,6 +255,8 @@ function App() {
           <Route path='vitral' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
           <Route path="p2/espe1" element={<EspejoRedondo />} />
+          <Route path='espejos' element={<Espejos />} />
+          <Route path='espejos/espdis1' element={<Redondos />} />
           <Route path="p3" element={<TiposAccesorios />} />
           <Route path="p3/ac1" element={<Batientes />} />
           <Route path="p3/ac2" element={<Bisagras />} />
