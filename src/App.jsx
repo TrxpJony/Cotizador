@@ -93,6 +93,9 @@ import { Redondos } from './pages/espejos/redondos/redondos';
 import { Cuadrados } from './pages/espejos/cuadrados/cuadrados';
 import { Organicos } from './pages/espejos/organicos/organicos';
 import { Marcos } from './pages/espejos/marcos/marcos';
+import { DivisionesBaño } from './pages/divisiones/divisiones';
+import { DivisionesdeBaño } from './pages/divisiones/divisionesbaño/divisionesbaño';
+import { DiseñoDivisionesBaño } from './pages/divisiones/diseñosdivisionesbaño/diseñosdivisionesbaño';
 
 const cookies = new Cookies();
 
@@ -293,6 +296,9 @@ function App() {
           <Route path="sk5" element= {<Sensores />}/>
           <Route path="sk6" element= {<Sensoresc />}/>
           <Route path="sk7" element= {<Sensorese />}/>
+          <Route path="divisionesbaño" element= {<DivisionesBaño />}/>
+          <Route path="divisionesbaño/div1" element= {<DivisionesdeBaño />}/>
+          <Route path="divisionesbaño/div2" element= {<DiseñoDivisionesBaño />}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
