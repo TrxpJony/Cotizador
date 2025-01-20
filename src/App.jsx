@@ -91,6 +91,7 @@ import { Sensorese } from './pages/skyleds/sensorese/sensorese';
 import { Espejos } from './pages/espejos/espejos';
 import { Redondos } from './pages/espejos/redondos/redondos';
 import { Cuadrados } from './pages/espejos/cuadrados/cuadrados';
+import { Organicos } from './pages/espejos/organicos/organicos';
 
 const cookies = new Cookies();
 
@@ -259,6 +260,7 @@ function App() {
           <Route path='espejos' element={<Espejos />} />
           <Route path='espejos/espdis1' element={<Redondos />} />
           <Route path='espejos/espdis2' element={<Cuadrados />} />
+          <Route path='espejos/espdis3' element={<Organicos />} />
           <Route path="p3" element={<TiposAccesorios />} />
           <Route path="p3/ac1" element={<Batientes />} />
           <Route path="p3/ac2" element={<Bisagras />} />
