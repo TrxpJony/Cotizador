@@ -98,6 +98,7 @@ import { DivisionesdeBaño } from './pages/divisiones/divisionesbaño/divisiones
 import { DiseñoDivisionesBaño } from './pages/divisiones/diseñosdivisionesbaño/diseñosdivisionesbaño';
 import { Sandblasting } from './pages/sandblasting/sandblasting';
 import { SandblastingFruteros } from './pages/sandblasting/fruteros/fruteros';
+import { SandblastingFlores } from './pages/sandblasting/flores/flores';
 
 const cookies = new Cookies();
 
@@ -303,6 +304,7 @@ function App() {
           <Route path="divisionesbaño/div2" element= {<DiseñoDivisionesBaño />}/>
           <Route path="sandblasting" element= {<Sandblasting />}/>
           <Route path="sandblasting/sand1" element= {<SandblastingFruteros />}/>
+          <Route path="sandblasting/sand2" element= {<SandblastingFlores/>}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
