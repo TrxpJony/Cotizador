@@ -96,6 +96,7 @@ import { Marcos } from './pages/espejos/marcos/marcos';
 import { DivisionesBaño } from './pages/divisiones/divisiones';
 import { DivisionesdeBaño } from './pages/divisiones/divisionesbaño/divisionesbaño';
 import { DiseñoDivisionesBaño } from './pages/divisiones/diseñosdivisionesbaño/diseñosdivisionesbaño';
+import { Sandblasting } from './pages/sandblasting/sandblasting';
 
 const cookies = new Cookies();
 
@@ -299,6 +300,7 @@ function App() {
           <Route path="divisionesbaño" element= {<DivisionesBaño />}/>
           <Route path="divisionesbaño/div1" element= {<DivisionesdeBaño />}/>
           <Route path="divisionesbaño/div2" element= {<DiseñoDivisionesBaño />}/>
+          <Route path="sandblasting" element= {<Sandblasting />}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
