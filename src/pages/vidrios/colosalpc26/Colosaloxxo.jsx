@@ -395,7 +395,7 @@ const Colosaloxxo = () => {
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Cantidad de puertas', 20, 220);
+    doc.text('Cantidad', 20, 220);
     doc.text(`${puertas.length}`, 20, 225);
 
     doc.save('Cotizacion-Colosalpc2.6.pdf');
@@ -473,7 +473,7 @@ const Colosaloxxo = () => {
               <p>Área: {area} m²</p>
             </>
           ) : (
-            <p>Ingrese las dimensiones de la puerta en milímetros.</p>
+            <p>Ingrese las dimensiones en milímetros.</p>
           )}
           <br />
         </div>
@@ -482,7 +482,7 @@ const Colosaloxxo = () => {
 
           {/* Resumen de Puertas */}
           <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen de Puertas</h2>
+            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
             <ul className="list-disc pl-5 mb-4">
               {puertas.map((puerta, index) => (
                 <li key={index} className="mb-2 text-gray-600">
@@ -493,7 +493,7 @@ const Colosaloxxo = () => {
             </ul>
             <div className="text-gray-700">
               <p>
-                <strong>Total Puertas:</strong> {puertas.length}
+                <strong>Total:</strong> {puertas.length}
               </p>
               <p>
                 <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
@@ -804,7 +804,7 @@ const Colosaloxxo = () => {
             onClick={handleAddDoor}
             className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
           >
-            Agregar Puerta
+            Agregar
           </button>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>

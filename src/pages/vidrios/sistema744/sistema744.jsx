@@ -314,7 +314,7 @@ const Sistema744 = () => {
   
       doc.setFontSize(14);
       doc.setTextColor(cyanBlue);
-      doc.text('Cantidad de puertas', 20, 190);
+      doc.text('Cantidad', 20, 190);
       doc.text(`${puertas.length}`, 20, 195);
   
       doc.save('Cotizacion-Sistema744.pdf');
@@ -373,7 +373,7 @@ const Sistema744 = () => {
               <p>Área: {area} m²</p>
             </>
           ) : (
-            <p>Ingrese las dimensiones de la puerta en milímetros.</p>
+            <p>Ingrese las dimensiones en milímetros.</p>
           )}
           <br />
         </div>
@@ -393,7 +393,7 @@ const Sistema744 = () => {
             </ul>
             <div className="text-gray-700">
               <p>
-                <strong>Total Puertas:</strong> {puertas.length}
+                <strong>Total:</strong> {puertas.length}
               </p>
               <p>
                 <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
@@ -658,7 +658,7 @@ const Sistema744 = () => {
             onClick={handleAddDoor}
             className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
           >
-            Agregar Puerta
+            Agregar
           </button>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>
