@@ -99,6 +99,7 @@ import { DiseñoDivisionesBaño } from './pages/divisiones/diseñosdivisionesba�
 import { Sandblasting } from './pages/sandblasting/sandblasting';
 import { SandblastingFruteros } from './pages/sandblasting/fruteros/fruteros';
 import { SandblastingFlores } from './pages/sandblasting/flores/flores';
+import { SandblastingAnimales } from './pages/sandblasting/animales/animales';
 
 const cookies = new Cookies();
 
@@ -141,11 +142,10 @@ function App() {
       onClick: handleLogout
     });
   }
-
+  
   const isActive = (path) => location.pathname === path;
-
+  
   return (
-
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen}>
         <NavbarContent>
@@ -164,7 +164,7 @@ function App() {
               {item.onClick ? (
                 <button
                   onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
+                  className={`w-full ${item.name === "Cerrar sesión" ? "text-red-600" : isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
                 >
                   {item.name}
                 </button>
@@ -187,7 +187,7 @@ function App() {
               {item.onClick ? (
                 <button
                   onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
+                  className={`w-full ${item.name === "Cerrar sesión" ? "text-red-600" : isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
                 >
                   {item.name}
                 </button>
@@ -305,6 +305,7 @@ function App() {
           <Route path="sandblasting" element= {<Sandblasting />}/>
           <Route path="sandblasting/sand1" element= {<SandblastingFruteros />}/>
           <Route path="sandblasting/sand2" element= {<SandblastingFlores/>}/>
+          <Route path="sandblasting/sand3" element= {<SandblastingAnimales/>}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
