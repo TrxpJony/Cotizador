@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid'
 
 const cookies = new Cookies();
-const baseUrl = 'https://api-cotizador.vercel.app/usuarios';
+const baseUrl = 'http://localhost:3002/api/vidrioalarte/login';  // Cambié la URL al endpoint del backend real
 
 function Login() {
   const [usuario, setUsuario] = useState('');
@@ -19,25 +19,40 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
-      const response = await fetch(baseUrl);
+      // Enviar solicitud POST con usuario y contraseña al backend
+      const response = await fetch(baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usuario, contraseña }),  // Enviar las credenciales en el cuerpo de la solicitud
+      });
+
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
-      const data = await response.json();
-      const user = data.find(
-        (u) => u.usuario === usuario && u.contraseña === contraseña
-      );
-      if (user) {
-        cookies.set('id', user.id, { path: '/' });
-        cookies.set('usuario', user.usuario, { path: '/' });
-        cookies.set('rol', user.rol, { path: '/' });
+
+      const data = await response.text();  // El backend solo retorna un mensaje de texto, no es necesario convertir a JSON
+
+      if (data === 'Login exitoso.') {
+        // Si el login es exitoso, obtener los datos del usuario
+        // Aquí agregamos otro request para obtener los detalles del usuario si es necesario, por ejemplo, con el ID
+        const userResponse = await fetch('http://localhost:3002/api/usuarios?usuario=' + usuario);  // Endpoint para obtener los detalles del usuario
+        const userData = await userResponse.json();
+
+        // Guardar datos en cookies
+        cookies.set('id', userData.id, { path: '/' });
+        cookies.set('usuario', userData.usuario, { path: '/' });
+        cookies.set('rol', userData.rol, { path: '/' });
+
+        // Redirigir al cotizador
         navigate('/cotizar');
       } else {
         setError('Usuario o contraseña incorrectos.');
       }
     } catch (err) {
       console.error('Error al conectarse a la API:', err);
-      setError(`Error al iniciar sesión: ${err.message}`);
+      setError(`Usuario o contraseña incorrectos.`);
     }
   };
 

@@ -3,7 +3,8 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/catalogo';
+const baseUrl = 'http://localhost:3002/api/catalogo'; // Cambia la URL base
+
 
 export function Productos() {
   const [list, setList] = useState([]); // Datos de la API

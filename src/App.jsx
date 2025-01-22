@@ -265,33 +265,33 @@ function App() {
           <Route path="tipos/awa/awa4" element={<ProtectedRoute element={<Awa5h />} allowedRole="cotizador" />} />
           <Route path="tipos/awa/awa5" element={<ProtectedRoute element={<Awa6h />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
-          <Route path='vitral' element={<Vitral />} />
+          <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
           <Route path="p2/espe1" element={<EspejoRedondo />} />
-          <Route path='espejos' element={<Espejos />} />
-          <Route path='espejos/espdis1' element={<Redondos />} />
-          <Route path='espejos/espdis2' element={<Cuadrados />} />
-          <Route path='espejos/espdis3' element={<Organicos />} />
-          <Route path='espejos/espdis4' element={<Marcos />} />
-          <Route path="p3" element={<TiposAccesorios />} />
-          <Route path="p3/ac1" element={<Batientes />} />
-          <Route path="p3/ac2" element={<Bisagras />} />
-          <Route path="p3/ac3" element={<Divisiones />} />
-          <Route path="p3/ac4" element={<Pasadores />} />
-          <Route path="p3/ac5" element={<Cerraduras />} />
-          <Route path="p3/ac6" element={<Soportes />} />
-          <Route path="p3/ac7" element={<Brocas />} />
-          <Route path="p3/ac8" element={<Manijas />} />
-          <Route path="p3/ac9" element={<Chupas />} />
-          <Route path="p3/ac10" element={<Deslizantes />} />
-          <Route path="p3/ac11" element={<Lijas />} />
-          <Route path="p3/ac12" element={<Discos />} />
-          <Route path="p3/ac13" element={<Maquina />} />
-          <Route path="p3/ac14" element={<Herramientas />} />
-          <Route path="p3/ac15" element={<Fachadas />} />
-          <Route path="p3/ac16" element={<Adhesivos />} />
-          <Route path="p3/ac17" element={<Fotocurados />} />
-          <Route path="skyleds" element={<CatalogoSkylesd />} />
+          <Route path='cat003' element={<Espejos />} />
+          <Route path='cat003/espdis1' element={<Redondos />} />
+          <Route path='cat003/espdis2' element={<Cuadrados />} />
+          <Route path='cat003/espdis3' element={<Organicos />} />
+          <Route path='cat003/espdis4' element={<Marcos />} />
+          <Route path="cat008" element={<TiposAccesorios />} />
+          <Route path="cat008/ac1" element={<Batientes />} />
+          <Route path="cat008/ac2" element={<Bisagras />} />
+          <Route path="cat008/ac3" element={<Divisiones />} />
+          <Route path="cat008/ac4" element={<Pasadores />} />
+          <Route path="cat008/ac5" element={<Cerraduras />} />
+          <Route path="cat008/ac6" element={<Soportes />} />
+          <Route path="cat008/ac7" element={<Brocas />} />
+          <Route path="cat008/ac8" element={<Manijas />} />
+          <Route path="cat008/ac9" element={<Chupas />} />
+          <Route path="cat008/ac10" element={<Deslizantes />} />
+          <Route path="cat008/ac11" element={<Lijas />} />
+          <Route path="cat008/ac12" element={<Discos />} />
+          <Route path="cat008/ac13" element={<Maquina />} />
+          <Route path="cat008/ac14" element={<Herramientas />} />
+          <Route path="cat008/ac15" element={<Fachadas />} />
+          <Route path="cat008/ac16" element={<Adhesivos />} />
+          <Route path="cat008/ac17" element={<Fotocurados />} />
+          <Route path="cat002" element={<CatalogoSkylesd />} />
           <Route path="led12" element={<Luzled12vista />} />
           <Route path="led110" element={<Luzled1101vista />} />
           <Route path="difusores" element={<PerfilesVista />} />
@@ -303,17 +303,17 @@ function App() {
           <Route path="sk5" element= {<Sensores />}/>
           <Route path="sk6" element= {<Sensoresc />}/>
           <Route path="sk7" element= {<Sensorese />}/>
-          <Route path="divisionesbaño" element= {<DivisionesBaño />}/>
-          <Route path="divisionesbaño/div1" element= {<DivisionesdeBaño />}/>
-          <Route path="divisionesbaño/div2" element= {<DiseñoDivisionesBaño />}/>
-          <Route path="sandblasting" element= {<Sandblasting />}/>
-          <Route path="sandblasting/sand1" element= {<SandblastingFruteros />}/>
-          <Route path="sandblasting/sand2" element= {<SandblastingFlores/>}/>
-          <Route path="sandblasting/sand3" element= {<SandblastingAnimales/>}/>
-          <Route path="sandblasting/sand4" element= {<SandblastingEsquineros/>}/>
-          <Route path="sandblasting/sand5" element= {<SandblastingCenefas/>}/>
-          <Route path="vitrinas" element= {<VitrinasVista />}/>
-          <Route path="cocina" element= {<CocinasVista />}/>
+          <Route path="cat004" element= {<DivisionesBaño />}/>
+          <Route path="cat004/div1" element= {<DivisionesdeBaño />}/>
+          <Route path="cat004/div2" element= {<DiseñoDivisionesBaño />}/>
+          <Route path="cat005" element= {<Sandblasting />}/>
+          <Route path="cat005/sand1" element= {<SandblastingFruteros />}/>
+          <Route path="cat005/sand2" element= {<SandblastingFlores/>}/>
+          <Route path="cat005/sand3" element= {<SandblastingAnimales/>}/>
+          <Route path="cat005/sand4" element= {<SandblastingEsquineros/>}/>
+          <Route path="cat005/sand5" element= {<SandblastingCenefas/>}/>
+          <Route path="cat006" element= {<VitrinasVista />}/>
+          <Route path="cat007" element= {<CocinasVista />}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
