@@ -101,6 +101,7 @@ import { SandblastingFruteros } from './pages/sandblasting/fruteros/fruteros';
 import { SandblastingFlores } from './pages/sandblasting/flores/flores';
 import { SandblastingAnimales } from './pages/sandblasting/animales/animales';
 import { SandblastingEsquineros } from './pages/sandblasting/esquineros/esquineros';
+import { SandblastingCenefas } from './pages/sandblasting/cenefas/cenefas';
 
 const cookies = new Cookies();
 
@@ -308,6 +309,7 @@ function App() {
           <Route path="sandblasting/sand2" element= {<SandblastingFlores/>}/>
           <Route path="sandblasting/sand3" element= {<SandblastingAnimales/>}/>
           <Route path="sandblasting/sand4" element= {<SandblastingEsquineros/>}/>
+          <Route path="sandblasting/sand5" element= {<SandblastingCenefas/>}/>
         </Routes>
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
