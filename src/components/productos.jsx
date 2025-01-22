@@ -14,13 +14,15 @@ export function Productos() {
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
 
-  useEffect(() => {
+ useEffect(() => {
     fetch(baseUrl)
       .then((response) => response.json())
       .then((data) => {
         if (data && Array.isArray(data)) {
-          setList(data);
-          setFilteredList(data);
+          // Filtrar los datos para que solo se muestren los de categoria ""
+          const categoriaData = data.filter(item => item.tipo?.toLowerCase() === 'catalogo');
+          setList(categoriaData);
+          setFilteredList(categoriaData);
         } else {
           console.error("La respuesta de la API no es un array válido.");
         }

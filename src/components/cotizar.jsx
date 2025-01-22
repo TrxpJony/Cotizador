@@ -3,7 +3,8 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/Productos';
+const baseUrl = 'http://localhost:3002/api/catalogo'; // Cambia la URL base
+
 
 export function Cotizador() {
   const [list, setList] = useState([]); // Datos de la API
@@ -60,7 +61,7 @@ export function Cotizador() {
       <div className="filter-frame">
         <br />
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-          Productos
+          Cotizar
         </p>
         <br />
         <div className="flex justify-between items-center">
