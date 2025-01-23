@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
+const baseUrl ='http://localhost:3002/api/detalleProductos'
 
 export function SandblastingFruteros() {
     const [list, setList] = useState([]); // Datos de la API
