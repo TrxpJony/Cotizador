@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
+const baseUrl ='http://localhost:3002/api/detalleProductos'; 
 
 export function Sensorese() {
     const [list, setList] = useState([]); // Datos de la API
@@ -119,7 +119,7 @@ export function Sensorese() {
                             </CardBody>
                             <b className="overflow-hidden p-2">{item.title}</b>
                             <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                                <b className="text-lg text-cyan-500 font-bold mt-2">${item.precio}</b>
+                                <b className="text-lg text-cyan-500 font-bold mt-2">${item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
                             </CardFooter>
                         </Card>
                     ))}
@@ -164,7 +164,7 @@ export function Sensorese() {
                                         height="450px"
                                     />
                                     <p>{selectedItem.description}</p>
-                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio}</b>
+                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>

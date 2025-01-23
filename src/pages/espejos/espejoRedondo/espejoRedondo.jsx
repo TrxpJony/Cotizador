@@ -123,68 +123,68 @@ const EspejoRedondo = () => {
     pulidoTotalPrice+
     (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    const cyanBlue = '#00b5e2';
-    const lightGray = '#d3d3d3';
-    const currentDate = new Date().toLocaleDateString();
-
-    const addTableRow = (doc, y, label, size, price) => {
-      doc.text(label, 20, y);
-      doc.text(size, 120, y);
-      doc.text(price, 170, y);
-    };
-
-    const addSection = (doc, title, y) => {
-      doc.setFontSize(12);
+    const generatePDF = () => {
+      const doc = new jsPDF();
+      const cyanBlue = '#00b5e2';
+      const lightGray = '#d3d3d3';
+      const currentDate = new Date().toLocaleDateString();
+  
+      const addTableRow = (doc, y, label, size, price) => {
+        doc.text(label, 20, y);
+        doc.text(size, 120, y);
+        doc.text(price, 170, y);
+      };
+  
+      const addSection = (doc, title, y) => {
+        doc.setFontSize(12);
+        doc.setTextColor(cyanBlue);
+        doc.text(title, 20, y);
+        doc.setFontSize(10);
+        doc.setTextColor('black');
+      };
+  
+      doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+      doc.setFontSize(14);
       doc.setTextColor(cyanBlue);
-      doc.text(title, 20, y);
-      doc.setFontSize(10);
+      doc.setFontSize(8);
       doc.setTextColor('black');
+      doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+      doc.setFillColor(lightGray);
+      doc.rect(20, 30, 170, 8, 'F');
+      doc.setTextColor('white');
+      doc.setFontSize(10);
+      doc.text('Detalle de la cotización espejo Redondo', 70, 34);
+  
+      addSection(doc, 'Espejo', 45);
+      addTableRow(doc, 50, 'Espejo Redondo:', `${componentTotals.espejo.totalSize} mm`, `${componentTotals.espejo.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 55, 'Espejo Alto', `${componentTotals.espejoTotal.totalSize} mm`, ``);
+      addTableRow(doc, 60, 'Espejo Ancho', `${componentTotals.espejoTotal.totalSize2} mm`, ``);
+  
+      addSection(doc, 'Extra', 70);
+      addTableRow(doc, 75, 'Pulido:', `${componentTotals.pulido.totalSize} mm`, `${componentTotals.pulido.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 80, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+  
+  
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      doc.text('Total', 170, 90);
+      doc.setFontSize(16);
+      doc.setTextColor('black');
+      const formattedTotal = totalSum.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      doc.text(formattedTotal, 150, 95);
+  
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      doc.text('Cantidad de espejos', 20, 90);
+      doc.text(`${espejos.length}`, 20, 95);
+  
+      doc.save('Cotizacion-EspejoRedondo.pdf');
     };
-
-    doc.addImage(logo, 'PNG', 20, 10, 40, 20);
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.setFontSize(8);
-    doc.setTextColor('black');
-    doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
-    doc.setFillColor(lightGray);
-    doc.rect(20, 30, 170, 8, 'F');
-    doc.setTextColor('white');
-    doc.setFontSize(10);
-    doc.text('Detalle de la cotización espejo Redondo', 70, 34);
-
-    addSection(doc, 'Espejo', 45);
-    addTableRow(doc, 50, 'Espejo Redondo:', `${componentTotals.espejo.totalSize} mm`, `${componentTotals.espejo.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 55, 'Espejo Alto', `${componentTotals.espejoTotal.totalSize} mm`, ``);
-    addTableRow(doc, 60, 'Espejo Ancho', `${componentTotals.espejoTotal.totalSize2} mm`, ``);
-
-    addSection(doc, 'Extra', 70);
-    addTableRow(doc, 75, 'Pulido:', `${componentTotals.pulido.totalSize} mm`, `${componentTotals.pulido.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 80, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
-
-
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 90);
-    doc.setFontSize(16);
-    doc.setTextColor('black');
-    const formattedTotal = totalSum.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    doc.text(formattedTotal, 150, 95);
-
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.text('Cantidad de espejos', 20, 90);
-    doc.text(`${espejos.length}`, 20, 95);
-
-    doc.save('Cotizacion-EspejoRedondo.pdf');
-  };
 
   return (
     <div className="door-container">
