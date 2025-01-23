@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-const baseUrl = 'https://api-cotizador.vercel.app/vidrio';
+const baseUrl = 'http://localhost:3002/api/marcos'; 
 
 export function Sistema3890page() {
   const [filteredList, setFilteredList] = useState([]); // Solo mantenemos el estado para la lista filtrada

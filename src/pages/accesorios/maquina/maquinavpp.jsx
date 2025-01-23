@@ -3,7 +3,8 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/detalleProductos';
+const baseUrl ='http://localhost:3002/api/detalleProductos';
+
 
 export function Maquina() {
     const [list, setList] = useState([]); // Datos de la API
@@ -120,7 +121,7 @@ export function Maquina() {
                             <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
                                 <p className="text-sm text-gray-900 text-center">{item.description}</p>
                                 <p className="text-sm text-default-400 text-center">Color: {item.color}</p>
-                                <b className="text-lg text-cyan-500 font-bold mt-2">${item.precio}</b>
+                                <b className="text-lg text-cyan-500 font-bold mt-2">${item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
                             </CardFooter>
                         </Card>
                     ))}
@@ -166,7 +167,7 @@ export function Maquina() {
                                     />
                                     <p>{selectedItem.description}</p>
                                     <p>Color: {selectedItem.color}</p>
-                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio}</b>
+                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>
