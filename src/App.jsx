@@ -53,7 +53,6 @@ import { Inicio } from './components/Inicio';
 import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
-import EspejoRedondo from './pages/espejos/espejoRedondo/espejoRedondo';
 import { TiposAccesorios } from './pages/accesorios/tipos';
 import { Servicios } from './components/servicios';
 import { Batientes } from './pages/accesorios/batientes/batientes';
@@ -104,6 +103,7 @@ import { SandblastingEsquineros } from './pages/sandblasting/esquineros/esquiner
 import { SandblastingCenefas } from './pages/sandblasting/cenefas/cenefas';
 import { VitrinasVista } from './pages/vitrinas/vitrinasvista';
 import { CocinasVista } from './pages/cocinas/cocinasvista';
+import CotizadorEspejos from './pages/espejos/espejoRedondo/cotizadorespejos';
 
 const cookies = new Cookies();
 
@@ -267,7 +267,7 @@ function App() {
           <Route path='tipos' element={<Tipos />} />
           <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
-          <Route path="p2/espe1" element={<EspejoRedondo />} />
+          <Route path="p2/espe1" element={<CotizadorEspejos />} />
           <Route path='cat003' element={<Espejos />} />
           <Route path='cat003/espdis1' element={<Redondos />} />
           <Route path='cat003/espdis2' element={<Cuadrados />} />

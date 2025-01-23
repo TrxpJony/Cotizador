@@ -101,7 +101,13 @@
     "felpacol": 400,
 
     "espejoRedondo": 80000,
-    "pulido":4000
+    "pulido":4000,
+    "incoloro3mm": 55000,
+    "radiant4mm":110000,
+    "orion4mm":80000,
+    "palorosa4mm":150000,
+    "gris4mm":120000,
+    "bronce4mm":120000
   },
   "accesorios": {
     "kitCierrecol": 22000,
