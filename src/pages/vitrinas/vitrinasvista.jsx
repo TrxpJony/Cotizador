@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/categoria';
+const baseUrl ='http://localhost:3002/api/categorias'
 
 export function VitrinasVista() {
     const [list, setList] = useState([]); // Datos de la API
