@@ -105,6 +105,7 @@ import { VitrinasVista } from './pages/vitrinas/vitrinasvista';
 import { CocinasVista } from './pages/cocinas/cocinasvista';
 import CotizadorEspejos from './pages/espejos/espejoRedondo/cotizadorespejos';
 import CotizadorEspejosCuadrados from './pages/espejos/cuadrados/cotizadorespejoscuadrados';
+import CotizadorEspejosconForma from './pages/espejos/espejosconForma/cotizadorespejosconforma';
 
 const cookies = new Cookies();
 
@@ -270,6 +271,7 @@ function App() {
           <Route path="p2" element={<TiposEspejos />} />
           <Route path="p2/espe1" element={<CotizadorEspejos />} />
           <Route path="p2/espe2" element={<CotizadorEspejosCuadrados />} />
+          <Route path="p2/espe3" element={<CotizadorEspejosconForma />} />
           <Route path='cat003' element={<Espejos />} />
           <Route path='cat003/espdis1' element={<Redondos />} />
           <Route path='cat003/espdis2' element={<Cuadrados />} />
