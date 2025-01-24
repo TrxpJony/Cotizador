@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'https://api-cotizador.vercel.app/categoria';
+const baseUrl ='http://localhost:3002/api/categorias';
 
 export function TiposEspejos() {
   const [list, setList] = useState([]); // Datos de la API
@@ -60,7 +60,7 @@ export function TiposEspejos() {
       <div className="filter-frame">
         <br />
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-          Espejos
+          Cotizacion de Espejos
         </p>
         <br />
         <div className="flex justify-between items-center">

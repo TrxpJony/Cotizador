@@ -104,6 +104,7 @@ import { SandblastingCenefas } from './pages/sandblasting/cenefas/cenefas';
 import { VitrinasVista } from './pages/vitrinas/vitrinasvista';
 import { CocinasVista } from './pages/cocinas/cocinasvista';
 import CotizadorEspejos from './pages/espejos/espejoRedondo/cotizadorespejos';
+import CotizadorEspejosCuadrados from './pages/espejos/cuadrados/cotizadorespejoscuadrados';
 
 const cookies = new Cookies();
 
@@ -268,6 +269,7 @@ function App() {
           <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
           <Route path="p2/espe1" element={<CotizadorEspejos />} />
+          <Route path="p2/espe2" element={<CotizadorEspejosCuadrados />} />
           <Route path='cat003' element={<Espejos />} />
           <Route path='cat003/espdis1' element={<Redondos />} />
           <Route path='cat003/espdis2' element={<Cuadrados />} />

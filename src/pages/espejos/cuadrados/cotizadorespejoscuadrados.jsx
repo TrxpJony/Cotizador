@@ -1,12 +1,12 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import s3890Image from '../../../img/espejo1.png'; // Importar la imagen
+import Espejo from '../../../img/img_Espejos/espejocuadrado.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-const CotizadorEspejos = () => {
+const CotizadorEspejosCuadrados = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
-    const [dimensions, setDimensions] = useState({ diame: '' });
+    const [dimensions, setDimensions] = useState({ alto: '', ancho: '' });
     const [accessories, setAccessories] = useState({
         pulido: false,
         felpa: '',
@@ -29,6 +29,7 @@ const CotizadorEspejos = () => {
     const [cenefaprices, setcenefaprices] = useState({
         cenefaPrice: 0,
     });
+
     const handleAccessorySelect = (tipo, precio) => {
         setSelectedAccessory((prevState) => {
             const newState = { ...prevState, [tipo]: precio };
@@ -119,21 +120,21 @@ const CotizadorEspejos = () => {
         }));
     };
 
-    const { diame } = dimensions;
+    const { alto, ancho } = dimensions;
 
-    const totalWidth = diame ? Number(diame) + 50 : '';
-    const totalHeight = diame ? Number(diame) + 50 : '';
+    const totalWidth = ancho ? Number(ancho) : '';
+    const totalHeight = alto ? Number(alto) : '';
 
     // Calcular valores
     const area = totalWidth && totalHeight ? (totalWidth * totalHeight) / 1000000 : ''; // Convertir a m²
 
-    const luztotal = diame * 3.14;
+    const luztotal = totalHeight && totalWidth ? (totalHeight * 2) + (totalWidth * 2) : "";
     const pulidoTotal = totalHeight && totalWidth ? (totalHeight * 2) + (totalWidth * 2) : "";
     // Calcular precios
     const luzprice = (selectedAccessory.luz12V / 1000) * luztotal;
     const luz110price = (selectedAccessory.luz110V / 1000) * luztotal;
     const espejoPrice = prices[selectedMirrorType] * area;
-    const pulidoTotalPrice = accessories.pulido ? pulidoTotal * (prices.pulido / 1000) : 0;
+    const pulidoTotalPrice = accessories.pulido ? pulidoTotal * (prices.pulidorecto / 1000) : 0;
     const { cenefaPrice } = cenefaprices;
 
     const totalPrice =
@@ -150,7 +151,7 @@ const CotizadorEspejos = () => {
     return (
         <div className="door-container">
             <div className="door-frame">
-                {/* Formulario para el Diametro y ancho */}
+                {/* Formulario para el altotro y ancho */}
                 <div className="dimensions-form flex flex-col gap-4 bg-gray-100 p-6 rounded-lg max-w-lg mx-auto">
                     <label className="flex flex-col font-semibold text-gray-800">
                         Tipo de Espejo:
@@ -168,11 +169,22 @@ const CotizadorEspejos = () => {
                         </select>
                     </label>
                     <label className="flex flex-col font-semibold text-gray-800">
-                        Diametro (mm):
+                        alto (mm):
                         <input
                             type="number"
-                            name="diame"
-                            value={diame}
+                            name="alto"
+                            value={alto}
+                            onChange={handleChange}
+                            placeholder="00"
+                            className="mt-2 p-2 text-lg border border-gray-300 rounded-md focus:border-green-500 focus:outline-none"
+                        />
+                    </label>
+                    <label className="flex flex-col font-semibold text-gray-800">
+                        Ancho (mm):
+                        <input
+                            type="number"
+                            name="ancho"
+                            value={ancho}
                             onChange={handleChange}
                             placeholder="00"
                             className="mt-2 p-2 text-lg border border-gray-300 rounded-md focus:border-green-500 focus:outline-none"
@@ -181,13 +193,13 @@ const CotizadorEspejos = () => {
                 </div>
 
                 {/* Imagen */}
-                <img src={s3890Image} alt="espejo Corrediza Colosal" className="door-image" />
+                <img src={Espejo} alt="espejo Corrediza Colosal" className="door-image" />
 
                 {/* Dimensiones dinámicas */}
                 <div className="dimensions-display">
-                    {diame ? (
+                    {alto && ancho ? (
                         <>
-                            <p>Dimensiones totales: {diame} </p>
+                            <p>Dimensiones totales: {alto} x {ancho} mm</p>
                             <p>Área: {area} m²</p>
                         </>
                     ) : (
@@ -232,7 +244,7 @@ const CotizadorEspejos = () => {
             <br />
             {/* Lista de partes */}
             <div className="parts-list">
-                <strong><h1>ESPEJO REDONDO</h1></strong>
+                <strong><h1>ESPEJO CUADRADO</h1></strong>
                 <Table aria-label="TABLA ESPEJO">
                     <TableHeader>
                         <TableColumn><h1>Espejo</h1></TableColumn>
@@ -246,19 +258,9 @@ const CotizadorEspejos = () => {
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Espejo Redondo ({selectedMirrorType}):</strong></TableCell>
-                            <TableCell> {diame} mm</TableCell>
+                            <TableCell><strong>Espejo Cuadrado ({selectedMirrorType}):</strong></TableCell>
+                            <TableCell> {alto} x {ancho} mm</TableCell>
                             <TableCell>${espejoPrice.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell><strong>Espejo Alto:</strong></TableCell>
-                            <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                        <TableRow key="4">
-                            <TableCell><strong>Espejo Ancho:</strong></TableCell>
-                            <TableCell>{totalHeight} mm</TableCell>
-                            <TableCell></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -332,9 +334,6 @@ const CotizadorEspejos = () => {
                     </TableBody>
                 </Table>
                 <br />
-
-
-
                 <h1 className="font-bold">Total</h1>
                 <div className="flex justify-between items-center">
                     <p className=" text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
@@ -483,4 +482,4 @@ const CotizadorEspejos = () => {
     );
 };
 
-export default CotizadorEspejos;
+export default CotizadorEspejosCuadrados;
