@@ -46,7 +46,7 @@ function Login() {
         cookies.set('rol', userData.rol, { path: '/' });
 
         // Redirigir al cotizador
-        navigate('/cotizar');
+        navigate('/');
       } else {
         setError('Usuario o contraseña incorrectos.');
       }

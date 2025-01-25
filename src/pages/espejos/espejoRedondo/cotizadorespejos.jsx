@@ -29,6 +29,7 @@ const CotizadorEspejos = () => {
     const [cenefaprices, setcenefaprices] = useState({
         cenefaPrice: 0,
     });
+    const [aluminioPrice, setAluminioPrice] = useState(0); // Nuevo estado para el precio del aluminio
     const handleAccessorySelect = (tipo, precio) => {
         setSelectedAccessory((prevState) => {
             const newState = { ...prevState, [tipo]: precio };
@@ -119,6 +120,11 @@ const CotizadorEspejos = () => {
         }));
     };
 
+    const handleAluminioChange = (e) => {
+        const { value } = e.target;
+        setAluminioPrice(parseFloat(value) || 0);
+    };
+
     const { diame } = dimensions;
 
     const totalWidth = diame ? Number(diame) + 50 : '';
@@ -137,12 +143,14 @@ const CotizadorEspejos = () => {
     const { cenefaPrice } = cenefaprices;
 
     const totalPrice =
+        30000 +
         espejoPrice +
         pulidoTotalPrice +
         luzprice +
         luz110price +
         selectedAccessory.sensores +
-        (cenefaPrice ? parseFloat(cenefaPrice) : 0)
+        (cenefaPrice ? parseFloat(cenefaPrice) : 0) +
+        aluminioPrice; // Sumar el precio del aluminio
 
     if (loading) return <p>Cargando precios...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -328,6 +336,18 @@ const CotizadorEspejos = () => {
                                 placeholder="Ingrece precio"
                                 onChange={handlecenefaChange}
                             /></TableCell>
+                        </TableRow>
+                        <TableRow key="7">
+                            <TableCell>Aluminio</TableCell>
+                            <TableCell>
+                                <input
+                                    type="number"
+                                    name="aluminioPrice"
+                                    value={aluminioPrice || ''}
+                                    placeholder="Ingrese precio"
+                                    onChange={handleAluminioChange}
+                                />
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
