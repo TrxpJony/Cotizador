@@ -106,7 +106,8 @@ import { CocinasVista } from './pages/cocinas/cocinasvista';
 import CotizadorEspejos from './pages/espejos/espejoRedondo/cotizadorespejos';
 import CotizadorEspejosCuadrados from './pages/espejos/cuadrados/cotizadorespejoscuadrados';
 import CotizadorEspejosconForma from './pages/espejos/espejosconForma/cotizadorespejosconforma';
-
+import AdmindPage from './admin/admindPage';
+import ProductsPage from './pages/ProductsPage';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -141,6 +142,11 @@ function App() {
     { name: "Productos", path: "/productos" },
     { name: userId ? "Cotizar" : "Cotizar", path: userId ? "/cotizar" : "/login" }, // Mostrar según sesión
   ];
+
+  if (userRole === 'administrador') {
+    menuItems.push({ name: "Admin", path: "/admin" });
+  }
+
   if (userId) {
     menuItems.push({
       name: "Cerrar sesión",
@@ -148,9 +154,9 @@ function App() {
       onClick: handleLogout
     });
   }
-  
+
   const isActive = (path) => location.pathname === path;
-  
+
   return (
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -210,8 +216,6 @@ function App() {
           ))}
         </NavbarMenu>
       </Navbar>
-
-
       <div className="fondo  min-h-screen container-app">
         <Routes>
           <Route path="login" element={<Login />} />
@@ -224,6 +228,8 @@ function App() {
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
           <Route path="servicios" element={<Servicios />} />
+          <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
+          <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp2" element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />} />
@@ -303,22 +309,23 @@ function App() {
           <Route path="p4/sk1" element={<ProtectedRoute element={<Luzled1101 />} allowedRole='cotizador' />} />
           <Route path="p4/sk2" element={<ProtectedRoute element={<Luzled12 />} allowedRole="cotizador" />} />
           <Route path="p4/sk3" element={<ProtectedRoute element={<Perfiles />} allowedRole="cotizador" />} />
-          <Route path="sk4" element= {<Fuentes />}/>
-          <Route path="sk5" element= {<Sensores />}/>
-          <Route path="sk6" element= {<Sensoresc />}/>
-          <Route path="sk7" element= {<Sensorese />}/>
-          <Route path="cat004" element= {<DivisionesBaño />}/>
-          <Route path="cat004/div1" element= {<DivisionesdeBaño />}/>
-          <Route path="cat004/div2" element= {<DiseñoDivisionesBaño />}/>
-          <Route path="cat005" element= {<Sandblasting />}/>
-          <Route path="cat005/sand1" element= {<SandblastingFruteros />}/>
-          <Route path="cat005/sand2" element= {<SandblastingFlores/>}/>
-          <Route path="cat005/sand3" element= {<SandblastingAnimales/>}/>
-          <Route path="cat005/sand4" element= {<SandblastingEsquineros/>}/>
-          <Route path="cat005/sand5" element= {<SandblastingCenefas/>}/>
-          <Route path="cat006" element= {<VitrinasVista />}/>
-          <Route path="cat007" element= {<CocinasVista />}/>
+          <Route path="sk4" element={<Fuentes />} />
+          <Route path="sk5" element={<Sensores />} />
+          <Route path="sk6" element={<Sensoresc />} />
+          <Route path="sk7" element={<Sensorese />} />
+          <Route path="cat004" element={<DivisionesBaño />} />
+          <Route path="cat004/div1" element={<DivisionesdeBaño />} />
+          <Route path="cat004/div2" element={<DiseñoDivisionesBaño />} />
+          <Route path="cat005" element={<Sandblasting />} />
+          <Route path="cat005/sand1" element={<SandblastingFruteros />} />
+          <Route path="cat005/sand2" element={<SandblastingFlores />} />
+          <Route path="cat005/sand3" element={<SandblastingAnimales />} />
+          <Route path="cat005/sand4" element={<SandblastingEsquineros />} />
+          <Route path="cat005/sand5" element={<SandblastingCenefas />} />
+          <Route path="cat006" element={<VitrinasVista />} />
+          <Route path="cat007" element={<CocinasVista />} />
         </Routes>
+
       </div>
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
@@ -343,7 +350,7 @@ function App() {
       </footer>
       <br />
     </>
-    
+
   )
 }
 
