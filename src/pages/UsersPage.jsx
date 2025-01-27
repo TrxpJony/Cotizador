@@ -1,7 +1,7 @@
-import ProductsTable from "../components/products/ProductsTable";
+import UsersTable from "../components/users/UsersTable";
 import Sidebar from "../components/common/Sidebar";
 
-const ProductsPage = () => {
+const UsersPage = () => {
 	return (
 		<>
 			<div className='flex h-screen  overflow-hidden'>
@@ -14,11 +14,11 @@ const ProductsPage = () => {
 					</header>
 
 					<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
+						{/* STATS */}
+						<UsersTable />
 
-						<ProductsTable />
-
-						{/* CHARTS */}
-						<div className='grid grid-col-1 lg:grid-cols-2 gap-8'>
+						{/* USER CHARTS */}
+						<div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8'>
 						</div>
 					</main>
 				</div>
@@ -26,4 +26,4 @@ const ProductsPage = () => {
 		</>
 	);
 };
-export default ProductsPage;
+export default UsersPage;

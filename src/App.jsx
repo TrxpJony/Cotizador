@@ -108,6 +108,7 @@ import CotizadorEspejosCuadrados from './pages/espejos/cuadrados/cotizadorespejo
 import CotizadorEspejosconForma from './pages/espejos/espejosconForma/cotizadorespejosconforma';
 import AdmindPage from './admin/admindPage';
 import ProductsPage from './pages/ProductsPage';
+import UsersPage from './pages/UsersPage';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -324,6 +325,7 @@ function App() {
           <Route path="cat005/sand5" element={<SandblastingCenefas />} />
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
+          <Route path='/users' element={<UsersPage />} />
         </Routes>
 
       </div>

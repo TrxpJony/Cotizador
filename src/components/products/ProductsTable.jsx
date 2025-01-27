@@ -144,7 +144,7 @@ const ProductsTable = () => {
 						disabled={currentPage === 1}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
 					>
-						Previous
+						Anterior
 					</button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredProducts.length / itemsPerPage)}
@@ -154,7 +154,7 @@ const ProductsTable = () => {
 						disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
 					>
-						Next
+						Siguiente
 					</button>
 				</div>
 			</motion.div>
