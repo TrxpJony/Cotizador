@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const baseUrl = 'http://localhost:3002/api/usuarios';
 
@@ -89,9 +91,21 @@ const UsersTable = () => {
 				return response.json();
 			})
 			.then(() => {
-				alert("Usuario actualizado correctamente");
+				toast('Usuario actualizado correctamente!', {
+					position: "bottom-center",
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: false,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+				});
 				setUsers(users.map((user) => (user.id === id ? editedUser : user)));
 				setIsModalOpen(false);
+				setTimeout(() => {
+					window.location.reload(); // Recarga la página después de 3 segundos
+				}, 3000);
 			})
 			.catch((error) => {
 				console.error("Error al actualizar el usuario:", error);
@@ -100,28 +114,49 @@ const UsersTable = () => {
 	};
 
 	const handleDeleteClick = (id) => {
-		// Confirmar la eliminación
-		if (window.confirm("¿Estás seguro de que quieres eliminar este usuario?")) {
-			// Hacer la solicitud DELETE a la API
-			fetch(`${baseUrl}/${id}`, {
-				method: 'DELETE',
-			})
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					// Intenta parsear la respuesta como JSON
-					return response.json();
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: "¡No podrás revertir esto!",
+			showCancelButton: true,
+			confirmButtonColor: '#06B6D4',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, eliminarlo!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Hacer la solicitud DELETE a la API
+				fetch(`${baseUrl}/${id}`, {
+					method: 'DELETE',
 				})
-				.then((data) => {
-					alert(data.message);  // Muestra el mensaje de éxito desde la respuesta
-					setUsers(users.filter((user) => user.id !== id));
-				})
-				.catch((error) => {
-					console.error("Error al eliminar el usuario:", error);
-					alert("Hubo un problema al eliminar el usuario.");
-				});
-		}
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						// Intenta parsear la respuesta como JSON
+						return response.json();
+					})
+					.then((data) => {
+						toast(data.message, {
+							position: "bottom-center",
+							autoClose: 3000,
+							hideProgressBar: true,
+							closeOnClick: false,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "light",
+						});
+						setUsers(users.filter((user) => user.id !== id));
+						setTimeout(() => {
+							window.location.reload(); // Recarga la página después de 3 segundos
+						}, 3000);
+					})
+					.catch((error) => {
+						console.error("Error al eliminar el usuario:", error);
+						alert("Hubo un problema al eliminar el usuario.");
+					});
+			}
+		});
 	};
 
 	const paginatedUsers = filteredUsers.slice(

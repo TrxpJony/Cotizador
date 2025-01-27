@@ -19,42 +19,46 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
-      // Enviar solicitud POST con usuario y contraseña al backend
-      const response = await fetch(baseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ usuario, contraseña }),  // Enviar las credenciales en el cuerpo de la solicitud
-      });
+        // Enviar solicitud POST con usuario y contraseña al backend
+        const response = await fetch(baseUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ usuario, contraseña }),  // Enviar las credenciales en el cuerpo de la solicitud
+        });
 
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
 
-      const data = await response.text();  // El backend solo retorna un mensaje de texto, no es necesario convertir a JSON
+        const data = await response.text();  // El backend solo retorna un mensaje de texto, no es necesario convertir a JSON
 
-      if (data === 'Login exitoso.') {
-        // Si el login es exitoso, obtener los datos del usuario
-        // Aquí agregamos otro request para obtener los detalles del usuario si es necesario, por ejemplo, con el ID
-        const userResponse = await fetch('http://localhost:3002/api/usuarios?usuario=' + usuario);  // Endpoint para obtener los detalles del usuario
-        const userData = await userResponse.json();
+        if (data === 'Login exitoso.') {
+            // Si el login es exitoso, obtener los datos del usuario
+            const userResponse = await fetch(`http://localhost:3002/api/usuarios/${usuario}`);  // Endpoint para obtener los detalles del usuario
+            const userData = await userResponse.json();
 
-        // Guardar datos en cookies
-        cookies.set('id', userData.id, { path: '/' });
-        cookies.set('usuario', userData.usuario, { path: '/' });
-        cookies.set('rol', userData.rol, { path: '/' });
+            // Guardar datos en cookies
+            cookies.set('id', userData.id, { path: '/' });
+            cookies.set('usuario', userData.usuario, { path: '/' });
+            cookies.set('rol', userData.rol, { path: '/' });
 
-        // Redirigir al cotizador
-        navigate('/');
-      } else {
-        setError('Usuario o contraseña incorrectos.');
-      }
+            // Redirigir según el rol del usuario
+            if (userData.rol === 'administrador') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+            window.location.reload();  // Reiniciar la página
+        } else {
+            setError('Usuario o contraseña incorrectos.');
+        }
     } catch (err) {
-      console.error('Error al conectarse a la API:', err);
-      setError(`Usuario o contraseña incorrectos.`);
+        console.error('Error al conectarse a la API:', err);
+        setError('Usuario o contraseña incorrectos.');
     }
-  };
+};
 
   const toggleMostrarContraseña = () => {
     setMostrarContraseña((prevState) => !prevState);

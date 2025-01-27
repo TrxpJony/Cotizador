@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Tipos } from './pages/tipos';
-import React from "react";
+import React, { useEffect } from "react";
 import ProtectedRoute from './components/ProtectedRoute';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, } from "@nextui-org/react";
 import Cookies from 'universal-cookie';
@@ -124,11 +124,17 @@ function App() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  // Obtener datos del usuario desde las cookies
-  const userId = cookies.get('id');
-  const userRole = cookies.get('rol'); // Leer el rol
-  console.log('User ID:', userId);  // Muestra el ID del usuario
-  console.log('User Role:', userRole);  // Muestra el rol del usuario
+  const [userId, setUserId] = React.useState(undefined);
+  const [userRole, setUserRole] = React.useState(undefined);
+
+  useEffect(() => {
+    const id = cookies.get('id');
+    const role = cookies.get('rol');
+    setUserId(id);
+    setUserRole(role);
+    console.log('User ID:', id);  // Muestra el ID del usuario
+    console.log('User Role:', role);  // Muestra el rol del usuario
+  }, []);
 
   const handleLogout = () => {
     cookies.remove('id');

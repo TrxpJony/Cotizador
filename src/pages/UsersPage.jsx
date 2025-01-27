@@ -1,6 +1,6 @@
 import UsersTable from "../components/users/UsersTable";
 import Sidebar from "../components/common/Sidebar";
-
+import UsersAdd from "../components/users/UsersAdd";
 const UsersPage = () => {
 	return (
 		<>
@@ -12,8 +12,11 @@ const UsersPage = () => {
 							<h1 className='text-2xl font-semibold text-gray-700'>Productos</h1>
 						</div>
 					</header>
-
 					<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
+						{/* boton agregar usuario */}
+						<UsersAdd />
+						<br />
+						<br />
 						{/* STATS */}
 						<UsersTable />
 
