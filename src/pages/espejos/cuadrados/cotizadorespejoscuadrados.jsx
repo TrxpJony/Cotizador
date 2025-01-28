@@ -21,23 +21,25 @@ const CotizadorEspejosCuadrados = () => {
     const { isOpen: isOpenSensores, onOpen: onOpenSensores, onClose: onCloseSensores } = useDisclosure();
 
     const [selectedAccessory, setSelectedAccessory] = useState({
-        luz12V: 0,
-        luz110V: 0,
-        sensores: 0,
+        luz12V: { id: 0, precio: 0 },
+        luz110V: { id: 0, precio: 0 },
+        sensores: { id: 0, precio: 0 },
     });
 
     const [cenefaprices, setcenefaprices] = useState({
         cenefaPrice: 0,
     });
 
-    const handleAccessorySelect = (tipo, precio) => {
+    const [aluminioPrice, setAluminioPrice] = useState(0); // Nuevo estado para el precio del aluminio
+
+    const handleAccessorySelect = (tipo, id, precio) => {
         setSelectedAccessory((prevState) => {
-            const newState = { ...prevState, [tipo]: precio };
+            const newState = { ...prevState, [tipo]: { id, precio } };
             if (tipo === 'luz12V') {
-                newState.luz110V = 0; // Deseleccionar luz 110V
+                newState.luz110V = { id: 0, precio: 0 }; // Deseleccionar luz 110V
                 onClose12V();
             } else if (tipo === 'luz110V') {
-                newState.luz12V = 0; // Deseleccionar luz 12V
+                newState.luz12V = { id: 0, precio: 0 }; // Deseleccionar luz 12V
                 onClose110V();
             } else if (tipo === 'sensores') {
                 onCloseSensores();
@@ -120,6 +122,11 @@ const CotizadorEspejosCuadrados = () => {
         }));
     };
 
+    const handleAluminioChange = (e) => {
+        const { value } = e.target;
+        setAluminioPrice(parseFloat(value) || 0);
+    };
+
     const { alto, ancho } = dimensions;
 
     const totalWidth = ancho ? Number(ancho) : '';
@@ -131,19 +138,21 @@ const CotizadorEspejosCuadrados = () => {
     const luztotal = totalHeight && totalWidth ? (totalHeight * 2) + (totalWidth * 2) : "";
     const pulidoTotal = totalHeight && totalWidth ? (totalHeight * 2) + (totalWidth * 2) : "";
     // Calcular precios
-    const luzprice = (selectedAccessory.luz12V / 1000) * luztotal;
-    const luz110price = (selectedAccessory.luz110V / 1000) * luztotal;
+    const luzprice = (selectedAccessory.luz12V.precio / 1000) * luztotal;
+    const luz110price = (selectedAccessory.luz110V.precio / 1000) * luztotal;
     const espejoPrice = prices[selectedMirrorType] * area;
     const pulidoTotalPrice = accessories.pulido ? pulidoTotal * (prices.pulidorecto / 1000) : 0;
     const { cenefaPrice } = cenefaprices;
 
     const totalPrice =
+        30000 +
         espejoPrice +
         pulidoTotalPrice +
         luzprice +
         luz110price +
-        selectedAccessory.sensores +
-        (cenefaPrice ? parseFloat(cenefaPrice) : 0)
+        selectedAccessory.sensores.precio +
+        (cenefaPrice ? parseFloat(cenefaPrice) : 0) +
+        aluminioPrice; // Sumar el precio del aluminio
 
     if (loading) return <p>Cargando precios...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -319,7 +328,7 @@ const CotizadorEspejosCuadrados = () => {
                                     Sensores
                                 </button>
                             </TableCell>
-                            <TableCell>$ {selectedAccessory.sensores}</TableCell>
+                            <TableCell>$ {selectedAccessory.sensores.precio}</TableCell>
                         </TableRow>
                         <TableRow key="6">
                             <TableCell>Cenefa</TableCell>
@@ -330,6 +339,18 @@ const CotizadorEspejosCuadrados = () => {
                                 placeholder="Ingrece precio"
                                 onChange={handlecenefaChange}
                             /></TableCell>
+                        </TableRow>
+                        <TableRow key="7">
+                            <TableCell>Aluminio</TableCell>
+                            <TableCell>
+                                <input
+                                    type="number"
+                                    name="aluminioPrice"
+                                    value={aluminioPrice || ''}
+                                    placeholder="Ingrese precio"
+                                    onChange={handleAluminioChange}
+                                />
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -353,8 +374,8 @@ const CotizadorEspejosCuadrados = () => {
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('luz12V', item.precio)} // Actualizar precio y cerrar modal
-                                                    className="nextui-card"
+                                                    onPress={() => handleAccessorySelect('luz12V', item.id, item.precio)}
+                                                    className={`nextui-card ${selectedAccessory.luz12V.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4">
                                                         <Image
@@ -376,6 +397,9 @@ const CotizadorEspejosCuadrados = () => {
                                     </div>
                                 </ModalBody>
                                 <ModalFooter>
+                                    <Button color="danger" variant="light" onPress={() => handleAccessorySelect('luz12V', 0, 0)}>
+                                        Ninguno
+                                    </Button>
                                     <Button color="danger" variant="light" onPress={onClose}>
                                         Cerrar
                                     </Button>
@@ -399,8 +423,8 @@ const CotizadorEspejosCuadrados = () => {
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('luz110V', item.precio)} // Actualizar precio y cerrar modal
-                                                    className="nextui-card"
+                                                    onPress={() => handleAccessorySelect('luz110V', item.id, item.precio)}
+                                                    className={`nextui-card ${selectedAccessory.luz110V.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4">
                                                         <Image
@@ -422,6 +446,9 @@ const CotizadorEspejosCuadrados = () => {
                                     </div>
                                 </ModalBody>
                                 <ModalFooter>
+                                    <Button color="danger" variant="light" onPress={() => handleAccessorySelect('luz110V', 0, 0)}>
+                                        Ninguno
+                                    </Button>
                                     <Button color="danger" variant="light" onPress={onClose}>
                                         Cerrar
                                     </Button>
@@ -445,8 +472,8 @@ const CotizadorEspejosCuadrados = () => {
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('sensores', item.precio)} // Actualizar precio y cerrar modal
-                                                    className="nextui-card"
+                                                    onPress={() => handleAccessorySelect('sensores', item.id, item.precio)}
+                                                    className={`nextui-card ${selectedAccessory.sensores.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4 items-center">
                                                         <Image
@@ -468,6 +495,9 @@ const CotizadorEspejosCuadrados = () => {
                                     </div>
                                 </ModalBody>
                                 <ModalFooter>
+                                    <Button color="danger" variant="light" onPress={() => handleAccessorySelect('sensores', 0, 0)}>
+                                        Ninguno
+                                    </Button>
                                     <Button color="danger" variant="light" onPress={onClose}>
                                         Cerrar
                                     </Button>
