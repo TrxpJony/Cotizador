@@ -109,6 +109,7 @@ import CotizadorEspejosconForma from './pages/espejos/espejosconForma/cotizadore
 import AdmindPage from './admin/admindPage';
 import ProductsPage from './pages/ProductsPage';
 import UsersPage from './pages/UsersPage';
+import PricePage from './pages/PricePage';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -237,6 +238,7 @@ function App() {
           <Route path="servicios" element={<Servicios />} />
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
+          <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp2" element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />} />

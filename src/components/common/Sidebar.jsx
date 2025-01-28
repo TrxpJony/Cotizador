@@ -1,4 +1,4 @@
-import {  Menu, ShoppingBag,  Users } from "lucide-react";
+import {  Menu, ShoppingBag, DollarSign,  Users } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const SIDEBAR_ITEMS = [
 	{ name: "Productos", icon: ShoppingBag, color: "#06b6d4", href: "/products" },
 	{ name: "Usuarios", icon: Users, color: "#06b6d4", href: "/users" },
+	{ name: "Precios", icon: DollarSign, color: "#06b6d4", href: "/precios" },
 ];
 
 const Sidebar = () => {
