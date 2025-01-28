@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 const baseUrl = 'http://localhost:3002/api/detalleProductos';
 
@@ -133,6 +134,52 @@ const ProductsTable = () => {
 			});
 	};
 
+	const handleDeleteClick = (id) => {
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: "¡No podrás revertir esto!",
+			showCancelButton: true,
+			confirmButtonColor: '#06B6D4',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, eliminarlo!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Hacer la solicitud DELETE a la API
+				fetch(`${baseUrl}/${id}`, {
+					method: 'DELETE',
+				})
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then((data) => {
+					toast(data.message, {
+						position: "bottom-center",
+						autoClose: 3000,
+						hideProgressBar: true,
+						closeOnClick: false,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						theme: "light",
+					});
+	
+					// Actualizar el estado sin recargar la página
+					const updatedProducts = products.filter((product) => product.id !== id);
+					setProducts(updatedProducts);
+					setFilteredProducts(updatedProducts);
+				})
+				.catch((error) => {
+					console.error("Error al eliminar el producto:", error);
+					alert("Hubo un problema al eliminar el producto.");
+				});
+			}
+		});
+	};
+
 	const paginatedProducts = filteredProducts.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
@@ -215,9 +262,12 @@ const ProductsTable = () => {
 											>
 												<Edit size={18} />
 											</button>
-										<button className='text-red-400 hover:text-red-300'>
-											<Trash2 size={18} />
-										</button>
+											<button
+												className='text-red-400 hover:text-red-300'
+												onClick={() => handleDeleteClick(product.id)}
+											>
+												<Trash2 size={18} />
+											</button>
 									</td>
 								</motion.tr>
 							))}
