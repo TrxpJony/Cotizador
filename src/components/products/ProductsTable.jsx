@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from 'react-toastify';
 
 const baseUrl = 'http://localhost:3002/api/detalleProductos';
 
@@ -11,6 +12,13 @@ const ProductsTable = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
 	const [selectedImage, setSelectedImage] = useState(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [editedProduct, setEditedProduct] = useState({
+		id: '',
+		title: '',
+		description: '',
+		precio: ''
+	});
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -50,6 +58,81 @@ const ProductsTable = () => {
 		setSelectedImage(null);
 	};
 
+	const handleEditClick = (product) => {
+		setEditedProduct(product);
+		setIsModalOpen(true);
+	};
+
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		setEditedProduct((prevProduct) => ({
+			...prevProduct,
+			[name]: value
+		}));
+	};
+
+	const handleModalClose = () => {
+		setIsModalOpen(false);
+	};
+
+	const handleSaveChanges = () => {
+		// Validar que los campos no estén vacíos
+		const { title, description, precio, id } = editedProduct;
+	
+		if (!title || !description || !precio || !id) {
+			alert("Todos los campos son requeridos.");
+			return;
+		}
+	
+		// Hacer la solicitud PUT a la API para actualizar el producto
+		fetch(`${baseUrl}/${editedProduct.id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				title: editedProduct.title,
+				description: editedProduct.description,
+				precio: editedProduct.precio,
+				color: editedProduct.color,
+				img: editedProduct.img,
+				categoria: editedProduct.categoria,
+			}),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error('Error al actualizar el producto.');
+				}
+				return response.json();
+			})
+			.then(() => {
+				// Mostrar la alerta con react-toastify
+				toast('Producto actualizado correctamente!', {
+					position: "bottom-center",
+					autoClose: 3000,
+					hideProgressBar: true,
+					closeOnClick: false,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+				});
+	
+				// Actualizar el estado de los productos
+				const updatedProducts = products.map((product) =>
+					product.id === editedProduct.id ? editedProduct : product
+				);
+				setProducts(updatedProducts);
+				setFilteredProducts(updatedProducts);
+				setIsModalOpen(false);
+	
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+				alert('Hubo un problema al actualizar el producto.');
+			});
+	};
+
 	const paginatedProducts = filteredProducts.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
@@ -57,6 +140,7 @@ const ProductsTable = () => {
 
 	return (
 		<>
+		    <ToastContainer />
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
 				initial={{ opacity: 0, y: 20 }}
@@ -112,8 +196,7 @@ const ProductsTable = () => {
 										{product.title}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-										${product.precio ? product.precio.toFixed(2) : 'N/A'}
-									</td>
+										${product.precio ? parseFloat(product.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}								</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										{product.categoria}
 									</td>
@@ -126,9 +209,12 @@ const ProductsTable = () => {
 										/>
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-										<button className='text-cyan-500 hover:text-cyan-400 mr-2'>
-											<Edit size={18} />
-										</button>
+											<button
+												className='text-cyan-500 hover:text-cyan-400 mr-2'
+												onClick={() => handleEditClick(product)}
+											>
+												<Edit size={18} />
+											</button>
 										<button className='text-red-400 hover:text-red-300'>
 											<Trash2 size={18} />
 										</button>
@@ -169,6 +255,87 @@ const ProductsTable = () => {
 						>
 							Close
 						</button>
+					</div>
+				</div>
+			)}
+
+			{isModalOpen && (
+				<div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+					<div className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'>
+						<h2 className='text-xl font-semibold mb-4'>Editar Producto</h2>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Title</label>
+							<input
+								type='text'
+								name='title'
+								value={editedProduct.title}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Description</label>
+							<textarea
+								name='description'
+								value={editedProduct.description}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded h-32'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Color</label>
+							<input
+								type='text'
+								name='color'
+								value={editedProduct.color}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Precio</label>
+							<input
+								type='number'
+								name='precio'
+								value={editedProduct.precio}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Imagen</label>
+							<input
+								type='text'
+								name='img'
+								value={editedProduct.img}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700'>Categoria</label>
+							<input
+								type='text'
+								name='categoria'
+								value={editedProduct.categoria}
+								onChange={handleInputChange}
+								className='w-full p-2 border rounded'
+							/>
+						</div>
+						<div className='flex justify-end'>
+							<button
+								onClick={handleModalClose}
+								className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2'
+							>
+								Cancelar
+							</button>
+							<button
+								onClick={handleSaveChanges}
+								className='px-4 py-2 bg-cyan-500 text-white rounded-md'
+							>
+								Guardar
+							</button>
+						</div>
 					</div>
 				</div>
 			)}

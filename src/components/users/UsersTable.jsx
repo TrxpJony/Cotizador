@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 const baseUrl = 'http://localhost:3002/api/usuarios';
@@ -66,13 +66,13 @@ const UsersTable = () => {
 
 	const handleSaveChanges = () => {
 		const { id, usuario, contraseña } = editedUser;
-
+	
 		// Validar que los campos no estén vacíos
 		if (!usuario || !contraseña || !id) {
 			alert("Usuario, contraseña e ID son requeridos.");
 			return;
 		}
-
+	
 		// Hacer la solicitud PUT a la API para actualizar el usuario
 		fetch(`${baseUrl}/${id}`, {
 			method: 'PUT',
@@ -101,17 +101,18 @@ const UsersTable = () => {
 					progress: undefined,
 					theme: "light",
 				});
+	
+				// Actualizar el estado de los usuarios sin necesidad de recargar la página
 				setUsers(users.map((user) => (user.id === id ? editedUser : user)));
-				setIsModalOpen(false);
-				setTimeout(() => {
-					window.location.reload(); // Recarga la página después de 3 segundos
-				}, 3000);
+				setFilteredUsers(users.map((user) => (user.id === id ? editedUser : user))); // Esto también actualiza el listado filtrado
+				setIsModalOpen(false); // Cierra el modal después de guardar los cambios
 			})
 			.catch((error) => {
 				console.error("Error al actualizar el usuario:", error);
 				alert("Hubo un problema al actualizar el usuario.");
 			});
 	};
+	
 
 	const handleDeleteClick = (id) => {
 		Swal.fire({
@@ -132,7 +133,6 @@ const UsersTable = () => {
 						if (!response.ok) {
 							throw new Error('Network response was not ok');
 						}
-						// Intenta parsear la respuesta como JSON
 						return response.json();
 					})
 					.then((data) => {
@@ -146,10 +146,10 @@ const UsersTable = () => {
 							progress: undefined,
 							theme: "light",
 						});
-						setUsers(users.filter((user) => user.id !== id));
-						setTimeout(() => {
-							window.location.reload(); // Recarga la página después de 3 segundos
-						}, 3000);
+	
+						// Actualizar el estado sin recargar la página
+						setUsers(users.filter((user) => user.id !== id)); // Elimina el usuario del estado
+						setFilteredUsers(filteredUsers.filter((user) => user.id !== id)); // Actualiza también el listado filtrado
 					})
 					.catch((error) => {
 						console.error("Error al eliminar el usuario:", error);
@@ -158,6 +158,7 @@ const UsersTable = () => {
 			}
 		});
 	};
+	
 
 	const paginatedUsers = filteredUsers.slice(
 		(currentPage - 1) * itemsPerPage,
@@ -166,6 +167,7 @@ const UsersTable = () => {
 
 	return (
 		<>
+		    <ToastContainer />
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
 				initial={{ opacity: 0, y: 20 }}
