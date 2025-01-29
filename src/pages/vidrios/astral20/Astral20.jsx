@@ -36,6 +36,31 @@ const Astral20 = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]);
 
+  // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
+
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
@@ -106,18 +131,18 @@ const Astral20 = () => {
   const empaqueastWidth = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 4 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaqueastPrice = (empaqueastHeight + empaqueastWidth) / 1000 * prices.empaqueast; // Precio total del empaqueast
+  const empaqueastPrice = (empaqueastHeight + empaqueastWidth) / 1000 * dbPrices.empaqueast; // Precio total del empaqueast
   const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
-  const cabezalastPrice = prices.cabezalast * (totalWidth / 1000);
-  const sillarastPrice = prices.sillarast * (totalWidth / 1000);
-  const sillarAlfajiaastPrice = prices.sillarAlfajiaast * (totalWidth / 1000);
-  const jambaastPrice = prices.jambaast * (doubleHeight / 1000);
-  const horizontalSuperiorastPrice = prices.horizontalSuperiorast * (doubleHalfWidth / 1000);
-  const horizontalInferiorFijaastPrice = prices.horizontalInferiorFijaast * (halfWidth / 1000);
-  const horizontalInferiorMovilastPrice = prices.horizontalInferiorMovilast * (halfWidth / 1000);
-  const traslapeastPrice = prices.traslapeast * (doubleHeight / 1000);
-  const engancheastPrice = prices.engancheast * (doubleHeight / 1000);
+  const cabezalastPrice = dbPrices.cabezalast * (totalWidth / 1000);
+  const sillarastPrice = dbPrices.sillarast * (totalWidth / 1000);
+  const sillarAlfajiaastPrice = dbPrices.sillarAlfajiaast * (totalWidth / 1000);
+  const jambaastPrice = dbPrices.jambaast * (doubleHeight / 1000);
+  const horizontalSuperiorastPrice = dbPrices.horizontalSuperiorast * (doubleHalfWidth / 1000);
+  const horizontalInferiorFijaastPrice = dbPrices.horizontalInferiorFijaast * (halfWidth / 1000);
+  const horizontalInferiorMovilastPrice = dbPrices.horizontalInferiorMovilast * (halfWidth / 1000);
+  const traslapeastPrice = dbPrices.traslapeast * (doubleHeight / 1000);
+  const engancheastPrice = dbPrices.engancheast * (doubleHeight / 1000);
 
   const kitCierreastPrice = accessories.kitCierreast ? accessoryPrices.kitCierreast : 0;
   const cubetaAngeoPrice = accessories.cubetaAngeo ? accessoryPrices.cubetaAngeo : 0;

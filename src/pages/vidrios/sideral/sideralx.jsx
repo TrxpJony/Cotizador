@@ -33,6 +33,30 @@ const Sideralx = () => {
     const [utilitaryPrices, setUtilitaryPrices] = useState({});
     const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+    // Nuevo estado para los precios de la base de datos
+    const [dbPrices, setDbPrices] = useState({});
+
+    // Efecto para cargar los precios de la base de datos
+    useEffect(() => {
+        const fetchPrices = async () => {
+            try {
+                const response = await fetch('http://localhost:3002/api/precios');
+                const data = await response.json();
+
+                // Convertir el array de precios a un objeto para fácil acceso
+                const pricesObject = data.reduce((acc, item) => {
+                    acc[item.nombre] = item.precio;
+                    return acc;
+                }, {});
+
+                setDbPrices(pricesObject);
+            } catch (error) {
+                console.error('Error al cargar los precios:', error);
+            }
+        };
+
+        fetchPrices();
+    }, []);
 
     useEffect(() => {
         setPrices(preciosData.precios);
@@ -106,13 +130,13 @@ const Sideralx = () => {
     const empaqueSidWidth = height && width ? width * 2 : '';
     const felpaHeight = height && width ? height * 6 : '';
     const felpaWidth = height && width ? width * 2 : '';
-    const empaqueSidPrice = (empaqueSidHeight + empaqueSidWidth) / 1000 * prices.empaqueSid; // Precio total del empaque
+    const empaqueSidPrice = (empaqueSidHeight + empaqueSidWidth) / 1000 * dbPrices.empaqueSid; // Precio total del empaque
     const totFelpa = (felpaHeight + felpaWidth);
     // Calcular precios
-    const marcoPerimetralSidPrice = prices.marcoPerimetralSid * (marcoPerimetralSid / 1000);
-    const horizontalFelperosSidPrice = prices.horizontalFelperosSid * (doubleWidth / 1000);
-    const verticalSidPrice = prices.verticalSid * (doubleHeight / 1000);
-    const verticalReforzadoSidPrice = prices.verticalReforzadoSid * (doubleHeight / 1000);
+    const marcoPerimetralSidPrice = dbPrices.marcoPerimetralSid * (marcoPerimetralSid / 1000);
+    const horizontalFelperosSidPrice = dbPrices.horizontalFelperosSid * (doubleWidth / 1000);
+    const verticalSidPrice = dbPrices.verticalSid * (doubleHeight / 1000);
+    const verticalReforzadoSidPrice = dbPrices.verticalReforzadoSid * (doubleHeight / 1000);
 
     const kitManijaDobleSidPrice = accessories.kitManijaDobleSid ? accessoryPrices.kitManijaDobleSid : 0;
     const kitCierreConLlave3890Price = accessories.kitCierreConLlave3890 ? accessoryPrices.kitCierreConLlave3890 : 0;

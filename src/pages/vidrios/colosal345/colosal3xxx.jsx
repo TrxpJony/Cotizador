@@ -41,6 +41,31 @@ const Colosal3xxx = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+  // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
+
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
@@ -109,15 +134,15 @@ const Colosal3xxx = () => {
   const empaquecolWidth = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * prices.empaquecol; // Precio total del empaquecol
+  const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaquecol; // Precio total del empaquecol
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralCol345 = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
   const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 3 + 13) * 6 + totalHeight * 6) : 0;
   // Calcular precios
 
-  const marcoPerimetralCol345Price = (marcoPerimetralCol345 / 1000) * prices.marcoPerimetralCol345;
-  const perimetralNaveCol345Price = (perimetralNaveCol345 / 1000) * prices.perimetralNaveCol345;
-  const engancheCol345Price = prices.engancheCol345 * (cuadHeight / 1000);
+  const marcoPerimetralCol345Price = (marcoPerimetralCol345 / 1000) * dbPrices.marcoPerimetralCol345;
+  const perimetralNaveCol345Price = (perimetralNaveCol345 / 1000) * dbPrices.perimetralNaveCol345;
+  const engancheCol345Price = dbPrices.engancheCol345 * (cuadHeight / 1000);
 
   const kitCierrecol345Price = accessories.kitCierrecol345 ? accessoryPrices.kitCierrecol345 : 0;
   const kitCierreConLlavecol345Price = accessories.kitCierreConLlavecol345 ? accessoryPrices.kitCierreConLlavecol345 : 0;

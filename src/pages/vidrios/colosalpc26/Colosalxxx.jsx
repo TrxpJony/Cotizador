@@ -37,6 +37,31 @@ const Colosalxxx = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+  // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
+
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
@@ -110,16 +135,16 @@ const Colosalxxx = () => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * prices.empaquecol; // Precio total del empaquecol
   const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
-  const cabezalcolPrice = prices.cabezalcol * (totalWidth / 1000);
-  const sillarcolPrice = prices.sillarcol * (totalWidth / 1000);
-  const guiaDoblecolPrice = prices.guiaDoblecol * (totalWidth / 1000);
-  const jambacolPrice = prices.jambacol * (doubleHeight / 1000);
-  const horizontalSuperiorcolPrice = prices.horizontalSuperiorcol * (tripleHalfWidth / 1000);
-  const horizontalInferiorMovilcolPrice = prices.horizontalInferiorMovilcol * (tripleHalfWidth / 1000);
-  const traslapecolPrice = prices.traslapecol * (doubleHeight / 1000);
-  const enganchecolPrice = prices.enganchecol * (cuadrupleHeight / 1000);
-  const complementoCabezalcolPrice = prices.complementoCabezalcol * (totalWidth / 1000);
-  const complementoJambacolPrice = prices.complementoJambacol * (doubleHeight / 1000);
+  const cabezalcolPrice = dbPrices.cabezalcol ? (dbPrices.cabezalcol * (totalWidth / 1000)) : 0;
+  const sillarcolPrice = dbPrices.sillarcol ? (dbPrices.sillarcol * (totalWidth / 1000)) : 0;
+  const guiaDoblecolPrice = dbPrices.guiaDoblecol ? (dbPrices.guiaDoblecol * (totalWidth / 1000)) : 0;
+  const jambacolPrice = dbPrices.jambacol ? (dbPrices.jambacol * (doubleHeight / 1000)) : 0;
+  const horizontalSuperiorcolPrice = dbPrices.horizontalSuperiorcol ? (dbPrices.horizontalSuperiorcol * (tripleHalfWidth / 1000)) : 0;
+  const horizontalInferiorMovilcolPrice = dbPrices.horizontalInferiorMovilcol ? (dbPrices.horizontalInferiorMovilcol * (tripleHalfWidth / 1000)) : 0;
+  const traslapecolPrice = dbPrices.traslapecol ? (dbPrices.traslapecol * (doubleHeight / 1000)) : 0;
+  const enganchecolPrice = dbPrices.enganchecol ? (dbPrices.enganchecol * (cuadrupleHeight / 1000)) : 0;
+  const complementoCabezalcolPrice = dbPrices.complementoCabezalcol ? (dbPrices.complementoCabezalcol * (totalWidth / 1000)) : 0;
+  const complementoJambacolPrice = dbPrices.complementoJambacol ? (dbPrices.complementoJambacol * (doubleHeight / 1000)) : 0;
 
   const kitCierrecolPrice = accessories.kitCierrecol ? accessoryPrices.kitCierrecol : 0;
   const kitCierreConLlavecolPrice = accessories.kitCierreConLlavecol ? accessoryPrices.kitCierreConLlavecol : 0;

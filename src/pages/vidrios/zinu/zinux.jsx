@@ -33,6 +33,30 @@ const Zinux = () => {
     const [utilitaryPrices, setUtilitaryPrices] = useState({});
     const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
+
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
 
     useEffect(() => {
         setPrices(preciosData.precios);
@@ -104,13 +128,13 @@ const Zinux = () => {
     const empaque3890Width = height && width ? width * 2 : '';
     const felpaHeight = height && width ? height * 6 : '';
     const felpaWidth = height && width ? width * 2 : '';
-    const empaque3890Price = (empaque3890Height + empaque3890Width) / 1000 * prices.empaque3890; // Precio total del empaque
+    const empaque3890Price = (empaque3890Height + empaque3890Width) / 1000 * dbPrices.empaque3890; // Precio total del empaque
     const totFelpa = (felpaHeight + felpaWidth);
     // Calcular precios
-    const marcoPerimetralZinuPrice = prices.marcoPerimetralZinu * (marcoPerimetralZinu / 1000);
-    const perimetralNaveZinuPrice = prices.perimetralNaveZinu * (marcoPerimetralZinu / 1000);
-    const pisaVidrioZinuPrice = prices.pisaVidrioZinu * (marcoPerimetralZinu / 1000);
-    const verticalHorizontalesCaZinuPrice = prices.verticalHorizontalesCaZinu * (marcoPerimetralZinu / 1000);
+    const marcoPerimetralZinuPrice = dbPrices.marcoPerimetralZinu * (marcoPerimetralZinu / 1000);
+    const perimetralNaveZinuPrice = dbPrices.perimetralNaveZinu * (marcoPerimetralZinu / 1000);
+    const pisaVidrioZinuPrice = dbPrices.pisaVidrioZinu * (marcoPerimetralZinu / 1000);
+    const verticalHorizontalesCaZinuPrice = dbPrices.verticalHorizontalesCaZinu * (marcoPerimetralZinu / 1000);
     const kitCierreZinuPrice = accessories.kitCierreZinu ? accessoryPrices.kitCierreZinu : 0;
     const kitCierreConLlaveZinuPrice = accessories.kitCierreConLlaveZinu ? accessoryPrices.kitCierreConLlaveZinu : 0;
     const limitador150ZinuPrice = accessories.limitador150Zinu ? accessoryPrices.limitador150Zinu : 0;

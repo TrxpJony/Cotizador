@@ -32,6 +32,30 @@ const Sistema3890 = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
+
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
 
   useEffect(() => {
     setPrices(preciosData.precios);
@@ -96,11 +120,11 @@ const Sistema3890 = () => {
   const empaque3890Width = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaque3890Price = (empaque3890Height + empaque3890Width) / 1000 * prices.empaque3890; // Precio total del empaque
+  const empaque3890Price = (empaque3890Height + empaque3890Width) / 1000 * dbPrices.empaque3890; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
-  const aln1101s3890Price = prices.aln1101s3890 * (aln1101s3890 / 1000);
-  const aln1102s3890Price = prices.aln1102s3890 * (totalWidth / 1000);
+  const aln1101s3890Price = dbPrices.aln1101s3890 * (aln1101s3890 / 1000);
+  const aln1102s3890Price = dbPrices.aln1102s3890 * (totalWidth / 1000);
 
   const kitCierre3890Price = accessories.kitCierre3890 ? accessoryPrices.kitCierre3890 : 0;
   const kitCierreConLlave3890Price = accessories.kitCierreConLlave3890 ? accessoryPrices.kitCierreConLlave3890 : 0;

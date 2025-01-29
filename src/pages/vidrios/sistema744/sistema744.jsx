@@ -31,6 +31,31 @@ const Sistema744 = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]);
 
+  // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
+
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
@@ -85,16 +110,16 @@ const Sistema744 = () => {
   const empaque744Width = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaque744Price = (empaque744Height + empaque744Width) / 1000 * prices.empaque744; // Precio total del empaque
+  const empaque744Price = (empaque744Height + empaque744Width) / 1000 * dbPrices.empaque744; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
-  const cabezal744Price = prices.cabezal744 * (totalWidth / 1000);
-  const sillar744Price = prices.sillar744 * (totalWidth / 1000);
-  const jamba744Price = prices.jamba744 * (doubleHeight / 1000);
-  const horizontalSuperior744Price = prices.horizontalSuperior744 * (doubleHalfWidth / 1000);
-  const horizontalInferior744Price = prices.horizontalInferior744 * (doubleHalfWidth / 1000);
-  const traslape744Price = prices.traslape744 * (doubleHeight / 1000);
-  const enganche744Price = prices.enganche744 * (doubleHeight / 1000);
+  const cabezal744Price = dbPrices.cabezal744 * (totalWidth / 1000);
+  const sillar744Price = dbPrices.sillar744 * (totalWidth / 1000);
+  const jamba744Price = dbPrices.jamba744 * (doubleHeight / 1000);
+  const horizontalSuperior744Price = dbPrices.horizontalSuperior744 * (doubleHalfWidth / 1000);
+  const horizontalInferior744Price = dbPrices.horizontalInferior744 * (doubleHalfWidth / 1000);
+  const traslape744Price = dbPrices.traslape744 * (doubleHeight / 1000);
+  const enganche744Price = dbPrices.enganche744 * (doubleHeight / 1000);
 
   const kitCierre744Price = accessories.kitCierre744 ? accessoryPrices.kitCierre744 : 0;
   const rodamientoSimple744Price = accessories.rodamientoSimple744 ? accessoryPrices.rodamientoSimple744 * 2 : 0;

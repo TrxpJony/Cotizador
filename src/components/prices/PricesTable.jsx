@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { Search, Trash2, Edit } from "lucide-react";
+import { Search, Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
-import Swal from 'sweetalert2';
 
 const baseUrl = 'http://localhost:3002/api/precios';
 
@@ -116,50 +115,6 @@ const PricesTable = () => {
 			});
 	};
 
-	const handleDeleteClick = (id) => {
-		Swal.fire({
-			title: '¿Estás seguro?',
-			text: "¡No podrás revertir esto!",
-			showCancelButton: true,
-			confirmButtonColor: '#06B6D4',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sí, eliminarlo!',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				fetch(`${baseUrl}/${id}`, {
-					method: 'DELETE',
-				})
-					.then((response) => {
-						if (!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-						return response.json();
-					})
-					.then((data) => {
-						toast(data.message, {
-							position: "bottom-center",
-							autoClose: 3000,
-							hideProgressBar: true,
-							closeOnClick: false,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: "light",
-						});
-
-						const updatedPrices = prices.filter((price) => price.id !== id);
-						setPrices(updatedPrices);
-						setFilteredPrices(updatedPrices);
-					})
-					.catch((error) => {
-						console.error("Error al eliminar el precio:", error);
-						alert("Hubo un problema al eliminar el precio.");
-					});
-			}
-		});
-	};
-
 	const paginatedPrices = filteredPrices.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
@@ -230,12 +185,6 @@ const PricesTable = () => {
 											onClick={() => handleEditClick(price)}
 										>
 											<Edit size={18} />
-										</button>
-										<button
-											className='text-red-400 hover:text-red-300'
-											onClick={() => handleDeleteClick(price.id)}
-										>
-											<Trash2 size={18} />
 										</button>
 									</td>
 								</motion.tr>

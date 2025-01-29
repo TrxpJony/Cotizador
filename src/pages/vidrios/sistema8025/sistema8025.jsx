@@ -33,6 +33,31 @@ const Sistema8025 = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]);
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
+
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
+
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
@@ -103,16 +128,16 @@ const Sistema8025 = () => {
   const empaque744Width = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaque744Price = (empaque744Height + empaque744Width) / 1000 * prices.empaque744; // Precio total del empaque
+  const empaque744Price = (empaque744Height + empaque744Width) / 1000 * dbPrices.empaque744; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   // Calcular precios
-  const cabezal8025Price = prices.cabezal8025 * (totalWidth / 1000);
-  const sillar8025Price = prices.sillar8025 * (totalWidth / 1000);
-  const jamba8025Price = prices.jamba8025 * (doubleHeight / 1000);
-  const horizontalSuperior8025Price = prices.horizontalSuperior8025 * (doubleHalfWidth / 1000);
-  const horizontalInferior8025Price = prices.horizontalInferior8025 * (doubleHalfWidth / 1000);
-  const traslape8025Price = prices.traslape8025 * (doubleHeight / 1000);
-  const enganche8025Price = prices.enganche8025 * (doubleHeight / 1000);
+  const cabezal8025Price = dbPrices.cabezal8025 * (totalWidth / 1000);
+  const sillar8025Price = dbPrices.sillar8025 * (totalWidth / 1000);
+  const jamba8025Price = dbPrices.jamba8025 * (doubleHeight / 1000);
+  const horizontalSuperior8025Price = dbPrices.horizontalSuperior8025 * (doubleHalfWidth / 1000);
+  const horizontalInferior8025Price = dbPrices.horizontalInferior8025 * (doubleHalfWidth / 1000);
+  const traslape8025Price = dbPrices.traslape8025 * (doubleHeight / 1000);
+  const enganche8025Price = dbPrices.enganche8025 * (doubleHeight / 1000);
 
   const kitCierre8025Price = accessories.kitCierre8025 ? accessoryPrices.kitCierre8025 : 0;
   const kitCierreConLlave8025Price = accessories.kitCierreConLlave8025 ? accessoryPrices.kitCierreConLlave8025 : 0;

@@ -64,7 +64,30 @@ const Kimbayaxxx = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
 
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
 
   useEffect(() => {
     setPrices(preciosData.precios);
@@ -158,7 +181,7 @@ const Kimbayaxxx = () => {
   const empaquekimWidth = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaquekimPrice = (empaquekimHeight + empaquekimWidth) / 1000 * prices.empaquekim; // Precio total del empaquekim
+  const empaquekimPrice = (empaquekimHeight + empaquekimWidth) / 1000 * dbPrices.empaquekim; // Precio total del empaquekim
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralkim = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
   const pistaRodamientokim = (totalWidth && totalHeight) ? (totalWidth * 3 + totalHeight * 6) : 0;
@@ -166,15 +189,15 @@ const Kimbayaxxx = () => {
   const verticalHorizontalesCakim = (totalWidth && totalHeight) ? ((totalWidth / 3 + 27) * 6 + totalHeight * 2) : 0;
 
   // Calcular precios
-  const pistaRodamientokimPrice = (pistaRodamientokim / 1000) * prices.pistaRodamientokim;
-  const marcoPerimetralkimPrice = (marcoPerimetralkim / 1000) * prices.marcoPerimetralkim;
-  const pistaRodamientokalPrice = prices.pistaRodamientokal * ((totalWidth / 1000) * 3);
-  const complementoSuperiorkimPrice = prices.complementoSuperiorkim * ((totalWidth / 1000) * 3);
-  const enganchekimPrice = prices.enganchekim * (cuadHeight / 1000);
-  const engancheVidrioCakimPrice = prices.engancheVidrioCakim * (cuadHeight / 1000);
-  const verticalHorizontaleskimPrice = (verticalHorizontaleskim / 1000) * prices.verticalHorizontaleskim;
-  const verticalHorizontalesCakimPrice = (verticalHorizontalesCakim / 1000) * prices.verticalHorizontalesCakim;
-  const adaptadorKimPrice = prices.adaptadorKim * (totalHeight / 1000);
+  const pistaRodamientokimPrice = (pistaRodamientokim / 1000) * dbPrices.pistaRodamientokim;
+  const marcoPerimetralkimPrice = (marcoPerimetralkim / 1000) * dbPrices.marcoPerimetralkim;
+  const pistaRodamientokalPrice = dbPrices.pistaRodamientokal * ((totalWidth / 1000) * 3);
+  const complementoSuperiorkimPrice = dbPrices.complementoSuperiorkim * ((totalWidth / 1000) * 3);
+  const enganchekimPrice = dbPrices.enganchekim * (cuadHeight / 1000);
+  const engancheVidrioCakimPrice = dbPrices.engancheVidrioCakim * (cuadHeight / 1000);
+  const verticalHorizontaleskimPrice = (verticalHorizontaleskim / 1000) * dbPrices.verticalHorizontaleskim;
+  const verticalHorizontalesCakimPrice = (verticalHorizontalesCakim / 1000) * dbPrices.verticalHorizontalesCakim;
+  const adaptadorKimPrice = dbPrices.adaptadorKim * (totalHeight / 1000);
 
   const escuadraEnsamblekimPrice = accessories.escuadraEnsamblekim ? accessoryPrices.escuadraEnsamblekim : 0;
   const espumaSelloSukimPrice = accessories.espumaSelloSukim ? accessoryPrices.espumaSelloSukim : 0;

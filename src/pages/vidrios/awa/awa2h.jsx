@@ -37,6 +37,30 @@ const Awa3h = () => {
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
+
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
 
   useEffect(() => {
     setPrices(preciosData.precios);
@@ -99,19 +123,19 @@ const Awa3h = () => {
   const empaquecolWidth = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 6 : '';
   const felpaWidth = height && width ? width * 2 : '';
-  const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * prices.empaquecol; // Precio total del empaque
+  const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaqueAwa; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   const verticalInferiorAwa = (totalWidth && totalHeight) ? (totalWidth * 1 + totalHeight * 2) : 0;
   const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 3) * 6 + (totalHeight * 6)) : 0;
   
   // Calcular precios
-  const compensadorAwaPrice = prices.compensadorAwa * (totalWidth / 1000);
-  const cabezalAwaPrice = prices.cabezalAwa * (totalWidth / 1000);
-  const verticalInferiorAwaPrice = prices.verticalInferiorAwa * (verticalInferiorAwa / 1000);
-  const sillarEmpotrarAwaPrice = prices.sillarEmpotrarAwa * (totalWidth / 1000);
-  const sillaSobreponerAwaPrice = prices.sillaSobreponerAwa * (totalWidth / 1000);
-  const perimetralAwaPrice = prices.perimetralAwa * (perimetralAwa / 1000);
-  const pisavidrioPerimetralAwaPrice = prices.pisavidrioPerimetralAwa * (perimetralAwa / 1000);
+  const compensadorAwaPrice = dbPrices.compensadorAwa * (totalWidth / 1000);
+  const cabezalAwaPrice = dbPrices.cabezalAwa * (totalWidth / 1000);
+  const verticalInferiorAwaPrice = dbPrices.verticalInferiorAwa * (verticalInferiorAwa / 1000);
+  const sillarEmpotrarAwaPrice = dbPrices.sillarEmpotrarAwa * (totalWidth / 1000);
+  const sillaSobreponerAwaPrice = dbPrices.sillaSobreponerAwa * (totalWidth / 1000);
+  const perimetralAwaPrice = dbPrices.perimetralAwa * (perimetralAwa / 1000);
+  const pisavidrioPerimetralAwaPrice = dbPrices.pisavidrioPerimetralAwa * (perimetralAwa / 1000);
 
   const kitManijaAwaPrice = accessories.kitManijaAwa ? accessoryPrices.kitManijaAwa : 0;
   const kitManijaConLlaveAwaPrice = accessories.kitManijaConLlaveAwa ? accessoryPrices.kitManijaConLlaveAwa : 0;

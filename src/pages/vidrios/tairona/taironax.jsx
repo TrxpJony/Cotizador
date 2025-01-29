@@ -33,13 +33,36 @@ const Taironax = () => {
     const [utilitaryPrices, setUtilitaryPrices] = useState({});
     const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
+
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
+
+  fetchPrices();
+}, []);
 
     useEffect(() => {
         setPrices(preciosData.precios);
         setAccessoryPrices(preciosData.accesorios);
         setUtilitaryPrices(preciosData.utilitarios);
     }, []);
-
 
     // Función que maneja el cambio de valores
     const handleChange = (e) => {
@@ -104,13 +127,14 @@ const Taironax = () => {
     const empaqueTaironaWidth = height && width ? width * 2 : '';
     const felpaHeight = height && width ? height * 6 : '';
     const felpaWidth = height && width ? width * 2 : '';
-    const empaqueTaironaPrice = (empaqueTaironaHeight + empaqueTaironaWidth) / 1000 * prices.empaqueTairona; // Precio total del empaque
+    const empaqueTaironaPrice = (empaqueTaironaHeight + empaqueTaironaWidth) / 1000 * dbPrices.empaqueTairona; // Precio total del empaque
     const totFelpa = (felpaHeight + felpaWidth);
     // Calcular precios
-    const marcoPerimetralTaironaPrice = prices.marcoPerimetralTairona * (marcoPerimetralTairona / 1000);
-    const perimetralNaveTaironaPrice = prices.perimetralNaveTairona * (marcoPerimetralTairona / 1000);
-    const pisaVidrioTaironaPrice = prices.pisaVidrioTairona * (marcoPerimetralTairona / 1000);
-    const verticalHorizontalesCaTaironaPrice = prices.verticalHorizontalesCaTairona * (marcoPerimetralTairona / 1000);
+    const marcoPerimetralTaironaPrice = dbPrices.marcoPerimetralTairona * (marcoPerimetralTairona / 1000);
+    const perimetralNaveTaironaPrice = dbPrices.perimetralNaveTairona * (marcoPerimetralTairona / 1000);
+    const pisaVidrioTaironaPrice = dbPrices.pisaVidrioTairona * (marcoPerimetralTairona / 1000);
+    const verticalHorizontalesCaTaironaPrice = dbPrices.verticalHorizontalesCaTairona * (marcoPerimetralTairona / 1000);
+   
     const kitCierreTaironaPrice = accessories.kitCierreTairona ? accessoryPrices.kitCierreTairona : 0;
     const kitCierreConLlaveTaironaPrice = accessories.kitCierreConLlaveTairona ? accessoryPrices.kitCierreConLlaveTairona : 0;
     const limitador150TaironaPrice = accessories.limitador150Tairona ? accessoryPrices.limitador150Tairona : 0;
