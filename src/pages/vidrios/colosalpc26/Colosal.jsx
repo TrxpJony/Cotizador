@@ -63,7 +63,8 @@ const Colosal = () => {
           onAddDoor={handleAddDoor} 
           onAccessoryChange={handleAccessoryChange} 
           selectedAccessories={selectedAccessories} 
-        /> {/* Pass dimensions, handler, and selected accessories as props */}
+          useCalculoPrecios={useCalculoPrecios} 
+        /> {/* Pass useCalculoPrecios as a prop */}
       </div>
     </>
   );

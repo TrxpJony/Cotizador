@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import useCalculoPrecios from './useCalculoPrecios';
 
-const EnviarDimensiones = ({ onDimensionsChange }) => {
+const EnviarDimensiones744 = ({ onDimensionsChange }) => {
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
 
   const handleChange = (e) => {
@@ -55,9 +55,9 @@ const EnviarDimensiones = ({ onDimensionsChange }) => {
   );
 };
 
-EnviarDimensiones.propTypes = {
+EnviarDimensiones744.propTypes = {
   // setTotalPrice: PropTypes.func.isRequired, // Removed this line
   onDimensionsChange: PropTypes.func.isRequired,
 };
 
-export default EnviarDimensiones;
+export default EnviarDimensiones744;

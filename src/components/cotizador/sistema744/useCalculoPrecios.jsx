@@ -38,22 +38,21 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const totalWidth = Number(width);
     const doubleHeight = totalHeight * 2;
     const doubleHalfWidth = halfWidth * 2;
-    const empaquecolHeight = totalHeight * 4;
-    const empaquecolWidth = totalWidth * 2;
+    const empaque744Height = totalHeight * 4;
+    const empaque744Width = totalWidth * 2;
     const felpaHeight = totalHeight * 6;
     const felpaWidth = totalWidth * 2;
     const totalFelpa = felpaHeight + felpaWidth;
     const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
-    const cabezalcolPrice = getPrice("cabezalcol", totalWidth);
-    const sillarcolPrice = getPrice("sillarcol", totalWidth);
-    const jambacolPrice = getPrice("jambacol", doubleHeight);
-    const horizontalSuperiorcolPrice = getPrice("horizontalSuperiorcol", doubleHalfWidth);
-    const horizontalInferiorFijacolPrice = getPrice("horizontalInferiorFijacol", halfWidth);
-    const horizontalInferiorMovilcolPrice = getPrice("horizontalInferiorMovilcol", halfWidth);
-    const traslapecolPrice = getPrice("traslapecol", doubleHeight);
-    const enganchecolPrice = getPrice("enganchecol", doubleHeight);
-    const empaquecolPrice = getPrice("empaquecol", empaquecolHeight + empaquecolWidth);
+    const cabezal744Price = getPrice("cabezal744", totalWidth);
+    const sillar744Price = getPrice("sillar744", totalWidth);
+    const jamba744Price = getPrice("jamba744", doubleHeight);
+    const horizontalSuperior744Price = getPrice("horizontalSuperior744", doubleHalfWidth);
+    const horizontalInferior744Price = getPrice("horizontalInferior744", doubleHalfWidth);
+    const traslape744Price = getPrice("traslape744", doubleHeight);
+    const enganche744Price = getPrice("enganche744", doubleHeight);
+    const empaque744Price = getPrice("empaque744", empaque744Height + empaque744Width);
     const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
     const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
@@ -62,9 +61,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
     const total = 
-      cabezalcolPrice + sillarcolPrice + jambacolPrice + 
-      horizontalSuperiorcolPrice + horizontalInferiorFijacolPrice + horizontalInferiorMovilcolPrice + 
-      traslapecolPrice + enganchecolPrice + empaquecolPrice + tornillosPrice + siliconaPrice + accesoriosPrice + felpaPrice;
+      cabezal744Price + sillar744Price + jamba744Price + 
+      horizontalSuperior744Price + horizontalInferior744Price + 
+      traslape744Price + enganche744Price + empaque744Price + tornillosPrice + siliconaPrice + accesoriosPrice + felpaPrice;
 
     setTotalPrice(total);
     setCalculatedValues({
@@ -72,29 +71,25 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
       doubleHeight,
       halfWidth,
       doubleHalfWidth,
-      cabezalcolPrice,
-      sillarcolPrice,
-      jambacolPrice,
-      horizontalSuperiorcolPrice,
-      horizontalInferiorFijacolPrice,
-      horizontalInferiorMovilcolPrice,
-      traslapecolPrice,
-      enganchecolPrice,
-      empaquecolPrice,
+      cabezal744Price,
+      sillar744Price,
+      jamba744Price,
+      horizontalSuperior744Price,
+      horizontalInferior744Price,
+      traslape744Price,
+      enganche744Price,
+      empaque744Price,
       tornillosPrice,
       siliconaPrice,
-      empaquecolHeight,
-      empaquecolWidth,
+      empaque744Height,
+      empaque744Width,
       felpaHeight,
       felpaWidth,
       felpaPrice,
       totalFelpa,
-      kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number(memoizedPrices.kitCierrecol) : 0,
-      kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol) : 0,
-      cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
-      rodamientoSimple70colPrice: memoizedPrices.rodamientoSimple70col ? Number(memoizedPrices.rodamientoSimple70col) : 0,
-      rodamientoDoble140colPrice: memoizedPrices.rodamientoDoble140col ? Number(memoizedPrices.rodamientoDoble140col) : 0,
-      cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
+      kitCierre744Price: memoizedPrices.kitCierre744 ? Number(memoizedPrices.kitCierre744) : 0,
+      rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) : 0,
+     
     });
   }, [width, height, memoizedPrices, memoizedAccessories]);
 
