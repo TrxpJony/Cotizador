@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import jsPDF from 'jspdf';
 import logo from '../../../src/img/logo.png';
 import 'jspdf-autotable';
+import axios from 'axios'; // Import axios
+import Cookies from 'universal-cookie'; // Import cookies
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
-        client: '',
+        client: ' ',
         project: '',
         contact: '',
         phone: '',
@@ -16,6 +20,8 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         abono: '' // Add abono to formData
     });
     const [cotNumber, setCotNumber] = useState('');
+    const cookies = new Cookies();
+    const usuarioId = cookies.get('id'); // Get user ID from cookies
 
     useEffect(() => {
         const generateUniqueCotNumber = () => {
@@ -35,7 +41,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         }));
     };
 
-    const handlePrint = () => {
+    const handlePrint = async () => {
         const doc = new jsPDF();
         const cyanBlue = '#00b5e2';
         const lightGray = '#d3d3d3';
@@ -121,7 +127,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             body: summaryTableRows,
             startY: doc.previousAutoTable.finalY + 10, // Adjust startY to be below the previous table
             tableWidth: 'wrap', // Adjust table width to fit content
-            margin: { left: 120 }, // Position the table to the right
+            // Position the table to the right
             headStyles: { fillColor: lightGray },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
@@ -136,6 +142,35 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.text('Cel ventas: 3223065279 - 3204391328', 75, 290);
         doc.text('Nit: 900.260.389-9', 140, 287.5);
         
+        const pdfBlob = doc.output('blob');
+        const formDataToSend = new FormData();
+        formDataToSend.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
+        formDataToSend.append('cotNumber', cotNumber);
+        formDataToSend.append('client_name', formData.cliente);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('usuario_id', usuarioId); // Use user ID from cookies
+
+        try {
+            await axios.post('http://localhost:3002/api/cotizaciones', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            toast.success('Cotización almacenada con éxito', {
+                                position: "bottom-center",
+                                autoClose: 3000,
+                                hideProgressBar: true,
+                                closeOnClick: false,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+        } catch (error) {
+            console.error('Error al almacenar la cotización:', error);
+            toast.error('Error al almacenar la cotización'); // Show error toast
+        }
+
         doc.save(`${cotNumber}_${currentDate}.pdf`);
 
         handleCloseModal();
@@ -188,6 +223,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                     </div>
                 </div>
             )}
+            <ToastContainer /> {/* Add ToastContainer */}
         </>
     );
 };
