@@ -110,6 +110,7 @@ import AdmindPage from './admin/admindPage';
 import ProductsPage from './pages/ProductsPage';
 import UsersPage from './pages/UsersPage';
 import PricePage from './pages/PricePage';
+import CotiPage from './pages/cotiPage';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -239,6 +240,8 @@ function App() {
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
+          <Route path='/users' element={<ProtectedRoute element= {<UsersPage />} allowedRole='administrador' />} />
+          <Route path='/cotizaciones' element={<ProtectedRoute element= {<CotiPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp2" element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />} />
@@ -333,7 +336,6 @@ function App() {
           <Route path="cat005/sand5" element={<SandblastingCenefas />} />
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
-          <Route path='/users' element={<UsersPage />} />
         </Routes>
 
       </div>
