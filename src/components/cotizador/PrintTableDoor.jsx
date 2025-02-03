@@ -7,6 +7,7 @@ import axios from 'axios'; // Import axios
 import Cookies from 'universal-cookie'; // Import cookies
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
+import { v4 as uuidv4 } from 'uuid'; // Import uuid
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +26,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
 
     useEffect(() => {
         const generateUniqueCotNumber = () => {
-            return 'COT-' + Date.now();
+            return 'COT-' + uuidv4(); // Use uuidv4 to generate unique cotNumber
         };
         setCotNumber(generateUniqueCotNumber());
     }, []);
@@ -166,9 +167,31 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                 progress: undefined,
                                 theme: "light",
                             });
+
+            // Send email with PDF
+            const emailData = new FormData();
+            emailData.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
+            emailData.append('email', formData.email);
+            emailData.append('cotNumber', cotNumber);
+
+            await axios.post('http://localhost:3002/api/send-email', emailData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            toast.success('Correo de confirmación enviado', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (error) {
-            console.error('Error al almacenar la cotización:', error);
-            toast.error('Error al almacenar la cotización'); // Show error toast
+            console.error('Error al almacenar la cotización o enviar el correo:', error);
+            toast.error('Error al almacenar la cotización o enviar el correo');
         }
 
         doc.save(`${cotNumber}_${currentDate}.pdf`);
