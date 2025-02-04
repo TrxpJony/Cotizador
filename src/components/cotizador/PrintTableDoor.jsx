@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie'; // Import cookies
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
+import { CircularProgress } from '@heroui/react';
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +22,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         abono: '' // Add abono to formData
     });
     const [cotNumber, setCotNumber] = useState('');
+    const [isLoading, setIsLoading] = useState(false); // Add loading state
     const cookies = new Cookies();
     const usuarioId = cookies.get('id'); // Get user ID from cookies
 
@@ -43,6 +45,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     };
 
     const handlePrint = async () => {
+        setIsLoading(true); // Set loading to true
         const doc = new jsPDF();
         const cyanBlue = '#00b5e2';
         const lightGray = '#d3d3d3';
@@ -195,7 +198,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         }
 
         doc.save(`${cotNumber}_${currentDate}.pdf`);
-
+        setIsLoading(false); // Set loading to false
         handleCloseModal();
     };
 
@@ -208,41 +211,48 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             {isModalOpen && (
                 <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto'>
                     <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-4 my-8 mt-16 sm:mt-8'>
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Datos para el PDF</h2>
-
-                        {/* Form Fields - 2 columns */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            {['cliente', 'projecto', 'contacto', 'telefono', 'direccion', 'email', 'abono'].map((field, index) => (
-                                <div key={index} className='mb-5'>
-                                    <label htmlFor={field} className='block text-gray-700 font-medium mb-2'>{field.toUpperCase()}</label>
-                                    <input
-                                        id={field}
-                                        type='text'
-                                        name={field}
-                                        value={formData[field]}
-                                        onChange={handleChange}
-                                        className='w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500'
-                                        placeholder={`Ingrese el ${field}`}
-                                    />
+                        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Cotizacion</h2>
+                        {isLoading ? (
+                            <div className="flex justify-center items-center">
+                                <CircularProgress aria-label="Loading..." color="default" />
+                            </div>
+                        ) : (
+                            <>
+                                {/* Form Fields - 2 columns */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    {['cliente', 'projecto', 'contacto', 'telefono', 'direccion', 'email', 'abono'].map((field, index) => (
+                                        <div key={index} className='mb-5'>
+                                            <label htmlFor={field} className='block text-gray-700 font-medium mb-2'>{field.toUpperCase()}</label>
+                                            <input
+                                                id={field}
+                                                type='text'
+                                                name={field}
+                                                value={formData[field]}
+                                                onChange={handleChange}
+                                                className='w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500'
+                                                placeholder={`Ingrese el ${field}`}
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
 
-                        {/* Buttons */}
-                        <div className="flex justify-end space-x-4 mt-6">
-                            <button
-                                onClick={handleCloseModal}
-                                className="px-6 py-3 bg-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                onClick={handlePrint}
-                                className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                            >
-                                Imprimir
-                            </button>
-                        </div>
+                                {/* Buttons */}
+                                <div className="flex justify-end space-x-4 mt-6">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        className="px-6 py-3 bg-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        onClick={handlePrint}
+                                        className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                    >
+                                        Imprimir
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             )}

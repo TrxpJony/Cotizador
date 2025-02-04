@@ -30,11 +30,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         felpaPrice,
         totalFelpa,
     } = calculatedValues || {};
-
+    
     return (
         <>
             <div className="parts-list">
-                <strong><h1>COLOSAL PC 2.6 XO-OX</h1></strong>
+                <strong><h1>COLOSAL PC 2.6 XX</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -138,7 +138,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('kitCierreConLlavecol')}
                                     onChange={() => onAccessoryChange('kitCierreConLlavecol')}
                                 />
-                               <strong>Kit Cierre con Llave</strong>
+                                <strong>Kit Cierre con Llave</strong>
                             </TableCell>
                             <TableCell>${kitCierreConLlavecolPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -235,11 +235,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             </TableCell>
                             <TableCell>${empaquecolPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                          <TableRow key="3">
-                                      <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
-                                      <TableCell>{totalFelpa} mm</TableCell>
-                                      <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
-                                    </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+                            <TableCell>{totalFelpa} mm</TableCell>
+                            <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
                 <br />
