@@ -7,27 +7,28 @@ import { Colaboración } from './inicio/colaboracion';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } 
+  },
 };
 
 export function Inicio() {
   return (
     <>
-      <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <CortinaMovimiento />
-      </motion.div>
-      <br />
-      <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <NuestrosInfo />
-      </motion.div>
-      <br />
-      <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <InfoProductos />
-      </motion.div>
-      <br />
-      <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <Colaboración />
-      </motion.div>
+      {[CortinaMovimiento, NuestrosInfo, InfoProductos, Colaboración].map((Component, index) => (
+        <motion.div
+          key={index}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }} // Se activa cuando el 20% del elemento es visible
+          style={{ marginBottom: '40px' }} // Espaciado entre secciones
+        >
+          <Component />
+        </motion.div>
+      ))}
     </>
   );
 }

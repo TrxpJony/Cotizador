@@ -6,36 +6,42 @@ const links = [
     { name: 'Acerca de nosotros', href: '/nosotros' },
 ];
 
-const stats = [
-
-];
-
-const gradientVariants = {
-    animate: {
-        background: [
-            "linear-gradient(45deg, #06b6d4, #0891b2, #64748b)",
-            "linear-gradient(135deg, #06b6d4, #0891b2, #64748b)",
-            "linear-gradient(225deg, #06b6d4, #0891b2, #64748b)",
-            "linear-gradient(315deg, #06b6d4, #0891b2, #64748b)"
-        ],
-        transition: {
-            duration: 12,
-            ease: "linear",
-            repeat: Infinity,
-        },
-    },
-};
-
 export function CortinaMovimiento() {
     return (
         <motion.div
             className="relative isolate overflow-hidden py-24 sm:py-32 text-center"
-            style={{ backgroundSize: "200% 200%" }}
-            variants={gradientVariants}
-            animate="animate"
+            style={{
+                background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151)", 
+                backgroundSize: "400% 400%", // Movimiento más fluido
+            }}
+            animate={{
+                backgroundPosition: [
+                    "0% 50%", "25% 50%", "50% 50%", "75% 50%", "100% 50%",
+                    "75% 50%", "50% 50%", "25% 50%", "0% 50%"
+                ], 
+            }}
+            transition={{
+                duration: 20,
+                ease: "linear",
+                repeat: Infinity,
+            }}
         >
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <h2 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">Vidrio al Arte SAS</h2>
+                <motion.h2
+                    className="text-5xl font-bold tracking-tight text-white sm:text-7xl"
+                    animate={{
+                        opacity: [1, 0.95, 1],
+                        scale: [1, 1.02, 1],
+                    }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                    }}
+                >
+                    Vidrio al Arte SAS
+                </motion.h2>
+
                 <p className="mt-6 text-lg text-gray-300 sm:text-xl">
                     Especialistas en vidrios y espejos personalizados de alta calidad. ¡Confía en nosotros para todas tus necesidades!
                 </p>
@@ -45,25 +51,18 @@ export function CortinaMovimiento() {
                         <motion.a
                             key={link.name}
                             href={link.href}
-                            className="px-6 py-3 rounded-lg text-lg font-medium text-white bg-cyan-700 hover:bg-cyan-600 transition-all"
-                            whileHover={{ scale: 1.1 }}
+                            className="px-6 py-3 rounded-lg text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
+                            whileHover={{
+                                scale: 1.1,
+                                backgroundColor: "#22d3ee",
+                                boxShadow: "0px 4px 15px rgba(34, 211, 238, 0.6)",
+                            }}
                             whileTap={{ scale: 0.9 }}
                         >
                             {link.name}
                         </motion.a>
                     ))}
                 </div>
-
-                <dl className="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    {stats.map((stat) => (
-                        <div key={stat.name} className="flex flex-col items-center">
-                            <motion.dd className="text-4xl font-semibold text-white" whileHover={{ scale: 1.1 }}>
-                                {stat.value}
-                            </motion.dd>
-                            <dt className="text-base text-gray-300">{stat.name}</dt>
-                        </div>
-                    ))}
-                </dl>
             </div>
         </motion.div>
     );
