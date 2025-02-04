@@ -23,19 +23,19 @@ const ProductsTable = () => {
 
 	useEffect(() => {
 		fetch(baseUrl)
-		  .then((response) => response.json())
-		  .then((data) => {
-			if (data && Array.isArray(data)) {
-			  setProducts(data);
-			  setFilteredProducts(data);
-			} else {
-			  console.error("La respuesta de la API no es un array válido.");
-			}
-		  })
-		  .catch((error) => {
-			console.error('Error fetching data:', error);
-		  });
-	  }, []);
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && Array.isArray(data)) {
+					setProducts(data);
+					setFilteredProducts(data);
+				} else {
+					console.error("La respuesta de la API no es un array válido.");
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	}, []);
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
@@ -77,60 +77,54 @@ const ProductsTable = () => {
 	};
 
 	const handleSaveChanges = () => {
-		// Validar que los campos no estén vacíos
-		const { title, description, precio, id } = editedProduct;
+		const { title, description, precio, color, categoria, img, id } = editedProduct;
 	
-		if (!title || !description || !precio || !id) {
+		if (!title || !description || !precio || !color || !categoria || !id) {
 			alert("Todos los campos son requeridos.");
 			return;
 		}
 	
-		// Hacer la solicitud PUT a la API para actualizar el producto
-		fetch(`${baseUrl}/${editedProduct.id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				title: editedProduct.title,
-				description: editedProduct.description,
-				precio: editedProduct.precio,
-				color: editedProduct.color,
-				img: editedProduct.img,
-				categoria: editedProduct.categoria,
-			}),
+		const formData = new FormData();
+		formData.append("title", title);
+		formData.append("description", description);
+		formData.append("precio", precio);
+		formData.append("color", color);
+		formData.append("categoria", categoria);
+		if (img instanceof File) {
+			formData.append("img", img); // Solo se añade si se seleccionó una nueva imagen
+		}
+	
+		fetch(`${baseUrl}/${id}`, {
+			method: "PUT",
+			body: formData, // Enviamos FormData en lugar de JSON
 		})
 			.then((response) => {
 				if (!response.ok) {
-					throw new Error('Error al actualizar el producto.');
+					throw new Error("Error al actualizar el producto.");
 				}
 				return response.json();
 			})
 			.then(() => {
-				// Mostrar la alerta con react-toastify
-				toast('Producto actualizado correctamente!', {
+				toast("Producto actualizado correctamente!", {
 					position: "bottom-center",
 					autoClose: 3000,
 					hideProgressBar: true,
-					closeOnClick: false,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
 					theme: "light",
 				});
 	
-				// Actualizar el estado de los productos
-				const updatedProducts = products.map((product) =>
-					product.id === editedProduct.id ? editedProduct : product
-				);
-				setProducts(updatedProducts);
-				setFilteredProducts(updatedProducts);
-				setIsModalOpen(false);
+				// Recargar los productos después de la actualización
+				fetch(baseUrl)
+					.then((res) => res.json())
+					.then((data) => {
+						setProducts(data);
+						setFilteredProducts(data);
+					});
 	
+				setIsModalOpen(false);
 			})
 			.catch((error) => {
-				console.error('Error:', error);
-				alert('Hubo un problema al actualizar el producto.');
+				console.error("Error:", error);
+				alert("Hubo un problema al actualizar el producto.");
 			});
 	};
 
@@ -149,33 +143,33 @@ const ProductsTable = () => {
 				fetch(`${baseUrl}/${id}`, {
 					method: 'DELETE',
 				})
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					return response.json();
-				})
-				.then((data) => {
-					toast(data.message, {
-						position: "bottom-center",
-						autoClose: 3000,
-						hideProgressBar: true,
-						closeOnClick: false,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: "light",
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then((data) => {
+						toast(data.message, {
+							position: "bottom-center",
+							autoClose: 3000,
+							hideProgressBar: true,
+							closeOnClick: false,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "light",
+						});
+
+						// Actualizar el estado sin recargar la página
+						const updatedProducts = products.filter((product) => product.id !== id);
+						setProducts(updatedProducts);
+						setFilteredProducts(updatedProducts);
+					})
+					.catch((error) => {
+						console.error("Error al eliminar el producto:", error);
+						alert("Hubo un problema al eliminar el producto.");
 					});
-	
-					// Actualizar el estado sin recargar la página
-					const updatedProducts = products.filter((product) => product.id !== id);
-					setProducts(updatedProducts);
-					setFilteredProducts(updatedProducts);
-				})
-				.catch((error) => {
-					console.error("Error al eliminar el producto:", error);
-					alert("Hubo un problema al eliminar el producto.");
-				});
 			}
 		});
 	};
@@ -187,7 +181,7 @@ const ProductsTable = () => {
 
 	return (
 		<>
-		    <ToastContainer />
+			<ToastContainer />
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
 				initial={{ opacity: 0, y: 20 }}
@@ -232,7 +226,7 @@ const ProductsTable = () => {
 						</thead>
 
 						<tbody className='divide-y divide-gray-900'>
-								{paginatedProducts.map((product) => (
+							{paginatedProducts.map((product) => (
 								<motion.tr
 									key={product.id}
 									initial={{ opacity: 0 }}
@@ -256,18 +250,18 @@ const ProductsTable = () => {
 										/>
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-											<button
-												className='text-cyan-500 hover:text-cyan-400 mr-2'
-												onClick={() => handleEditClick(product)}
-											>
-												<Edit size={18} />
-											</button>
-											<button
-												className='text-red-400 hover:text-red-300'
-												onClick={() => handleDeleteClick(product.id)}
-											>
-												<Trash2 size={18} />
-											</button>
+										<button
+											className='text-cyan-500 hover:text-cyan-400 mr-2'
+											onClick={() => handleEditClick(product)}
+										>
+											<Edit size={18} />
+										</button>
+										<button
+											className='text-red-400 hover:text-red-300'
+											onClick={() => handleDeleteClick(product.id)}
+										>
+											<Trash2 size={18} />
+										</button>
 									</td>
 								</motion.tr>
 							))}
@@ -300,13 +294,13 @@ const ProductsTable = () => {
 			</motion.div>
 
 			{selectedImage && (
-				<motion.div 
+				<motion.div
 					className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
-					<motion.div 
+					<motion.div
 						className='bg-white p-4 rounded-lg'
 						initial={{ scale: 0.8 }}
 						animate={{ scale: 1 }}
@@ -326,13 +320,13 @@ const ProductsTable = () => {
 			)}
 
 			{isModalOpen && (
-				<motion.div 
+				<motion.div
 					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
-					<motion.div 
+					<motion.div
 						className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'
 						initial={{ scale: 0.8 }}
 						animate={{ scale: 1 }}
@@ -381,13 +375,14 @@ const ProductsTable = () => {
 						<div className='mb-4'>
 							<label className='block text-gray-700'>Imagen</label>
 							<input
-								type='text'
+								type='file'
 								name='img'
-								value={editedProduct.img}
-								onChange={handleInputChange}
+								accept='image/*'
+								onChange={(e) => setEditedProduct({ ...editedProduct, img: e.target.files[0] })}
 								className='w-full p-2 border rounded'
 							/>
 						</div>
+
 						<div className='mb-4'>
 							<label className='block text-gray-700'>Categoria</label>
 							<input
