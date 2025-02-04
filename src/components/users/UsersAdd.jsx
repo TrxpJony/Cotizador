@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importa los estilos de Toastify
+import { motion } from "framer-motion"; // Importar framer-motion
 
 const UsersAdd = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,12 +68,14 @@ const UsersAdd = () => {
 
     return (
         <>
-            <button
+            <motion.button
                 onClick={handleOpenModal}
                 className="px-4 py-2 bg-cyan-500 text-white rounded-md"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
             >
                 Agregar Usuario
-            </button>
+            </motion.button>
 
             {isModalOpen && (
                 <div
@@ -114,18 +117,22 @@ const UsersAdd = () => {
                             </select>
                         </div>
                         <div className="flex justify-end">
-                            <button
+                            <motion.button
                                 onClick={handleCloseModal}
                                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
                             >
                                 Cancelar
-                            </button>
-                            <button
+                            </motion.button>
+                            <motion.button
                                 onClick={handleSaveUser}
                                 className="px-4 py-2 bg-cyan-500 text-white rounded-md"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
                             >
                                 Guardar
-                            </button>
+                            </motion.button>
                         </div>
                     </div>
                 </div>

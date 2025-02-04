@@ -195,23 +195,27 @@ const CotiTable = () => {
 					</table>
 				</div>
 				<div className='flex justify-between items-center mt-4'>
-					<button
+					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
 					>
 						Anterior
-					</button>
+					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredCotizaciones.length / itemsPerPage)}
 					</span>
-					<button
+					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredCotizaciones.length / itemsPerPage)}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
 					>
 						Siguiente
-					</button>
+					</motion.button>
 				</div>
 			</motion.div>
 		</>

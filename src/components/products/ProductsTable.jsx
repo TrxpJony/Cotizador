@@ -275,43 +275,69 @@ const ProductsTable = () => {
 					</table>
 				</div>
 				<div className='flex justify-between items-center mt-4'>
-					<button
+					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
 					>
 						Anterior
-					</button>
+					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredProducts.length / itemsPerPage)}
 					</span>
-					<button
+					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
 						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
 					>
 						Siguiente
-					</button>
+					</motion.button>
 				</div>
 			</motion.div>
 
 			{selectedImage && (
-				<div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-					<div className='bg-white p-4 rounded-lg'>
+				<motion.div 
+					className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					<motion.div 
+						className='bg-white p-4 rounded-lg'
+						initial={{ scale: 0.8 }}
+						animate={{ scale: 1 }}
+						exit={{ scale: 0.8 }}
+					>
 						<img src={selectedImage} alt='Selected' className='max-h-96 max-w-full' />
-						<button
+						<motion.button
 							onClick={closeModal}
 							className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md'
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
 						>
 							Close
-						</button>
-					</div>
-				</div>
+						</motion.button>
+					</motion.div>
+				</motion.div>
 			)}
 
 			{isModalOpen && (
-				<div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-					<div className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'>
+				<motion.div 
+					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					<motion.div 
+						className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'
+						initial={{ scale: 0.8 }}
+						animate={{ scale: 1 }}
+						exit={{ scale: 0.8 }}
+					>
 						<h2 className='text-xl font-semibold mb-4'>Editar Producto</h2>
 						<div className='mb-4'>
 							<label className='block text-gray-700'>Title</label>
@@ -373,21 +399,25 @@ const ProductsTable = () => {
 							/>
 						</div>
 						<div className='flex justify-end'>
-							<button
+							<motion.button
 								onClick={handleModalClose}
 								className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2'
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
 							>
 								Cancelar
-							</button>
-							<button
+							</motion.button>
+							<motion.button
 								onClick={handleSaveChanges}
 								className='px-4 py-2 bg-cyan-500 text-white rounded-md'
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
 							>
 								Guardar
-							</button>
+							</motion.button>
 						</div>
-					</div>
-				</div>
+					</motion.div>
+				</motion.div>
 			)}
 		</>
 	);
