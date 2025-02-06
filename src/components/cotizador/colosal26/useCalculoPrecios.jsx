@@ -31,7 +31,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
   const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
   useEffect(() => {
-    if (!width || !height || Object.keys(memoizedPrices).length === 0) return;
+    if (Object.keys(memoizedPrices).length === 0) return;
     
     const halfWidth = Number(width) / 2;
     const totalHeight = Number(height);
@@ -59,6 +59,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
+    // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
     const total = 

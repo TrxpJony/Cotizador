@@ -111,6 +111,7 @@ import ProductsPage from './pages/ProductsPage';
 import UsersPage from './pages/UsersPage';
 import PricePage from './pages/PricePage';
 import CotiPage from './pages/cotiPage';
+import CocinasCotizador from './pages/cocinas/cocinascotizador';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -336,6 +337,7 @@ function App() {
           <Route path="cat005/sand5" element={<SandblastingCenefas />} />
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
+          <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
 
       </div>

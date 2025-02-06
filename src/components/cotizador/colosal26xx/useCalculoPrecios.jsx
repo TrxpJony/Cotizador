@@ -31,7 +31,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
   const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
   useEffect(() => {
-    if (!width || !height || Object.keys(memoizedPrices).length === 0) return;
+    if (Object.keys(memoizedPrices).length === 0) return;
     
     const halfWidth = Number(width) / 2;
     const totalHeight = Number(height);
