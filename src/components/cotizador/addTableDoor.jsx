@@ -13,7 +13,7 @@ const AddTableDoor = ({ doors }) => {
                         <p><strong>Cantidad:</strong> {door.quantity}</p>
                         <p><strong>Ancho:</strong> {door.width} mm</p>
                         <p><strong>Alto:</strong> {door.height} mm</p>
-                        <p><strong>Precio:</strong> ${door.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                        <p><strong>Subtotal:</strong> ${door.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                         <p><strong>Total:</strong> ${(door.price * door.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </li>
                 ))}

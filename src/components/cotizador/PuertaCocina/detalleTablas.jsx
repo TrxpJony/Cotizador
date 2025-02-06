@@ -2,15 +2,15 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 
-const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
+const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
     const {
-        totalWidth,
         marcoCocinaPrice,
         siliconaPrice,
         felpaPrice,
         totalFelpa,
         escuadrasCocinaPrice,
         perfilNegroCocinaPrice,
+        marcoCocina,
     } = calculatedValues || {};
 
     return (
@@ -30,8 +30,8 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Cabezal:</strong></TableCell>
-                            <TableCell>{totalWidth} mm</TableCell>
+                            <TableCell><strong>Marco:</strong></TableCell>
+                            <TableCell>{marcoCocina} mm</TableCell>
                             <TableCell>${marcoCocinaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
@@ -39,9 +39,9 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
 
                 <br />
 
-                <Table aria-label="TABLA ACCESORIOS">
+                <Table aria-label="TABLA EXTRAS">
                     <TableHeader>
-                        <TableColumn><h1>Accesorios</h1></TableColumn>
+                        <TableColumn><h1>Extras</h1></TableColumn>
 
                         <TableColumn></TableColumn>
                     </TableHeader>
@@ -108,11 +108,11 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
-                          <TableRow key="3">
-                                      <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
-                                      <TableCell>{totalFelpa} mm</TableCell>
-                                      <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
-                                    </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+                            <TableCell>{totalFelpa} mm</TableCell>
+                            <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
                 <br />
@@ -123,9 +123,8 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
     );
 };
 
-DetalleTablas744.propTypes = {
+DetalleTablasCocinas.propTypes = {
     calculatedValues: PropTypes.shape({
-        totalWidth: PropTypes.number,     
         marcoCocinaPrice: PropTypes.number,
         escuadrasCocinaPrice: PropTypes.number,
         perfilNegroCocinaPrice: PropTypes.number,
@@ -137,4 +136,4 @@ DetalleTablas744.propTypes = {
     useCalculoPrecios: PropTypes.func.isRequired
 };
 
-export default DetalleTablas744;
+export default DetalleTablasCocinas;

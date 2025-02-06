@@ -8,7 +8,8 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
         description: '',
         quantity: 1,
         width: dimensions.width || 0, // Initialize width
-        height: dimensions.height || 0 // Initialize height
+        height: dimensions.height || 0, // Initialize height
+        glassPrice: '' // Initialize the glass price
     });
     const { totalPrice } = useCalculoPrecios(dimensions, selectedAccessories); // Use dimensions and selectedAccessories for price calculation
 
@@ -32,16 +33,21 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
     };
 
     const handleSave = () => {
+        const glassPrice = parseFloat(formData.glassPrice) || 0; // Ensure glass price is a number
+        const newTotalPrice = totalPrice + glassPrice; // Add glass price to totalPrice
+
         const newDoor = {
             ...formData,
-            price: totalPrice // Add totalPrice to the new door
+            glassPrice: glassPrice,
+            price: newTotalPrice // Add the new total price including glass price
         };
         onAddDoor(newDoor); // Use the onAddDoor prop
         setFormData({
             description: '',
             quantity: 1,
             width: dimensions.width || 0, // Reset width
-            height: dimensions.height || 0 // Reset height
+            height: dimensions.height || 0, // Reset height
+            glassPrice: 0 // Reset glass price
         });
         handleCloseModal();
     };
@@ -67,6 +73,20 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700">
+                                Precio del vidrio:
+                                <input
+                                    type="number"
+                                    name="glassPrice"
+                                    value={formData.glassPrice}
+                                    onChange={handleChange}
+                                    className="w-full p-2 border rounded"
+                                    placeholder="0"
+                                    min="0"
+                                />
+                            </label>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700">
                                 Cantidad:
                                 <input
                                     type="number"
@@ -85,8 +105,11 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
                             <p className="text-lg font-semibold">
                                 Alto: {dimensions.height} mm
                             </p>
+                        </div>
+
+                        <div className="mb-4">
                             <p className="text-lg font-semibold">
-                                Precio calculado: ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                Precio total: ${(totalPrice + (parseFloat(formData.glassPrice) || 0)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                         </div>
 
