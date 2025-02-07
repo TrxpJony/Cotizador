@@ -1,6 +1,7 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
+import { useState } from 'react';
 
 const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
     const {
@@ -9,9 +10,31 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
         felpaPrice,
         totalFelpa,
         escuadrasCocinaPrice,
+        escuadrasCocinaUnidadPrice,
         perfilNegroCocinaPrice,
+        perfilMateCocinaPrice,
         marcoCocina,
     } = calculatedValues || {};
+
+    const [escuadraCantidad, setEscuadraCantidad] = useState(1);
+
+    const handleCheckboxChange = (accessory) => {
+        if (accessory === "escuadrasCocinaUnidad") {
+            onAccessoryChange(accessory, escuadraCantidad);
+        } else {
+            onAccessoryChange(accessory, 1); // Accesorios sin cantidad específica
+        }
+    };
+    
+    const handleCantidadChange = (e) => {
+        const value = Math.max(1, Number(e.target.value));
+        setEscuadraCantidad(value);
+        
+        if (selectedAccessories.includes("escuadrasCocinaUnidad")) {
+            onAccessoryChange({ ...selectedAccessories, escuadrasCocinaUnidad: value });
+        }
+    };
+    
 
     return (
         <>
@@ -39,9 +62,9 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
 
                 <br />
 
-                <Table aria-label="TABLA EXTRAS">
+                <Table aria-label="TABLA ACCESORIOS">
                     <TableHeader>
-                        <TableColumn><h1>Extras</h1></TableColumn>
+                        <TableColumn><h1>ACCESORIOS</h1></TableColumn>
 
                         <TableColumn></TableColumn>
                     </TableHeader>
@@ -65,12 +88,42 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                             <TableCell>
                                 <input
                                     type="checkbox"
+                                    checked={selectedAccessories.includes('escuadrasCocinaUnidad')}
+                                    onChange={() => handleCheckboxChange('escuadrasCocinaUnidad')}
+                                />
+                                <strong>Unidad de Escuadra para Puerta Cocina</strong>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={escuadraCantidad}
+                                    onChange={handleCantidadChange}
+                                    style={{ width: "50px", marginLeft: "10px" }}
+                                />
+                            </TableCell>
+                            <TableCell>${(escuadrasCocinaUnidadPrice * escuadraCantidad).toFixed(2)}</TableCell>
+                        </TableRow>
+
+                        <TableRow key="4">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
                                     checked={selectedAccessories.includes('perfilNegroCocina')}
                                     onChange={() => onAccessoryChange('perfilNegroCocina')}
                                 />
                                 <strong>Perfil 6 mtr Negro Puerta Cocina</strong>
                             </TableCell>
                             <TableCell>${perfilNegroCocinaPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('perfilMateCocina')}
+                                    onChange={() => onAccessoryChange('perfilMateCocina')}
+                                />
+                                <strong>Perfil 6 mtr Mate Puerta Cocina</strong>
+                            </TableCell>
+                            <TableCell>${perfilMateCocinaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

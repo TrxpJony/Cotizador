@@ -56,7 +56,6 @@ const EnviarDimensiones = ({ onDimensionsChange }) => {
 };
 
 EnviarDimensiones.propTypes = {
-  // setTotalPrice: PropTypes.func.isRequired, // Removed this line
   onDimensionsChange: PropTypes.func.isRequired,
 };
 

@@ -65,7 +65,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPri
       felpaPrice,
       totalFelpa,
       escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
+      escuadrasCocinaUnidadPrice: memoizedPrices.escuadrasCocinaUnidad ? Number(memoizedPrices.escuadrasCocinaUnidad) : 0,
       perfilNegroCocinaPrice: memoizedPrices.perfilNegroCocina ? Number(memoizedPrices.perfilNegroCocina) : 0,
+      perfilMateCocinaPrice: memoizedPrices.perfilMateCocina ? Number(memoizedPrices.perfilMateCocina) : 0,
     });
   }, [width, height, memoizedPrices, memoizedAccessories, glassPrice]); // Asegúrate de agregar glassPrice en las dependencias
 
