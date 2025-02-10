@@ -8,7 +8,7 @@ import PrintTableDoor from '../../../components/cotizador/PrintTableDoor'; // Im
 import DetalleTablas from '../../../components/cotizador/colosal26xxx/detalleTablas';
 import colosalImage from '../../../img/colxxx.png'; // Importar la imagen
 
-const Colosal = () => {
+const Colosalxxx = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [doors, setDoors] = useState([]); // State to hold doors
@@ -70,4 +70,4 @@ const Colosal = () => {
   );
 };
 
-export default Colosal;
+export default Colosalxxx;

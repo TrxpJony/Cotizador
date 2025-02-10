@@ -1,35 +1,37 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import PropTypes from 'prop-types';
-import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
+import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 
-const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
+const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         totalWidth,
         doubleHeight,
         doubleHalfWidth,
-        cabezal744Price,
-        sillar744Price,
-        jamba744Price,
-        horizontalSuperior744Price,
-        horizontalInferior744Price,
-        traslape744Price,
-        enganche744Price,
-        kitCierre744Price,
-        rodamientoSimple744Price,
+        cabezal8025Price,
+        sillar8025Price,
+        jamba8025Price,
+        horizontalSuperior8025Price,
+        horizontalInferior8025Price,
+        traslape8025Price,
+        enganche8025Price,
+        empaque744Price,
         tornillosPrice,
         siliconaPrice,
-        empaque744Price,
         empaque744Height,
         empaque744Width,
         felpaPrice,
         totalFelpa,
+        kitCierre8025Price,
+        kitCierreConLlave8025Price,
+        rodamientoSimple8025Price,
+        rodamientoDoble8025Price,
     } = calculatedValues || {};
 
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA 744 XO-OX</h1></strong>
-                <Table aria-label="TABLA MARCO">
+                <strong><h1>SISTEMA 8025 XO-OX</h1></strong>
+                <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -42,26 +44,24 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Cabezal:</strong></TableCell>
+                            <TableCell><strong><h2>Cabezal:</h2></strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell>${cabezal744Price?.toFixed(2)}</TableCell>
+                            <TableCell>${cabezal8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Sillar:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell>${sillar744Price?.toFixed(2)}</TableCell>
+                            <TableCell>${sillar8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Jamba:</strong></TableCell>
                             <TableCell>{doubleHeight} mm (2)</TableCell>
-                            <TableCell>${jamba744Price?.toFixed(2)}</TableCell>
+                            <TableCell>4{jamba8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA NAVE">
+                <Table aria-label="Tabla Nave">
                     <TableHeader>
                         <TableColumn><h1>Nave</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -76,70 +76,86 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                         <TableRow key="2">
                             <TableCell><strong>Horizontal Superior:</strong></TableCell>
                             <TableCell>{doubleHalfWidth} mm (2)</TableCell>
-                            <TableCell>${horizontalSuperior744Price?.toFixed(2)}</TableCell>
+                            <TableCell>${horizontalSuperior8025Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Horizontal Inferior:</strong></TableCell>
+                            <TableCell>{doubleHalfWidth}</TableCell>
+                            <TableCell>${horizontalInferior8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
-                            <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
-                            <TableCell>{doubleHalfWidth} mm </TableCell>
-                            <TableCell>${horizontalInferior744Price?.toFixed(2)}</TableCell>
+                            <TableCell><strong>Traslape:</strong></TableCell>
+                            <TableCell>{doubleHeight} mm (2)</TableCell>
+                            <TableCell>${traslape8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
-                            <TableCell><strong>Traslape:</strong> </TableCell>
-                            <TableCell>{doubleHeight} mm (2) </TableCell>
-                            <TableCell>${traslape744Price?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell><strong>Enganche:</strong> </TableCell>
-                            <TableCell>{doubleHeight} mm (2) </TableCell>
-                            <TableCell>${enganche744Price?.toFixed(2)}</TableCell>
+                            <TableCell><strong>Enganche:</strong></TableCell>
+                            <TableCell>{doubleHeight} mm (2)</TableCell>
+                            <TableCell>${enganche8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA ACCESORIOS">
+                <Table aria-label="Tabla Accesorios">
                     <TableHeader>
                         <TableColumn><h1>Accesorios</h1></TableColumn>
-
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
                         <TableRow key="1">
-                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+                            <TableCell><strong><h2>Prieza</h2></strong></TableCell>
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierre744')}
-                                    onChange={() => onAccessoryChange('kitCierre744')}
+                                    checked={selectedAccessories.includes('kitCierre8025')}
+                                    onChange={() => onAccessoryChange('kitCierre8025')}
                                 />
-                                <strong>Kit Cierre</strong>
+                                <strong>kit Cierre</strong>
                             </TableCell>
-                            <TableCell>${kitCierre744Price?.toFixed(2)}</TableCell>
+                            <TableCell>${kitCierre8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoSimple744')}
-                                    onChange={() => onAccessoryChange('rodamientoSimple744')}
+                                    checked={selectedAccessories.includes('kitCierreConLlave8025')}
+                                    onChange={() => onAccessoryChange('kitCierreConLlave8025')}
+                                />
+                                <strong>Kit de Cierre con Llave</strong>
+                            </TableCell>
+                            <TableCell>${kitCierreConLlave8025Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('rodamientoSimple8025')}
+                                    onChange={() => onAccessoryChange('rodamientoSimple8025')}
                                 />
                                 <strong>Rodamiento Simple 70</strong>
                             </TableCell>
-                            <TableCell>${rodamientoSimple744Price?.toFixed(2)}</TableCell>
+                            <TableCell>${rodamientoSimple8025Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('rodamientoDoble8025')}
+                                    onChange={() => onAccessoryChange('rodamientoDoble8025')}
+                                />
+                                <strong>Rodamiento Doble</strong>
+                            </TableCell>
+                            <TableCell>${rodamientoDoble8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA utilitarios">
+                <Table aria-label="Tabla Utilitarios">
                     <TableHeader>
                         <TableColumn><h1>Utilitarios</h1></TableColumn>
-
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -152,14 +168,13 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell>${tornillosPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>silicona:</strong></TableCell>
+                            <TableCell><strong>silicona</strong></TableCell>
                             <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-
-                <Table aria-label="TABLA EMPAQUE">
+                <Table aria-label="Tabla Empaque">
                     <TableHeader>
                         <TableColumn><h1>Empaque</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -175,46 +190,48 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell><strong>Empaque (Alto):
                                 <br />
                                 Empaque (Ancho): </strong></TableCell>
-                            <TableCell>{empaque744Height} mm
-                                <br /> {empaque744Width} mm
-                            </TableCell>
+                            <TableCell>{empaque744Height} mm 
+                                <br />
+                                {empaque744Width} mm</TableCell>
                             <TableCell>${empaque744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+                            <TableCell><strong>Felpa 5.00 x 7.00</strong></TableCell>
                             <TableCell>{totalFelpa} mm</TableCell>
                             <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} />
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories}/>
             </div>
 
         </>
-    );
+    )
 };
 
-DetalleTablas744.propTypes = {
+DetalleTablas8025.propTypes ={
     calculatedValues: PropTypes.shape({
         totalWidth: PropTypes.number,
         doubleHeight: PropTypes.number,
         doubleHalfWidth: PropTypes.number,
-        cabezal744Price: PropTypes.number,
-        sillar744Price: PropTypes.number,
-        jamba744Price: PropTypes.number,
-        horizontalSuperior744Price: PropTypes.number,
-        horizontalInferior744Price: PropTypes.number,
-        traslape744Price: PropTypes.number,
-        enganche744Price: PropTypes.number,
-        kitCierre744Price: PropTypes.number,
-        rodamientoSimple744Price: PropTypes.number,
+        cabezal8025Price: PropTypes.number,
+        sillar8025Price: PropTypes.number,
+        jamba8025Price: PropTypes.number,
+        horizontalSuperior8025Price: PropTypes.number,
+        horizontalInferior8025Price: PropTypes.number,
+        traslape8025Price: PropTypes.number,
+        enganche8025Price: PropTypes.number,
+        kitCierre8025Price: PropTypes.number,
+        kitCierreConLlave8025Price: PropTypes.number,
+        rodamientoSimple8025Price: PropTypes.number,
+        rodamientoDoble8025Price: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired,
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired
-};
+}
 
-export default DetalleTablas744;
+export default DetalleTablas8025
