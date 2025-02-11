@@ -135,7 +135,7 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
                                     checked={selectedAccessories.includes('rodamientoSimple8025')}
                                     onChange={() => onAccessoryChange('rodamientoSimple8025')}
                                 />
-                                <strong>Rodamiento Simple 70</strong>
+                                <strong>Rodamiento Simple en Agujas (2)</strong>
                             </TableCell>
                             <TableCell>${rodamientoSimple8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -146,7 +146,7 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
                                     checked={selectedAccessories.includes('rodamientoDoble8025')}
                                     onChange={() => onAccessoryChange('rodamientoDoble8025')}
                                 />
-                                <strong>Rodamiento Doble</strong>
+                                <strong>Rodamiento Doble (2)</strong>
                             </TableCell>
                             <TableCell>${rodamientoDoble8025Price?.toFixed(2)}</TableCell>
                         </TableRow>

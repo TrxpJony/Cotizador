@@ -8,33 +8,35 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         doubleHeight,
         halfWidth,
         doubleHalfWidth,
-        cabezalcolPrice,
-        sillarcolPrice,
-        jambacolPrice,
-        horizontalSuperiorcolPrice,
-        horizontalInferiorFijacolPrice,
-        horizontalInferiorMovilcolPrice,
-        traslapecolPrice,
-        enganchecolPrice,
-        kitCierrecolPrice,
-        kitCierreConLlavecolPrice,
-        cubetaAngeoPrice,
-        rodamientoSimple70colPrice,
-        rodamientoDoble140colPrice,
-        cajaDeflectoraPrice,
+        cabezalastPrice,
+        sillarastPrice,
+        jambaastPrice,
+        sillarAlfajiaastPrice,
+        horizontalSuperiorastPrice,
+        horizontalInferiorFijaastPrice,
+        horizontalInferiorMovilastPrice,
+        traslapeastPrice,
+        engancheastPrice,
+        empaqueastPrice,
         tornillosPrice,
         siliconaPrice,
-        empaquecolPrice,
-        empaquecolHeight,
-        empaquecolWidth,
+        empaqueastHeight,
+        empaqueastWidth,
         felpaPrice,
         totalFelpa,
+        kitCierreastPrice,
+        cubetaAngeoPrice,
+        rodamiento80astPrice,
+        rodamiento40astPrice,
+        cajaDeflectoraPrice,
+        rodamientoNave22astPrice,
+        guiaSuperiorangeoPrice,
     } = calculatedValues || {};
 
     return (
         <>
             <div className="parts-list">
-                <strong><h1>COLOSAL PC 2.6 XO-OX</h1></strong>
+                <strong><h1>ASTRAL 2.0 XO - OX</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -50,17 +52,22 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         <TableRow key="2">
                             <TableCell><strong>Cabezal:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell>${cabezalcolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${cabezalastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Sillar:</strong></TableCell>
+                            <TableCell><strong>Sillar un Riel:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell>${sillarcolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${sillarastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
+                            <TableCell><strong>Sillar Alfajia un Riel:</strong></TableCell>
+                            <TableCell>{totalWidth} mm</TableCell>
+                            <TableCell>${sillarAlfajiaastPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
                             <TableCell><strong>Jamba:</strong></TableCell>
                             <TableCell>{doubleHeight} mm (2)</TableCell>
-                            <TableCell>${jambacolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${jambaastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -82,27 +89,27 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         <TableRow key="2">
                             <TableCell><strong>Horizontal Superior:</strong></TableCell>
                             <TableCell>{doubleHalfWidth} mm (2)</TableCell>
-                            <TableCell>${horizontalSuperiorcolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${horizontalSuperiorastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Horizontal Inferior Fija:</strong></TableCell>
                             <TableCell>{halfWidth} mm</TableCell>
-                            <TableCell>${horizontalInferiorFijacolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${horizontalInferiorFijaastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Horizontal Inferior Móvil:</strong> </TableCell>
                             <TableCell>{halfWidth} mm </TableCell>
-                            <TableCell>${horizontalInferiorMovilcolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${horizontalInferiorMovilastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Traslape:</strong> </TableCell>
                             <TableCell>{doubleHeight} mm (2) </TableCell>
-                            <TableCell>${traslapecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${traslapeastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
                             <TableCell><strong>Enganche:</strong> </TableCell>
                             <TableCell>{doubleHeight} mm (2) </TableCell>
-                            <TableCell>${enganchecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${engancheastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -124,25 +131,36 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierrecol')}
-                                    onChange={() => onAccessoryChange('kitCierrecol')}
+                                    checked={selectedAccessories.includes('kitCierreast')}
+                                    onChange={() => onAccessoryChange('kitCierreast')}
                                 />
                                 <strong>Kit Cierre</strong>
                             </TableCell>
-                            <TableCell>${kitCierrecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${kitCierreastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierreConLlavecol')}
-                                    onChange={() => onAccessoryChange('kitCierreConLlavecol')}
+                                    checked={selectedAccessories.includes('rodamiento80ast')}
+                                    onChange={() => onAccessoryChange('rodamiento80ast')}
                                 />
-                               <strong>Kit Cierre con Llave</strong>
+                               <strong>Rodamiento 80 Kilos en Agujas</strong>
                             </TableCell>
-                            <TableCell>${kitCierreConLlavecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${rodamiento80astPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('rodamiento40ast')}
+                                    onChange={() => onAccessoryChange('rodamiento40ast')}
+                                />
+                               <strong>Rodamiento 40 Kilos en Bolas</strong>
+                            </TableCell>
+                            <TableCell>${rodamiento40astPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
                             <TableCell>
                                 <input
                                     type="checkbox"
@@ -153,29 +171,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             </TableCell>
                             <TableCell>${cubetaAngeoPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow key="5">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoSimple70col')}
-                                    onChange={() => onAccessoryChange('rodamientoSimple70col')}
-                                />
-                                <strong>Rodamiento Simple 70</strong>
-                            </TableCell>
-                            <TableCell>${rodamientoSimple70colPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
                         <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoDoble140col')}
-                                    onChange={() => onAccessoryChange('rodamientoDoble140col')}
-                                />
-                                <strong>Rodamiento Doble 140</strong>
-                            </TableCell>
-                            <TableCell>${rodamientoDoble140colPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
                             <TableCell>
                                 <input
                                     type="checkbox"
@@ -185,6 +181,28 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <strong>Caja Deflectora</strong>
                             </TableCell>
                             <TableCell>${cajaDeflectoraPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="7">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('rodamientoNave22ast')}
+                                    onChange={() => onAccessoryChange('rodamientoNave22ast')}
+                                />
+                                <strong>Rodamiento 22 Kilos en Bolas Para Nave</strong>
+                            </TableCell>
+                            <TableCell>${rodamientoNave22astPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="8">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('guiaSuperiorangeo')}
+                                    onChange={() => onAccessoryChange('guiaSuperiorangeo')}
+                                />
+                                <strong>Guia Superior Angeo Linea Universal</strong>
+                            </TableCell>
+                            <TableCell>${guiaSuperiorangeoPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -229,10 +247,10 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Empaque (Alto):
                                 <br />
                                 Empaque (Ancho): </strong></TableCell>
-                            <TableCell>{empaquecolHeight} mm
-                                <br /> {empaquecolWidth} mm
+                            <TableCell>{empaqueastHeight} mm
+                                <br /> {empaqueastWidth} mm
                             </TableCell>
-                            <TableCell>${empaquecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${empaqueastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                           <TableRow key="3">
                                       <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
@@ -255,20 +273,22 @@ DetalleTablas.propTypes = {
         doubleHeight: PropTypes.number,
         halfWidth: PropTypes.number,
         doubleHalfWidth: PropTypes.number,
-        cabezalcolPrice: PropTypes.number,
-        sillarcolPrice: PropTypes.number,
-        jambacolPrice: PropTypes.number,
-        horizontalSuperiorcolPrice: PropTypes.number,
-        horizontalInferiorFijacolPrice: PropTypes.number,
-        horizontalInferiorMovilcolPrice: PropTypes.number,
-        traslapecolPrice: PropTypes.number,
-        enganchecolPrice: PropTypes.number,
-        kitCierrecolPrice: PropTypes.number,
-        kitCierreConLlavecolPrice: PropTypes.number,
+        cabezalastPrice: PropTypes.number,
+        sillarastPrice: PropTypes.number,
+        sillarAlfajiaastPrice: PropTypes.number,
+        jambaastPrice: PropTypes.number,
+        horizontalSuperiorastPrice: PropTypes.number,
+        horizontalInferiorFijaastPrice: PropTypes.number,
+        horizontalInferiorMovilastPrice: PropTypes.number,
+        traslapeastPrice: PropTypes.number,
+        engancheastPrice: PropTypes.number,
+        kitCierreastPrice: PropTypes.number,
         cubetaAngeoPrice: PropTypes.number,
-        rodamientoSimple70colPrice: PropTypes.number,
-        rodamientoDoble140colPrice: PropTypes.number,
-        cajaDeflectoraPrice: PropTypes.number
+        rodamiento80astPrice: PropTypes.number,
+        rodamiento40astPrice: PropTypes.number,
+        cajaDeflectoraPrice: PropTypes.number,
+        rodamientoNave22astPrice: PropTypes.number,
+        guiaSuperiorangeoPrice: PropTypes.number
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
