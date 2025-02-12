@@ -44,7 +44,7 @@ const Astral20 = () => {
                     <br />
                     <AddTableDoor doors={doors} />
                     <PrintTableDoor doors={doors} title={"Puerta / ventana Corrediza Sistema Astral 2.0"} image={Astral20Img} totalPrice={totalPrice} />
-                    <div className='felx justify-end mt-6'>
+                    <div className='flex justify-end mt-6'>
                         <div className='flex justify-center mb-6'>
                             <button
                                 onClick={() => navigate(-1)}
