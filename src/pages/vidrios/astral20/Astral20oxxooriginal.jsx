@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import Astral20Image from '../../../img/xox.png'; // Importar la imagen
+import Astral20Image from '../../../img/coloxxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 
-const Astral20xox = () => {
+const Astral20oxxo = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -125,26 +125,27 @@ const Astral20xox = () => {
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
-  const cuadHeight = totalHeight ? totalHeight * 4 : '';
+  const doubleHalfWidth = halfWidth ? halfWidth * 2 : '';
+  const doubleWidth = totalWidth ? totalWidth * 2 : '';
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaqueastHeight = height && width ? height * 4 : '';
+  const cuadHeight = totalHeight ? totalHeight * 4 : '';
   const empaqueastWidth = height && width ? width * 2 : '';
   const felpaHeight = height && width ? height * 4 : '';
   const felpaWidth = height && width ? width * 2 : '';
   const empaqueastPrice = (empaqueastHeight + empaqueastWidth) / 1000 * dbPrices.empaqueast; // Precio total del empaqueast
   const totFelpa = (felpaHeight + felpaWidth);
-  const horizontalInferiorFijaast = totalWidth ? (totalWidth / 4 + 124) : 0;
-  const horizontalInferiorMovilast = totalWidth ? ((totalWidth / 4 + 124) * 2) : 0;
   // Calcular precios
   const cabezalastPrice = dbPrices.cabezalast * (totalWidth / 1000);
   const sillarastPrice = dbPrices.sillarast * (totalWidth / 1000);
   const sillarAlfajiaastPrice = dbPrices.sillarAlfajiaast * (totalWidth / 1000);
   const jambaastPrice = dbPrices.jambaast * (doubleHeight / 1000);
-  const horizontalSuperiorastPrice = dbPrices.horizontalSuperiorast * (totalWidth / 1000);
-  const horizontalInferiorFijaastPrice = dbPrices.horizontalInferiorFijaast * (horizontalInferiorFijaast / 1000);
-  const horizontalInferiorMovilastPrice = dbPrices.horizontalInferiorMovilast * (horizontalInferiorMovilast / 1000);
-  const traslapeastPrice = dbPrices.traslapeast * (doubleHeight / 1000);
+  const horizontalSuperiorastPrice = dbPrices.horizontalSuperiorast * (doubleWidth / 1000);
+  const horizontalInferiorFijaastPrice = dbPrices.horizontalInferiorFijaast * (doubleHalfWidth / 1000);
+  const horizontalInferiorMovilastPrice = dbPrices.horizontalInferiorMovilast * (doubleHalfWidth / 1000);
+  const traslapeastPrice = dbPrices.traslapeast * (cuadHeight / 1000);
   const engancheastPrice = dbPrices.engancheast * (cuadHeight / 1000);
+  const adaptadorReforzadoastPrice = dbPrices.adaptadorReforzadoast * (totalHeight / 1000);
 
   const kitCierreastPrice = accessories.kitCierreast ? accessoryPrices.kitCierreast : 0;
   const cubetaAngeoPrice = accessories.cubetaAngeo ? accessoryPrices.cubetaAngeo : 0;
@@ -155,7 +156,7 @@ const Astral20xox = () => {
   const guiaSuperiorangeoPrice = accessories.guiaSuperiorangeo ? accessoryPrices.guiaSuperiorangeo : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
 
-  const tornillosPrice = utilitaryPrices.tornillos * 60;
+  const tornillosPrice = utilitaryPrices.tornillos * 76;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
   const [componentTotals, setComponentTotals] = useState({
@@ -168,6 +169,7 @@ const Astral20xox = () => {
     horizontalInferior: { totalSize: 0, totalPrice: 0 },
     traslape: { totalSize: 0, totalPrice: 0 },
     enganche: { totalSize: 0, totalPrice: 0 },
+    adaptador: { totalSize: 0, totalPrice: 0 },
     empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
@@ -216,24 +218,28 @@ const Astral20xox = () => {
         totalPrice: prevTotals.jamba.totalPrice + jambaastPrice,
       },
       horizontalSuperior: {
-        totalSize: prevTotals.horizontalSuperior.totalSize + parseFloat(totalWidth),
+        totalSize: prevTotals.horizontalSuperior.totalSize + parseFloat(doubleWidth),
         totalPrice: prevTotals.horizontalSuperior.totalPrice + horizontalSuperiorastPrice,
       },
       horizontalInferiorFija: {
-        totalSize: prevTotals.horizontalInferiorFija.totalSize + parseFloat(horizontalInferiorFijaast),
+        totalSize: prevTotals.horizontalInferiorFija.totalSize + parseFloat(doubleHalfWidth),
         totalPrice: prevTotals.horizontalInferiorFija.totalPrice + horizontalInferiorFijaastPrice,
       },
       horizontalInferior: {
-        totalSize: prevTotals.horizontalInferior.totalSize + parseFloat(halfWidth),
+        totalSize: prevTotals.horizontalInferior.totalSize + parseFloat(doubleHalfWidth),
         totalPrice: prevTotals.horizontalInferior.totalPrice + horizontalInferiorMovilastPrice,
       },
       traslape: {
-        totalSize: prevTotals.traslape.totalSize + parseFloat(doubleHeight),
+        totalSize: prevTotals.traslape.totalSize + parseFloat(cuadHeight),
         totalPrice: prevTotals.traslape.totalPrice + traslapeastPrice,
       },
       enganche: {
         totalSize: prevTotals.enganche.totalSize + parseFloat(cuadHeight),
         totalPrice: prevTotals.enganche.totalPrice + engancheastPrice,
+      },
+      adaptador: {
+        totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
+        totalPrice: prevTotals.adaptador.totalPrice + adaptadorReforzadoastPrice,
       },
       empaque: {
         totalSize: prevTotals.empaque.totalSize + parseFloat(empaqueastHeight),
@@ -245,7 +251,7 @@ const Astral20xox = () => {
         totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
       },
       tornillos: {
-        cantidad: prevTotals.tornillos.cantidad + 60,
+        cantidad: prevTotals.tornillos.cantidad + 76,
         totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
       },
       silicona: {
@@ -308,8 +314,6 @@ const Astral20xox = () => {
         : prevTotals.cajaDeflectora,
 
 
-
-
       // Añade lógica para otros accesorios si es necesario.
     }));
     setPuertas((prev) => [...prev, nuevaPuerta]);
@@ -336,6 +340,7 @@ const Astral20xox = () => {
     horizontalInferiorMovilastPrice +
     traslapeastPrice +
     engancheastPrice +
+    adaptadorReforzadoastPrice +
     kitCierreastPrice +
     cubetaAngeoPrice +
     rodamiento80astPrice +
@@ -351,94 +356,95 @@ const Astral20xox = () => {
     (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
 
-  const generatePDF = () => {
-      const doc = new jsPDF();
-      const cyanBlue = '#00b5e2';
-      const lightGray = '#d3d3d3';
-      const currentDate = new Date().toLocaleDateString();
-  
-      const addTableRow = (doc, y, label, size, price) => {
-        doc.text(label, 20, y);
-        doc.text(size, 120, y);
-        doc.text(price, 170, y);
-      };
-  
-      const addSection = (doc, title, y) => {
-        doc.setFontSize(12);
-        doc.setTextColor(cyanBlue);
-        doc.text(title, 20, y);
-        doc.setFontSize(10);
-        doc.setTextColor('black');
-      };
-  
-      doc.addImage(logo, 'PNG', 20, 10, 40, 20);
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.setFontSize(8);
-      doc.setTextColor('black');
-      doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
-      doc.setFillColor(lightGray);
-      doc.rect(20, 30, 170, 8, 'F');
-      doc.setTextColor('white');
-      doc.setFontSize(10);
-      doc.text('Detalle de la cotización Astral 2.0 XO-OX', 70, 34);
-  
-      addSection(doc, 'Marco', 45);
-      addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 55, 'Sillar un Riel:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 60, 'Sillar Alfajia un Riel:', `${componentTotals.sillarAlfajia.totalSize} mm`, `${componentTotals.sillarAlfajia.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 65, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Nave', 75);
-      addTableRow(doc, 80, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 85, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 95, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 100, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Accesorios', 110);
-      addTableRow(doc, 115, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 120, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 125, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 130, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 135, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 140, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Empaque', 150);
-      addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-      addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Utilitarios', 175);
-      addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-      addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
-  
-      addSection(doc, 'Extra', 195);
-      addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-      addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-      addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
-  
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.text('Total', 170, 220);
-      doc.setFontSize(16);
-      doc.setTextColor('black');
-      const formattedTotal = totalSum.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'COP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-      doc.text(formattedTotal, 150, 225);
-  
-      doc.setFontSize(14);
-      doc.setTextColor(cyanBlue);
-      doc.text('Cantidad', 20, 220);
-      doc.text(`${puertas.length}`, 20, 225);
-  
-      doc.save('Cotizacion-Colosalpc2.6.pdf');
-    };
-
+   const generatePDF = () => {
+       const doc = new jsPDF();
+       const cyanBlue = '#00b5e2';
+       const lightGray = '#d3d3d3';
+       const currentDate = new Date().toLocaleDateString();
+   
+       const addTableRow = (doc, y, label, size, price) => {
+         doc.text(label, 20, y);
+         doc.text(size, 120, y);
+         doc.text(price, 170, y);
+       };
+   
+       const addSection = (doc, title, y) => {
+         doc.setFontSize(12);
+         doc.setTextColor(cyanBlue);
+         doc.text(title, 20, y);
+         doc.setFontSize(10);
+         doc.setTextColor('black');
+       };
+   
+       doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.setFontSize(8);
+       doc.setTextColor('black');
+       doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+       doc.setFillColor(lightGray);
+       doc.rect(20, 30, 170, 8, 'F');
+       doc.setTextColor('white');
+       doc.setFontSize(10);
+       doc.text('Detalle de la cotización Astral 2.0 XO-OX', 70, 34);
+   
+       addSection(doc, 'Marco', 45);
+       addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 55, 'Sillar un Riel:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 60, 'Sillar Alfajia un Riel:', `${componentTotals.sillarAlfajia.totalSize} mm`, `${componentTotals.sillarAlfajia.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 65, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Nave', 75);
+       addTableRow(doc, 80, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 85, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferior.totalSize} mm`, `${componentTotals.horizontalInferior.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 95, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 100, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 105, 'Adaptador Reforzaod:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Accesorios', 115);
+       addTableRow(doc, 120, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 125, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 130, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 135, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 140, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 145, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Empaque', 155);
+       addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+       addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Utilitarios', 180);
+       addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+       addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+   
+       addSection(doc, 'Extra', 200);
+       addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+       addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+       addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+   
+   
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.text('Total', 170, 225);
+       doc.setFontSize(16);
+       doc.setTextColor('black');
+       const formattedTotal = totalSum.toLocaleString('en-US', {
+         style: 'currency',
+         currency: 'COP',
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2
+       });
+       doc.text(formattedTotal, 150, 230);
+   
+       doc.setFontSize(14);
+       doc.setTextColor(cyanBlue);
+       doc.text('Cantidad', 20, 225);
+       doc.text(`${puertas.length}`, 20, 230);
+   
+       doc.save('Cotizacion-Astral20.pdf');
+     };
 
   const getPriceDisplay = () => {
     if (accessories.kitCierreast) {
@@ -489,105 +495,105 @@ const Astral20xox = () => {
 
 
   return (
-      <div className="door-container">
-        <div className="door-frame">
-          {/* Formulario para el alto y ancho */}
-          <div className="dimensions-form">
-            <label>
-              Alto (mm):
-              <input
-                type="number"
-                name="height"
-                value={height}
-                onChange={handleChange}
-                placeholder="00"
-              />
-            </label>
-            <label>
-              Ancho (mm):
-              <input
-                type="number"
-                name="width"
-                value={width}
-                onChange={handleChange}
-                placeholder="00"
-              />
-            </label>
-          </div>
-  
-          {/* Imagen */}
-          <img src={Astral20Image} alt="Puerta Corrediza Colosal" className="door-image" />
-  
-          {/* Dimensiones dinámicas */}
-          <div className="dimensions-display">
-            {width && height ? (
-              <>
-                <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
-                <p>Área: {area} m²</p>
-              </>
-            ) : (
-              <p>Ingrese las dimensiones  en milímetros.</p>
-            )}
-            <br />
-          </div>
-  
-          <div className="container mx-auto p-4">
-  
-            {/* Resumen de Puertas */}
-            <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
-              <ul className="list-disc pl-5 mb-4">
-                {puertas.map((puerta, index) => (
-                  <li key={index} className="mb-2 text-gray-600">
-                    <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
-                    <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="text-gray-700">
-                <p>
-                  <strong>Total:</strong> {puertas.length}
-                </p>
-                <p>
-                  <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
-                </p>
-                <p>
-                  <strong>Precio Total:</strong>{" "}
-                  <span className="text-cyan-600 font-bold">
-                    ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </p>
+   <div className="door-container">
+            <div className="door-frame">
+              {/* Formulario para el alto y ancho */}
+              <div className="dimensions-form">
+                <label>
+                  Alto (mm):
+                  <input
+                    type="number"
+                    name="height"
+                    value={height}
+                    onChange={handleChange}
+                    placeholder="00"
+                  />
+                </label>
+                <label>
+                  Ancho (mm):
+                  <input
+                    type="number"
+                    name="width"
+                    value={width}
+                    onChange={handleChange}
+                    placeholder="00"
+                  />
+                </label>
               </div>
-              <br />
-              <div>
-                <button
-                  className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                  onClick={generatePDF}
-                >
-                  Cotizar
-                </button>
+      
+              {/* Imagen */}
+              <img src={Astral20Image} alt="Puerta Corrediza Colosal" className="door-image" />
+      
+              {/* Dimensiones dinámicas */}
+              <div className="dimensions-display">
+                {width && height ? (
+                  <>
+                    <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
+                    <p>Área: {area} m²</p>
+                  </>
+                ) : (
+                  <p>Ingrese las dimensiones en milímetros.</p>
+                )}
+                <br />
               </div>
-            </div>
-  
-            {/* Botón Regresar */}
-            <div className="flex justify-end mt-6">
-              {/* Botón Agregar Puerta */}
-              <div className="flex justify-center mb-6">
-                <button
-                  onClick={() => navigate(-1)}
-                  className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-                >
-                  Regresar
-                </button>
+      
+              <div className="container mx-auto p-4">
+      
+                {/* Resumen de Puertas */}
+                <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+                  <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
+                  <ul className="list-disc pl-5 mb-4">
+                    {puertas.map((puerta, index) => (
+                      <li key={index} className="mb-2 text-gray-600">
+                        <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                        <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="text-gray-700">
+                    <p>
+                      <strong>Totals:</strong> {puertas.length}
+                    </p>
+                    <p>
+                      <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+                    </p>
+                    <p>
+                      <strong>Precio Total:</strong>{" "}
+                      <span className="text-cyan-600 font-bold">
+                        ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </span>
+                    </p>
+                  </div>
+                  <br />
+                  <div>
+                    <button
+                      className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                      onClick={generatePDF}
+                    >
+                      Cotizar
+                    </button>
+                  </div>
+                </div>
+      
+                {/* Botón Regresar */}
+                <div className="flex justify-end mt-6">
+                  {/* Botón Agregar Puerta */}
+                  <div className="flex justify-center mb-6">
+                    <button
+                      onClick={() => navigate(-1)}
+                      className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                    >
+                      Regresar
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-  
+
       </div>
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>ASTRAL 2.0 XOX</h1></strong>
+        <strong><h1>ASTRAL 2.0 OXXO</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -639,28 +645,33 @@ const Astral20xox = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Horizontal Superior:</strong></TableCell>
-              <TableCell>{totalWidth} mm (3)</TableCell>
+              <TableCell>{doubleWidth} mm (4)</TableCell>
               <TableCell>${horizontalSuperiorastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Horizontal Inferior Fija:</strong></TableCell>
-              <TableCell>{horizontalInferiorFijaast} mm</TableCell>
+              <TableCell>{doubleHalfWidth} mm (2)</TableCell>
               <TableCell>${horizontalInferiorFijaastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="4">
               <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
-              <TableCell>{horizontalInferiorMovilast} mm </TableCell>
+              <TableCell>{doubleHalfWidth} mm (2)</TableCell>
               <TableCell>${horizontalInferiorMovilastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="5">
               <TableCell><strong>Traslape:</strong> </TableCell>
-              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>{cuadHeight} mm (4) </TableCell>
               <TableCell>${traslapeastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="6">
               <TableCell><strong>Enganche:</strong> </TableCell>
               <TableCell>{cuadHeight} mm (4) </TableCell>
               <TableCell>${engancheastPrice.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="7">
+              <TableCell><strong>Adaptador Reforzado:</strong> </TableCell>
+              <TableCell>{totalHeight} mm </TableCell>
+              <TableCell>${adaptadorReforzadoastPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -764,7 +775,7 @@ const Astral20xox = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong> Tornillos</strong></TableCell>
-              <TableCell>60</TableCell>
+              <TableCell>76</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
@@ -776,7 +787,6 @@ const Astral20xox = () => {
         </Table>
 
         <br />
-
         <Table aria-label="TABLA EMPAQUEast">
           <TableHeader>
             <TableColumn><h1>Empaqueast</h1></TableColumn>
@@ -879,4 +889,4 @@ const Astral20xox = () => {
   );
 };
 
-export default Astral20xox;
+export default Astral20oxxo;
