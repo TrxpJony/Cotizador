@@ -92,16 +92,18 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             doc.addImage(image, 'PNG', 25, 75, 160, 55); // Adjust image dimensions
         }
 
-        const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "MEDIDAS (mm)", "SUBTOTAL", "TOTAL"];
+        const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "MEDIDAS (mm)", "SUBTOTAL", "IVA", "TOTAL"];
         const tableRows = [];
 
         doors.forEach(door => {
+            const iva = (door.price * 0.19) * door.quantity; // Correcto: se aplica a cada unidad
             const doorData = [
                 door.description,
                 door.quantity,
-                `${door.width} x ${door.height}`, // Combine width and height into one cell
+                `${door.width} x ${door.height}`,
                 (door.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                (door.price * door.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), // Mostrar IVA
+                ((door.price * door.quantity) + iva).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) // Total con IVA
             ];
             tableRows.push(doorData);
         });
@@ -116,22 +118,27 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         });
 
         // Calculate total price from doors
+        const totalIva = doors.reduce((sum, door) => sum + ((door.price * 0.19) * door.quantity), 0);
         const totalPrice = doors.reduce((sum, door) => sum + (door.price * door.quantity), 0);
+        const totalConIva = totalPrice + totalIva; // Total con IVA
 
         // Add summary table
-        const summaryTableColumn = ["Total", "Abono", "Saldo"];
-        const abono = parseFloat(formData.abono || 0); // Get abono from form data
-        const saldo = totalPrice - abono; // Calculate saldo
+        const summaryTableColumn = ["Total con IVA", "Abono", "Saldo"];
+        const abono = parseFloat(formData.abono || 0);
+        const saldo = totalConIva - abono;
         const summaryTableRows = [
-            [totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), abono.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), saldo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })]
+            [
+                totalConIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                abono.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                saldo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            ]
         ];
 
         doc.autoTable({
             head: [summaryTableColumn],
             body: summaryTableRows,
-            startY: doc.previousAutoTable.finalY + 10, // Adjust startY to be below the previous table
-            tableWidth: 'wrap', // Adjust table width to fit content
-            // Position the table to the right
+            startY: doc.previousAutoTable.finalY + 10,
+            tableWidth: 'wrap',
             headStyles: { fillColor: lightGray },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
@@ -145,7 +152,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.text('Tel: 4824039 Nit: 900.260.389-9', 75, 285);
         doc.text('Cel ventas: 3223065279 - 3204391328', 75, 290);
         doc.text('Nit: 900.260.389-9', 140, 287.5);
-        
+
         const pdfBlob = doc.output('blob');
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
@@ -161,15 +168,15 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                 }
             });
             toast.success('Cotización almacenada con éxito', {
-                                position: "bottom-center",
-                                autoClose: 3000,
-                                hideProgressBar: true,
-                                closeOnClick: false,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "light",
-                            });
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
 
             // Send email with PDF
             const emailData = new FormData();
