@@ -1,8 +1,8 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import PropTypes from 'prop-types';
-import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
+import CotizadorAdd from "../CotizadorAdd";
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         totalWidth,
         doubleHeight,
@@ -36,8 +36,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>ASTRAL 2.0 XO - OX</h1></strong>
-                <Table aria-label="TABLA MARCO">
+                <strong><h1>ASTRAL 1.7 - XO - OX</h1></strong>
+                <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -71,10 +71,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA NAVE">
+                <Table aria-label="Tabla Nave">
                     <TableHeader>
                         <TableColumn><h1>Nave</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -97,29 +95,26 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${horizontalInferiorFijaastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
-                            <TableCell><strong>Horizontal Inferior Móvil:</strong> </TableCell>
-                            <TableCell>{halfWidth} mm </TableCell>
+                            <TableCell><strong>Horizontal Inferior Móvil:</strong></TableCell>
+                            <TableCell>{halfWidth} mm</TableCell>
                             <TableCell>${horizontalInferiorMovilastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
-                            <TableCell><strong>Traslape:</strong> </TableCell>
-                            <TableCell>{doubleHeight} mm (2) </TableCell>
+                            <TableCell><strong>Traslape:</strong></TableCell>
+                            <TableCell>{doubleHeight} mm (2)</TableCell>
                             <TableCell>${traslapeastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
-                            <TableCell><strong>Enganche:</strong> </TableCell>
+                            <TableCell><strong>Enganche:</strong></TableCell>
                             <TableCell>{doubleHeight} mm (2) </TableCell>
                             <TableCell>${engancheastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA ACCESORIOS">
+                <Table aria-label="Tabla Aceesorios">
                     <TableHeader>
-                        <TableColumn><h1>Accesorios</h1></TableColumn>
-
+                        <TableColumn><h1>Accessorios</h1></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -206,10 +201,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA utilitarios">
+                <Table aria-label="Tabla Utilitarios">
                     <TableHeader>
                         <TableColumn><h1>Utilitarios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -224,14 +217,13 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${tornillosPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Silicona:</strong></TableCell>
+                            <TableCell><strong>Silicona</strong></TableCell>
                             <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-
-                <Table aria-label="TABLA EMPAQUE">
+                <Table aria-label="Tabla Empaque">
                     <TableHeader>
                         <TableColumn><h1>Empaque</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -260,9 +252,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} /> {/* Pass selectedAccessories as a prop */}
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} />
             </div>
-
         </>
     );
 };
@@ -294,7 +285,7 @@ DetalleTablas.propTypes = {
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired,
     selectedAccessories: PropTypes.array.isRequired,
-    useCalculoPrecios: PropTypes.func.isRequired // Add prop type for useCalculoPrecios
+    useCalculoPrecios: PropTypes.func.isRequired
 };
 
 export default DetalleTablas;
