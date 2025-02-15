@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import Astral20Image from '../../../img/colox.png'; // Importar la imagen
+import Astral20Image from '../../../img/colxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 
-const Astral17 = () => {
+const Astral17xx = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -104,7 +104,6 @@ useEffect(() => {
       [name]: value,
     }));
   };
-
   const handlemanodeObraChange = (e) => {
     const { name, value } = e.target;
     setmanodeObraprices((prev) => ({
@@ -112,7 +111,6 @@ useEffect(() => {
       [name]: value,
     }));
   };
-
 
   const { width, height } = dimensions;
   const halfWidth = width ? width / 2 : '';
@@ -137,11 +135,9 @@ useEffect(() => {
   // Calcular precios
   const cabezalastPrice = dbPrices.cabezalast * (totalWidth / 1000);
   const sillarastPrice = dbPrices.sillarast * (totalWidth / 1000);
-  const sillarAlfajiaastPrice = dbPrices.sillarAlfajiaast * (totalWidth / 1000);
   const jambaastPrice = dbPrices.jambaast * (doubleHeight / 1000);
   const horizontalSuperiorastPrice = dbPrices.horizontalSuperiorast * (doubleHalfWidth / 1000);
-  const horizontalInferiorFijaastPrice = dbPrices.horizontalInferiorFijaast * (halfWidth / 1000);
-  const horizontalInferiorMovilastPrice = dbPrices.horizontalInferiorMovilast * (halfWidth / 1000);
+  const horizontalInferiorMovilastPrice = dbPrices.horizontalInferiorMovilast * (doubleHalfWidth / 1000);
   const traslapeastPrice = dbPrices.traslapeast * (doubleHeight / 1000);
   const engancheastPrice = dbPrices.engancheast * (doubleHeight / 1000);
 
@@ -206,10 +202,6 @@ useEffect(() => {
         totalSize: prevTotals.cabezal.totalSize + parseFloat(totalWidth),
         totalPrice: prevTotals.cabezal.totalPrice + cabezalastPrice,
       },
-      sillarAlfajia: {
-        totalSize: prevTotals.sillar.totalSize + parseFloat(totalWidth), // Sumar tamaño
-        totalPrice: prevTotals.sillar.totalPrice + sillarAlfajiaastPrice, // Sumar precio
-      },
       jamba: {
         totalSize: prevTotals.jamba.totalSize + parseFloat(doubleHeight),
         totalPrice: prevTotals.jamba.totalPrice + jambaastPrice,
@@ -218,12 +210,8 @@ useEffect(() => {
         totalSize: prevTotals.horizontalSuperior.totalSize + parseFloat(doubleHalfWidth),
         totalPrice: prevTotals.horizontalSuperior.totalPrice + horizontalSuperiorastPrice,
       },
-      horizontalInferiorFija: {
-        totalSize: prevTotals.horizontalInferiorFija.totalSize + parseFloat(halfWidth),
-        totalPrice: prevTotals.horizontalInferiorFija.totalPrice + horizontalInferiorFijaastPrice,
-      },
       horizontalInferiorMovil: {
-        totalSize: prevTotals.horizontalInferiorMovil.totalSize + parseFloat(halfWidth),
+        totalSize: prevTotals.horizontalInferiorMovil.totalSize + parseFloat(doubleHalfWidth),
         totalPrice: prevTotals.horizontalInferiorMovil.totalPrice + horizontalInferiorMovilastPrice,
       },
       traslape: {
@@ -311,11 +299,11 @@ useEffect(() => {
 
       // Añade lógica para otros accesorios si es necesario.
     }));
+
+
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
-    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
-    setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -328,10 +316,8 @@ useEffect(() => {
   const totalPrice =
     cabezalastPrice +
     sillarastPrice +
-    sillarAlfajiaastPrice +
     jambaastPrice +
     horizontalSuperiorastPrice +
-    horizontalInferiorFijaastPrice +
     horizontalInferiorMovilastPrice +
     traslapeastPrice +
     engancheastPrice +
@@ -379,48 +365,45 @@ useEffect(() => {
     doc.rect(20, 30, 170, 8, 'F');
     doc.setTextColor('white');
     doc.setFontSize(10);
-    doc.text('Detalle de la cotización Astral 1.7 XO-OX', 70, 34);
+    doc.text('Detalle de la cotización Astral 2.0 XX', 70, 34);
 
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'Cabezal:', `${componentTotals.cabezal.totalSize} mm`, `${componentTotals.cabezal.totalPrice.toFixed(2)}`);
     addTableRow(doc, 55, 'Sillar un Riel:', `${componentTotals.sillar.totalSize} mm`, `${componentTotals.sillar.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 60, 'Sillar Alfajia un Riel:', `${componentTotals.sillarAlfajia.totalSize} mm`, `${componentTotals.sillarAlfajia.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 65, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 60, 'Jamba:', `${componentTotals.jamba.totalSize} mm`, `${componentTotals.jamba.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Nave', 75);
-    addTableRow(doc, 80, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 85, 'Horizontal Inferior Fija:', `${componentTotals.horizontalInferiorFija.totalSize} mm`, `${componentTotals.horizontalInferiorFija.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 90, 'Horizontal Inferior Móvil:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 95, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 100, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Nave', 70);
+    addTableRow(doc, 75, 'Horizontal Superior:', `${componentTotals.horizontalSuperior.totalSize} mm`, `${componentTotals.horizontalSuperior.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 80, 'Horizontal Inferior:', `${componentTotals.horizontalInferiorMovil.totalSize} mm`, `${componentTotals.horizontalInferiorMovil.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 85, 'Traslape:', `${componentTotals.traslape.totalSize} mm`, `${componentTotals.traslape.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 90, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Accesorios', 110);
-    addTableRow(doc, 115, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 120, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 125, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 130, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 135, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 140, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 145, 'Guia Superior Angeo Linea Universal:', `${accessoryTotals.guiaSuperior.cantidad}`, `${accessoryTotals.guiaSuperior.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Accesorios', 100);
+    addTableRow(doc, 105, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 110, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 115, 'Rodamiento 80 Kilos en Agujas:', `${accessoryTotals.rodamiento80.cantidad}`, `${accessoryTotals.rodamiento80.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 120, 'Rodamiento 40 Kilos en Agujas:', `${accessoryTotals.rodamiento40.cantidad}`, `${accessoryTotals.rodamiento40.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 125, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 130, 'Rodamiento 22 Kilos en Bolas Para Nave:', `${accessoryTotals.rodamiento22.cantidad}`, `${accessoryTotals.rodamiento22.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 135, 'Guia Superior Angeo Linea Universal', `${accessoryTotals.guiaSuperior.cantidad}`, `${accessoryTotals.guiaSuperior.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Empaque', 155);
-    addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-    addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Empaque', 145);
+    addTableRow(doc, 150, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+    addTableRow(doc, 155, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 160, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Utilitarios', 180);
-    addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+    addSection(doc, 'Utilitarios', 170);
+    addTableRow(doc, 175, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+    addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
-    addSection(doc, 'Extra', 200);
-    addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-    addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-    addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
-
+    addSection(doc, 'Extra', 190);
+    addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+    addTableRow(doc, 205, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 225);
+    doc.text('Total', 170, 215);
     doc.setFontSize(16);
     doc.setTextColor('black');
     const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -429,16 +412,15 @@ useEffect(() => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-    doc.text(formattedTotal, 150, 230);
+    doc.text(formattedTotal, 150, 220);
 
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
-    doc.text('Cantidad', 20, 225);
-    doc.text(`${puertas.length}`, 20, 230);
+    doc.text('Cantidad', 20, 215);
+    doc.text(`${puertas.length}`, 20, 220);
 
     doc.save('Cotizacion-Astral1.7.pdf');
   };
-
 
   const getPriceDisplay = () => {
     if (accessories.kitCierreast) {
@@ -486,7 +468,6 @@ useEffect(() => {
     }
     return ''; // Si no está seleccionado, no mostrar precio
   };
-
 
   return (
     <div className="door-container">
@@ -611,11 +592,6 @@ useEffect(() => {
               <TableCell>${sillarastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="4">
-              <TableCell><strong>Sillar Alfajia un Riel:</strong></TableCell>
-              <TableCell>{totalWidth} mm</TableCell>
-              <TableCell>${sillarAlfajiaastPrice.toFixed(2)}</TableCell>
-            </TableRow>
-            <TableRow key="5">
               <TableCell><strong>Jamba:</strong></TableCell>
               <TableCell>{doubleHeight} mm (2)</TableCell>
               <TableCell>${jambaastPrice.toFixed(2)}</TableCell>
@@ -642,14 +618,9 @@ useEffect(() => {
               <TableCell>{doubleHalfWidth} mm (2)</TableCell>
               <TableCell>${horizontalSuperiorastPrice.toFixed(2)}</TableCell>
             </TableRow>
-            <TableRow key="3">
-              <TableCell><strong>Horizontal Inferior Fija:</strong></TableCell>
-              <TableCell>{halfWidth} mm</TableCell>
-              <TableCell>${horizontalInferiorFijaastPrice.toFixed(2)}</TableCell>
-            </TableRow>
             <TableRow key="4">
               <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
-              <TableCell>{halfWidth} mm </TableCell>
+              <TableCell>{doubleHalfWidth} mm (2)</TableCell>
               <TableCell>${horizontalInferiorMovilastPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="5">
@@ -877,4 +848,4 @@ useEffect(() => {
   );
 };
 
-export default Astral17;
+export default Astral17xx;

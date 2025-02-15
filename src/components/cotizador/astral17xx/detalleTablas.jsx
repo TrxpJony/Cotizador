@@ -1,6 +1,6 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import PropTypes from "prop-types";
-import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
+import CotizadorAdd from "../CotizadorAdd";
 
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
@@ -26,14 +26,14 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         rodamiento40astPrice,
         cajaDeflectoraPrice,
         rodamientoNave22astPrice,
-        guiaSuperiorangeoPrice,
+        guiaSuperiorangeoPrice
     } = calculatedValues || {};
 
     return (
         <>
             <div className="parts-list">
-                <strong><h1>ASTRAL 2.0 XX</h1></strong>
-                <Table aria-label="Table Marco">
+                <strong><h1>ASTRAL 1.7 XX</h1></strong>
+                <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -47,7 +47,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Cabezal:</strong></TableCell>
-                            <TableCell>{totalWidth} mm</TableCell>
+                            <TableCell>{totalWidth} mm </TableCell>
                             <TableCell>${cabezalastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
@@ -77,11 +77,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Horizontal Superior:</strong></TableCell>
-                            <TableCell>{totalWidth} mm</TableCell>
+                            <TableCell>{totalWidth} mm </TableCell>
                             <TableCell>${horizontalSuperiorastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Horizontal Inferior Móvil:</strong></TableCell>
+                            <TableCell><strong>Horizontal Inferior Movil:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
                             <TableCell>${horizontalInferiorMovilastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -100,7 +100,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                 <br />
                 <Table aria-label="Tabla Accesorios">
                     <TableHeader>
-                        <TableColumn><h1>Accesosios</h1></TableColumn>
+                        <TableColumn><h1>Accesorios</h1></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -109,22 +109,22 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierreast')}
-                                    onChange={() => onAccessoryChange('kitCierreast')}
-                                />
+                            <TableCell><input
+                                type="checkbox"
+                                checked={selectedAccessories.includes('kitCierreast')}
+                                onChange={() => onAccessoryChange('kitCierreast')}
+                            />
                                 <strong>Kit Cierre</strong>
                             </TableCell>
                             <TableCell>${kitCierreastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><input
-                                type="checkbox"
-                                checked={selectedAccessories.includes('rodamiento80ast')}
-                                onChange={() => onAccessoryChange('rodamiento80ast')}
-                            />
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('rodamiento80ast')}
+                                    onChange={() => onAccessoryChange('rodamiento80ast')}
+                                />
                                 <strong>Rodamiento 80 Kilos en Agujas</strong>
                             </TableCell>
                             <TableCell>${rodamiento80astPrice?.toFixed(2)}</TableCell>
@@ -187,7 +187,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla utilitarios">
+                <Table aria-label="Table Utilitarios">
                     <TableHeader>
                         <TableColumn><h1>Utilitarios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -238,7 +238,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories}/>
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor}  useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories}/>
             </div>
         </>
     );
@@ -261,7 +261,7 @@ DetalleTablas.propTypes = {
         rodamiento40astPrice: PropTypes.number,
         cajaDeflectoraPrice: PropTypes.number,
         rodamientoNave22astPrice: PropTypes.number,
-        guiaSuperiorangeoPrice: PropTypes.number
+        guiaSuperiorangeoPrice: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
