@@ -13,13 +13,13 @@ import { CircularProgress } from '@heroui/react';
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
-        client: ' ',
-        project: '',
-        contact: '',
-        phone: '',
-        address: '',
+        cliente: '',   // Cambiado de 'client' a 'cliente'
+        projecto: '',  // Asegurar consistencia en los nombres
+        contacto: '',
+        telefono: '',
+        direccion: '',
         email: '',
-        abono: '' // Add abono to formData
+        abono: ''
     });
     const [cotNumber, setCotNumber] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Add loading state
@@ -226,37 +226,45 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                         ) : (
                             <>
                                 {/* Form Fields - 2 columns */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    {['cliente', 'projecto', 'contacto', 'telefono', 'direccion', 'email', 'abono'].map((field, index) => (
-                                        <div key={index} className='mb-5'>
-                                            <label htmlFor={field} className='block text-gray-700 font-medium mb-2'>{field.toUpperCase()}</label>
-                                            <input
-                                                id={field}
-                                                type='text'
-                                                name={field}
-                                                value={formData[field]}
-                                                onChange={handleChange}
-                                                className='w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500'
-                                                placeholder={`Ingrese el ${field}`}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-[90%] sm:max-w-4xl max-h-[90vh] overflow-y-auto">
+                                        <h2 className="text-xl font-semibold mb-4">Cotización</h2>
 
-                                {/* Buttons */}
-                                <div className="flex justify-end space-x-4 mt-6">
-                                    <button
-                                        onClick={handleCloseModal}
-                                        className="px-6 py-3 bg-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                                    >
-                                        Cancelar
-                                    </button>
-                                    <button
-                                        onClick={handlePrint}
-                                        className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                    >
-                                        Imprimir
-                                    </button>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {['cliente', 'projecto', 'contacto', 'telefono', 'direccion', 'email', 'abono'].map((field, index) => (
+                                                <div key={index} className="flex flex-col">
+                                                    <label htmlFor={field} className="block text-gray-700">
+                                                        {field}
+                                                    </label>
+                                                    <input
+                                                        id={field}
+                                                        type="text"
+                                                        name={field}
+                                                        value={formData[field]}
+                                                        onChange={handleChange}
+                                                        className="w-full p-2 border rounded h-10"
+                                                        placeholder={`Ingrese el ${field}`}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Botones */}
+                                        <div className="flex flex-col sm:flex-row justify-end mt-6 gap-2">
+                                            <button
+                                                onClick={handleCloseModal}
+                                                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md w-full sm:w-auto"
+                                            >
+                                                Cancelar
+                                            </button>
+                                            <button
+                                                onClick={handlePrint}
+                                                className="px-4 py-2 bg-cyan-500 text-white rounded-md w-full sm:w-auto"
+                                            >
+                                                Cotizar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </>
                         )}
