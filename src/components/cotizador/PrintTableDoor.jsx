@@ -28,7 +28,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
 
     useEffect(() => {
         const generateUniqueCotNumber = () => {
-            return 'COT-' + uuidv4(); // Use uuidv4 to generate unique cotNumber
+            return uuidv4(); // Use uuidv4 to generate unique cotNumber
         };
         setCotNumber(generateUniqueCotNumber());
     }, []);

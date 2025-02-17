@@ -40,7 +40,7 @@ const Astral17 = () => {
                 <div className='door-frame'>
                     <img src={Astral20Image} alt='ASTRAL 1.0 XO - OX' className='door-image' />
                     <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
-                    <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h2>
+                    <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />
                     <AddTableDoor doors={doors} />
                     <PrintTableDoor doors={doors} title={"Ventana Corrediza Sistema Astral 1.7"} image={Astral20Image} totalPrice={totalPrice} />

@@ -15,19 +15,21 @@ const CotiTable = () => {
 
 	useEffect(() => {
 		fetch(baseUrl)
-		  .then((response) => response.json())
-		  .then((data) => {
-			if (data && Array.isArray(data)) {
-			  setCotizaciones(data);
-			  setFilteredCotizaciones(data);
-			} else {
-			  console.error("La respuesta de la API no es un array válido.");
-			}
-		  })
-		  .catch((error) => {
-			console.error('Error fetching data:', error);
-		  });
-	  }, []);
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && Array.isArray(data)) {
+					// Ordenar por created_at (suponiendo que es una fecha válida)
+					const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+					setCotizaciones(sortedData);
+					setFilteredCotizaciones(sortedData);
+				} else {
+					console.error("La respuesta de la API no es un array válido.");
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	}, []);
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
@@ -61,33 +63,33 @@ const CotiTable = () => {
 				fetch(`${baseUrl}/${id}`, {
 					method: 'DELETE',
 				})
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					return response.json();
-				})
-				.then((data) => {
-					toast(data.message, {
-						position: "bottom-center",
-						autoClose: 3000,
-						hideProgressBar: true,
-						closeOnClick: false,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: "light",
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then((data) => {
+						toast(data.message, {
+							position: "bottom-center",
+							autoClose: 3000,
+							hideProgressBar: true,
+							closeOnClick: false,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "light",
+						});
+
+						// Actualizar el estado sin recargar la página
+						const updatedCotizaciones = cotizaciones.filter((cotizacion) => cotizacion.id !== id);
+						setCotizaciones(updatedCotizaciones);
+						setFilteredCotizaciones(updatedCotizaciones);
+					})
+					.catch((error) => {
+						console.error("Error al eliminar la cotización:", error);
+						alert("Hubo un problema al eliminar la cotización.");
 					});
-	
-					// Actualizar el estado sin recargar la página
-					const updatedCotizaciones = cotizaciones.filter((cotizacion) => cotizacion.id !== id);
-					setCotizaciones(updatedCotizaciones);
-					setFilteredCotizaciones(updatedCotizaciones);
-				})
-				.catch((error) => {
-					console.error("Error al eliminar la cotización:", error);
-					alert("Hubo un problema al eliminar la cotización.");
-				});
 			}
 		});
 	};
@@ -106,7 +108,7 @@ const CotiTable = () => {
 
 	return (
 		<>
-		    <ToastContainer />
+			<ToastContainer />
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
 				initial={{ opacity: 0, y: 20 }}
@@ -153,7 +155,7 @@ const CotiTable = () => {
 						</thead>
 
 						<tbody className='divide-y divide-gray-900'>
-								{paginatedCotizaciones.map((cotizacion) => (
+							{paginatedCotizaciones.map((cotizacion) => (
 								<motion.tr
 									key={cotizacion.id}
 									initial={{ opacity: 0 }}
