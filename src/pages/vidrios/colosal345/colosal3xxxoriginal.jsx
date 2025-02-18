@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosal3Image from '../../../img/colox.png'; // Importar la imagen
+import colosal3Image from '../../../img/colxxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import preciosData from '../../../api/db.json';
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import logo from '../../../../src/img/logo.png'
 
-const Colosal3 = () => {
+const Colosal3xxx = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -128,7 +128,7 @@ const Colosal3 = () => {
 
   // Calcular valores
   const doubleHeight = totalHeight ? totalHeight * 2 : '';
-  //const doubleHalfWidth = halfWidth ? halfWidth * 2 : '';
+  const cuadHeight = totalHeight ? totalHeight * 4 : '';
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaquecolHeight = height && width ? height * 4 : '';
   const empaquecolWidth = height && width ? width * 2 : '';
@@ -137,12 +137,12 @@ const Colosal3 = () => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaquecol; // Precio total del empaquecol
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralCol345 = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
-  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 2 + 13) * 4 + totalHeight * 4) : 0;
+  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 3 + 13) * 6 + totalHeight * 6) : 0;
   // Calcular precios
 
   const marcoPerimetralCol345Price = (marcoPerimetralCol345 / 1000) * dbPrices.marcoPerimetralCol345;
   const perimetralNaveCol345Price = (perimetralNaveCol345 / 1000) * dbPrices.perimetralNaveCol345;
-  const engancheCol345Price = dbPrices.engancheCol345 * (doubleHeight / 1000);
+  const engancheCol345Price = dbPrices.engancheCol345 * (cuadHeight / 1000);
 
   const kitCierrecol345Price = accessories.kitCierrecol345 ? accessoryPrices.kitCierrecol345 : 0;
   const kitCierreConLlavecol345Price = accessories.kitCierreConLlavecol345 ? accessoryPrices.kitCierreConLlavecol345 : 0;
@@ -157,8 +157,7 @@ const Colosal3 = () => {
   const rodamientoDoble140colPrice = accessories.rodamientoDoble140col ? accessoryPrices.rodamientoDoble140col : 0;
   const cajaDeflectoraPrice = accessories.cajaDeflectora ? accessoryPrices.cajaDeflectora : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-
-  const tornillosPrice = utilitaryPrices.tornillos * 44;
+  const tornillosPrice = utilitaryPrices.tornillos * 60;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
   const [componentTotals, setComponentTotals] = useState({
@@ -210,7 +209,7 @@ const Colosal3 = () => {
         totalPrice: prevTotals.perimetralNave.totalPrice + perimetralNaveCol345Price, // Sumar precio
       },
       enganche: {
-        totalSize: prevTotals.enganche.totalSize + parseFloat(doubleHeight),
+        totalSize: prevTotals.enganche.totalSize + parseFloat(cuadHeight),
         totalPrice: prevTotals.enganche.totalPrice + engancheCol345Price,
       },
       empaque: {
@@ -223,7 +222,7 @@ const Colosal3 = () => {
         totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
       },
       tornillos: {
-        cantidad: prevTotals.tornillos.cantidad + 44,
+        cantidad: prevTotals.tornillos.cantidad + 60,
         totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
       },
       silicona: {
@@ -314,7 +313,6 @@ const Colosal3 = () => {
           totalPrice: prevTotals.kit4Seguros.totalPrice + kit4Seguroscol345Price,
         }
         : prevTotals.kit4Seguros,
-      // Añade lógica para otros accesorios si es necesario.
     }));
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
@@ -384,7 +382,7 @@ const Colosal3 = () => {
     doc.rect(20, 30, 170, 8, 'F');
     doc.setTextColor('white');
     doc.setFontSize(10);
-    doc.text('Detalle de la cotización Colosal 345 XO-OX', 70, 34);
+    doc.text('Detalle de la cotización Colosal 345 XXX', 70, 34);
 
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'Marco Perimetral:', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
@@ -421,7 +419,6 @@ const Colosal3 = () => {
     addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
     addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
-
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
     doc.text('Total', 170, 220);
@@ -442,7 +439,6 @@ const Colosal3 = () => {
 
     doc.save('Cotizacion-Colosal345.pdf');
   };
-
 
   const getPriceDisplay = () => {
     if (accessories.kitCierrecol345) {
@@ -517,8 +513,6 @@ const Colosal3 = () => {
     }
     return ''; // Si no está seleccionado, no mostrar precio
   };
-
-
 
   return (
     <div className="door-container">
@@ -619,7 +613,7 @@ const Colosal3 = () => {
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>COLOSAL 345 XO-OX</h1></strong>
+        <strong><h1>COLOSAL 345 XXX</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -656,12 +650,12 @@ const Colosal3 = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Nave:</strong></TableCell>
-              <TableCell>{perimetralNaveCol345} mm (8)</TableCell>
+              <TableCell>{perimetralNaveCol345} mm (12)</TableCell>
               <TableCell>${perimetralNaveCol345Price.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Enganche:</strong> </TableCell>
-              <TableCell>{doubleHeight} mm (2) </TableCell>
+              <TableCell>{doubleHeight} mm (4) </TableCell>
               <TableCell>${engancheCol345Price.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
@@ -817,7 +811,7 @@ const Colosal3 = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong> Tornillos</strong></TableCell>
-              <TableCell>44</TableCell>
+              <TableCell>60</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
@@ -915,6 +909,7 @@ const Colosal3 = () => {
           </TableBody>
         </Table>
 
+
         <h2 className="text-right text-2xl font-bold">Total</h2>
         <div className="flex justify-between items-center">
           <button
@@ -933,4 +928,4 @@ const Colosal3 = () => {
   );
 };
 
-export default Colosal3;
+export default Colosal3xxx;
