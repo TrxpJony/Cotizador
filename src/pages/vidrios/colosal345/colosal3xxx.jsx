@@ -42,9 +42,9 @@ const Colosal3xxx = () => {
                     <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />
                     <AddTableDoor doors={doors} />
-                    <PrintTableDoor doors={doors} title={"puerta Corrediza Sistema Colosal 345"} image={colosal3Image} totalPrice={totalPrice} />
+                    <PrintTableDoor doors={doors} title={"Puerta Corrediza Sistema Colosal 345"} image={colosal3Image} totalPrice={totalPrice} />
                     <div className='flex justify-end mt-6'>
-                        <div className='flex justify-end mb-6'>
+                        <div className='flex justify-center mb-6'>
                             <button
                                 onClick={() => navigate(-1)}
                                 className='bg-gray-500 px-4 py-2 text-white rounded-md'
@@ -67,4 +67,4 @@ const Colosal3xxx = () => {
     );
 };
 
-export default Colosal3xxx
+export default Colosal3xxx;

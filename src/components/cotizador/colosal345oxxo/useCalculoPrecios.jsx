@@ -41,33 +41,36 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaHeight + felpaWidth;
-        const marcoPerimetralTresCol345 = (totalWidth * 2) + (totalHeight * 2);
-        const perimetralNaveCol345 = (totalWidth / 3 + 31) * 6 + totalHeight * 6;
+        const marcoPerimetralCol345 = (totalWidth * 2) + (totalHeight * 2);
+        const perimetralNaveCol345 = (totalWidth / 3 + 31) * 8 + totalWidth * 8;
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
-        const marcoPerimetralTresCol345Price = getPrice("marcoPerimetralTresCol345", marcoPerimetralTresCol345);
+        const marcoPerimetralCol345Price = getPrice("marcoPerimetralCol345", marcoPerimetralCol345);
         const perimetralNaveCol345Price = getPrice("perimetralNaveCol345", perimetralNaveCol345);
         const engancheCol345Price = getPrice("engancheCol345", cuadHeight);
+        const adaptadorCol345Price = getPrice("adaptadorCol345", totalHeight);
         const empaquecolPrice = getPrice("empaquecol", empaquecolHeight + empaquecolWidth);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
-        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 76;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
         const total =
-            marcoPerimetralTresCol345Price + perimetralNaveCol345Price + engancheCol345Price +
-            empaquecolPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
+            marcoPerimetralCol345Price + perimetralNaveCol345Price + engancheCol345Price +
+            empaquecolPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice + adaptadorCol345Price;
         setTotalPrice(total);
         setCalculatedValues({
             totalWidth,
+            totalHeight,
             cuadHeight,
-            marcoPerimetralTresCol345,
+            marcoPerimetralCol345,
             perimetralNaveCol345,
-            marcoPerimetralTresCol345Price,
+            marcoPerimetralCol345Price,
             perimetralNaveCol345Price,
             engancheCol345Price,
+            adaptadorCol345Price,
             empaquecolPrice,
             tornillosPrice,
             siliconaPrice,
@@ -82,7 +85,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             Kit8Escuadrascol345Price: memoizedPrices.Kit8Escuadrascol345 ? Number(memoizedPrices.Kit8Escuadrascol345) : 0,
             kit4Anclascol345Price: memoizedPrices.kit4Anclascol345 ? Number(memoizedPrices.kit4Anclascol345) : 0,
             kit4Alzacol345Price: memoizedPrices.kit4Alzacol345 ? Number(memoizedPrices.kit4Alzacol345) : 0,
-            kit4Tapacol345Price: memoizedPrices.kit4Tapacol345 ? Number(memoizedPrices.kit4Tapacol345) : 0,
+            kit4Tapacol345Price: memoizedPrices.kit4Tapacol345 ? Number(memoizedPrices.kit4Alzacol345) : 0,
             kit2Cortavientoscol345Price: memoizedPrices.kit2Cortavientoscol345 ? Number(memoizedPrices.kit2Cortavientoscol345) : 0,
             kit4Seguroscol345Price: memoizedPrices.kit4Seguroscol345 ? Number(memoizedPrices.kit4Seguroscol345) : 0,
             cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
@@ -91,7 +94,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
-
+    
     return { totalPrice, calculatedValues };
 };
 

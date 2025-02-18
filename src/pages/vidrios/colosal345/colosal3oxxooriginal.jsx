@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosal3Image from '../../../img/colxxx.png'; // Importar la imagen
+import colosal3Image from '../../../img/coloxxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import preciosData from '../../../api/db.json';
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import logo from '../../../../src/img/logo.png'
 
-const Colosal3xxx = () => {
+const Colosal3oxxo = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -116,7 +116,6 @@ const Colosal3xxx = () => {
     }));
   };
 
-
   const { width, height } = dimensions;
   const totalHeight = height ? height : '';
   const totalWidth = width ? width : '';
@@ -137,12 +136,13 @@ const Colosal3xxx = () => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaquecol; // Precio total del empaquecol
   const totFelpa = (felpaHeight + felpaWidth);
   const marcoPerimetralCol345 = (totalWidth && totalHeight) ? (totalWidth * 2 + totalHeight * 2) : 0;
-  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 3 + 13) * 6 + totalHeight * 6) : 0;
+  const perimetralNaveCol345 = (totalWidth && totalHeight) ? ((totalWidth / 3 + 31) * 8 + totalHeight * 8) : 0;
+  
   // Calcular precios
-
   const marcoPerimetralCol345Price = (marcoPerimetralCol345 / 1000) * dbPrices.marcoPerimetralCol345;
   const perimetralNaveCol345Price = (perimetralNaveCol345 / 1000) * dbPrices.perimetralNaveCol345;
   const engancheCol345Price = dbPrices.engancheCol345 * (cuadHeight / 1000);
+  const adaptadorCol345Price = dbPrices.adaptadorCol345 * (totalHeight / 1000);
 
   const kitCierrecol345Price = accessories.kitCierrecol345 ? accessoryPrices.kitCierrecol345 : 0;
   const kitCierreConLlavecol345Price = accessories.kitCierreConLlavecol345 ? accessoryPrices.kitCierreConLlavecol345 : 0;
@@ -157,13 +157,15 @@ const Colosal3xxx = () => {
   const rodamientoDoble140colPrice = accessories.rodamientoDoble140col ? accessoryPrices.rodamientoDoble140col : 0;
   const cajaDeflectoraPrice = accessories.cajaDeflectora ? accessoryPrices.cajaDeflectora : 0;
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
-  const tornillosPrice = utilitaryPrices.tornillos * 60;
+
+  const tornillosPrice = utilitaryPrices.tornillos * 76;
   const siliconaPrice = utilitaryPrices.silicona * 1;
 
   const [componentTotals, setComponentTotals] = useState({
     marcoPerimetral: { totalSize: 0, totalPrice: 0 },
     perimetralNave: { totalSize: 0, totalPrice: 0 },
     enganche: { totalSize: 0, totalPrice: 0 },
+    adaptador: { totalSize: 0, totalPrice: 0 },
     empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
@@ -212,6 +214,10 @@ const Colosal3xxx = () => {
         totalSize: prevTotals.enganche.totalSize + parseFloat(cuadHeight),
         totalPrice: prevTotals.enganche.totalPrice + engancheCol345Price,
       },
+      adaptador: {
+        totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
+        totalPrice: prevTotals.adaptador.totalPrice + adaptadorCol345Price,
+      },
       empaque: {
         totalSize: prevTotals.empaque.totalSize + parseFloat(empaquecolHeight),
         totalSize2: prevTotals.empaque.totalSize + parseFloat(empaquecolWidth),
@@ -222,7 +228,7 @@ const Colosal3xxx = () => {
         totalPrice: prevTotals.felpa.totalPrice + felpaPrice,
       },
       tornillos: {
-        cantidad: prevTotals.tornillos.cantidad + 60,
+        cantidad: prevTotals.tornillos.cantidad + 76,
         totalPrice: prevTotals.tornillos.totalPrice + tornillosPrice,
       },
       silicona: {
@@ -313,13 +319,13 @@ const Colosal3xxx = () => {
           totalPrice: prevTotals.kit4Seguros.totalPrice + kit4Seguroscol345Price,
         }
         : prevTotals.kit4Seguros,
-    }));
-    setPuertas((prev) => [...prev, nuevaPuerta]);
-    setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
-    setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
-    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
-    setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
-  };
+      }));
+      setPuertas((prev) => [...prev, nuevaPuerta]);
+      setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
+      setAccessories({ kitCierrecol: false, kitCierreConLlavecol: false }); // Reiniciar accesorios
+      setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar dimensiones del vidrio
+      setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de mano de obra
+    };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
   const totalArea = puertas.reduce(
@@ -331,6 +337,7 @@ const Colosal3xxx = () => {
 
   const totalPrice =
     engancheCol345Price +
+    adaptadorCol345Price +
     kitCierrecol345Price +
     kitCierreConLlavecol345Price +
     Kit8Escuadrascol345Price +
@@ -353,92 +360,94 @@ const Colosal3xxx = () => {
     (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
 
   const generatePDF = () => {
-    const doc = new jsPDF();
-    const cyanBlue = '#00b5e2';
-    const lightGray = '#d3d3d3';
-    const currentDate = new Date().toLocaleDateString();
-
-    const addTableRow = (doc, y, label, size, price) => {
-      doc.text(label, 20, y);
-      doc.text(size, 120, y);
-      doc.text(price, 170, y);
-    };
-
-    const addSection = (doc, title, y) => {
-      doc.setFontSize(12);
+      const doc = new jsPDF();
+      const cyanBlue = '#00b5e2';
+      const lightGray = '#d3d3d3';
+      const currentDate = new Date().toLocaleDateString();
+  
+      const addTableRow = (doc, y, label, size, price) => {
+        doc.text(label, 20, y);
+        doc.text(size, 120, y);
+        doc.text(price, 170, y);
+      };
+  
+      const addSection = (doc, title, y) => {
+        doc.setFontSize(12);
+        doc.setTextColor(cyanBlue);
+        doc.text(title, 20, y);
+        doc.setFontSize(10);
+        doc.setTextColor('black');
+      };
+  
+      doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+      doc.setFontSize(14);
       doc.setTextColor(cyanBlue);
-      doc.text(title, 20, y);
-      doc.setFontSize(10);
+      doc.setFontSize(8);
       doc.setTextColor('black');
+      doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
+      doc.setFillColor(lightGray);
+      doc.rect(20, 30, 170, 8, 'F');
+      doc.setTextColor('white');
+      doc.setFontSize(10);
+      doc.text('Detalle de la cotización Colosal 345 OXXO', 70, 34);
+  
+      addSection(doc, 'Marco', 45);
+      addTableRow(doc, 50, 'Marco Perimetral:', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
+  
+      addSection(doc, 'Nave', 60);
+      addTableRow(doc, 65, 'Perimetral Nave:', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 70, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 75, 'Adaptador:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
+  
+      addSection(doc, 'Accesorios', 85);
+      addTableRow(doc, 90, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 95, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 100, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 105, 'Rodamiento Simple en Agujas 70 Kilos:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 110, 'Rodamiento Doble en Agujas 140 Kilos:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 115, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 120, 'Kit 8 Escuadras de Alineación:', `${accessoryTotals.Kit8Escuadras.cantidad}`, `${accessoryTotals.Kit8Escuadras.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 125, 'Kit 4 Anclas Esquinero:', `${accessoryTotals.kit4Anclas.cantidad}`, `${accessoryTotals.kit4Anclas.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 130, 'Kit 4 Alza Guia/Tope Hoja Fija/Movil:', `${accessoryTotals.kit4Alza.cantidad}`, `${accessoryTotals.kit4Alza.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 135, 'Kit 4 Tapa y Tapeta Enganche:', `${accessoryTotals.kit4Tapa.cantidad}`, `${accessoryTotals.kit4Tapa.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 140, 'Kit 2 Cortavientos:', `${accessoryTotals.kit2Cortavientos.cantidad}`, `${accessoryTotals.kit2Cortavientos.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 145, 'Kit 4 Seguros de Hoja Fija:', `${accessoryTotals.kit4Seguros.cantidad}`, `${accessoryTotals.kit4Seguros.totalPrice.toFixed(2)}`);
+  
+      addSection(doc, 'Empaque', 155);
+      addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+      addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+  
+      addSection(doc, 'Utilitarios', 180);
+      addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+      addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+  
+      addSection(doc, 'Extra', 200);
+      addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+      addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+      addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+  
+  
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      doc.text('Total', 170, 225);
+      doc.setFontSize(16);
+      doc.setTextColor('black');
+      const formattedTotal = totalSum.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      doc.text(formattedTotal, 150, 230);
+  
+      doc.setFontSize(14);
+      doc.setTextColor(cyanBlue);
+      doc.text('Cantidad', 20, 225);
+      doc.text(`${puertas.length}`, 20, 230);
+  
+      doc.save('Cotizacion-Colosal345.pdf');
     };
-
-    doc.addImage(logo, 'PNG', 20, 10, 40, 20);
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.setFontSize(8);
-    doc.setTextColor('black');
-    doc.text(`Fecha de creación: ${currentDate}`, 150, 20);
-    doc.setFillColor(lightGray);
-    doc.rect(20, 30, 170, 8, 'F');
-    doc.setTextColor('white');
-    doc.setFontSize(10);
-    doc.text('Detalle de la cotización Colosal 345 XXX', 70, 34);
-
-    addSection(doc, 'Marco', 45);
-    addTableRow(doc, 50, 'Marco Perimetral:', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
-
-    addSection(doc, 'Nave', 60);
-    addTableRow(doc, 65, 'Perimetral Nave:', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 70, 'Enganche:', `${componentTotals.enganche.totalSize} mm`, `${componentTotals.enganche.totalPrice.toFixed(2)}`);
-
-    addSection(doc, 'Accesorios', 80);
-    addTableRow(doc, 85, 'Kit de Cierre:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 90, 'Kit de Cierre con Llave:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 95, 'Cubeta de Angeo Negra:', `${accessoryTotals.cubetaAngeo.cantidad}`, `${accessoryTotals.cubetaAngeo.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 100, 'Rodamiento Simple en Agujas 70 Kilos:', `${accessoryTotals.rodamientoSimple.cantidad}`, `${accessoryTotals.rodamientoSimple.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 105, 'Rodamiento Doble en Agujas 140 Kilos:', `${accessoryTotals.rodamientoDoble.cantidad}`, `${accessoryTotals.rodamientoDoble.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 110, 'Caja Deflectora:', `${accessoryTotals.cajaDeflectora.cantidad}`, `${accessoryTotals.cajaDeflectora.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 115, 'Kit 8 Escuadras de Alineación:', `${accessoryTotals.Kit8Escuadras.cantidad}`, `${accessoryTotals.Kit8Escuadras.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 120, 'Kit 4 Anclas Esquinero:', `${accessoryTotals.kit4Anclas.cantidad}`, `${accessoryTotals.kit4Anclas.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 125, 'Kit 4 Alza Guia/Tope Hoja Fija/Movil:', `${accessoryTotals.kit4Alza.cantidad}`, `${accessoryTotals.kit4Alza.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 130, 'Kit 4 Tapa y Tapeta Enganche:', `${accessoryTotals.kit4Tapa.cantidad}`, `${accessoryTotals.kit4Tapa.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 135, 'Kit 2 Cortavientos:', `${accessoryTotals.kit2Cortavientos.cantidad}`, `${accessoryTotals.kit2Cortavientos.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 140, 'Kit 4 Seguros de Hoja Fija:', `${accessoryTotals.kit4Seguros.cantidad}`, `${accessoryTotals.kit4Seguros.totalPrice.toFixed(2)}`);
-
-    addSection(doc, 'Empaque', 150);
-    addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-    addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
-
-    addSection(doc, 'Utilitarios', 175);
-    addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-    addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
-
-    addSection(doc, 'Extra', 195);
-    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-    addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-    addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
-
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.text('Total', 170, 220);
-    doc.setFontSize(16);
-    doc.setTextColor('black');
-    const formattedTotal = totalSum.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    doc.text(formattedTotal, 150, 225);
-
-    doc.setFontSize(14);
-    doc.setTextColor(cyanBlue);
-    doc.text('Cantidad', 20, 220);
-    doc.text(`${puertas.length}`, 20, 225);
-
-    doc.save('Cotizacion-Colosal345.pdf');
-  };
 
   const getPriceDisplay = () => {
     if (accessories.kitCierrecol345) {
@@ -516,104 +525,104 @@ const Colosal3xxx = () => {
 
   return (
     <div className="door-container">
-      <div className="door-frame">
-        {/* Formulario para el alto y ancho */}
-        <div className="dimensions-form">
-          <label>
-            Alto (mm):
-            <input
-              type="number"
-              name="height"
-              value={height}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-          <label>
-            Ancho (mm):
-            <input
-              type="number"
-              name="width"
-              value={width}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-        </div>
-
-        {/* Imagen */}
-        <img src={colosal3Image} alt="Puerta Corrediza Colosal" className="door-image" />
-
-        {/* Dimensiones dinámicas */}
-        <div className="dimensions-display">
-          {width && height ? (
-            <>
-              <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
-              <p>Área: {area} m²</p>
-            </>
-          ) : (
-            <p>Ingrese las dimensiones en milímetros.</p>
-          )}
-          <br />
-        </div>
-
-        <div className="container mx-auto p-4">
-
-          {/* Resumen de Puertas */}
-          <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
-            <ul className="list-disc pl-5 mb-4">
-              {puertas.map((puerta, index) => (
-                <li key={index} className="mb-2 text-gray-600">
-                  <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
-                  <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="text-gray-700">
-              <p>
-                <strong>Total:</strong> {puertas.length}
-              </p>
-              <p>
-                <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
-              </p>
-              <p>
-                <strong>Precio Total:</strong>{" "}
-                <span className="text-cyan-600 font-bold">
-                  ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </p>
+          <div className="door-frame">
+            {/* Formulario para el alto y ancho */}
+            <div className="dimensions-form">
+              <label>
+                Alto (mm):
+                <input
+                  type="number"
+                  name="height"
+                  value={height}
+                  onChange={handleChange}
+                  placeholder="00"
+                />
+              </label>
+              <label>
+                Ancho (mm):
+                <input
+                  type="number"
+                  name="width"
+                  value={width}
+                  onChange={handleChange}
+                  placeholder="00"
+                />
+              </label>
             </div>
-            <br />
-            <div>
-              <button
-                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                onClick={generatePDF}
-              >
-                Cotizar
-              </button>
+    
+            {/* Imagen */}
+            <img src={colosal3Image} alt="Puerta Corrediza Colosal" className="door-image" />
+    
+            {/* Dimensiones dinámicas */}
+            <div className="dimensions-display">
+              {width && height ? (
+                <>
+                  <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
+                  <p>Área: {area} m²</p>
+                </>
+              ) : (
+                <p>Ingrese las dimensiones  en milímetros.</p>
+              )}
+              <br />
             </div>
-          </div>
-
-          {/* Botón Regresar */}
-          <div className="flex justify-end mt-6">
-            {/* Botón Agregar Puerta */}
-            <div className="flex justify-center mb-6">
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-              >
-                Regresar
-              </button>
+    
+            <div className="container mx-auto p-4">
+    
+              {/* Resumen de Puertas */}
+              <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
+                <ul className="list-disc pl-5 mb-4">
+                  {puertas.map((puerta, index) => (
+                    <li key={index} className="mb-2 text-gray-600">
+                      <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                      <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-gray-700">
+                  <p>
+                    <strong>Total:</strong> {puertas.length}
+                  </p>
+                  <p>
+                    <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+                  </p>
+                  <p>
+                    <strong>Precio Total:</strong>{" "}
+                    <span className="text-cyan-600 font-bold">
+                      ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                  </p>
+                </div>
+                <br />
+                <div>
+                  <button
+                    className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                    onClick={generatePDF}
+                  >
+                    Cotizar
+                  </button>
+                </div>
+              </div>
+    
+              {/* Botón Regresar */}
+              <div className="flex justify-end mt-6">
+                {/* Botón Agregar Puerta */}
+                <div className="flex justify-center mb-6">
+                  <button
+                    onClick={() => navigate(-1)}
+                    className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                  >
+                    Regresar
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
       </div>
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>COLOSAL 345 XXX</h1></strong>
+        <strong><h1>COLOSAL 345 OXXO</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -650,13 +659,18 @@ const Colosal3xxx = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Nave:</strong></TableCell>
-              <TableCell>{perimetralNaveCol345} mm (12)</TableCell>
+              <TableCell>{perimetralNaveCol345} mm (16)</TableCell>
               <TableCell>${perimetralNaveCol345Price.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Enganche:</strong> </TableCell>
               <TableCell>{doubleHeight} mm (4) </TableCell>
               <TableCell>${engancheCol345Price.toFixed(2)}</TableCell>
+            </TableRow>
+            <TableRow key="4">
+              <TableCell><strong>Adaptador:</strong> </TableCell>
+              <TableCell>{totalHeight} mm </TableCell>
+              <TableCell>${adaptadorCol345Price.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -811,7 +825,7 @@ const Colosal3xxx = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong> Tornillos</strong></TableCell>
-              <TableCell>60</TableCell>
+              <TableCell>76</TableCell>
               <TableCell>$ {tornillosPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
@@ -909,7 +923,6 @@ const Colosal3xxx = () => {
           </TableBody>
         </Table>
 
-
         <h2 className="text-right text-2xl font-bold">Total</h2>
         <div className="flex justify-between items-center">
           <button
@@ -921,11 +934,10 @@ const Colosal3xxx = () => {
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
         </div>
 
-
       </div>
     </div>
 
   );
 };
 
-export default Colosal3xxx;
+export default Colosal3oxxo;

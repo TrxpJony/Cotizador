@@ -51,7 +51,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const empaquecolPrice = getPrice("empaquecol", empaquecolHeight + empaquecolWidth);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
-        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 60;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
