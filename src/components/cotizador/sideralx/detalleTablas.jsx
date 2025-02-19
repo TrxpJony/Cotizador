@@ -5,36 +5,34 @@ import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         doubleHeight,
-        marcoPerimetralCol345,
-        perimetralNaveCol345,
-        marcoPerimetralCol345Price,
-        perimetralNaveCol345Price,
-        engancheCol345Price,
-        empaquecolPrice,
+        doubleWidth,
+        marcoPerimetralSid,
+        marcoPerimetralSidPrice,
+        horizontalFelperosSidPrice,
+        verticalSidPrice,
+        verticalReforzadoSidPrice,
+        empaqueSidPrice,
+        felpaPrice,
         tornillosPrice,
         siliconaPrice,
-        empaquecolHeight,
-        empaquecolWidth,
-        felpaPrice,
+        empaqueSidHeight,
+        empaqueSidWidth,
         totalFelpa,
-        kitCierrecol345Price,
-        kitCierreConLlavecol345Price,
-        Kit8Escuadrascol345Price,
-        kit4Anclascol345Price,
-        kit4Alzacol345Price,
-        kit4Tapacol345Price,
-        kit2Cortavientoscol345Price,
-        kit4Seguroscol345Price,
-        cubetaAngeoPrice,
-        rodamientoSimple70colPrice,
-        rodamientoDoble140colPrice,
-        cajaDeflectoraPrice,
+        kitManijaDobleSidPrice,
+        bisagra2SidPrice,
+        bisagra2aletasregulablePrice,
+        bisagra3SidPrice,
+        escuadraEnsambleSidPrice,
+        bisagraOcultaPrice,
+        kitFallevbaSidPrice,
+        terminalesSidPrice,
+        kit50puntoCierreSidPrice,
     } = calculatedValues || {};
 
     return (
         <>
             <div className="parts-list">
-                <strong><h1>COLOSAL 345 XO-OX</h1></strong>
+                <strong><h1>SIDERAL 2.4 X PLUS</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -48,9 +46,9 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Marco Perimetral:</strong></TableCell>
-                            <TableCell>{marcoPerimetralCol345} mm (4)</TableCell>
-                            <TableCell>${marcoPerimetralCol345Price?.toFixed(2)}</TableCell>
+                            <TableCell><strong>Marco Perimetral Sideral:</strong></TableCell>
+                            <TableCell>{marcoPerimetralSid} mm</TableCell>
+                            <TableCell>${marcoPerimetralSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -68,14 +66,19 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Perimetal Nave:</strong></TableCell>
-                            <TableCell>{perimetralNaveCol345} mm (8)</TableCell>
-                            <TableCell>${perimetralNaveCol345Price?.toFixed(2)}</TableCell>
+                            <TableCell><strong>Horizontal con Felperos:</strong></TableCell>
+                            <TableCell>{doubleWidth} mm</TableCell>
+                            <TableCell>${horizontalFelperosSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Enganche:</strong></TableCell>
-                            <TableCell>{doubleHeight} mm (2)</TableCell>
-                            <TableCell>${engancheCol345Price?.toFixed(2)}</TableCell>
+                            <TableCell><strong>Vertical:</strong></TableCell>
+                            <TableCell>{doubleHeight} mm</TableCell>
+                            <TableCell>${verticalSidPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
+                            <TableCell><strong>Vertical Reforzado</strong></TableCell>
+                            <TableCell>{doubleHeight} mm</TableCell>
+                            <TableCell>${verticalReforzadoSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -94,138 +97,105 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierrecol345')}
-                                    onChange={() => onAccessoryChange('kitCierrecol345')}
+                                    checked={selectedAccessories.includes('kitManijaDobleSid')}
+                                    onChange={() => onAccessoryChange("kitManijaDobleSid")}
                                 />
-                                <strong>Kit de Cierre</strong>
+                                <strong>Kit Manija Doble Bidireccional con Bloqueo</strong>
                             </TableCell>
-                            <TableCell>${kitCierrecol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${kitManijaDobleSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kitCierreConLlavecol345')}
-                                    onChange={() => onAccessoryChange('kitCierreConLlavecol345')}
+                                    checked={selectedAccessories.includes('bisagra2Sid')}
+                                    onChange={() => onAccessoryChange('bisagra2Sid')}
                                 />
-                                <strong>Kit de Cierre con Llave</strong>
+                                <strong>Bisagra 2 Aletas Negra para 70K</strong>
                             </TableCell>
-                            <TableCell>${kitCierreConLlavecol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${bisagra2SidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('cubetaAngeo')}
-                                    onChange={() => onAccessoryChange('cubetaAngeo')}
+                                    checked={selectedAccessories.includes('bisagra3Sid')}
+                                    onChange={() => onAccessoryChange('bisagra3Sid')}
                                 />
-                                <strong>Cubeta de Angeo Negra</strong>
+                                <strong>Bisagra 3 Aletas Para 90K</strong>
                             </TableCell>
-                            <TableCell>${cubetaAngeoPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${bisagra3SidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoSimple70col')}
-                                    onChange={() => onAccessoryChange('rodamientoSimple70col')}
+                                    checked={selectedAccessories.includes('bisagra2aletasregulable')}
+                                    onChange={() => onAccessoryChange('bisagra2aletasregulable')}
                                 />
-                                <strong>Rodamiento Simple en Agujas 70 Kilos</strong>
+                                <strong>Bisagra 2 Aletas Regulable para 120K</strong>
                             </TableCell>
-                            <TableCell>${rodamientoSimple70colPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${bisagra2aletasregulablePrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoDoble140col')}
-                                    onChange={() => onAccessoryChange('rodamientoDoble140col')}
+                                    checked={selectedAccessories.includes('escuadraEnsambleSid')}
+                                    onChange={() => onAccessoryChange('escuadraEnsambleSid')}
                                 />
-                                <strong>Rodamiento Doble en Agujas 140 Kilos</strong>
+                                <strong>Escuadra Ensamble Marco</strong>
                             </TableCell>
-                            <TableCell>${rodamientoDoble140colPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('cajaDeflectora')}
-                                    onChange={() => onAccessoryChange('cajaDeflectora')}
-                                />
-                                <strong>Caja Deflectora</strong>
-                            </TableCell>
-                            <TableCell>${cajaDeflectoraPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${escuadraEnsambleSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="8">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('Kit8Escuadrascol345')}
-                                    onChange={() => onAccessoryChange('Kit8Escuadrascol345')}
+                                    checked={selectedAccessories.includes('bisagraOculta')}
+                                    onChange={() => onAccessoryChange('bisagraOculta')}
                                 />
-                                <strong>Kit 8 Escuadras de Alineación</strong>
+                                <strong>Bisagra Oculta de Ajuste</strong>
                             </TableCell>
-                            <TableCell>${Kit8Escuadrascol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${bisagraOcultaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="9">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kit4Anclascol345')}
-                                    onChange={() => onAccessoryChange('kit4Anclascol345')}
+                                    checked={selectedAccessories.includes('kitFallevbaSid')}
+                                    onChange={() => onAccessoryChange('kitFallevbaSid')}
                                 />
-                                <strong>Kit 4 Anclas Esquinero</strong>
+                                <strong>Kit Falleba de Palanca con Terminal y Encuentro</strong>
                             </TableCell>
-                            <TableCell>${kit4Anclascol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${kitFallevbaSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="10">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kit4Alzacol345')}
-                                    onChange={() => onAccessoryChange('kit4Alzacol345')}
+                                    checked={selectedAccessories.includes('kit50puntoCierreSid')}
+                                    onChange={() => onAccessoryChange('kit50puntoCierreSid')}
                                 />
-                                <strong>kit 4 Alza Guia/Tope Hoja Fija/Movil</strong>
+                                <strong>Kit 50 Puntos de Cierre y 50 Encuentros Regulables</strong>
                             </TableCell>
-                            <TableCell>${kit4Alzacol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${kit50puntoCierreSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="11">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('kit4Tapacol345')}
-                                    onChange={() => onAccessoryChange('kit4Tapacol345')}
+                                    checked={selectedAccessories.includes('terminalesSid')}
+                                    onChange={() => onAccessoryChange('terminalesSid')}
                                 />
-                                <strong>Kit 4 Tapa y Tapeta Enganche</strong>
+                                <strong>Terminales y Encuentros</strong>
                             </TableCell>
-                            <TableCell>${kit4Tapacol345Price?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="12">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kit2Cortavientoscol345')}
-                                    onChange={() => onAccessoryChange('kit2Cortavientoscol345')}
-                                />
-                                <strong>Kit 2 Cortavientos</strong>
-                            </TableCell>
-                            <TableCell>${kit2Cortavientoscol345Price?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="13">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kit4Seguroscol345')}
-                                    onChange={() => onAccessoryChange('kit4Seguroscol345')}
-                                />
-                                <strong>Kit 4 Seguros de Hoja Fija</strong>
-                            </TableCell>
-                            <TableCell>${kit4Seguroscol345Price?.toFixed(2)}</TableCell>
+                            <TableCell>${terminalesSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="tabla utilitarios">
+                <Table aria-label="Tabla Utilitarios">
                     <TableHeader>
                         <TableColumn><h1>Utilitarios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -262,10 +232,10 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Empaque (Alto):
                                 <br />
                                 Empaque (Ancho):</strong></TableCell>
-                            <TableCell>{empaquecolHeight} mm
-                                <br /> {empaquecolWidth} mm
+                            <TableCell>{empaqueSidHeight} mm
+                                <br /> {empaqueSidWidth} mm
                             </TableCell>
-                            <TableCell>${empaquecolPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${empaqueSidPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Felpa 5.00 x 7.00</strong></TableCell>
@@ -284,36 +254,36 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
 DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
         doubleHeight: PropTypes.number,
-        marcoPerimetralCol345: PropTypes.number,
-        perimetralNaveCol345: PropTypes.number,
-        marcoPerimetralCol345Price: PropTypes.number,
-        perimetralNaveCol345Price: PropTypes.number,
-        engancheCol345Price: PropTypes.number,
-        empaquecolPrice: PropTypes.number,
+        doubleWidth: PropTypes.number,
+        marcoPerimetralSid: PropTypes.number,
+        marcoPerimetralSidPrice: PropTypes.number,
+        horizontalFelperosSidPrice: PropTypes.number,
+        verticalSidPrice: PropTypes.number,
+        verticalReforzadoSidPrice: PropTypes.number,
+        empaqueSidPrice: PropTypes.number,
+        felpaPrice: PropTypes.number,
         tornillosPrice: PropTypes.number,
         siliconaPrice: PropTypes.number,
-        empaquecolHeight: PropTypes.number,
-        empaquecolWidth: PropTypes.number,
-        felpaPrice: PropTypes.number,
+        empaqueSidHeight: PropTypes.number,
+        empaqueSidWidth: PropTypes.number,
+        felpaHeight: PropTypes.number,
+        felpaWidth: PropTypes.number,
         totalFelpa: PropTypes.number,
-        kitCierrecol345Price:PropTypes.number,
-        kitCierreConLlavecol345Price: PropTypes.number,
-        Kit8Escuadrascol345Price: PropTypes.number,
-        kit4Anclascol345Price: PropTypes.number,
-        kit4Alzacol345Price: PropTypes.number,
-        kit4Tapacol345Price: PropTypes.number,
-        kit2Cortavientoscol345Price: PropTypes.number,
-        kit4Seguroscol345Price: PropTypes.number,
-        cubetaAngeoPrice: PropTypes.number,
-        rodamientoSimple70colPrice: PropTypes.number,
-        rodamientoDoble140colPrice: PropTypes.number,
-        cajaDeflectoraPrice: PropTypes.number,
+        kitManijaDobleSidPrice: PropTypes.number,
+        bisagra2SidPrice: PropTypes.number,
+        bisagra2aletasregulablePrice: PropTypes.number,
+        bisagra3SidPrice: PropTypes.number,
+        escuadraEnsambleSidPrice: PropTypes.number,
+        bisagraOcultaPrice: PropTypes.number,
+        kitFallevbaSidPrice: PropTypes.number,
+        terminalesSidPrice: PropTypes.number,
+        kit50puntoCierreSidPrice: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired,
     selectedAccessories: PropTypes.array.isRequired,
-    useCalculoPrecios: PropTypes.func.isRequired // Add prop type for useCalculoPrecios
+    useCalculoPrecios: PropTypes.func.isRequired
 };
 
 export default DetalleTablas;
