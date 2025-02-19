@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo} from "react";
 
 const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const [dbPrices, setDbPrices] = useState({});
@@ -25,6 +25,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         fetchPrices();
     }, []);
 
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(dbPrices)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,7 +37,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const totalHeight = Number(height);
         const totalWidth = Number(width);
         const doubleHeight = totalHeight * 2;
-        const doubleWidth = totalWidth * 2;
+        const cuadHeight = totalHeight * 4;
+        const cuadWidth = totalWidth * 4;
         const marcoPerimetralSid = totalWidth + doubleHeight;
         const empaqueSidHeight = totalHeight * 4;
         const empaqueSidWidth = totalWidth * 2;
@@ -46,30 +48,34 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const marcoPerimetralSidPrice = getPrice("marcoPerimetralSid", marcoPerimetralSid);
-        const horizontalFelperosSidPrice = getPrice("horizontalFelperosSid", doubleWidth);
-        const verticalSidPrice = getPrice("verticalSid",doubleHeight);
-        const verticalReforzadoSidPrice = getPrice("verticalReforzadoSid", doubleHeight);
+        const horizontalFelperosSidPrice = getPrice("horizontalFelperosSid", cuadWidth);
+        const verticalSidPrice = getPrice("verticalSid", cuadHeight);
+        const verticalReforzadoSidPrice = getPrice("verticalReforzadoSid", cuadHeight);
+        const adaptadorSidPrice = getPrice("adaptadorSid", totalHeight);
         const empaqueSidPrice = getPrice("empaqueSid", empaqueSidHeight + empaqueSidWidth);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 28;
-        const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
+        const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1; 
         
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
-        const total =
-            marcoPerimetralSidPrice + horizontalFelperosSidPrice + verticalSidPrice +
-            verticalReforzadoSidPrice + empaqueSidPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
+        const total = 
+            marcoPerimetralSidPrice + horizontalFelperosSidPrice + verticalSidPrice + verticalReforzadoSidPrice + 
+            adaptadorSidPrice + empaqueSidPrice + felpaPrice + tornillosPrice + siliconaPrice +accessoriesPrice;
         
         setTotalPrice(total);
         setCalculatedValues({
+            totalHeight,
             doubleHeight,
-            doubleWidth,
+            cuadHeight,
+            cuadWidth,
             marcoPerimetralSid,
             marcoPerimetralSidPrice,
             horizontalFelperosSidPrice,
             verticalSidPrice,
             verticalReforzadoSidPrice,
+            adaptadorSidPrice,
             empaqueSidPrice,
             felpaPrice,
             tornillosPrice,
@@ -83,15 +89,15 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             bisagra2SidPrice: memoizedPrices.bisagra2Sid ? Number(memoizedPrices.bisagra2Sid) : 0,
             bisagra2aletasregulablePrice: memoizedPrices.bisagra2aletasregulable ? Number(memoizedPrices.bisagra2aletasregulable) : 0,
             bisagra3SidPrice: memoizedPrices.bisagra3Sid ? Number(memoizedPrices.bisagra3Sid) : 0,
-            escuadraEnsambleSidPrice: memoizedPrices.escuadraEnsambleSid ? Number(memoizedPrices.escuadraEnsambleSid) : 0,
+            escuadraEnsambleMSidPrice: memoizedPrices.escuadraEnsambleMSid ? Number(memoizedPrices.escuadraEnsambleMSid) : 0,
             bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
             kitFallevbaSidPrice: memoizedPrices.kitFallevbaSid ? Number(memoizedPrices.kitFallevbaSid) : 0,
             terminalesSidPrice: memoizedPrices.terminalesSid ? Number(memoizedPrices.terminalesSid) : 0,
             kit50puntoCierreSidPrice: memoizedPrices.kit50puntoCierreSid ? Number(memoizedPrices.kit50puntoCierreSid) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
-
-    return { totalPrice, calculatedValues };
+    
+    return { totalPrice, calculatedValues};
 };
 
 export default useCalculoPrecios;

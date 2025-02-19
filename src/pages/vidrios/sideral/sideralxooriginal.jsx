@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import sideralImage from '../../../img/sideralx.png'; // Importar la imagen
+import sideralImage from '../../../img/sideralxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Sideralx = () => {
+const Sideralxo = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ width: '', height: '' });
     const [accessories, setAccessories] = useState({
@@ -33,30 +33,30 @@ const Sideralx = () => {
     const [utilitaryPrices, setUtilitaryPrices] = useState({});
     const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
-    // Nuevo estado para los precios de la base de datos
-    const [dbPrices, setDbPrices] = useState({});
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
 
-    // Efecto para cargar los precios de la base de datos
-    useEffect(() => {
-        const fetchPrices = async () => {
-            try {
-                const response = await fetch('http://localhost:3002/api/precios');
-                const data = await response.json();
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
 
-                // Convertir el array de precios a un objeto para fácil acceso
-                const pricesObject = data.reduce((acc, item) => {
-                    acc[item.nombre] = item.precio;
-                    return acc;
-                }, {});
-
-                setDbPrices(pricesObject);
-            } catch (error) {
-                console.error('Error al cargar los precios:', error);
-            }
-        };
-
-        fetchPrices();
-    }, []);
+  fetchPrices();
+}, []);
 
     useEffect(() => {
         setPrices(preciosData.precios);
@@ -64,10 +64,7 @@ const Sideralx = () => {
         setUtilitaryPrices(preciosData.utilitarios);
     }, []);
 
-
     // Función que maneja el cambio de valores
-
-
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setDimensions((prev) => ({ ...prev, [name]: value }));
@@ -123,7 +120,8 @@ const Sideralx = () => {
 
     // Calcular valores
     const doubleHeight = totalHeight ? totalHeight * 2 : '';
-    const doubleWidth = totalWidth ? totalWidth * 2 : '';
+    const cuadHeight = totalHeight ? totalHeight * 4 : '';
+    const cuadWidth = totalWidth ? totalWidth * 4 : '';
     const marcoPerimetralSid = totalWidth && doubleHeight ? (parseInt(totalWidth) + parseInt(doubleHeight)) : '';
     const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
     const empaqueSidHeight = height && width ? height * 4 : '';
@@ -134,9 +132,10 @@ const Sideralx = () => {
     const totFelpa = (felpaHeight + felpaWidth);
     // Calcular precios
     const marcoPerimetralSidPrice = dbPrices.marcoPerimetralSid * (marcoPerimetralSid / 1000);
-    const horizontalFelperosSidPrice = dbPrices.horizontalFelperosSid * (doubleWidth / 1000);
-    const verticalSidPrice = dbPrices.verticalSid * (doubleHeight / 1000);
-    const verticalReforzadoSidPrice = dbPrices.verticalReforzadoSid * (doubleHeight / 1000);
+    const horizontalFelperosSidPrice = dbPrices.horizontalFelperosSid * (cuadWidth / 1000);
+    const verticalSidPrice = dbPrices.verticalSid * (cuadHeight / 1000);
+    const verticalReforzadoSidPrice = dbPrices.verticalReforzadoSid * (cuadHeight / 1000);
+    const adaptadorSidPrice = dbPrices.adaptadorSid * (totalHeight / 1000)
 
     const kitManijaDobleSidPrice = accessories.kitManijaDobleSid ? accessoryPrices.kitManijaDobleSid : 0;
     const kitCierreConLlave3890Price = accessories.kitCierreConLlave3890 ? accessoryPrices.kitCierreConLlave3890 : 0;
@@ -154,6 +153,7 @@ const Sideralx = () => {
         horizontalFelperos: { totalSize: 0, totalPrice: 0 },
         vertical: { totalSize: 0, totalPrice: 0 },
         verticalReforzado: { totalSize: 0, totalPrice: 0 },
+        adaptador: { totalSize: 0, totalPrice: 0 },
         empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
         felpa: { totalSize: 0, totalPrice: 0 },
         escuadraEnsamble: { cantidad: 0, totalPrice: 0 },
@@ -189,16 +189,20 @@ const Sideralx = () => {
                 totalPrice: prevTotals.marcoPerimetral.totalPrice + marcoPerimetralSidPrice,
             },
             horizontalFelperos: {
-                totalSize: prevTotals.horizontalFelperos.totalSize + parseFloat(doubleWidth),
+                totalSize: prevTotals.horizontalFelperos.totalSize + parseFloat(cuadWidth),
                 totalPrice: prevTotals.horizontalFelperos.totalPrice + horizontalFelperosSidPrice,
             },
             vertical: {
-                totalSize: prevTotals.vertical.totalSize + parseFloat(doubleHeight),
+                totalSize: prevTotals.vertical.totalSize + parseFloat(cuadHeight),
                 totalPrice: prevTotals.vertical.totalPrice + verticalSidPrice,
             },
             verticalReforzado: {
-                totalSize: prevTotals.verticalReforzado.totalSize + parseFloat(doubleHeight),
+                totalSize: prevTotals.verticalReforzado.totalSize + parseFloat(cuadHeight),
                 totalPrice: prevTotals.verticalReforzado.totalPrice + verticalReforzadoSidPrice,
+            },
+            adaptador: {
+                totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
+                totalPrice: prevTotals.adaptador.totalPrice + adaptadorSidPrice
             },
             empaque: {
                 totalSize: prevTotals.empaque.totalSize + parseFloat(empaqueSidHeight),
@@ -282,6 +286,7 @@ const Sideralx = () => {
         horizontalFelperosSidPrice +
         verticalSidPrice +
         verticalReforzadoSidPrice +
+        adaptadorSidPrice +
         kitManijaDobleSidPrice +
         kitCierreConLlave3890Price +
         bisagra2SidPrice +
@@ -334,6 +339,7 @@ const Sideralx = () => {
         addTableRow(doc, 65, 'Horizontal con Felperos:', `${componentTotals.horizontalFelperos.totalSize} mm`, `${componentTotals.horizontalFelperos.totalPrice.toFixed(2)}`);
         addTableRow(doc, 70, 'Vertical:', `${componentTotals.vertical.totalSize} mm`, `${componentTotals.vertical.totalPrice.toFixed(2)}`);
         addTableRow(doc, 75, 'Vertical Reforzado:', `${componentTotals.verticalReforzado.totalSize} mm`, `${componentTotals.verticalReforzado.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 80, 'Adaptador:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
 
         addSection(doc, 'Accesorios', 85);
         addTableRow(doc, 90, 'Kit Manija Doble Bidireccional con Bloqueo:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
@@ -494,7 +500,7 @@ const Sideralx = () => {
             <br />
             {/* Lista de partes */}
             <div className="parts-list">
-                <strong><h1>SIDERAL 2.4 X PLUS</h1></strong>
+                <strong><h1>SIDERAL 2.4 XO PLUS</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -531,18 +537,23 @@ const Sideralx = () => {
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Horizontal con Felperos:</strong></TableCell>
-                            <TableCell>{doubleWidth} mm</TableCell>
+                            <TableCell>{cuadWidth} mm (4)</TableCell>
                             <TableCell>${horizontalFelperosSidPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Vertical:</strong></TableCell>
-                            <TableCell>{doubleHeight} mm</TableCell>
+                            <TableCell>{cuadHeight} mm (4)</TableCell>
                             <TableCell>${verticalSidPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Vertical Reforzado:</strong></TableCell>
-                            <TableCell>{doubleHeight} mm</TableCell>
+                            <TableCell>{cuadHeight} mm (4)</TableCell>
                             <TableCell>${verticalReforzadoSidPrice.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell><strong>Adaptador:</strong></TableCell>
+                            <TableCell>{totalHeight} mm </TableCell>
+                            <TableCell>${adaptadorSidPrice.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -739,4 +750,4 @@ const Sideralx = () => {
     );
 };
 
-export default Sideralx;
+export default Sideralxo;
