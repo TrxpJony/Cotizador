@@ -37,57 +37,57 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const totalWidth = Number(width);
         const doubleHeight = totalHeight * 2;
         const doubleWidth = totalWidth * 2;
-        const marcoPerimetralSid = totalWidth + doubleHeight;
-        const empaqueSidHeight = totalHeight * 4;
-        const empaqueSidWidth = totalWidth * 2;
+        const doubleTotalDimensions = doubleHeight + doubleWidth;
+        const empaqueTaironaHeight = totalHeight * 4;
+        const empaqueTaironaWidth = totalWidth * 2;
         const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
-        const totalFelpa = felpaHeight + felpaWidth;
+        const totalFelpa = felpaWidth + felpaWidth;
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
-        const marcoPerimetralSidPrice = getPrice("marcoPerimetralSid", marcoPerimetralSid);
-        const horizontalFelperosSidPrice = getPrice("horizontalFelperosSid", doubleWidth);
-        const verticalSidPrice = getPrice("verticalSid",doubleHeight);
-        const verticalReforzadoSidPrice = getPrice("verticalReforzadoSid", doubleHeight);
-        const empaqueSidPrice = getPrice("empaqueSid", empaqueSidHeight + empaqueSidWidth);
+        const marcoPerimetralTaironaPrice = getPrice("marcoPerimetralTairona", doubleTotalDimensions);
+        const perimetralNaveTaironaPrice = getPrice("perimetralNaveTairona", doubleTotalDimensions);
+        const pisaVidrioTaironaPrice = getPrice("pisaVidrioTairona", doubleTotalDimensions);
+        const verticalHorizontalesCaTaironaPrice = getPrice("verticalHorizontalesCaTairona", doubleTotalDimensions)
+        const empaqueTaironaPrice = getPrice("empaqueTairon", empaqueTaironaHeight + empaqueTaironaWidth)
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 28;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
-        
+
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
         const total =
-            marcoPerimetralSidPrice + horizontalFelperosSidPrice + verticalSidPrice +
-            verticalReforzadoSidPrice + empaqueSidPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
-        
+            marcoPerimetralTaironaPrice + perimetralNaveTaironaPrice + pisaVidrioTaironaPrice +
+            verticalHorizontalesCaTaironaPrice + empaqueTaironaPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
+
         setTotalPrice(total);
         setCalculatedValues({
-            doubleHeight,
-            doubleWidth,
-            marcoPerimetralSid,
-            marcoPerimetralSidPrice,
-            horizontalFelperosSidPrice,
-            verticalSidPrice,
-            verticalReforzadoSidPrice,
-            empaqueSidPrice,
+            doubleTotalDimensions,
+            marcoPerimetralTaironaPrice,
+            perimetralNaveTaironaPrice,
+            pisaVidrioTaironaPrice,
+            verticalHorizontalesCaTaironaPrice,
+            empaqueTaironaPrice,
             felpaPrice,
             tornillosPrice,
             siliconaPrice,
-            empaqueSidHeight,
-            empaqueSidWidth,
+            empaqueTaironaHeight,
+            empaqueTaironaWidth,
             felpaHeight,
             felpaWidth,
             totalFelpa,
-            kitManijaDobleSidPrice: memoizedPrices.kitManijaDobleSid ? Number(memoizedPrices.kitManijaDobleSid) : 0,
-            bisagra2SidPrice: memoizedPrices.bisagra2Sid ? Number(memoizedPrices.bisagra2Sid) : 0,
-            bisagra2aletasregulablePrice: memoizedPrices.bisagra2aletasregulable ? Number(memoizedPrices.bisagra2aletasregulable) : 0,
-            bisagra3SidPrice: memoizedPrices.bisagra3Sid ? Number(memoizedPrices.bisagra3Sid) : 0,
-            escuadraEnsambleSidPrice: memoizedPrices.escuadraEnsambleSid ? Number(memoizedPrices.escuadraEnsambleSid) : 0,
+            kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCiereTairona) : 0,
+            kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreConLlaveTairona) : 0,
+            limitador150TaironaPrice: memoizedPrices.limitador150Tairona ? Number(memoizedPrices.limitador150Tairona) : 0,
+            limitador220TaironaPrice: memoizedPrices.limitador220Tairona ? Number(memoizedPrices.limitador220Tairona) : 0,
+            escuadraEnsambleTaironaPrice: memoizedPrices.escuadraEnsambleTairona ? Number(memoizedPrices.escuadraEnsambleTairona) : 0,
+            escuadraEnsambleHTaironaPrice: memoizedPrices.escuadraEnsambleHTairona ? Number(memoizedPrices.escuadraEnsambleHTairona) : 0,
+            bisagra2TaironaPrice: memoizedPrices.bisagra2Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
+            bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
             bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
-            kitFallevbaSidPrice: memoizedPrices.kitFallevbaSid ? Number(memoizedPrices.kitFallevbaSid) : 0,
-            terminalesSidPrice: memoizedPrices.terminalesSid ? Number(memoizedPrices.terminalesSid) : 0,
-            kit50puntoCierreSidPrice: memoizedPrices.kit50puntoCierreSid ? Number(memoizedPrices.kit50puntoCierreSid) : 0,
+            cierreHTaironaPrice: memoizedPrices.cierreHTairona ? Number(memoizedPrices.cierreHTairona) : 0,
+            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,   
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
