@@ -96,14 +96,15 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         const tableRows = [];
 
         doors.forEach(door => {
-            const iva = (door.price * 0.19) * door.quantity; // Correcto: se aplica a cada unidad
+            const iva = (door.price * 0.19) * door.quantity;
+            const totalConIva = (door.price * door.quantity);
             const doorData = [
                 door.description,
                 door.quantity,
                 `${door.width} x ${door.height}`,
-                (door.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), // Mostrar IVA
-                ((door.price * door.quantity) + iva).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) // Total con IVA
+                ((door.price * door.quantity) - iva).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                totalConIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             ];
             tableRows.push(doorData);
         });
@@ -118,17 +119,15 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         });
 
         // Calculate total price from doors
-        const totalIva = doors.reduce((sum, door) => sum + ((door.price * 0.19) * door.quantity), 0);
         const totalPrice = doors.reduce((sum, door) => sum + (door.price * door.quantity), 0);
-        const totalConIva = totalPrice + totalIva; // Total con IVA
 
         // Add summary table
         const summaryTableColumn = ["Total con IVA", "Abono", "Saldo"];
         const abono = parseFloat(formData.abono || 0);
-        const saldo = totalConIva - abono;
+        const saldo = totalPrice - abono;
         const summaryTableRows = [
             [
-                totalConIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
                 abono.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
                 saldo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             ]

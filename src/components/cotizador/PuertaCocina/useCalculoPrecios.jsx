@@ -50,10 +50,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPri
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
-    const manoDeObra = totalHeight > 1200 ? 45000 : 35000;
+    const manoDeObra = totalHeight > 1200 ? 50000 : 40000;
     
     // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-    const total = marcoCocinaPrice + siliconaPrice + accesoriosPrice + felpaPrice + manoDeObra + glassPrice;
+    const total = marcoCocinaPrice + accesoriosPrice +  manoDeObra + glassPrice;
 
     setTotalPrice(total);
     setCalculatedValues({

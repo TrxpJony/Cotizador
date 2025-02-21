@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import sTaironaImage from '../../../img/zinux.png'; // Importar la imagen
+import sTaironaImage from '../../../img/taironaxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Taironax = () => {
+const Taironaxx = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ width: '', height: '' });
     const [accessories, setAccessories] = useState({
@@ -63,6 +63,7 @@ useEffect(() => {
         setAccessoryPrices(preciosData.accesorios);
         setUtilitaryPrices(preciosData.utilitarios);
     }, []);
+
 
     // Función que maneja el cambio de valores
     const handleChange = (e) => {
@@ -122,6 +123,8 @@ useEffect(() => {
     const doubleHeight = totalHeight ? totalHeight * 2 : '';
     const doubleWidth = totalWidth ? totalWidth * 2 : '';
     const marcoPerimetralTairona = doubleHeight && doubleWidth ? (doubleHeight + doubleWidth) : '';
+    const PerimetralNaveTairona = (totalWidth && totalHeight) ? ((totalWidth / 2) * 4 + totalHeight * 4) : 0;
+    const PisaVidrioTairona = (totalWidth && totalHeight) ? ((totalWidth / 2) * 4 + totalHeight * 4) : 0;
     const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
     const empaqueTaironaHeight = height && width ? height * 4 : '';
     const empaqueTaironaWidth = height && width ? width * 2 : '';
@@ -129,12 +132,13 @@ useEffect(() => {
     const felpaWidth = height && width ? width * 2 : '';
     const empaqueTaironaPrice = (empaqueTaironaHeight + empaqueTaironaWidth) / 1000 * dbPrices.empaqueTairona; // Precio total del empaque
     const totFelpa = (felpaHeight + felpaWidth);
+
     // Calcular precios
     const marcoPerimetralTaironaPrice = dbPrices.marcoPerimetralTairona * (marcoPerimetralTairona / 1000);
-    const perimetralNaveTaironaPrice = dbPrices.perimetralNaveTairona * (marcoPerimetralTairona / 1000);
-    const pisaVidrioTaironaPrice = dbPrices.pisaVidrioTairona * (marcoPerimetralTairona / 1000);
-    const verticalHorizontalesCaTaironaPrice = dbPrices.verticalHorizontalesCaTairona * (marcoPerimetralTairona / 1000);
-   
+    const perimetralNaveTaironaPrice = dbPrices.perimetralNaveTairona * (PerimetralNaveTairona / 1000);
+    const pisaVidrioTaironaPrice = dbPrices.pisaVidrioTairona * (PisaVidrioTairona / 1000);
+    const verticalHorizontalesCaTaironaPrice = dbPrices.verticalHorizontalesCaTairona * (PisaVidrioTairona / 1000);
+    const adaptadorTaironaPrice = dbPrices.adaptadorTairona * (totalHeight / 1000);
     const kitCierreTaironaPrice = accessories.kitCierreTairona ? accessoryPrices.kitCierreTairona : 0;
     const kitCierreConLlaveTaironaPrice = accessories.kitCierreConLlaveTairona ? accessoryPrices.kitCierreConLlaveTairona : 0;
     const limitador150TaironaPrice = accessories.limitador150Tairona ? accessoryPrices.limitador150Tairona : 0;
@@ -158,6 +162,7 @@ useEffect(() => {
         perimetralNave: { totalSize: 0, totalPrice: 0 },
         pisaVidrio: { totalSize: 0, totalPrice: 0 },
         verticalHorizontalesCa: { totalSize: 0, totalPrice: 0 },
+        adaptador: { totalSize: 0, totalPrice: 0 },
         empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
         felpa: { totalSize: 0, totalPrice: 0 },
         tornillos: { cantidad: 0, totalPrice: 0 },
@@ -171,6 +176,7 @@ useEffect(() => {
         soporteH: { cantidad: 0, totalPrice: 0 },
         manodeObra: { totalPrice: 0 },
         glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
+        // Puedes añadir más componentes aquí si es necesario.
     });
 
     const [accessoryTotals, setAccessoryTotals] = useState({
@@ -197,16 +203,20 @@ useEffect(() => {
                 totalPrice: prevTotals.marcoPerimetral.totalPrice + marcoPerimetralTaironaPrice, // Sumar precio
             },
             perimetralNave: {
-                totalSize: prevTotals.perimetralNave.totalSize + parseFloat(marcoPerimetralTairona),
+                totalSize: prevTotals.perimetralNave.totalSize + parseFloat(PerimetralNaveTairona),
                 totalPrice: prevTotals.perimetralNave.totalPrice + perimetralNaveTaironaPrice,
             },
             pisaVidrio: {
-                totalSize: prevTotals.pisaVidrio.totalSize + parseFloat(marcoPerimetralTairona),
+                totalSize: prevTotals.pisaVidrio.totalSize + parseFloat(PisaVidrioTairona),
                 totalPrice: prevTotals.pisaVidrio.totalPrice + pisaVidrioTaironaPrice,
             },
             verticalHorizontalesCa: {
-                totalSize: prevTotals.verticalHorizontalesCa.totalSize + parseFloat(marcoPerimetralTairona),
+                totalSize: prevTotals.verticalHorizontalesCa.totalSize + parseFloat(PisaVidrioTairona),
                 totalPrice: prevTotals.verticalHorizontalesCa.totalPrice + verticalHorizontalesCaTaironaPrice,
+            },
+            adaptador: {
+                totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
+                totalPrice: prevTotals.adaptador.totalPrice + parseFloat(adaptadorTaironaPrice),
             },
             empaque: {
                 totalSize: prevTotals.empaque.totalSize + parseFloat(empaqueTaironaHeight),
@@ -289,7 +299,6 @@ useEffect(() => {
                     totalPrice: prevTotals.limitador220.totalPrice + limitador220TaironaPrice,
                 }
                 : prevTotals.limitador220,
-
             // Añade lógica para otros accesorios si es necesario.
         }));
         setPuertas((prev) => [...prev, nuevaPuerta]);
@@ -311,6 +320,7 @@ useEffect(() => {
         perimetralNaveTaironaPrice +
         pisaVidrioTaironaPrice +
         verticalHorizontalesCaTaironaPrice +
+        adaptadorTaironaPrice +
         kitCierreTaironaPrice +
         kitCierreConLlaveTaironaPrice +
         limitador150TaironaPrice +
@@ -368,37 +378,38 @@ useEffect(() => {
         addTableRow(doc, 65, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
         addTableRow(doc, 70, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
         addTableRow(doc, 75, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 80, 'Adaptador Diseño XX:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Accesorios', 85);
-        addTableRow(doc, 90, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 100, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 105, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 110, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 115, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 120, 'Bisagra 2 Aletas Regulable Negra 120K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 125, 'Bisagra 3 Aletas Negra 90K', `${componentTotals.bisagra3.cantidad}`, `${componentTotals.bisagra3.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 130, 'Bisagra Oculta de Ajuste', `${componentTotals.bisagraOculta.cantidad}`, `${componentTotals.bisagraOculta.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 135, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 140, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Accesorios', 90);
+        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 100, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 105, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 110, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 115, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 120, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 125, 'Bisagra 2 Aletas Regulable Negra 120K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 130, 'Bisagra 3 Aletas Negra 90K', `${componentTotals.bisagra3.cantidad}`, `${componentTotals.bisagra3.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 135, 'Bisagra Oculta de Ajuste', `${componentTotals.bisagraOculta.cantidad}`, `${componentTotals.bisagraOculta.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 140, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 145, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Empaque', 150);
-        addTableRow(doc, 155, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-        addTableRow(doc, 160, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 165, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Empaque', 155);
+        addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+        addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Utilitarios', 175);
-        addTableRow(doc, 180, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Utilitarios', 180);
+        addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Extra', 195);
-        addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-        addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-        addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+        addSection(doc, 'Extra', 200);
+        addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 220);
+        doc.text('Total', 170, 225);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -407,12 +418,12 @@ useEffect(() => {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 225);
+        doc.text(formattedTotal, 150, 230);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad', 20, 220);
-        doc.text(`${puertas.length}`, 20, 225);
+        doc.text('Cantidad', 20, 225);
+        doc.text(`${puertas.length}`, 20, 230);
 
         doc.save('Cotizacion-SistemaTairona.pdf');
     };
@@ -434,6 +445,7 @@ useEffect(() => {
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
+
 
     return (
         <div className="door-container">
@@ -534,7 +546,7 @@ useEffect(() => {
             <br />
             {/* Lista de partes */}
             <div className="parts-list">
-                <strong><h1>SISTEMA TAIRONA X</h1></strong>
+                <strong><h1>SISTEMA TAIRONA XX</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -571,18 +583,23 @@ useEffect(() => {
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Perimetral de nave:</strong></TableCell>
-                            <TableCell>{marcoPerimetralTairona} mm</TableCell>
+                            <TableCell>{PerimetralNaveTairona} mm</TableCell>
                             <TableCell>${perimetralNaveTaironaPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Pisavidrio:</strong></TableCell>
-                            <TableCell>{marcoPerimetralTairona} mm</TableCell>
+                            <TableCell>{PisaVidrioTairona} mm</TableCell>
                             <TableCell>${pisaVidrioTaironaPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Vertical Horizontales Vidrio Camara:</strong></TableCell>
-                            <TableCell>{marcoPerimetralTairona} mm</TableCell>
+                            <TableCell>{PisaVidrioTairona} mm</TableCell>
                             <TableCell>${verticalHorizontalesCaTaironaPrice.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell><strong>Adaptador Diseño XX:</strong></TableCell>
+                            <TableCell>{totalHeight} mm</TableCell>
+                            <TableCell>${adaptadorTaironaPrice.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -803,4 +820,4 @@ useEffect(() => {
     );
 };
 
-export default Taironax;
+export default Taironaxx;

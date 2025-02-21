@@ -11,6 +11,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
                 const response = await fetch('http://localhost:3002/api/precios');
                 const data = await response.json();
 
+
                 const pricesObject = data.reduce((acc, item) => {
                     acc[item.nombre] = Number(item.precio) || 0;
                     return acc;
@@ -26,7 +27,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     }, []);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(dbPrices)]);
+    const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(selectedAccessories)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
@@ -38,6 +39,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const doubleHeight = totalHeight * 2;
         const doubleWidth = totalWidth * 2;
         const doubleTotalDimensions = doubleHeight + doubleWidth;
+        const cuadHalfTotalDimensions = (totalWidth / 2) * 4 + totalHeight * 4;
         const empaqueTaironaHeight = totalHeight * 4;
         const empaqueTaironaWidth = totalWidth * 2;
         const felpaHeight = totalHeight * 6;
@@ -46,29 +48,31 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const marcoPerimetralTaironaPrice = getPrice("marcoPerimetralTairona", doubleTotalDimensions);
-        const perimetralNaveTaironaPrice = getPrice("perimetralNaveTairona", doubleTotalDimensions);
-        const pisaVidrioTaironaPrice = getPrice("pisaVidrioTairona", doubleTotalDimensions);
-        const verticalHorizontalesCaTaironaPrice = getPrice("verticalHorizontalesCaTairona", doubleTotalDimensions)
+        const perimetralNaveTaironaPrice = getPrice("perimetralNaveTairona", cuadHalfTotalDimensions);
+        const pisaVidrioTaironaPrice = getPrice("pisaVidrioTairona", cuadHalfTotalDimensions);
+        const verticalHorizontalesCaTaironaPrice = getPrice("verticalHorizontalesCaTairona", cuadHalfTotalDimensions);
         const empaqueTaironaPrice = getPrice("empaqueTairon", empaqueTaironaHeight + empaqueTaironaWidth);
+        const adaptadorTaironaPrice = getPrice("adaptadorTairona", totalHeight);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
-        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 28;
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
-
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
         const total =
-            marcoPerimetralTaironaPrice + perimetralNaveTaironaPrice + pisaVidrioTaironaPrice +
-            verticalHorizontalesCaTaironaPrice + empaqueTaironaPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
-
+            marcoPerimetralTaironaPrice + perimetralNaveTaironaPrice + pisaVidrioTaironaPrice + verticalHorizontalesCaTaironaPrice +
+            adaptadorTaironaPrice + empaqueTaironaPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
         setTotalPrice(total);
         setCalculatedValues({
             doubleTotalDimensions,
+            cuadHalfTotalDimensions,
+            totalHeight,
             marcoPerimetralTaironaPrice,
             perimetralNaveTaironaPrice,
             pisaVidrioTaironaPrice,
             verticalHorizontalesCaTaironaPrice,
             empaqueTaironaPrice,
+            adaptadorTaironaPrice,
             felpaPrice,
             tornillosPrice,
             siliconaPrice,
@@ -77,17 +81,17 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             felpaHeight,
             felpaWidth,
             totalFelpa,
-            kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCiereTairona) : 0,
-            kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreConLlaveTairona) : 0,
+            kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCierreTairona) : 0,
+            kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreTairona) : 0,
             limitador150TaironaPrice: memoizedPrices.limitador150Tairona ? Number(memoizedPrices.limitador150Tairona) : 0,
             limitador220TaironaPrice: memoizedPrices.limitador220Tairona ? Number(memoizedPrices.limitador220Tairona) : 0,
             escuadraEnsambleTaironaPrice: memoizedPrices.escuadraEnsambleTairona ? Number(memoizedPrices.escuadraEnsambleTairona) : 0,
-            escuadraEnsambleHTaironaPrice: memoizedPrices.escuadraEnsambleHTairona ? Number(memoizedPrices.escuadraEnsambleHTairona) : 0,
+            escuadraEnsambleHTaironaPrice: memoizedPrices.escuadraEnsambleHtairona ? Number(memoizedPrices.escuadraEnsambleHTairona) : 0,
             bisagra2TaironaPrice: memoizedPrices.bisagra2Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
-            bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
+            bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra3Tairona) : 0,
             bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
             cierreHTaironaPrice: memoizedPrices.cierreHTairona ? Number(memoizedPrices.cierreHTairona) : 0,
-            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,   
+            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
