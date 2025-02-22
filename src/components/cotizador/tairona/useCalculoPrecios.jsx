@@ -77,7 +77,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             felpaHeight,
             felpaWidth,
             totalFelpa,
-            kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCiereTairona) : 0,
+            kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCierreTairona) : 0,
             kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreConLlaveTairona) : 0,
             limitador150TaironaPrice: memoizedPrices.limitador150Tairona ? Number(memoizedPrices.limitador150Tairona) : 0,
             limitador220TaironaPrice: memoizedPrices.limitador220Tairona ? Number(memoizedPrices.limitador220Tairona) : 0,

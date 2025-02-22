@@ -11,7 +11,6 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
                 const response = await fetch('http://localhost:3002/api/precios');
                 const data = await response.json();
 
-
                 const pricesObject = data.reduce((acc, item) => {
                     acc[item.nombre] = Number(item.precio) || 0;
                     return acc;
@@ -27,7 +26,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     }, []);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(selectedAccessories)]);
+    const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(dbPrices)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
@@ -62,6 +61,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const total =
             marcoPerimetralTaironaPrice + perimetralNaveTaironaPrice + pisaVidrioTaironaPrice + verticalHorizontalesCaTaironaPrice +
             adaptadorTaironaPrice + empaqueTaironaPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
+
         setTotalPrice(total);
         setCalculatedValues({
             doubleTotalDimensions,
@@ -82,13 +82,13 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             felpaWidth,
             totalFelpa,
             kitCierreTaironaPrice: memoizedPrices.kitCierreTairona ? Number(memoizedPrices.kitCierreTairona) : 0,
-            kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreTairona) : 0,
+            kitCierreConLlaveTaironaPrice: memoizedPrices.kitCierreConLlaveTairona ? Number(memoizedPrices.kitCierreConLlaveTairona) : 0,
             limitador150TaironaPrice: memoizedPrices.limitador150Tairona ? Number(memoizedPrices.limitador150Tairona) : 0,
             limitador220TaironaPrice: memoizedPrices.limitador220Tairona ? Number(memoizedPrices.limitador220Tairona) : 0,
             escuadraEnsambleTaironaPrice: memoizedPrices.escuadraEnsambleTairona ? Number(memoizedPrices.escuadraEnsambleTairona) : 0,
-            escuadraEnsambleHTaironaPrice: memoizedPrices.escuadraEnsambleHtairona ? Number(memoizedPrices.escuadraEnsambleHTairona) : 0,
+            escuadraEnsambleHTaironaPrice: memoizedPrices.escuadraEnsambleHTairona ? Number(memoizedPrices.escuadraEnsambleHTairona) : 0,
             bisagra2TaironaPrice: memoizedPrices.bisagra2Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
-            bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra3Tairona) : 0,
+            bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
             bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
             cierreHTaironaPrice: memoizedPrices.cierreHTairona ? Number(memoizedPrices.cierreHTairona) : 0,
             soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,
