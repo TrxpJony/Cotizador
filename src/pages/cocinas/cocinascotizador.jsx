@@ -14,7 +14,9 @@ const CocinasCotizador = () => {
   const [doors, setDoors] = useState([]); // State to hold doors
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
   const cocinaIMG = 'https://res.cloudinary.com/dils6fuig/image/upload/v1738787741/img_catalogo/producto_coci2_1738787740325.png'; // Importar la imagen
-  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories);
+  const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
+  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
+
 
   const handleDimensionsChange = (newDimensions) => {
     setDimensions(newDimensions);
@@ -41,6 +43,12 @@ const CocinasCotizador = () => {
           {/* Imagen */}
           <img src={cocinaIMG} alt="Puerta Corrediza Colosal" className="door-image" />
           <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
+          <label>Tipo de vidrio:</label>
+          <select className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition ease-in-out w-[130px]" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+            <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
+            <option value="4mm">Vidrio 4 mm</option>
+            <option value="5mm">Vidrio 5 mm</option>
+          </select>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           <br />
           <AddTableDoor doors={doors} /> {/* Use the new component */}
@@ -57,14 +65,16 @@ const CocinasCotizador = () => {
             </div>
           </div>
         </div>
-        <DetalleTablas 
-          calculatedValues={calculatedValues} 
-          dimensions={dimensions} 
-          onAddDoor={handleAddDoor} 
-          onAccessoryChange={handleAccessoryChange} 
-          selectedAccessories={selectedAccessories} 
-          useCalculoPrecios={useCalculoPrecios} 
-        /> {/* Pass useCalculoPrecios as a prop */}
+        <DetalleTablas
+          calculatedValues={calculatedValues}
+          dimensions={dimensions}
+          onAddDoor={handleAddDoor}
+          onAccessoryChange={handleAccessoryChange}
+          selectedAccessories={selectedAccessories}
+          useCalculoPrecios={useCalculoPrecios}
+          selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando
+        />
+        {/* Pass useCalculoPrecios as a prop */}
       </div>
     </>
   );

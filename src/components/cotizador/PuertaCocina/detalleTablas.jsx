@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 import { useState } from 'react';
 
-const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
+const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => {
+
     const {
         marcoCocinaPrice,
-        siliconaPrice,
-        felpaPrice,
-        totalFelpa,
         escuadrasCocinaPrice,
         escuadrasCocinaUnidadPrice,
         perfilNegroCocinaPrice,
         perfilMateCocinaPrice,
         marcoCocina,
+        vidrioPrice, // Agregamos el precio del vidrio
+        area // Agregamos el área del vidrio
     } = calculatedValues || {};
 
     const [escuadraCantidad, setEscuadraCantidad] = useState(1);
@@ -25,16 +25,16 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
             onAccessoryChange(accessory, 1); // Accesorios sin cantidad específica
         }
     };
-    
+
     const handleCantidadChange = (e) => {
         const value = Math.max(1, Number(e.target.value));
         setEscuadraCantidad(value);
-        
+
         if (selectedAccessories.includes("escuadrasCocinaUnidad")) {
             onAccessoryChange({ ...selectedAccessories, escuadrasCocinaUnidad: value });
         }
     };
-    
+
 
     return (
         <>
@@ -129,47 +129,34 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                 </Table>
 
                 <br />
-
-                <Table aria-label="TABLA utilitarios">
+                <Table aria-label="TABLA VIDRIO">
                     <TableHeader>
-                        <TableColumn><h1>Utilitarios</h1></TableColumn>
-
-                        <TableColumn></TableColumn>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow key="1">
-                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell><strong>silicona:</strong></TableCell>
-                            <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                <br />
-
-                <Table aria-label="TABLA EMPAQUE">
-                    <TableHeader>
-                        <TableColumn><h1>Empaque</h1></TableColumn>
+                        <TableColumn><h1>Vidrio</h1></TableColumn>
                         <TableColumn></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
                         <TableRow key="1">
                             <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-                            <TableCell><strong><h2>Tamaño</h2></strong></TableCell>
+                            <TableCell><strong><h2>Área (m²)</h2></strong></TableCell>
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
-                        <TableRow key="3">
-                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
-                            <TableCell>{totalFelpa} mm</TableCell>
-                            <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
+                        <TableRow key="2">
+                            <TableCell><strong>Vidrio:</strong></TableCell>
+                            <TableCell>{area?.toFixed(2)} m²</TableCell>
+                            <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
+
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} />
+                <CotizadorAdd
+                    dimensions={dimensions}
+                    onAddDoor={onAddDoor}
+                    useCalculoPrecios={useCalculoPrecios}
+                    selectedAccessories={selectedAccessories}
+                    selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando a CotizadorAdd
+                />
             </div>
 
         </>
@@ -186,7 +173,8 @@ DetalleTablasCocinas.propTypes = {
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired,
     selectedAccessories: PropTypes.array.isRequired,
-    useCalculoPrecios: PropTypes.func.isRequired
+    useCalculoPrecios: PropTypes.func.isRequired,
+    selectedGlass: PropTypes.string.isRequired, 
 };
 
 export default DetalleTablasCocinas;

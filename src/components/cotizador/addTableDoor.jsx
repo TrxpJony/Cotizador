@@ -13,6 +13,7 @@ const AddTableDoor = ({ doors }) => {
                 {doors.map((door, index) => {
                     const iva = (door.price * 0.19) * door.quantity; // Calcular IVA por puerta
                     const totalSinIvaPorPuerta = (door.price * door.quantity) - iva; // Se resta el IVA
+                    const totalConIvaPorPuerta = (door.price * door.quantity);
                     return (
                         <li key={index} className="mb-2 p-2 border rounded">
                             <p><strong>Descripción:</strong> {door.description}</p>
@@ -21,7 +22,7 @@ const AddTableDoor = ({ doors }) => {
                             <p><strong>Alto:</strong> {door.height} mm</p>
                             <p><strong>Subtotal:</strong> ${totalSinIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                             <p><strong>IVA:</strong> ${iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p><strong>Total:</strong> ${door.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </p>
+                            <p><strong>Total:</strong> ${totalConIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </p>
                         </li>
                     );
                 })}

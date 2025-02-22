@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPrice = 0) => { // Asegúrate de agregar 'glassPrice' como prop
+const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio') => { // Asegúrate de agregar 'vidrioPrice' como prop
   const [dbPrices, setDbPrices] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [calculatedValues, setCalculatedValues] = useState({});
@@ -37,6 +37,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPri
     const totalHeight = Number(height) || 0;
     const totalWidth = Number(width) || 0;
 
+    const area = (totalHeight / 1000) * (totalWidth / 1000);
+    const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
+
+
     const felpaHeight = totalHeight * 6;
     const felpaWidth = totalWidth * 2;
     const totalFelpa = felpaHeight + felpaWidth;
@@ -50,10 +54,11 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPri
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+    const vidrioPrice = (glassUnitPrice * area); // Si es "sinVidrio", será 0
     const manoDeObra = totalHeight > 1200 ? 50000 : 40000;
-    
+
     // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-    const total = marcoCocinaPrice + accesoriosPrice +  manoDeObra + glassPrice;
+    const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
 
     setTotalPrice(total);
     setCalculatedValues({
@@ -64,12 +69,14 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], glassPri
       felpaWidth,
       felpaPrice,
       totalFelpa,
+      area,
+      vidrioPrice,
       escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
       escuadrasCocinaUnidadPrice: memoizedPrices.escuadrasCocinaUnidad ? Number(memoizedPrices.escuadrasCocinaUnidad) : 0,
       perfilNegroCocinaPrice: memoizedPrices.perfilNegroCocina ? Number(memoizedPrices.perfilNegroCocina) : 0,
       perfilMateCocinaPrice: memoizedPrices.perfilMateCocina ? Number(memoizedPrices.perfilMateCocina) : 0,
     });
-  }, [width, height, memoizedPrices, memoizedAccessories, glassPrice]); // Asegúrate de agregar glassPrice en las dependencias
+  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
 
 
   return { totalPrice, calculatedValues };
