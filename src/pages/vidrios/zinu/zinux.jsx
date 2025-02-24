@@ -38,7 +38,7 @@ const Zinux = () => {
         <>
             <div className='door-container'>
                 <div className='door-frame'>
-                    <img src={zinuImg} alt="SISTEMA SINU X" className='door-image' />
+                    <img src={zinuImg} alt="SISTEMA ZINU X" className='door-image' />
                     <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
                     <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />

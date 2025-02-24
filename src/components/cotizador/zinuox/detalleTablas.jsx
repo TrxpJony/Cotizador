@@ -5,7 +5,9 @@ import CotizadorAdd from "../CotizadorAdd";
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         doubleTotalDimensions,
+        totalHeight,
         marcoPerimetralZinuPrice,
+        divisorZinuPrice,
         perimetralNaveZinuPrice,
         pisaVidrioZinuPrice,
         verticalHorizontalesCaZinuPrice,
@@ -32,10 +34,10 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA ZINU X</h1></strong>
+                <strong><h1>SISTEMA ZINU OX</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
-                        <TableColumn><h1>Marco</h1></TableColumn>
+                        <TableColumn><h1>Maroc</h1></TableColumn>
                         <TableColumn></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
@@ -49,6 +51,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Marco Perimetral:</strong></TableCell>
                             <TableCell>{doubleTotalDimensions} mm</TableCell>
                             <TableCell>${marcoPerimetralZinuPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Divisor Zinu:</strong></TableCell>
+                            <TableCell>{totalHeight} mm</TableCell>
+                            <TableCell>${divisorZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -71,7 +78,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${perimetralNaveZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>PisaVidrio:</strong></TableCell>
+                            <TableCell><strong>Pisavidrio:</strong></TableCell>
                             <TableCell>{doubleTotalDimensions} mm</TableCell>
                             <TableCell>${pisaVidrioZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -83,14 +90,14 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Accesorios">
+                <Table aria-label="tabla accessorios">
                     <TableHeader>
-                        <TableColumn><h1>Accessorios</h1></TableColumn>
+                        <TableColumn><h1>Accesorios</h1></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
                         <TableRow key="1">
-                            <TableCell><strong><h2>Price</h2></strong></TableCell>
+                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
@@ -100,7 +107,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('kitCierreZinu')}
                                     onChange={() => onAccessoryChange('kitCierreZinu')}
                                 />
-                                <strong>Kit Manija Bidirecional con Transmision</strong>
+                                <strong>Kit Manija Bidireccional con Transmision</strong>
                             </TableCell>
                             <TableCell>${kitCierreZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -111,7 +118,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('kitCierreConLlaveZinu')}
                                     onChange={() => onAccessoryChange('kitCierreConLlaveZinu')}
                                 />
-                                <strong>Kit Manija Bidireccional con Transmisions con Llave</strong>
+                                <strong>Kit Manija Bidireccional con Transmision con Llave</strong>
                             </TableCell>
                             <TableCell>${kitCierreConLlaveZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -188,7 +195,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('soporteHZinu')}
                                     onChange={() => onAccessoryChange('soporteHZinu')}
                                 />
-                                <strong>Soporte Compensador de Hoja:</strong>
+                                <strong>Soporte Compensador de Hoja</strong>
                             </TableCell>
                             <TableCell>${soporteHTaironaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -253,10 +260,9 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         <TableRow key="2">
                             <TableCell><strong>Empaque (Alto):
                                 <br />
-                                Empaque(Ancho): </strong></TableCell>
+                                Empaque(Ancho):</strong></TableCell>
                             <TableCell>{empaqueZinuHeight} mm
-                                <br /> {empaqueZinuWidth} mm
-                            </TableCell>
+                            <br /> {empaqueZinuWidth} mm</TableCell>
                             <TableCell>${empaqueZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
@@ -273,10 +279,13 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     );
 };
 
+
 DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
         doubleTotalDimensions: PropTypes.number,
+        totalHeight: PropTypes.number,
         marcoPerimetralZinuPrice: PropTypes.number,
+        divisorZinuPrice: PropTypes.number,
         perimetralNaveZinuPrice: PropTypes.number,
         pisaVidrioZinuPrice: PropTypes.number,
         verticalHorizontalesCaZinuPrice: PropTypes.number,

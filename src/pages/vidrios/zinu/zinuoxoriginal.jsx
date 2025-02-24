@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import s3890Image from '../../../img/zinux.png'; // Importar la imagen
+import s3890Image from '../../../img/zinuxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Zinux = () => {
+const Zinuox = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ width: '', height: '' });
     const [accessories, setAccessories] = useState({
@@ -33,37 +33,36 @@ const Zinux = () => {
     const [utilitaryPrices, setUtilitaryPrices] = useState({});
     const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
-// Nuevo estado para los precios de la base de datos
-const [dbPrices, setDbPrices] = useState({});
+    // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
 
-// Efecto para cargar los precios de la base de datos
-useEffect(() => {
-  const fetchPrices = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/api/precios');
-      const data = await response.json();
-      
-      // Convertir el array de precios a un objeto para fácil acceso
-      const pricesObject = data.reduce((acc, item) => {
-        acc[item.nombre] = item.precio;
-        return acc;
-      }, {});
-      
-      setDbPrices(pricesObject);
-    } catch (error) {
-      console.error('Error al cargar los precios:', error);
-    }
-  };
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
 
-  fetchPrices();
-}, []);
+    fetchPrices();
+  }, []);
 
     useEffect(() => {
         setPrices(preciosData.precios);
         setAccessoryPrices(preciosData.accesorios);
         setUtilitaryPrices(preciosData.utilitarios);
     }, []);
-
 
     // Función que maneja el cambio de valores
     const handleChange = (e) => {
@@ -92,7 +91,6 @@ useEffect(() => {
             setAccessories((prev) => ({ ...prev, [name]: value }));
         }
     };
-
 
     const handleGlassChange = (e) => {
         const { name, value } = e.target;
@@ -132,14 +130,17 @@ useEffect(() => {
     const totFelpa = (felpaHeight + felpaWidth);
     // Calcular precios
     const marcoPerimetralZinuPrice = dbPrices.marcoPerimetralZinu * (marcoPerimetralZinu / 1000);
+    const divisorZinuPrice = dbPrices.divisorZinu * (totalHeight / 1000);
     const perimetralNaveZinuPrice = dbPrices.perimetralNaveZinu * (marcoPerimetralZinu / 1000);
     const pisaVidrioZinuPrice = dbPrices.pisaVidrioZinu * (marcoPerimetralZinu / 1000);
     const verticalHorizontalesCaZinuPrice = dbPrices.verticalHorizontalesCaZinu * (marcoPerimetralZinu / 1000);
+
     const kitCierreZinuPrice = accessories.kitCierreZinu ? accessoryPrices.kitCierreZinu : 0;
     const kitCierreConLlaveZinuPrice = accessories.kitCierreConLlaveZinu ? accessoryPrices.kitCierreConLlaveZinu : 0;
     const limitador150ZinuPrice = accessories.limitador150Zinu ? accessoryPrices.limitador150Zinu : 0;
     const limitador220ZinuPrice = accessories.limitador220Zinu ? accessoryPrices.limitador220Zinu : 0;
     const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
+
 
     const escuadraEnsambleZinuPrice = accessoryPrices.escuadraEnsambleZinu;
     const escuadraEnsambleHZinuPrice = accessoryPrices.escuadraEnsambleZinu;
@@ -152,6 +153,7 @@ useEffect(() => {
 
     const [componentTotals, setComponentTotals] = useState({
         marcoPerimetral: { totalSize: 0, totalPrice: 0 },
+        divisor: { totalSize: 0, totalPrice: 0 },
         perimetralNave: { totalSize: 0, totalPrice: 0 },
         pisaVidrio: { totalSize: 0, totalPrice: 0 },
         verticalHorizontalesCa: { totalSize: 0, totalPrice: 0 },
@@ -191,6 +193,10 @@ useEffect(() => {
             marcoPerimetral: {
                 totalSize: prevTotals.marcoPerimetral.totalSize + parseFloat(marcoPerimetralZinu), // Sumar tamaño
                 totalPrice: prevTotals.marcoPerimetral.totalPrice + marcoPerimetralZinuPrice, // Sumar precio
+            },
+            divisor: {
+                totalSize: prevTotals.divisor.totalSize + parseFloat(totalHeight), // Sumar tamaño
+                totalPrice: prevTotals.divisor.totalPrice + divisorZinuPrice, // Sumar precio
             },
             perimetralNave: {
                 totalSize: prevTotals.perimetralNave.totalSize + parseFloat(marcoPerimetralZinu),
@@ -277,9 +283,6 @@ useEffect(() => {
                     totalPrice: prevTotals.limitador220.totalPrice + limitador220ZinuPrice,
                 }
                 : prevTotals.limitador220,
-
-
-
             // Añade lógica para otros accesorios si es necesario.
         }));
         setPuertas((prev) => [...prev, nuevaPuerta]);
@@ -298,6 +301,7 @@ useEffect(() => {
 
     const totalPrice =
         marcoPerimetralZinuPrice +
+        divisorZinuPrice +
         perimetralNaveZinuPrice +
         pisaVidrioZinuPrice +
         verticalHorizontalesCaZinuPrice +
@@ -351,41 +355,41 @@ useEffect(() => {
 
         addSection(doc, 'Marco', 45);
         addTableRow(doc, 50, 'Marco Perimentral', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 55, 'Divisor Zinu:', `${componentTotals.divisor.totalSize} mm`, `${componentTotals.divisor.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Nave', 60);
-        addTableRow(doc, 65, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 70, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 75, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Nave', 65);
+        addTableRow(doc, 70, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 75, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 80, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
 
+        addSection(doc, 'Accesorios', 90);
+        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 100, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 105, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 110, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 115, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 120, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 125, 'Bisagra 2 Aletas Negra 70K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 130, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 135, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Accesorios', 85);
-        addTableRow(doc, 90, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 100, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 105, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 110, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 115, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 120, 'Bisagra 2 Aletas Negra 70K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 125, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 130, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Empaque', 145);
+        addTableRow(doc, 150, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+        addTableRow(doc, 155, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 160, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Empaque', 140);
-        addTableRow(doc, 145, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-        addTableRow(doc, 150, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 155, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Utilitarios', 170);
+        addTableRow(doc, 175, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 180, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Utilitarios', 165);
-        addTableRow(doc, 170, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 175, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
-
-        addSection(doc, 'Extra', 185);
-        addTableRow(doc, 190, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-        addTableRow(doc, 195, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-        addTableRow(doc, 200, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+        addSection(doc, 'Extra', 190);
+        addTableRow(doc, 195, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 200, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 205, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 210);
+        doc.text('Total', 170, 215);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -394,14 +398,14 @@ useEffect(() => {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 215);
+        doc.text(formattedTotal, 150, 220);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad', 20, 210);
-        doc.text(`${puertas.length}`, 20, 215);
+        doc.text('Cantidad', 20, 215);
+        doc.text(`${puertas.length}`, 20, 220);
 
-        doc.save('Cotizacion-SistemaZinu.pdf');
+        doc.save('Cotizacion-SistemaZinuOX.pdf');
     };
 
     const getPriceDisplay = () => {
@@ -421,7 +425,6 @@ useEffect(() => {
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
-
 
     return (
         <div className="door-container">
@@ -518,12 +521,11 @@ useEffect(() => {
                     </div>
                 </div>
 
-
             </div>
             <br />
             {/* Lista de partes */}
             <div className="parts-list">
-                <strong><h1>SISTEMA ZINU X</h1></strong>
+                <strong><h1>SISTEMA ZINU OX</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -540,6 +542,11 @@ useEffect(() => {
                             <TableCell><strong>Marco Perimetral:</strong></TableCell>
                             <TableCell>{marcoPerimetralZinu} mm</TableCell>
                             <TableCell>${marcoPerimetralZinuPrice.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Divisor Zinu:</strong></TableCell>
+                            <TableCell>{totalHeight} mm</TableCell>
+                            <TableCell>${divisorZinuPrice.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -711,7 +718,6 @@ useEffect(() => {
                     </TableBody>
                 </Table>
                 <br />
-
                 <Table aria-label="Tabla Vidrio">
                     <TableHeader>
                         <TableColumn><h1>Vidrio - Mano de Obra</h1></TableColumn>
@@ -781,8 +787,7 @@ useEffect(() => {
             </div>
         </div>
 
-
     );
 };
 
-export default Zinux;
+export default Zinuox;
