@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import sTaironaImage from '../../../img/taironaxx.png'; // Importar la imagen
+import s3890Image from '../../../img/zinux.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,14 +7,14 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Taironaxx = () => {
+const Zinux = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ width: '', height: '' });
     const [accessories, setAccessories] = useState({
-        kitCierreTairona: false,
-        kitCierreConLlaveTairona: false,
-        limitador150Tairona: false,
-        limitador220Tairona: false,
+        kitCierreZinu: false,
+        kitCierreConLlaveZinu: false,
+        limitador150Zinu: false,
+        limitador220Zinu: false,
         felpa: '',
     });
 
@@ -73,17 +73,17 @@ useEffect(() => {
             setAccessories((prev) => ({ ...prev, [name]: checked }));
         } else if (type === 'radio') {
             // Desmarcar la otra opción cuando se selecciona una nueva
-            if (name === 'kitCierreTairona' || name === 'kitCierreConLlaveTairona') {
+            if (name === 'kitCierreZinu' || name === 'kitCierreConLlaveZinu') {
                 setAccessories((prev) => ({
                     ...prev,
-                    kitCierreTairona: name === 'kitCierreTairona' ? checked : false,
-                    kitCierreConLlaveTairona: name === 'kitCierreConLlaveTairona' ? checked : false,
+                    kitCierreZinu: name === 'kitCierreZinu' ? checked : false,
+                    kitCierreConLlaveZinu: name === 'kitCierreConLlaveZinu' ? checked : false,
                 }));
-            } else if (name === 'limitador150Tairona' || name === 'limitador220Tairona') {
+            } else if (name === 'limitador150Zinu' || name === 'limitador220Zinu') {
                 setAccessories((prev) => ({
                     ...prev,
-                    limitador150Tairona: name === 'limitador150Tairona' ? checked : false,
-                    limitador220Tairona: name === 'limitador220Tairona' ? checked : false,
+                    limitador150Zinu: name === 'limitador150Zinu' ? checked : false,
+                    limitador220Zinu: name === 'limitador220Zinu' ? checked : false,
                 }));
             } else {
                 setAccessories((prev) => ({ ...prev, [name]: value }));
@@ -122,37 +122,30 @@ useEffect(() => {
     // Calcular valores
     const doubleHeight = totalHeight ? totalHeight * 2 : '';
     const doubleWidth = totalWidth ? totalWidth * 2 : '';
-    const marcoPerimetralTairona = doubleHeight && doubleWidth ? (doubleHeight + doubleWidth) : '';
-    const PerimetralNaveTairona = (totalWidth && totalHeight) ? ((totalWidth / 2) * 4 + totalHeight * 4) : 0;
-    const PisaVidrioTairona = (totalWidth && totalHeight) ? ((totalWidth / 2) * 4 + totalHeight * 4) : 0;
+    const marcoPerimetralZinu = doubleHeight && doubleWidth ? (doubleHeight + doubleWidth) : '';
     const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
-    const empaqueTaironaHeight = height && width ? height * 4 : '';
-    const empaqueTaironaWidth = height && width ? width * 2 : '';
+    const empaque3890Height = height && width ? height * 4 : '';
+    const empaque3890Width = height && width ? width * 2 : '';
     const felpaHeight = height && width ? height * 6 : '';
     const felpaWidth = height && width ? width * 2 : '';
-    const empaqueTaironaPrice = (empaqueTaironaHeight + empaqueTaironaWidth) / 1000 * dbPrices.empaqueTairona; // Precio total del empaque
+    const empaque3890Price = (empaque3890Height + empaque3890Width) / 1000 * dbPrices.empaque3890; // Precio total del empaque
     const totFelpa = (felpaHeight + felpaWidth);
-
     // Calcular precios
-    const marcoPerimetralTaironaPrice = dbPrices.marcoPerimetralTairona * (marcoPerimetralTairona / 1000);
-    const perimetralNaveTaironaPrice = dbPrices.perimetralNaveTairona * (PerimetralNaveTairona / 1000);
-    const pisaVidrioTaironaPrice = dbPrices.pisaVidrioTairona * (PisaVidrioTairona / 1000);
-    const verticalHorizontalesCaTaironaPrice = dbPrices.verticalHorizontalesCaTairona * (PisaVidrioTairona / 1000);
-    const adaptadorTaironaPrice = dbPrices.adaptadorTairona * (totalHeight / 1000);
-    const kitCierreTaironaPrice = accessories.kitCierreTairona ? accessoryPrices.kitCierreTairona : 0;
-    const kitCierreConLlaveTaironaPrice = accessories.kitCierreConLlaveTairona ? accessoryPrices.kitCierreConLlaveTairona : 0;
-    const limitador150TaironaPrice = accessories.limitador150Tairona ? accessoryPrices.limitador150Tairona : 0;
-    const limitador220TaironaPrice = accessories.limitador220Tairona ? accessoryPrices.limitador220Tairona : 0;
+    const marcoPerimetralZinuPrice = dbPrices.marcoPerimetralZinu * (marcoPerimetralZinu / 1000);
+    const perimetralNaveZinuPrice = dbPrices.perimetralNaveZinu * (marcoPerimetralZinu / 1000);
+    const pisaVidrioZinuPrice = dbPrices.pisaVidrioZinu * (marcoPerimetralZinu / 1000);
+    const verticalHorizontalesCaZinuPrice = dbPrices.verticalHorizontalesCaZinu * (marcoPerimetralZinu / 1000);
+    const kitCierreZinuPrice = accessories.kitCierreZinu ? accessoryPrices.kitCierreZinu : 0;
+    const kitCierreConLlaveZinuPrice = accessories.kitCierreConLlaveZinu ? accessoryPrices.kitCierreConLlaveZinu : 0;
+    const limitador150ZinuPrice = accessories.limitador150Zinu ? accessoryPrices.limitador150Zinu : 0;
+    const limitador220ZinuPrice = accessories.limitador220Zinu ? accessoryPrices.limitador220Zinu : 0;
     const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
 
-    const escuadraEnsambleTaironaPrice = accessoryPrices.escuadraEnsambleTairona;
-    const escuadraEnsambleHTaironaPrice = accessoryPrices.escuadraEnsambleTairona;
-    const bisagra2TaironaPrice = accessoryPrices.bisagra2Tairona;
-    const bisagra3TaironaPrice = accessoryPrices.bisagra3Tairona;
-    const bisagraOcultaTaironaPrice = accessoryPrices.bisagraOcultaTairona;
-
-    const cierreHTaironaPrice = accessoryPrices.cierreHTairona;
-    const soporteHTaironaPrice = accessoryPrices.soporteHTairona;
+    const escuadraEnsambleZinuPrice = accessoryPrices.escuadraEnsambleZinu;
+    const escuadraEnsambleHZinuPrice = accessoryPrices.escuadraEnsambleZinu;
+    const bisagra2ZinuPrice = accessoryPrices.bisagra2Zinu;
+    const cierreHZinuPrice = accessoryPrices.cierreHZinu;
+    const soporteHZinuPrice = accessoryPrices.soporteHZinu;
 
     const tornillosPrice = utilitaryPrices.tornillos * 28;
     const siliconaPrice = utilitaryPrices.silicona * 1;
@@ -162,7 +155,6 @@ useEffect(() => {
         perimetralNave: { totalSize: 0, totalPrice: 0 },
         pisaVidrio: { totalSize: 0, totalPrice: 0 },
         verticalHorizontalesCa: { totalSize: 0, totalPrice: 0 },
-        adaptador: { totalSize: 0, totalPrice: 0 },
         empaque: { totalSize: 0, totalSize2: 0, totalPrice: 0 },
         felpa: { totalSize: 0, totalPrice: 0 },
         tornillos: { cantidad: 0, totalPrice: 0 },
@@ -170,8 +162,6 @@ useEffect(() => {
         escuadraEnsamble: { cantidad: 0, totalPrice: 0 },
         escuadraEnsambleH: { cantidad: 0, totalPrice: 0 },
         bisagra2: { cantidad: 0, totalPrice: 0 },
-        bisagra3: { cantidad: 0, totalPrice: 0 },
-        bisagraOculta: { cantidad: 0, totalPrice: 0 },
         cierreH: { cantidad: 0, totalPrice: 0 },
         soporteH: { cantidad: 0, totalPrice: 0 },
         manodeObra: { totalPrice: 0 },
@@ -199,29 +189,25 @@ useEffect(() => {
         setComponentTotals((prevTotals) => ({
             ...prevTotals,
             marcoPerimetral: {
-                totalSize: prevTotals.marcoPerimetral.totalSize + parseFloat(marcoPerimetralTairona), // Sumar tamaño
-                totalPrice: prevTotals.marcoPerimetral.totalPrice + marcoPerimetralTaironaPrice, // Sumar precio
+                totalSize: prevTotals.marcoPerimetral.totalSize + parseFloat(marcoPerimetralZinu), // Sumar tamaño
+                totalPrice: prevTotals.marcoPerimetral.totalPrice + marcoPerimetralZinuPrice, // Sumar precio
             },
             perimetralNave: {
-                totalSize: prevTotals.perimetralNave.totalSize + parseFloat(PerimetralNaveTairona),
-                totalPrice: prevTotals.perimetralNave.totalPrice + perimetralNaveTaironaPrice,
+                totalSize: prevTotals.perimetralNave.totalSize + parseFloat(marcoPerimetralZinu),
+                totalPrice: prevTotals.perimetralNave.totalPrice + perimetralNaveZinuPrice,
             },
             pisaVidrio: {
-                totalSize: prevTotals.pisaVidrio.totalSize + parseFloat(PisaVidrioTairona),
-                totalPrice: prevTotals.pisaVidrio.totalPrice + pisaVidrioTaironaPrice,
+                totalSize: prevTotals.pisaVidrio.totalSize + parseFloat(marcoPerimetralZinu),
+                totalPrice: prevTotals.pisaVidrio.totalPrice + pisaVidrioZinuPrice,
             },
             verticalHorizontalesCa: {
-                totalSize: prevTotals.verticalHorizontalesCa.totalSize + parseFloat(PisaVidrioTairona),
-                totalPrice: prevTotals.verticalHorizontalesCa.totalPrice + verticalHorizontalesCaTaironaPrice,
-            },
-            adaptador: {
-                totalSize: prevTotals.adaptador.totalSize + parseFloat(totalHeight),
-                totalPrice: prevTotals.adaptador.totalPrice + parseFloat(adaptadorTaironaPrice),
+                totalSize: prevTotals.verticalHorizontalesCa.totalSize + parseFloat(marcoPerimetralZinu),
+                totalPrice: prevTotals.verticalHorizontalesCa.totalPrice + verticalHorizontalesCaZinuPrice,
             },
             empaque: {
-                totalSize: prevTotals.empaque.totalSize + parseFloat(empaqueTaironaHeight),
-                totalSize2: prevTotals.empaque.totalSize + parseFloat(empaqueTaironaWidth),
-                totalPrice: prevTotals.empaque.totalPrice + empaqueTaironaPrice,
+                totalSize: prevTotals.empaque.totalSize + parseFloat(empaque3890Height),
+                totalSize2: prevTotals.empaque.totalSize + parseFloat(empaque3890Width),
+                totalPrice: prevTotals.empaque.totalPrice + empaque3890Price,
             },
             felpa: {
                 totalSize: prevTotals.felpa.totalSize + parseFloat(totFelpa),
@@ -237,31 +223,23 @@ useEffect(() => {
             },
             escuadraEnsamble: {
                 cantidad: prevTotals.escuadraEnsamble.cantidad + 1,
-                totalPrice: prevTotals.escuadraEnsamble.totalPrice + escuadraEnsambleTaironaPrice,
+                totalPrice: prevTotals.escuadraEnsamble.totalPrice + escuadraEnsambleZinuPrice,
             },
             escuadraEnsambleH: {
                 cantidad: prevTotals.escuadraEnsambleH.cantidad + 1,
-                totalPrice: prevTotals.escuadraEnsambleH.totalPrice + escuadraEnsambleHTaironaPrice,
+                totalPrice: prevTotals.escuadraEnsambleH.totalPrice + escuadraEnsambleHZinuPrice,
             },
             bisagra2: {
                 cantidad: prevTotals.bisagra2.cantidad + 1,
-                totalPrice: prevTotals.bisagra2.totalPrice + bisagra2TaironaPrice,
-            },
-            bisagra3: {
-                cantidad: prevTotals.bisagra3.cantidad + 1,
-                totalPrice: prevTotals.bisagra3.totalPrice + bisagra3TaironaPrice,
-            },
-            bisagraOculta: {
-                cantidad: prevTotals.bisagraOculta.cantidad + 1,
-                totalPrice: prevTotals.bisagraOculta.totalPrice + bisagraOcultaTaironaPrice,
+                totalPrice: prevTotals.bisagra2.totalPrice + bisagra2ZinuPrice,
             },
             cierreH: {
                 cantidad: prevTotals.cierreH.cantidad + 1,
-                totalPrice: prevTotals.cierreH.totalPrice + cierreHTaironaPrice,
+                totalPrice: prevTotals.cierreH.totalPrice + cierreHZinuPrice,
             },
             soporteH: {
                 cantidad: prevTotals.soporteH.cantidad + 1,
-                totalPrice: prevTotals.soporteH.totalPrice + soporteHTaironaPrice,
+                totalPrice: prevTotals.soporteH.totalPrice + soporteHZinuPrice,
             },
             manodeObra: {
                 totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
@@ -275,30 +253,33 @@ useEffect(() => {
 
         setAccessoryTotals((prevTotals) => ({
             ...prevTotals,
-            kitCierre: accessories.kitCierreTairona
+            kitCierre: accessories.kitCierreZinu
                 ? {
                     cantidad: prevTotals.kitCierre.cantidad + 1,
-                    totalPrice: prevTotals.kitCierre.totalPrice + kitCierreTaironaPrice,
+                    totalPrice: prevTotals.kitCierre.totalPrice + kitCierreZinuPrice,
                 }
                 : prevTotals.kitCierre,
-            kitCierreConLlave: accessories.kitCierreConLlaveTairona
+            kitCierreConLlave: accessories.kitCierreConLlaveZinu
                 ? {
                     cantidad: prevTotals.kitCierreConLlave.cantidad + 1,
-                    totalPrice: prevTotals.kitCierreConLlave.totalPrice + kitCierreConLlaveTaironaPrice,
+                    totalPrice: prevTotals.kitCierreConLlave.totalPrice + kitCierreConLlaveZinuPrice,
                 }
                 : prevTotals.kitCierreConLlave,
-            limitador150: accessories.limitador150Tairona
+            limitador150: accessories.limitador150Zinu
                 ? {
                     cantidad: prevTotals.limitador150.cantidad + 1,
-                    totalPrice: prevTotals.limitador150.totalPrice + limitador150TaironaPrice,
+                    totalPrice: prevTotals.limitador150.totalPrice + limitador150ZinuPrice,
                 }
                 : prevTotals.limitador150,
-            limitador220: accessories.limitador220Tairona
+            limitador220: accessories.limitador220Zinu
                 ? {
                     cantidad: prevTotals.limitador220.cantidad + 1,
-                    totalPrice: prevTotals.limitador220.totalPrice + limitador220TaironaPrice,
+                    totalPrice: prevTotals.limitador220.totalPrice + limitador220ZinuPrice,
                 }
                 : prevTotals.limitador220,
+
+
+
             // Añade lógica para otros accesorios si es necesario.
         }));
         setPuertas((prev) => [...prev, nuevaPuerta]);
@@ -316,24 +297,21 @@ useEffect(() => {
     );
 
     const totalPrice =
-        marcoPerimetralTaironaPrice +
-        perimetralNaveTaironaPrice +
-        pisaVidrioTaironaPrice +
-        verticalHorizontalesCaTaironaPrice +
-        adaptadorTaironaPrice +
-        kitCierreTaironaPrice +
-        kitCierreConLlaveTaironaPrice +
-        limitador150TaironaPrice +
-        limitador220TaironaPrice +
-        escuadraEnsambleTaironaPrice +
-        escuadraEnsambleHTaironaPrice +
-        bisagra2TaironaPrice +
-        bisagra3TaironaPrice +
-        bisagraOcultaTaironaPrice +
-        cierreHTaironaPrice +
-        soporteHTaironaPrice +
+        marcoPerimetralZinuPrice +
+        perimetralNaveZinuPrice +
+        pisaVidrioZinuPrice +
+        verticalHorizontalesCaZinuPrice +
+        kitCierreZinuPrice +
+        kitCierreConLlaveZinuPrice +
+        limitador150ZinuPrice +
+        limitador220ZinuPrice +
+        escuadraEnsambleZinuPrice +
+        escuadraEnsambleHZinuPrice +
+        bisagra2ZinuPrice +
+        cierreHZinuPrice +
+        soporteHZinuPrice +
         felpaPrice +
-        empaqueTaironaPrice +
+        empaque3890Price +
         tornillosPrice +
         siliconaPrice +
         (glassPrice ? parseFloat(glassPrice) : 0) + // Precio del vidrio
@@ -369,7 +347,7 @@ useEffect(() => {
         doc.rect(20, 30, 170, 8, 'F');
         doc.setTextColor('white');
         doc.setFontSize(10);
-        doc.text('Detalle de la cotización Sistema Tairona X', 70, 34);
+        doc.text('Detalle de la cotización Sistema Zinu X', 70, 34);
 
         addSection(doc, 'Marco', 45);
         addTableRow(doc, 50, 'Marco Perimentral', `${componentTotals.marcoPerimetral.totalSize} mm`, `${componentTotals.marcoPerimetral.totalPrice.toFixed(2)}`);
@@ -378,38 +356,36 @@ useEffect(() => {
         addTableRow(doc, 65, 'Perimetral de Nave', `${componentTotals.perimetralNave.totalSize} mm`, `${componentTotals.perimetralNave.totalPrice.toFixed(2)}`);
         addTableRow(doc, 70, 'Pisavidrio:', `${componentTotals.pisaVidrio.totalSize} mm`, `${componentTotals.pisaVidrio.totalPrice.toFixed(2)}`);
         addTableRow(doc, 75, 'Vertical Horizontales Vidrio Camara:', `${componentTotals.verticalHorizontalesCa.totalSize} mm`, `${componentTotals.verticalHorizontalesCa.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 80, 'Adaptador Diseño XX:', `${componentTotals.adaptador.totalSize} mm`, `${componentTotals.adaptador.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Accesorios', 90);
-        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 100, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 105, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 110, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 115, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 120, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 125, 'Bisagra 2 Aletas Regulable Negra 120K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 130, 'Bisagra 3 Aletas Negra 90K', `${componentTotals.bisagra3.cantidad}`, `${componentTotals.bisagra3.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 135, 'Bisagra Oculta de Ajuste', `${componentTotals.bisagraOculta.cantidad}`, `${componentTotals.bisagraOculta.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 140, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 145, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Empaque', 155);
-        addTableRow(doc, 160, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
-        addTableRow(doc, 165, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 170, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Accesorios', 85);
+        addTableRow(doc, 90, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierre.cantidad}`, `${accessoryTotals.kitCierre.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 95, 'Kit Manija Bidireccional con Transmision:', `${accessoryTotals.kitCierreConLlave.cantidad}`, `${accessoryTotals.kitCierreConLlave.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 100, 'Limitador De Apertura L = 150:', `${accessoryTotals.limitador150.cantidad}`, `${accessoryTotals.limitador150.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 105, 'Limitador De Apertura L = 220:', `${accessoryTotals.limitador220.cantidad}`, `${accessoryTotals.limitador220.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 110, 'Escuadra Ensamble Marco Sideral:', `${componentTotals.escuadraEnsamble.cantidad}`, `${componentTotals.escuadraEnsamble.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 115, 'Escuadra Ensamble Hoja:', `${componentTotals.escuadraEnsambleH.cantidad}`, `${componentTotals.escuadraEnsambleH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 120, 'Bisagra 2 Aletas Negra 70K:', `${componentTotals.bisagra2.cantidad}`, `${componentTotals.bisagra2.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 125, 'Cierre Hojas y Encuentros Regulables:', `${componentTotals.cierreH.cantidad}`, `${componentTotals.cierreH.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 130, 'Soporte Compensador de Hoja:', `${componentTotals.soporteH.cantidad}`, `${componentTotals.soporteH.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Utilitarios', 180);
-        addTableRow(doc, 185, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
-        addTableRow(doc, 190, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+        addSection(doc, 'Empaque', 140);
+        addTableRow(doc, 145, 'Empaque (Alto):', `${componentTotals.empaque.totalSize} mm`, '');
+        addTableRow(doc, 150, 'Empaque (Ancho):', `${componentTotals.empaque.totalSize2} mm`, `${componentTotals.empaque.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 155, 'Felpa 5.00 x 7.00:', `${componentTotals.felpa.totalSize} mm`, `${componentTotals.felpa.totalPrice.toFixed(2)}`);
 
-        addSection(doc, 'Extra', 200);
-        addTableRow(doc, 205, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
-        addTableRow(doc, 210, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
-        addTableRow(doc, 215, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
+        addSection(doc, 'Utilitarios', 165);
+        addTableRow(doc, 170, 'Tornillos:', `${componentTotals.tornillos.cantidad}`, `${componentTotals.tornillos.totalPrice.toFixed(2)}`);
+        addTableRow(doc, 175, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
+
+        addSection(doc, 'Extra', 185);
+        addTableRow(doc, 190, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+        addTableRow(doc, 195, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
+        addTableRow(doc, 200, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Total', 170, 225);
+        doc.text('Total', 170, 210);
         doc.setFontSize(16);
         doc.setTextColor('black');
         const formattedTotal = totalSum.toLocaleString('en-US', {
@@ -418,30 +394,30 @@ useEffect(() => {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
-        doc.text(formattedTotal, 150, 230);
+        doc.text(formattedTotal, 150, 215);
 
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
-        doc.text('Cantidad', 20, 225);
-        doc.text(`${puertas.length}`, 20, 230);
+        doc.text('Cantidad', 20, 210);
+        doc.text(`${puertas.length}`, 20, 215);
 
-        doc.save('Cotizacion-SistemaTairona.pdf');
+        doc.save('Cotizacion-SistemaZinu.pdf');
     };
 
     const getPriceDisplay = () => {
-        if (accessories.kitCierreTairona) {
-            return `$${accessoryPrices.kitCierreTairona.toFixed(2)}`;
-        } else if (accessories.kitCierreConLlaveTairona) {
-            return `$${accessoryPrices.kitCierreConLlaveTairona.toFixed(2)}`;
+        if (accessories.kitCierreZinu) {
+            return `$${accessoryPrices.kitCierreZinu.toFixed(2)}`;
+        } else if (accessories.kitCierreConLlaveZinu) {
+            return `$${accessoryPrices.kitCierreConLlaveZinu.toFixed(2)}`;
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
 
     const getLimitadorPrice = () => {
-        if (accessories.limitador150Tairona) {
-            return `$${accessoryPrices.limitador150Tairona.toFixed(2)}`;
-        } else if (accessories.limitador220Tairona) {
-            return `$${accessoryPrices.limitador220Tairona.toFixed(2)}`;
+        if (accessories.limitador150Zinu) {
+            return `$${accessoryPrices.limitador150Zinu.toFixed(2)}`;
+        } else if (accessories.limitador220Zinu) {
+            return `$${accessoryPrices.limitador220Zinu.toFixed(2)}`;
         }
         return ''; // Si no hay ninguna opción seleccionada, no mostrar precio
     };
@@ -475,7 +451,7 @@ useEffect(() => {
                 </div>
 
                 {/* Imagen */}
-                <img src={sTaironaImage} alt="Puerta Corrediza Colosal" className="door-image" />
+                <img src={s3890Image} alt="Puerta Corrediza Colosal" className="door-image" />
 
                 {/* Dimensiones dinámicas */}
                 <div className="dimensions-display">
@@ -542,11 +518,12 @@ useEffect(() => {
                     </div>
                 </div>
 
+
             </div>
             <br />
             {/* Lista de partes */}
             <div className="parts-list">
-                <strong><h1>SISTEMA TAIRONA XX</h1></strong>
+                <strong><h1>SISTEMA ZINU X</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -561,8 +538,8 @@ useEffect(() => {
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Marco Perimetral:</strong></TableCell>
-                            <TableCell>{marcoPerimetralTairona} mm</TableCell>
-                            <TableCell>${marcoPerimetralTaironaPrice.toFixed(2)}</TableCell>
+                            <TableCell>{marcoPerimetralZinu} mm</TableCell>
+                            <TableCell>${marcoPerimetralZinuPrice.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -583,23 +560,18 @@ useEffect(() => {
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Perimetral de nave:</strong></TableCell>
-                            <TableCell>{PerimetralNaveTairona} mm</TableCell>
-                            <TableCell>${perimetralNaveTaironaPrice.toFixed(2)}</TableCell>
+                            <TableCell>{marcoPerimetralZinu} mm</TableCell>
+                            <TableCell>${perimetralNaveZinuPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Pisavidrio:</strong></TableCell>
-                            <TableCell>{PisaVidrioTairona} mm</TableCell>
-                            <TableCell>${pisaVidrioTaironaPrice.toFixed(2)}</TableCell>
+                            <TableCell>{marcoPerimetralZinu} mm</TableCell>
+                            <TableCell>${pisaVidrioZinuPrice.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Vertical Horizontales Vidrio Camara:</strong></TableCell>
-                            <TableCell>{PisaVidrioTairona} mm</TableCell>
-                            <TableCell>${verticalHorizontalesCaTaironaPrice.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="5">
-                            <TableCell><strong>Adaptador Diseño XX:</strong></TableCell>
-                            <TableCell>{totalHeight} mm</TableCell>
-                            <TableCell>${adaptadorTaironaPrice.toFixed(2)}</TableCell>
+                            <TableCell>{marcoPerimetralZinu} mm</TableCell>
+                            <TableCell>${verticalHorizontalesCaZinuPrice.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -619,9 +591,9 @@ useEffect(() => {
                         <TableRow key="2">
                             <TableCell><input
                                 type="radio"
-                                name="kitCierreTairona"
+                                name="kitCierreZinu"
                                 value="Kit de Cierre"
-                                checked={accessories.kitCierreTairona}
+                                checked={accessories.kitCierreZinu}
                                 onChange={handleChange}
                             />
                                 Kit Manija Bidireccional con Transmision
@@ -629,9 +601,9 @@ useEffect(() => {
                                 <br />
                                 <input
                                     type="radio"
-                                    name="kitCierreConLlaveTairona"
+                                    name="kitCierreConLlaveZinu"
                                     value="Kit de Cierre con Llave"
-                                    checked={accessories.kitCierreConLlaveTairona}
+                                    checked={accessories.kitCierreConLlaveZinu}
                                     onChange={handleChange}
                                 />
                                 Kit Manija Bidireccional con Transmision con Llave
@@ -641,9 +613,9 @@ useEffect(() => {
                         <TableRow key="2">
                             <TableCell><input
                                 type="radio"
-                                name="limitador150Tairona"
+                                name="limitador150Zinu"
                                 value="Limitador De Apertura L = 150"
-                                checked={accessories.limitador150Tairona}
+                                checked={accessories.limitador150Zinu}
                                 onChange={handleChange}
                             />
                                 Limitador De Apertura L = 150
@@ -651,9 +623,9 @@ useEffect(() => {
                                 <br />
                                 <input
                                     type="radio"
-                                    name="limitador220Tairona"
+                                    name="limitador220Zinu"
                                     value="Limitador De Apertura L = 220"
-                                    checked={accessories.limitador220Tairona}
+                                    checked={accessories.limitador220Zinu}
                                     onChange={handleChange}
                                 />
                                 Limitador De Apertura L = 220
@@ -662,31 +634,23 @@ useEffect(() => {
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>Escuadra Ensamble Marco Sideral:</TableCell>
-                            <TableCell>$ {escuadraEnsambleTaironaPrice}</TableCell>
+                            <TableCell>$ {escuadraEnsambleZinuPrice}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell>Escuadra Ensamble Hoja:</TableCell>
-                            <TableCell>$ {escuadraEnsambleHTaironaPrice}</TableCell>
+                            <TableCell>$ {escuadraEnsambleHZinuPrice}</TableCell>
                         </TableRow>
                         <TableRow key="5">
-                            <TableCell>Bisagra 2 Aletas Regulable Negra 120K:</TableCell>
-                            <TableCell>$ {bisagra2TaironaPrice}</TableCell>
+                            <TableCell>Bisagra 2 Aletas Negra 70K:</TableCell>
+                            <TableCell>$ {bisagra2ZinuPrice}</TableCell>
                         </TableRow>
                         <TableRow key="6">
-                            <TableCell>Bisagra 3 Aletas Negra 90K:</TableCell>
-                            <TableCell>$ {bisagra3TaironaPrice}</TableCell>
+                            <TableCell>Cierre Hojas y Encuentros Regulables:</TableCell>
+                            <TableCell>$ {cierreHZinuPrice}</TableCell>
                         </TableRow>
                         <TableRow key="7">
-                            <TableCell>Bisagra Oculta de Ajuste:</TableCell>
-                            <TableCell>$ {bisagraOcultaTaironaPrice}</TableCell>
-                        </TableRow>
-                        <TableRow key="8">
-                            <TableCell>Cierre Hojas y Encuentros Regulables:</TableCell>
-                            <TableCell>$ {cierreHTaironaPrice}</TableCell>
-                        </TableRow>
-                        <TableRow key="9">
                             <TableCell>Soporte Compensador de Hoja:</TableCell>
-                            <TableCell>$ {soporteHTaironaPrice}</TableCell>
+                            <TableCell>$ {soporteHZinuPrice}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -734,10 +698,10 @@ useEffect(() => {
                             <TableCell><strong>Empaque (Alto):
                                 <br />
                                 Empaque (Ancho): </strong></TableCell>
-                            <TableCell>{empaqueTaironaHeight} mm
-                                <br /> {empaqueTaironaWidth} mm
+                            <TableCell>{empaque3890Height} mm
+                                <br /> {empaque3890Width} mm
                             </TableCell>
-                            <TableCell>${empaqueTaironaPrice.toFixed(2)}</TableCell>
+                            <TableCell>${empaque3890Price.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
@@ -817,7 +781,8 @@ useEffect(() => {
             </div>
         </div>
 
+
     );
 };
 
-export default Taironaxx;
+export default Zinux;
