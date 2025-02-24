@@ -53,7 +53,12 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
-    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+      if (acc === "manijaPuertaCocina") {
+        return sum + (memoizedPrices.manijaPuertaCocina ? Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000) : 0);
+      }
+      return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+    }, 0);
     const vidrioPrice = (glassUnitPrice * area); // Si es "sinVidrio", será 0
     const manoDeObra = totalHeight > 1200 ? 50000 : 40000;
 
@@ -72,9 +77,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       area,
       vidrioPrice,
       escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
-      escuadrasCocinaUnidadPrice: memoizedPrices.escuadrasCocinaUnidad ? Number(memoizedPrices.escuadrasCocinaUnidad) : 0,
-      perfilNegroCocinaPrice: memoizedPrices.perfilNegroCocina ? Number(memoizedPrices.perfilNegroCocina) : 0,
-      perfilMateCocinaPrice: memoizedPrices.perfilMateCocina ? Number(memoizedPrices.perfilMateCocina) : 0,
+      manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
+
     });
   }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
 

@@ -1,5 +1,5 @@
 import '../../../css/colosal.css';
-import EnviarDimensiones from '../../../components/cotizador/colosal345oxxo/EnviarDimenciones';
+import EnviarDimensiones from '../../../components/cotizador/colosal345oxxo/enviarDimenciones';
 import useCalculoPrecios from '../../../components/cotizador/colosal345oxxo/useCalculoPrecios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
