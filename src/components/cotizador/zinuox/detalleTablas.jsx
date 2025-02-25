@@ -262,7 +262,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <br />
                                 Empaque(Ancho):</strong></TableCell>
                             <TableCell>{empaqueZinuHeight} mm
-                            <br /> {empaqueZinuWidth} mm</TableCell>
+                                <br /> {empaqueZinuWidth} mm</TableCell>
                             <TableCell>${empaqueZinuPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
