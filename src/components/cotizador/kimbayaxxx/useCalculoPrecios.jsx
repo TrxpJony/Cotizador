@@ -1,0 +1,132 @@
+import { useEffect, useState, useMemo } from "react";
+
+const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
+    const [dbPrices, setDbPrices] = useState({});
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [calculatedValues, setCalculatedValues] = useState({});
+
+    useEffect(() => {
+        const fetchPrices = async () => {
+            try {
+                const response = await fetch('http://localhost:3002/api/precios');
+                const data = await response.json();
+
+                const pricesObject = data.reduce((acc, item) => {
+                    acc[item.nombre] = Number(item.precio) || 0;
+                    return acc;
+                }, {});
+
+                setDbPrices(pricesObject);
+            } catch (error) {
+                console.error('Error al cargar los precios:', error);
+            }
+        };
+
+        fetchPrices();
+    }, []);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(dbPrices)]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
+    
+    useEffect(() => {
+        if (Object.keys(memoizedPrices).length === 0) return;
+
+        const totalHeight = Number(height);
+        const totalWidth = Number(width);
+        const tripleWidth = totalWidth * 3;
+        const cuadHeight = totalHeight * 4;
+        const empaquekimHeight = totalHeight * 4;
+        const empaquekimWidth = totalWidth * 2;
+        const felpaHeight = totalHeight * 6;
+        const felpaWidth = totalWidth * 2;
+        const totalFelpa = felpaHeight + felpaWidth;
+        const doubleSum = (totalWidth * 2) + (totalHeight * 2);
+        const tripleSumSix = (totalWidth * 3) + (totalHeight * 6);
+        const tripleHalfWidthsumDouble = ((totalWidth / 3) * 6) + (totalHeight * 2);
+        const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0 );
+
+        const pistaRodamientokimPrice = getPrice("pistaRodamientokim", tripleSumSix);
+        const marcoPerimetralkimPrice = getPrice("marcoPerimetralkim", doubleSum);
+        const pistaRodamientoKalPrice = getPrice("pistaRodamientokal", tripleWidth);
+        const complementoSuperiorkimPrice = getPrice("complementoSuperiorkim", tripleWidth);
+        const enganchekimPrice = getPrice("enganchekim", cuadHeight);
+        const engancheVidrioCakimPrice = getPrice("engancheVidrioCakim", cuadHeight);
+        const verticalHorizontaleskimPrice = getPrice("verticalHorizontaleskim", tripleHalfWidthsumDouble);
+        const verticalHorizontalesCakimPrice = getPrice("verticalHorizontalesCakim", tripleHalfWidthsumDouble);
+        const empaquekimPrice = getPrice("empaquekim", empaquekimHeight + empaquekimWidth)
+        const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
+
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 60;
+        const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
+        const escuadraEnsamblekimPrice = (memoizedPrices.escuadraEnsamblekim ? Number(memoizedPrices.escuadraEnsamblekim) : 0) * 3;
+        const espumaSelloSukimPrice = (memoizedPrices.espumaSelloSukim ? Number(memoizedPrices.espumaSelloSukim) : 0) * 1;
+        const espumaSelloInkimPrice = (memoizedPrices.espumaSelloInkim ? Number(memoizedPrices.espumaSelloInkim) : 0) * 1;
+        const sifonSistemaskimPrice = (memoizedPrices.sifonSistemaskim ? Number(memoizedPrices.sifonSistemaskim) : 0) * 1;
+        const kit6kimPrice = (memoizedPrices.kit6kim ? Number(memoizedPrices.kit6kim) : 0) * 2;
+        const kit2kimPrice = (memoizedPrices.kit2kim ? Number(memoizedPrices.kit2kim) : 0) * 2;
+        const topeskimPrice = (memoizedPrices.topeskim ? Number(memoizedPrices.topeskim) : 0) *2;
+        const espumaTapaGuiakimPrice = (memoizedPrices.espumaTapaGuiakim ? Number(memoizedPrices.espumaTapaGuiakim) : 0) * 2;
+        const portaEsponjaKimPrice = (memoizedPrices.portaEsponjakim ? Number(memoizedPrices.portaEsponjakim) : 0) * 2;
+        const tapaEntrecierrekimPrice = (memoizedPrices.tapaEntrecierrekim ? Number(memoizedPrices.tapaEntrecierrekim) : 0) * 2;
+        const kitHojaFijakimPrice = (memoizedPrices.kitHojaFijakim ? Number(memoizedPrices.kitHojaFijakim) : 0) * 1;
+        const kitPuntoCierrekimPrice = (memoizedPrices.kitPuntoCierrekim ? Number(memoizedPrices.kitPuntoCierrekim) : 0) * 1;
+
+        const accessoriesPrices = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+
+        const total = 
+            pistaRodamientoKalPrice + marcoPerimetralkimPrice + pistaRodamientokimPrice +
+            complementoSuperiorkimPrice + enganchekimPrice + engancheVidrioCakimPrice +
+            verticalHorizontaleskimPrice + verticalHorizontalesCakimPrice +
+            tornillosPrice + siliconaPrice + felpaPrice + empaquekimPrice + accessoriesPrices +
+            escuadraEnsamblekimPrice + espumaSelloSukimPrice + espumaSelloInkimPrice + sifonSistemaskimPrice+
+            kit6kimPrice + kit2kimPrice + topeskimPrice + espumaTapaGuiakimPrice + portaEsponjaKimPrice +
+            tapaEntrecierrekimPrice + kitHojaFijakimPrice + kitPuntoCierrekimPrice;
+        
+        setTotalPrice(total);
+        setCalculatedValues({
+            tripleSumSix,
+            doubleSum,
+            tripleWidth,
+            cuadHeight,
+            tripleHalfWidthsumDouble,
+            pistaRodamientoKalPrice,
+            marcoPerimetralkimPrice,
+            pistaRodamientokimPrice,
+            complementoSuperiorkimPrice,
+            enganchekimPrice,
+            engancheVidrioCakimPrice,
+            verticalHorizontaleskimPrice,
+            verticalHorizontalesCakimPrice,
+            empaquekimPrice,
+            felpaPrice,
+            tornillosPrice,
+            siliconaPrice,
+            escuadraEnsamblekimPrice,
+            espumaSelloSukimPrice,
+            espumaSelloInkimPrice,
+            sifonSistemaskimPrice,
+            kit6kimPrice,
+            kit2kimPrice,
+            topeskimPrice,
+            espumaTapaGuiakimPrice,
+            portaEsponjaKimPrice,
+            tapaEntrecierrekimPrice,
+            kitHojaFijakimPrice,
+            kitPuntoCierrekimPrice,
+            empaquekimHeight,
+            empaquekimWidth,
+            totalFelpa,
+            kitManijakimPrice: memoizedPrices.kitManijakim ? Number(memoizedPrices.kitManijakim) : 0,
+            kitManijaConLlavekimPrice : memoizedPrices.kitManijaConLlavekim ? Number(memoizedPrices.kitManijaConLlavekim) : 0,
+            pletinaPoliamidaPrice : memoizedPrices.pletinaPoliamida ? Number(memoizedPrices.pletinaPoliamida) : 0,
+            empaqueBurbujakimPrice : memoizedPrices.empaqueBurbujakim ? Number(memoizedPrices.empaqueBurbujakim) : 0,
+            cajaDeflectoraPrice : memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
+        });
+    }, [width, height, memoizedPrices, memoizedAccessories])
+
+    return { totalPrice, calculatedValues };
+};
+
+export default useCalculoPrecios;

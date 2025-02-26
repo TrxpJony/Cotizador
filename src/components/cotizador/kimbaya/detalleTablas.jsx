@@ -56,7 +56,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA KIMBAYA</h1></strong>
+                <strong><h1>SISTEMA KIMBAYA OX</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -70,7 +70,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Marco Perimetrak:</strong></TableCell>
+                            <TableCell><strong>Marco Perimetra:</strong></TableCell>
                             <TableCell>{doubleSum} mm </TableCell>
                             <TableCell>${marcoPerimetralkimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -511,7 +511,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         <TableRow key="2">
                             <TableCell><strong>Empaque (Alto):
                                 <br />
-                                Empaque(Ancho):</strong></TableCell>
+                                Empaque (Ancho):</strong></TableCell>
                             <TableCell>{empaquekimWidth} mm
                                 <br /> {empaquekimHeight} mm</TableCell>
                             <TableCell>${empaquekimPrice?.toFixed(2)}</TableCell>
