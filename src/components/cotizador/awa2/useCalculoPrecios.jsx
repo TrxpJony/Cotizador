@@ -52,7 +52,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const perimetralAwaPrice = getPrice("perimetralAwa", halfCuadDouble);
         const pisavidrioPerimetralAwaPrice = getPrice("pisavidrioPerimetralAwa", halfCuadDouble);
         const empaqueAwaPrice = getPrice("empaqueAwa", empaqueAwaHeight + empaqueAwaWidth);
-        const felpaPrice = getPrice("felpaAwa", felpaHeight + felpaWidth);
+        const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 60;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
