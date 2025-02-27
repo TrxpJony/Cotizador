@@ -112,7 +112,7 @@ import PricePage from './pages/PricePage';
 import CotiPage from './pages/cotiPage';
 import CocinasCotizador from './pages/cocinas/cocinascotizador';
 import Sistema744xox from './pages/vidrios/sistema744/sistema744xox';
-import Astral20xox from './pages/vidrios/astral20/astral20xox';
+import Astral20xox from './pages/vidrios/astral20/Astral20xox';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
