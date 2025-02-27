@@ -13,8 +13,8 @@ const Sistema744 = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [doors, setDoors] = useState([]); // State to hold doors
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
-
-  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories);
+  const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
+  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
 
   const handleDimensionsChange = (newDimensions) => {
     setDimensions(newDimensions);
@@ -41,6 +41,13 @@ const Sistema744 = () => {
           {/* Imagen */}
           <img src={sistema744img} alt="Puerta / ventana Corrediza Sistema 744" className="door-image" />
           <EnviarDimensiones744 onDimensionsChange={handleDimensionsChange} />
+          <label>Tipo de Vidrio</label>
+          <select className="p-2 border border-gray-300 rounded-md focus:outline-none focus:right-2 focus:ring-cyan-500 focus:border-cyan-500 transition ease-in-out w-[130px]" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+            <option value="sinVidrio">Sin Vidrio</option>
+            <option value="4mm744">Vidrio 4 mm</option>
+            <option value="5mm744">Vidrio 5 mm</option>
+            <option value="vidriobronce">Vidrio Bronce</option>
+          </select>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           <br />
           <AddTableDoor doors={doors} /> {/* Use the new component */}
@@ -64,8 +71,8 @@ const Sistema744 = () => {
           onAccessoryChange={handleAccessoryChange} 
           selectedAccessories={selectedAccessories} 
           useCalculoPrecios={useCalculoPrecios} 
+          selectedGlass={selectedGlass}
         /> {/* Pass useCalculoPrecios as a prop */}
-        
       </div>
     </>
   );
