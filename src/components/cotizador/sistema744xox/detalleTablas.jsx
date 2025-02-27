@@ -2,7 +2,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import PropTypes from "prop-types";
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => {
     const {
         totalWidth,
         doubleHeight,
@@ -24,6 +24,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         empaque744Width,
         felpaPrice,
         totalFelpa,
+        vidrioPrice,
+        area,
     } = calculatedValues || {};
 
     return (
@@ -95,7 +97,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-labe="Tabla Accessorios">
+                <Table aria-label="Tabla Accessorios">
                     <TableHeader>
                         <TableColumn><h1>Accessorios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -126,6 +128,26 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <strong>Rodamiento Simple 70</strong>
                             </TableCell>
                             <TableCell>${rodamientoSimple744Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+                <br />
+                <Table aria-label="TABLA VIDRIO">
+                    <TableHeader>
+                        <TableColumn><h1>Vidrio</h1></TableColumn>
+                        <TableColumn></TableColumn>
+                        <TableColumn></TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                        <TableRow key="1">
+                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+                            <TableCell><strong><h2>Área (m²)</h2></strong></TableCell>
+                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
+                        </TableRow>
+                        <TableRow key="2">
+                            <TableCell><strong>Vidrio:</strong></TableCell>
+                            <TableCell>{area?.toFixed(2)} m²</TableCell>
+                            <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -181,7 +203,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories}/>
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} />
             </div>
         </>
     );
@@ -207,7 +229,8 @@ DetalleTablas.propTypes = {
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired,
     selectedAccessories: PropTypes.array.isRequired,
-    useCalculoPrecios: PropTypes.func.isRequired
+    useCalculoPrecios: PropTypes.func.isRequired,
+    selectedGlass: PropTypes.string.isRequired,
 };
 
 export default DetalleTablas;

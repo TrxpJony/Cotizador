@@ -13,8 +13,8 @@ const Sistema744xox = () => {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [doors, setDoors] = useState([]);
     const [selectedAccessories, setSelectedAccessories] = useState([]);
-
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories)
+    const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass)
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -40,6 +40,13 @@ const Sistema744xox = () => {
                 <div className="door-frame">
                     <img src={Sistema744Image} alt="Puerta / Ventana Corrediz Sistema 744" className="door-image" />
                     <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
+                    <label> Tipo de Vidrio:</label>
+                    <select className="p-2 border border-gray-300 rounded-md foucs:outline-none focus:right-2 focus:ring-cyan-500 focus:border-cyan-500 transition ease-in-out w-[130px]" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+                        <option value="sinVidrio">Sin Vidrio</option>
+                        <option value="4mm744">Vidrio 4 mm</option>
+                        <option value="5mm744">Vidrio 5 mm</option>
+                        <option value="vidriobronce">Vidrio Bronce</option>
+                    </select>
                     <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />
                     <AddTableDoor doors={doors} />
@@ -62,6 +69,7 @@ const Sistema744xox = () => {
                     onAccessoryChange={handleAccessoryChange}
                     selectedAccessories={selectedAccessories}
                     useCalculoPrecios={useCalculoPrecios}
+                    selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando
                 />
             </div>
         </>
