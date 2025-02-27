@@ -38,7 +38,6 @@ import Sideralxo from './pages/vidrios/sideral/sideralxo';
 import Colosal3xxx from './pages/vidrios/colosal345/colosal3xxx';
 import Colosal3oxxo from './pages/vidrios/colosal345/colosal3oxxo';
 import Kimbayaoxxo from './pages/vidrios/kimbayas/Kimbayaoxxo';
-import Astral20xox from './pages/vidrios/astral20/astral20xox';
 import Astral17xx from './pages/vidrios/astral17/Astral17xx';
 import Taironax from './pages/vidrios/tairona/taironax';
 import { TaironaPage } from './pages/categorias/taironapage';
@@ -113,6 +112,7 @@ import PricePage from './pages/PricePage';
 import CotiPage from './pages/cotiPage';
 import CocinasCotizador from './pages/cocinas/cocinascotizador';
 import Sistema744xox from './pages/vidrios/sistema744/sistema744xox';
+import Astral20xox from './pages/vidrios/astral20/astral20xox';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {

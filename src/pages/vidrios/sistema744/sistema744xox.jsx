@@ -9,12 +9,12 @@ import DetalleTablas from '../../../components/cotizador/sistema744xox/detalleTa
 import Sistema744Image from '../../../img/xox.png';
 
 const Sistema744xox = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    const [doors, setDoors] = useState([]);
-    const [selectedAccessories, setSelectedAccessories] = useState([]);
+    const [doors, setDoors] = useState([]); // State to hold doors
+    const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
     const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass)
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -33,7 +33,6 @@ const Sistema744xox = () => {
             }
         });
     };
-
     return (
         <>
             <div className="door-container">
@@ -50,7 +49,7 @@ const Sistema744xox = () => {
                     <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />
                     <AddTableDoor doors={doors} />
-                    <PrintTableDoor door={doors} title={"Puerta / Ventana Corrediza Sistema 744"} image={Sistema744Image} totalPrice={totalPrice} />
+                    <PrintTableDoor doors={doors} title={"Puerta / ventana Corrediza Sistema 744"} image={Sistema744Image} totalPrice={totalPrice} />
                     <div className="flex jutify-end mt-6">
                         <div className="flex justify-end mt-6">
                             <button

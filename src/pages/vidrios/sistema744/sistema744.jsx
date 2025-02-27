@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddTableDoor from '../../../components/cotizador/addTableDoor'; // Import the new component
 import PrintTableDoor from '../../../components/cotizador/PrintTableDoor'; // Import the new component
-import DetalleTablas744 from '../../../components/cotizador/sistema744/detalleTablas';
+import DetalleTablas from '../../../components/cotizador/sistema744/detalleTablas';
 import sistema744img from '../../../img/colox.png'; // Importar la imagen
 
 const Sistema744 = () => {
@@ -64,14 +64,14 @@ const Sistema744 = () => {
             </div>
           </div>
         </div>
-        <DetalleTablas744 
-          calculatedValues={calculatedValues} 
-          dimensions={dimensions} 
-          onAddDoor={handleAddDoor} 
-          onAccessoryChange={handleAccessoryChange} 
-          selectedAccessories={selectedAccessories} 
-          useCalculoPrecios={useCalculoPrecios} 
-          selectedGlass={selectedGlass}
+        <DetalleTablas
+          calculatedValues={calculatedValues}
+          dimensions={dimensions}
+          onAddDoor={handleAddDoor}
+          onAccessoryChange={handleAccessoryChange}
+          selectedAccessories={selectedAccessories}
+          useCalculoPrecios={useCalculoPrecios}
+          selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando
         /> {/* Pass useCalculoPrecios as a prop */}
       </div>
     </>

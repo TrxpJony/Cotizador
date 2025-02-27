@@ -2,7 +2,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 
-const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => { // Add new props
     const {
         totalWidth,
         doubleHeight,
@@ -216,7 +216,7 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
     );
 };
 
-DetalleTablas744.propTypes = {
+DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
         totalWidth: PropTypes.number,
         doubleHeight: PropTypes.number,
@@ -239,4 +239,4 @@ DetalleTablas744.propTypes = {
     selectedGlass: PropTypes.string.isRequired,
 };
 
-export default DetalleTablas744;
+export default DetalleTablas;
