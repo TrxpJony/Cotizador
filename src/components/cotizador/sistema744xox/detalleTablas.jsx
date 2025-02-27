@@ -1,12 +1,13 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
-import PropTypes from 'prop-types';
-import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
+import PropTypes from "prop-types";
+import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 
-const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         totalWidth,
         doubleHeight,
         doubleHalfWidth,
+        cuadHeight,
         cabezal744Price,
         sillar744Price,
         jamba744Price,
@@ -28,8 +29,8 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA 744 XO-OX</h1></strong>
-                <Table aria-label="TABLA MARCO">
+                <strong><h1>SISTEMA 744 XOX</h1></strong>
+                <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -58,10 +59,8 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA NAVE">
+                <Table aria-label="Table Nave">
                     <TableHeader>
                         <TableColumn><h1>Nave</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -79,29 +78,26 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell>${horizontalSuperior744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Horizontal Inferior:</strong> </TableCell>
-                            <TableCell>{doubleHalfWidth} mm </TableCell>
+                            <TableCell><strong>Horizontal Inferior:</strong></TableCell>
+                            <TableCell>{doubleHalfWidth} mm</TableCell>
                             <TableCell>${horizontalInferior744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
-                            <TableCell><strong>Traslape:</strong> </TableCell>
-                            <TableCell>{doubleHeight} mm (2) </TableCell>
+                            <TableCell><strong>Traslape:</strong></TableCell>
+                            <TableCell>{doubleHeight} mm (2)</TableCell>
                             <TableCell>${traslape744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
-                            <TableCell><strong>Enganche:</strong> </TableCell>
-                            <TableCell>{doubleHeight} mm (2) </TableCell>
+                            <TableCell><strong>Enganche:</strong></TableCell>
+                            <TableCell>{cuadHeight} mm (2)</TableCell>
                             <TableCell>${enganche744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA ACCESORIOS">
+                <Table aria-labe="Tabla Accessorios">
                     <TableHeader>
-                        <TableColumn><h1>Accesorios</h1></TableColumn>
-
+                        <TableColumn><h1>Accessorios</h1></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -133,13 +129,10 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <br />
-
-                <Table aria-label="TABLA utilitarios">
+                <Table aria-label="Tabla Utilitarios">
                     <TableHeader>
                         <TableColumn><h1>Utilitarios</h1></TableColumn>
-
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -152,14 +145,13 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                             <TableCell>${tornillosPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>silicona:</strong></TableCell>
+                            <TableCell><strong>Silicona:</strong></TableCell>
                             <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-
-                <Table aria-label="TABLA EMPAQUE">
+                <Table aria-label="Tabla Empaque">
                     <TableHeader>
                         <TableColumn><h1>Empaque</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -176,30 +168,31 @@ const DetalleTablas744 = ({ calculatedValues, dimensions, onAddDoor, onAccessory
                                 <br />
                                 Empaque (Ancho): </strong></TableCell>
                             <TableCell>{empaque744Height} mm
-                                <br /> {empaque744Width} mm
+                                <br />
+                                {empaque744Width} mm
                             </TableCell>
                             <TableCell>${empaque744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+                            <TableCell><strong>Felpa 5.00 x 7.00</strong></TableCell>
                             <TableCell>{totalFelpa} mm</TableCell>
                             <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} />
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories}/>
             </div>
-
         </>
     );
 };
 
-DetalleTablas744.propTypes = {
+DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
         totalWidth: PropTypes.number,
         doubleHeight: PropTypes.number,
         doubleHalfWidth: PropTypes.number,
+        cuadHeight: PropTypes.number,
         cabezal744Price: PropTypes.number,
         sillar744Price: PropTypes.number,
         jamba744Price: PropTypes.number,
@@ -217,4 +210,4 @@ DetalleTablas744.propTypes = {
     useCalculoPrecios: PropTypes.func.isRequired
 };
 
-export default DetalleTablas744;
+export default DetalleTablas;
