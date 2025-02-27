@@ -15,7 +15,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
                     acc[item.nombre] = Number(item.precio) || 0;
                     return acc;
                 }, {});
-                
+
                 setDbPrices(pricesObject);
             } catch (error) {
                 console.error('Error al cargar los precios:', error);
@@ -36,10 +36,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const halfWidth = Number(width) / 2;
         const totalHeight = Number(height);
         const totalWidth = Number(width);
-        
+
         const area = (totalHeight / 1000) * (totalWidth / 1000);
         const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
-    
+
         const doubleHeight = totalHeight * 2;
         const cuadHeight = totalHeight * 4;
         const doubleHalfWidth = halfWidth * 2;
@@ -65,12 +65,12 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
         const accessoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
         const vidrioPrice = (glassUnitPrice * area);
-        const total = 
+        const total =
             cabezal744Price + sillar744Price + jamba744Price +
             horizontalInferior744Price + horizontalSuperior744Price +
             traslape744Price + enganche744Price + empaque744Price + felpaPrice +
             tornillosPrice + siliconaPrice + vidrioPrice + accessoriosPrice;
-        
+
         setTotalPrice(total);
         setCalculatedValues({
             totalWidth,
@@ -96,7 +96,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
             area,
             vidrioPrice,
             kitCierre744Price: memoizedPrices.kitCierre744 ? Number(memoizedPrices.kitCierre744) : 0,
-            rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) : 0,
+            rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) * 4 : 0,
 
         });
     }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]);

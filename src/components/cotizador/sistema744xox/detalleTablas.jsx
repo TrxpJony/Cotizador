@@ -91,7 +91,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Enganche:</strong></TableCell>
-                            <TableCell>{cuadHeight} mm (2)</TableCell>
+                            <TableCell>{cuadHeight} mm (4)</TableCell>
                             <TableCell>${enganche744Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
