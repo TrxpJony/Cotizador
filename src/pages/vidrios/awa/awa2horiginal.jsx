@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosalImage from '../../../img/awa2h.png'; // Importar la imagen
+import colosalImage from '../../../img/awa3h.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Awa2h = () => {
+const Awa3h = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -30,7 +30,7 @@ const Awa2h = () => {
 
   const [manodeObraprices, setmanodeObraprices] = useState({
     manodeObraPrice: 0,
-  });
+  })
 
   const [prices, setPrices] = useState({});
   const [accessoryPrices, setAccessoryPrices] = useState({});
@@ -98,14 +98,14 @@ useEffect(() => {
       [name]: value,
     }));
   };
-
+  
   const handlemanodeObraChange = (e) => {
     const { name, value } = e.target;
     setmanodeObraprices((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }
 
 
   const { width, height } = dimensions;
@@ -126,8 +126,8 @@ useEffect(() => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaqueAwa; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   const verticalInferiorAwa = (totalWidth && totalHeight) ? (totalWidth * 1 + totalHeight * 2) : 0;
-  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 2) * 4 + (totalHeight * 4)) : 0;
-
+  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 3) * 6 + (totalHeight * 6)) : 0;
+  
   // Calcular precios
   const compensadorAwaPrice = dbPrices.compensadorAwa * (totalWidth / 1000);
   const cabezalAwaPrice = dbPrices.cabezalAwa * (totalWidth / 1000);
@@ -145,7 +145,7 @@ useEffect(() => {
   const kitRodamientosAwaPrice = accessories.kitRodamientosAwa ? accessoryPrices.kitRodamientosAwa : 0;
   const frenoRodamientoAwaPrice = accessories.frenoRodamientoAwa ? accessoryPrices.frenoRodamientoAwa : 0;
   const kitGuiaHAwaPrice = accessories.kitGuiaHAwa ? accessoryPrices.kitGuiaHAwa : 0;
-
+  
   const felpaPrice = (felpaHeight + felpaWidth) / 1000 * prices.felpacol; // Precio total de la felpa
 
   const tornillosPrice = utilitaryPrices.tornillos * 44;
@@ -164,8 +164,8 @@ useEffect(() => {
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
-    manodeObra: { totalPrice: 0 },
-    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0 }
+    manodeObra: { totalPrice: 0},
+    glass: { totalSize: 0, totalSize2: 0 , totalPrice: 0}
     // Puedes añadir más componentes aquí si es necesario.
   });
 
@@ -240,7 +240,7 @@ useEffect(() => {
         totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
       },
       manodeObra: {
-        totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
+        totalPrice: prevTotals.glass.totalSize + parseFloat(manodeObraPrice),
       },
       glass: {
         totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
@@ -275,25 +275,25 @@ useEffect(() => {
           totalPrice: prevTotals.escuadraEnsambleHAwa.totalPrice + escuadraEnsambleHAwaPrice,
         }
         : prevTotals.escuadraEnsambleHAwa,
-      bisagra3Awa: accessories.bisagra3Awa
+        bisagra3Awa: accessories.bisagra3Awa
         ? {
           cantidad: prevTotals.bisagra3Awa.cantidad + 1,
           totalPrice: prevTotals.bisagra3Awa.totalPrice + bisagra3AwaPrice,
         }
         : prevTotals.bisagra3Awa,
-      kitRodamientosAwa: accessories.kitRodamientosAwa
+        kitRodamientosAwa: accessories.kitRodamientosAwa
         ? {
           cantidad: prevTotals.kitRodamientosAwa.cantidad + 1,
           totalPrice: prevTotals.kitRodamientosAwa.totalPrice + kitRodamientosAwaPrice,
         }
         : prevTotals.kitRodamientosAwa,
-      frenoRodamientoAwa: accessories.frenoRodamientoAwa
+        frenoRodamientoAwa: accessories.frenoRodamientoAwa
         ? {
           cantidad: prevTotals.frenoRodamientoAwa.cantidad + 1,
           totalPrice: prevTotals.frenoRodamientoAwa.totalPrice + frenoRodamientoAwaPrice,
         }
         : prevTotals.frenoRodamientoAwa,
-      kitGuiaHAwa: accessories.kitGuiaHAwa
+        kitGuiaHAwa: accessories.kitGuiaHAwa
         ? {
           cantidad: prevTotals.kitGuiaHAwa.cantidad + 1,
           totalPrice: prevTotals.kitGuiaHAwa.totalPrice + kitGuiaHAwaPrice,
@@ -304,8 +304,8 @@ useEffect(() => {
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitManijaAwa: false, kitManijaConLlaveAwa: false }); // Reiniciar accesorios
-    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' }); // Reiniciar Dimensiones del vidrio
-    setmanodeObraprices({ manodeObraPrice: 0 }); // Reiniciar precio de la mano de obra
+    setGlassDimensions({glassWidth: '', glassHeight: '', glassPrice: ''}); //Reinicia las dimensiones del vidrio
+    setmanodeObraprices({manodeObraPrice: 0}); //Reinicia precio de la mano de Obra
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -368,7 +368,7 @@ useEffect(() => {
     doc.rect(20, 30, 170, 8, 'F');
     doc.setTextColor('white');
     doc.setFontSize(10);
-    doc.text('Detalle de la cotización Sistema Awa 2 Hojas   ', 70, 34);
+    doc.text('Detalle de la cotización Sistema Awa 3 Hojas   ', 70, 34);
 
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'Compensador:', `${componentTotals.compensador.totalSize} mm`, `${componentTotals.compensador.totalPrice.toFixed(2)}`);
@@ -401,7 +401,7 @@ useEffect(() => {
     addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
     addSection(doc, 'Extra', 195);
-    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
+    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, '');
     addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
     addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
@@ -469,7 +469,7 @@ useEffect(() => {
     }
     return ''; // Si no está seleccionado, no mostrar precio
   };
-
+  
   const getkitguiaPrice = () => {
     if (accessories.kitGuiaHAwa) {
       return `$${accessoryPrices.kitGuiaHAwa.toFixed(2)}`; // Mostrar precio si el checkbox está seleccionado
@@ -479,104 +479,104 @@ useEffect(() => {
 
   return (
     <div className="door-container">
-      <div className="door-frame">
-        {/* Formulario para el alto y ancho */}
-        <div className="dimensions-form">
-          <label>
-            Alto (mm):
-            <input
-              type="number"
-              name="height"
-              value={height}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-          <label>
-            Ancho (mm):
-            <input
-              type="number"
-              name="width"
-              value={width}
-              onChange={handleChange}
-              placeholder="00"
-            />
-          </label>
-        </div>
-
-        {/* Imagen */}
-        <img src={colosalImage} alt="Puerta Corrediza Colosal" className="door-image" />
-
-        {/* Dimensiones dinámicas */}
-        <div className="dimensions-display">
-          {width && height ? (
-            <>
-              <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
-              <p>Área: {area} m²</p>
-            </>
-          ) : (
-            <p>Ingrese las dimensiones en milímetros.</p>
-          )}
-          <br />
-        </div>
-
-        <div className="container mx-auto p-4">
-
-          {/* Resumen de Puertas */}
-          <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
-            <ul className="list-disc pl-5 mb-4">
-              {puertas.map((puerta, index) => (
-                <li key={index} className="mb-2 text-gray-600">
-                  <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
-                  <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="text-gray-700">
-              <p>
-                <strong>Total:</strong> {puertas.length}
-              </p>
-              <p>
-                <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
-              </p>
-              <p>
-                <strong>Precio Total:</strong>{" "}
-                <span className="text-cyan-600 font-bold">
-                  ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </p>
-            </div>
-            <br />
-            <div>
-              <button
-                className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                onClick={generatePDF}
-              >
-                Cotizar
-              </button>
-            </div>
-          </div>
-
-          {/* Botón Regresar */}
-          <div className="flex justify-end mt-6">
-            {/* Botón Agregar Puerta */}
-            <div className="flex justify-center mb-6">
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-              >
-                Regresar
-              </button>
-            </div>
-          </div>
-        </div>
+         <div className="door-frame">
+           {/* Formulario para el alto y ancho */}
+           <div className="dimensions-form">
+             <label>
+               Alto (mm):
+               <input
+                 type="number"
+                 name="height"
+                 value={height}
+                 onChange={handleChange}
+                 placeholder="00"
+               />
+             </label>
+             <label>
+               Ancho (mm):
+               <input
+                 type="number"
+                 name="width"
+                 value={width}
+                 onChange={handleChange}
+                 placeholder="00"
+               />
+             </label>
+           </div>
+   
+           {/* Imagen */}
+           <img src={colosalImage} alt="Puerta Corrediza Colosal" className="door-image" />
+   
+           {/* Dimensiones dinámicas */}
+           <div className="dimensions-display">
+             {width && height ? (
+               <>
+                 <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
+                 <p>Área: {area} m²</p>
+               </>
+             ) : (
+               <p>Ingrese las dimensiones en milímetros.</p>
+             )}
+             <br />
+           </div>
+   
+           <div className="container mx-auto p-4">
+   
+             {/* Resumen de Puertas */}
+             <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+               <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
+               <ul className="list-disc pl-5 mb-4">
+                 {puertas.map((puerta, index) => (
+                   <li key={index} className="mb-2 text-gray-600">
+                     <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                     <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                   </li>
+                 ))}
+               </ul>
+               <div className="text-gray-700">
+                 <p>
+                   <strong>Total:</strong> {puertas.length}
+                 </p>
+                 <p>
+                   <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+                 </p>
+                 <p>
+                   <strong>Precio Total:</strong>{" "}
+                   <span className="text-cyan-600 font-bold">
+                     ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                   </span>
+                 </p>
+               </div>
+               <br />
+               <div>
+                 <button
+                   className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                   onClick={generatePDF}
+                 >
+                   Cotizar
+                 </button>
+               </div>
+             </div>
+   
+             {/* Botón Regresar */}
+             <div className="flex justify-end mt-6">
+               {/* Botón Agregar Puerta */}
+               <div className="flex justify-center mb-6">
+                 <button
+                   onClick={() => navigate(-1)}
+                   className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                 >
+                   Regresar
+                 </button>
+               </div>
+             </div>
+           </div>
 
       </div>
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>SISTEMA AGUA 2 HOJAS</h1></strong>
+        <strong><h1>SISTEMA AGUA 3 HOJAS</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -633,12 +633,12 @@ useEffect(() => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Hoja:</strong></TableCell>
-              <TableCell>{perimetralAwa} mm (8)</TableCell>
+              <TableCell>{perimetralAwa} mm (12)</TableCell>
               <TableCell>${perimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Pisa Vidrio Perimetral de Hoja:</strong> </TableCell>
-              <TableCell>{perimetralAwa} mm (8)</TableCell>
+              <TableCell>{perimetralAwa} mm (12)</TableCell>
               <TableCell>${pisavidrioPerimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
@@ -865,8 +865,7 @@ useEffect(() => {
 
       </div>
     </div>
-
   );
 };
 
-export default Awa2h;
+export default Awa3h;

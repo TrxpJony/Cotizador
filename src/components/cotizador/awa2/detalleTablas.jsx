@@ -33,7 +33,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA AWA 2 HOJAS</h1></strong>
+                <strong><h1>SISTEMA AWA 3 HOJAS</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -258,7 +258,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
 
 DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
-        totalWidth: PropTypes.number,
+        TotalWidth: PropTypes.number,
         verticalInferiorAwa: PropTypes.number,
         halfCuadDouble: PropTypes.number,
         compensadorAwaPrice: PropTypes.number,
@@ -281,7 +281,7 @@ DetalleTablas.propTypes = {
         escuadraEnsambleAwaPrice: PropTypes.number,
         escuadraEnsambleHAwaPrice: PropTypes.number,
         bisagra3AwaPrice: PropTypes.number,
-        kitRodamientosAwaPrice: PropTypes.number,
+        kitRodamientoAwaPrice: PropTypes.number,
         frenoRodamientoAwaPrice: PropTypes.number,
         kitGuiaHAwaPrice: PropTypes.number,
     }),
