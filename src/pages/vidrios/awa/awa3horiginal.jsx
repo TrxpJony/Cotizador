@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosalImage from '../../../img/awa3h.png'; // Importar la imagen
+import colosalImage from '../../../img/awa4h.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Awa3h = () => {
+const Awa4h = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -28,46 +28,45 @@ const Awa3h = () => {
     glassPrice: '',
   });
 
-  const [manodeObraprices, setmanodeObraprices] = useState({
+  const [manodeObraprices, setmanodeObraprices] = useState ({
     manodeObraPrice: 0,
-  })
+  });
 
   const [prices, setPrices] = useState({});
   const [accessoryPrices, setAccessoryPrices] = useState({});
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
-// Nuevo estado para los precios de la base de datos
-const [dbPrices, setDbPrices] = useState({});
+  // Nuevo estado para los precios de la base de datos
+  const [dbPrices, setDbPrices] = useState({});
 
-// Efecto para cargar los precios de la base de datos
-useEffect(() => {
-  const fetchPrices = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/api/precios');
-      const data = await response.json();
-      
-      // Convertir el array de precios a un objeto para fácil acceso
-      const pricesObject = data.reduce((acc, item) => {
-        acc[item.nombre] = item.precio;
-        return acc;
-      }, {});
-      
-      setDbPrices(pricesObject);
-    } catch (error) {
-      console.error('Error al cargar los precios:', error);
-    }
-  };
+  // Efecto para cargar los precios de la base de datos
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:3002/api/precios');
+        const data = await response.json();
+        
+        // Convertir el array de precios a un objeto para fácil acceso
+        const pricesObject = data.reduce((acc, item) => {
+          acc[item.nombre] = item.precio;
+          return acc;
+        }, {});
+        
+        setDbPrices(pricesObject);
+      } catch (error) {
+        console.error('Error al cargar los precios:', error);
+      }
+    };
 
-  fetchPrices();
-}, []);
+    fetchPrices();
+  }, []);
 
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
     setUtilitaryPrices(preciosData.utilitarios);
   }, []);
-
 
   // Función que maneja el cambio de valores
   const handleChange = (e) => {
@@ -98,15 +97,14 @@ useEffect(() => {
       [name]: value,
     }));
   };
-  
+
   const handlemanodeObraChange = (e) => {
     const { name, value } = e.target;
     setmanodeObraprices((prev) => ({
       ...prev,
       [name]: value,
     }));
-  }
-
+  };
 
   const { width, height } = dimensions;
   const totalHeight = height ? height : '';
@@ -117,6 +115,7 @@ useEffect(() => {
   const { glassWidth } = glassDimensions;
   const { manodeObraPrice } = manodeObraprices;
 
+
   // Calcular valores
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaquecolHeight = height && width ? height * 4 : '';
@@ -126,7 +125,7 @@ useEffect(() => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaqueAwa; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   const verticalInferiorAwa = (totalWidth && totalHeight) ? (totalWidth * 1 + totalHeight * 2) : 0;
-  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 3) * 6 + (totalHeight * 6)) : 0;
+  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 4) * 8 + (totalHeight * 8)) : 0;
   
   // Calcular precios
   const compensadorAwaPrice = dbPrices.compensadorAwa * (totalWidth / 1000);
@@ -164,8 +163,8 @@ useEffect(() => {
     felpa: { totalSize: 0, totalPrice: 0 },
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
-    manodeObra: { totalPrice: 0},
-    glass: { totalSize: 0, totalSize2: 0 , totalPrice: 0}
+    manodeObra: { totalPrice: 0 },
+    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0}
     // Puedes añadir más componentes aquí si es necesario.
   });
 
@@ -240,7 +239,7 @@ useEffect(() => {
         totalPrice: prevTotals.silicona.totalPrice + siliconaPrice,
       },
       manodeObra: {
-        totalPrice: prevTotals.glass.totalSize + parseFloat(manodeObraPrice),
+        totalPrice: prevTotals.manodeObra.totalPrice + parseFloat(manodeObraPrice),
       },
       glass: {
         totalSize: prevTotals.glass.totalSize + parseFloat(glassHeight),
@@ -304,8 +303,8 @@ useEffect(() => {
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitManijaAwa: false, kitManijaConLlaveAwa: false }); // Reiniciar accesorios
-    setGlassDimensions({glassWidth: '', glassHeight: '', glassPrice: ''}); //Reinicia las dimensiones del vidrio
-    setmanodeObraprices({manodeObraPrice: 0}); //Reinicia precio de la mano de Obra
+    setGlassDimensions({glasswidth: '', glassHeight: '', glassPrice: ''});
+    setmanodeObraprices({manodeObraPrice: 0 });
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -337,7 +336,6 @@ useEffect(() => {
     siliconaPrice +
     (glassPrice ? parseFloat(glassPrice) : 0) +// Precio del vidrio
     (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
-
   const generatePDF = () => {
     const doc = new jsPDF();
     const cyanBlue = '#00b5e2';
@@ -368,7 +366,7 @@ useEffect(() => {
     doc.rect(20, 30, 170, 8, 'F');
     doc.setTextColor('white');
     doc.setFontSize(10);
-    doc.text('Detalle de la cotización Sistema Awa 3 Hojas   ', 70, 34);
+    doc.text('Detalle de la cotización Sistema Awa 4 Hojas   ', 70, 34);
 
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'Compensador:', `${componentTotals.compensador.totalSize} mm`, `${componentTotals.compensador.totalPrice.toFixed(2)}`);
@@ -401,7 +399,7 @@ useEffect(() => {
     addTableRow(doc, 185, 'Silicona:', `${componentTotals.silicona.cantidad}`, `${componentTotals.silicona.totalPrice.toFixed(2)}`);
 
     addSection(doc, 'Extra', 195);
-    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, '');
+    addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
     addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
     addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
 
@@ -479,104 +477,104 @@ useEffect(() => {
 
   return (
     <div className="door-container">
-         <div className="door-frame">
-           {/* Formulario para el alto y ancho */}
-           <div className="dimensions-form">
-             <label>
-               Alto (mm):
-               <input
-                 type="number"
-                 name="height"
-                 value={height}
-                 onChange={handleChange}
-                 placeholder="00"
-               />
-             </label>
-             <label>
-               Ancho (mm):
-               <input
-                 type="number"
-                 name="width"
-                 value={width}
-                 onChange={handleChange}
-                 placeholder="00"
-               />
-             </label>
-           </div>
-   
-           {/* Imagen */}
-           <img src={colosalImage} alt="Puerta Corrediza Colosal" className="door-image" />
-   
-           {/* Dimensiones dinámicas */}
-           <div className="dimensions-display">
-             {width && height ? (
-               <>
-                 <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
-                 <p>Área: {area} m²</p>
-               </>
-             ) : (
-               <p>Ingrese las dimensiones en milímetros.</p>
-             )}
-             <br />
-           </div>
-   
-           <div className="container mx-auto p-4">
-   
-             {/* Resumen de Puertas */}
-             <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
-               <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
-               <ul className="list-disc pl-5 mb-4">
-                 {puertas.map((puerta, index) => (
-                   <li key={index} className="mb-2 text-gray-600">
-                     <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
-                     <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
-                   </li>
-                 ))}
-               </ul>
-               <div className="text-gray-700">
-                 <p>
-                   <strong>Total:</strong> {puertas.length}
-                 </p>
-                 <p>
-                   <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
-                 </p>
-                 <p>
-                   <strong>Precio Total:</strong>{" "}
-                   <span className="text-cyan-600 font-bold">
-                     ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                   </span>
-                 </p>
-               </div>
-               <br />
-               <div>
-                 <button
-                   className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
-                   onClick={generatePDF}
-                 >
-                   Cotizar
-                 </button>
-               </div>
-             </div>
-   
-             {/* Botón Regresar */}
-             <div className="flex justify-end mt-6">
-               {/* Botón Agregar Puerta */}
-               <div className="flex justify-center mb-6">
-                 <button
-                   onClick={() => navigate(-1)}
-                   className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
-                 >
-                   Regresar
-                 </button>
-               </div>
-             </div>
-           </div>
+          <div className="door-frame">
+            {/* Formulario para el alto y ancho */}
+            <div className="dimensions-form">
+              <label>
+                Alto (mm):
+                <input
+                  type="number"
+                  name="height"
+                  value={height}
+                  onChange={handleChange}
+                  placeholder="00"
+                />
+              </label>
+              <label>
+                Ancho (mm):
+                <input
+                  type="number"
+                  name="width"
+                  value={width}
+                  onChange={handleChange}
+                  placeholder="00"
+                />
+              </label>
+            </div>
+    
+            {/* Imagen */}
+            <img src={colosalImage} alt="Puerta Corrediza Colosal" className="door-image" />
+    
+            {/* Dimensiones dinámicas */}
+            <div className="dimensions-display">
+              {width && height ? (
+                <>
+                  <p>Dimensiones totales: {height} mm (Alto) x {width} mm (Ancho) </p>
+                  <p>Área: {area} m²</p>
+                </>
+              ) : (
+                <p>Ingrese las dimensiones en milímetros.</p>
+              )}
+              <br />
+            </div>
+    
+            <div className="container mx-auto p-4">
+    
+              {/* Resumen de Puertas */}
+              <div className="doors-summary bg-gray-100 p-6 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-700 mb-4">Resumen</h2>
+                <ul className="list-disc pl-5 mb-4">
+                  {puertas.map((puerta, index) => (
+                    <li key={index} className="mb-2 text-gray-600">
+                      <strong>Puerta {index + 1}</strong>: {puerta.dimensions.height} mm x {puerta.dimensions.width} mm -
+                      <span className="text-cyan-600 font-semibold"> ${puerta.price.toFixed(2)}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-gray-700">
+                  <p>
+                    <strong>Total:</strong> {puertas.length}
+                  </p>
+                  <p>
+                    <strong>Área Total:</strong> {totalArea.toFixed(2)} m²
+                  </p>
+                  <p>
+                    <strong>Precio Total:</strong>{" "}
+                    <span className="text-cyan-600 font-bold">
+                      ${totalSum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                  </p>
+                </div>
+                <br />
+                <div>
+                  <button
+                    className="bg-cyan-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+                    onClick={generatePDF}
+                  >
+                    Cotizar
+                  </button>
+                </div>
+              </div>
+    
+              {/* Botón Regresar */}
+              <div className="flex justify-end mt-6">
+                {/* Botón Agregar Puerta */}
+                <div className="flex justify-center mb-6">
+                  <button
+                    onClick={() => navigate(-1)}
+                    className="bg-gray-500 text-white py-2 px-6 rounded-lg font-bold text-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 transition"
+                  >
+                    Regresar
+                  </button>
+                </div>
+              </div>
+            </div>
 
       </div>
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>SISTEMA AGUA 3 HOJAS</h1></strong>
+        <strong><h1>SISTEMA AGUA 4 HOJAS</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -633,12 +631,12 @@ useEffect(() => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Hoja:</strong></TableCell>
-              <TableCell>{perimetralAwa} mm (12)</TableCell>
+              <TableCell>{perimetralAwa} mm (16)</TableCell>
               <TableCell>${perimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Pisa Vidrio Perimetral de Hoja:</strong> </TableCell>
-              <TableCell>{perimetralAwa} mm (12)</TableCell>
+              <TableCell>{perimetralAwa} mm (16)</TableCell>
               <TableCell>${pisavidrioPerimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
@@ -865,7 +863,8 @@ useEffect(() => {
 
       </div>
     </div>
+
   );
 };
 
-export default Awa3h;
+export default Awa4h;

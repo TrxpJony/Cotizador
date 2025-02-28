@@ -33,7 +33,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA AWA 3 HOJAS</h1></strong>
+                <strong><h1>SISTEMA AWA 4 HOJAS</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -67,14 +67,14 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${sillarEmpotrarAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
-                            <TableCell><strong>Sillar de Sobreponer:</strong></TableCell>
+                            <TableCell><strong>Silla de Sobreponer:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
                             <TableCell>${sillaSobreponerAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Naave">
+                <Table aria-labeñ="Tabla Nave">
                     <TableHeader>
                         <TableColumn><h1>Nave</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -87,19 +87,19 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Perimetral Hoja:</strong></TableCell>
-                            <TableCell>{halfCuadDouble} mm (8)</TableCell>
+                            <TableCell><strong>Perimetral Hoja</strong></TableCell>
+                            <TableCell>{halfCuadDouble} mm (16)</TableCell>
                             <TableCell>${perimetralAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Pisa Vidrio perimetral de Hoja:</strong></TableCell>
+                            <TableCell><strong>Pisa Vidrio Perimetral de Hoja:</strong></TableCell>
                             <TableCell>{halfCuadDouble} mm (8)</TableCell>
                             <TableCell>${pisavidrioPerimetralAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Accesorios">
+                <Table aria-label="Tabla Accessorios">
                     <TableHeader>
                         <TableColumn><h1>Accessorios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -113,8 +113,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes("kitManijaAwa")}
-                                    onChange={() => onAccessoryChange("kitManijaAwa")}
+                                    checked={selectedAccessories.includes('kitManijaAwa')}
+                                    onChange={() => onAccessoryChange('kitManijaAwa')}
                                 />
                                 <strong>Kit de Manija Bidireccional</strong>
                             </TableCell>
@@ -124,8 +124,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes("kitManijaConLlaveAwa")}
-                                    onChange={() => onAccessoryChange("kitManijaConLlaveAwa")}
+                                    checked={selectedAccessories.includes('kitManijaConLlaveAwa')}
+                                    onChange={() => onAccessoryChange('kitManijaConLlaveAwa')}
                                 />
                                 <strong>Kit de Manija Bidireccional con Llave</strong>
                             </TableCell>
@@ -149,7 +149,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes("escuadraEnsambleHAwa")}
                                     onChange={() => onAccessoryChange("escuadraEnsambleHAwa")}
                                 />
-                                <strong>Escuadra Ensamble Hojas</strong>
+
+                                <strong>Escuadra Ensamble Hoja</strong>
                             </TableCell>
                             <TableCell>${escuadraEnsambleHAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -171,7 +172,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes("kitRodamientosAwa")}
                                     onChange={() => onAccessoryChange("kitRodamientosAwa")}
                                 />
-                                <strong>Kit Rodamiento Agujas Superior Guia Inferior 80K</strong>
+                                <strong>Kit Rodamientos Agujas Superior Guia Inferior 80K</strong>
                             </TableCell>
                             <TableCell>${kitRodamientosAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -190,10 +191,10 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes("kitGuiaHAwa")}
-                                    onChange={() => onAccessoryChange("kitGuiaHAwa")}
+                                    checked={selectedAccessories.includes("kitGuiasHAwa")}
+                                    onChange={() => onAccessoryChange("kitGuiasHAwa")}
                                 />
-                                <strong>kit Guia Para Hoja Par</strong>
+                                <strong>Kit Guia Para Hoja Par</strong>
                             </TableCell>
                             <TableCell>${kitGuiaHAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -221,7 +222,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Empque">
+                <Table aria-label="Tabla Empaque">
                     <TableHeader>
                         <TableColumn><h1>Empaque</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -243,7 +244,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${empaqueAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Felpa 5.00 x 7.00:</strong></TableCell>
+                            <TableCell><strong>Felpa 5.00 x 7.00</strong></TableCell>
                             <TableCell>{totalFelpa} mm</TableCell>
                             <TableCell>${felpaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -258,7 +259,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
 
 DetalleTablas.propTypes = {
     calculatedValues: PropTypes.shape({
-        TotalWidth: PropTypes.number,
+        totalWidth: PropTypes.number,
         verticalInferiorAwa: PropTypes.number,
         halfCuadDouble: PropTypes.number,
         compensadorAwaPrice: PropTypes.number,
@@ -272,7 +273,7 @@ DetalleTablas.propTypes = {
         felpaPrice: PropTypes.number,
         tornillosPrice: PropTypes.number,
         siliconaPrice: PropTypes.number,
-        empaqueAwaHeight: PropTypes.number,
+        EmpaqueAwaHeight: PropTypes.number,
         empaqueAwaWidth: PropTypes.number,
         totalFelpa: PropTypes.number,
         kitManijaAwaPrice: PropTypes.number,
