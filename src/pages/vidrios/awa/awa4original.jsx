@@ -1,5 +1,5 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
-import colosalImage from '../../../img/awa4h.png'; // Importar la imagen
+import colosalImage from '../../../img/awa5h.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'
 
-const Awa4h = () => {
+const Awa5h = () => {
   const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
   const [accessories, setAccessories] = useState({
@@ -28,45 +28,47 @@ const Awa4h = () => {
     glassPrice: '',
   });
 
-  const [manodeObraprices, setmanodeObraprices] = useState ({
+  const [manodeObraprices, setmanodeObraprices] = useState({
     manodeObraPrice: 0,
   });
+
 
   const [prices, setPrices] = useState({});
   const [accessoryPrices, setAccessoryPrices] = useState({});
   const [utilitaryPrices, setUtilitaryPrices] = useState({});
   const [puertas, setPuertas] = useState([]); // Estado para almacenar las puertas agregadas
 
-  // Nuevo estado para los precios de la base de datos
-  const [dbPrices, setDbPrices] = useState({});
+// Nuevo estado para los precios de la base de datos
+const [dbPrices, setDbPrices] = useState({});
 
-  // Efecto para cargar los precios de la base de datos
-  useEffect(() => {
-    const fetchPrices = async () => {
-      try {
-        const response = await fetch('http://localhost:3002/api/precios');
-        const data = await response.json();
-        
-        // Convertir el array de precios a un objeto para fácil acceso
-        const pricesObject = data.reduce((acc, item) => {
-          acc[item.nombre] = item.precio;
-          return acc;
-        }, {});
-        
-        setDbPrices(pricesObject);
-      } catch (error) {
-        console.error('Error al cargar los precios:', error);
-      }
-    };
+// Efecto para cargar los precios de la base de datos
+useEffect(() => {
+  const fetchPrices = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/api/precios');
+      const data = await response.json();
+      
+      // Convertir el array de precios a un objeto para fácil acceso
+      const pricesObject = data.reduce((acc, item) => {
+        acc[item.nombre] = item.precio;
+        return acc;
+      }, {});
+      
+      setDbPrices(pricesObject);
+    } catch (error) {
+      console.error('Error al cargar los precios:', error);
+    }
+  };
 
-    fetchPrices();
-  }, []);
+  fetchPrices();
+}, []);
 
   useEffect(() => {
     setPrices(preciosData.precios);
     setAccessoryPrices(preciosData.accesorios);
     setUtilitaryPrices(preciosData.utilitarios);
   }, []);
+
 
   // Función que maneja el cambio de valores
   const handleChange = (e) => {
@@ -115,7 +117,6 @@ const Awa4h = () => {
   const { glassWidth } = glassDimensions;
   const { manodeObraPrice } = manodeObraprices;
 
-
   // Calcular valores
   const area = width && height ? (width * height) / 1000000 : ''; // Convertir a m²
   const empaquecolHeight = height && width ? height * 4 : '';
@@ -125,7 +126,7 @@ const Awa4h = () => {
   const empaquecolPrice = (empaquecolHeight + empaquecolWidth) / 1000 * dbPrices.empaqueAwa; // Precio total del empaque
   const totFelpa = (felpaHeight + felpaWidth);
   const verticalInferiorAwa = (totalWidth && totalHeight) ? (totalWidth * 1 + totalHeight * 2) : 0;
-  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 4) * 8 + (totalHeight * 8)) : 0;
+  const perimetralAwa = (totalHeight && totalWidth) ? ((totalWidth / 5) * 10 + (totalHeight * 10)) : 0;
   
   // Calcular precios
   const compensadorAwaPrice = dbPrices.compensadorAwa * (totalWidth / 1000);
@@ -164,7 +165,7 @@ const Awa4h = () => {
     tornillos: { cantidad: 0, totalPrice: 0 },
     silicona: { cantidad: 0, totalPrice: 0 },
     manodeObra: { totalPrice: 0 },
-    glass: { totalSize: 0, totalSize2: 0, totalPrice: 0}
+    glass: {totalSize: 0, totalSize2: 0, totalPrice: 0}
     // Puedes añadir más componentes aquí si es necesario.
   });
 
@@ -246,6 +247,7 @@ const Awa4h = () => {
         totalSize2: prevTotals.glass.totalSize2 + parseFloat(glassWidth),
         totalPrice: prevTotals.glass.totalPrice + parseFloat(glassPrice),
       }
+
     }));
 
     setAccessoryTotals((prevTotals) => ({
@@ -303,8 +305,8 @@ const Awa4h = () => {
     setPuertas((prev) => [...prev, nuevaPuerta]);
     setDimensions({ width: '', height: '' }); // Reiniciar dimensiones
     setAccessories({ kitManijaAwa: false, kitManijaConLlaveAwa: false }); // Reiniciar accesorios
-    setGlassDimensions({glasswidth: '', glassHeight: '', glassPrice: ''});
-    setmanodeObraprices({manodeObraPrice: 0 });
+    setGlassDimensions({ glassWidth: '', glassHeight: '', glassPrice: '' });
+    setmanodeObraprices({ manodeObraPrice: 0});
   };
 
   const totalSum = puertas.reduce((acc, puerta) => acc + puerta.price, 0);
@@ -336,6 +338,7 @@ const Awa4h = () => {
     siliconaPrice +
     (glassPrice ? parseFloat(glassPrice) : 0) +// Precio del vidrio
     (manodeObraPrice ? parseFloat(manodeObraPrice) : 0)
+
   const generatePDF = () => {
     const doc = new jsPDF();
     const cyanBlue = '#00b5e2';
@@ -366,7 +369,7 @@ const Awa4h = () => {
     doc.rect(20, 30, 170, 8, 'F');
     doc.setTextColor('white');
     doc.setFontSize(10);
-    doc.text('Detalle de la cotización Sistema Awa 4 Hojas   ', 70, 34);
+    doc.text('Detalle de la cotización Sistema Awa 5 Hojas   ', 70, 34);
 
     addSection(doc, 'Marco', 45);
     addTableRow(doc, 50, 'Compensador:', `${componentTotals.compensador.totalSize} mm`, `${componentTotals.compensador.totalPrice.toFixed(2)}`);
@@ -402,7 +405,7 @@ const Awa4h = () => {
     addTableRow(doc, 200, 'Vidrio (alto):', `${componentTotals.glass.totalSize} mm`, ``);
     addTableRow(doc, 205, 'Vidrio (ancho):', `${componentTotals.glass.totalSize2} mm`, `${Number(componentTotals.glass.totalPrice).toFixed(2)}`);
     addTableRow(doc, 210, 'Mano de Obra:', ``, `${Number(componentTotals.manodeObra.totalPrice).toFixed(2)}`);
-
+    
     doc.setFontSize(14);
     doc.setTextColor(cyanBlue);
     doc.text('Total', 170, 220);
@@ -574,7 +577,7 @@ const Awa4h = () => {
       <br />
       {/* Lista de partes */}
       <div className="parts-list">
-        <strong><h1>SISTEMA AGUA 4 HOJAS</h1></strong>
+        <strong><h1>SISTEMA AGUA 5 HOJAS</h1></strong>
         <Table aria-label="TABLA MARCO">
           <TableHeader>
             <TableColumn><h1>Marco</h1></TableColumn>
@@ -631,12 +634,12 @@ const Awa4h = () => {
             </TableRow>
             <TableRow key="2">
               <TableCell><strong>Perimetral Hoja:</strong></TableCell>
-              <TableCell>{perimetralAwa} mm (16)</TableCell>
+              <TableCell>{perimetralAwa} mm (20)</TableCell>
               <TableCell>${perimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow key="3">
               <TableCell><strong>Pisa Vidrio Perimetral de Hoja:</strong> </TableCell>
-              <TableCell>{perimetralAwa} mm (16)</TableCell>
+              <TableCell>{perimetralAwa} mm (20)</TableCell>
               <TableCell>${pisavidrioPerimetralAwaPrice.toFixed(2)}</TableCell>
             </TableRow>
           </TableBody>
@@ -867,4 +870,4 @@ const Awa4h = () => {
   );
 };
 
-export default Awa4h;
+export default Awa5h;

@@ -86,8 +86,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             totalFelpa,
             kitCierre8025Price: memoizedPrices.kitCierre8025 ? Number(memoizedPrices.kitCierre8025) : 0,
             kitCierreConLlave8025Price: memoizedPrices.kitCierreConLlave8025Price ? Number(memoizedPrices.kitCierre8025) : 0,
-            rodamientoSimple8025Price: memoizedPrices.rodamientoSimple8025 ? Number(memoizedPrices.rodamientoSimple8025) : 0,
-            rodamientoDoble8025Price: memoizedPrices.rodamientoDoble8025 ? Number(memoizedPrices.rodamientoDoble8025) : 0,
+            rodamientoSimple8025Price: memoizedPrices.rodamientoSimple8025 ? Number(memoizedPrices.rodamientoSimple8025) * 2 : 0,
+            rodamientoDoble8025Price: memoizedPrices.rodamientoDoble8025 ? Number(memoizedPrices.rodamientoDoble8025) * 2 : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 

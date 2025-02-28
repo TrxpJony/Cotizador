@@ -1,5 +1,5 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
@@ -33,8 +33,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA AWA 4 HOJAS</h1></strong>
-                <Table aria-label="Tabla Marco">
+                <strong><h1>SISTEMA AWA 5 HOJAS</h1></strong>
+                <Table aria-label="Tabma Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -59,7 +59,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                         <TableRow key="4">
                             <TableCell><strong>Vertical Inferior de Marco:</strong></TableCell>
                             <TableCell>{verticalInferiorAwa} mm</TableCell>
-                            <TableCell>${verticalInferiorAwaPrice?.toFixed(2)}</TableCell>
+                            <TableCell>{verticalInferiorAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Sillar de Empotrar:</strong></TableCell>
@@ -87,19 +87,19 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Perimetral Hoja</strong></TableCell>
-                            <TableCell>{halfCuadDouble} mm (16)</TableCell>
+                            <TableCell><strong>Perimetral Hoja:</strong></TableCell>
+                            <TableCell>{halfCuadDouble} mm (20)</TableCell>
                             <TableCell>${perimetralAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Pisa Vidrio Perimetral de Hoja:</strong></TableCell>
-                            <TableCell>{halfCuadDouble} mm (8)</TableCell>
+                            <TableCell><strong>Pisa Vidrio Perimetral de Hoja</strong></TableCell>
+                            <TableCell>{perimetralAwaPrice} mm (10)</TableCell>
                             <TableCell>${pisavidrioPerimetralAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Accessorios">
+                <Table aria-label="Table Accessorios">
                     <TableHeader>
                         <TableColumn><h1>Accessorios</h1></TableColumn>
                         <TableColumn></TableColumn>
@@ -127,7 +127,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('kitManijaConLlaveAwa')}
                                     onChange={() => onAccessoryChange('kitManijaConLlaveAwa')}
                                 />
-                                <strong>Kit de Manija Bidireccional con Llave</strong>
+                                <strong>Kit Manija Bidireccional con Llave</strong>
                             </TableCell>
                             <TableCell>${kitManijaConLlaveAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -169,15 +169,15 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <input
                                     type="checkbox"
                                     checked={selectedAccessories.includes("kitRodamientosAwa")}
-                                    onChange={() => onAccessoryChange("kitRodamientosAwa")}
+                                    onChange={() => onAccessoryChange('kitRodamientosAwa')}
                                 />
-                                <strong>Kit Rodamientos Agujas Superior Guia Inferior 80K</strong>
+                                <strong>Kit Rodamiento Agujas Superior Guia Inferior 80K</strong>
                             </TableCell>
                             <TableCell>${kitRodamientosAwaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="8">
                             <TableCell>
-                                <input
+                            <input
                                     type="checkbox"
                                     checked={selectedAccessories.includes("frenoRodamientoAwa")}
                                     onChange={() => onAccessoryChange("frenoRodamientoAwa")}
@@ -190,8 +190,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes("kitGuiasHAwa")}
-                                    onChange={() => onAccessoryChange("kitGuiasHAwa")}
+                                    checked={selectedAccessories.includes("kitGuiaHAwa")}
+                                    onChange={() => onAccessoryChange("kitGuiaHAwa")}
                                 />
                                 <strong>Kit Guia Para Hoja Par</strong>
                             </TableCell>
@@ -215,7 +215,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${tornillosPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
-                            <TableCell><strong>Silicona:</strong></TableCell>
+                            <TableCell><strong>Silicona</strong></TableCell>
                             <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
@@ -273,14 +273,14 @@ DetalleTablas.propTypes = {
         tornillosPrice: PropTypes.number,
         siliconaPrice: PropTypes.number,
         EmpaqueAwaHeight: PropTypes.number,
-        empaqueAwaWidth: PropTypes.number,
+        EmpaqueAwaWdith: PropTypes.number,
         totalFelpa: PropTypes.number,
         kitManijaAwaPrice: PropTypes.number,
         kitManijaConLlaveAwaPrice: PropTypes.number,
         escuadraEnsambleAwaPrice: PropTypes.number,
         escuadraEnsambleHAwaPrice: PropTypes.number,
-        bisagra3AwaPrice: PropTypes.number,
-        kitRodamientoAwaPrice: PropTypes.number,
+        busagra3AwaPrice: PropTypes.number,
+        kitRodamientosAwaPrice: PropTypes.number,
         frenoRodamientoAwaPrice: PropTypes.number,
         kitGuiaHAwaPrice: PropTypes.number,
     }),

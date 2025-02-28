@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddTableDoor from '../../../components/cotizador/addTableDoor';
 import PrintTableDoor from '../../../components/cotizador/PrintTableDoor';
-import AwaImage from '../../../img/awa5h.png';
+import AwaImage from '../../../img/awa4h.png';
 import DetalleTablas from '../../../components/cotizador/awa3/detalleTablas';
 
 const Awa4h = () => {
