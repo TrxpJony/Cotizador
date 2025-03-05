@@ -44,7 +44,7 @@ const Kimbayaxxx = () => {
                     <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                     <br />
                     <AddTableDoor doors={doors} />
-                    <PrintTableDoor door={doors} title={"Puerta Corrediza Sistema Kimbaya"} image={kimbayaImage} totalPrice={totalPrice} />
+                    <PrintTableDoor doors={doors} title={"Puerta Corrediza Sistema Kimbaya"} image={kimbayaImage} totalPrice={totalPrice} />
                     <div className='flex justify-end mt-6'>
                         <div className='flex justify-center mb-6'>
                             <button
