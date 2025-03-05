@@ -103,6 +103,8 @@ import CotiPage from './pages/cotiPage';
 import CocinasCotizador from './pages/cocinas/cocinascotizador';
 import Sistema744xox from './pages/vidrios/sistema744/sistema744xox';
 import Astral20xox from './pages/vidrios/astral20/Astral20xox';
+import { Tiposaluminark } from './pages/aluminark/tipos';
+import { Aluminark } from './pages/aluminark/aluminark';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -247,11 +249,6 @@ function App() {
           <Route path="tipos/ast17" element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a171" element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a172" element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />} />
-          <Route path="tipos/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />
-          <Route path="tipos/744/s741" element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />} />
-          <Route path="tipos/744/s742" element={<ProtectedRoute element={<Sistema744xox />} allowedRole="cotizador" />} />
-          <Route path="tipos/8025" element={<ProtectedRoute element={<Sistema8025page />} allowedRole="cotizador" />} />
-          <Route path="tipos/8025/s80251" element={<ProtectedRoute element={<Sistema8025 />} allowedRole="cotizador" />} />
           <Route path="tipos/s3890" element={<ProtectedRoute element={<Sistema3890page />} allowedRole="cotizador" />} />
           <Route path="tipos/s3890/s38901" element={<ProtectedRoute element={<Sistema3890 />} allowedRole="cotizador" />} />
           <Route path="tipos/kim" element={<ProtectedRoute element={<Kimbayapage />} allowedRole="cotizador" />} />
@@ -268,6 +265,12 @@ function App() {
           <Route path="tipos/tai/tai1" element={<ProtectedRoute element={<Taironax />} allowedRole="cotizador" />} />
           <Route path="tipos/tai/tai2" element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
+          <Route path='aluminark' element={<Tiposaluminark />} />
+          <Route path="aluminark/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />
+          <Route path="aluminark/744/s741" element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />} />
+          <Route path="aluminark/744/s742" element={<ProtectedRoute element={<Sistema744xox />} allowedRole="cotizador" />} />
+          <Route path="aluminark/8025" element={<ProtectedRoute element={<Sistema8025page />} allowedRole="cotizador" />} />
+          <Route path="aluminark/8025/s80251" element={<ProtectedRoute element={<Sistema8025 />} allowedRole="cotizador" />} />
           <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
           <Route path="p2/espe1" element={<CotizadorEspejos />} />
@@ -319,6 +322,7 @@ function App() {
           <Route path="cat005/sand5" element={<SandblastingCenefas />} />
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
+          <Route path="cat009" element={<Aluminark />} />
           <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
 

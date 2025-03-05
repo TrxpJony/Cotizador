@@ -89,7 +89,7 @@ export function Oficinas() {
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
                   <p className="mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Ubicación</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Nuestra dirección principal es Carrera Cl. 71A #75 36, Bogotá, con una bodega adicional ubicada en Cl 71a No 76 - 08.
+                  Nuestras oficinas principales están ubicadas en Carrera Cl. 71A #75 36, Bogotá.
                   </p>
                 </div>
                 <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">

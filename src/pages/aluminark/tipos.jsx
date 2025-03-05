@@ -5,7 +5,7 @@ import { Pagination } from "@nextui-org/react";
 
 const baseUrl = 'http://localhost:3002/api/categorias'; 
 
-export function Tipos() {
+export function Tiposaluminark() {
   const [list, setList] = useState([]); // Datos de la API
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
@@ -19,7 +19,7 @@ export function Tipos() {
       .then((data) => {
         if (data && Array.isArray(data)) {
           // Filtrar los datos para que solo se muestren los de categoria ""
-          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'vitral');
+          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'aluminark');
           setList(categoriaData);
           setFilteredList(categoriaData);
         } else {
@@ -60,7 +60,7 @@ export function Tipos() {
       <div className="filter-frame">
         <br />
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-          Sistemas vitral
+          Sistemas Aluminark
         </p>
         <br />
         <div className="flex justify-between items-center">

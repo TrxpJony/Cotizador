@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +5,14 @@ import { Pagination } from "@nextui-org/react";
 
 const baseUrl = 'http://localhost:3002/api/detalleProductos';
 
-export function Vitral() {
-    const [list, setList] = useState([]); // Datos de la API
-    const [filteredList, setFilteredList] = useState([]); // Datos filtrados
-    const [currentPage, setCurrentPage] = useState(1); // Página actual
+export function Aluminark() {
+    const [list, setList] = useState([]);
+    const [filteredList, setFilteredList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedItem, setSelectedItem] = useState(null); // Elemento seleccionado para el modal
+    const [selectedItem, setSelectedItem] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const itemsPerPage = 15; // Elementos por página
+    const itemsPerPage = 15;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,12 +20,11 @@ export function Vitral() {
             .then((response) => response.json())
             .then((data) => {
                 if (data && Array.isArray(data)) {
-                    // Filtrar los datos para que solo se muestren los de categoria ""
-                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'vitral');
+                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'aluminark');
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
-                    console.error("La respuesta de la API no es un array válido.");
+                    console.error("La respuesta de la API no es un array valido.");
                 }
             })
             .catch((error) => {
@@ -34,7 +32,6 @@ export function Vitral() {
             });
     }, []);
 
-    // Filtra los datos según el término de búsqueda
     const filterBySearchTerm = (term) => {
         setSearchTerm(term);
 
@@ -51,7 +48,6 @@ export function Vitral() {
         setCurrentPage(1);
     };
 
-    // Calcula los elementos visibles según la página actual
     const paginatedList = filteredList.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
@@ -69,7 +65,7 @@ export function Vitral() {
             <div className="filter-frame">
                 <br />
                 <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Sistemas Vitral
+                    Sistemas Aluminark
                 </p>
                 <br />
                 <div className="flex justify-between items-center">
