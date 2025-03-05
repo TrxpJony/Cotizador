@@ -137,19 +137,19 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>${espumaSelloSukimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
-                            <TableCell><strong>Espuma Sello Inferior</strong></TableCell>
+                            <TableCell><strong>Espuma Sello Inferior:</strong></TableCell>
                             <TableCell>${espumaSelloInkimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
-                            <TableCell><strong>Sifon Sistemas Eurovitral</strong></TableCell>
+                            <TableCell><strong>Sifon Sistemas Eurovitral:</strong></TableCell>
                             <TableCell>${sifonSistemaskimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
-                            <TableCell><strong>Kit 6 Escuadras de Alineación</strong></TableCell>
+                            <TableCell><strong>Kit 6 Escuadras de Alineación:</strong></TableCell>
                             <TableCell>${kit6kimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="7">
-                            <TableCell><strong>Kit 2 Escuadras de Alineación con Guía</strong></TableCell>
+                            <TableCell><strong>Kit 2 Escuadras de Alineación con Guía:</strong></TableCell>
                             <TableCell>${kit2kimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="8">
@@ -172,7 +172,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Kit Hoja Fija</strong></TableCell>
                             <TableCell>${kitHojaFijakimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow>
+                        <TableRow key="13">
                             <TableCell><strong>Kit Punto de Cierre</strong></TableCell>
                             <TableCell>${kitPuntoCierrekimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -194,7 +194,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <input
                                     type="checkbox"
                                     checked={selectedAccessories.includes('kitManijakim')}
-                                    onChange={() => onAccessoryChange('kitManija')}
+                                    onChange={() => onAccessoryChange('kitManijakim')}
                                 />
                                 <strong>Kit Manija Bidireccional con Transmisión</strong>
                             </TableCell>
@@ -226,8 +226,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('empaqueBurbujakimPrice')}
-                                    onChange={() => onAccessoryChange('empaqueBurbujakimPrice')}
+                                    checked={selectedAccessories.includes('empaqueBurbujakim')}
+                                    onChange={() => onAccessoryChange('empaqueBurbujakim')}
                                 />
                                 <strong>Empaque Burbuja Sello X 250M</strong>
                             </TableCell>

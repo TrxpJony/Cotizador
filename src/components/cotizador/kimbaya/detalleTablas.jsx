@@ -21,31 +21,21 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         felpaPrice,
         tornillosPrice,
         siliconaPrice,
-        empaquekimHeight,
-        empaquekimWidth,
-        totalFelpa,
         escuadraEnsamblekimPrice,
-        escuadraHojaPrice,
-        escuadraMovilPrice,
         espumaSelloSukimPrice,
         espumaSelloInkimPrice,
         sifonSistemaskimPrice,
-        kit6HPrice,
-        kit6MPrice,
-        kit2MPrice,
-        kit2HPrice,
-        topesHPrice,
-        topesMPrice,
-        espumaTapaMPrice,
-        espumaTapaHPrice,
-        portaEsponjaHPrice,
-        portaEsponjaMPrice,
-        tapaCierreHPrice,
-        tapaCierreMPrice,
+        kit6kimPrice,
+        kit2kimPrice,
+        topeskimPrice,
+        espumaTapaGuiakimPrice,
+        portaEsponjaKimPrice,
+        tapaEntrecierrekimPrice,
         kitHojaFijakimPrice,
-        rodamientoSimplekimPrice,
-        rodamientoDoblekimPrice,
         kitPuntoCierrekimPrice,
+        empaquekimHeight,
+        empaquekimWidth,
+        totalFelpa,
         kitManijakimPrice,
         kitManijaConLlavekimPrice,
         pletinaPoliamidaPrice,
@@ -127,9 +117,70 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <Table aria-label="Tabla Accessorios Marco">
+                <Table aria-label="Tabla accessorios marco nave">
                     <TableHeader>
-                        <TableColumn><h1>Accesorios de Marco</h1></TableColumn>
+                        <TableColumn><h1>Accessorios Marco - Nave</h1></TableColumn>
+                        <TableColumn></TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                        <TableRow key="1">
+                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
+                        </TableRow>
+                        <TableRow key="2">
+                            <TableCell><strong>Escuadra Ensamble:</strong></TableCell>
+                            <TableCell>${escuadraEnsamblekimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>Espuma Sello Superior:</strong></TableCell>
+                            <TableCell>${espumaSelloSukimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
+                            <TableCell><strong>Espuma Sello Inferior:</strong></TableCell>
+                            <TableCell>${espumaSelloInkimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell><strong>Sifon Sistemas Eurovitral:</strong></TableCell>
+                            <TableCell>${sifonSistemaskimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="6">
+                            <TableCell><strong>Kit 6 Escuadras de Alineación:</strong></TableCell>
+                            <TableCell>${kit6kimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow kit="7">
+                            <TableCell><strong>Kit 2 Escuadras de Alineacion con Guias:</strong></TableCell>
+                            <TableCell>${kit2kimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="8">
+                            <TableCell><strong>Topes Para Hojas:</strong></TableCell>
+                            <TableCell>${topeskimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="9">
+                            <TableCell><strong>Espuma Tapa Guia:</strong></TableCell>
+                            <TableCell>${espumaTapaGuiakimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="10">
+                            <TableCell><strong>Tapa y Tapeta Porta Esponja:</strong></TableCell>
+                            <TableCell>${portaEsponjaKimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="11">
+                            <TableCell><strong>Tapa Entrecierre Superior</strong></TableCell>
+                            <TableCell>${tapaEntrecierrekimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="12">
+                            <TableCell><strong>Kit Hoja Fija</strong></TableCell>
+                            <TableCell>${kitHojaFijakimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="13">
+                            <TableCell><strong>Kit Punto de Cierre</strong></TableCell>
+                            <TableCell>${kitPuntoCierrekimPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+                <br />
+                <Table aria-label="Tabla Accesorios">
+                    <TableHeader>
+                        <TableColumn><h1>Accesorios</h1></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
@@ -141,44 +192,45 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('escuadraEnsamblekim')}
-                                    onChange={() => onAccessoryChange('escuadraEnsamblekim')}
+                                    checked={selectedAccessories.includes('kitManijakim')}
+                                    onChange={() => onAccessoryChange('kitManijakim')}
                                 />
-                                <strong>Escuadra Ensamble Marco</strong>
+                                <strong>Kit Manija Bidireccional con Transmisión</strong>
                             </TableCell>
-                            <TableCell>${escuadraEnsamblekimPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${kitManijakimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('espumaSelloSukim')}
-                                    onChange={() => onAccessoryChange('espumaSelloSukim')}
+                                    checked={selectedAccessories.includes('kitManijaConLlavekim')}
+                                    onChange={() => onAccessoryChange('kitManijaConLlavekim')}
                                 />
-                                <strong>Espuma Sello Superior</strong>
+                                <strong>Kit Manija Bidireccional con Transmision con Llave</strong>
                             </TableCell>
-                            <TableCell>${espumaSelloSukimPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${kitManijaConLlavekimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('espumaSelloInkim')}
-                                    onChange={() => onAccessoryChange('espumaSelloInkim')}
+                                    checked={selectedAccessories.includes('pletinaPoliamida')}
+                                    onChange={() => onAccessoryChange('pletinaPoliamida')}
                                 />
-                                <strong>Espuma Sello Inferior</strong>
+                                <strong>Pletina Poliamida Negra</strong>
                             </TableCell>
-                            <TableCell>${espumaSelloInkimPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${pletinaPoliamidaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="5">
                             <TableCell>
                                 <input
                                     type="checkbox"
-                                    checked={selectedAccessories.includes('sifonSistemaskim')}
-                                    onChange={() => onAccessoryChange('sifonSistemaskim')} />
-                                <strong>Sifon Sistemas Eurovitral</strong>
+                                    checked={selectedAccessories.includes('empaqueBurbujakim')}
+                                    onChange={() => onAccessoryChange('empaqueBurbujakim')}
+                                />
+                                <strong>Empaque Burbuja Sello X 250M</strong>
                             </TableCell>
-                            <TableCell>${sifonSistemaskimPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${empaqueBurbujakimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="6">
                             <TableCell>
@@ -190,287 +242,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <strong>Caja Deflectora</strong>
                             </TableCell>
                             <TableCell>${cajaDeflectoraPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                <br />
-                <Table aria-label="Tabla Accessorios Hoja">
-                    <TableHeader>
-                        <TableColumn><h1>Accessorios Hoja Fija</h1></TableColumn>
-                        <TableColumn></TableColumn>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow key="1">
-                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
-                        </TableRow>
-                        <TableRow key="2">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('escuadraHoja')}
-                                    onChange={() => onAccessoryChange('escuadraHoja')}
-                                />
-                                <strong>Escuadra Ensamble Hoja fija</strong>
-                            </TableCell>
-                            <TableCell>${escuadraHojaPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kit6H')}
-                                    onChange={() => onAccessoryChange('kit6H')}
-                                />
-                                <strong>Kit de 6 Escuadras de Alineación Hoja Fija</strong>
-                            </TableCell>
-                            <TableCell>${kit6HPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="4">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("kit2H")}
-                                    onChange={() => onAccessoryChange("kit2H")}
-                                />
-                                <strong>Kit 2 Escuadras de Alineación con guia</strong>
-                            </TableCell>
-                            <TableCell>${kit2HPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="5">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("topesH")}
-                                    onChange={() => onAccessoryChange("topesH")}
-                                />
-                                <strong>Topes Para Hojas</strong>
-                            </TableCell>
-                            <TableCell>${topesHPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("espumaTapaH")}
-                                    onChange={() => onAccessoryChange("espumaTapaH")}
-                                />
-                                <strong>Espuma Tapa Guia Superior/Inferior</strong>
-                            </TableCell>
-                            <TableCell>${espumaTapaHPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("portaEsponjaH")}
-                                    onChange={() => onAccessoryChange("portaEsponjaH")}
-                                />
-                                <strong>Tapa y Tapete Porta Esponja Superior e Inferior</strong>
-                            </TableCell>
-                            <TableCell>${portaEsponjaHPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="8">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("tapaCierreH")}
-                                    onChange={() => onAccessoryChange("tapaCierreH")}
-                                />
-                                <strong>Tapa Entrecierre Superior e Inferior</strong>
-                            </TableCell>
-                            <TableCell>${tapaCierreHPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="9">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes("KitHojaFijakim")}
-                                    onChange={() => onAccessoryChange("kitHojaFijakim")}
-                                />
-                                <strong>Kit Hojas Fija</strong>
-                            </TableCell>
-                            <TableCell>${kitHojaFijakimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table >
-                <br />
-                <Table aria-label="Tabla Accessorios Hoja Mobil">
-                    <TableHeader>
-                        <TableColumn><h1>Accessorios Hoja Mobil</h1></TableColumn>
-                        <TableColumn></TableColumn>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow key="1">
-                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
-                        </TableRow>
-                        <TableRow key="2">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('escuadraMovil')}
-                                    onChange={() => onAccessoryChange('escuadraMovil')}
-                                />
-                                <strong>Escuadra Ensamble Hoja Movil</strong>
-                            </TableCell>
-                            <TableCell>${escuadraMovilPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kit6M')}
-                                    onChange={() => onAccessoryChange('kit6M')}
-                                />
-                                <strong>Kit de 6 Escuadras de Alineación Hoja Mobil</strong>
-                            </TableCell>
-                            <TableCell>${kit6MPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="4">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kit2M')}
-                                    onChange={() => onAccessoryChange('kit2M')}
-                                />
-                                <strong>Kit de 2 Escuadras de Alineación con Guia</strong>
-                            </TableCell>
-                            <TableCell>${kit2MPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="5">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('topesM')}
-                                    onChange={() => onAccessoryChange('topesM')}
-                                />
-                                <strong>Topes Para Hojas</strong>
-                            </TableCell>
-                            <TableCell>${topesMPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('espumaTapaM')}
-                                    onChange={() => onAccessoryChange('espumaTapaM')}
-                                />
-                                <strong>Espuma Tapa Guia Superior/inferior</strong>
-                            </TableCell>
-                            <TableCell>${espumaTapaMPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('portaEsponjaM')}
-                                    onChange={() => onAccessoryChange('portaEsponjaM')}
-                                />
-                                <strong>Tapa y Tapete Porta Esponja Superior e Inferior</strong>
-                            </TableCell>
-                            <TableCell>${portaEsponjaMPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="8">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('tapaCierreM')}
-                                    onChange={() => onAccessoryChange('tapaCierreM')}
-                                />
-                                <strong>Tapa Entrecierre Superior e Inferior</strong>
-                            </TableCell>
-                            <TableCell>${tapaCierreMPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="9">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoSimplekim')}
-                                    onChange={() => onAccessoryChange('rodamientoSimplekim')}
-                                />
-                                <strong>Rodamiento Simple en Agujas 100 Kilos</strong>
-                            </TableCell>
-                            <TableCell>${rodamientoSimplekimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="10">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoDoblekim')}
-                                    onChange={() => onAccessoryChange('rodamientoDoblekim')}
-                                />
-                                <strong>Rodamiento Doble en Agujas 200 Kilos</strong>
-                            </TableCell>
-                            <TableCell>${rodamientoDoblekimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                <br />
-                <Table aria-label="Tabla Accesorios">
-                    <TableHeader>
-                        <TableColumn><h1>Accessorios</h1></TableColumn>
-                        <TableColumn></TableColumn>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow key="1">
-                            <TableCell><strong><h2>Pieza</h2></strong></TableCell>
-                            <TableCell><strong><h2>Precio</h2></strong></TableCell>
-                        </TableRow>
-                        <TableRow key="2">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kitPuntoCierrekim')}
-                                    onChange={() => onAccessoryChange('kitPuntoCierrekim')}
-                                />
-                                <strong>Kit Punto de Cierre</strong>
-                            </TableCell>
-                            <TableCell>${kitPuntoCierrekimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kitManijakim')}
-                                    onChange={() => onAccessoryChange('kitManijakim')}
-                                />
-                                <strong>Kit Manija Bidireccional con Transmisión</strong>
-                            </TableCell>
-                            <TableCell>${kitManijakimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="4">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('kitManijaConLlavekim')}
-                                    onChange={() => onAccessoryChange('kitManijaConLlavekim')}
-                                />
-                                <strong>Kit Manija Bidireccional con Transmision con Llave</strong>
-                            </TableCell>
-                            <TableCell>${kitManijaConLlavekimPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="5">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('pletinaPoliamida')}
-                                    onChange={() => onAccessoryChange('pletinaPoliamida')}
-                                />
-                                <strong>Pletina Poliamida Negra</strong>
-                            </TableCell>
-                            <TableCell>${pletinaPoliamidaPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('empaqueBurbujakim')}
-                                    onChange={() => onAccessoryChange('empaqueBurbujakim')}
-                                />
-                                <strong>Empaque Burbuja Sello X 250M</strong>
-                            </TableCell>
-                            <TableCell>${empaqueBurbujakimPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -549,31 +320,21 @@ DetalleTablas.propTypes = {
         felpaPrice: PropTypes.number,
         tornillosPrice: PropTypes.number,
         siliconaPrice: PropTypes.number,
-        empaquekimHeight: PropTypes.number,
-        empaquekimWidth: PropTypes.number,
-        totalFelpa: PropTypes.number,
         escuadraEnsamblekimPrice: PropTypes.number,
-        escuadraHojaPrice: PropTypes.number,
-        escuadraMovilPrice: PropTypes.number,
         espumaSelloSukimPrice: PropTypes.number,
         espumaSelloInkimPrice: PropTypes.number,
         sifonSistemaskimPrice: PropTypes.number,
-        kit6HPrice: PropTypes.number,
-        kit6MPrice: PropTypes.number,
-        kit2MPrice: PropTypes.number,
-        kit2HPrice: PropTypes.number,
-        topesHPrice: PropTypes.number,
-        topesMPrice: PropTypes.number,
-        espumaTapaMPrice: PropTypes.number,
-        espumaTapaHPrice: PropTypes.number,
-        portaEsponjaHPrice: PropTypes.number,
-        portaEsponjaMPrice: PropTypes.number,
-        tapaCierreHPrice: PropTypes.number,
-        tapaCierreMPrice: PropTypes.number,
+        kit6kimPrice: PropTypes.number,
+        kit2kimPrice: PropTypes.number,
+        topeskimPrice: PropTypes.number,
+        espumaTapaGuiakimPrice: PropTypes.number,
+        portaEsponjaKimPrice: PropTypes.number,
+        tapaEntrecierrekimPrice: PropTypes.number,
         kitHojaFijakimPrice: PropTypes.number,
-        rodamientoSimplekimPrice: PropTypes.number,
-        rodamientoDoblekimPrice: PropTypes.number,
         kitPuntoCierrekimPrice: PropTypes.number,
+        empaquekimHeight: PropTypes.number,
+        empaquekimWidth: PropTypes.number,
+        totalFelpa: PropTypes.number,
         kitManijakimPrice: PropTypes.number,
         kitManijaConLlavekimPrice: PropTypes.number,
         pletinaPoliamidaPrice: PropTypes.number,
