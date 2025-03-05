@@ -38,12 +38,6 @@ import Astral17xx from './pages/vidrios/astral17/Astral17xx';
 import Taironax from './pages/vidrios/tairona/taironax';
 import { TaironaPage } from './pages/categorias/taironapage';
 import Taironaxx from './pages/vidrios/tairona/taironaxx';
-import { AwaPage } from './pages/categorias/awapage';
-import Awa2h from './pages/vidrios/awa/awa1h';
-import Awa3h from './pages/vidrios/awa/awa2h';
-import Awa4h from './pages/vidrios/awa/awa3h';
-import Awa5h from './pages/vidrios/awa/awa4';
-import Awa6h from './pages/vidrios/awa/awa5h';
 import { Inicio } from './components/Inicio';
 import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
@@ -273,12 +267,6 @@ function App() {
           <Route path="tipos/tai" element={<ProtectedRoute element={<TaironaPage />} allowedRole="cotizador" />} />
           <Route path="tipos/tai/tai1" element={<ProtectedRoute element={<Taironax />} allowedRole="cotizador" />} />
           <Route path="tipos/tai/tai2" element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa" element={<ProtectedRoute element={<AwaPage />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa/awa1" element={<ProtectedRoute element={<Awa2h />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa/awa2" element={<ProtectedRoute element={<Awa3h />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa/awa3" element={<ProtectedRoute element={<Awa4h />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa/awa4" element={<ProtectedRoute element={<Awa5h />} allowedRole="cotizador" />} />
-          <Route path="tipos/awa/awa5" element={<ProtectedRoute element={<Awa6h />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
           <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
