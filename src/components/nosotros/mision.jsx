@@ -3,6 +3,7 @@ import { GlobeAmericasIcon, EyeIcon, CubeTransparentIcon, HandRaisedIcon, HeartI
 import mision from '../../img/img_nosotros/vaperso.png'
 import Organigrama from '../../img/img_nosotros/organigrama.jpg'
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const features = [
     {
@@ -129,21 +130,31 @@ export function Mision() {
                                         </span>
                                     </li>
                                 </ul>
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
                                     onClick={() => setShowOrganigrama(!showOrganigrama)}
                                     className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700"
                                 >
                                     {showOrganigrama ? 'Ocultar Organigrama' : 'Ver Organigrama'}
-                                </button>
-                                {showOrganigrama && (
-                                    <div className="mt-4">
-                                        <img
-                                            alt="Organigrama"
-                                            src={Organigrama}
-                                            className="w-full max-w-none rounded-xl bg-gray-900 ring-1 shadow-xl ring-gray-400/10"
-                                        />
-                                    </div>
-                                )}
+                                </motion.button>
+                                <AnimatePresence initial={false}>
+                                    {showOrganigrama && (
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0 }}
+                                            transition={{ duration: 0.5 }}
+                                            className="mt-4"
+                                        >
+                                            <img
+                                                alt="Organigrama"
+                                                src={Organigrama}
+                                                className="w-full max-w-none rounded-xl bg-gray-900 ring-1 shadow-xl ring-gray-400/10"
+                                            />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                     </div>

@@ -2,24 +2,40 @@ import '../css/colosal.css'; // Archivo CSS para estilos
 import { Mision } from './nosotros/mision';
 import { Oficinas } from './nosotros/oficinas';
 import { motion } from 'framer-motion';
+import GoogleMap from './nosotros/direccion';
+const variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export function Nosotros() {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        variants={variants}
+        initial="hidden"
+        animate="visible"
       >
         <Mision />
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        variants={variants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
       >
         <Oficinas />
       </motion.div>
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <GoogleMap />
+      </motion.div>
+
+
     </>
   );
 }

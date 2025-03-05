@@ -23,7 +23,7 @@ export function Inicio() {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }} // Se activa cuando el 20% del elemento es visible
+          viewport={{ once: true, amount: 0.2 }} // Se activa cuando el 20% del elemento es visible
           style={{ marginBottom: '40px' }} // Espaciado entre secciones
         >
           <Component />

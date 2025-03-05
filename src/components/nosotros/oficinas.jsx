@@ -59,15 +59,15 @@ export function Oficinas() {
               <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Ubicación</p>
+                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Nosotros</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Nuestra dirección principal es Carrera Cl. 71A #75 36, Bogotá, con una bodega adicional ubicada en Cl 71a No 76 - 08.
+                    Fundada el 5 de enero de 2009, Vidrio al Arte SAS se dedica principalmente al comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipos y materiales de fontanería y calefacción.
                   </p>
                 </div>
-                <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+                <div className="flex flex-1 items-center justify-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
                   <motion.img
-                    className="object-cover  max-h-40"
-                    src={ubica}
+                    className=" object-cover mx-auto"
+                    src={Logo}
                     alt=""
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -87,15 +87,15 @@ export function Oficinas() {
               <div className="absolute inset-px rounded-lg bg-white"></div>
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Nosotros</p>
+                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Ubicación</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Fundada el 5 de enero de 2009, Vidrio al Arte SAS se dedica principalmente al comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipos y materiales de fontanería y calefacción.
+                    Nuestra dirección principal es Carrera Cl. 71A #75 36, Bogotá, con una bodega adicional ubicada en Cl 71a No 76 - 08.
                   </p>
                 </div>
-                <div className="flex flex-1 items-center justify-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
+                <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                   <motion.img
-                    className=" object-cover mx-auto"
-                    src={Logo}
+                    className="object-cover  max-h-40"
+                    src={ubica}
                     alt=""
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}

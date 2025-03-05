@@ -10,7 +10,6 @@ import logo from '../src/img/logo.png'
 import Colosal from './pages/vidrios/colosalpc26/Colosal';
 import Astral17 from './pages/vidrios/astral17/Astral17';
 import Astral20 from './pages/vidrios/astral20/Astral20';
-import Colosal3 from './pages/vidrios/colosal345/colosal3';
 import Kymbaya from './pages/vidrios/kimbayas/Kimbaya';
 import { Colosalpage } from './pages/categorias/colosalpage';
 import { Kimbayapage } from './pages/categorias/kimbayapage';
@@ -23,7 +22,6 @@ import { Astral20page } from './pages/categorias/astral20page';
 import { Sistema8025page } from './pages/categorias/sistema8025page';
 import Sistema8025 from './pages/vidrios/sistema8025/sistema8025';
 import { Astral17page } from './pages/categorias/astral17page';
-import { Colosal345page } from './pages/categorias/colosal345page';
 import Astral20xx from './pages/vidrios/astral20/Astral20xx';
 import { Sistema3890page } from './pages/categorias/sistema3890page';
 import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
@@ -35,8 +33,6 @@ import { Sideralpage } from './pages/categorias/sideralPage';
 import Sideralx from './pages/vidrios/sideral/sideralx';
 import Astral20oxxo from './pages/vidrios/astral20/Astral20oxxo';
 import Sideralxo from './pages/vidrios/sideral/sideralxo';
-import Colosal3xxx from './pages/vidrios/colosal345/colosal3xxx';
-import Colosal3oxxo from './pages/vidrios/colosal345/colosal3oxxo';
 import Kimbayaoxxo from './pages/vidrios/kimbayas/Kimbayaoxxo';
 import Astral17xx from './pages/vidrios/astral17/Astral17xx';
 import Taironax from './pages/vidrios/tairona/taironax';
@@ -257,10 +253,6 @@ function App() {
           <Route path="tipos/ast17" element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a171" element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a172" element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />} />
-          <Route path="tipos/c345" element={<ProtectedRoute element={<Colosal345page />} allowedRole="cotizador" />} />
-          <Route path="tipos/c345/c3451" element={<ProtectedRoute element={<Colosal3 />} allowedRole="cotizador" />} />
-          <Route path="tipos/c345/c3452" element={<ProtectedRoute element={<Colosal3xxx />} allowedRole="cotizador" />} />
-          <Route path="tipos/c345/c3453" element={<ProtectedRoute element={<Colosal3oxxo />} allowedRole="cotizador" />} />
           <Route path="tipos/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />
           <Route path="tipos/744/s741" element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />} />
           <Route path="tipos/744/s742" element={<ProtectedRoute element={<Sistema744xox />} allowedRole="cotizador" />} />
@@ -346,17 +338,11 @@ function App() {
       <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024 <a href="https://flowbite.com/" className="hover:underline">Vidrio al Arte SAS. Cl. 71A #75 36, Bogotá</a>. TODOS LOS DERECHOS RESERVADOS.
+            © 2024 <a href="https://maps.app.goo.gl/cxr3YbuHojn8BX1R7" className="hover:underline">Vidrio al Arte SAS. Cl. 71A #75 36, Bogotá</a>. TODOS LOS DERECHOS RESERVADOS.
           </span>
           <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">Nosotros</a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
             </li>
             <li>
               <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" className="hover:underline">contacto</a>

@@ -1,0 +1,13 @@
+.map-container {
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensure the iframe respects the border-radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  width: 80%; /* Reduce the width */
+  margin: 20px auto; /* Add horizontal margins and center the container */
+  height: 400px; /* Fixed height for the map */
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+}
