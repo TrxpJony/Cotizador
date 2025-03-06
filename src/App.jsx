@@ -23,8 +23,6 @@ import { Sistema8025page } from './pages/categorias/sistema8025page';
 import Sistema8025 from './pages/vidrios/sistema8025/sistema8025';
 import { Astral17page } from './pages/categorias/astral17page';
 import Astral20xx from './pages/vidrios/astral20/Astral20xx';
-import { Sistema3890page } from './pages/categorias/sistema3890page';
-import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
 import Kimbayaxxx from './pages/vidrios/kimbayas/Kimbayaxxx';
 import { Zinupage } from './pages/categorias/zinypage';
 import Zinux from './pages/vidrios/zinu/zinux';
@@ -249,8 +247,6 @@ function App() {
           <Route path="tipos/ast17" element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a171" element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a172" element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />} />
-          <Route path="tipos/s3890" element={<ProtectedRoute element={<Sistema3890page />} allowedRole="cotizador" />} />
-          <Route path="tipos/s3890/s38901" element={<ProtectedRoute element={<Sistema3890 />} allowedRole="cotizador" />} />
           <Route path="tipos/kim" element={<ProtectedRoute element={<Kimbayapage />} allowedRole="cotizador" />} />
           <Route path="tipos/kim/kim1" element={<ProtectedRoute element={<Kymbaya />} allowedRole="cotizador" />} />
           <Route path="tipos/kim/kim2" element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole="cotizador" />} />
