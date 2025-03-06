@@ -32,33 +32,34 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
     useEffect(() => {
         if (Object.keys(memoizedPrices).length === 0) return;
-
         const totalHeight = Number(height);
         const totalWidth = Number(width);
         const doubleHeight = totalHeight * 2;
         const doubleWidth = totalWidth * 2;
+        const cuadHeight = totalHeight * 4
         const empaquekimHeight = totalHeight * 4;
         const empaquekimWidth = totalWidth * 2;
         const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaWidth + felpaHeight;
-        const doubleSum = (totalWidth * 2) + (totalHeight * 2);
+        const doubleSum = (totalWidth * 2) + (totalWidth * 2);
         const doubleSumCuad = (totalWidth * 2) + (totalHeight * 4);
-        const horizontales = ((totalWidth / 2) * 4) + (totalHeight * 2);
+        const horizontales = ((totalWidth / 4) * 8) + (totalHeight * 4);
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const pistaRodamientokimPrice = getPrice("pistaRodamientokim", doubleSumCuad);
         const marcoPerimetralkimPrice = getPrice("marcoPerimetralkim", doubleSum);
         const pistaRodamientokalPrice = getPrice("pistaRodamientokal", doubleWidth);
         const complementoSuperiorkimPrice = getPrice("complementoSuperiorkim", doubleWidth);
-        const enganchekimPrice = getPrice("enganchekim", doubleHeight);
-        const engancheVidrioCakimPrice = getPrice("engancheVidrioCakim", doubleHeight);
+        const enganchekimPrice = getPrice("enganchekim", cuadHeight);
+        const engancheVidrioCakimPrice = getPrice("engancheVidrioCakim", totalWidth);
         const verticalHorizontaleskimPrice = getPrice("verticalHorizontaleskim", horizontales);
         const verticalHorizontalesCakimPrice = getPrice("verticalHorizontalesCakim", horizontales);
+        const adaptadorKimPrice = getPrice("adaptadorKim", totalHeight);
         const empaquekimPrice = getPrice("empaquekim", empaquekimHeight + empaquekimWidth);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
-        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 76;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
         const escuadraEnsamblekimPrice = (memoizedPrices.escuadraEnsamblekim ? Number(memoizedPrices.escuadraEnsamblekim) : 0) * 3;
         const espumaSelloSukimPrice = (memoizedPrices.espumaSelloSukim ? Number(memoizedPrices.espumaSelloSukim) : 0) * 1;
@@ -77,8 +78,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const total =
             pistaRodamientokimPrice + marcoPerimetralkimPrice + pistaRodamientokalPrice +
-            complementoSuperiorkimPrice  + enganchekimPrice + engancheVidrioCakimPrice +
-            verticalHorizontaleskimPrice + verticalHorizontalesCakimPrice + empaquekimPrice +
+            complementoSuperiorkimPrice + enganchekimPrice + engancheVidrioCakimPrice +
+            verticalHorizontaleskimPrice + verticalHorizontalesCakimPrice + adaptadorKimPrice + empaquekimPrice +
             felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice +
             escuadraEnsamblekimPrice + espumaSelloSukimPrice + espumaSelloInkimPrice + sifonSistemaskimPrice +
             kit6kimPrice + kit2kimPrice + topeskimPrice + espumaTapaGuiakimPrice + portaEsponjaKimPrice +
@@ -86,6 +87,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         setTotalPrice(total);
         setCalculatedValues({
+            totalWidth,
+            totalHeight,
             doubleSum,
             doubleSumCuad,
             doubleWidth,
@@ -99,6 +102,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             engancheVidrioCakimPrice,
             verticalHorizontaleskimPrice,
             verticalHorizontalesCakimPrice,
+            adaptadorKimPrice,
             empaquekimPrice,
             felpaPrice,
             tornillosPrice,
