@@ -7,6 +7,7 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid'
 
 const cookies = new Cookies();
 const baseUrl = import.meta.env.VITE_API_URL + "/api/vidrioalarte/login";
+const API_URL = import.meta.env.VITE_API_URL; 
 // Cambié la URL al endpoint del backend real
 
 function Login() {
@@ -34,10 +35,10 @@ function Login() {
       }
 
       const data = await response.text();  // El backend solo retorna un mensaje de texto, no es necesario convertir a JSON
-
+      // Usar la variable de entorno
       if (data === 'Login exitoso.') {
         // Si el login es exitoso, obtener los datos del usuario
-        const userResponse = await fetch(`http://localhost:3002/api/usuarios/${usuario}`);  // Endpoint para obtener los detalles del usuario
+        const userResponse = await fetch(`${API_URL}/api/usuarios/${usuario}`); // Endpoint para obtener los detalles del usuario
         const userData = await userResponse.json();
 
         // Guardar datos en cookies
