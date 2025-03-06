@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = 'http://localhost:3002/api/catalogo'; // Cambia la URL base
+const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 
 
 export function Productos() {
