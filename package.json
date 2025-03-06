@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "json-server --watch src/api/db.json --port 3001"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
