@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 
-const baseUrl = import.meta.env.VITE_API_URL + '/api/detalleProductos';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 const ProductsTable = () => {
 	const [products, setProducts] = useState([]);
@@ -78,12 +78,12 @@ const ProductsTable = () => {
 
 	const handleSaveChanges = () => {
 		const { title, description, precio, color, categoria, img, id } = editedProduct;
-	
+
 		if (!title || !description || !precio || !color || !categoria || !id) {
 			alert("Todos los campos son requeridos.");
 			return;
 		}
-	
+
 		const formData = new FormData();
 		formData.append("title", title);
 		formData.append("description", description);
@@ -93,7 +93,7 @@ const ProductsTable = () => {
 		if (img instanceof File) {
 			formData.append("img", img); // Solo se añade si se seleccionó una nueva imagen
 		}
-	
+
 		fetch(`${baseUrl}/${id}`, {
 			method: "PUT",
 			body: formData, // Enviamos FormData en lugar de JSON
@@ -111,7 +111,7 @@ const ProductsTable = () => {
 					hideProgressBar: true,
 					theme: "light",
 				});
-	
+
 				// Recargar los productos después de la actualización
 				fetch(baseUrl)
 					.then((res) => res.json())
@@ -119,7 +119,7 @@ const ProductsTable = () => {
 						setProducts(data);
 						setFilteredProducts(data);
 					});
-	
+
 				setIsModalOpen(false);
 			})
 			.catch((error) => {
