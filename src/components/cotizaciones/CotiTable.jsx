@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 
-const baseUrl = 'http://localhost:3002/api/cotizaciones';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/cotizaciones";// Cambia la URL base
 
 const CotiTable = () => {
 	const [cotizaciones, setCotizaciones] = useState([]);
