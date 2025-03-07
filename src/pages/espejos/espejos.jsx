@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl = import.meta.env.VITE_API_URL + "/categorias";
+const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias";
 
 export function Espejos() {
   const [list, setList] = useState([]); // Datos de la API
