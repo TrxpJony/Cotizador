@@ -3,7 +3,8 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/categorias'
+const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias";
+
 export function Sandblasting() {
   const [list, setList] = useState([]); // Datos de la API
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
