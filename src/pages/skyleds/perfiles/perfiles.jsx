@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/detalleProductos';    
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";// Cambia la URL base
 
 export function Perfiles() {
     const [list, setList] = useState([]); // Datos de la API
@@ -23,6 +23,8 @@ export function Perfiles() {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
                     const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'perfiles');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -182,7 +184,7 @@ export function Perfiles() {
                                             onChange={(e) => setQuantity(e.target.value)}
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring focus:ring-cyan-500 focus:ring-opacity-50"
                                             placeholder="ingresa la cantidad en milimetros"
-                                       />
+                                        />
                                     </div>
                                     <p className="mt-2 text-lg font-bold">Precio Total: ${calculateTotalPrice().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                                 </ModalBody>
