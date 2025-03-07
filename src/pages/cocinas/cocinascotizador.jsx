@@ -52,7 +52,7 @@ const CocinasCotizador = () => {
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           <br />
           <AddTableDoor doors={doors} /> {/* Use the new component */}
-          <PrintTableDoor doors={doors} title={"Puerta Corrediza Colosal 2.6"} image={cocinaIMG} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
+          <PrintTableDoor doors={doors} title={"Puerta de Cocina"} image={cocinaIMG} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
           <div className="flex justify-end mt-6">
             {/* Botón Agregar Puerta */}
             <div className="flex justify-center mb-6">
