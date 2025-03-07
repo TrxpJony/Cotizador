@@ -8,7 +8,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/precios');
+                const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+                const response = await fetch(`${API_URL}/api/precios`);
                 const data = await response.json();
 
                 const pricesObject = data.reduce((acc, item) => {
@@ -29,7 +30,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const memoizedPrices = useMemo(() => dbPrices, [JSON.stringify(dbPrices)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
-    
+
     useEffect(() => {
         if (Object.keys(memoizedPrices).length === 0) return;
 
@@ -45,7 +46,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const doubleSum = (totalWidth * 2) + (totalHeight * 2);
         const tripleSumSix = (totalWidth * 3) + (totalHeight * 6);
         const tripleHalfWidthsumDouble = ((totalWidth / 3) * 6) + (totalHeight * 2);
-        const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0 );
+        const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const pistaRodamientokimPrice = getPrice("pistaRodamientokim", tripleSumSix);
         const marcoPerimetralkimPrice = getPrice("marcoPerimetralkim", doubleSum);
@@ -66,7 +67,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const sifonSistemaskimPrice = (memoizedPrices.sifonSistemaskim ? Number(memoizedPrices.sifonSistemaskim) : 0) * 1;
         const kit6kimPrice = (memoizedPrices.kit6kim ? Number(memoizedPrices.kit6kim) : 0) * 2;
         const kit2kimPrice = (memoizedPrices.kit2kim ? Number(memoizedPrices.kit2kim) : 0) * 2;
-        const topeskimPrice = (memoizedPrices.topeskim ? Number(memoizedPrices.topeskim) : 0) *2;
+        const topeskimPrice = (memoizedPrices.topeskim ? Number(memoizedPrices.topeskim) : 0) * 2;
         const espumaTapaGuiakimPrice = (memoizedPrices.espumaTapaGuiakim ? Number(memoizedPrices.espumaTapaGuiakim) : 0) * 2;
         const portaEsponjaKimPrice = (memoizedPrices.portaEsponjakim ? Number(memoizedPrices.portaEsponjakim) : 0) * 2;
         const tapaEntrecierrekimPrice = (memoizedPrices.tapaEntrecierrekim ? Number(memoizedPrices.tapaEntrecierrekim) : 0) * 2;
@@ -75,15 +76,15 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const accessoriesPrices = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
-        const total = 
+        const total =
             pistaRodamientoKalPrice + marcoPerimetralkimPrice + pistaRodamientokimPrice +
             complementoSuperiorkimPrice + enganchekimPrice + engancheVidrioCakimPrice +
             verticalHorizontaleskimPrice + verticalHorizontalesCakimPrice +
             tornillosPrice + siliconaPrice + felpaPrice + empaquekimPrice + accessoriesPrices +
-            escuadraEnsamblekimPrice + espumaSelloSukimPrice + espumaSelloInkimPrice + sifonSistemaskimPrice+
+            escuadraEnsamblekimPrice + espumaSelloSukimPrice + espumaSelloInkimPrice + sifonSistemaskimPrice +
             kit6kimPrice + kit2kimPrice + topeskimPrice + espumaTapaGuiakimPrice + portaEsponjaKimPrice +
             tapaEntrecierrekimPrice + kitHojaFijakimPrice + kitPuntoCierrekimPrice;
-        
+
         setTotalPrice(total);
         setCalculatedValues({
             tripleSumSix,
@@ -119,10 +120,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             empaquekimWidth,
             totalFelpa,
             kitManijakimPrice: memoizedPrices.kitManijakim ? Number(memoizedPrices.kitManijakim) : 0,
-            kitManijaConLlavekimPrice : memoizedPrices.kitManijaConLlavekim ? Number(memoizedPrices.kitManijaConLlavekim) : 0,
-            pletinaPoliamidaPrice : memoizedPrices.pletinaPoliamida ? Number(memoizedPrices.pletinaPoliamida) : 0,
-            empaqueBurbujakimPrice : memoizedPrices.empaqueBurbujakim ? Number(memoizedPrices.empaqueBurbujakim) : 0,
-            cajaDeflectoraPrice : memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
+            kitManijaConLlavekimPrice: memoizedPrices.kitManijaConLlavekim ? Number(memoizedPrices.kitManijaConLlavekim) : 0,
+            pletinaPoliamidaPrice: memoizedPrices.pletinaPoliamida ? Number(memoizedPrices.pletinaPoliamida) : 0,
+            empaqueBurbujakimPrice: memoizedPrices.empaqueBurbujakim ? Number(memoizedPrices.empaqueBurbujakim) : 0,
+            cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories])
 

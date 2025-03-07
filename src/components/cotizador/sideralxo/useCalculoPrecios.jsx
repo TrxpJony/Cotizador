@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo} from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const [dbPrices, setDbPrices] = useState({});
@@ -8,7 +8,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/precios');
+                const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+                const response = await fetch(`${API_URL}/api/precios`);
                 const data = await response.json();
 
                 const pricesObject = data.reduce((acc, item) => {
@@ -32,7 +33,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
     useEffect(() => {
-        if (Object.keys(memoizedPrices). length === 0) return;
+        if (Object.keys(memoizedPrices).length === 0) return;
 
         const totalHeight = Number(height);
         const totalWidth = Number(width);
@@ -56,14 +57,14 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 28;
-        const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1; 
-        
+        const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
+
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
-        const total = 
-            marcoPerimetralSidPrice + horizontalFelperosSidPrice + verticalSidPrice + verticalReforzadoSidPrice + 
-            adaptadorSidPrice + empaqueSidPrice + felpaPrice + tornillosPrice + siliconaPrice +accessoriesPrice;
-        
+        const total =
+            marcoPerimetralSidPrice + horizontalFelperosSidPrice + verticalSidPrice + verticalReforzadoSidPrice +
+            adaptadorSidPrice + empaqueSidPrice + felpaPrice + tornillosPrice + siliconaPrice + accessoriesPrice;
+
         setTotalPrice(total);
         setCalculatedValues({
             totalHeight,
@@ -96,8 +97,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             kit50puntoCierreSidPrice: memoizedPrices.kit50puntoCierreSid ? Number(memoizedPrices.kit50puntoCierreSid) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
-    
-    return { totalPrice, calculatedValues};
+
+    return { totalPrice, calculatedValues };
 };
 
 export default useCalculoPrecios;

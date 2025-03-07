@@ -8,7 +8,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/precios');
+                const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+                const response = await fetch(`${API_URL}/api/precios`);
                 const data = await response.json();
                 const pricesObject = data.reduce((acc, item) => {
                     acc[item.nombre] = Number(item.precio) || 0;
@@ -54,14 +55,14 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
-        
-        const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0 ), 0);
+
+        const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
         const total =
             cabezal8025Price + sillar8025Price + jamba8025Price +
             horizontalSuperior8025Price + horizontalInferior8025Price +
             traslape8025Price + enganche8025Price + empaque744Price + tornillosPrice + siliconaPrice + accesoriosPrice + felpaPrice;
-        
+
         setTotalPrice(total);
         setCalculatedValues({
             totalWidth,
@@ -91,7 +92,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
-    return {totalPrice, calculatedValues};
+    return { totalPrice, calculatedValues };
 };
 
 export default useCalculoPrecios;

@@ -8,7 +8,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const response = await fetch('http://localhost:3002/api/precios');
+        const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+        const response = await fetch(`${API_URL}/api/precios`);
         const data = await response.json();
 
         const pricesObject = data.reduce((acc, item) => {
@@ -86,21 +87,21 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
       tornillosPrice,
       siliconaPrice,
       empaquecolHeight,
-      empaquecolWidth, 
+      empaquecolWidth,
       felpaHeight,
       felpaWidth,
       felpaPrice,
       totalFelpa,
-      kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number (memoizedPrices.kitCierrecol): 0,
-      kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol): 0,
+      kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number(memoizedPrices.kitCierrecol) : 0,
+      kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol) : 0,
       cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
       rodamientoSimple70colPrice: memoizedPrices.rodamientoSimple70col ? Number(memoizedPrices.rodamientoSimple70col) : 0,
       rodamientoDoble140colPrice: memoizedPrices.rodamientoDoble140col ? Number(memoizedPrices.rodamientoDoble140col) : 0,
       cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
     });
   }, [width, height, memoizedPrices, memoizedAccessories]);
-  
-  return { totalPrice, calculatedValues};
+
+  return { totalPrice, calculatedValues };
 };
 
 export default useCalculoPrecios;

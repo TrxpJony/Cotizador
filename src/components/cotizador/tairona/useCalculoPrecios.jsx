@@ -8,7 +8,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/precios');
+                const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+                const response = await fetch(`${API_URL}/api/precios`);
                 const data = await response.json();
 
                 const pricesObject = data.reduce((acc, item) => {
@@ -87,7 +88,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             bisagra3TaironaPrice: memoizedPrices.bisagra3Tairona ? Number(memoizedPrices.bisagra2Tairona) : 0,
             bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
             cierreHTaironaPrice: memoizedPrices.cierreHTairona ? Number(memoizedPrices.cierreHTairona) : 0,
-            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,   
+            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 

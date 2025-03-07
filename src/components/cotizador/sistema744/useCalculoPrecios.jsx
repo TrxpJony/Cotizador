@@ -8,14 +8,15 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const response = await fetch('http://localhost:3002/api/precios');
+        const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+        const response = await fetch(`${API_URL}/api/precios`);
         const data = await response.json();
-        
+
         const pricesObject = data.reduce((acc, item) => {
           acc[item.nombre] = Number(item.precio) || 0;
           return acc;
         }, {});
-        
+
         setDbPrices(pricesObject);
       } catch (error) {
         console.error('Error al cargar los precios:', error);
@@ -32,7 +33,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
   useEffect(() => {
     if (Object.keys(memoizedPrices).length === 0) return;
-    
+
     const halfWidth = Number(width) / 2;
     const totalHeight = Number(height);
     const totalWidth = Number(width);
@@ -64,9 +65,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
     const vidrioPrice = (glassUnitPrice * area);
 
-    const total = 
-      cabezal744Price + sillar744Price + jamba744Price + 
-      horizontalSuperior744Price + horizontalInferior744Price + 
+    const total =
+      cabezal744Price + sillar744Price + jamba744Price +
+      horizontalSuperior744Price + horizontalInferior744Price +
       traslape744Price + enganche744Price + empaque744Price + tornillosPrice + siliconaPrice + accesoriosPrice + vidrioPrice + felpaPrice;
 
     setTotalPrice(total);
@@ -95,7 +96,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       vidrioPrice,
       kitCierre744Price: memoizedPrices.kitCierre744 ? Number(memoizedPrices.kitCierre744) : 0,
       rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) : 0,
-     
+
     });
   }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]);
 
