@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-const baseUrl = 'http://localhost:3002/api/marcos'; 
+
+const baseUrl = import.meta.env.VITE_API_URL + "/api/marcos";// Cambia la URL base
 
 export function Colosalpage() {
   const [filteredList, setFilteredList] = useState([]); // Solo mantenemos el estado para la lista filtrada
