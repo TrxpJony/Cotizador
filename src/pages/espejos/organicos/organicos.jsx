@@ -22,6 +22,8 @@ export function Organicos() {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
                     const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'organicos');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -161,7 +163,7 @@ export function Organicos() {
                                         src={selectedItem.img}
                                         width="100%"
                                         height="450px"
-                                    /> 
+                                    />
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>

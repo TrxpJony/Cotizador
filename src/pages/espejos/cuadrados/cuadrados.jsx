@@ -20,8 +20,10 @@ export function Cuadrados() {
             .then((response) => response.json())
             .then((data) => {
                 if (data && Array.isArray(data)) {
-                    // Filtrar los datos para que solo se muestren los de categoria ""
+                    // Filtrar los datos para que solo se muestren los de categoria "cuadrados"
                     const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'cuadrados');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
