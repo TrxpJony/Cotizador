@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/categorias';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias";// Cambia la URL base
 
 export function TiposSkylesd() {
   const [list, setList] = useState([]); // Datos de la API
@@ -20,6 +20,8 @@ export function TiposSkylesd() {
         if (data && Array.isArray(data)) {
           // Filtrar los datos para que solo se muestren los de categoria ""
           const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'skyleds');
+          // Ordenar los datos por el nombre
+          categoriaData.sort((a, b) => a.title.localeCompare(b.title));
           setList(categoriaData);
           setFilteredList(categoriaData);
         } else {
