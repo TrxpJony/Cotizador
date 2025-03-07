@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importa los estilos de Toastify
 import { motion } from "framer-motion"; // Importar framer-motion
 
-const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias"; // Cambia la URL base
+const baseUrl = import.meta.env.VITE_API_URL + "/api/usuarios"; // Cambia la URL base
 
 const UsersAdd = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
