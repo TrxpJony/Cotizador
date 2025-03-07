@@ -97,8 +97,7 @@ const CotiTable = () => {
 	const handleDownloadClick = (pdfPath) => {
 		const link = document.createElement('a');
 		link.href = pdfPath;
-		const fileName = pdfPath.split('/').pop().split('.')[0] + '.pdf';
-		link.download = fileName;
+		link.download = pdfPath.split('/').pop();
 		link.click();
 	};
 
