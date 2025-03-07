@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/detalleProductos'
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 export function DivisionesdeBaño() {
     const [list, setList] = useState([]); // Datos de la API
@@ -22,6 +22,8 @@ export function DivisionesdeBaño() {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
                     const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'divisionesdebaño');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {
@@ -161,7 +163,7 @@ export function DivisionesdeBaño() {
                                         src={selectedItem.img}
                                         width="100%"
                                         height="450px"
-                                    /> 
+                                    />
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>
