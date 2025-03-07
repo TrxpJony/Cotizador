@@ -8,14 +8,15 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const response = await fetch('http://localhost:3002/api/precios');
+        const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
+        const response = await fetch(`${API_URL}/api/precios`);
         const data = await response.json();
-        
+
         const pricesObject = data.reduce((acc, item) => {
           acc[item.nombre] = Number(item.precio) || 0;
           return acc;
         }, {});
-        
+
         setDbPrices(pricesObject);
       } catch (error) {
         console.error('Error al cargar los precios:', error);
@@ -32,7 +33,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
   useEffect(() => {
     if (Object.keys(memoizedPrices).length === 0) return;
-    
+
     const halfWidth = Number(width) / 2;
     const totalHeight = Number(height);
     const totalWidth = Number(width);
@@ -62,9 +63,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
-    const total = 
-      cabezalcolPrice + sillarcolPrice + jambacolPrice + 
-      horizontalSuperiorcolPrice + horizontalInferiorFijacolPrice + horizontalInferiorMovilcolPrice + 
+    const total =
+      cabezalcolPrice + sillarcolPrice + jambacolPrice +
+      horizontalSuperiorcolPrice + horizontalInferiorFijacolPrice + horizontalInferiorMovilcolPrice +
       traslapecolPrice + enganchecolPrice + empaquecolPrice + tornillosPrice + siliconaPrice + accesoriosPrice + felpaPrice;
 
     setTotalPrice(total);
