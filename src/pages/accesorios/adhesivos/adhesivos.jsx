@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/detalleProductos';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 export function Adhesivos() {
     const [list, setList] = useState([]); // Datos de la API
@@ -23,6 +23,8 @@ export function Adhesivos() {
                 if (data && Array.isArray(data)) {
                     // Filtrar los datos para que solo se muestren los de categoria ""
                     const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'adhesivos');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
                     setList(categoriaData);
                     setFilteredList(categoriaData);
                 } else {

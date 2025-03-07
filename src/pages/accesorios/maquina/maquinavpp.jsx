@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
 
-const baseUrl ='http://localhost:3002/api/detalleProductos';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 
 export function Maquina() {
@@ -16,23 +16,25 @@ export function Maquina() {
     const itemsPerPage = 15; // Elementos por página
     const navigate = useNavigate();
 
-   useEffect(() => {
-           fetch(baseUrl)
-               .then((response) => response.json())
-               .then((data) => {
-                   if (data && Array.isArray(data)) {
-                       // Filtrar los datos para que solo se muestren los de categoria ""
-                       const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'maquina');
-                       setList(categoriaData);
-                       setFilteredList(categoriaData);
-                   } else {
-                       console.error("La respuesta de la API no es un array válido.");
-                   }
-               })
-               .catch((error) => {
-                   console.error('Error fetching data:', error);
-               });
-       }, []);
+    useEffect(() => {
+        fetch(baseUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && Array.isArray(data)) {
+                    // Filtrar los datos para que solo se muestren los de categoria ""
+                    const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'maquina');
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
+                    setList(categoriaData);
+                    setFilteredList(categoriaData);
+                } else {
+                    console.error("La respuesta de la API no es un array válido.");
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
 
     // Filtra los datos según el término de búsqueda
     const filterBySearchTerm = (term) => {
