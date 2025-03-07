@@ -3,8 +3,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importa los estilos de Toastify
 import { motion } from "framer-motion"; // Importar framer-motion
 
+const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias"; // Cambia la URL base
+
 const UsersAdd = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const [newUser, setNewUser] = useState({
         usuario: "",
         contraseña: "",
@@ -24,7 +27,7 @@ const UsersAdd = () => {
     // Función para guardar el nuevo usuario en la API
     const handleSaveUser = async () => {
         try {
-            const response = await fetch("http://localhost:3002/api/usuarios", {
+            const response = await fetch(baseUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,7 +49,7 @@ const UsersAdd = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                });
+            });
             handleCloseModal();
             // Limpia el formulario después de guardar
             setNewUser({
