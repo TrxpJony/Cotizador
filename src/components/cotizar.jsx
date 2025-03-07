@@ -14,23 +14,25 @@ export function Cotizador() {
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
 
-   useEffect(() => {
-          fetch(baseUrl)
-              .then((response) => response.json())
-              .then((data) => {
-                  if (data && Array.isArray(data)) {
-                      // Filtrar los datos para que solo se muestren los de categoria ""
-                      const categoriaData = data.filter(item => item.tipo?.toLowerCase() === 'cotizar');
-                      setList(categoriaData);
-                      setFilteredList(categoriaData);
-                  } else {
-                      console.error("La respuesta de la API no es un array válido.");
-                  }
-              })
-              .catch((error) => {
-                  console.error('Error fetching data:', error);
-              });
-      }, []);
+  useEffect(() => {
+    fetch(baseUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && Array.isArray(data)) {
+          // Filtrar los datos para que solo se muestren los de categoria ""
+          const categoriaData = data.filter(item => item.tipo?.toLowerCase() === 'cotizar');
+          // Ordenar los datos por el nombre
+          categoriaData.sort((a, b) => a.title.localeCompare(b.title));
+          setList(categoriaData);
+          setFilteredList(categoriaData);
+        } else {
+          console.error("La respuesta de la API no es un array válido.");
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   // Filtra los datos según el término de búsqueda
   const filterBySearchTerm = (term) => {
@@ -98,7 +100,7 @@ export function Cotizador() {
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">
-              <Image
+                <Image
                   alt={item.title}
                   className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
                   radius="lg"
