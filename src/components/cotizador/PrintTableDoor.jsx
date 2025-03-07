@@ -161,7 +161,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         formDataToSend.append('usuario_id', usuarioId); // Use user ID from cookies
 
         try {
-            await axios.post('http://localhost:3002/api/cotizaciones', formDataToSend, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/cotizaciones`, formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -183,7 +183,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             emailData.append('email', formData.email);
             emailData.append('cotNumber', cotNumber);
 
-            await axios.post('http://localhost:3002/api/send-email', emailData, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/send-email`, emailData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
