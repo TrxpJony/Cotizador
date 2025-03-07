@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-const baseUrl = 'http://localhost:3002/api/usuarios';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/usuarios";
 
 const UsersTable = () => {
 	const [users, setUsers] = useState([]);
