@@ -3,7 +3,7 @@ import { Search, Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 
-const baseUrl = 'http://localhost:3002/api/precios';
+const baseUrl = import.meta.env.VITE_API_URL + "/api/precios";
 
 const PricesTable = () => {
 	const [prices, setPrices] = useState([]);
