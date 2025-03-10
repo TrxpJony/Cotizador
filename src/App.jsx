@@ -103,6 +103,7 @@ import Sistema744xox from './pages/vidrios/sistema744/sistema744xox';
 import Astral20xox from './pages/vidrios/astral20/Astral20xox';
 import { Tiposaluminark } from './pages/aluminark/tipos';
 import { Aluminark } from './pages/aluminark/aluminark';
+import TestimonialsPage from './pages/testimonialsPage';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -229,6 +230,7 @@ function App() {
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
           <Route path="servicios" element={<Servicios />} />
+          <Route path="proyectos" element={<TestimonialsPage />} />
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />

@@ -23,7 +23,7 @@ const posts = [
   },
   {
     id: 2,
-    title: 'Artículos de ferretería',
+    title: 'Accesorios',
     href: '#',
     description:
       'Encuentre una variedad de artículos de ferretería para todos sus proyectos, desde herramientas hasta accesorios.',
@@ -65,10 +65,10 @@ const posts = [
   },
   {
     id: 5,
-    title: 'Equipos',
+    title: 'Equipos para servicio',
     href: '#',
     description:
-      'Ofrecemos servicios especializados de biselado, mesa de corte, pulido, ademas de otros para garantizar acabados perfectos en todos sus proyectos de vidrio.',
+      'Ofrecemos servicios especializados de biselado, mesa de corte, pulido, ademas de otros para sus proyectos de vidrio.',
     category: { title: 'Servicios', href: '#' },
     author: {
       name: 'Vidrio al Arte SAS',
