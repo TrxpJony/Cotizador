@@ -181,7 +181,9 @@ const CotiTable = () => {
 										{new Date(cotizacion.created_at).toLocaleDateString()}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-										{cotizacion.total_precio.toFixed(2)}
+										{cotizacion.total_price !== undefined && !isNaN(cotizacion.total_price)
+											? `$${Number(cotizacion.total_price).toFixed(2)}`
+											: "N/A"}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										<button
