@@ -149,6 +149,9 @@ const CotiTable = () => {
 									Fecha
 								</th>
 								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+									Precio
+								</th>
+								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
 								</th>
 							</tr>
@@ -177,6 +180,10 @@ const CotiTable = () => {
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										{new Date(cotizacion.created_at).toLocaleDateString()}
 									</td>
+									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+										{new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(cotizacion.total_precio)}
+									</td>
+
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										<button
 											className='text-cyan-500 hover:text-cyan-400 mr-2'
