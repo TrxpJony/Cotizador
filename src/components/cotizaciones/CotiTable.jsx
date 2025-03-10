@@ -182,7 +182,7 @@ const CotiTable = () => {
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										{cotizacion.total_precio !== undefined && !isNaN(cotizacion.total_precio)
-											? `$${Number(cotizacion.total_precio).toFixed(2)}`
+											? `$${Number(cotizacion.total_precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 											: "N/A"}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
