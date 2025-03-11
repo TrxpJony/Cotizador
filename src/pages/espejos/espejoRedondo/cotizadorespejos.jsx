@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+
+const baseUrl = import.meta.env.VITE_API_URL + "/api";
+
 const CotizadorEspejos = () => {
+
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ diame: '' });
     const [accessories, setAccessories] = useState({
@@ -47,10 +51,11 @@ const CotizadorEspejos = () => {
     };
 
 
+
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/precios');
+                const response = await fetch(`${baseUrl}/precios`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos de la API');
                 }
@@ -70,7 +75,7 @@ const CotizadorEspejos = () => {
 
         const fetchDetalleProductos = async () => {
             try {
-                const response = await fetch('http://localhost:3002/api/detalleProductos');
+                const response = await fetch(`${baseUrl}/detalleProductos`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos de detalleProductos');
                 }
