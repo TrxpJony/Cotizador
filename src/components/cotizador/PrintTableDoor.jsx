@@ -147,7 +147,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.setFontSize(8);
         doc.setTextColor('black');
         doc.text('Ventas: Calle 71 A # 75 - 36', 20, 285);
-        doc.text('Planta: Calle 71 A  # 76 - 08', 20, 290);
+        doc.text('Planta: Calle 71 A # 76 - 08', 20, 290);
         doc.text('Tel: 4824039 Nit: 900.260.389-9', 75, 285);
         doc.text('Cel ventas: 3223065279 - 3204391328', 75, 290);
         doc.text('Nit: 900.260.389-9', 140, 287.5);
@@ -158,6 +158,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         formDataToSend.append('cotNumber', cotNumber);
         formDataToSend.append('client_name', formData.cliente);
         formDataToSend.append('email', formData.email);
+        formDataToSend.append('total_precio', totalPrice.toFixed(2)); // Add totalPrice to form data
         formDataToSend.append('usuario_id', usuarioId); // Use user ID from cookies
 
         try {
