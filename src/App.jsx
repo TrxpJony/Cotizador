@@ -23,6 +23,8 @@ import { Sistema8025page } from './pages/categorias/sistema8025page';
 import Sistema8025 from './pages/vidrios/sistema8025/sistema8025';
 import { Astral17page } from './pages/categorias/astral17page';
 import Astral20xx from './pages/vidrios/astral20/Astral20xx';
+import { Sistema3890page } from './pages/categorias/sistema3890page';
+import Sistema3890 from './pages/vidrios/sistema3890/sistema3890';
 import Kimbayaxxx from './pages/vidrios/kimbayas/Kimbayaxxx';
 import { Zinupage } from './pages/categorias/zinypage';
 import Zinux from './pages/vidrios/zinu/zinux';
@@ -234,8 +236,8 @@ function App() {
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
-          <Route path='/users' element={<ProtectedRoute element= {<UsersPage />} allowedRole='administrador' />} />
-          <Route path='/cotizaciones' element={<ProtectedRoute element= {<CotiPage />} allowedRole='administrador' />} />
+          <Route path='/users' element={<ProtectedRoute element={<UsersPage />} allowedRole='administrador' />} />
+          <Route path='/cotizaciones' element={<ProtectedRoute element={<CotiPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp2" element={<ProtectedRoute element={<Colosalxx />} allowedRole="cotizador" />} />
@@ -247,6 +249,8 @@ function App() {
           <Route path="tipos/ast/a203" element={<ProtectedRoute element={<Astral20oxxo />} allowedRole="cotizador" />} />
           <Route path="tipos/ast/a204" element={<ProtectedRoute element={<Astral20xox />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17" element={<ProtectedRoute element={<Astral17page />} allowedRole="cotizador" />} />
+          <Route path="tipos/s3890" element={<ProtectedRoute element={<Sistema3890page />} allowedRole="cotizador" />} />
+          <Route path="tipos/s3890/s38901" element={<ProtectedRoute element={<Sistema3890 />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a171" element={<ProtectedRoute element={<Astral17 />} allowedRole="cotizador" />} />
           <Route path="tipos/ast17/a172" element={<ProtectedRoute element={<Astral17xx />} allowedRole="cotizador" />} />
           <Route path="tipos/kim" element={<ProtectedRoute element={<Kimbayapage />} allowedRole="cotizador" />} />
