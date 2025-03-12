@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useMemo } from "react";
 
 const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
@@ -36,62 +37,46 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const totalHeight = Number(height);
         const totalWidth = Number(width);
-        const doubleheight = totalHeight * 2;
+        const doubleHeight = totalHeight * 2;
         const doubleWidth = totalWidth * 2;
-        const doubleTotalDimensions = doubleheight + doubleWidth;
-        const empaqueZinuHeight = totalHeight * 4;
-        const empaqueZinuWidth = totalWidth * 2;
-        const felpaHeight = totalHeight * 6;
+        const aln1101s3890 = doubleHeight + doubleWidth;
+        const empaque3890Height = totalHeight * 4;
+        const empaque3890Width = totalWidth * 2;
+        const felpaHeight = felpaHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaWidth + felpaHeight;
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
-        const marcoPerimetralZinuPrice = getPrice("marcoPerimetralZinu", doubleTotalDimensions);
-        const divisorZinuPrice = getPrice("divisorZinu", totalHeight);
-        const perimetralNaveZinuPrice = getPrice("perimetralNaveZinu", doubleTotalDimensions);
-        const pisaVidrioZinuPrice = getPrice("pisaVidrioZinu", doubleTotalDimensions);
-        const verticalHorizontalesCaZinuPrice = getPrice("verticalHorizontalesCaZinu", doubleTotalDimensions);
-        const empaqueZinuPrice = getPrice("empaqueZinu", empaqueZinuHeight + empaqueZinuWidth);
+        const aln1101s3890Price = getPrice("aln1101s3890", aln1101s3890);
+        const aln1102s3890Price = getPrice("aln1102s3890", totalWidth);
+        const empaque3890Price = getPrice("empaque3890", empaque3890Height + empaque3890Width);
         const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
 
-        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 28;
+        const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
         const accessoriesPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
 
         const total =
-            marcoPerimetralZinuPrice + divisorZinuPrice + perimetralNaveZinuPrice +
-            pisaVidrioZinuPrice + verticalHorizontalesCaZinuPrice + empaqueZinuPrice + felpaPrice
-            + tornillosPrice + siliconaPrice + accessoriesPrice;
+            aln1101s3890Price + aln1102s3890Price + empaque3890Price + felpaPrice +
+            tornillosPrice + siliconaPrice + accessoriesPrice
 
-        setTotalPrice(total);
-        setCalculatedValues({
-            doubleTotalDimensions,
-            totalHeight,
-            marcoPerimetralZinuPrice,
-            divisorZinuPrice,
-            perimetralNaveZinuPrice,
-            pisaVidrioZinuPrice,
-            verticalHorizontalesCaZinuPrice,
-            empaqueZinuPrice,
-            felpaPrice,
-            tornillosPrice,
-            siliconaPrice,
-            empaqueZinuHeight,
-            empaqueZinuWidth,
-            totalFelpa,
-            kitCierreZinuPrice: memoizedPrices.kitCierreZinu ? Number(memoizedPrices.kitCierreZinu) : 0,
-            kitCierreConLlaveZinuPrice: memoizedPrices.kitCierreConLlaveZinu ? Number(memoizedPrices.kitCierreConLlaveZinu) : 0,
-            limitador150ZinuPrice: memoizedPrices.limitador150Zinu ? Number(memoizedPrices.limitador150Zinu) : 0,
-            limitador220ZinuPrice: memoizedPrices.limitador220Zinu ? Number(memoizedPrices.limitador220Zinu) : 0,
-            escuadraEnsambleZinuPrice: memoizedPrices.escuadraEnsambleZinu ? Number(memoizedPrices.escuadraEnsambleZinu) : 0,
-            escuadraEnsambleHZinuPrice: memoizedPrices.escuadraEnsambleHZinu ? Number(memoizedPrices.escuadraEnsambleHZinu) : 0,
-            bisagra2ZinuPrice: memoizedPrices.bisagra2Zinu ? Number(memoizedPrices.bisagra2Zinu) : 0,
-            cierreHZinuPrice: memoizedPrices.cierreHZinu ? Number(memoizedPrices.bisagra2Zinu) : 0,
-            soporteHTaironaPrice: memoizedPrices.soporteHTairona ? Number(memoizedPrices.soporteHTairona) : 0,
-            bisagraOcultaPrice: memoizedPrices.bisagraOculta ? Number(memoizedPrices.bisagraOculta) : 0,
-            pletinaPoliamidaPrice: memoizedPrices.pletinaPoliamida ? Number(memoizedPrices.pletinaPoliamida) : 0,
-        });
+        setTotalPrice(total),
+            setCalculatedValues({
+                totalWidth,
+                aln1101s3890,
+                aln1101s3890Price,
+                aln1102s3890Price,
+                empaque3890Price,
+                felpaPrice,
+                tornillosPrice,
+                siliconaPrice,
+                empaque3890Height,
+                empaque3890Width,
+                totalFelpa,
+                kitCierre3890Price: memoizedPrices.kitCierre3890 ? Number(memoizedPrices.kitCierre3890) : 0,
+                kitCierreConLlave3890Price: memoizedPrices.kitCierreConLlave3890 ? Number(memoizedPrices.kitCierreConLlave3890) : 0,
+            });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
     return { totalPrice, calculatedValues };
