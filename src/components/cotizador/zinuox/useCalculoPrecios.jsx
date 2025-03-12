@@ -42,7 +42,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const aln1101s3890 = doubleHeight + doubleWidth;
         const empaque3890Height = totalHeight * 4;
         const empaque3890Width = totalWidth * 2;
-        const felpaHeight = felpaHeight * 6;
+        const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaWidth + felpaHeight;
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
