@@ -1,6 +1,6 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nexui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 import PropTypes from "prop-types";
-import CotizadorAdd from '../../../components/components/cotizador/CotizadorAdd';// importar cotizaciones
+import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // importar cotizaciones
 
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
