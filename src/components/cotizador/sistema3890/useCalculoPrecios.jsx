@@ -9,8 +9,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL; // Obtener la URL base del backend
-                const response = await fetch(`${API_URL}/api/precios`);
+                const response = await fetch('http://localhost:3002/api/precios');
                 const data = await response.json();
 
                 const pricesObject = data.reduce((acc, item) => {
@@ -42,7 +41,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const aln1101s3890 = doubleHeight + doubleWidth;
         const empaque3890Height = totalHeight * 4;
         const empaque3890Width = totalWidth * 2;
-        const felpaHeight = felpaHeight * 6;
+        const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaWidth + felpaHeight;
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
