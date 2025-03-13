@@ -17,6 +17,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         totalFelpa,
         kitCierre3890Price,
         kitCierreConLlave3890Price,
+        enchapePieces,
+        enchapeTotalPrice
     } = calculatedValues || {};
 
     return (
@@ -44,6 +46,18 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>ALN: 1102 Tubular:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
                             <TableCell>${aln1102s3890Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
+                            <TableCell>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('enchape')}
+                                    onChange={() => onAccessoryChange('enchape')}
+                                />
+                                <strong>Enchape</strong>
+                            </TableCell>
+                            <TableCell>({enchapePieces})</TableCell>
+                            <TableCell>${enchapeTotalPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -76,7 +90,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                     checked={selectedAccessories.includes('kitCierreConLlave3890')}
                                     onChange={() => onAccessoryChange('kitCierreConLlave3890')}
                                 />
-                                <strong>Kit de Cierre</strong>
+                                <strong>Kit de Cierre Con Llave</strong>
                             </TableCell>
                             <TableCell>${kitCierreConLlave3890Price?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -144,16 +158,18 @@ DetalleTablas.propTypes = {
         totalWidth: PropTypes.number,
         aln1101s3890: PropTypes.number,
         aln1101s3890Price: PropTypes.number,
-        aln1102s3890Pricce: PropTypes.number,
+        aln1102s3890Price: PropTypes.number,
         tornillosPrice: PropTypes.number,
         siliconaPrice: PropTypes.number,
         empaque3890Price: PropTypes.number,
         empaque3890Height: PropTypes.number,
         empaque3890Width: PropTypes.number,
-        felpaPricee: PropTypes.number,
+        felpaPrice: PropTypes.number,
         totalFelpa: PropTypes.number,
         kitCierre3890Price: PropTypes.number,
-        kitCierreConLlave3890Price: PropTypes.number
+        kitCierreConLlave3890Price: PropTypes.number,
+        enchapePieces: PropTypes.number,
+        enchapeTotalPrice: PropTypes.number
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,

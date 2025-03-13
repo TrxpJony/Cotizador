@@ -45,6 +45,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const felpaHeight = totalHeight * 6;
         const felpaWidth = totalWidth * 2;
         const totalFelpa = felpaWidth + felpaHeight;
+        const enchapeWidth = 90;
+        const enchapePieces = Math.floor(totalWidth / enchapeWidth);
+        const enchapeTotalPrice = memoizedAccessories.includes('enchape') ? enchapePieces * (memoizedPrices.enchape3890 || 0) : 0;
+
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const aln1101s3890Price = getPrice("aln1101s3890", aln1101s3890);
@@ -59,7 +63,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const total =
             aln1101s3890Price + aln1102s3890Price + empaque3890Price + felpaPrice +
-            tornillosPrice + siliconaPrice + accessoriesPrice
+            tornillosPrice + siliconaPrice + accessoriesPrice + enchapeTotalPrice;
 
         setTotalPrice(total),
             setCalculatedValues({
@@ -76,6 +80,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
                 totalFelpa,
                 kitCierre3890Price: memoizedPrices.kitCierre3890 ? Number(memoizedPrices.kitCierre3890) : 0,
                 kitCierreConLlave3890Price: memoizedPrices.kitCierreConLlave3890 ? Number(memoizedPrices.kitCierreConLlave3890) : 0,
+                enchapePieces,
+                enchapeTotalPrice
             });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
