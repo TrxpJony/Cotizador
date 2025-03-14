@@ -30,7 +30,7 @@ const features = [
 export default function Example() {
   return (
     <>
-      <div className="bg-white py-24 sm:py-32">
+      <div className="bg-white py-24 sm:py-32 h-full">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base/7 font-semibold text-cyan-600">Administrador</h2>
@@ -57,7 +57,6 @@ export default function Example() {
             </dl>
           </div>
         </div>
-        <br />
         <br />
         <br />
         <br />
