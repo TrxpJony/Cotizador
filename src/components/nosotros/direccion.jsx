@@ -1,4 +1,4 @@
-import './direccion.css';
+import '../../css/direccion.css';
 
 const GoogleMap = () => {
   return (

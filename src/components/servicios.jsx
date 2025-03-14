@@ -97,7 +97,6 @@ export function Servicios() {
 
   return (
     <>
-    <br />
       <motion.div 
         className="bg-gradient-to-r from-cyan-400 to-cyan-600 py-24 sm:py-32"
         initial={{ opacity: 0 }}
