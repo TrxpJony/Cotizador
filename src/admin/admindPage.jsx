@@ -5,8 +5,8 @@ const AdmindPage = () => {
     return (
         <>
 		<div className='flex h-screen overflow-hidden'>
-        			<Sidebar />
-					<div className='flex-grow'>
+        			<Sidebar className='w-1/4 md:w-1/5 lg:w-1/6' />
+					<div className='flex-grow overflow-auto'>
 						<Info/>
 					</div>
 		</div>
