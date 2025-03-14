@@ -11,17 +11,16 @@ export function CortinaMovimiento() {
         <motion.div
             className="relative isolate overflow-hidden py-24 sm:py-32 text-center"
             style={{
-                background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151)", 
-                backgroundSize: "400% 400%", // Movimiento más fluido
+                background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
+                backgroundSize: "800% 800%", // Movimiento más fluido
             }}
             animate={{
                 backgroundPosition: [
-                    "0% 50%", "25% 50%", "50% 50%", "75% 50%", "100% 50%",
-                    "75% 50%", "50% 50%", "25% 50%", "0% 50%"
-                ], 
+                    "0% 50%", "25% 50%", "50% 50%", "75% 50%", "100% 50%"
+                ],
             }}
             transition={{
-                duration: 20,
+                duration: 40,
                 ease: "linear",
                 repeat: Infinity,
             }}
@@ -45,7 +44,7 @@ export function CortinaMovimiento() {
                 <p className="mt-6 text-lg text-gray-300 sm:text-xl">
                     Especialistas en vidrios y espejos personalizados de alta calidad. ¡Confía en nosotros para todas tus necesidades!
                 </p>
-                
+
                 <div className="mt-10 flex justify-center gap-6">
                     {links.map((link) => (
                         <motion.a
