@@ -29,7 +29,7 @@ export default function FooterComponent() {
           <ul className="flex space-x-4">
             <li>
               <FaFacebookF className="text-blue-500" />{" "}
-              <a href="https://www.facebook.com" className="hover:underline text-gray-700">
+              <a href="https://www.facebook.com/share/1AG3qHjqaf/?mibextid=wwXIfr" className="hover:underline text-gray-700">
                 Facebook
               </a>
             </li>
@@ -41,7 +41,7 @@ export default function FooterComponent() {
             </li>
             <li>
               <FaInstagram className="text-orange-500" />
-              <a href="https://www.instagram.com" className="hover:underline text-gray-700">
+              <a href="https://www.instagram.com/vidrioalartesas?igsh=MXd5ODdlOGpnMmt6ag==" className="hover:underline text-gray-700">
                 Instagram
               </a>
             </li>
