@@ -15,7 +15,7 @@
 
 @media (max-width: 480px) {
   .map-container {
-    width: 100%; /* Full width for very small screens */
+    width: 88%; /* Full width for very small screens */
   }
 }
 
