@@ -52,19 +52,25 @@ export function InfoProductos() {
           </dl>
         </motion.div>
 
-        {/* Sección de imágenes con animaciones */}
+        {/* Sección de imágenes con animaciones mejoradas */}
         <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
           {[cocina1, cocina2, cocina3, cocina4].map((image, index) => (
-            <motion.img
+            <motion.div
               key={index}
-              src={image}
-              alt={`Producto ${index + 1}`}
-              className="rounded-lg bg-gray-100"
+              className="relative overflow-hidden rounded-lg bg-gray-100"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-            />
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <motion.img
+                src={image}
+                alt={`Producto ${index + 1}`}
+                className="w-full h-full object-cover"
+                whileHover={{ opacity: 0.8 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
           ))}
         </div>
       </motion.div>
