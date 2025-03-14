@@ -20,7 +20,7 @@ export function CortinaMovimiento() {
                 ],
             }}
             transition={{
-                duration: 40,
+                duration: 50,
                 ease: "linear",
                 repeat: Infinity,
             }}
