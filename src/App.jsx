@@ -4,7 +4,6 @@ import { Home } from "./pages/Home";
 import { Tipos } from './pages/tipos';
 import React, { useEffect } from "react";
 import ProtectedRoute from './components/ProtectedRoute';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, } from "@nextui-org/react";
 import Cookies from 'universal-cookie';
 import logo from '../src/img/logo.png'
 import Colosal from './pages/vidrios/colosalpc26/Colosal';
@@ -106,6 +105,8 @@ import Astral20xox from './pages/vidrios/astral20/Astral20xox';
 import { Tiposaluminark } from './pages/aluminark/tipos';
 import { Aluminark } from './pages/aluminark/aluminark';
 import TestimonialsPage from './pages/testimonialsPage';
+import NavBarComponent from './components/Home/navBarComponent';
+import FooterComponent from './components/Home/footerComponent';
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -117,10 +118,7 @@ export const AcmeLogo = () => {
 };
 
 function App() {
-
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
   const [userId, setUserId] = React.useState(undefined);
   const [userRole, setUserRole] = React.useState(undefined);
 
@@ -133,93 +131,9 @@ function App() {
     console.log('User Role:', role);  // Muestra el rol del usuario
   }, []);
 
-  const handleLogout = () => {
-    cookies.remove('id');
-    cookies.remove('rol');
-    window.location.href = '/login'; // Redirigir a la página de login o cualquier otra página
-  };
-
-  const menuItems = [
-    { name: "Inicio", path: "/" },
-    { name: "Sobre Nosotros", path: "/nosotros" },
-    { name: "Servicios", path: "/servicios" },
-    { name: "Productos", path: "/productos" },
-    { name: userId ? "Cotizar" : "Cotizar", path: userId ? "/cotizar" : "/login" }, // Mostrar según sesión
-  ];
-
-  if (userRole === 'administrador') {
-    menuItems.push({ name: "Admin", path: "/admin" });
-  }
-
-  if (userId) {
-    menuItems.push({
-      name: "Cerrar sesión",
-      path: "", // No tiene una URL real
-      onClick: handleLogout
-    });
-  }
-
-  const isActive = (path) => location.pathname === path;
-
   return (
     <>
-      <Navbar onMenuOpenChange={setIsMenuOpen}>
-        <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
-          />
-          <NavbarBrand>
-            <AcmeLogo />
-            <p className="font-bold text-inherit"></p>
-          </NavbarBrand>
-        </NavbarContent>
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          {menuItems.map((item) => (
-            <NavbarItem key={item.name}>
-              {item.onClick ? (
-                <button
-                  onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-                  className={`w-full ${item.name === "Cerrar sesión" ? "text-red-600" : isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  className={isActive(item.path) ? "text-cyan-600" : "text-foreground"}
-                  href={item.path}
-                >
-                  {item.name}
-                </Link>
-              )}
-            </NavbarItem>
-          ))}
-        </NavbarContent>
-        <NavbarContent justify="end">
-        </NavbarContent>
-        <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item.name}-${index}`}>
-              {item.onClick ? (
-                <button
-                  onClick={item.onClick} // Llama a handleLogout si se hace clic en "Cerrar sesión"
-                  className={`w-full ${item.name === "Cerrar sesión" ? "text-red-600" : isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  className={`w-full ${isActive(item.path) ? "text-cyan-600" : "text-foreground"}`}
-                  href={item.path}
-                  size="lg"
-                >
-                  {item.name}
-                </Link>
-              )}
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
-      </Navbar>
+    <NavBarComponent userId={userId} userRole={userRole} location={location} />
       <div className="fondo  min-h-screen container-app">
         <Routes>
           <Route path="login" element={<Login />} />
@@ -327,24 +241,8 @@ function App() {
           <Route path="cat009" element={<Aluminark />} />
           <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
-
       </div>
-      <footer className="bg-white rounded-lg shadow m-4 w-4/5 mx-auto">
-        <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024 <a href="https://maps.app.goo.gl/cxr3YbuHojn8BX1R7" className="hover:underline">Vidrio al Arte SAS. Cl. 71A #75 36, Bogotá</a>. TODOS LOS DERECHOS RESERVADOS.
-          </span>
-          <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">Nosotros</a>
-            </li>
-            <li>
-              <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" className="hover:underline">contacto</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
-      <br />
+      <FooterComponent />
     </>
 
   )
