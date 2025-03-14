@@ -7,6 +7,18 @@
   height: 400px; /* Fixed height for the map */
 }
 
+@media (max-width: 768px) {
+  .map-container {
+    width: 88%; /* Increase width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    width: 100%; /* Full width for very small screens */
+  }
+}
+
 .map-container iframe {
   width: 100%;
   height: 100%;
