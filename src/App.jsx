@@ -107,6 +107,8 @@ import { Aluminark } from './pages/aluminark/aluminark';
 import TestimonialsPage from './pages/testimonialsPage';
 import NavBarComponent from './components/Home/navBarComponent';
 import FooterComponent from './components/Home/footerComponent';
+import ContactPage from './pages/contact';
+
 const cookies = new Cookies();
 
 export const AcmeLogo = () => {
@@ -239,6 +241,7 @@ function App() {
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
           <Route path="cat009" element={<Aluminark />} />
+          <Route path='contact' element={<ContactPage/>}/>
           <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
       </div>

@@ -25,7 +25,7 @@ export default function FooterComponent() {
           </ul>
         </div>
         <div>
-          <h2 className="text-lg font-bold mb-4">Follow Us</h2>
+          <h2 className="text-lg font-bold mb-4">Nuestras Redes</h2>
           <ul className="flex space-x-4">
             <li>
               <FaFacebookF className="text-blue-500" />{" "}

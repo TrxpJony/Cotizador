@@ -9,14 +9,14 @@ export default function FormContact() {
     return (
         <>
             <motion.div
-                className="relative isolate overflow-hidden py-24 sm:py-32 text-center"
+                className="relative isolate overflow-hidden py-24 sm:py-36 text-center"
                 style={{
                     background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
                     backgroundSize: "800% 800%", // Movimiento más fluido
                 }}
                 animate={{
                     backgroundPosition: [
-                        "0% 50%", "25% 50%", "50% 50%", "75% 50%", "100% 50%",
+                        "0% 50%", "25% 50%", "50% 50%", "75% 50%", "100% 50%"
                     ],
                 }}
                 transition={{
@@ -25,19 +25,17 @@ export default function FormContact() {
                     repeat: Infinity,
                 }}
             >
-                <div className="">
+                <div className="px-4 sm:px-6 lg:px-8"> {/* Added padding for responsiveness */}
 
                     <div
                         aria-hidden="true"
                         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
                     >
-                        <div
-
-                        />
+                        <div />
                     </div>
                     <div className="mx-auto max-w-2xl text-center">
                         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">¿Como podemos ayudarte?</h2>
-                        <p className="mt-2 text-lg/8 text-gray-300">Aute magna irure deserunt veniam aliqua magna enim voluptate.</p>
+                        <p className="mt-2 text-lg/8 text-gray-300">Por favor, completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
                     </div>
                     <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
