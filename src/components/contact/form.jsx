@@ -144,9 +144,9 @@ export default function FormContact() {
                                     </Switch>
                                 </div>
                                 <Label className="text-sm/6 text-gray-300">
-                                    By selecting this, you agree to our{' '}
+                                    Al seleccionar esto, aceptas nuestra{' '}
                                     <a href="#" className="font-semibold text-cyan-500">
-                                        privacy&nbsp;policy
+                                    política&nbsp;de privacidad
                                     </a>
                                     .
                                 </Label>

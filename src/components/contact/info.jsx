@@ -30,8 +30,8 @@ export default function InfoContact() {
                 </motion.div>
                 {/* Horarios de Atención */}
                 <motion.div variants={itemVariants} className="text-center space-y-1">
-                    <h3 className="text-2xl font-semibold">Horario de Atención</h3>
-                    <p className="text-lg">Lunes a Viernes: <span className="font-semibold">8:00 AM - 12:00 AMM / 1:30 PM - 4:00 PM</span></p>
+                    <h3 className="text-2xl font-semibold">Horario de Entregas</h3>
+                    <p className="text-lg">Lunes a Viernes: <span className="font-semibold">8:00 AM - 12:00 AM / 1:30 PM - 4:00 PM</span></p>
                     <p className="text-lg">Sábados: <span className="font-semibold">8:00 AM - 11:30 AM</span></p>
                 </motion.div>
 
