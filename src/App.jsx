@@ -108,6 +108,7 @@ import TestimonialsPage from './pages/testimonialsPage';
 import NavBarComponent from './components/Home/navBarComponent';
 import FooterComponent from './components/Home/footerComponent';
 import ContactPage from './pages/contact';
+import Blog from './pages/posts/blog';
 
 const cookies = new Cookies();
 
@@ -149,6 +150,7 @@ function App() {
           <Route path="productos" element={<Productos />} />
           <Route path="servicios" element={<Servicios />} />
           <Route path="proyectos" element={<TestimonialsPage />} />
+          <Route path="blog" element={<Blog/>} />
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
