@@ -19,7 +19,7 @@ const Blog = () => {
             try {
                 const response = await axios.get(baseUrl);
                 let fetchedImages = response.data.map(img => img.secure_url);
-                
+
                 // Si hay menos de 2 imágenes, duplicarlas para evitar el error de Swiper
                 if (fetchedImages.length === 1) {
                     fetchedImages = [...fetchedImages, ...fetchedImages];
@@ -56,7 +56,9 @@ const Blog = () => {
                                     <div
                                         className="w-full h-96 bg-cover bg-center"
                                         style={{ backgroundImage: `url(${image})` }}
-                                    ></div>
+                                    >
+
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
