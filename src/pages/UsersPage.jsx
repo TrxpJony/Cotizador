@@ -4,7 +4,7 @@ import UsersAdd from "../components/users/UsersAdd";
 const UsersPage = () => {
 	return (
 		<>
-			<div className='flex h-screen  overflow-hidden'>
+			<div className='flex h-full  overflow-hidden'>
 				<Sidebar />
 				<div className='flex-1 overflow-auto relative z-10'>
 					<header className='bg-white backdrop-blur-md shadow-lg border-b '>

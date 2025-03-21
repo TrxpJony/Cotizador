@@ -165,13 +165,13 @@ const CotiTable = () => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
-									<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600'>
+									<td className='px-6 py-4 text-sm font-medium text-gray-600'>
 										{cotizacion.cotNumber}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 text-sm text-gray-700'>
 										{cotizacion.client_name}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4  text-sm text-gray-700'>
 										{cotizacion.email}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
