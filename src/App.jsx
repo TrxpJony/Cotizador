@@ -109,6 +109,8 @@ import NavBarComponent from './components/Home/navBarComponent';
 import FooterComponent from './components/Home/footerComponent';
 import ContactPage from './pages/contact';
 import Blog from './pages/posts/blog';
+import EditPostPage from './pages/editBlogPage';
+import AddPost from './pages/posts/add';
 
 const cookies = new Cookies();
 
@@ -136,7 +138,7 @@ function App() {
 
   return (
     <>
-    <NavBarComponent userId={userId} userRole={userRole} location={location} />
+      <NavBarComponent userId={userId} userRole={userRole} location={location} />
       <div className="fondo  min-h-screen container-app">
         <Routes>
           <Route path="login" element={<Login />} />
@@ -150,11 +152,13 @@ function App() {
           <Route path="productos" element={<Productos />} />
           <Route path="servicios" element={<Servicios />} />
           <Route path="proyectos" element={<TestimonialsPage />} />
-          <Route path="blog" element={<Blog/>} />
+          <Route path="blog" element={<Blog />} />
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
           <Route path='/users' element={<ProtectedRoute element={<UsersPage />} allowedRole='administrador' />} />
+          <Route path='/editPost' element={<ProtectedRoute element={<EditPostPage />} allowedRole='administrador' />} />
+          <Route path='/addPost' element={<ProtectedRoute element={<AddPost/>} allowedRole='administrador' />} />
           <Route path='/cotizaciones' element={<ProtectedRoute element={<CotiPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
@@ -243,7 +247,7 @@ function App() {
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
           <Route path="cat009" element={<Aluminark />} />
-          <Route path='contact' element={<ContactPage/>}/>
+          <Route path='contact' element={<ContactPage />} />
           <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
       </div>
