@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
 import { Pagination } from "@nextui-org/react";
+import BackButton from "../../../components/common/backButton";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
@@ -13,7 +13,6 @@ export function Redondos() {
     const [selectedItem, setSelectedItem] = useState(null); // Elemento seleccionado para el modal
     const { isOpen, onOpen, onClose } = useDisclosure();
     const itemsPerPage = 15; // Elementos por página
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(baseUrl)
@@ -87,7 +86,14 @@ export function Redondos() {
                     {/* Componente de paginación */}
                     <div className="flex items-center ">
                         <Pagination showControls
-                            className="text-right mx-2"
+                            classNames={{
+                                base: "",
+                                wrapper: "",
+                                prev: "bg-white",
+                                next: "bg-white",
+                                item: "bg-transparent ",
+                                cursor: "bg-cyan-500"
+                            }}
                             initialPage={1}
                             page={currentPage} // Sincroniza el estado de la página con el componente
                             total={Math.ceil(filteredList.length / itemsPerPage)}
@@ -127,17 +133,19 @@ export function Redondos() {
                 </div>
                 {/* Botón Regresar */}
                 <div className="flex justify-end mt-6">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="bg-cyan-500 text-white py-2 px-4 rounded-lg font-bold text-lg hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                    >
-                        Regresar
-                    </button>
+                <BackButton />
                 </div>
                 <br />
                 <div className="flex items-center ">
                     <Pagination showControls
-                        className="text-right mx-2"
+                        classNames={{
+                            base: "",
+                            wrapper: "",
+                            prev: "bg-white",
+                            next: "bg-white",
+                            item: "bg-transparent ",
+                            cursor: "bg-cyan-500"
+                        }}
                         initialPage={1}
                         page={currentPage} // Sincroniza el estado de la página con el componente
                         total={Math.ceil(filteredList.length / itemsPerPage)}
@@ -163,7 +171,7 @@ export function Redondos() {
                                         src={selectedItem.img}
                                         width="100%"
                                         height="450px"
-                                    /> 
+                                    />
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>

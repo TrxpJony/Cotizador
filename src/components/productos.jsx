@@ -14,7 +14,7 @@ export function Productos() {
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
 
- useEffect(() => {
+  useEffect(() => {
     fetch(baseUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -76,8 +76,15 @@ export function Productos() {
 
           {/* Componente de paginación */}
 
-          <Pagination
-            className="text-right"
+          <Pagination showControls
+            classNames={{
+              base: "",
+              wrapper: "",
+              prev: "bg-white",
+              next: "bg-white",
+              item: "bg-transparent ",
+              cursor: "bg-cyan-500"
+            }}
             initialPage={1}
             page={currentPage} // Sincroniza el estado de la página con el componente
             total={Math.ceil(filteredList.length / itemsPerPage)}
@@ -98,7 +105,7 @@ export function Productos() {
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">
-              <Image
+                <Image
                   alt={item.title}
                   className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
                   radius="lg"
