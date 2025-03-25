@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import BackButton from "../../components/common/backButton";
 import Sidebar from "../../components/common/Sidebar";
 import PostFormAdd from "../../components/post/postFormAdd";
+
+const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
 const AddPost = () => {
     const navigate = useNavigate();
@@ -11,11 +14,19 @@ const AddPost = () => {
     const handleSubmit = async (formData) => {
         try {
             setIsSubmitting(true);
-            // Aquí iría tu lógica para subir el post
-            console.log("Subiendo post:", formData);
-            // Simular delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            navigate("/posts");
+
+            const data = new FormData();
+            data.append("title", formData.title);
+            data.append("description", formData.description);
+            data.append("category", formData.category); // Asegúrate de que sea solo la clave
+            data.append("image", formData.image);
+
+            const response = await axios.post(`${baseUrl}/posts`, data, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            console.log("Post creado:", response.data);
+            navigate("/editPost");
         } catch (error) {
             console.error("Error al subir el post:", error);
         } finally {

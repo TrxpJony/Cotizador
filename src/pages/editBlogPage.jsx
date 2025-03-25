@@ -4,15 +4,29 @@ import { useState } from "react";
 import { MdOutlineDensitySmall, MdCalendarMonth } from "react-icons/md";
 import { LuFolderPlus } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { Calendar } from "@heroui/react";
+import { parseDate } from "@internationalized/date";
 
 const EditPostPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Estado para controlar la visibilidad del calendario
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
     };
 
+    const handleCategoryFilter = (category) => {
+        setSelectedCategory(category);
+        setSelectedDate(null); // Resetear la fecha al filtrar por categoría
+    };
 
+    const handleDateFilter = (date) => {
+        setSelectedDate(date);
+        setSelectedCategory(""); // Resetear la categoría al filtrar por fecha
+        setIsCalendarOpen(false); // Cerrar el calendario después de seleccionar una fecha
+    };
 
     return (
         <>
@@ -38,52 +52,79 @@ const EditPostPage = () => {
                         </div>
                         <div className="flex flex-col sm:flex-row py-4 justify-center gap-4 sm:gap-8">
                             <button
-                                className="border border-black py-1 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
+                                className={`border border-black py-1 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
+                                    selectedCategory === "" && !selectedDate ? "bg-black text-white" : ""
+                                }`}
+                                onClick={() => handleCategoryFilter("")}
                             >
                                 <MdOutlineDensitySmall />
                             </button>
                             <button
-                                className="border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
+                                    selectedCategory === "Regalos" ? "bg-black text-white" : ""
+                                }`}
+                                onClick={() => handleCategoryFilter("Regalos")}
                             >
                                 Regalos
                             </button>
                             <button
-                                className="border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
+                                    selectedCategory === "Eventos" ? "bg-black text-white" : ""
+                                }`}
+                                onClick={() => handleCategoryFilter("Eventos")}
                             >
                                 Eventos
                             </button>
                             <button
-                                className="border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
+                                    selectedCategory === "Salidas" ? "bg-black text-white" : ""
+                                }`}
+                                onClick={() => handleCategoryFilter("Salidas")}
                             >
                                 Salidas
                             </button>
                             <button
-                                className="border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
+                                    selectedCategory === "Premios" ? "bg-black text-white" : ""
+                                }`}
+                                onClick={() => handleCategoryFilter("Premios")}
                             >
                                 Premios
                             </button>
-                            <button
-                                className="border border-black py-1 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto"
-                            >
-                                <MdCalendarMonth />
-                            </button>
+                            <div className="relative">
+                                <button
+                                    className="border border-black py-2 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto flex items-center justify-center"
+                                    onClick={() => setIsCalendarOpen(!isCalendarOpen)} // Alternar visibilidad del calendario
+                                >
+                                    <MdCalendarMonth />
+                                </button>
+                                {isCalendarOpen && (
+                                    <div className="absolute mt-2 z-50 bg-transparent rounded-lg p-2">
+                                        <Calendar
+                                            aria-label="Seleccionar fecha"
+                                            value={selectedDate ? parseDate(selectedDate.toISOString().split('T')[0]) : null}
+                                            onChange={(date) => handleDateFilter(date.toDate("UTC"))}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div className="">
-                            <button
-                                className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
+                            <Link
+                                to="/addPost"
+                                className="flex"
                             >
-                                <Link
-                                    to="/addPost"
-                                    className="flex"
+                                <button
+                                    className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
                                 >
                                     <p className="text-sm font-semibold">Añadir</p> <p className="text-sm text-transparent">s</p><p className="mt-0.5"><LuFolderPlus /></p>
-                                </Link>
-                            </button>
+                                </button>
+                            </Link>
                         </div>
                         {/*Tarjetas con mejor diseño */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                            <PostVa searchTerm={searchTerm} />
+                            <PostVa searchTerm={searchTerm} selectedCategory={selectedCategory} selectedDate={selectedDate} />
                         </div>
                     </div>
                 </div>

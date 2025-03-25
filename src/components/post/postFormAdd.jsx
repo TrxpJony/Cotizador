@@ -1,4 +1,3 @@
-import { Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -36,7 +35,7 @@ const PostFormAdd = ({ onSubmit }) => {
             <form onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit?.(formData);
-            }}>
+            }} encType="multipart/form-data">
                 <label className="block text-gray-700 font-bold mb-2">
                     Imagen
                 </label>
@@ -44,7 +43,7 @@ const PostFormAdd = ({ onSubmit }) => {
                     <div className="absolute top-0 left-0 w-full h-full">
                         <img 
                             className="w-full h-full object-cover rounded-xl" 
-                            src={preview || "https://via.placeholder.com/800x600"} 
+                            src={preview || "/default-placeholder.png"} // Cambiar a una imagen local o válida
                             alt="Imagen" 
                         />
                     </div>
@@ -75,19 +74,20 @@ const PostFormAdd = ({ onSubmit }) => {
                     <label className="block text-gray-700 font-bold mb-2">
                         Categoría
                     </label>
-                    <Select
-                        className="w-full"
-                        classNames={{
-                            trigger: "bg-white text-gray-700",
-                            popoverContent: "bg-white",
-                            selectorIcon: "text-black"
-                        }}
-                        items={category}
-                        placeholder="Selecciona una categoría"
-                        onChange={(val) => setFormData(prev => ({ ...prev, category: val }))}
+                    <select
+                        name="category"
+                        value={formData.category}
+                        onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                        className="border rounded-xl w-full py-2 px-3 text-gray-700 font-bold mb-2 hover:bg-default-200 focus:outline-none"
+                        required
                     >
-                        {(item) => <SelectItem key={item.key}>{item.label}</SelectItem>}
-                    </Select>
+                        <option value="" disabled>Selecciona una categoría</option>
+                        {category.map((item) => (
+                            <option key={item.key} value={item.key}>
+                                {item.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 font-bold mb-2">

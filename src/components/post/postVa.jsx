@@ -1,5 +1,12 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState  } from 'react';
+import { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie'; // Importar universal-cookie
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+
+const cookies = new Cookies(); // Crear instancia de cookies
+
 const baseUrl = import.meta.env.VITE_API_URL + "/api/posts";
 
 const formatDate = (dateString) => {
@@ -16,8 +23,9 @@ const truncate = (text, maxLength) => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 };
 
-const PostVa = ({ searchTerm }) => {
+const PostVa = ({ searchTerm, selectedCategory, selectedDate }) => {
     const [posts, setPosts] = useState([]);
+    const userRole = cookies.get('rol'); // Leer el rol del usuario desde las cookies
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -33,10 +41,57 @@ const PostVa = ({ searchTerm }) => {
         fetchPosts();
     }, []);
 
-    const filteredPosts = posts.filter((post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchTerm.toLowerCase())
-    ).sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); // Sort by date descending
+    const handleDeleteClick = (id) => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            showCancelButton: true,
+            confirmButtonColor: '#06B6D4',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`${baseUrl}/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        toast(data.message, {
+                            position: "bottom-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: false,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+
+                        // Actualizar el estado sin recargar la página
+                        setPosts(posts.filter((post) => post.id !== id));
+                    })
+                    .catch((error) => {
+                        console.error("Error al eliminar el post:", error);
+                        Swal.fire("Error", "Hubo un problema al eliminar el post.", "error");
+                    });
+            }
+        });
+    };
+
+    const filteredPosts = posts
+        .filter((post) =>
+            (!selectedCategory || post.category === selectedCategory) &&
+            (!selectedDate || post.fecha.startsWith(selectedDate.toISOString().split('T')[0])) &&
+            (post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        )
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); // Sort by date descending
 
     return (
         <>
@@ -56,16 +111,28 @@ const PostVa = ({ searchTerm }) => {
                         {truncate(post.description, 300)}
                     </div>
                     <div className='w-full h-[0.025em] bg-gray-400/90 mt-2'></div>
-                    <div className='w-full flex flex-row justify-end px-2 mt-2'>
-                        {/* Additional content can go here */}
-                    </div>
+
+                    {/* Mostrar botones solo si el rol es administrador */}
+                    {userRole === 'administrador' && (
+                        <div className='w-full flex flex-row justify-end px-2 mt-2'>
+                            <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/posts/update' state={{ post: post }}>Edit</Link>
+                            <button
+                                className='text-red-500 underline underline-offset-2'
+                                onClick={() => handleDeleteClick(post.id)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    )}
                 </div>
             ))}
         </>
     );
 };
 PostVa.propTypes = {
-    searchTerm: PropTypes.string
+    searchTerm: PropTypes.string,
+    selectedCategory: PropTypes.string,
+    selectedDate: PropTypes.instanceOf(Date),
 };
 
 export default PostVa;
