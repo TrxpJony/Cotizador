@@ -1,9 +1,15 @@
 import '../../css/colosal.css'; // Archivo CSS para estilos
 import { GlobeAmericasIcon, EyeIcon, CubeTransparentIcon, HandRaisedIcon, HeartIcon, Cog8ToothIcon, ShieldCheckIcon, UserGroupIcon, PuzzlePieceIcon } from '@heroicons/react/20/solid'
-import mision from '../../img/img_nosotros/vaperso.png'
-import Organigrama from '../../img/img_nosotros/organigrama.jpg'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
+import Organigrama from '../../img/img_nosotros/organigrama.jpg'
+const baseUrl = import.meta.env.VITE_API_URL + "/api/blog-images";
 
 const features = [
     {
@@ -20,10 +26,29 @@ const features = [
 ];
 export function Mision() {
     const [showOrganigrama, setShowOrganigrama] = useState(false);
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get(baseUrl);
+                let fetchedImages = response.data.map(img => img.secure_url);
+
+                // Ensure at least two images for Swiper
+                if (fetchedImages.length === 1) {
+                    fetchedImages = [...fetchedImages, ...fetchedImages];
+                }
+                setImages(fetchedImages);
+            } catch (error) {
+                console.error("Error fetching images", error);
+            }
+        };
+        fetchImages();
+    }, []);
 
     return (
         <>
-         
+
             <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
                 <div className="absolute inset-0 -z-10 overflow-hidden">
                     <svg
@@ -74,12 +99,29 @@ export function Mision() {
                             </div>
                         </div>
                     </div>
-                    <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-                        <img
-                            alt=""
-                            src={mision}
-                            className="w-[48rem] max-w-none rounded-xl bg-gray-900 ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem]"
-                        />
+                    <div className=" -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+                        {images.length > 0 && (
+                            <Swiper
+                                spaceBetween={0}
+                                slidesPerView={1}
+                                loop={true}
+                                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                                allowTouchMove={false} // Disable user interaction for sliding
+                                effect="fade"
+                                modules={[Autoplay, EffectFade]}
+                                className="w-[48rem] h-[35rem] max-w-none rounded-xl bg-gray-900 ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem]"
+                            >
+                                {images.map((image, index) => (
+                                    <SwiperSlide key={index}>
+                                        <img
+                                            alt={`Slide ${index + 1}`}
+                                            src={image}
+                                            className="w-full h-full object-cover rounded-xl"
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        )}
                     </div>
 
                     <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
