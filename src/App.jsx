@@ -112,6 +112,7 @@ import Blog from './pages/posts/blog';
 import EditPostPage from './pages/editBlogPage';
 import AddPost from './pages/posts/add';
 import { All } from './pages/accesorios/all';
+import EditPost from './pages/posts/edit';
 
 const cookies = new Cookies();
 
@@ -160,6 +161,7 @@ function App() {
           <Route path='/users' element={<ProtectedRoute element={<UsersPage />} allowedRole='administrador' />} />
           <Route path='/editPost' element={<ProtectedRoute element={<EditPostPage />} allowedRole='administrador' />} />
           <Route path='/addPost' element={<ProtectedRoute element={<AddPost/>} allowedRole='administrador' />} />
+          <Route path='/edit' element={<ProtectedRoute element={<EditPost/>} allowedRole='administrador' />} />
           <Route path='/cotizaciones' element={<ProtectedRoute element={<CotiPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />

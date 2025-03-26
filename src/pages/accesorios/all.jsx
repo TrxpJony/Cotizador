@@ -119,24 +119,27 @@ export function All() {
                 </div>
             </div>
             <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
-                {/* Barra de búsqueda más ancha, ocupando 2 columnas */}
-                <div className="mt-6 col-span-2 flex gap-2 items-center">
+                {/* Barra de búsqueda más baja y con icono a la izquierda */}
+                <div className="mt-6 col-span-1 sm:col-span-2 flex items-center gap-2">
                     <Search className="w-5 h-5 text-gray-500" />
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={(e) => filterBySearchTerm(e.target.value)}
                         placeholder="Buscar Accessorio ..."
-                        className="w-full p-2 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                        aria-label="Buscar accesorio" // Added aria-label for accessibility
+                        className="w-full p-2 h-10 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                     />
                 </div>
-                {/* Filtro por categoría */}
-                <div className="mt-6 flex gap-2 items-center">
+                {/* Filtro por categoría más bajo y con icono a la izquierda */}
+                <div className="mt-6 flex items-center gap-2">
                     <Filter className="w-5 h-5 text-gray-500" />
                     <Autocomplete
                         defaultItems={categorias}
                         defaultSelectedKey="All"
                         placeholder="Busca una categoría"
+                        aria-label="Filtrar por categoría" // Added aria-label for accessibility
+                        className="w-full  h-10  rounded-xl shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                         onSelectionChange={(key) => filterByCategory(key)}
                     >
                         {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}

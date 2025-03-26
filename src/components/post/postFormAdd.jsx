@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 const category = [
@@ -8,34 +8,49 @@ const category = [
     { key: "Premios", label: "Premios" },
 ];
 
-const PostFormAdd = ({ onSubmit }) => {
+const PostFormAdd = ({ onSubmit, initialData }) => {
     const [formData, setFormData] = useState({
         title: "",
         category: "",
         description: "",
-        image: null
+        image: null,
     });
     const [preview, setPreview] = useState(null);
+
+    useEffect(() => {
+        if (initialData) {
+            setFormData({
+                title: initialData.title || "",
+                category: initialData.category || "",
+                description: initialData.description || "",
+                image: null, // Imagen no se previsualiza en edición
+            });
+            setPreview(initialData.image || null);
+        }
+    }, [initialData]);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setFormData(prev => ({ ...prev, image: file }));
+            setFormData((prev) => ({ ...prev, image: file }));
             setPreview(URL.createObjectURL(file));
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     return (
         <div className="p-10">
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit?.(formData);
-            }} encType="multipart/form-data">
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    onSubmit?.(formData);
+                }}
+                encType="multipart/form-data"
+            >
                 <label className="block text-gray-700 font-bold mb-2">
                     Imagen
                 </label>
@@ -107,6 +122,7 @@ const PostFormAdd = ({ onSubmit }) => {
 };
 PostFormAdd.propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    initialData: PropTypes.object, // Nuevo prop para datos iniciales
 };
 
 export default PostFormAdd;

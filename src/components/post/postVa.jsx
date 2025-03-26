@@ -115,7 +115,9 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate }) => {
                     {/* Mostrar botones solo si el rol es administrador */}
                     {userRole === 'administrador' && (
                         <div className='w-full flex flex-row justify-end px-2 mt-2'>
-                            <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/posts/update' state={{ post: post }}>Edit</Link>
+                            <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/edit' state={{ post: post }}>
+                                Edit
+                            </Link>
                             <button
                                 className='text-red-500 underline underline-offset-2'
                                 onClick={() => handleDeleteClick(post.id)}
