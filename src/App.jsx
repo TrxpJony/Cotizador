@@ -111,6 +111,7 @@ import ContactPage from './pages/contact';
 import Blog from './pages/posts/blog';
 import EditPostPage from './pages/editBlogPage';
 import AddPost from './pages/posts/add';
+import { All } from './pages/accesorios/all';
 
 const cookies = new Cookies();
 
@@ -188,6 +189,7 @@ function App() {
           <Route path="tipos/tai" element={<ProtectedRoute element={<TaironaPage />} allowedRole="cotizador" />} />
           <Route path="tipos/tai/tai1" element={<ProtectedRoute element={<Taironax />} allowedRole="cotizador" />} />
           <Route path="tipos/tai/tai2" element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />} />
+          <Route path="p5" element={<ProtectedRoute element={<All />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
           <Route path='aluminark' element={<Tiposaluminark />} />
           <Route path="aluminark/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />

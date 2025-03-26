@@ -1,0 +1,248 @@
+import { useEffect, useState } from "react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Pagination } from "@nextui-org/react";
+import BackButton from "../../components/common/backButton";
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import { Search, Filter } from "lucide-react"; // Import icons
+
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
+
+const categorias = [
+    { label: "Todas las categorías", key: "All" },
+    { label: "Sistemas batientes", key: "batientes" },
+    { label: "Divisiones", key: "divisiones" },
+    { label: "Soportes", key: "soportes" },
+    { label: "Herramientas e insumos", key: "herramientas" },
+    { label: "Brocas para vidrio", key: "brocas" },
+    { label: "kit sistemas deslizantes", key: "deslizantes" },
+    { label: "Maquita", key: "maquina" },
+    { label: "Bisagras pivotadas", key: "bisagras" },
+    { label: "Cerraduras", key: "cerraduras" },
+    { label: "Chupas", key: "chupas" },
+    { label: "Discos para pulir", key: "discosv" },
+    { label: "Accessorios para fachadas", key: "fachadas" },
+    { label: "Lijas", key: "lijas" },
+    { label: "Manijas", key: "manijas" },
+    { label: "Pasadores", key: "pasadores" },
+    { label: "Adhesivos", key: "adhesivos" },
+    { label: "Fotocurados", key: "fotocurados" },
+];
+
+export function All() {
+    const [list, setList] = useState([]); // Datos de la API
+    const [filteredList, setFilteredList] = useState([]); // Datos filtrados
+    const [currentPage, setCurrentPage] = useState(1); // Página actual
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedItem, setSelectedItem] = useState(null); // Elemento seleccionado para el modal
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const itemsPerPage = 15; // Elementos por página
+
+    useEffect(() => {
+        fetch(baseUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && Array.isArray(data)) {
+                    // Filtrar los datos para que solo se muestren los de las categorías especificadas
+                    const categoriasPermitidas = [
+                        'batientes', 'divisiones', 'soportes', 'herramientas', 'brocas',
+                        'deslizantes', 'maquina', 'bisagras', 'cerraduras', 'chupas',
+                        'discosv', 'fachadas', 'lijas', 'manijas', 'pasadores', 'adhesivos', 'fotocurados'
+                    ];
+                    const categoriaData = data.filter(item =>
+                        categoriasPermitidas.includes(item.categoria?.toLowerCase())
+                    );
+                    // Ordenar los datos por el nombre
+                    categoriaData.sort((a, b) => a.title.localeCompare(b.title));
+                    setList(categoriaData);
+                    setFilteredList(categoriaData);
+                } else {
+                    console.error("La respuesta de la API no es un array válido.");
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    // Filtra los datos según el término de búsqueda
+    const filterBySearchTerm = (term) => {
+        setSearchTerm(term);
+
+        const filtered = term === ''
+            ? list
+            : list.filter(item =>
+                item.title?.toLowerCase().includes(term.toLowerCase()) ||
+                item.description?.toLowerCase().includes(term.toLowerCase())
+            );
+
+        setFilteredList(filtered);
+
+        // Siempre reinicia la paginación a la página 1 al cambiar la búsqueda
+        setCurrentPage(1);
+    };
+
+    const filterByCategory = (categoryKey) => {
+        const filtered = !categoryKey || categoryKey === 'All'
+            ? list
+            : list.filter(item => item.categoria?.toLowerCase() === categoryKey?.toLowerCase());
+
+        setFilteredList(filtered);
+
+        // Reset pagination to the first page when filtering
+        setCurrentPage(1);
+    };
+
+    // Calcula los elementos visibles según la página actual
+    const paginatedList = filteredList.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    // Maneja la apertura del modal
+    const handleCardPress = (item) => {
+        setSelectedItem(item);
+        onOpen();
+    };
+
+    return (
+        <>
+            <br />
+            <div className="filter-frame">
+                <br />
+                <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
+                    Accesorios
+                </p>
+                <br />
+                <div className="flex justify-between items-center">
+                    {/* Barra de búsqueda */}
+
+                </div>
+            </div>
+            <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
+                {/* Barra de búsqueda más ancha, ocupando 2 columnas */}
+                <div className="mt-6 col-span-2 flex gap-2 items-center">
+                    <Search className="w-5 h-5 text-gray-500" />
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => filterBySearchTerm(e.target.value)}
+                        placeholder="Buscar Accessorio ..."
+                        className="w-full p-2 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                    />
+                </div>
+                {/* Filtro por categoría */}
+                <div className="mt-6 flex gap-2 items-center">
+                    <Filter className="w-5 h-5 text-gray-500" />
+                    <Autocomplete
+                        defaultItems={categorias}
+                        defaultSelectedKey="All"
+                        placeholder="Busca una categoría"
+                        onSelectionChange={(key) => filterByCategory(key)}
+                    >
+                        {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+                    </Autocomplete>
+                </div>
+            </div>
+            <br />
+            <div className="card-frame">
+                <p className="text-gray-600 text-sm">
+                    Mostrando {paginatedList.length} de {filteredList.length} accesorios disponibles.
+                </p>
+                {filteredList.length === 0 ? (
+                    <p className="text-center text-gray-500 mt-4">No se encontraron accesorios.</p>
+                ) : (
+                    <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+                        {paginatedList.map((item, index) => (
+                            <Card
+                                key={index}
+                                isPressable
+                                shadow="sm"
+                                onPress={() => handleCardPress(item)}
+                                className="nextui-card"
+                            >
+                                <CardBody className="overflow-hidden p-4">
+                                    <Image
+                                        alt={item.title}
+                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                                        radius="lg"
+                                        shadow="sm"
+                                        src={item.img}
+                                        width="100%"
+                                        height="auto"
+                                    />
+                                </CardBody>
+                                <b className="overflow-hidden p-2">{item.title}</b>
+                                <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
+                                    <p className="text-sm text-gray-900 text-center">{item.description}</p>
+                                    <p className="text-sm text-default-400 text-center">Color: {item.color}</p>
+                                    <b className="text-lg text-cyan-500 font-bold mt-2">
+                                        {item.precio != null
+                                            ? `$${item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                                            : 'Precio no disponible'}
+                                    </b>
+                                </CardFooter>
+                            </Card>
+                        ))}
+                    </div>
+                )}
+                {/* Botón Regresar */}
+                <div className="flex justify-end mt-6">
+                    <BackButton />
+                </div>
+                <br />
+                <div className="flex items-center ">
+                    <Pagination showControls
+                        classNames={{
+                            base: "",
+                            wrapper: "",
+                            prev: "bg-white",
+                            next: "bg-white",
+                            item: "bg-transparent ",
+                            cursor: "bg-cyan-500"
+                        }}
+                        initialPage={1}
+                        page={currentPage} // Sincroniza el estado de la página con el componente
+                        total={Math.ceil(filteredList.length / itemsPerPage)}
+                        onChange={(page) => {
+                            setCurrentPage(page);
+                            window.scrollTo(0, 0); // Desplazar hacia arriba
+                        }}
+                        color="primary"
+                    />
+                </div>
+            </div>
+            <br />
+            {/* Modal */}
+            {selectedItem && (
+                <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
+                    <ModalContent>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader className="flex flex-col gap-1">{selectedItem.title}</ModalHeader>
+                                <ModalBody>
+                                    <Image
+                                        alt={selectedItem.title}
+                                        className="w-full object-cover h-[200px] rounded-t-lg"
+                                        radius="lg"
+                                        shadow="sm"
+                                        src={selectedItem.img}
+                                        width="100%"
+                                        height="450px"
+                                    />
+                                    <p>{selectedItem.description}</p>
+                                    <p>Color: {selectedItem.color}</p>
+                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button variant="light" onPress={onClose}>
+                                        Cerrar
+                                    </Button>
+                                </ModalFooter>
+                            </>
+                        )}
+                    </ModalContent>
+                </Modal>
+            )}
+        </>
+    );
+}

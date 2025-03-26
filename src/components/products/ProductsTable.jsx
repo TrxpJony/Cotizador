@@ -26,8 +26,9 @@ const ProductsTable = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data && Array.isArray(data)) {
-					setProducts(data);
-					setFilteredProducts(data);
+					const sortedData = data.sort((a, b) => a.title.localeCompare(b.title));
+					setProducts(sortedData);
+					setFilteredProducts(sortedData);
 				} else {
 					console.error("La respuesta de la API no es un array válido.");
 				}
