@@ -61,15 +61,12 @@ import { Fachadas } from './pages/accesorios/fachadas/fachadas';
 import { Adhesivos } from './pages/accesorios/adhesivos/adhesivos';
 import { Fotocurados } from './pages/accesorios/fotocurados/fotocurados';
 import { TiposSkylesd } from './pages/skyleds/tipos';
-import { Luzled1101 } from './pages/skyleds/luzled110/luzled110';
-import { Luzled12 } from './pages/skyleds/luzled12/luzled12';
 import Login from './admin/login';
 import { Cotizador } from './components/cotizar';
 import { Vitral } from './pages/Vitral';
 import { CatalogoSkylesd } from './pages/skyleds/skyleds';
 import { Luzled12vista } from './pages/skyleds/luzled12/luzled12vista';
 import { Luzled1101vista } from './pages/skyleds/luzled110/luzled110vista';
-import { Perfiles } from './pages/skyleds/perfiles/perfiles';
 import { PerfilesVista } from './pages/skyleds/perfiles/perfilesvista';
 import { Fuentes } from './pages/skyleds/fuentes/fuentes';
 import { Sensores } from './pages/skyleds/sensores/sensores';
@@ -232,9 +229,6 @@ function App() {
           <Route path="led110" element={<Luzled1101vista />} />
           <Route path="difusores" element={<PerfilesVista />} />
           <Route path="p4" element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
-          <Route path="p4/sk1" element={<ProtectedRoute element={<Luzled1101 />} allowedRole='cotizador' />} />
-          <Route path="p4/sk2" element={<ProtectedRoute element={<Luzled12 />} allowedRole="cotizador" />} />
-          <Route path="p4/sk3" element={<ProtectedRoute element={<Perfiles />} allowedRole="cotizador" />} />
           <Route path="sk4" element={<Fuentes />} />
           <Route path="sk5" element={<Sensores />} />
           <Route path="sk6" element={<Sensoresc />} />

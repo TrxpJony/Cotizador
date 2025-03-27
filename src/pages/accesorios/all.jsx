@@ -114,7 +114,6 @@ export function All() {
                     </p>
                 </div>
             </div>
-            <div></div>
             <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
                 {/* Barra de búsqueda más baja y con icono a la izquierda */}
                 <div className="mt-6 col-span-2 sm:col-span-2 flex items-center gap-2">

@@ -48,7 +48,7 @@ const CocinasCotizador = () => {
             <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
             <option value="4mm">Vidrio bronce - gris 4 mm</option>
             <option value="templado">Vidrio bronce - gris templado 5 mm</option>
-            <option value="bienestar">Vidrio bienestar 4 mm</option>
+            <option value="bienestar">Vidrio bienestar 5 mm</option>
             <option value="bienestarTem">Vidrio bienestar templado 5 mm</option>
             <option value="5mm">Vidrio transparente</option>
           </select>
