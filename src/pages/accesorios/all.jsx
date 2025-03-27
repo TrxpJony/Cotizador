@@ -106,21 +106,18 @@ export function All() {
 
     return (
         <>
-            <br />
-            <div className="filter-frame">
-                <br />
-                <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Accesorios
-                </p>
-                <br />
-                <div className="flex justify-between items-center">
-                    {/* Barra de búsqueda */}
 
+            <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
+                <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
+                    <p className="py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700">
+                        Accesorios
+                    </p>
                 </div>
             </div>
+            <div></div>
             <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
                 {/* Barra de búsqueda más baja y con icono a la izquierda */}
-                <div className="mt-6 col-span-1 sm:col-span-2 flex items-center gap-2">
+                <div className="mt-6 col-span-2 sm:col-span-2 flex items-center gap-2">
                     <Search className="w-5 h-5 text-gray-500" />
                     <input
                         type="text"
@@ -132,14 +129,14 @@ export function All() {
                     />
                 </div>
                 {/* Filtro por categoría más bajo y con icono a la izquierda */}
-                <div className="mt-6 flex items-center gap-2">
+                <div className="mt-6 flex col-span-1 sm:col-span-1 items-center gap-">
                     <Filter className="w-5 h-5 text-gray-500" />
                     <Autocomplete
                         defaultItems={categorias}
                         defaultSelectedKey="All"
                         placeholder="Busca una categoría"
                         aria-label="Filtrar por categoría" // Added aria-label for accessibility
-                        className="w-full  h-10  rounded-xl shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                        className=""
                         onSelectionChange={(key) => filterByCategory(key)}
                     >
                         {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
