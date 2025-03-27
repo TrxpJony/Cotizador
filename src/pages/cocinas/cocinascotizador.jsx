@@ -46,11 +46,12 @@ const CocinasCotizador = () => {
           <label>Tipo de vidrio:</label>
           <select className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition ease-in-out w-[130px]" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
             <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
-            <option value="4mm">Vidrio bronce - gris 4 mm</option>
-            <option value="templado">Vidrio bronce - gris templado 5 mm</option>
-            <option value="bienestar">Vidrio bienestar 5 mm</option>
-            <option value="bienestarTem">Vidrio bienestar templado 5 mm</option>
-            <option value="5mm">Vidrio transparente</option>
+            <option value="TRA_NOR">Vidrio transparente</option>
+            <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>
+            <option value="COL_TEM">Vidrio bronce - gris templado 5 mm</option>
+            <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
+            <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
+            <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
           </select>
           <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           <br />
