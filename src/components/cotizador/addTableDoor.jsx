@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import { IoTrashBinOutline } from "react-icons/io5";
 
-const AddTableDoor = ({ doors }) => {
+const AddTableDoor = ({ doors, onRemove }) => {
     // Calcular el total del IVA y el total sin IVA
     const totalPrice = doors.reduce((sum, door) => sum + (door.price * door.quantity), 0);
     const totalIva = totalPrice * 0.19;
@@ -48,6 +49,14 @@ const AddTableDoor = ({ doors }) => {
                                     </tr>
                                 </tbody>
                             </table>
+                            <div className="flex justify-end">
+                                <button 
+                                    onClick={() => onRemove(index)} 
+                                    className="rounded-2xl text-red-400 hover:text-red-700 font-bold transition-all"
+                                >
+                                    <IoTrashBinOutline/>
+                                </button>
+                            </div>
                         </li>
                     );
                 })}
@@ -76,7 +85,8 @@ const AddTableDoor = ({ doors }) => {
 };
 
 AddTableDoor.propTypes = {
-    doors: PropTypes.array.isRequired
+    doors: PropTypes.array.isRequired,
+    onRemove: PropTypes.func.isRequired
 };
 
 export default AddTableDoor;

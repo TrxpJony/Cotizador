@@ -217,8 +217,8 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
 
             {isModalOpen && (
                 <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto'>
-                    <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-4 my-8 mt-16 sm:mt-8'>
-                        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Cotizacion</h2>
+                    <div className='bg-white p-6 rounded-2xl shadow-lg w-full max-w-4xl mx-4 my-8 mt-16 sm:mt-8 max-h-[90vh] overflow-y-auto'>
+                        <h2 className="text-xl font-semibold mb-4">Cotizacion</h2>
                         {isLoading ? (
                             <div className="flex justify-center items-center">
                                 <CircularProgress aria-label="Loading..." color="default" />
@@ -226,45 +226,100 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                         ) : (
                             <>
                                 {/* Form Fields - 2 columns */}
-                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-[90%] sm:max-w-4xl max-h-[90vh] overflow-y-auto">
-                                        <h2 className="text-xl font-semibold mb-4">Cotización</h2>
-
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            {['cliente', 'projecto', 'contacto', 'telefono', 'direccion', 'email', 'abono'].map((field, index) => (
-                                                <div key={index} className="flex flex-col">
-                                                    <label htmlFor={field} className="block text-gray-700">
-                                                        {field}
-                                                    </label>
-                                                    <input
-                                                        id={field}
-                                                        type="text"
-                                                        name={field}
-                                                        value={formData[field]}
-                                                        onChange={handleChange}
-                                                        className="w-full p-2 border rounded h-10"
-                                                        placeholder={`Ingrese el ${field}`}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {/* Botones */}
-                                        <div className="flex flex-col sm:flex-row justify-end mt-6 gap-2">
-                                            <button
-                                                onClick={handleCloseModal}
-                                                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md w-full sm:w-auto"
-                                            >
-                                                Cancelar
-                                            </button>
-                                            <button
-                                                onClick={handlePrint}
-                                                className="px-4 py-2 bg-cyan-500 text-white rounded-md w-full sm:w-auto"
-                                            >
-                                                Cotizar
-                                            </button>
-                                        </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="flex flex-col">
+                                        <label htmlFor="cliente" className="block text-gray-700 font-bold mb-2">Cliente</label>
+                                        <input
+                                            id="cliente"
+                                            type="text"
+                                            name="cliente"
+                                            value={formData.cliente}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
                                     </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="projecto" className="block text-gray-700 font-bold mb-2">Proyecto</label>
+                                        <input
+                                            id="projecto"
+                                            type="text"
+                                            name="projecto"
+                                            value={formData.projecto}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="contacto" className="block text-gray-700 font-bold mb-2">Contacto</label>
+                                        <input
+                                            id="contacto"
+                                            type="text"
+                                            name="contacto"
+                                            value={formData.contacto}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="telefono" className="block text-gray-700 font-bold mb-2">Teléfono</label>
+                                        <input
+                                            id="telefono"
+                                            type="text"
+                                            name="telefono"
+                                            value={formData.telefono}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="direccion" className="block text-gray-700 font-bold mb-2">Dirección</label>
+                                        <input
+                                            id="direccion"
+                                            type="text"
+                                            name="direccion"
+                                            value={formData.direccion}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Correo</label>
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col sm:col-span-2">
+                                        <label htmlFor="abono" className="block text-gray-700 font-bold mb-2">Abono</label>
+                                        <input
+                                            id="abono"
+                                            type="text"
+                                            name="abono"
+                                            value={formData.abono}
+                                            onChange={handleChange}
+                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                                        />
+                                    </div>
+                                </div>
+            
+                                {/* Botones */}
+                                <div className="flex flex-col sm:flex-row justify-end mt-6 gap-2">
+                                    <button
+                                        onClick={handleCloseModal}
+                                        className="flex rounded-2xl text-gray-400 hover:text-black  font-bold py-2 px-6  transition-all"
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        onClick={handlePrint}
+                                        className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
+                                    >
+                                        Cotizar
+                                    </button>
                                 </div>
                             </>
                         )}

@@ -61,69 +61,69 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
 
             {isModalOpen && (
                 <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-                    <div className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'>
+                    <div className='bg-white p-6 rounded-2xl shadow-lg w-3/4 max-w-4xl'>
                         <h2 className="text-xl font-semibold mb-4">Agregar</h2>
                         <div className='mb-4'>
-                            <label className='block text-gray-700'>Descripción</label>
+                            <label className='block text-gray-700 font-bold mb-2'>Descripción</label>
                             <textarea
                                 name='description'
                                 value={formData.description}
                                 onChange={handleChange}
-                                className='w-full p-2 border rounded h-32'
+                                className='py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full p-2 border rounded-2xl h-32 hover:bg-default-200'
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">
+                            <label className="block text-gray-700 font-bold mb-2">
                                 Precio del vidrio:
                                 <input
                                     type="number"
                                     name="glassPrice"
                                     value={formData.glassPrice}
                                     onChange={handleChange}
-                                    className="w-full p-2 border rounded"
+                                    className=" border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                                     placeholder="0"
                                     min="0"
                                 />
                             </label>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">
+                            <label className="block text-gray-700 font-bold mb-2">
                                 Cantidad:
                                 <input
                                     type="number"
                                     name="quantity"
                                     value={formData.quantity}
                                     onChange={handleChange}
-                                    className="w-full p-2 border rounded"
+                                    className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                                 />
                             </label>
                         </div>
 
-                        <div className="mb-4">
-                            <p className="text-lg font-semibold">
+                        <div className="mb-4 flex justify-center gap-x-4">
+                            <p className="text-gray-700 font-bold">
                                 Ancho: {dimensions.width} mm
                             </p>
-                            <p className="text-lg font-semibold">
+                            <p className="text-gray-700 font-bold">
                                 Alto: {dimensions.height} mm
                             </p>
                         </div>
 
                         <div className="mb-4">
-                            <p className="text-lg font-semibold">
-                                Precio total: ${(totalPrice + (parseFloat(formData.glassPrice) || 0)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            <p className="text-lg block text-gray-700 font-bold mb-2">
+                                Precio: ${(totalPrice + (parseFloat(formData.glassPrice) || 0)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                         </div>
 
                         <div className="flex justify-end">
                             <button
                                 onClick={handleCloseModal}
-                                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2"
+                                className="flex rounded-2xl text-gray-400 hover:text-black  font-bold py-2 px-6  transition-all"
                             >
                                 Cancelar
                             </button>
                             <button
                                 onClick={handleSave}
-                                className="px-4 py-2 bg-cyan-500 text-white rounded-md"
+                                className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
                             >
                                 Guardar
                             </button>
@@ -140,7 +140,7 @@ CotizadorAdd.propTypes = {
     onAddDoor: PropTypes.func.isRequired, // Add prop type for onAddDoor
     useCalculoPrecios: PropTypes.func.isRequired, // Add prop type for useCalculoPrecios
     selectedAccessories: PropTypes.array.isRequired, // Add prop type for selectedAccessories
-    selectedGlass: PropTypes.string.isRequired, 
+    selectedGlass: PropTypes.string.isRequired,
 };
 
 export default CotizadorAdd;

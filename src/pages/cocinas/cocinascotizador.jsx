@@ -25,6 +25,10 @@ const CocinasCotizador = () => {
     setDoors(prevDoors => [...prevDoors, newDoor]);
   };
 
+  const handleRemoveDoor = (indexToRemove) => {
+    setDoors(prevDoors => prevDoors.filter((_, index) => index !== indexToRemove));
+  };
+
   const handleAccessoryChange = (accessory) => {
     setSelectedAccessories(prevAccessories => {
       if (prevAccessories.includes(accessory)) {
@@ -71,7 +75,7 @@ const CocinasCotizador = () => {
             </select>
           </div>
           <div className=''>
-            <AddTableDoor doors={doors} /> {/* Use the new component */}
+            <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Pass handleRemoveDoor */}
           </div>
           {/* Botón Agregar Puerta */}
           <div className="flex justify-between mb-6">
