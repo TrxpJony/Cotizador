@@ -2,14 +2,13 @@ import '../../css/colosal.css';
 import EnviarDimensiones from '../../components/cotizador/PuertaCocina/enviarDimenciones';
 import useCalculoPrecios from '../../components/cotizador/PuertaCocina/useCalculoPrecios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AddTableDoor from '../../components/cotizador/addTableDoor'; // Import the new component
 import PrintTableDoor from '../../components/cotizador/PrintTableDoor'; // Import the new component
 import DetalleTablas from '../../components/cotizador/PuertaCocina/detalleTablas';
+import BackButton from '../../components/common/backButton';
 
 
 const CocinasCotizador = () => {
-  const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [doors, setDoors] = useState([]); // State to hold doors
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
@@ -38,35 +37,46 @@ const CocinasCotizador = () => {
 
   return (
     <>
+      <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
+        <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
+          <p className="py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700">
+            Puerta cocina con batiente
+          </p>
+        </div>
+      </div>
       <div className="door-container">
-        <div className="door-frame">
+        <div className="px-10">
           {/* Imagen */}
-          <img src={cocinaIMG} alt="Puerta Corrediza Colosal" className="door-image" />
-          <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
-          <label>Tipo de vidrio:</label>
-          <select className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition ease-in-out w-[130px]" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
-            <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
-            <option value="TRA_NOR">Vidrio transparente</option>
-            <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>
-            <option value="COL_TEM">Vidrio bronce - gris templado 5 mm</option>
-            <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
-            <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
-            <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
-          </select>
-          <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-          <br />
-          <AddTableDoor doors={doors} /> {/* Use the new component */}
-          <PrintTableDoor doors={doors} title={"Puerta de Cocina"} image={cocinaIMG} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
-          <div className="flex justify-end mt-6">
-            {/* Botón Agregar Puerta */}
-            <div className="flex justify-center mb-6">
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-gray-500 px-4 py-2 text-white rounded-md"
-              >
-                Regresar
-              </button>
+          <div className='relative w-full h-96 bg-black/20 mb-5 rounded-xl'>
+            <div className='top-0 left-0 w-full h-full'>
+              <img src={cocinaIMG} alt="Imagen" className="w-full h-full object-cover rounded-xl" />
             </div>
+          </div>
+          <div className='mb-2'>
+            <label className='text-gray-700 font-bold mb-2'>
+              Dimensiones
+            </label>
+            <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
+          </div>
+          <div className='mb-2'>
+            <label className='text-gray-700 font-bold mb-2' >Tipo de vidrio:</label>
+            <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+              <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
+              <option value="TRA_NOR">Vidrio transparente</option>
+              <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>
+              <option value="COL_TEM">Vidrio bronce - gris templado 5 mm</option>
+              <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
+              <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
+              <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
+            </select>
+          </div>
+          <div className=''>
+            <AddTableDoor doors={doors} /> {/* Use the new component */}
+          </div>
+          {/* Botón Agregar Puerta */}
+          <div className="flex justify-between mb-6">
+            <PrintTableDoor doors={doors} title={"Puerta de Cocina"} image={cocinaIMG} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
+            <BackButton />
           </div>
         </div>
         <DetalleTablas

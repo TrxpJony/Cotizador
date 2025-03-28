@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Pagination } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import BackButton from "../../components/common/backButton";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
@@ -135,7 +135,7 @@ export function All() {
                         defaultSelectedKey="All"
                         placeholder="Busca una categoría"
                         aria-label="Filtrar por categoría" // Added aria-label for accessibility
-                        className=""
+                        className="shadow-md rounded-lg"
                         onSelectionChange={(key) => filterByCategory(key)}
                     >
                         {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
@@ -150,19 +150,18 @@ export function All() {
                 {filteredList.length === 0 ? (
                     <p className="text-center text-gray-500 mt-4">No se encontraron accesorios.</p>
                 ) : (
-                    <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+                    <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
                         {paginatedList.map((item, index) => (
                             <Card
                                 key={index}
                                 isPressable
-                                shadow="sm"
                                 onPress={() => handleCardPress(item)}
                                 className="nextui-card"
                             >
                                 <CardBody className="overflow-hidden p-4">
                                     <Image
                                         alt={item.title}
-                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
                                         radius="lg"
                                         shadow="sm"
                                         src={item.img}
@@ -170,11 +169,11 @@ export function All() {
                                         height="auto"
                                     />
                                 </CardBody>
-                                <b className="overflow-hidden p-2">{item.title}</b>
-                                <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                                    <p className="text-sm text-gray-900 text-center">{item.description}</p>
-                                    <p className="text-sm text-default-400 text-center">Color: {item.color}</p>
-                                    <b className="text-lg text-cyan-500 font-bold mt-2">
+                                <b className="overflow-hidden text-xs md:text-sm lg:text-base">{item.description}</b>
+                                <CardFooter className="px-4 flex flex-col items-start rounded-b-lg">
+                                    <p className="text-xs md:text-sm lg:text-sm text-gray-700 text-center font-semibold">{item.title}</p>
+                                    <p className="text-xs md:text-sm lg:text-sm text-default-400 text-center font-semibold">{item.color}</p>
+                                    <b className="text-sm md:text-base lg:text-lg text-cyan-500 font-bold ">
                                         {item.precio != null
                                             ? `$${item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
                                             : 'Precio no disponible'}
@@ -221,16 +220,16 @@ export function All() {
                                 <ModalBody>
                                     <Image
                                         alt={selectedItem.title}
-                                        className="w-full object-cover h-[200px] rounded-t-lg"
+                                        className="w-full object-cover h-[200px] "
                                         radius="lg"
                                         shadow="sm"
                                         src={selectedItem.img}
                                         width="100%"
                                         height="450px"
                                     />
-                                    <p>{selectedItem.description}</p>
-                                    <p>Color: {selectedItem.color}</p>
-                                    <b className="text-lg text-cyan-500 font-bold mt-2">${selectedItem.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
+                                    <p className="overflow-hidden text-base font-bold">{selectedItem.description}</p>
+                                    <p className="text-default-400 font-semibold">{selectedItem.color}</p>
+                                    <b className="text-lg text-cyan-500 font-bold ">${selectedItem.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button variant="light" onPress={onClose}>

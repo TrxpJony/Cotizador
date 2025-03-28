@@ -55,7 +55,7 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
 
     return (
         <>
-            <button onClick={handleOpenModal} className="px-4 py-2 bg-cyan-500 text-white rounded-md">
+            <button onClick={handleOpenModal} className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all ">
                 Agregar
             </button>
 

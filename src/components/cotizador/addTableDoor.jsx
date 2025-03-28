@@ -7,30 +7,68 @@ const AddTableDoor = ({ doors }) => {
     const totalSinIva = totalPrice - totalIva; // Se resta el IVA al total
 
     return (
-        <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-4">Agregados</h3>
+        <div className="">
+            <h3 className="text-gray-700 font-bold mb-2">Agregados</h3>
             <ul>
                 {doors.map((door, index) => {
                     const iva = (door.price * 0.19) * door.quantity; // Calcular IVA por puerta
                     const totalSinIvaPorPuerta = (door.price * door.quantity) - iva; // Se resta el IVA
                     const totalConIvaPorPuerta = (door.price * door.quantity);
                     return (
-                        <li key={index} className="mb-2 p-2 border rounded">
-                            <p><strong>Descripción:</strong> {door.description}</p>
-                            <p><strong>Cantidad:</strong> {door.quantity}</p>
-                            <p><strong>Ancho:</strong> {door.width} mm</p>
-                            <p><strong>Alto:</strong> {door.height} mm</p>
-                            <p><strong>Subtotal:</strong> ${totalSinIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p><strong>IVA:</strong> ${iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p><strong>Total:</strong> ${totalConIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </p>
+                        <li key={index} className="py-2 px-4 mb-2 border-2 rounded-2xl w-full bg-white ">
+                            <table className="table-auto w-full text-left ">
+                                <tbody>
+                                    <tr>
+                                        <td className="font-semibold">Descripción:</td>
+                                        <td className='text-sm'>{door.description}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">Cantidad:</td>
+                                        <td>{door.quantity}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">Ancho:</td>
+                                        <td>{door.width} mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">Alto:</td>
+                                        <td>{door.height} mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">Subtotal:</td>
+                                        <td>${totalSinIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">IVA:</td>
+                                        <td>${iva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="font-semibold">Total:</td>
+                                        <td>${totalConIvaPorPuerta.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </li>
                     );
                 })}
             </ul>
-            <div className="mt-4 p-2 border rounded">
-                <p><strong>Total sin IVA:</strong> ${totalSinIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                <p><strong>Total IVA:</strong> ${totalIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                <p><strong>Total:</strong> ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+            <div className="py-2 px-4  border-2 rounded-2xl w-full bg-white ">
+                <table className="table-auto w-full text-left">
+                    <tbody>
+                        <tr>
+                            <td className="font-semibold">Total sin IVA:</td>
+                            <td>${totalSinIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        </tr>
+                        <tr>
+                            <td className="font-semibold">Total IVA:</td>
+                            <td>${totalIva.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        </tr>
+                        <tr>
+                            <td className="font-semibold">Total:</td>
+                            <td>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <br />
         </div>

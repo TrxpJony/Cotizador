@@ -5,7 +5,7 @@ import colosal from '../../img/img_Principal/vidrio2.png';
 import puerta from '../../img/img_Principal/vidrio1.png';
 import luces from '../../img/img_Principal/luces.png';
 import luces2 from '../../img/img_Principal/luces2.png';
-import { Divider } from "@nextui-org/divider";
+import { Divider } from "@heroui/divider";
 import '../../css/colosal.css'; // Archivo CSS para estilos
 
 

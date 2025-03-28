@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Pagination } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
 import BackButton from "../../components/common/backButton";
@@ -144,19 +144,18 @@ export function TiposSkylesd() {
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron accesorios.</p>
         ) : (
-          <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
             {paginatedList.map((item, index) => (
               <Card
                 key={index}
                 isPressable
-                shadow="sm"
                 onPress={() => handleCardPress(item)}
                 className="nextui-card"
               >
                 <CardBody className="overflow-hidden p-4">
                   <Image
                     alt={item.title}
-                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover "
                     radius="lg"
                     shadow="sm"
                     src={item.img}
@@ -164,9 +163,9 @@ export function TiposSkylesd() {
                     height="auto"
                   />
                 </CardBody>
-                <b className="overflow-hidden p-2">{item.title}</b>
-                <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                  <p className="text-sm text-default-400 text-center">{item.color}</p>
+                <b className="overflow-hidden font-bold text-xs md:text-sm lg:text-base ">{item.title}</b>
+                <CardFooter className="py-2 px-4 flex flex-col items-start rounded-b-lg">
+                  <p className="text-xs font-semibold md:text-sm lg:text-sm text-default-400 text-center">{item.color}</p>
                 </CardFooter>
               </Card>
             ))}

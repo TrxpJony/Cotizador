@@ -1,9 +1,9 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
 import s3890Image from '../../../img/img_Espejos/espejoconforma.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { useNavigate } from 'react-router-dom';
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
 const CotizadorEspejosconForma = () => {
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ alto: '', ancho: '' });

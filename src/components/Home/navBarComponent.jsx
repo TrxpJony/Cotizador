@@ -1,14 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Button } from "@heroui/react";
 import { motion } from "framer-motion";
 import { AcmeLogo } from "../../App";
 import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
 
 const cookies = new Cookies();
 
 export default function NavBarComponent({ userId, userRole, location }) {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
+
 
   const handleLogout = () => {
     cookies.remove('id');
@@ -72,14 +76,14 @@ export default function NavBarComponent({ userId, userRole, location }) {
               className=""
               key="nosotros"
               description="Lideramos la transformación de vidrios y espejos."
-              href="/nosotros"
+              onClick={() => navigate("/nosotros")}
             >
               Misión y Visión
             </DropdownItem>
             <DropdownItem
               key="blog"
               description="Eventos, regalos y novedades de Vidrio al Arte."
-              href="/blog"
+              onClick={() => navigate("/blog")}
             >
               Blog
             </DropdownItem>

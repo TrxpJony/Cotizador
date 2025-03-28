@@ -1,4 +1,4 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 
@@ -19,7 +19,6 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
     return (
         <>
             <div className="parts-list">
-                <strong><h1>PUERTA COCINA CON BATIENTE DE 1CM</h1></strong>
                 <Table aria-label="TABLA MARCO">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>

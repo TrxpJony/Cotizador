@@ -1,7 +1,7 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
 import Astral20Image from '../../../img/colxx.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { useNavigate } from 'react-router-dom';
 import preciosData from '../../../api/db.json';
 import logo from '../../../../src/img/logo.png'

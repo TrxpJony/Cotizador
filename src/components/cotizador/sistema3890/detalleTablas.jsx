@@ -1,4 +1,4 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import PropTypes from "prop-types";
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // importar cotizaciones
 

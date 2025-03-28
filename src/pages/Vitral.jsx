@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Pagination } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import BackButton from "../components/common/backButton";
 import { Search, Filter } from "lucide-react"; // Import icons
 import { Autocomplete, AutocompleteItem } from "@heroui/react";

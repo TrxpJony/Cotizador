@@ -1,7 +1,7 @@
 import '../../../css/colosal.css'; // Archivo CSS para estilos
 import kimbayaImage from '../../../img/coloxxo.png'; // Importar la imagen
 import { useState, useEffect } from 'react';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { jsPDF } from 'jspdf'; // Importamos jsPDF
 import { useNavigate } from 'react-router-dom';
 import preciosData from '../../../api/db.json';

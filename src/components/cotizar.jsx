@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
-import { Pagination } from "@nextui-org/react";
+import { Pagination } from "@heroui/react";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 
@@ -125,19 +125,18 @@ export function Cotizador() {
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
         ) : (
-          <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
             {paginatedList.map((item, index) => (
               <Card
                 key={index}
                 isPressable
-                shadow="sm"
                 onPress={() => navigate(`/${item.id}`)} // Update the navigation path
                 className="nextui-card"
               >
                 <CardBody className="overflow-hidden p-4">
                   <Image
                     alt={item.title}
-                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
                     radius="lg"
                     shadow="sm"
                     src={item.img}
@@ -145,7 +144,7 @@ export function Cotizador() {
                     height="auto"
                   />
                 </CardBody>
-                <CardFooter className="text-small justify-between p-2">
+                <CardFooter className="text-lg md:text-base lg:text-sm justify-between p-2 px-4">
                   <b>{item.title}</b>
                 </CardFooter>
               </Card>

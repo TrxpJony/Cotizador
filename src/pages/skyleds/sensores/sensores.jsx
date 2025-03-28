@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Pagination } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import BackButton from "../../../components/common/backButton";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";

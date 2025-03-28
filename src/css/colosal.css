@@ -1,8 +1,9 @@
 /* General Body and Background */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7f9; /* Light gray background */
-  color: #333; /* Dark text for readability */
+  background-color: #f4f7f9;
+  /* Light gray background */
+
+  /* Dark text for readability */
   margin: 0;
   padding: 0;
 }
@@ -11,57 +12,68 @@ body {
 .door-container {
   display: flex;
   justify-content: center;
-  padding: 20px;
   margin-top: 20px;
-  
 }
 
 /* Section for the door frame */
 .door-frame {
-  width: 45.5%; /* Aumenta el ancho al 60% */
-  background-color: #ffffff; /* Fondo blanco para el contenido principal */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Fondo blanco para el contenido principal */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px; /* Puedes eliminar esto si no quieres espacio entre las secciones */
+  margin-right: 20px;
+  /* Puedes eliminar esto si no quieres espacio entre las secciones */
+  margin-left: 20px;
 }
 
 .filter-frame {
-  width: 80%; /* Reducido a un 60% del ancho */
-  background-color: #ffffff; /* Fondo blanco */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
-  padding: 15px; /* Menos espacio interno para hacerlo más compacto */
-  border-radius: 8px; /* Borde redondeado */
- /*display: flex;*/
+  width: 80%;
+  /* Reducido a un 60% del ancho */
+  background-color: #ffffff;
+  /* Fondo blanco */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra más sutil */
+  padding: 15px;
+  /* Menos espacio interno para hacerlo más compacto */
+  border-radius: 8px;
+  /* Borde redondeado */
+  /*display: flex;*/
   flex-direction: column;
-  align-items: center; /* Asegura que los elementos se alineen en una columna */
-  margin: 0 auto; /* Centrado horizontal */
+  align-items: center;
+  /* Asegura que los elementos se alineen en una columna */
+  margin: 0 auto;
+  /* Centrado horizontal */
 }
 
 
 .filter-frame-page {
-  width: 80%; /* Aumenta el ancho al 80% */
-  background-color: #ffffff; /* Fondo blanco para el contenido principal */
+  width: 80%;
+  /* Aumenta el ancho al 80% */
+  background-color: #ffffff;
+  /* Fondo blanco para el contenido principal */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto; /* Centrado horizontal */
+  margin: 0 auto;
+  /* Centrado horizontal */
 }
 
-.card-frame{
-  width: 80%; /* Aumenta el ancho al 80% */
+.card-frame {
+  width: 80%;
+  /* Aumenta el ancho al 80% */
   padding: 0px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto; /* Centrado horizontal */
+  margin: 0 auto;
+  /* Centrado horizontal */
 }
 
 /* Dimensions form */
@@ -77,25 +89,26 @@ body {
 }
 
 .dimensions-form input {
-  padding: 8px;
-  width: 120px;
+  width: 100%;
   font-size: 1em;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #000000;
+  border-radius: 0.75rem;
+  padding-left: 0.5rem /* 8px */;
+  padding-right: 0.5rem /* 8px */;
+  padding-top: 0.25rem /* 4px */;
+  padding-bottom: 0.25rem /* 4px */;
+      --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1))
 }
 
 .dimensions-form input:focus {
   outline: none;
-  border-color: #00bcd4; /* Cyan blue border on focus */
+  border-color: #00bcd4;
+  /* Cyan blue border on focus */
 }
 
 /* Image styling */
-.door-image {
-  width: 60%;
-  height: auto;
-  margin: 20px 0;
-  border-radius: 8px;
-}
+
 
 /* Dimensions display */
 .dimensions-display {
@@ -110,10 +123,11 @@ body {
 
 /* Parts list section */
 .parts-list {
-  width: 35%; /* Aumenta el ancho al 35% */
-  padding: 20px;
+  width: 35%;
+  padding-right: 20px;
+  /* Aumenta el ancho al 35% */
   /*background-color: #ffffff;*/
-  border-radius: 8px;
+
   /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 }
 
@@ -145,11 +159,9 @@ h2 {
   color: #333;
 }
 
-label {
-  font-weight: bold;
-}
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin-right: 10px;
 }
 
@@ -162,7 +174,8 @@ select {
 }
 
 select:focus {
-  border-color: #00bcd4; /* Cyan blue border on focus */
+  border-color: #00bcd4;
+  /* Cyan blue border on focus */
 }
 
 ul li {
@@ -183,84 +196,106 @@ ul li label {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+
   /* Ajustes generales para pantallas pequeñas (como iPhone) */
   .door-container {
     flex-direction: column;
-    align-items: center; /* Centra los elementos en pantallas pequeñas */
-    padding: 10px; /* Añade un poco de padding */
+    align-items: center;
+    /* Centra los elementos en pantallas pequeñas */
+    padding: 10px;
+    /* Añade un poco de padding */
   }
 
-  .door-frame, .parts-list {
-    width: 100%; /* Ocupa todo el ancho disponible */
+  .door-frame,
+  .parts-list {
+    width: 95%;
+    /* Ocupa todo el ancho disponible */
     margin: 0;
     padding: 15px;
-    box-sizing: border-box; /* Asegura que padding no afecte el tamaño total */
+    box-sizing: border-box;
+    /* Asegura que padding no afecte el tamaño total */
   }
 
   .dimensions-form {
     flex-direction: column;
     align-items: flex-start;
-    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+    width: 100%;
+    /* Asegura que el formulario ocupe todo el ancho disponible */
     padding: 15px 0;
   }
 
   .dimensions-form label {
     margin-bottom: 10px;
-    font-size: 14px; /* Ajusta el tamaño de la fuente para pantallas pequeñas */
+    font-size: 14px;
+    /* Ajusta el tamaño de la fuente para pantallas pequeñas */
   }
 
   .dimensions-form input {
-    width: 100%; /* Hace que los inputs ocupen todo el ancho */
+    width: 100%;
+    /* Hace que los inputs ocupen todo el ancho */
     padding: 8px;
-    font-size: 14px; /* Ajusta el tamaño de la fuente de los inputs */
+    font-size: 14px;
+    /* Ajusta el tamaño de la fuente de los inputs */
   }
 
   /* Asegura que los elementos de la lista de partes estén bien organizados */
   .parts-list {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los elementos de la lista */
+    align-items: center;
+    /* Centra los elementos de la lista */
     width: 100%;
   }
 
   .parts-list .part {
     margin-bottom: 10px;
-    width: 100%; /* Asegura que cada parte ocupe el ancho completo */
+    width: 100%;
+    /* Asegura que cada parte ocupe el ancho completo */
   }
 
   /* Ajusta imágenes para que no excedan el tamaño en pantallas pequeñas */
   .door-frame img {
-    max-width: 100%; /* Hace que las imágenes sean responsivas */
+    max-width: 100%;
+    /* Hace que las imágenes sean responsivas */
     height: auto;
   }
 }
 
 @media screen and (max-width: 480px) {
+
   /* Ajustes específicos para pantallas más pequeñas como las de iPhones más pequeños */
   .door-container {
-    padding: 5px; /* Reduce el padding en pantallas muy pequeñas */
+    padding: 5px;
+    /* Reduce el padding en pantallas muy pequeñas */
   }
 
-  .door-frame, .parts-list {
-    padding: 10px; /* Ajusta el padding */
+  .door-frame,
+  .parts-list {
+    padding: 10px;
+    /* Ajusta el padding */
   }
 
   .dimensions-form label {
-    font-size: 12px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    font-size: 12px;
+    /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
   }
 
   .dimensions-form input {
-    font-size: 12px; /* Ajusta el tamaño de la fuente de los inputs */
+    font-size: 12px;
+    /* Ajusta el tamaño de la fuente de los inputs */
   }
 }
 
 @media print {
   body * {
-    visibility: hidden; /* Oculta todo */
+    visibility: hidden;
+    /* Oculta todo */
   }
 
-  .receipt, .receipt * {
-    visibility: visible; /* Asegura que solo el contenido del recibo sea visible */
+  .receipt,
+  .receipt * {
+    visibility: visible;
+    /* Asegura que solo el contenido del recibo sea visible */
     position: absolute;
     left: 0;
     top: 0;
@@ -274,5 +309,3 @@ ul li label {
     font-family: Arial, sans-serif;
   }
 }
-
-

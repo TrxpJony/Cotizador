@@ -1,6 +1,6 @@
 import { useState } from "react"; 
 import CompareImage from "react-compare-image";
-import { Pagination } from "@nextui-org/react";
+import { Pagination } from "@heroui/react";
 
 const itemsPerPage = 3;
 

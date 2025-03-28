@@ -157,8 +157,8 @@ function App() {
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
           <Route path='/users' element={<ProtectedRoute element={<UsersPage />} allowedRole='administrador' />} />
           <Route path='/editPost' element={<ProtectedRoute element={<EditPostPage />} allowedRole='administrador' />} />
-          <Route path='/addPost' element={<ProtectedRoute element={<AddPost/>} allowedRole='administrador' />} />
-          <Route path='/edit' element={<ProtectedRoute element={<EditPost/>} allowedRole='administrador' />} />
+          <Route path='/addPost' element={<ProtectedRoute element={<AddPost />} allowedRole='administrador' />} />
+          <Route path='/edit' element={<ProtectedRoute element={<EditPost />} allowedRole='administrador' />} />
           <Route path='/cotizaciones' element={<ProtectedRoute element={<CotiPage />} allowedRole='administrador' />} />
           <Route path="tipos/col" element={<ProtectedRoute element={<Colosalpage />} allowedRole="cotizador" />} />
           <Route path="tipos/col/cp1" element={<ProtectedRoute element={<Colosal />} allowedRole="cotizador" />} />
@@ -190,7 +190,7 @@ function App() {
           <Route path="tipos/tai/tai2" element={<ProtectedRoute element={<Taironaxx />} allowedRole="cotizador" />} />
           <Route path="p5" element={<ProtectedRoute element={<All />} allowedRole="cotizador" />} />
           <Route path='tipos' element={<Tipos />} />
-          <Route path='aluminark' element={<Tiposaluminark />} />
+          <Route path='aluminark' element={<ProtectedRoute element={<Tiposaluminark />} allowedRole="cotizador" />} />
           <Route path="aluminark/744" element={<ProtectedRoute element={<Sistema744page />} allowedRole="cotizador" />} />
           <Route path="aluminark/744/s741" element={<ProtectedRoute element={<Sistema744 />} allowedRole="cotizador" />} />
           <Route path="aluminark/744/s742" element={<ProtectedRoute element={<Sistema744xox />} allowedRole="cotizador" />} />
