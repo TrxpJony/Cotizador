@@ -1,10 +1,10 @@
-import '../../../css/colosal.css';
-import { useState, useEffect} from "react";
+import '../../../css/colosal.css'; // Archivo CSS para estilos
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import useCalculoPrecios from './useCalculoPrecios';
 
-const EnviarDimensiones8025 = ({ onDimensionsChange }) => {
-    const [dimensions, setDimensions] = useState({width: '', height: ''});
+const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
+    const [dimensions, setDimensions] = useState({ width: '', height: '' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,9 +18,10 @@ const EnviarDimensiones8025 = ({ onDimensionsChange }) => {
 
     const { totalPrice } = useCalculoPrecios(dimensions);
 
+    // Usamos useEffect para enviar el totalPrice al componente padre
     useEffect(() => {
         if (totalPrice !== undefined) {
-            //removed this line
+            // setTotalPrice(totalPrice); // Removed this line
         }
     }, [totalPrice]);
 
@@ -28,34 +29,32 @@ const EnviarDimensiones8025 = ({ onDimensionsChange }) => {
 
     return (
         <>
-            <div className="dimensions-form">
-                <label>
-                    Alto (mm):
-                    <input
-                        type="number"
-                        name="height"
-                        value={height}
-                        onChange={handleChange}
-                        placeholder="00"
-                    />
-                </label>
-                <label>
-                    Ancho (mm):
-                    <input
-                        type="number"
-                        name="width"
-                        value={width}
-                        onChange={handleChange}
-                        placeholder="00"
-                    />
-                </label>
+
+            <div className="grid grid-cols-2 gap-2 mt-2">
+
+                <input
+                    name="height"
+                    value={height}
+                    onChange={handleChange}
+                    placeholder="Alto (mm)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+                />
+
+                <input
+                    name="width"
+                    value={width}
+                    onChange={handleChange}
+                    placeholder="Ancho (mm)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+                />
             </div>
         </>
-    )
+    );
 };
 
-EnviarDimensiones8025.propTypes = {
+EnviarDimensionesCocinas.propTypes = {
+    // setTotalPrice: PropTypes.func.isRequired, // Removed this line
     onDimensionsChange: PropTypes.func.isRequired,
 };
 
-export default EnviarDimensiones8025
+export default EnviarDimensionesCocinas;

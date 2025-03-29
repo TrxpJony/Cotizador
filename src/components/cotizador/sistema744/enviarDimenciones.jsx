@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import useCalculoPrecios from './useCalculoPrecios';
 
-const EnviarDimensiones744 = ({ onDimensionsChange }) => {
+const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
   const [dimensions, setDimensions] = useState({ width: '', height: '' });
 
   const handleChange = (e) => {
@@ -29,35 +29,32 @@ const EnviarDimensiones744 = ({ onDimensionsChange }) => {
 
   return (
     <>
-      <div className="dimensions-form">
-        <label>
-          Alto (mm):
+    
+      <div className="grid grid-cols-2 gap-2 mt-2">
+        
           <input
-            type="number"
             name="height"
             value={height}
             onChange={handleChange}
-            placeholder="00"
+            placeholder="Alto (mm)"
+            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
           />
-        </label>
-        <label>
-          Ancho (mm):
+
           <input
-            type="number"
             name="width"
             value={width}
             onChange={handleChange}
-            placeholder="00"
+            placeholder="Ancho (mm)"
+            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
           />
-        </label>
       </div>
     </>
   );
 };
 
-EnviarDimensiones744.propTypes = {
+EnviarDimensionesCocinas.propTypes = {
   // setTotalPrice: PropTypes.func.isRequired, // Removed this line
   onDimensionsChange: PropTypes.func.isRequired,
 };
 
-export default EnviarDimensiones744;
+export default EnviarDimensionesCocinas;

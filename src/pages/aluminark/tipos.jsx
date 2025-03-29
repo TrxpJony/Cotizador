@@ -115,6 +115,9 @@ export function Tiposaluminark() {
       </div>
       <br />
       <div className="card-frame">
+        <p className="text-gray-600 text-sm">
+          Mostrando {paginatedList.length} de {filteredList.length} resultados disponibles.
+        </p>
         <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
           {paginatedList.map((item, index) => (
             <Card

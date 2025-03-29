@@ -30,7 +30,6 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SISTEMA 8025 XO-OX</h1></strong>
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
@@ -44,7 +43,7 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong><h2>Cabezal:</h2></strong></TableCell>
+                            <TableCell><strong>Cabezal:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
                             <TableCell>${cabezal8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -56,7 +55,7 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
                         <TableRow key="4">
                             <TableCell><strong>Jamba:</strong></TableCell>
                             <TableCell>{doubleHeight} mm (2)</TableCell>
-                            <TableCell>4{jamba8025Price?.toFixed(2)}</TableCell>
+                            <TableCell>${jamba8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -80,7 +79,7 @@ const DetalleTablas8025 = ({ calculatedValues, dimensions, onAddDoor, onAccessor
                         </TableRow>
                         <TableRow key="3">
                             <TableCell><strong>Horizontal Inferior:</strong></TableCell>
-                            <TableCell>{doubleHalfWidth}</TableCell>
+                            <TableCell>{doubleHalfWidth} mm</TableCell>
                             <TableCell>${horizontalInferior8025Price?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">

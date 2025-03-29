@@ -51,9 +51,9 @@ const CocinasCotizador = () => {
       <div className="door-container">
         <div className="px-10">
           {/* Imagen */}
-          <div className='relative w-full h-96 bg-black/20 mb-5 rounded-xl'>
+          <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl'>
             <div className='top-0 left-0 w-full h-full'>
-              <img src={cocinaIMG} alt="Imagen" className="w-full h-full object-cover rounded-xl" />
+              <img src={cocinaIMG} alt="Imagen" className="w-full h-56 sm:h-full object-cover rounded-xl" />
             </div>
           </div>
           <div className='mb-2'>
@@ -73,6 +73,7 @@ const CocinasCotizador = () => {
               <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
               <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
             </select>
+            <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           </div>
           <div className=''>
             <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Pass handleRemoveDoor */}
