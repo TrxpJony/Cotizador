@@ -122,19 +122,18 @@ export function Sistema744page() {
         <p className="text-gray-600 text-sm">
           Mostrando {paginatedList.length} de {filteredList.length} tipologías disponibles.
         </p>
-        <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
           {filteredList.map((item, index) => (
             <Card
               key={index}
               isPressable
-              shadow="sm"
               onPress={() => navigate(`${item.id}`)}  // Redirige usando el ID
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">
                 <Image
                   alt={item.title}
-                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
                   radius="lg"
                   shadow="sm"
                   src={item.img}
@@ -142,7 +141,7 @@ export function Sistema744page() {
                   height="auto"
                 />
               </CardBody>
-              <CardFooter className="text-small justify-between">
+              <CardFooter className="text-lg md:text-base lg:text-sm justify-between p-2 px-4">
                 <b>{item.title}</b>
                 <p className="text-default-500" >{item.tipo}</p>
               </CardFooter>

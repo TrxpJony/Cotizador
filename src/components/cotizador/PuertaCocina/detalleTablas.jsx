@@ -43,7 +43,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
 
                 <Table aria-label="TABLA ACCESORIOS">
                     <TableHeader>
-                        <TableColumn><h1>ACCESORIOS</h1></TableColumn>
+                        <TableColumn><h1>Accesorios</h1></TableColumn>
 
                         <TableColumn></TableColumn>
                     </TableHeader>
