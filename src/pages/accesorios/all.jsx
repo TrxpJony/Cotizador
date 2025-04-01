@@ -169,7 +169,7 @@ export function All() {
                                         height="auto"
                                     />
                                 </CardBody>
-                                <b className="overflow-hidden text-center text-xs md:text-sm lg:text-base">{item.description}</b>
+                                <b className="overflow-hidden text-xs md:text-sm lg:text-base text-center">{item.description}</b>
                                 <CardFooter className="px-4 flex flex-col items-start rounded-b-lg">
                                     <p className="text-xs md:text-sm lg:text-sm text-gray-700 text-center font-semibold">{item.title}</p>
                                     <p className="text-xs md:text-sm lg:text-sm text-default-400 text-center font-semibold">{item.color}</p>

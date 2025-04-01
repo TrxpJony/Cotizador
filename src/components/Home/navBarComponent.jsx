@@ -40,11 +40,12 @@ export default function NavBarComponent({ userId, userRole, location }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)} // Alterna el estado
         />
         <NavbarBrand>
           <AcmeLogo />
@@ -180,14 +181,20 @@ export default function NavBarComponent({ userId, userRole, location }) {
               <DropdownItem
                 key="mision"
                 description="Lideramos la transformación de vidrios y espejos."
-                href="/nosotros"
+                onClick={() => {
+                  navigate("/nosotros");
+                  setIsMenuOpen(false); // Cerrar el menú después de la navegación
+                }}
               >
                 Misión y Visión
               </DropdownItem>
               <DropdownItem
                 key="blog"
                 description="Eventos, regalos y novedades de Vidrio al Arte."
-                href="/blog"
+                onClick={() => {
+                  navigate("/blog");
+                  setIsMenuOpen(false); // Cerrar el menú después de la navegación
+                }}
               >
                 Blog
               </DropdownItem>
