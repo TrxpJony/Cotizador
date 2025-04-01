@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image } from "@heroui/react";
-import { useNavigate } from "react-router-dom";
+import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 import BackButton from "../../components/common/backButton";
-import { Filter, Search } from "lucide-react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import { Search, Filter } from "lucide-react"; // Import icons
 
-const baseUrl = import.meta.env.VITE_API_URL + "/api/categorias";
+const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 const categorias = [
-  { label: "Todas las categorias", key: "All" }
+  { label: "Todas las categorías", key: "All" },
+  { label: "Espejos redondos", key: "redondos" },
+  { label: "Espejos cuadrados", key: "cuadrados" },
+  { label: "Espejos con forma", key: "organicos" },
+  { label: "Espejos con marco", key: "marcos" },
 ];
 
 export function Espejos() {
@@ -17,16 +20,23 @@ export function Espejos() {
   const [filteredList, setFilteredList] = useState([]); // Datos filtrados
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null); // Elemento seleccionado para el modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const itemsPerPage = 15; // Elementos por página
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(baseUrl)
       .then((response) => response.json())
       .then((data) => {
         if (data && Array.isArray(data)) {
-          // Filtrar los datos para que solo se muestren los de categoria ""
-          const categoriaData = data.filter(item => item.categoria?.toLowerCase() === 'catalogoespejos');
+          // Filtrar los datos para que solo se muestren los de las categorías especificadas
+          const categoriasPermitidas = [
+            'redondos', 'cuadrados', 'organicos', 'marcos'];
+          const categoriaData = data.filter(item =>
+            categoriasPermitidas.includes(item.categoria?.toLowerCase())
+          );
+          // Ordenar los datos por el nombre
+          categoriaData.sort((a, b) => a.title.localeCompare(b.title));
           setList(categoriaData);
           setFilteredList(categoriaData);
         } else {
@@ -46,7 +56,7 @@ export function Espejos() {
       ? list
       : list.filter(item =>
         item.title?.toLowerCase().includes(term.toLowerCase()) ||
-        item.categoria?.toLowerCase().includes(term.toLowerCase())
+        item.description?.toLowerCase().includes(term.toLowerCase())
       );
 
     setFilteredList(filtered);
@@ -58,9 +68,7 @@ export function Espejos() {
   const filterByCategory = (categoryKey) => {
     const filtered = !categoryKey || categoryKey === 'All'
       ? list
-      : list.filter(item =>
-        item.color?.toLowerCase().split(/[\s,-]+/).includes(categoryKey?.toLowerCase())
-      );
+      : list.filter(item => item.categoria?.toLowerCase() === categoryKey?.toLowerCase());
 
     setFilteredList(filtered);
 
@@ -74,8 +82,15 @@ export function Espejos() {
     currentPage * itemsPerPage
   );
 
+  // Maneja la apertura del modal
+  const handleCardPress = (item) => {
+    setSelectedItem(item);
+    onOpen();
+  };
+
   return (
     <>
+
       <div className="w-full bg-white shadow-md  p-4 flex flex-col mx-auto">
         <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
           <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
@@ -104,7 +119,7 @@ export function Espejos() {
             defaultSelectedKey="All"
             placeholder="Busca una categoría"
             aria-label="Filtrar por categoría" // Added aria-label for accessibility
-            className=""
+            className="shadow-md rounded-lg"
             onSelectionChange={(key) => filterByCategory(key)}
           >
             {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
@@ -117,14 +132,14 @@ export function Espejos() {
           Mostrando {paginatedList.length} de {filteredList.length} accesorios disponibles.
         </p>
         {filteredList.length === 0 ? (
-          <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
+          <p className="text-center text-gray-500 mt-4">No se encontraron accesorios.</p>
         ) : (
           <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
             {paginatedList.map((item, index) => (
               <Card
                 key={index}
                 isPressable
-                onPress={() => navigate(`${item.id}`)}
+                onPress={() => handleCardPress(item)}
                 className="nextui-card"
               >
                 <CardBody className="overflow-hidden p-4">
@@ -138,8 +153,9 @@ export function Espejos() {
                     height="auto"
                   />
                 </CardBody>
-                <CardFooter className="py-2 px-4 flex flex-col items-start rounded-b-lg">
-                  <b className="overflow-hidden font-bold text-xs md:text-sm lg:text-base ">{item.title}</b>
+                <b className="overflow-hidden p-2 text-lg md:text-base lg:text-sm">{item.title}</b>
+                <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
+                  <p className="text-sm text-default-400 text-center">{item.categoria}</p>
                 </CardFooter>
               </Card>
             ))}
@@ -163,13 +179,43 @@ export function Espejos() {
             initialPage={1}
             page={currentPage} // Sincroniza el estado de la página con el componente
             total={Math.ceil(filteredList.length / itemsPerPage)}
-            onChange={(page) => setCurrentPage(page)}
+            onChange={(page) => {
+              setCurrentPage(page);
+              window.scrollTo(0, 0); // Desplazar hacia arriba
+            }}
             color="primary"
           />
         </div>
       </div>
       <br />
-
+      {/* Modal */}
+      {selectedItem && (
+        <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">{selectedItem.title}</ModalHeader>
+                <ModalBody>
+                  <Image
+                    alt={selectedItem.title}
+                    className="w-full object-cover h-[200px] "
+                    radius="lg"
+                    shadow="sm"
+                    src={selectedItem.img}
+                    width="100%"
+                    height="450px"
+                  />  
+                </ModalBody>
+                <ModalFooter>
+                  <Button variant="light" onPress={onClose}>
+                    Cerrar
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 }

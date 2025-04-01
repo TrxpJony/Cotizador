@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
+import { Card, CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 import BackButton from "../../../components/common/backButton";
+import { Filter, Search } from "lucide-react";
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
 
+const categorias = [
+    { label: "Todas las categorias", key: "All" },
+]
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
 export function DiseñoDivisionesBaño() {
@@ -51,6 +56,19 @@ export function DiseñoDivisionesBaño() {
         setCurrentPage(1);
     };
 
+    const filterByCategory = (categoryKey) => {
+        const filtered = !categoryKey || categoryKey === 'All'
+            ? list
+            : list.filter(item =>
+                item.categoria?.toLowerCase().split(/[\s,-]+/).includes(categoryKey?.toLowerCase())
+            );
+
+        setFilteredList(filtered);
+
+        // Reset pagination to the first page when filtering
+        setCurrentPage(1);
+    };
+
     // Calcula los elementos visibles según la página actual
     const paginatedList = filteredList.slice(
         (currentPage - 1) * itemsPerPage,
@@ -66,43 +84,42 @@ export function DiseñoDivisionesBaño() {
 
     return (
         <>
-            <br />
-            <div className="filter-frame">
-                <br />
-                <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                    Diseños de Divisiones de Baño
-                </p>
-                <br />
-                <div className="flex justify-between items-center">
-                    {/* Barra de búsqueda */}
+            <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
+                <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
+                    <p className="py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700">
+                        Diseños de divisiones de baño
+                    </p>
+                </div>
+            </div>
+            <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
+                {/*Barra de búsqueda mas aja y con icono a la izquierda */}
+                <div className="mt-6 col-span-2 sm:col-span-2 flex items-center gap-2">
+                    <Search className="w-5 h-5 text-gray-500" />
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={(e) => filterBySearchTerm(e.target.value)}
-                        placeholder="Buscar Categoria"
-                        className="peer block w-full sm:w-80 border-b-2 border-gray-400 bg-transparent px-3 py-2 outline-none focus:border-cyan-500 focus:ring-0 focus:placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:focus:border-cyan-500"
+                        placeholder="Buscar Accesorio" // Added arial-label for accesibility
+                        aria-label="Buscar Accesorio"
+                        className="w-full p-2 h-10 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                     />
-
-                    {/* Componente de paginación */}
-                    <div className="flex items-center ">
-                        <Pagination showControls
-                            classNames={{
-                                base: "",
-                                wrapper: "",
-                                prev: "bg-white",
-                                next: "bg-white",
-                                item: "bg-transparent ",
-                                cursor: "bg-cyan-500"
-                            }}
-                            initialPage={1}
-                            page={currentPage} // Sincroniza el estado de la página con el componente
-                            total={Math.ceil(filteredList.length / itemsPerPage)}
-                            onChange={(page) => setCurrentPage(page)}
-                            color="primary"
-                        />
-                    </div>
+                </div>
+                {/*Filtro por categoria más bajo y con icono a la izquierda */}
+                <div className="mt-6 flex col-span-1 sm:col-span-1 items-center">
+                    <Filter className="w-5 h-5 text-gray-500" />
+                    <Autocomplete
+                        defaultItems={categorias}
+                        dafalutSelectedKey="All"
+                        placeholder="Busca una categoria"
+                        aria-label="filtrar por categoria" // Added aria labelfor accessibility
+                        className=""
+                        onSelectionChange={(key) => filterByCategory(key)}
+                    >
+                        {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+                    </Autocomplete>
                 </div>
             </div>
+
             <br />
             <div className="card-frame">
                 <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
@@ -110,14 +127,13 @@ export function DiseñoDivisionesBaño() {
                         <Card
                             key={index}
                             isPressable
-                            shadow="sm"
                             onPress={() => handleCardPress(item)}
                             className="nextui-card"
                         >
                             <CardBody className="overflow-hidden p-4">
                                 <Image
                                     alt={item.title}
-                                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
                                     radius="lg"
                                     shadow="sm"
                                     src={item.img}
@@ -126,8 +142,6 @@ export function DiseñoDivisionesBaño() {
                                 />
                             </CardBody>
                             <b className="overflow-hidden p-2">{item.title}</b>
-                            <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                            </CardFooter>
                         </Card>
                     ))}
                 </div>
@@ -156,33 +170,35 @@ export function DiseñoDivisionesBaño() {
             </div>
             <br />
             {/* Modal */}
-            {selectedItem && (
-                <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
-                    <ModalContent>
-                        {(onClose) => (
-                            <>
-                                <ModalHeader className="flex flex-col gap-1">{selectedItem.title}</ModalHeader>
-                                <ModalBody>
-                                    <Image
-                                        alt={selectedItem.title}
-                                        className="w-full object-cover h-[200px] rounded-t-lg"
-                                        radius="lg"
-                                        shadow="sm"
-                                        src={selectedItem.img}
-                                        width="100%"
-                                        height="450px"
-                                    />
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button variant="light" onPress={onClose}>
-                                        Cerrar
-                                    </Button>
-                                </ModalFooter>
-                            </>
-                        )}
-                    </ModalContent>
-                </Modal>
-            )}
+            {
+                selectedItem && (
+                    <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
+                        <ModalContent>
+                            {(onClose) => (
+                                <>
+                                    <ModalHeader className="flex flex-col gap-1">{selectedItem.title}</ModalHeader>
+                                    <ModalBody>
+                                        <Image
+                                            alt={selectedItem.title}
+                                            className="w-full object-cover h-[200px] rounded-t-lg"
+                                            radius="lg"
+                                            shadow="sm"
+                                            src={selectedItem.img}
+                                            width="100%"
+                                            height="450px"
+                                        />
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button variant="light" onPress={onClose}>
+                                            Cerrar
+                                        </Button>
+                                    </ModalFooter>
+                                </>
+                            )}
+                        </ModalContent>
+                    </Modal>
+                )
+            }
         </>
     );
 }

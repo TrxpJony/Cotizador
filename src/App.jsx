@@ -63,11 +63,6 @@ import { DivisionesBaño } from './pages/divisiones/divisiones';
 import { DivisionesdeBaño } from './pages/divisiones/divisionesbaño/divisionesbaño';
 import { DiseñoDivisionesBaño } from './pages/divisiones/diseñosdivisionesbaño/diseñosdivisionesbaño';
 import { Sandblasting } from './pages/sandblasting/sandblasting';
-import { SandblastingFruteros } from './pages/sandblasting/fruteros/fruteros';
-import { SandblastingFlores } from './pages/sandblasting/flores/flores';
-import { SandblastingAnimales } from './pages/sandblasting/animales/animales';
-import { SandblastingEsquineros } from './pages/sandblasting/esquineros/esquineros';
-import { SandblastingCenefas } from './pages/sandblasting/cenefas/cenefas';
 import { VitrinasVista } from './pages/vitrinas/vitrinasvista';
 import { CocinasVista } from './pages/cocinas/cocinasvista';
 import CotizadorEspejos from './pages/espejos/espejoRedondo/cotizadorespejos';
@@ -202,11 +197,6 @@ function App() {
           <Route path="cat004/div1" element={<DivisionesdeBaño />} />
           <Route path="cat004/div2" element={<DiseñoDivisionesBaño />} />
           <Route path="cat005" element={<Sandblasting />} />
-          <Route path="cat005/sand1" element={<SandblastingFruteros />} />
-          <Route path="cat005/sand2" element={<SandblastingFlores />} />
-          <Route path="cat005/sand3" element={<SandblastingAnimales />} />
-          <Route path="cat005/sand4" element={<SandblastingEsquineros />} />
-          <Route path="cat005/sand5" element={<SandblastingCenefas />} />
           <Route path="cat006" element={<VitrinasVista />} />
           <Route path="cat007" element={<CocinasVista />} />
           <Route path="cat009" element={<Aluminark />} />
