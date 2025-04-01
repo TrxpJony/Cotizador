@@ -42,7 +42,6 @@ import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
 import { Servicios } from './components/servicios';
-
 import { TiposSkylesd } from './pages/skyleds/tipos';
 import Login from './admin/login';
 import { Cotizador } from './components/cotizar';
