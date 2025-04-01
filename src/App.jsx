@@ -41,25 +41,8 @@ import { Inicio } from './components/Inicio';
 import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
-import { TiposAccesorios } from './pages/accesorios/tipos';
 import { Servicios } from './components/servicios';
-import { Batientes } from './pages/accesorios/batientes/batientes';
-import { Bisagras } from './pages/accesorios/bisagras/bisagras';
-import { Divisiones } from './pages/accesorios/divisiones/divisiones';
-import { Cerraduras } from './pages/accesorios/cerraduras/cerraduras';
-import { Pasadores } from './pages/accesorios/pasadores/pasadores';
-import { Soportes } from './pages/accesorios/soportes/soportes';
-import { Brocas } from './pages/accesorios/brocas/brocas';
-import { Manijas } from './pages/accesorios/manijas/manijas';
-import { Chupas } from './pages/accesorios/chupas/chupas';
-import { Deslizantes } from './pages/accesorios/deslizantes/Deslizantes';
-import { Lijas } from './pages/accesorios/lijas/lijas';
-import { Discos } from './pages/accesorios/discos/discos';
-import { Maquina } from './pages/accesorios/maquina/maquinavpp';
-import { Herramientas } from './pages/accesorios/herramientas/herramientas';
-import { Fachadas } from './pages/accesorios/fachadas/fachadas';
-import { Adhesivos } from './pages/accesorios/adhesivos/adhesivos';
-import { Fotocurados } from './pages/accesorios/fotocurados/fotocurados';
+
 import { TiposSkylesd } from './pages/skyleds/tipos';
 import Login from './admin/login';
 import { Cotizador } from './components/cotizar';
@@ -206,24 +189,7 @@ function App() {
           <Route path='cat003/espdis2' element={<Cuadrados />} />
           <Route path='cat003/espdis3' element={<Organicos />} />
           <Route path='cat003/espdis4' element={<Marcos />} />
-          <Route path="cat008" element={<TiposAccesorios />} />
-          <Route path="cat008/ac1" element={<Batientes />} />
-          <Route path="cat008/ac2" element={<Bisagras />} />
-          <Route path="cat008/ac3" element={<Divisiones />} />
-          <Route path="cat008/ac4" element={<Pasadores />} />
-          <Route path="cat008/ac5" element={<Cerraduras />} />
-          <Route path="cat008/ac6" element={<Soportes />} />
-          <Route path="cat008/ac7" element={<Brocas />} />
-          <Route path="cat008/ac8" element={<Manijas />} />
-          <Route path="cat008/ac9" element={<Chupas />} />
-          <Route path="cat008/ac10" element={<Deslizantes />} />
-          <Route path="cat008/ac11" element={<Lijas />} />
-          <Route path="cat008/ac12" element={<Discos />} />
-          <Route path="cat008/ac13" element={<Maquina />} />
-          <Route path="cat008/ac14" element={<Herramientas />} />
-          <Route path="cat008/ac15" element={<Fachadas />} />
-          <Route path="cat008/ac16" element={<Adhesivos />} />
-          <Route path="cat008/ac17" element={<Fotocurados />} />
+          <Route path="cat008" element={<All />} />
           <Route path="cat002" element={<CatalogoSkylesd />} />
           <Route path="led12" element={<Luzled12vista />} />
           <Route path="led110" element={<Luzled1101vista />} />

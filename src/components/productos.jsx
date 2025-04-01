@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import { Search, Filter } from "lucide-react"; // Import icons
 import { Pagination } from "@heroui/react";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
+
+const categorias = [
+  { label: "Todas las categorías", key: "All" },
+  { label: "Sistemas de aluminio", key: "aluminio" },
+  { label: "Espejos", key: "espejos" },
+  { label: "Accesorios", key: "accesorios" },
+  { label: "divisiones de baño", key: "baño" },
+  { label: "Diseños", key: "diseños" },
+];
 
 
 export function Productos() {
@@ -49,6 +60,20 @@ export function Productos() {
     setCurrentPage(1);
   };
 
+  const filterByCategory = (categoryKey) => {
+    const filtered = !categoryKey || categoryKey === 'All'
+      ? list
+      : list.filter(item => {
+        const categories = item.categoria?.toLowerCase().split(/[\s,-]+/) || [];
+        return categories.includes(categoryKey?.toLowerCase());
+      });
+
+    setFilteredList(filtered);
+
+    // Reset pagination to the first page when filtering
+    setCurrentPage(1);
+  };
+
   // Calcula los elementos visibles según la página actual
   const paginatedList = filteredList.slice(
     (currentPage - 1) * itemsPerPage,
@@ -57,25 +82,77 @@ export function Productos() {
 
   return (
     <>
-      <br />
-      <div className="filter-frame">
-        <br />
-        <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-          Productos
-        </p>
-        <br />
-        <div className="flex justify-between items-center">
-          {/* Barra de búsqueda */}
+      <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
+        <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
+          <p className="py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700">
+            Productos
+          </p>
+        </div>
+      </div>
+
+      <div className="filtros grid grid-cols-3 gap-4 w-4/5 mx-auto items-center">
+        {/* Barra de búsqueda más baja y con icono a la izquierda */}
+        <div className="mt-6 col-span-2 sm:col-span-2 flex items-center gap-2">
+          <Search className="w-5 h-5 text-gray-500" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => filterBySearchTerm(e.target.value)}
-            placeholder="Buscar Categoria"
-            className="peer block w-80 border-b-2 border-gray-400 bg-transparent px-3 py-2 outline-none focus:border-cyan-500 focus:ring-0 focus:placeholder-opacity-0 dark:text-white dark:placeholder:text-neutral-300 dark:focus:border-cyan-500"
+            placeholder="Buscar Accessorio ..."
+            aria-label="Buscar accesorio" // Added aria-label for accessibility
+            className="w-full p-2 h-10 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
           />
-
-          {/* Componente de paginación */}
-
+        </div>
+        {/* Filtros por categoria mas bajo y con icono a la izquierda */}
+        <div className="mt-6 flex col-span-1 sm:col-span-1 items-center gap-">
+          <Filter className="w-5 h-5 text-gray-500" />
+          <Autocomplete
+            defaultItems={categorias}
+            defaultSelectedKey="All"
+            placeholder="Busca una categoria"
+            aria-label="filtrar por categoria" // Added aria-label for accessibility
+            className=""
+            onSelectionChange={(key) => filterByCategory(key)}
+          >
+            {(item) => <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>}
+          </Autocomplete>
+        </div>
+      </div>
+      <br />
+      <div className="card-frame">
+        <p className="text-gray-600 text-sm">
+          Mostrando {paginatedList.length} de {filteredList.length} accesorios disponibles.
+        </p>
+        {filteredList.length === 0 ? (
+          <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
+        ) : (
+          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
+            {paginatedList.map((item, index) => (
+              <Card
+                key={index}
+                isPressable
+                onPress={() => navigate(`/${item.id}`)} // Update the navigation path
+                className="nextui-card"
+              >
+                <CardBody className="overflow-hidden p-4">
+                  <Image
+                    alt={item.title}
+                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
+                    radius="lg"
+                    shadow="sm"
+                    src={item.img}
+                    width="100%"
+                    height="auto"
+                  />
+                </CardBody>
+                <CardFooter className="text-lg md:text-base lg:text-sm justify-between p-2 px-4">
+                  <b>{item.title}</b>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
+        <div className="flex items-center mt-6">
           <Pagination showControls
             classNames={{
               base: "",
@@ -88,38 +165,12 @@ export function Productos() {
             initialPage={1}
             page={currentPage} // Sincroniza el estado de la página con el componente
             total={Math.ceil(filteredList.length / itemsPerPage)}
-            onChange={(page) => setCurrentPage(page)}
+            onChange={(page) => {
+              setCurrentPage(page);
+              window.scrollTo(0, 0); // Desplazar hacia arriba
+            }}
             color="primary"
           />
-        </div>
-      </div>
-      <br />
-      <div className="card-frame">
-        <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-          {paginatedList.map((item, index) => (
-            <Card
-              key={index}
-              isPressable
-              shadow="sm"
-              onPress={() => navigate(`/${item.id}`)} // Update the navigation path
-              className="nextui-card"
-            >
-              <CardBody className="overflow-hidden p-4">
-                <Image
-                  alt={item.title}
-                  className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
-                  radius="lg"
-                  shadow="sm"
-                  src={item.img}
-                  width="100%"
-                  height="auto"
-                />
-              </CardBody>
-              <CardFooter className="text-small justify-between p-2">
-                <b>{item.title}</b>
-              </CardFooter>
-            </Card>
-          ))}
         </div>
       </div>
       <br />

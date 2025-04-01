@@ -131,33 +131,36 @@ export function Vitral() {
                 <p className="text-gray-600 text-sm">
                     Mostrando {paginatedList.length} de {filteredList.length} accesorios disponibles.
                 </p>
-                <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-                    {paginatedList.map((item, index) => (
-                        <Card
-                            key={index}
-                            isPressable
-                            shadow="sm"
-                            onPress={() => handleCardPress(item)}
-                            className="nextui-card"
-                        >
-                            <CardBody className="overflow-hidden p-4">
-                                <Image
-                                    alt={item.title}
-                                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
-                                    radius="lg"
-                                    shadow="sm"
-                                    src={item.img}
-                                    width="100%"
-                                    height="auto"
-                                />
-                            </CardBody>
-                            <b className="overflow-hidden p-2">{item.title}</b>
-                            <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                                <p className="text-sm text-default-400 text-center">{item.color}</p>
-                            </CardFooter>
-                        </Card>
-                    ))}
-                </div>
+                {filteredList.length === 0 ? (
+                    <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
+                ) : (
+                    <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
+                        {paginatedList.map((item, index) => (
+                            <Card
+                                key={index}
+                                isPressable
+                                onPress={() => handleCardPress(item)}
+                                className="nextui-card"
+                            >
+                                <CardBody className="overflow-hidden p-4">
+                                    <Image
+                                        alt={item.title}
+                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
+                                        radius="lg"
+                                        shadow="sm"
+                                        src={item.img}
+                                        width="100%"
+                                        height="auto"
+                                    />
+                                </CardBody>
+                                <b className="overflow-hidden p-2 text-lg md:text-base lg:text-sm">{item.title}</b>
+                                <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
+                                    <p className="text-sm text-default-400 text-center">{item.color}</p>
+                                </CardFooter>
+                            </Card>
+                        ))}
+                    </div>
+                )}
                 {/* Botón Regresar */}
                 <div className="flex justify-end mt-6">
                     <BackButton />
