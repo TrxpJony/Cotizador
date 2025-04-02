@@ -112,7 +112,7 @@ export function Vitral() {
                     />
                 </div>
                 {/* Filtro por categoría más bajo y con icono a la izquierda */}
-                <div className="mt-6 flex col-span-1 sm:col-span-1 items-center gap-">
+                <div className="mt-6 flex col-span-1 sm:col-span-1 items-center ">
                     <Filter className="w-5 h-5 text-gray-500" />
                     <Autocomplete
                         defaultItems={categorias}

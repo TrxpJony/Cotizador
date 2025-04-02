@@ -128,14 +128,13 @@ export function PerfilesVista() {
                             <Card
                                 key={index}
                                 isPressable
-                                shadow="sm"
                                 onPress={() => handleCardPress(item)}
                                 className="nextui-card"
                             >
                                 <CardBody className="overflow-hidden p-4">
                                     <Image
                                         alt={item.title}
-                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
                                         radius="lg"
                                         shadow="sm"
                                         src={item.img}
@@ -143,10 +142,9 @@ export function PerfilesVista() {
                                         height="auto"
                                     />
                                 </CardBody>
-                                <b className="overflow-hidden p-2">{item.title}</b>
+                                <b className="overflow-hidden p-2 text-lg md:text-base lg:text-sm">{item.title}</b>
                                 <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
-                                    <p className="text-sm text-default-400 text-center">{item.color}</p>
-                                </CardFooter>
+                                    <p className="text-sm text-default-400 text-center">{item.color}</p>  </CardFooter>
                             </Card>
                         ))}
                     </div>

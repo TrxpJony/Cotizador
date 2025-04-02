@@ -142,8 +142,8 @@ export function CatalogoSkylesd() {
                     height="auto"
                   />
                 </CardBody>
-                <CardFooter className="py-2 px-4 flex flex-col items-start rounded-b-lg">
-                  <b className="overflow-hidden font-bold text-xs md:text-sm lg:text-base ">{item.title}</b>
+                <CardFooter className="text-lg md:text-base lg:text-sm justify-between p-2 px-4">
+                  <b>{item.title}</b>
                 </CardFooter>
               </Card>
             ))}
