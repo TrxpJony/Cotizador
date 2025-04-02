@@ -36,6 +36,13 @@ const Colosalxxx = () => {
 
   return (
     <>
+      <div className='w-full bg-white shadow-md p-4 flex flex-col mx-auto'>
+        <div className='px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left'>
+          <p className='py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700'>
+            Sistema colosal pc 2.6 XXX
+          </p>
+        </div>
+      </div>
       <div className="door-container">
         <div className="door-frame">
           {/* Imagen */}
@@ -57,13 +64,13 @@ const Colosalxxx = () => {
             </div>
           </div>
         </div>
-        <DetalleTablas 
-          calculatedValues={calculatedValues} 
-          dimensions={dimensions} 
-          onAddDoor={handleAddDoor} 
-          onAccessoryChange={handleAccessoryChange} 
-          selectedAccessories={selectedAccessories} 
-          useCalculoPrecios={useCalculoPrecios} 
+        <DetalleTablas
+          calculatedValues={calculatedValues}
+          dimensions={dimensions}
+          onAddDoor={handleAddDoor}
+          onAccessoryChange={handleAccessoryChange}
+          selectedAccessories={selectedAccessories}
+          useCalculoPrecios={useCalculoPrecios}
         /> {/* Pass useCalculoPrecios as a prop */}
       </div>
     </>

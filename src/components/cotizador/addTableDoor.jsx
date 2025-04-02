@@ -16,7 +16,7 @@ const AddTableDoor = ({ doors, onRemove }) => {
                     const totalSinIvaPorPuerta = (door.price * door.quantity) - iva; // Se resta el IVA
                     const totalConIvaPorPuerta = (door.price * door.quantity);
                     return (
-                        <li key={index} className="py-2 px-4 mb-2 border-2 rounded-2xl w-full bg-white ">
+                        <li key={index} className="py-2 px-4 mb-2 border-2 rounded-2xl w-full bg-white shadow-lg">
                             <table className="table-auto w-full text-left ">
                                 <tbody>
                                     <tr>
@@ -61,7 +61,7 @@ const AddTableDoor = ({ doors, onRemove }) => {
                     );
                 })}
             </ul>
-            <div className="py-2 px-4  border-2 rounded-2xl w-full bg-white ">
+            <div className="py-2 px-4  border-2 rounded-2xl w-full bg-white shadow-lg">
                 <table className="table-auto w-full text-left">
                     <tbody>
                         <tr>

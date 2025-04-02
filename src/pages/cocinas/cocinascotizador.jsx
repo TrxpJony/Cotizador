@@ -51,7 +51,7 @@ const CocinasCotizador = () => {
       <div className="door-container">
         <div className="px-10">
           {/* Imagen */}
-          <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl'>
+          <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl shadow-lg'>
             <div className='top-0 left-0 w-full h-full'>
               <img src={cocinaIMG} alt="Imagen" className="w-full h-56 sm:h-full object-cover rounded-xl" />
             </div>
@@ -64,7 +64,7 @@ const CocinasCotizador = () => {
           </div>
           <div className='mb-2'>
             <label className='text-gray-700 font-bold mb-2' >Tipo de vidrio:</label>
-            <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+            <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
               <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
               <option value="TRA_NOR">Vidrio transparente</option>
               <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>

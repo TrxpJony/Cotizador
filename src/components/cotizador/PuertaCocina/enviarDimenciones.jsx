@@ -37,7 +37,7 @@ const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
             value={height}
             onChange={handleChange}
             placeholder="Alto (mm)"
-            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none shadow-lg"
           />
 
           <input
@@ -45,7 +45,7 @@ const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
             value={width}
             onChange={handleChange}
             placeholder="Ancho (mm)"
-            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+            className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none shadow-lg"
           />
       </div>
     </>
