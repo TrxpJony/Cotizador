@@ -61,7 +61,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
     }, 0);
     const vidrioPrice = (glassUnitPrice * area); // Si es "sinVidrio", será 0
-    const manoDeObra = totalHeight > 1200 ? 50000 : 40000;
+    const manoDeObra = totalHeight > 1200 ? 35000 : 35000 ;
 
     // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
     const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
