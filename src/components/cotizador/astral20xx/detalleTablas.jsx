@@ -32,7 +32,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>ASTRAL 2.0 XX</h1></strong>
                 <Table aria-label="Table Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
