@@ -29,9 +29,7 @@ const EnviarDimensiones = ({ onDimensionsChange }) => {
 
   return (
     <>
-
       <div className="grid grid-cols-2 gap-2 mt-2">
-
         <input
           name="height"
           value={height}
