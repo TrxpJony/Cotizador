@@ -2,14 +2,13 @@ import '../../../css/colosal.css';
 import EnviarDimensiones from '../../../components/cotizador/colosal26xxx/enviarDimenciones';
 import useCalculoPrecios from '../../../components/cotizador/colosal26xxx/useCalculoPrecios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AddTableDoor from '../../../components/cotizador/addTableDoor'; // Import the new component
 import PrintTableDoor from '../../../components/cotizador/PrintTableDoor'; // Import the new component
 import DetalleTablas from '../../../components/cotizador/colosal26xxx/detalleTablas';
 import colosalImage from '../../../img/colxxx.png'; // Importar la imagen
+import BackButton from '../../../components/common/backButton';
 
 const Colosalxxx = () => {
-  const navigate = useNavigate(); // Inicializar useNavigate
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [doors, setDoors] = useState([]); // State to hold doors
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
@@ -22,6 +21,10 @@ const Colosalxxx = () => {
 
   const handleAddDoor = (newDoor) => {
     setDoors(prevDoors => [...prevDoors, newDoor]);
+  };
+
+  const handleRemoveDoor = (indextoRemove) => {
+    setDoors(prevDoors => prevDoors.filter((_, index) => index !== indextoRemove));
   };
 
   const handleAccessoryChange = (accessory) => {
@@ -44,24 +47,26 @@ const Colosalxxx = () => {
         </div>
       </div>
       <div className="door-container">
-        <div className="door-frame">
+        <div className="px-10">
           {/* Imagen */}
-          <img src={colosalImage} alt="Puerta Corrediza Colosal" className="door-image" />
-          <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
-          <h2 className="text-right text-4xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-          <br />
-          <AddTableDoor doors={doors} /> {/* Use the new component */}
-          <PrintTableDoor doors={doors} title={"Puerta Corrediza Colosal 2.6"} image={colosalImage} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
-          <div className="flex justify-end mt-6">
-            {/* Botón Agregar Puerta */}
-            <div className="flex justify-center mb-6">
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-gray-500 px-4 py-2 text-white rounded-md"
-              >
-                Regresar
-              </button>
+          <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl shadow-lg'>
+            <div className='top-0 left-0 w-full h-full'>
+              <img src={colosalImage} alt="Puerta Corrediza Colosal" className='w-full h-56 sm:h-full object-cover rounded-xl' />
             </div>
+          </div>
+          <div className='mb-2'>
+            <label className='text-gray-700 font-bold mb-2'>
+              Dimensiones
+            </label>
+            <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
+          </div>
+          <div className=''>
+            <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+            <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Use the new component */}
+          </div>
+          <div className='flex justify-between mb-6'>
+            <PrintTableDoor doors={doors} title={"Puerta Corrediza Colosal 2.6"} image={colosalImage} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}
+            <BackButton />
           </div>
         </div>
         <DetalleTablas
