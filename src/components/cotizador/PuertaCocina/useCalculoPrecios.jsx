@@ -61,27 +61,34 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
     }, 0);
     const vidrioPrice = (glassUnitPrice * area); // Si es "sinVidrio", será 0
-    const manoDeObra = totalHeight > 1200 ? 50000 : 40000;
 
-    // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-    const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
+    // Determinar el precio de mano de obra según el área
+    let manoDeObra = 0;
+    if (totalHeight < 1200 || totalWidth < 1200) {
+      manoDeObra = memoizedPrices.PUC_MO1 || 0;
+    } else if (totalHeight > 1200 || totalWidth > 1200) {
+      manoDeObra = memoizedPrices.PUC_MO2 || 0;
+    }
+    
+      // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
+      const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
 
-    setTotalPrice(total);
-    setCalculatedValues({
-      marcoCocina,
-      marcoCocinaPrice,
-      siliconaPrice,
-      felpaHeight,
-      felpaWidth,
-      felpaPrice,
-      totalFelpa,
-      area,
-      vidrioPrice,
-      escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
-      manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
+      setTotalPrice(total);
+      setCalculatedValues({
+        marcoCocina,
+        marcoCocinaPrice,
+        siliconaPrice,
+        felpaHeight,
+        felpaWidth,
+        felpaPrice,
+        totalFelpa,
+        area,
+        vidrioPrice,
+        escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
+        manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
 
-    });
-  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
+      });
+    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
 
 
   return { totalPrice, calculatedValues };

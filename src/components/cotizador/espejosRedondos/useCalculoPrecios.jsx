@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", isCenBotSelected = false) => {
+const useCalculoPrecios = ({ Diameter }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", isCenBotSelected = false) => {
     const [dbPrices, setDbPrices] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [calculatedValues, setCalculatedValues] = useState({});
@@ -34,9 +34,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     useEffect(() => {
         if (Object.keys(memoizedPrices).length === 0) return;
 
-        const totalHeight = Number(height);
-        const totalWidth = Number(width);
-        const mtrsLineal = totalHeight * 2 + totalWidth * 2; // Perimeter for cenefa calculation
+        const totalDiameter = Number(Diameter);
+        const totalHeight = totalDiameter + 50;
+        const totalWidth = totalDiameter + 50;
+        const mtrsLineal = totalDiameter * 3.14; // Perimeter for cenefa calculation
         const area = (totalHeight / 1000) * (totalWidth / 1000);
         const totalArea = area;
 
@@ -62,7 +63,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const perfilPrice = perfilUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for perfil
         const cenBotPrice = isCenBotSelected ? (memoizedPrices.CEN_BOT || 0) : 0; // Add CEN_BOT_PRI if selected
 
-        const total = perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + cenBotPrice + manoDeObra;
+
+        const total = manoDeObra + perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + cenBotPrice;
 
         setTotalPrice(total);
         setCalculatedValues({
@@ -72,11 +74,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
             vidrioPrice,
             cenefaPrice,
             mtrsLineal,
-            totalArea,
             manoDeObra,
             CEN_BOT_PRI: memoizedPrices.CEN_BOT ? Number(memoizedPrices.CEN_BOT) : 0,
         });
-    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, isCenBotSelected]);
+    }, [Diameter, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, isCenBotSelected]);
 
     return { totalPrice, calculatedValues };
 };

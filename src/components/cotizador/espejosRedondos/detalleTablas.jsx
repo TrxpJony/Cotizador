@@ -20,8 +20,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
     });
 
     const handleAccessorySelect = (tipo, id, precio) => {
-        const luztotal = dimensions.height && dimensions.width
-            ? (dimensions.height * 2) + (dimensions.width * 2)
+        const luztotal = dimensions.Diameter
+            ? (dimensions.Diameter * 3.14)
             : 0;
 
         let precioFinal = precio;
@@ -51,8 +51,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
 
     useEffect(() => {
         // Recalcular el precio de las luces seleccionadas al cambiar las dimensiones
-        const luztotal = dimensions.height && dimensions.width
-            ? (dimensions.height * 2) + (dimensions.width * 2)
+        const luztotal = dimensions.Diameter
+            ? (dimensions.Diameter * 3.14)
             : 0;
 
         setSelectedAccessory((prevState) => {
@@ -105,12 +105,13 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
 
 
     const {
+        totalWidth,
+        totalHeight,
         vidrioPrice,
         cenefaPrice,
         perfilPrice,
         mtrsLineal,
         CEN_BOT_PRI,
-        totalArea,
         manoDeObra,
     } = calculatedValues || {};
 
@@ -131,7 +132,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Vidrio:</strong></TableCell>
-                            <TableCell> {totalArea?.toFixed(2)} m²</TableCell>
+                            <TableCell> {totalHeight} x {totalWidth} mm</TableCell>
                             <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
@@ -146,7 +147,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Mano de obra:</strong></TableCell>
-                            <TableCell> {dimensions.height} mm x {dimensions.width} mm</TableCell>
+                            <TableCell> {totalHeight} x {totalWidth} mm</TableCell>
                             <TableCell>${manoDeObra?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
@@ -359,7 +360,12 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                     </ModalContent>
                 </Modal>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedCenefa={selectedCenefa} selectedPerfil={selectedPerfil} />
+                <CotizadorAdd
+                    dimensions={{
+                        width: dimensions.Diameter, // Usa Diameter como width
+                        height: dimensions.Diameter // Usa Diameter como height
+                    }}
+                    onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedCenefa={selectedCenefa} selectedPerfil={selectedPerfil} />
             </div>
         </>
     );
