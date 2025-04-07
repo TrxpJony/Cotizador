@@ -71,7 +71,7 @@ const Sistema744 = () => {
           </div>
           <div>
             <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-            <AddTableDoor doors={doors} onRemove={handleRemoveDoor}/> {/* Use the new component */}
+            <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Use the new component */}
           </div>
           <div className='flex justify-between mb-6'>
             <PrintTableDoor doors={doors} title={"Puerta / ventana Corrediza Sistema 744"} image={sistema744img} totalPrice={totalPrice} /> {/* Pass totalPrice prop */}

@@ -7,7 +7,7 @@ import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, Mo
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
-const CotizadorEspejos = () => {
+const CotizadorEspejosRedondos = () => {
 
     const navigate = useNavigate(); // Inicializar useNavigate
     const [dimensions, setDimensions] = useState({ diame: '' });
@@ -517,4 +517,4 @@ const CotizadorEspejos = () => {
     );
 };
 
-export default CotizadorEspejos;
+export default CotizadorEspejosRedondos;

@@ -38,7 +38,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     const totalHeight = Number(height);
     const totalWidth = Number(width);
 
-    const area = (totalWidth / 1000) * (totalWidth / 1000);
+    const area = (totalHeight / 1000) * (totalWidth / 1000);
     const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
     const doubleHeight = totalHeight * 2;
     const doubleHalfWidth = halfWidth * 2;
@@ -47,6 +47,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     const felpaHeight = totalHeight * 6;
     const felpaWidth = totalWidth * 2;
     const totalFelpa = felpaHeight + felpaWidth;
+    
     const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
     const cabezal744Price = getPrice("cabezal744", totalWidth);
