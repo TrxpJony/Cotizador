@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ Diameter }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", isCenBotSelected = false) => {
+const useCalculoPrecios = ({ Diameter, width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", isCenBotSelected = false) => {
     const [dbPrices, setDbPrices] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [calculatedValues, setCalculatedValues] = useState({});
@@ -35,9 +35,9 @@ const useCalculoPrecios = ({ Diameter }, selectedAccessories = [], selectedGlass
         if (Object.keys(memoizedPrices).length === 0) return;
 
         const totalDiameter = Number(Diameter);
-        const totalHeight = totalDiameter + 50;
-        const totalWidth = totalDiameter + 50;
-        const mtrsLineal = totalDiameter * 3.14; // Perimeter for cenefa calculation
+        const totalHeight = height ?? (totalDiameter + 50);
+        const totalWidth = width ?? (totalDiameter + 50);
+        const mtrsLineal = totalHeight * 2 + totalWidth * 2; // Perimeter for cenefa calculation
         const area = (totalHeight / 1000) * (totalWidth / 1000);
         const totalArea = area;
 
@@ -77,7 +77,7 @@ const useCalculoPrecios = ({ Diameter }, selectedAccessories = [], selectedGlass
             manoDeObra,
             CEN_BOT_PRI: memoizedPrices.CEN_BOT ? Number(memoizedPrices.CEN_BOT) : 0,
         });
-    }, [Diameter, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, isCenBotSelected]);
+    }, [Diameter, width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, isCenBotSelected]);
 
     return { totalPrice, calculatedValues };
 };

@@ -362,8 +362,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                 <br />
                 <CotizadorAdd
                     dimensions={{
-                        width: dimensions.Diameter, // Usa Diameter como width
-                        height: dimensions.Diameter // Usa Diameter como height
+                        width: Number(dimensions.Diameter || dimensions.width || 0) + 50, // Convierte a número
+                        height: Number(dimensions.Diameter || dimensions.height || 0) + 50 // Convierte a número
                     }}
                     onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedCenefa={selectedCenefa} selectedPerfil={selectedPerfil} />
             </div>
