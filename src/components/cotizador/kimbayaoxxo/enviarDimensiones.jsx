@@ -28,27 +28,23 @@ const EnviarDimensiones = ({ onDimensionsChange }) => {
 
     return (
         <>
-            <div className='dimensions-form'>
-                <label>
-                    Alto (mm):
-                    <input
-                        type="number"
-                        name='height'
-                        value={height}
-                        onChange={handleChange}
-                        placeholder='00'
-                    />
-                </label>
-                <label>
-                    Ancho (mm):
-                    <input
-                        type="number"
-                        name='width'
-                        value={width}
-                        onChange={handleChange}
-                        placeholder='00'
-                    />
-                </label>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+
+                <input
+                    name="height"
+                    value={height}
+                    onChange={handleChange}
+                    placeholder="Alto (mm)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+                />
+
+                <input
+                    name="width"
+                    value={width}
+                    onChange={handleChange}
+                    placeholder="Ancho (mm)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
+                />
             </div>
         </>
     );

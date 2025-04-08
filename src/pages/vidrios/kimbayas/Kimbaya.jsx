@@ -2,14 +2,13 @@ import '../../../css/colosal.css';
 import EnviarDimensiones from '../../../components/cotizador/kimbaya/enviarDimensiones';
 import useCalculoPrecios from '../../../components/cotizador/kimbaya/useCalculoPrecios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AddTableDoor from '../../../components/cotizador/addTableDoor';
 import DetalleTablas from '../../../components/cotizador/kimbaya/detalleTablas';
 import kimbayaImage from '../../../img/kimxo.png';
 import PrintTableDoor from '../../../components/cotizador/PrintTableDoor';
+import BackButton from '../../../components/common/backButton';
 
 const Kimbaya = () => {
-    const navigate = useNavigate();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [doors, setDoors] = useState([]);
     const [selectedAccessories, setSelectedAccessories] = useState([]);
@@ -22,6 +21,10 @@ const Kimbaya = () => {
 
     const handleAddDoor = (newDoor) => {
         setDoors(prevDoors => [...prevDoors, newDoor]);
+    };
+
+    const handleRemoveDoor = (indexToRemove) => {
+        setDoors(prevDoors => prevDoors.filter((_, index) => index !== indexToRemove));
     };
 
     const handleAccessoryChange = (accessory) => {
@@ -46,30 +49,24 @@ const Kimbaya = () => {
             <div className='door-container'>
                 <div className='px-10'>
                     {/* Imagen */}
-                    <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl shadow-lg'>
+                    <div className='relative w-full h-56 sm:h-72 md:h-96 bg-black/20 mb-5 rounded-xl'>
                         <div className='top-0 left-0 w-full h-full'>
-                            <img src={kimbayaImage} alt="SISTEMA KIMBAYA XO" className='w-full h-56 sm:h-full object-cover rounded-xl' />
+                            <img src={kimbayaImage} alt="SISTEMA KIMBAYA XO" className="w-full h-56 sm:h-full object-cover rounded-xl" />
                         </div>
                     </div>
-                    <div className='MB-2'>
-                        <label className=''>
+                    <div className='mb-2'>
+                        <label className='text-gray-700 font-bold mb-2'>
                             Dimensiones
                         </label>
+                        <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
                     </div>
-                    <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
-                    <h2 className='text-right text-4xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-                    <br />
-                    <AddTableDoor doors={doors} />
-                    <PrintTableDoor doors={doors} title={"Puerta Corrediza Sistema Kimbaya"} image={kimbayaImage} totalPrice={totalPrice} />
-                    <div className='flex justify-end mt-6'>
-                        <div className='flex justify-center mb-6'>
-                            <button
-                                onClick={() => navigate(-1)}
-                                className='bg-gray-500 px-3 py-2 text-white rounded-md'
-                            >
-                                Regresar
-                            </button>
-                        </div>
+                    <div>
+                        <h2 className='text-right text-xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                        <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Use the new component */}
+                    </div>
+                    <div className='flex justify-between mb-6'>
+                        <PrintTableDoor doors={doors} title={"Puerta Corrediza Sistema Kimbaya"} image={kimbayaImage} totalPrice={totalPrice} />
+                        <BackButton />
                     </div>
                 </div>
                 <DetalleTablas
