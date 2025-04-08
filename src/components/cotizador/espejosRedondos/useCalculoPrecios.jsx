@@ -32,7 +32,7 @@ const useCalculoPrecios = ({ Diameter, width, height }, selectedAccessories = []
     const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
     useEffect(() => {
-        if (Object.keys(memoizedPrices).length === 0) return;
+        if (!Diameter || Object.keys(memoizedPrices).length === 0) return;
 
         const totalDiameter = Number(Diameter);
         const totalHeight = height ?? (totalDiameter + 50);
@@ -49,9 +49,9 @@ const useCalculoPrecios = ({ Diameter, width, height }, selectedAccessories = []
         let manoDeObra = 0;
         if (totalArea <= 0.6) {
             manoDeObra = memoizedPrices.ESP_MO1 || 0;
-        } else if (totalArea > 0.6 && totalArea <= 1) {
+        } else if (totalArea > 0.6 && totalArea <= 1.5) {
             manoDeObra = memoizedPrices.ESP_MO2 || 0;
-        } else if (totalArea > 1 && totalArea <= 2) {
+        } else if (totalArea > 1.5 && totalArea <= 2) {
             manoDeObra = memoizedPrices.ESP_MO3 || 0;
         } else if (totalArea > 2) {
             manoDeObra = memoizedPrices.ESP_MO4 || 0;
@@ -59,10 +59,21 @@ const useCalculoPrecios = ({ Diameter, width, height }, selectedAccessories = []
 
         const vidrioPrice = (glassUnitPrice * area);
         const accessoriesPrice = memoizedAccessories.reduce((acc, accessory) => acc + (accessory.precio || 0), 0);
-        const cenefaPrice = cenefaUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for cenefa
-        const perfilPrice = perfilUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for perfil
+        const cenefaPriceRaw = cenefaUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for cenefa
+        const perfilPriceRaw = perfilUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for perfil
         const cenBotPrice = isCenBotSelected ? (memoizedPrices.CEN_BOT || 0) : 0; // Add CEN_BOT_PRI if selected
 
+        // Apply minimum price logic for cenefa
+        let cenefaPrice = cenefaPriceRaw;
+        if (selectedCenefa === "CEN_FAC") {
+            cenefaPrice = Math.max(cenefaPriceRaw, 25000);
+        } else if (selectedCenefa === "CEN_INT") {
+            cenefaPrice = Math.max(cenefaPriceRaw, 30000);
+        } else if (selectedCenefa === "CEN_DIF") {
+            cenefaPrice = Math.max(cenefaPriceRaw, 35000);
+        }
+
+        const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.max(perfilPriceRaw, 25000);
 
         const total = manoDeObra + perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + cenBotPrice;
 

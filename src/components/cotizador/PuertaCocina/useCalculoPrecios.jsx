@@ -32,7 +32,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
   const memoizedAccessories = useMemo(() => selectedAccessories, [JSON.stringify(selectedAccessories)]);
 
   useEffect(() => {
-    if (Object.keys(memoizedPrices).length === 0) return;
+    if (!width || !height || Object.keys(memoizedPrices).length === 0) return;
 
     // Convertimos en números las dimensiones para evitar NaN
     const totalHeight = Number(height) || 0;
@@ -69,26 +69,26 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     } else if (totalHeight > 1200 || totalWidth > 1200) {
       manoDeObra = memoizedPrices.PUC_MO2 || 0;
     }
-    
-      // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-      const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
 
-      setTotalPrice(total);
-      setCalculatedValues({
-        marcoCocina,
-        marcoCocinaPrice,
-        siliconaPrice,
-        felpaHeight,
-        felpaWidth,
-        felpaPrice,
-        totalFelpa,
-        area,
-        vidrioPrice,
-        escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
-        manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
+    // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
+    const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
 
-      });
-    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
+    setTotalPrice(total);
+    setCalculatedValues({
+      marcoCocina,
+      marcoCocinaPrice,
+      siliconaPrice,
+      felpaHeight,
+      felpaWidth,
+      felpaPrice,
+      totalFelpa,
+      area,
+      vidrioPrice,
+      escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
+      manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
+
+    });
+  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
 
 
   return { totalPrice, calculatedValues };

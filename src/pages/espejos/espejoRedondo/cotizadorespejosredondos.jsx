@@ -68,9 +68,8 @@ const CotizadorEspejosRedondos = () => {
                         <label className='text-gray-700 font-bold mb-2'>Tipo de Vidrio</label>
                         <select className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
                             <option value="sinVidrio">Sin Vidrio</option>
-                            <option value="Incoloro4mm">Incoloro 4 mm</option>
-                            <option value="Radiant4mm">Radiant 4 mm</option>
                             <option value="Orion4mm">Orion 4 mm</option>
+                            <option value="Radiant4mm">Radiant 4 mm</option>
                             <option value="PaloRosa4mm">Palo Rosa 4 mm</option>
                             <option value="Gris4mm">Gris 4 mm</option>
                             <option value="Bronce4mm">Bronce 4 mm</option>
