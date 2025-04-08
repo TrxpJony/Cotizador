@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCenefa, selectedPerfil, onAccessoryChange, onCenBotChange }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCut, selectedCenefa, selectedPerfil, onAccessoryChange, onCenBotChange }) => { // Add new props
     const { isOpen: isOpen12V, onOpen: onOpen12V, onClose: onClose12V } = useDisclosure();
     const { isOpen: isOpen110V, onOpen: onOpen110V, onClose: onClose110V } = useDisclosure();
     const { isOpen: isOpenSensores, onOpen: onOpenSensores, onClose: onCloseSensores } = useDisclosure();
@@ -108,6 +108,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
         vidrioPrice,
         cenefaPrice,
         perfilPrice,
+        cutPrice,
         mtrsLineal,
         CEN_BOT_PRI,
         totalArea,
@@ -135,16 +136,21 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                             <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="3">
+                            <TableCell><strong>biselado:</strong></TableCell>
+                            <TableCell> {mtrsLineal} mm</TableCell>
+                            <TableCell>${cutPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
                             <TableCell><strong>Cenefa:</strong></TableCell>
                             <TableCell> {mtrsLineal} mm</TableCell>
                             <TableCell>${cenefaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow key="4">
+                        <TableRow key="6">
                             <TableCell><strong>Perfileria en aluminio:</strong></TableCell>
                             <TableCell> {mtrsLineal} mm</TableCell>
                             <TableCell>${perfilPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow key="5">
+                        <TableRow key="7">
                             <TableCell><strong>Mano de obra:</strong></TableCell>
                             <TableCell> {dimensions.height} mm x {dimensions.width} mm</TableCell>
                             <TableCell>${manoDeObra?.toFixed(2)}</TableCell>
@@ -359,7 +365,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                     </ModalContent>
                 </Modal>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedCenefa={selectedCenefa} selectedPerfil={selectedPerfil} />
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedCut={selectedCut} selectedCenefa={selectedCenefa} selectedPerfil={selectedPerfil} />
             </div>
         </>
     );
@@ -382,6 +388,7 @@ DetalleTablas.propTypes = {
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired,
     selectedGlass: PropTypes.string.isRequired,
+    selectedCut: PropTypes.string.isRequired,
     selectedPerfil: PropTypes.string.isRequired,
     selectedCenefa: PropTypes.string.isRequired,
 };

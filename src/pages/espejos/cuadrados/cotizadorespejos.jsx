@@ -14,9 +14,10 @@ const CotizadorEspejos = () => {
     const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
     const [selectedCenefa, setSelectedCenefa] = useState('sinCenefa');
     const [selectedPerfil, setselectedPerfil] = useState('sinPerfil'); // State for selected profile
+    const [selectedCut, setSelectedCut] = useState('alCorte')
     const [isCenBotSelected, setIsCenBotSelected] = useState(false); // State for checkbox
 
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil,  isCenBotSelected);
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, isCenBotSelected);
 
 
     const handleDimensionsChange = (newDimensions) => {
@@ -57,15 +58,15 @@ const CotizadorEspejos = () => {
                             <img src={espejoImage} alt="Espejo" className="w-full h-56 sm:h-full object-cover rounded-xl " />
                         </div>
                     </div>
-                    <div className='mb-2'>
+                    <div className=''>
                         <label className='text-gray-700 font-bold mb-2'>
                             Dimensiones
                         </label>
                         <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
                     </div>
                     <div className='mb-2'>
-                        <label className='text-gray-700 font-bold mb-2'>Tipo de Vidrio</label>
-                        <select className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+                        <label className='text-gray-700 font-bold mb-2'>Tipo de vidrio</label>
+                        <select className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
                             <option value="sinVidrio">Sin Vidrio</option>
                             <option value="Orion4mm">Orion 4 mm</option>
                             <option value="Radiant4mm">Radiant 4 mm</option>
@@ -90,6 +91,13 @@ const CotizadorEspejos = () => {
                             <option value="PER_ESP">Perfileria en aluminio</option>
                         </select>
                     </div>
+                    <div className='mb-2'>
+                        <label className='text-gray-700 font-bold mb-2'>Biselado</label>
+                        <select className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedCut} onChange={(e) => setSelectedCut(e.target.value)}>
+                            <option value="alCorte">No</option>
+                            <option value="BIS_ES1">Biselado</option>
+                        </select>
+                    </div>
                     <div>
                         <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                         <AddTableDoor doors={doors} onRemove={handleRemoveDoor} /> {/* Use the new component */}
@@ -109,6 +117,7 @@ const CotizadorEspejos = () => {
                     selectedGlass={selectedGlass}
                     selectedCenefa={selectedCenefa} // Pass the selectedCenefa state to DetalleTablas
                     selectedPerfil={selectedPerfil} // Pass the selectedPerfil state to DetalleTablas
+                    selectedCut={selectedCut}
                     onCenBotChange={handleCenBotChange} // Pass handler to DetalleTablas
                 /> {/* Pass useCalculoPrecios as a prop */}
             </div>

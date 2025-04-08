@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import "react-toastify/dist/ReactToastify.css";
 
-const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil }) => { // Accept selectedAccessories as a prop
+const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut }) => { // Accept selectedAccessories as a prop
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         description: '',
@@ -11,7 +11,7 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
         height: dimensions.height || 0, // Initialize height
         glassPrice: '' // Initialize the glass price
     });
-    const { totalPrice } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil);
+    const { totalPrice } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut );
 
 
     useEffect(() => {
@@ -143,6 +143,7 @@ CotizadorAdd.propTypes = {
     selectedGlass: PropTypes.string,
     selectedCenefa: PropTypes.string,
     selectedPerfil: PropTypes.string,
+    selectedCut: PropTypes.string,
 };
 
 export default CotizadorAdd;

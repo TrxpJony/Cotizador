@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", isCenBotSelected = false) => {
+const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedCenefa = 'sinCenefa', selectedPerfil = "sinPerfil", selectedCut = "alCorte", isCenBotSelected = false) => {
     const [dbPrices, setDbPrices] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [calculatedValues, setCalculatedValues] = useState({});
@@ -43,6 +43,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
         const cenefaUnitPrice = selectedCenefa === "sinCenefa" ? 0 : (memoizedPrices[selectedCenefa] || 0);
         const perfilUnitPrice = selectedPerfil === "sinPerfil" ? 0 : (memoizedPrices[selectedPerfil] || 0);
+        const cutUnitPrice = selectedCut === "alCorte" ? 0 : (memoizedPrices[selectedCut] || 0);
 
         // Determinar el precio de mano de obra según el área
         let manoDeObra = 0;
@@ -57,6 +58,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         }
 
         const vidrioPrice = (glassUnitPrice * area);
+        const cutPrice = cutUnitPrice * mtrsLineal / 1000;
         const accessoriesPrice = memoizedAccessories.reduce((acc, accessory) => acc + (accessory.precio || 0), 0);
         const cenefaPriceRaw = cenefaUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for cenefa
         const perfilPriceRaw = perfilUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for perfil
@@ -74,7 +76,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
         const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.max(perfilPriceRaw, 25000);
 
-        const total = perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + cenBotPrice + manoDeObra;
+        const total = perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + cenBotPrice + manoDeObra + cutPrice;
 
         setTotalPrice(total);
         setCalculatedValues({
@@ -83,12 +85,13 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
             totalHeight,
             vidrioPrice,
             cenefaPrice,
+            cutPrice,
             mtrsLineal,
             totalArea,
             manoDeObra,
             CEN_BOT_PRI: memoizedPrices.CEN_BOT ? Number(memoizedPrices.CEN_BOT) : 0,
         });
-    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, isCenBotSelected]);
+    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, isCenBotSelected]);
 
     return { totalPrice, calculatedValues };
 };
