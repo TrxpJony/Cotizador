@@ -36,6 +36,13 @@ const Sideralxo = () => {
 
     return (
         <>
+            <div>
+                <div>
+                    <p>
+                        Sistema sideral 2.4 XO Plus
+                    </p>
+                </div>
+            </div>
             <div className='door-container'>
                 <div className='door-frame'>
                     <img src={sideralImage} alt="SIDERAL 2.4 XO" className='door-image' />

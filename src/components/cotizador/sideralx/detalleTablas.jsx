@@ -32,7 +32,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
     return (
         <>
             <div className="parts-list">
-                <strong><h1>SIDERAL 2.4 X PLUS</h1></strong>
+
                 <Table aria-label="Tabla Marco">
                     <TableHeader>
                         <TableColumn><h1>Marco</h1></TableColumn>
