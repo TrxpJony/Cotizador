@@ -53,15 +53,15 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         const currentDate = new Date().toLocaleDateString();
 
         // Add header
-        doc.addImage(logo, 'PNG', 20, 10, 40, 20);
+        doc.addImage(logo, 'PNG', 14, 10, 40, 20);
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
         doc.setFontSize(8);
         doc.setTextColor('black');
         doc.text(`COT. #: ${cotNumber}`, 75, 25);
-        doc.text(`Fecha de creación: ${currentDate}`, 150, 25);
+        doc.text(`Fecha de creación: ${currentDate}`, 160, 25);
         doc.setFillColor(lightGray);
-        doc.rect(20, 30, 170, 8, 'F');
+        doc.rect(14, 30, 182, 8, 'F');
         doc.setTextColor('white');
         doc.setFontSize(10);
         doc.text(`Detalle de la cotización: ${title}`, 70, 34); // Use title prop here
@@ -70,12 +70,12 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.setTextColor('black');
         doc.setFontSize(8);
         const formDataFields = [
-            { label: `CLIENTE: ${formData.cliente}`, x: 20, y: 50 },
-            { label: `PROYECTO: ${formData.projecto}`, x: 120, y: 50 },
-            { label: `CONTACTO: ${formData.contacto}`, x: 20, y: 57 },
-            { label: `TELEFONO: ${formData.telefono}`, x: 120, y: 57 },
-            { label: `DIRECCIÓN: ${formData.direccion}`, x: 20, y: 64 },
-            { label: `CORREO: ${formData.email}`, x: 120, y: 64 }
+            { label: `CLIENTE: ${formData.cliente}`, x: 14, y: 50 },
+            { label: `PROYECTO: ${formData.projecto}`, x: 126, y: 50 },
+            { label: `CONTACTO: ${formData.contacto}`, x: 14, y: 57 },
+            { label: `TELEFONO: ${formData.telefono}`, x: 126, y: 57 },
+            { label: `DIRECCIÓN: ${formData.direccion}`, x: 14, y: 64 },
+            { label: `CORREO: ${formData.email}`, x: 126, y: 64 }
         ];
 
         formDataFields.forEach(field => {
@@ -88,8 +88,8 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         if (image) {
             doc.setLineWidth(0.1); // Set line width to be thin
             doc.setDrawColor(0, 0, 0); // Set line color to black
-            doc.rect(20, 70, 170, 65); // Draw rectangle with thin border
-            doc.addImage(image, 'PNG', 25, 75, 160, 55); // Adjust image dimensions
+            doc.rect(14, 70, 182, 80); // Draw rectangle with thin border
+            doc.addImage(image, 'PNG', 14, 70, 182, 80); // Adjust image dimensions
         }
 
         const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "MEDIDAS (mm)", "SUBTOTAL", "IVA", "TOTAL"];
@@ -112,7 +112,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY: 140, // Adjust startY to account for increased rectangle height
+            startY: 155, // Adjust startY to account for increased rectangle height
             headStyles: { fillColor: lightGray },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
@@ -146,11 +146,11 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         // Add footer information
         doc.setFontSize(8);
         doc.setTextColor('black');
-        doc.text('Ventas: Calle 71 A # 75 - 36', 20, 285);
-        doc.text('Planta: Calle 71 A # 76 - 08', 20, 290);
-        doc.text('Tel: 4824039 Nit: 900.260.389-9', 75, 285);
-        doc.text('Cel ventas: 3223065279 - 3204391328', 75, 290);
-        doc.text('Nit: 900.260.389-9', 140, 287.5);
+        doc.text('Ventas: Calle 71 A # 75 - 36', 14, 285);
+        doc.text('Planta: Calle 71 A # 76 - 08', 14, 290);
+        doc.text('Tel: 4824039 Nit: 900.260.389-9', 85, 285);
+        doc.text('Cel ventas: 3223065279 - 3204391328', 85, 290);
+        doc.text('Nit: 900.260.389-9', 172, 287.5);
 
         const pdfBlob = doc.output('blob');
         const formDataToSend = new FormData();
