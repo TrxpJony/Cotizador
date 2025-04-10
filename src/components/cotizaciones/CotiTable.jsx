@@ -3,6 +3,7 @@ import { Search, Trash2, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
+import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/cotizaciones";// Cambia la URL base
 
@@ -208,11 +209,9 @@ const CotiTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Anterior
+						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredCotizaciones.length / itemsPerPage)}
@@ -220,11 +219,9 @@ const CotiTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredCotizaciones.length / itemsPerPage)}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Siguiente
+						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
 				</div>
 			</motion.div>

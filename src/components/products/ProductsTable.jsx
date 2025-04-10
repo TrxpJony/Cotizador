@@ -3,6 +3,7 @@ import { Edit, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
+import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
@@ -42,7 +43,10 @@ const ProductsTable = () => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
 		const filtered = products.filter(
-			(product) => product.title.toLowerCase().includes(term) || product.categoria.toLowerCase().includes(term)
+			(product) =>
+				product.title.toLowerCase().includes(term) ||
+				product.categoria.toLowerCase().includes(term) ||
+				product.description.toLowerCase().includes(term) // Agregar búsqueda por descripción
 		);
 		setFilteredProducts(filtered);
 		setCurrentPage(1); // Reset to first page on search
@@ -184,7 +188,7 @@ const ProductsTable = () => {
 		<>
 			<ToastContainer />
 			<motion.div
-				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
+				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
@@ -273,11 +277,9 @@ const ProductsTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Anterior
+					<IoIosArrowBack className="mt-1"/> Anterior
 					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredProducts.length / itemsPerPage)}
@@ -285,11 +287,9 @@ const ProductsTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Siguiente
+						Siguiente <IoIosArrowForward className="mt-1"/>
 					</motion.button>
 				</div>
 			</motion.div>

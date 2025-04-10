@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/usuarios";
 
@@ -66,13 +67,13 @@ const UsersTable = () => {
 
 	const handleSaveChanges = () => {
 		const { id, usuario, contraseña } = editedUser;
-	
+
 		// Validar que los campos no estén vacíos
 		if (!usuario || !contraseña || !id) {
 			alert("Usuario, contraseña e ID son requeridos.");
 			return;
 		}
-	
+
 		// Hacer la solicitud PUT a la API para actualizar el usuario
 		fetch(`${baseUrl}/${id}`, {
 			method: 'PUT',
@@ -101,7 +102,7 @@ const UsersTable = () => {
 					progress: undefined,
 					theme: "light",
 				});
-	
+
 				// Actualizar el estado de los usuarios sin necesidad de recargar la página
 				setUsers(users.map((user) => (user.id === id ? editedUser : user)));
 				setFilteredUsers(users.map((user) => (user.id === id ? editedUser : user))); // Esto también actualiza el listado filtrado
@@ -112,7 +113,7 @@ const UsersTable = () => {
 				alert("Hubo un problema al actualizar el usuario.");
 			});
 	};
-	
+
 
 	const handleDeleteClick = (id) => {
 		Swal.fire({
@@ -146,7 +147,7 @@ const UsersTable = () => {
 							progress: undefined,
 							theme: "light",
 						});
-	
+
 						// Actualizar el estado sin recargar la página
 						setUsers(users.filter((user) => user.id !== id)); // Elimina el usuario del estado
 						setFilteredUsers(filteredUsers.filter((user) => user.id !== id)); // Actualiza también el listado filtrado
@@ -158,7 +159,7 @@ const UsersTable = () => {
 			}
 		});
 	};
-	
+
 
 	const paginatedUsers = filteredUsers.slice(
 		(currentPage - 1) * itemsPerPage,
@@ -167,9 +168,9 @@ const UsersTable = () => {
 
 	return (
 		<>
-		    <ToastContainer />
+			<ToastContainer />
 			<motion.div
-				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
+				className='bg-white backdrop-blur-md shadow-lg rounded-2xl p-6 border mb-8'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
@@ -253,11 +254,9 @@ const UsersTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Anterior
+						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredUsers.length / itemsPerPage)}
@@ -265,23 +264,21 @@ const UsersTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredUsers.length / itemsPerPage)}
-						className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md disabled:opacity-50'
-						whileHover={{ scale: 1.1 }}
-						whileTap={{ scale: 0.9 }}
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
 					>
-						Siguiente
+						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
 				</div>
 			</motion.div>
 
 			{isModalOpen && (
-				<motion.div 
+				<motion.div
 					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
-					<motion.div 
+					<motion.div
 						className='bg-white p-6 rounded-lg shadow-lg'
 						initial={{ scale: 0.8 }}
 						animate={{ scale: 1 }}

@@ -1,7 +1,14 @@
 import ProductsTable from "../components/products/ProductsTable";
 import Sidebar from "../components/common/Sidebar";
+import { useState } from "react";
 
 const ProductsPage = () => {
+	const [searchTerm, setSearchTerm] = useState("");
+
+	const handleSearchChange = (e) => {
+		setSearchTerm(e.target.value.toLowerCase());
+	};
+
 	return (
 		<>
 			<div className='flex h-full  overflow-hidden'>
@@ -13,9 +20,18 @@ const ProductsPage = () => {
 						</div>
 					</header>
 
-					<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
+					<main className='container mx-auto p-4 mb-4 max-w-7xl'>
+						<div className="mt-10 ">
+							<input
+								type="text"
+								placeholder="Buscar posts..."
+								className="w-full p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+								value={searchTerm}
+								onChange={handleSearchChange}
+							/>
+						</div>
 
-						<ProductsTable />
+						<ProductsTable searchTerm={searchTerm}/>
 
 						{/* CHARTS */}
 						<div className='grid grid-col-1 lg:grid-cols-2 gap-8'>
