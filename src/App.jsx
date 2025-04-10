@@ -175,9 +175,9 @@ function App() {
           <Route path="aluminark/8025/s80251" element={<ProtectedRoute element={<Sistema8025 />} allowedRole="cotizador" />} />
           <Route path='cat001' element={<Vitral />} />
           <Route path="p2" element={<TiposEspejos />} />
-          <Route path="p2/espe1" element={<CotizadorEspejosRedondos />} />
-          <Route path="p2/espe2" element={<CotizadorEspejos />} />
-          <Route path="p2/espe3" element={<CotizadorEspejosconForma />} />
+          <Route path="p2/espe1" element={<ProtectedRoute element={<CotizadorEspejosRedondos />} allowedRole="cotizador" />} />
+          <Route path="p2/espe2" element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole="cotizador" />} />
+          <Route path="p2/espe3" element={<ProtectedRoute element={<CotizadorEspejosconForma />} allowedRole="cotizador" />} />
           <Route path='cat003' element={<Espejos />} />
           <Route path='cat003/espdis1' element={<Redondos />} />
           <Route path='cat003/espdis2' element={<Cuadrados />} />

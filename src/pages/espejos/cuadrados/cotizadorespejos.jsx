@@ -6,7 +6,6 @@ import useCalculoPrecios from '../../../components/cotizador/espejosCuadrados/us
 import DetalleTablas from '../../../components/cotizador/espejosCuadrados/detalleTablas';
 import AddTableDoor from '../../../components/cotizador/addTableDoor';
 
-const espejoImage = "https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744034207/img_cotizadores/e14xp7uhsscn62incxkg.png";
 const CotizadorEspejos = () => {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [doors, setDoors] = useState([]); // State to hold doors
@@ -17,8 +16,9 @@ const CotizadorEspejos = () => {
     const [selectedCut, setSelectedCut] = useState('alCorte')
     const [isCenBotSelected, setIsCenBotSelected] = useState(false); // State for checkbox
 
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, isCenBotSelected);
+    const [espejoImage, setEspejoImage] = useState("https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744034207/img_cotizadores/e14xp7uhsscn62incxkg.png");
 
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, isCenBotSelected);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -40,6 +40,16 @@ const CotizadorEspejos = () => {
         setIsCenBotSelected(isSelected);
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]; // Tomamos el primer archivo seleccionado
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEspejoImage(reader.result); // Guardamos la imagen en base64 en el estado
+            };
+            reader.readAsDataURL(file); // Leemos el archivo como URL base64
+        }
+    };
 
     return (
         <>
@@ -57,6 +67,15 @@ const CotizadorEspejos = () => {
                         <div className='top-0 left-0 w-full h-full'>
                             <img src={espejoImage} alt="Espejo" className="w-full h-56 sm:h-full object-cover rounded-xl " />
                         </div>
+                        <label className="absolute outline rounded-2xl hover:outline-black hover:bg-black bottom-5 right-5 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline cursor-pointer transition-all">
+                            Seleccionar
+                            <input
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={handleImageChange} // Llamamos a la función para manejar la selección de la imagen
+                            />
+                        </label>
                     </div>
                     <div className=''>
                         <label className='text-gray-700 font-bold mb-2'>

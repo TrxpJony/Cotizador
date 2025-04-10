@@ -64,9 +64,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
     // Determinar el precio de mano de obra según el área
     let manoDeObra = 0;
-    if (totalHeight < 1200 || totalWidth < 1200) {
+    if (totalHeight < 1900 || totalWidth < 1900) {
       manoDeObra = memoizedPrices.PUC_MO1 || 0;
-    } else if (totalHeight > 1200 || totalWidth > 1200) {
+    } else if (totalHeight > 1900 || totalWidth > 1900) {
       manoDeObra = memoizedPrices.PUC_MO2 || 0;
     }
 
