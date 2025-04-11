@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { Edit, Search, Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
-import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import PropTypes from 'prop-types'; // Importar PropTypes
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
-const ProductsTable = () => {
+const ProductsTable = ({ searchTerm }) => {
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -21,6 +21,18 @@ const ProductsTable = () => {
 		description: '',
 		precio: ''
 	});
+
+	useEffect(() => {
+		// Filtrar productos cuando cambia el searchTerm o los productos
+		const filtered = products.filter(
+			(product) =>
+				product.title.toLowerCase().includes(searchTerm) ||
+				product.categoria.toLowerCase().includes(searchTerm) ||
+				product.description.toLowerCase().includes(searchTerm)
+		);
+		setFilteredProducts(filtered);
+		setCurrentPage(1); // Resetear a la primera página al buscar
+	}, [searchTerm, products]);
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -39,18 +51,6 @@ const ProductsTable = () => {
 			});
 	}, []);
 
-	const handleSearch = (e) => {
-		const term = e.target.value.toLowerCase();
-		setSearchTerm(term);
-		const filtered = products.filter(
-			(product) =>
-				product.title.toLowerCase().includes(term) ||
-				product.categoria.toLowerCase().includes(term) ||
-				product.description.toLowerCase().includes(term) // Agregar búsqueda por descripción
-		);
-		setFilteredProducts(filtered);
-		setCurrentPage(1); // Reset to first page on search
-	};
 
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -194,36 +194,26 @@ const ProductsTable = () => {
 				transition={{ delay: 0.2 }}
 			>
 				<div className='flex justify-between items-center mb-6'>
-					<h2 className='text-xl font-semibold text-gray-700'>Lista de productos</h2>
-					<div className='relative'>
-						<input
-							type='text'
-							placeholder='Buscar Producto...'
-							className='bg-white text-gray-700 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500'
-							onChange={handleSearch}
-							value={searchTerm}
-						/>
-						<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
-					</div>
+					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de productos</h2>
 				</div>
 
 				<div className='overflow-x-auto'>
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Title
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Precio
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Categoria
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Imagen
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
 								</th>
 
@@ -238,15 +228,15 @@ const ProductsTable = () => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
-									<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
 										{product.title}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										${product.precio ? parseFloat(product.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}								</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{product.categoria}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										<img
 											src={product.img}
 											alt={product.title}
@@ -262,7 +252,7 @@ const ProductsTable = () => {
 											<Edit size={18} />
 										</button>
 										<button
-											className='text-red-400 hover:text-red-300'
+											className='text-red-400 hover:text-red-300 '
 											onClick={() => handleDeleteClick(product.id)}
 										>
 											<Trash2 size={18} />
@@ -273,13 +263,13 @@ const ProductsTable = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className='flex justify-between items-center mt-4'>
+				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'>
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
-					<IoIosArrowBack className="mt-1"/> Anterior
+						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredProducts.length / itemsPerPage)}
@@ -287,9 +277,9 @@ const ProductsTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
-						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
-						Siguiente <IoIosArrowForward className="mt-1"/>
+						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
 				</div>
 			</motion.div>
@@ -417,5 +407,9 @@ const ProductsTable = () => {
 			)}
 		</>
 	);
+};
+// Validación de las props
+ProductsTable.propTypes = {
+	searchTerm: PropTypes.string.isRequired, // searchTerm debe ser una cadena y es obligatorio
 };
 export default ProductsTable;

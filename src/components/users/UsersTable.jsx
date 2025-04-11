@@ -1,20 +1,30 @@
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
-import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import PropTypes from 'prop-types'; // Importar PropTypes
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/usuarios";
 
-const UsersTable = () => {
+const UsersTable = ({ searchTerm }) => {
 	const [users, setUsers] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
 	const [filteredUsers, setFilteredUsers] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [editedUser, setEditedUser] = useState({ usuario: "", contraseña: "" });
+
+	useEffect(() => {
+		// Filtrar productos cuando cambia el searchTerm o los productos
+		const filtered = users.filter(
+			(users) =>
+				users.usuario.toLowerCase().includes(searchTerm) ||
+				users.rol.toLowerCase().includes(searchTerm)
+		);
+		setFilteredUsers(filtered);
+		setCurrentPage(1); // Resetear a la primera página al buscar
+	}, [searchTerm, users]);
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -32,15 +42,6 @@ const UsersTable = () => {
 			});
 	}, []);
 
-	const handleSearch = (e) => {
-		const term = e.target.value.toLowerCase();
-		setSearchTerm(term);
-		const filtered = users.filter(
-			(user) => user.usuario.toLowerCase().includes(term) || user.rol.toLowerCase().includes(term)
-		);
-		setFilteredUsers(filtered);
-		setCurrentPage(1); // Reset to first page on search
-	};
 
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -176,30 +177,20 @@ const UsersTable = () => {
 				transition={{ delay: 0.2 }}
 			>
 				<div className='flex justify-between items-center mb-6'>
-					<h2 className='text-xl font-semibold text-gray-700'>Lista de usuarios</h2>
-					<div className='relative'>
-						<input
-							type='text'
-							placeholder='Buscar usuario...'
-							className='bg-white text-gray-700 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500'
-							onChange={handleSearch}
-							value={searchTerm}
-						/>
-						<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
-					</div>
+					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de usuarios</h2>
 				</div>
 
 				<div className='overflow-x-auto'>
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Usuario
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Rol
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Acciones
 								</th>
 							</tr>
@@ -213,7 +204,7 @@ const UsersTable = () => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
-									<td className='px-6 py-4 whitespace-nowrap'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
 										<div className='flex items-center'>
 											<div className='flex-shrink-0 h-10 w-10'>
 												<div className='h-10 w-10 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 flex items-center justify-center text-white font-semibold'>
@@ -225,12 +216,12 @@ const UsersTable = () => {
 											</div>
 										</div>
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap'>
-										<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-cyan-700 text-blue-100'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm'>
+										<span className='px-2 inline-flex leading-5 font-semibold rounded-full bg-cyan-700 text-blue-100'>
 											{user.rol}
 										</span>
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-300'>
 										<button
 											className='text-cyan-500 hover:text-cyan-400 mr-2'
 											onClick={() => handleEditClick(user)}
@@ -250,11 +241,11 @@ const UsersTable = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className='flex justify-between items-center mt-4'>
+				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'>
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
@@ -264,7 +255,7 @@ const UsersTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredUsers.length / itemsPerPage)}
-						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
@@ -329,4 +320,9 @@ const UsersTable = () => {
 		</>
 	);
 };
+
+UsersTable.propTypes = {
+	searchTerm: PropTypes.string.isRequired,
+};
+
 export default UsersTable;

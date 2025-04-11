@@ -73,7 +73,7 @@ const UsersAdd = () => {
         <>
             <motion.button
                 onClick={handleOpenModal}
-                className="mb-4 outline rounded-2xl outline-cyan-500 text-cyan-500 hover:text-white hover:bg-cyan-500 font-bold py-2 px-4 focus:outline-none focus:shadow-outline transition-all"
+                className="mb-5 mt-5 m-1 flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
             >
                 Agregar Usuario
             </motion.button>
