@@ -143,7 +143,13 @@ export function PerfilesVista() {
                                     />
                                 </CardBody>
                                 <b className="overflow-hidden p-2 text-lg md:text-base lg:text-sm">{item.title}</b>
+                                <b className="flex px-4 text-sm md:text-base lg:text-lg text-cyan-500 font-bold ">
+                                    {item.precio != null
+                                        ? `$${item.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                                        : 'Precio no disponible'}
+                                </b>
                                 <CardFooter className="p-2 flex flex-col items-start bg-gray-100 rounded-b-lg">
+
                                     <p className="text-sm text-default-400 text-center">{item.color}</p>  </CardFooter>
                             </Card>
                         ))}
