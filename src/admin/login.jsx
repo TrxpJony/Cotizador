@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid'
 
 const cookies = new Cookies();
 const baseUrl = import.meta.env.VITE_API_URL + "/api/vidrioalarte/login";
@@ -118,7 +117,6 @@ function Login() {
                     onClick={toggleMostrarContraseña}
                     className="absolute inset-y-0 right-3 flex items-center text-gray-500"
                   >
-                    {mostrarContraseña ? <EyeIcon className="h-4 w-4" /> : <EyeSlashIcon className="h-4 w-4" />}
                   </button>
                 )}
               </div>

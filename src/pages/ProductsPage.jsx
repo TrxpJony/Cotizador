@@ -24,7 +24,7 @@ const ProductsPage = () => {
 						<div className="mt-5 ">
 							<input
 								type="text"
-								placeholder="Buscar posts..."
+								placeholder="Buscar producto..."
 								className="w-full p-3 border border-gray-300 rounded-2xl shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none hover:bg-gray-200"
 								value={searchTerm}
 								onChange={handleSearchChange}

@@ -41,7 +41,6 @@ import { Inicio } from './components/Inicio';
 import { Nosotros } from './components/nosotros';
 import { Productos } from './components/productos';
 import { TiposEspejos } from './pages/espejos/tipos';
-import { Servicios } from './components/servicios';
 import { TiposSkylesd } from './pages/skyleds/tipos';
 import Login from './admin/login';
 import { Cotizador } from './components/cotizar';
@@ -87,6 +86,7 @@ import AddPost from './pages/posts/add';
 import { All } from './pages/accesorios/all';
 import EditPost from './pages/posts/edit';
 import CotizadorEspejosRedondos from './pages/espejos/espejoRedondo/cotizadorespejosredondos';
+import ServiciosPage from './components/serviciosPage';
 
 const cookies = new Cookies();
 
@@ -126,7 +126,7 @@ function App() {
           <Route path="inicio" element={<Inicio />} />
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="productos" element={<Productos />} />
-          <Route path="servicios" element={<Servicios />} />
+          <Route path="servicios" element={<ServiciosPage />} />
           <Route path="proyectos" element={<TestimonialsPage />} />
           <Route path="blog" element={<Blog />} />
           <Route path="admin" element={<ProtectedRoute element={<AdmindPage />} allowedRole="administrador" />} />

@@ -9,7 +9,7 @@ export default function FormContact() {
     return (
         <>
             <motion.div
-                className="relative isolate overflow-hidden py-24 sm:py-36 text-center"
+                className="h-screen relative isolate overflow-hidden py-24 sm:py-36 text-center"
                 style={{
                     background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
                     backgroundSize: "800% 800%", // Movimiento más fluido
@@ -157,7 +157,7 @@ export default function FormContact() {
                                 type="submit"
                                 className="block w-full rounded-md bg-cyan-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-cyan-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
                             >
-                                Lets talk
+                                Enviar
                             </button>
                         </div>
                     </form>
