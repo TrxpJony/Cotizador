@@ -1,18 +1,30 @@
 import { motion } from "framer-motion";
-import { Search, Trash2, Download } from "lucide-react";
+import { Trash2, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
-import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import PropTypes from "prop-types";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/cotizaciones";// Cambia la URL base
 
-const CotiTable = () => {
+const CotiTable = ({ searchTerm }) => {
 	const [cotizaciones, setCotizaciones] = useState([]);
 	const [filteredCotizaciones, setFilteredCotizaciones] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
+
+	useEffect(() => {
+		// Filtrar productos cuando cambia el search o los productos
+		const filtered = cotizaciones.filter(
+			(cotizaciones) =>
+				cotizaciones.client_name.toLowerCase().includes(searchTerm) ||
+				cotizaciones.nombre_usuario.toLowerCase().includes(searchTerm) ||
+				cotizaciones.cotNumber.toLowerCase().includes(searchTerm)
+		);
+		setFilteredCotizaciones(filtered);
+		setCurrentPage(1); // Resetear a la primera página al buscar
+	}, [searchTerm, cotizaciones])
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -32,18 +44,6 @@ const CotiTable = () => {
 			});
 	}, []);
 
-	const handleSearch = (e) => {
-		const term = e.target.value.toLowerCase();
-		setSearchTerm(term);
-		const filtered = cotizaciones.filter(
-			(cotizacion) =>
-				cotizacion.client_name.toLowerCase().includes(term) ||
-				cotizacion.nombre_usuario.toLowerCase().includes(term) ||
-				cotizacion.cotNumber.toString().toLowerCase().includes(term) // Ensure cotNumber is a string and lowercase
-		);
-		setFilteredCotizaciones(filtered);
-		setCurrentPage(1); // Reset to first page on search
-	};
 
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -111,48 +111,38 @@ const CotiTable = () => {
 		<>
 			<ToastContainer />
 			<motion.div
-				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
+				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
 			>
 				<div className='flex justify-between items-center mb-6'>
-					<h2 className='text-xl font-semibold text-gray-700'>Lista de Cotizaciones</h2>
-					<div className='relative'>
-						<input
-							type='text'
-							placeholder='Buscar Cotización...'
-							className='bg-white text-gray-700 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500'
-							onChange={handleSearch}
-							value={searchTerm}
-						/>
-						<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
-					</div>
+					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de Cotizaciones</h2>
 				</div>
 
 				<div className='overflow-x-auto'>
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Cotización #
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Cliente
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Email
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Usuario
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Fecha
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Precio
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
 								</th>
 							</tr>
@@ -166,22 +156,22 @@ const CotiTable = () => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
-									<td className='px-6 py-4 text-sm font-medium text-gray-600'>
+									<td className='px-6 py-4 text-xs sm:text-sm font-medium text-gray-600'>
 										{cotizacion.cotNumber}
 									</td>
-									<td className='px-6 py-4 text-sm text-gray-700'>
+									<td className='px-6 py-4 text-xs sm:text-sm text-gray-700'>
 										{cotizacion.client_name}
 									</td>
-									<td className='px-6 py-4  text-sm text-gray-700'>
+									<td className='px-6 py-4 text-xs sm:text-sm text-gray-700'>
 										{cotizacion.email}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{cotizacion.nombre_usuario}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{new Date(cotizacion.created_at).toLocaleDateString()}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{cotizacion.total_precio !== undefined && !isNaN(cotizacion.total_precio)
 											? `$${Number(cotizacion.total_precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 											: "N/A"}
@@ -205,11 +195,11 @@ const CotiTable = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className='flex justify-between items-center mt-4'>
+				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'>
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all '
 					>
 						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
@@ -219,7 +209,7 @@ const CotiTable = () => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredCotizaciones.length / itemsPerPage)}
-						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
@@ -227,5 +217,9 @@ const CotiTable = () => {
 			</motion.div>
 		</>
 	);
+};
+// Validacion de las props
+CotiTable.propTypes = {
+	searchTerm: PropTypes.string.isRequired,
 };
 export default CotiTable;

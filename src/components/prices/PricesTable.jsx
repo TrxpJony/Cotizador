@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
-import { Search, Edit } from "lucide-react";
+import { Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
-import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import PropTypes from "prop-types";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/precios";
 
-const PricesTable = () => {
+const PricesTable = ({ searchTerm }) => {
 	const [prices, setPrices] = useState([]);
 	const [filteredPrices, setFilteredPrices] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
 	const [editedPrice, setEditedPrice] = useState({
@@ -19,6 +19,17 @@ const PricesTable = () => {
 		precio: ''
 	});
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	useEffect(() => {
+		// Filtrar prices cuando cambia el searchTerm o los productos
+		const filtered = prices.filter(
+			(prices) =>
+				prices.nombre.toLowerCase().includes(searchTerm) ||
+				prices.descripcion.toLowerCase().includes(searchTerm)
+		);
+		setFilteredPrices(filtered);
+		setCurrentPage(1); // Resetear a la primera página al buscar
+	}, [searchTerm, prices]);
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -36,15 +47,6 @@ const PricesTable = () => {
 			});
 	}, []);
 
-	const handleSearch = (e) => {
-		const term = e.target.value.toLowerCase();
-		setSearchTerm(term);
-		const filtered = prices.filter(
-			(price) => price.nombre.toLowerCase().includes(term) || price.descripcion.toLowerCase().includes(term)
-		);
-		setFilteredPrices(filtered);
-		setCurrentPage(1); // Reset to first page on search
-	};
 
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -125,39 +127,28 @@ const PricesTable = () => {
 		<>
 			<ToastContainer />
 			<motion.div
-				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border  mb-8'
+				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
 			>
 				<div className='flex justify-between items-center mb-6'>
-					<h2 className='text-xl font-semibold text-gray-700'>Lista de precios</h2>
-					<div className='relative'>
-						<input
-							type='text'
-							placeholder='Buscar Precio...'
-							className='bg-white text-gray-700 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500'
-							onChange={handleSearch}
-							value={searchTerm}
-						/>
-						<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
-					</div>
+					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de precios</h2>
 				</div>
-
 				<div className='overflow-x-auto'>
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Nombre
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Descripción
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Precio
 								</th>
-								<th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
 								</th>
 							</tr>
@@ -171,16 +162,16 @@ const PricesTable = () => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
-									<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
 										{price.nombre}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{price.descripcion}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										${price.precio ? parseFloat(price.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										<button
 											className='text-cyan-500 hover:text-cyan-400 mr-2'
 											onClick={() => handleEditClick(price)}
@@ -193,21 +184,20 @@ const PricesTable = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className='flex justify-between items-center mt-4'>
-					<motion.button
-						onClick={() => handlePageChange(currentPage - 1)}
-						disabled={currentPage === 1}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
-					>
-						<IoIosArrowBack className="mt-1" /> Anterior
-					</motion.button>
+				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'><motion.button
+					onClick={() => handlePageChange(currentPage - 1)}
+					disabled={currentPage === 1}
+					className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
+				>
+					<IoIosArrowBack className="mt-1" /> Anterior
+				</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredPrices.length / itemsPerPage)}
 					</span>
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredPrices.length / itemsPerPage)}
-						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-10  transition-all'
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
@@ -215,13 +205,13 @@ const PricesTable = () => {
 			</motion.div>
 
 			{isModalOpen && (
-				<motion.div 
+				<motion.div
 					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
-					<motion.div 
+					<motion.div
 						className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'
 						initial={{ scale: 0.8 }}
 						animate={{ scale: 1 }}
@@ -271,5 +261,8 @@ const PricesTable = () => {
 		</>
 	);
 };
+PricesTable.propTypes = {
+	searchTerm: PropTypes.string.isRequired, // searchTerm debe ser una cadena y es obligatorio
+}
 
 export default PricesTable;

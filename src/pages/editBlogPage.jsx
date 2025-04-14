@@ -41,11 +41,11 @@ const EditPostPage = () => {
 
                     <div className="container mx-auto p-4 mb-4 max-w-7xl">
                         {/* barra de busquedas */}
-                        <div className="mt-10 ">
+                        <div className="mt-5 ">
                             <input
                                 type="text"
                                 placeholder="Buscar posts..."
-                                className="w-full p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                                className="w-full p-3 border border-gray-300 rounded-2xl shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
                             />
