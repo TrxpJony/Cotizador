@@ -15,7 +15,7 @@ const CotiTable = ({ searchTerm }) => {
 	const itemsPerPage = 10;
 
 	useEffect(() => {
-		// Filtrar productos cuando cambia el search o los productos
+		// Filtrar productos cuando cambia el searchTerm o lo productos
 		const filtered = cotizaciones.filter(
 			(cotizaciones) =>
 				cotizaciones.client_name.toLowerCase().includes(searchTerm) ||
@@ -23,8 +23,8 @@ const CotiTable = ({ searchTerm }) => {
 				cotizaciones.cotNumber.toLowerCase().includes(searchTerm)
 		);
 		setFilteredCotizaciones(filtered);
-		setCurrentPage(1); // Resetear a la primera página al buscar
-	}, [searchTerm, cotizaciones])
+		setCurrentPage(1);
+	}, [searchTerm, cotizaciones]);
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -111,7 +111,7 @@ const CotiTable = ({ searchTerm }) => {
 		<>
 			<ToastContainer />
 			<motion.div
-				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
+				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mt-5 mb-8'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
@@ -165,18 +165,18 @@ const CotiTable = ({ searchTerm }) => {
 									<td className='px-6 py-4 text-xs sm:text-sm text-gray-700'>
 										{cotizacion.email}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
+									<td className='px-6 py-4 text-xs sm:text-sm whitespace-nowrap text-gray-700'>
 										{cotizacion.nombre_usuario}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
+									<td className='px-6 py-4 text-xs sm:text-sm whitespace-nowrap text-gray-700'>
 										{new Date(cotizacion.created_at).toLocaleDateString()}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
+									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
 										{cotizacion.total_precio !== undefined && !isNaN(cotizacion.total_precio)
 											? `$${Number(cotizacion.total_precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 											: "N/A"}
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
+									<td className='px-6 py-4 text-xs sm:text-sm whitespace-nowrap text-gray-700'>
 										<button
 											className='text-cyan-500 hover:text-cyan-400 mr-2'
 											onClick={() => handleDownloadClick(cotizacion.pdf_path)}
@@ -199,7 +199,7 @@ const CotiTable = ({ searchTerm }) => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage - 1)}
 						disabled={currentPage === 1}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all '
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						<IoIosArrowBack className="mt-1" /> Anterior
 					</motion.button>
@@ -209,7 +209,7 @@ const CotiTable = ({ searchTerm }) => {
 					<motion.button
 						onClick={() => handlePageChange(currentPage + 1)}
 						disabled={currentPage === Math.ceil(filteredCotizaciones.length / itemsPerPage)}
-						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
+						className='flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
 					>
 						Siguiente <IoIosArrowForward className="mt-1" />
 					</motion.button>
@@ -218,8 +218,7 @@ const CotiTable = ({ searchTerm }) => {
 		</>
 	);
 };
-// Validacion de las props
 CotiTable.propTypes = {
-	searchTerm: PropTypes.string.isRequired,
+	searchTerm: PropTypes.string.isRequired // SearchTerm debe ser una cadena y es obligatotio
 };
 export default CotiTable;

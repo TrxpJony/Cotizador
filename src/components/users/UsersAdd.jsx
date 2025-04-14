@@ -83,57 +83,53 @@ const UsersAdd = () => {
                     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
                     style={{ zIndex: 9999 }} // Asegura que el modal tenga un índice alto
                 >
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto mt-10">
                         <h2 className="text-xl font-semibold mb-4">Agregar Usuario</h2>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Usuario</label>
+                            <label className="block text-gray-700 font-bold mb-2">Usuario</label>
                             <input
                                 type="text"
                                 name="usuario"
                                 value={newUser.usuario}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border rounded"
+                                className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Contraseña</label>
+                            <label className="block text-gray-700 font-bold mb-2">Contraseña</label>
                             <input
                                 type="password"
                                 name="contraseña"
                                 value={newUser.contraseña}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border rounded"
+                                className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Rol</label>
+                            <label className="block text-gray-700 font-bold mb-2">Rol</label>
                             <select
                                 name="rol"
                                 value={newUser.rol}
                                 onChange={handleInputChange}
-                                className="w-full p-2 border rounded"
+                                className="border border-default-200 rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                             >
                                 <option value="administrador">Administrador</option>
                                 <option value="cotizador">Cotizador</option>
                             </select>
                         </div>
-                        <div className="flex justify-end">
-                            <motion.button
+                        <div className="flex justify-between">
+                            <button
                                 onClick={handleCloseModal}
-                                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                className="flex rounded-2xl text-gray-400 hover:text-black font-bold py-2 px-6 transition-all"
                             >
                                 Cancelar
-                            </motion.button>
-                            <motion.button
+                            </button>
+                            <button
                                 onClick={handleSaveUser}
-                                className="px-4 py-2 bg-cyan-500 text-white rounded-md"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                className="flex border border-cyan-500 text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
                             >
                                 Guardar
-                            </motion.button>
+                            </button>
                         </div>
                     </div>
                 </div>

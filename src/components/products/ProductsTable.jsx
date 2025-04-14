@@ -312,95 +312,107 @@ const ProductsTable = ({ searchTerm }) => {
 
 			{isModalOpen && (
 				<motion.div
-					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'
+					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4 sm:p-6 md:p-8  '
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
 					<motion.div
-						className='bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-4xl'
+						className='bg-white p-6 rounded-2xl shadow-lg w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto mt-16 sm:mt-20'
 						initial={{ scale: 0.8 }}
 						animate={{ scale: 1 }}
 						exit={{ scale: 0.8 }}
 					>
 						<h2 className='text-xl font-semibold mb-4'>Editar Producto</h2>
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Title</label>
+							<label className='block text-gray-700 font-bold mb-2'>Title</label>
 							<input
 								type='text'
 								name='title'
 								value={editedProduct.title}
 								onChange={handleInputChange}
-								className='w-full p-2 border rounded'
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none'
 							/>
 						</div>
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Description</label>
+							<label className='block text-gray-700 font-bold mb-2'>Description</label>
 							<textarea
 								name='description'
 								value={editedProduct.description}
 								onChange={handleInputChange}
-								className='w-full p-2 border rounded h-32'
+								className='py-2 px-3 text-gray-700 leading-700 leading-tight focus:outline-none focus:shadow-outline w-full p-2 border rounded-2xl h-32 hover:bg-default-200'
 							/>
 						</div>
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Color</label>
+							<label className='block text-gray-700 font-bold mb-2'>Color</label>
 							<input
 								type='text'
 								name='color'
 								value={editedProduct.color}
 								onChange={handleInputChange}
-								className='w-full p-2 border rounded'
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
 							/>
 						</div>
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Precio</label>
+							<label className='block text-gray-700 font-bold mb-2'>Precio</label>
 							<input
 								type='number'
 								name='precio'
 								value={editedProduct.precio}
 								onChange={handleInputChange}
-								className='w-full p-2 border rounded'
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
 							/>
 						</div>
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Imagen</label>
-							<input
-								type='file'
-								name='img'
-								accept='image/*'
-								onChange={(e) => setEditedProduct({ ...editedProduct, img: e.target.files[0] })}
-								className='w-full p-2 border rounded'
-							/>
+							<label className='block text-gray-700 font-bold mb-2'>Imagen</label>
+							<div className='relative w-full h-96 bg-black/20 mb-5 rounded-xl'>
+								<div className='absolute top-0 left-0 w-full h-full object-cover'>
+									<img
+										className='w-full h-full object-cover rounded-xl'
+										src={
+											editedProduct.img instanceof File
+												? URL.createObjectURL(editedProduct.img)
+												: editedProduct.img || '/default-placeholder.png'
+										}
+										alt='Vista previa'
+									/>
+								</div>
+								<label className='absolute border border-black rounded-2xl hover:outline-black hover:bg-black hover:text-white bottom-5 right-5 text-black font-bold py-1 px-2 text-sm sm:text-base sm:py-2 sm:px-4 focus:outline-none focus:shadow-outline cursor-pointer transition-all'>
+									Seleccionar
+									<input
+										type='file'
+										name='img'
+										accept='image/*'
+										onChange={(e) => setEditedProduct({ ...editedProduct, img: e.target.files[0] })}
+										className='hidden'
+									/>
+								</label>
+							</div>
 						</div>
 
 						<div className='mb-4'>
-							<label className='block text-gray-700'>Categoria</label>
+							<label className='block text-gray-700 font-bold mb-2'>Categoria</label>
 							<input
 								type='text'
 								name='categoria'
 								value={editedProduct.categoria}
 								onChange={handleInputChange}
-								className='w-full p-2 border rounded'
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
 							/>
 						</div>
-						<div className='flex justify-end'>
-							<motion.button
+						<div className='flex justify-between'>
+							<button
 								onClick={handleModalClose}
-								className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2'
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}
+								className='flex rounded-2xl text-gray-400 hover:text-black  font-bold py-2 px-6  transition-all'
 							>
 								Cancelar
-							</motion.button>
-							<motion.button
+							</button>
+							<button
 								onClick={handleSaveChanges}
-								className='px-4 py-2 bg-cyan-500 text-white rounded-md'
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}
+								className='flex border border-cyan-500 text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all '
 							>
 								Guardar
-							</motion.button>
+							</button>
 						</div>
 					</motion.div>
 				</motion.div>
