@@ -9,7 +9,7 @@ export default function FormContact() {
     return (
         <>
             <motion.div
-                className="h-screen relative isolate overflow-hidden py-24 sm:py-36 text-center"
+                className="min-h-screen relative isolate overflow-hidden py-24 sm:py-36 text-center"
                 style={{
                     background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
                     backgroundSize: "800% 800%", // Movimiento más fluido
@@ -37,8 +37,8 @@ export default function FormContact() {
                         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">¿Como podemos ayudarte?</h2>
                         <p className="mt-2 text-lg/8 text-gray-300">Por favor, completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
                     </div>
-                    <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20 px-4 sm:px-6">
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-1 md:grid-cols-2">
                             <div>
                                 <label htmlFor="first-name" className="block text-sm/6 font-semibold text-white">
                                     Nombre

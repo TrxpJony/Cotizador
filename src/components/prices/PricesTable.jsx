@@ -184,13 +184,14 @@ const PricesTable = ({ searchTerm }) => {
 						</tbody>
 					</table>
 				</div>
-				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'><motion.button
-					onClick={() => handlePageChange(currentPage - 1)}
-					disabled={currentPage === 1}
-					className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
-				>
-					<IoIosArrowBack className="mt-1" /> Anterior
-				</motion.button>
+				<div className='text-xs sm:text-sm md:text-base flex justify-between items-center mt-4'>
+					<motion.button
+						onClick={() => handlePageChange(currentPage - 1)}
+						disabled={currentPage === 1}
+						className=' flex rounded-2xl text-gray-700 hover:text-cyan-500 font-bold py-2 px-0 sm:px-10 transition-all'
+					>
+						<IoIosArrowBack className="mt-1" /> Anterior
+					</motion.button>
 					<span className='text-gray-700'>
 						Page {currentPage} of {Math.ceil(filteredPrices.length / itemsPerPage)}
 					</span>
