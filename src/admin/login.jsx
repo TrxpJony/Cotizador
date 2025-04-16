@@ -1,19 +1,23 @@
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
-
+import { Input, Form } from "@heroui/react";
+import { Icon } from "@iconify/react"
 const cookies = new Cookies();
 const baseUrl = import.meta.env.VITE_API_URL + "/api/vidrioalarte/login";
-const API_URL = import.meta.env.VITE_API_URL; 
+const API_URL = import.meta.env.VITE_API_URL;
 // Cambié la URL al endpoint del backend real
 
 function Login() {
   const [usuario, setUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
-  const [mostrarContraseña, setMostrarContraseña] = useState(false); // Estado para manejar la visibilidad
   const [error, setError] = useState('');
+  const [isVisible, setIsVisible] = React.useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -61,80 +65,67 @@ function Login() {
     }
   };
 
-  const toggleMostrarContraseña = () => {
-    setMostrarContraseña((prevState) => !prevState);
-  };
-
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <div className="flex min-h-full flex-1 flex-col px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img alt="Your Company" src={logo} className="mx-auto h-10 w-auto" />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Introduzca las Credenciales para Acceder al Cotizador
-          </h2>
-        </div>
+      <div className='flex items-start mt-0 sm:mt-20 justify-center px-4 py-20 mb-20'>
+        <div className='w-full max-w-md rounded-2xl bg-white px-8 pb-10 pt-6 shadow-xl'>
+          <div className='flex flex-col items-center gap-3'>
+            <img alt="Vidrio al Arte" src={logo} className='h-14 w-auto' />
+            <h1 className='text-xl font-semibold text-gray-900 text-center'>Introduzca las credenciales</h1>
+            <p className='text-sm text-default-500 text-center'>Para acceder al cotizador</p>
+          </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label htmlFor="usuario" className="block text-sm/6 font-medium text-gray-900">
-                Usuario
-              </label>
-              <div className="mt-2">
-                <input
-                  id="usuario"
-                  name="usuario"
-                  type="text"
-                  value={usuario}
-                  onChange={(e) => setUsuario(e.target.value)}
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                Contraseña
-              </label>
-              <div className="mt-2 relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={mostrarContraseña ? 'text' : 'password'}
-                  value={contraseña}
-                  onChange={(e) => setContraseña(e.target.value)}
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                />
-                {contraseña && (
-                  <button
-                    type="button"
-                    onClick={toggleMostrarContraseña}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-                  >
-                  </button>
-                )}
-              </div>
-            </div>
+          <Form className='mt-6 flex flex-col gap-8' onSubmit={handleLogin}>
+            <Input
+              classNames={{
+                inputWrapper: "group-data-[focus-visible=true]:ring-0 group-data-[focus-visible=true]:ring-offset-0",
+              }}
+              isRequired
+              label="Usuario"
+              name='usuario'
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              placeholder='Ingrese su usuario'
+              type='text'
+            />
+            <Input
+              classNames={{
+                inputWrapper: "group-data-[focus-visible=true]:ring-0 group-data-[focus-visible=true]:ring-offset-0",
+              }}
+              isRequired
+              endContent={
+                <button type="button" onClick={toggleVisibility}>
+                  {isVisible ? (
+                    <Icon
+                      className="pointer-events-none text-2xl text-default-400"
+                      icon="solar:eye-closed-linear"
+                    />
+                  ) : (
+                    <Icon
+                      className="pointer-events-none text-2xl text-default-400"
+                      icon="solar:eye-bold"
+                    />
+                  )}
+                </button>
+              }
+              label="Contraseña"
+              name='password'
+              value={contraseña}
+              onChange={(e) => setContraseña(e.target.value)}
+              placeholder='Ingrese su contraseña'
+              type={isVisible ? "text" : "password"}
+            />
 
             {error && (
-              <p className="text-sm text-red-600">{error}</p>
+              <p className='text-sm text-red-600 px-1'>{error}</p>
             )}
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-cyan-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-              >
-                Acceder
-              </button>
-            </div>
-          </form>
+            <button
+              type="submit"
+              className='mt-2 w-full px-3 py-2 outline outline-cyan-500 rounded-xl text-cyan-500 hover:bg-cyan-500 hover:text-white hover:outline-none transition-all'
+            >
+              Acceder
+            </button>
+          </Form>
         </div>
       </div>
     </>
