@@ -30,10 +30,10 @@ const imageGroups = [
 ];
 
 const ImageCarousel = ({ images }) => (
-    <Carousel showThumbs={false} autoPlay infiniteLoop interval={5000}>
+    <Carousel showThumbs={false} showArrows={false} stopOnHover={false} autoPlay infiniteLoop interval={5000}>
         {images.map((img, index) => (
             <div key={index}>
-                <img src={img} alt={`Slide ${index}`} />
+                <img className="rounded-2xl" src={img} alt={`Slide ${index}`} />
             </div>
         ))}
     </Carousel>
@@ -42,9 +42,9 @@ const ImageCarousel = ({ images }) => (
 const CarruselesComponent = () => {
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {imageGroups.map((images, index) => (
-                    <div key={index} className="p-2 border rounded-lg shadow-md ml-4">
+                    <div key={index} className="shadow-md rounded-2xl">
                         <ImageCarousel images={images} />
                     </div>
                 ))}

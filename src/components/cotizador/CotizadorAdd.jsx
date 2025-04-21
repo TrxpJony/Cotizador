@@ -3,24 +3,40 @@ import PropTypes from 'prop-types';
 import "react-toastify/dist/ReactToastify.css";
 
 const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut }) => { // Accept selectedAccessories as a prop
+    // Procesar dimensions para soportar Diameter o width/height
+    const processedDimensions = (() => {
+        if ('Diameter' in dimensions) {
+            const d = Number(dimensions.Diameter) || 0;
+            return {
+                width: dimensions.width ?? (d > 0 ? d + 50 : 0),
+                height: dimensions.height ?? (d > 0 ? d + 50 : 0),
+                Diameter: d // Por si algún hook lo requiere
+            };
+        }
+        return {
+            width: Number(dimensions.width) || 0,
+            height: Number(dimensions.height) || 0
+        };
+    })();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         description: '',
         quantity: 1,
-        width: dimensions.width || 0, // Initialize width
-        height: dimensions.height || 0, // Initialize height
+        width: processedDimensions.width,
+        height: processedDimensions.height,
         glassPrice: '' // Initialize the glass price
     });
-    const { totalPrice } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut );
+    const { totalPrice } = useCalculoPrecios(processedDimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut );
 
 
     useEffect(() => {
         setFormData(prevData => ({
             ...prevData,
-            width: dimensions.width,
-            height: dimensions.height
+            width: processedDimensions.width,
+            height: processedDimensions.height
         }));
-    }, [dimensions]);
+    }, [dimensions, processedDimensions.width, processedDimensions.height]);
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
@@ -46,8 +62,8 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
         setFormData({
             description: '',
             quantity: 1,
-            width: dimensions.width || 0, // Reset width
-            height: dimensions.height || 0, // Reset height
+            width: processedDimensions.width, // Reset width
+            height: processedDimensions.height, // Reset height
             glassPrice: 0 // Reset glass price
         });
         handleCloseModal();
@@ -101,10 +117,10 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
 
                         <div className="mb-4 flex justify-center gap-x-4">
                             <p className="text-gray-700 font-bold">
-                                Ancho: {dimensions.width} mm
+                                Ancho: {processedDimensions.width} mm
                             </p>
                             <p className="text-gray-700 font-bold">
-                                Alto: {dimensions.height} mm
+                                Alto: {processedDimensions.height} mm
                             </p>
                         </div>
 

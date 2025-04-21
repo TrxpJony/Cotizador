@@ -14,11 +14,10 @@ const CotizadorEspejos = () => {
     const [selectedCenefa, setSelectedCenefa] = useState('sinCenefa');
     const [selectedPerfil, setselectedPerfil] = useState('sinPerfil'); // State for selected profile
     const [selectedCut, setSelectedCut] = useState('alCorte')
-    const [isCenBotSelected, setIsCenBotSelected] = useState(false); // State for checkbox
 
     const [espejoImage, setEspejoImage] = useState("https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744034207/img_cotizadores/e14xp7uhsscn62incxkg.png");
 
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, isCenBotSelected);
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -34,10 +33,6 @@ const CotizadorEspejos = () => {
 
     const handleAccessoryChange = (accessories) => {
         setSelectedAccessories(accessories); // Actualiza todo el array de accesorios
-    };
-
-    const handleCenBotChange = (isSelected) => {
-        setIsCenBotSelected(isSelected);
     };
 
     const handleImageChange = (e) => {
@@ -101,6 +96,7 @@ const CotizadorEspejos = () => {
 
                         <select className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedCenefa} onChange={(e) => setSelectedCenefa(e.target.value)}>
                             <option value="sinCenefa">Sin cenefa</option>
+                            <option value="CEN_BOT">Boton</option>
                             <option value="CEN_FAC">Facil</option>
                             <option value="CEN_INT">Intermedia</option>
                             <option value="CEN_DIF">Dificil</option>
@@ -137,7 +133,6 @@ const CotizadorEspejos = () => {
                     selectedCenefa={selectedCenefa} // Pass the selectedCenefa state to DetalleTablas
                     selectedPerfil={selectedPerfil} // Pass the selectedPerfil state to DetalleTablas
                     selectedCut={selectedCut}
-                    onCenBotChange={handleCenBotChange} // Pass handler to DetalleTablas
                 /> {/* Pass useCalculoPrecios as a prop */}
             </div>
         </>

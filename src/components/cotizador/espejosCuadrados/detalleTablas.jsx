@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCut, selectedCenefa, selectedPerfil, onAccessoryChange, onCenBotChange }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCut, selectedCenefa, selectedPerfil, onAccessoryChange}) => { // Add new props
     const { isOpen: isOpen12V, onOpen: onOpen12V, onClose: onClose12V } = useDisclosure();
     const { isOpen: isOpen110V, onOpen: onOpen110V, onClose: onClose110V } = useDisclosure();
     const { isOpen: isOpenSensores, onOpen: onOpenSensores, onClose: onCloseSensores } = useDisclosure();
@@ -110,7 +110,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
         perfilPrice,
         cutPrice,
         mtrsLineal,
-        CEN_BOT_PRI,
         totalArea,
         manoDeObra,
     } = calculatedValues || {};
@@ -201,16 +200,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                                 </button>
                             </TableCell>
                             <TableCell>${selectedAccessory.sensores.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    onChange={(e) => onCenBotChange(e.target.checked)} // Notify parent of selection
-                                />
-                                <strong>Boton cenefa para touch</strong>
-                            </TableCell>
-                            <TableCell>${CEN_BOT_PRI?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -379,12 +368,10 @@ DetalleTablas.propTypes = {
         cenefaPrice: PropTypes.number,
         perfilPrice: PropTypes.number,
         mtrsLineal: PropTypes.number,
-        CEN_BOT_PRI: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired, // ✅ Esto está bien
-    onCenBotChange: PropTypes.func.isRequired, // ✅ Agregado aquí
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired,
     selectedGlass: PropTypes.string.isRequired,

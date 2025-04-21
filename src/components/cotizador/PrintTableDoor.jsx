@@ -92,7 +92,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             doc.addImage(image, 'PNG', 14, 70, 182, 80); // Adjust image dimensions
         }
 
-        const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "MEDIDAS (mm)", "SUBTOTAL", "IVA", "TOTAL"];
+        const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "ANCHO x ALTO", "SUBTOTAL", "IVA", "TOTAL"];
         const tableRows = [];
 
         doors.forEach(door => {

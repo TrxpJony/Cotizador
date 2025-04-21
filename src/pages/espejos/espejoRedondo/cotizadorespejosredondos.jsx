@@ -6,8 +6,6 @@ import useCalculoPrecios from '../../../components/cotizador/espejosRedondos/use
 import DetalleTablas from '../../../components/cotizador/espejosRedondos/detalleTablas';
 import AddTableDoor from '../../../components/cotizador/addTableDoor';
 
-const espejoImage = "https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744046436/img_cotizadores/sha8scalmkgxg7tnaq1o.png";
-
 const CotizadorEspejosRedondos = () => {
     const [dimensions, setDimensions] = useState({ Diameter: 0 });
     const [doors, setDoors] = useState([]); // State to hold doors
@@ -15,9 +13,10 @@ const CotizadorEspejosRedondos = () => {
     const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
     const [selectedCenefa, setSelectedCenefa] = useState('sinCenefa');
     const [selectedPerfil, setselectedPerfil] = useState('sinPerfil'); // State for selected profile
-    const [isCenBotSelected, setIsCenBotSelected] = useState(false); // State for checkbox
 
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil,  isCenBotSelected);
+    const [espejoImage, setEspejoImage] = useState("https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744046436/img_cotizadores/sha8scalmkgxg7tnaq1o.png");
+
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil);
 
 
     const handleDimensionsChange = (newDimensions) => {
@@ -36,9 +35,16 @@ const CotizadorEspejosRedondos = () => {
         setSelectedAccessories(accessories); // Actualiza todo el array de accesorios
     };
 
-    const handleCenBotChange = (isSelected) => {
-        setIsCenBotSelected(isSelected);
-    };
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]; // Tomamos el primer archivo seleccionado
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEspejoImage(reader.result); // Guardamos la imagen en base64 en el estado
+            };
+            reader.readAsDataURL(file); // Leemos el archivo como URL base64
+        }
+    }
 
 
     return (
@@ -57,6 +63,15 @@ const CotizadorEspejosRedondos = () => {
                         <div className='top-0 left-0 w-full h-full'>
                             <img src={espejoImage} alt="Espejo" className="w-full h-56 sm:h-full object-cover rounded-xl " />
                         </div>
+                        <label className='absolute outline rounded-2xl hover:outline-black hover:bg-black bottom-5 right-5 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline cursor-pointer transition-all'>
+                            Seleccionar
+                            <input
+                                type="file"
+                                className='hidden'
+                                accept='image/*'
+                                onChange={handleImageChange} // Llamamos a la funcion para manejar la seleccion de la imagen
+                            />
+                        </label>
                     </div>
                     <div className='mb-2'>
                         <label className='text-gray-700 font-bold mb-2'>
@@ -82,6 +97,7 @@ const CotizadorEspejosRedondos = () => {
 
                         <select className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedCenefa} onChange={(e) => setSelectedCenefa(e.target.value)}>
                             <option value="sinCenefa">Sin cenefa</option>
+                            <option value="CEN_BOT">Boton</option>
                             <option value="CEN_FAC">Facil</option>
                             <option value="CEN_INT">Intermedia</option>
                             <option value="CEN_DIF">Dificil</option>
@@ -110,7 +126,6 @@ const CotizadorEspejosRedondos = () => {
                     selectedGlass={selectedGlass}
                     selectedCenefa={selectedCenefa} // Pass the selectedCenefa state to DetalleTablas
                     selectedPerfil={selectedPerfil} // Pass the selectedPerfil state to DetalleTablas
-                    onCenBotChange={handleCenBotChange} // Pass handler to DetalleTablas
                 /> {/* Pass useCalculoPrecios as a prop */}
             </div>
         </>

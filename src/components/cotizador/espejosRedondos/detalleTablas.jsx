@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCenefa, selectedPerfil, onAccessoryChange, onCenBotChange }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedCenefa, selectedPerfil, onAccessoryChange}) => { // Add new props
     const { isOpen: isOpen12V, onOpen: onOpen12V, onClose: onClose12V } = useDisclosure();
     const { isOpen: isOpen110V, onOpen: onOpen110V, onClose: onClose110V } = useDisclosure();
     const { isOpen: isOpenSensores, onOpen: onOpenSensores, onClose: onCloseSensores } = useDisclosure();
@@ -20,20 +20,19 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
     });
 
     const handleAccessorySelect = (tipo, id, precio) => {
-        const luztotal = dimensions.Diameter
-            ? (dimensions.Diameter * 3.14)
-            : 0;
-
+        const mtrsLineal = calculatedValues?.mtrsLineal || 0; // Ensure mtrsLineal is always derived here
         let precioFinal = precio;
 
         if (tipo === 'luz12V' || tipo === 'luz110V') {
-            precioFinal = (precio / 1000) * luztotal;
+            precioFinal = (precio / 1000) * mtrsLineal;
+            // Redondear a múltiplo de 5000 hacia arriba
+            precioFinal = Math.ceil(precioFinal / 5000) * 5000;
         }
 
         setSelectedAccessory((prevState) => {
             const newState = { ...prevState, [tipo]: { id, precio: precioFinal } };
 
-            // Deseleccionar el otro tipo de luz si es necesario
+            // Deselect the other type of light if necessary
             if (tipo === 'luz12V') {
                 newState.luz110V = { id: 0, precio: 0 };
                 onClose12V();
@@ -44,16 +43,13 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                 onCloseSensores();
             }
 
-            onAccessoryChange(Object.values(newState));
+            onAccessoryChange(Object.values(newState)); // Notify parent of the updated accessories
             return newState;
         });
     };
 
     useEffect(() => {
-        // Recalcular el precio de las luces seleccionadas al cambiar las dimensiones
-        const luztotal = dimensions.Diameter
-            ? (dimensions.Diameter * 3.14)
-            : 0;
+        const mtrsLineal = calculatedValues?.mtrsLineal || 0; // Derivar mtrsLineal directamente
 
         setSelectedAccessory((prevState) => {
             const updatedState = { ...prevState };
@@ -61,18 +57,22 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
             // Recalcular el precio de las luces 12V si están seleccionadas
             if (prevState.luz12V.id !== 0) {
                 const precioBase12V = detalleProductos.find(p => p.id === prevState.luz12V.id)?.precio || 0;
-                updatedState.luz12V.precio = (precioBase12V / 1000) * luztotal;
+                let recalculated = (precioBase12V / 1000) * mtrsLineal;
+                recalculated = Math.ceil(recalculated / 5000) * 5000; // Redondear a múltiplo de 5000 hacia arriba
+                updatedState.luz12V.precio = recalculated;
             }
 
             // Recalcular el precio de las luces 110V si están seleccionadas
             if (prevState.luz110V.id !== 0) {
                 const precioBase110V = detalleProductos.find(p => p.id === prevState.luz110V.id)?.precio || 0;
-                updatedState.luz110V.precio = (precioBase110V / 1000) * luztotal;
+                let recalculated = (precioBase110V / 1000) * mtrsLineal;
+                recalculated = Math.ceil(recalculated / 5000) * 5000; // Redondear a múltiplo de 5000 hacia arriba
+                updatedState.luz110V.precio = recalculated;
             }
 
             return updatedState;
         });
-    }, [dimensions, detalleProductos]);
+    }, [calculatedValues, detalleProductos]); // Ajustar dependencias
 
     useEffect(() => {
         const fetchDetalleProductos = async () => {
@@ -111,8 +111,8 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
         cenefaPrice,
         perfilPrice,
         mtrsLineal,
-        CEN_BOT_PRI,
         manoDeObra,
+        totalArea,
     } = calculatedValues || {};
 
     return (
@@ -147,7 +147,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Mano de obra:</strong></TableCell>
-                            <TableCell> {totalHeight} x {totalWidth} mm</TableCell>
+                            <TableCell> {totalArea} mm</TableCell>
                             <TableCell>${manoDeObra?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
@@ -197,16 +197,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                             </TableCell>
                             <TableCell>${selectedAccessory.sensores.precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</TableCell>
                         </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    onChange={(e) => onCenBotChange(e.target.checked)} // Notify parent of selection
-                                />
-                                <strong>Boton cenefa para touch</strong>
-                            </TableCell>
-                            <TableCell>${CEN_BOT_PRI?.toFixed(2)}</TableCell>
-                        </TableRow>
                     </TableBody>
                 </Table>
                 <br />
@@ -227,7 +217,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('luz12V', item.id, item.precio)}
+                                                    onPress={() => handleAccessorySelect('luz12V', item.id, item.precio)} // Pass id and price
                                                     className={`nextui-card ${selectedAccessory.luz12V.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4">
@@ -276,7 +266,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('luz110V', item.id, item.precio)}
+                                                    onPress={() => handleAccessorySelect('luz110V', item.id, item.precio)} // Pass id and price
                                                     className={`nextui-card ${selectedAccessory.luz110V.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4">
@@ -325,7 +315,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                                                     key={index}
                                                     isPressable
                                                     shadow="sm"
-                                                    onPress={() => handleAccessorySelect('sensores', item.id, item.precio)}
+                                                    onPress={() => handleAccessorySelect('sensores', item.id, item.precio)} // Pass id and price
                                                     className={`nextui-card ${selectedAccessory.sensores.id === item.id ? 'bg-cyan-300' : ''}`}
                                                 >
                                                     <CardBody className="overflow-hidden p-4 items-center">
@@ -375,12 +365,10 @@ DetalleTablas.propTypes = {
         cenefaPrice: PropTypes.number,
         perfilPrice: PropTypes.number,
         mtrsLineal: PropTypes.number,
-        CEN_BOT_PRI: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,
     onAddDoor: PropTypes.func.isRequired,
     onAccessoryChange: PropTypes.func.isRequired, // ✅ Esto está bien
-    onCenBotChange: PropTypes.func.isRequired, // ✅ Agregado aquí
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired,
     selectedGlass: PropTypes.string.isRequired,
