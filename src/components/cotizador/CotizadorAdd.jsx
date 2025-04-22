@@ -8,8 +8,8 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
         if ('Diameter' in dimensions) {
             const d = Number(dimensions.Diameter) || 0;
             return {
-                width: dimensions.width ?? (d > 0 ? d + 50 : 0),
-                height: dimensions.height ?? (d > 0 ? d + 50 : 0),
+                width: dimensions.width ?? (d > 0 ? d : 0),
+                height: dimensions.height ?? (d > 0 ? d : 0),
                 Diameter: d // Por si algún hook lo requiere
             };
         }

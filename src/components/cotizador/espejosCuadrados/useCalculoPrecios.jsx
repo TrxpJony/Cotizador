@@ -56,8 +56,9 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         } else if (totalArea > 2) {
             manoDeObra = memoizedPrices.ESP_MO4 || 0;
         }
-
-        const vidrioPrice = (glassUnitPrice * area);
+        
+        const vidrioPriceRaw = (glassUnitPrice * area);
+        const vidrioPrice = Math.ceil(vidrioPriceRaw / 5000) * 5000;
         const cutPrice = cutUnitPrice * mtrsLineal / 1000;
         const accessoriesPrice = memoizedAccessories.reduce((acc, accessory) => acc + (accessory.precio || 0), 0);
         const cenefaPriceRaw = cenefaUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for cenefa

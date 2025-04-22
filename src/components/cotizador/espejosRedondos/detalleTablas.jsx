@@ -20,11 +20,24 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
     });
 
     const handleAccessorySelect = (tipo, id, precio) => {
-        const mtrsLineal = calculatedValues?.mtrsLineal || 0; // Ensure mtrsLineal is always derived here
+        const mtrsLineal = calculatedValues?.mtrsLineal || 0; // mm
         let precioFinal = precio;
 
         if (tipo === 'luz12V' || tipo === 'luz110V') {
-            precioFinal = (precio / 1000) * mtrsLineal;
+            const precioPorMetro = precio / 5;
+            if (mtrsLineal < 3000) {
+                precioFinal = ((precioPorMetro) + (precioPorMetro * 0.12)) * (mtrsLineal / 1000);
+            } else if (mtrsLineal >= 3000 && mtrsLineal < 5000) {
+                precioFinal = precio;
+            } else if (mtrsLineal >= 5000) {
+                const rollosCompletos = Math.floor(mtrsLineal / 5000);
+                const sobrante = mtrsLineal % 5000;
+                let precioSobrante = 0;
+                if (sobrante > 0) {
+                    precioSobrante = ((precioPorMetro) + (precioPorMetro * 0.12)) * (sobrante / 1000);
+                }
+                precioFinal = (rollosCompletos * precio) + precioSobrante;
+            }
             // Redondear a múltiplo de 5000 hacia arriba
             precioFinal = Math.ceil(precioFinal / 5000) * 5000;
         }
@@ -57,16 +70,46 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
             // Recalcular el precio de las luces 12V si están seleccionadas
             if (prevState.luz12V.id !== 0) {
                 const precioBase12V = detalleProductos.find(p => p.id === prevState.luz12V.id)?.precio || 0;
-                let recalculated = (precioBase12V / 1000) * mtrsLineal;
-                recalculated = Math.ceil(recalculated / 5000) * 5000; // Redondear a múltiplo de 5000 hacia arriba
+                const precioPorMetro = precioBase12V / 5;
+                let recalculated = 0;
+                if (mtrsLineal < 3000) {
+                    recalculated = ((precioPorMetro) + (precioPorMetro * 0.12)) * (mtrsLineal / 1000);
+                } else if (mtrsLineal >= 3000 && mtrsLineal < 5000) {
+                    recalculated = precioBase12V;
+                } else if (mtrsLineal >= 5000) {
+                    const rollosCompletos = Math.floor(mtrsLineal / 5000);
+                    const sobrante = mtrsLineal % 5000;
+                    let precioSobrante = 0;
+                    if (sobrante > 0) {
+                        precioSobrante = ((precioPorMetro) + (precioPorMetro * 0.12)) * (sobrante / 1000);
+                    }
+                    recalculated = (rollosCompletos * precioBase12V) + precioSobrante;
+                }
+                // Redondear a múltiplo de 5000 hacia arriba
+                recalculated = Math.ceil(recalculated / 5000) * 5000;
                 updatedState.luz12V.precio = recalculated;
             }
 
             // Recalcular el precio de las luces 110V si están seleccionadas
             if (prevState.luz110V.id !== 0) {
                 const precioBase110V = detalleProductos.find(p => p.id === prevState.luz110V.id)?.precio || 0;
-                let recalculated = (precioBase110V / 1000) * mtrsLineal;
-                recalculated = Math.ceil(recalculated / 5000) * 5000; // Redondear a múltiplo de 5000 hacia arriba
+                const precioPorMetro = precioBase110V / 5;
+                let recalculated = 0;
+                if (mtrsLineal < 3000) {
+                    recalculated = ((precioPorMetro) + (precioPorMetro * 0.12)) * (mtrsLineal / 1000);
+                } else if (mtrsLineal >= 3000 && mtrsLineal < 5000) {
+                    recalculated = precioBase110V;
+                } else if (mtrsLineal >= 5000) {
+                    const rollosCompletos = Math.floor(mtrsLineal / 5000);
+                    const sobrante = mtrsLineal % 5000;
+                    let precioSobrante = 0;
+                    if (sobrante > 0) {
+                        precioSobrante = ((precioPorMetro) + (precioPorMetro * 0.12)) * (sobrante / 1000);
+                    }
+                    recalculated = (rollosCompletos * precioBase110V) + precioSobrante;
+                }
+                // Redondear a múltiplo de 5000 hacia arriba
+                recalculated = Math.ceil(recalculated / 5000) * 5000;
                 updatedState.luz110V.precio = recalculated;
             }
 
