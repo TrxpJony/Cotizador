@@ -10,6 +10,7 @@ import "swiper/css/effect-fade";
 import { MdOutlineDensitySmall, MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
+import { Pagination } from "@heroui/react";// Importa Pagination aquí
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/blog-images";
 
@@ -19,6 +20,17 @@ const Blog = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [images, setImages] = useState([]);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Estado para controlar la visibilidad del calendario
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+
+    // Para filtrar y paginar los posts, necesitamos obtener la lista filtrada aquí
+    // Creamos un estado para guardar la cantidad total de posts filtrados
+    const [filteredCount, setFilteredCount] = useState(0);
+
+    // Handler para actualizar el número total de posts filtrados desde PostVa
+    const handleFilteredCount = (count) => {
+        setFilteredCount(count);
+    };
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -158,8 +170,37 @@ const Blog = () => {
 
                     {/* Tarjetas con mejor diseño */}
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                        <PostVa searchTerm={searchTerm} selectedCategory={selectedCategory} selectedDate={selectedDate} />
+                        <PostVa
+                            searchTerm={searchTerm}
+                            selectedCategory={selectedCategory}
+                            selectedDate={selectedDate}
+                            currentPage={currentPage}
+                            itemsPerPage={itemsPerPage}
+                            onFilteredCount={handleFilteredCount}
+                        />
                     </div>
+                    <div className="flex justify-center mt-6">
+                        <Pagination
+                            showControls
+                            classNames={{
+                                base: "",
+                                wrapper: "",
+                                prev: "bg-white",
+                                next: "bg-white",
+                                item: "bg-transparent ",
+                                cursor: "bg-cyan-500"
+                            }}
+                            initialPage={1}
+                            page={currentPage}
+                            total={Math.ceil(filteredCount / itemsPerPage)}
+                            onChange={(page) => {
+                                setCurrentPage(page);
+                                window.scrollTo(0, 0);
+                            }}
+                            color="primary"
+                        />
+                    </div>
+                    {/* aqui paginacion */}
                 </div>
             </div>
         </>

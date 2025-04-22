@@ -23,7 +23,7 @@ const truncate = (text, maxLength) => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 };
 
-const PostVa = ({ searchTerm, selectedCategory, selectedDate }) => {
+const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, itemsPerPage = 4, onFilteredCount }) => {
     const [posts, setPosts] = useState([]);
     const userRole = cookies.get('rol'); // Leer el rol del usuario desde las cookies
 
@@ -93,9 +93,21 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate }) => {
         )
         .sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); // Sort by date descending
 
+    // Reportar el total de posts filtrados al padre
+    useEffect(() => {
+        if (onFilteredCount) {
+            onFilteredCount(filteredPosts.length);
+        }
+    }, [filteredPosts, onFilteredCount]);
+
+    // Calcular los posts a mostrar en la página actual
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const paginatedPosts = filteredPosts.slice(startIdx, endIdx);
+
     return (
         <>
-            {filteredPosts.map((post) => (
+            {paginatedPosts.map((post) => (
                 <div key={post.id} className='w-full max-w-md mx-auto flex flex-col mt-4'>
                     <div className='relative w-full h-48 bg-gray-300 rounded-xl transition duration-300 ease-in-out transform hover:scale-105'>
                         <img className='absolute top-0 left-0 w-full h-full object-cover rounded-xl' src={post.image} alt='' />
@@ -135,6 +147,9 @@ PostVa.propTypes = {
     searchTerm: PropTypes.string,
     selectedCategory: PropTypes.string,
     selectedDate: PropTypes.instanceOf(Date),
+    currentPage: PropTypes.number,
+    itemsPerPage: PropTypes.number,
+    onFilteredCount: PropTypes.func,
 };
 
 export default PostVa;
