@@ -11,10 +11,9 @@ import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { CircularProgress } from '@heroui/react';
 import { MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
-import { today } from '@internationalized/date';
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
-    const [selectedDate, setSelectedDate] = useState(today('UTC'));
+    const [selectedDate, setSelectedDate] = useState('');
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
