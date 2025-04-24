@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Edit } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { Flip, toast, ToastContainer } from 'react-toastify';
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from "prop-types";
 
@@ -73,7 +73,7 @@ const PricesTable = ({ searchTerm }) => {
 		const { descripcion, precio, id } = editedPrice;
 
 		if (!descripcion || !precio || !id) {
-			alert("Todos los campos son requeridos.");
+			toast.warn('Todos los campos son requeridos.');
 			return;
 		}
 
@@ -94,16 +94,7 @@ const PricesTable = ({ searchTerm }) => {
 				return response.json();
 			})
 			.then(() => {
-				toast('Precio actualizado correctamente!', {
-					position: "bottom-center",
-					autoClose: 3000,
-					hideProgressBar: true,
-					closeOnClick: false,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: "light",
-				});
+				toast.success('Precio actualizado correctamente!');
 
 				const updatedPrices = prices.map((price) =>
 					price.id === editedPrice.id ? editedPrice : price
@@ -114,7 +105,7 @@ const PricesTable = ({ searchTerm }) => {
 			})
 			.catch((error) => {
 				console.error('Error:', error);
-				alert('Hubo un problema al actualizar el precio.');
+				toast.error('Hubo un problema al actualizar el precio.');
 			});
 	};
 
@@ -125,7 +116,19 @@ const PricesTable = ({ searchTerm }) => {
 
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='light'
+				transition={Flip}
+			/>
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
 				initial={{ opacity: 0, y: 20 }}

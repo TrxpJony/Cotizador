@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { Flip, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importa los estilos de Toastify
 import { motion } from "framer-motion"; // Importar framer-motion
 
@@ -40,16 +40,7 @@ const UsersAdd = () => {
             }
 
             // Muestra la notificación de éxito
-            toast('Usuario creado exitosamente!', {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            toast.success('Usuario creado exitosamente!');
             handleCloseModal();
             // Limpia el formulario después de guardar
             setNewUser({
@@ -65,7 +56,7 @@ const UsersAdd = () => {
         } catch (error) {
             console.error("Error al guardar el usuario:", error);
             // Muestra la notificación de error
-            toast.error("Hubo un problema al crear el usuario.");
+            toast.warn("Rellena todos los campos.");
         }
     };
 
@@ -139,7 +130,7 @@ const UsersAdd = () => {
             <ToastContainer
                 position="bottom-center"
                 autoClose={3000}
-                hideProgressBar
+                hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick={false}
                 rtl={false}
@@ -147,6 +138,7 @@ const UsersAdd = () => {
                 draggable
                 pauseOnHover
                 theme="light"
+                transition={Flip}
             />
         </>
     );

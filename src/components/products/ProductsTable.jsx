@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Edit, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { Flip, toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from 'prop-types'; // Importar PropTypes
@@ -110,12 +110,7 @@ const ProductsTable = ({ searchTerm }) => {
 				return response.json();
 			})
 			.then(() => {
-				toast("Producto actualizado correctamente!", {
-					position: "bottom-center",
-					autoClose: 3000,
-					hideProgressBar: true,
-					theme: "light",
-				});
+				toast.success("Producto actualizado correctamente!");
 
 				// Recargar los productos después de la actualización
 				fetch(baseUrl)
@@ -129,7 +124,7 @@ const ProductsTable = ({ searchTerm }) => {
 			})
 			.catch((error) => {
 				console.error("Error:", error);
-				alert("Hubo un problema al actualizar el producto.");
+				toast.error("Hubo un problema al actualizar el producto.")
 			});
 	};
 
@@ -155,16 +150,7 @@ const ProductsTable = ({ searchTerm }) => {
 						return response.json();
 					})
 					.then((data) => {
-						toast(data.message, {
-							position: "bottom-center",
-							autoClose: 3000,
-							hideProgressBar: true,
-							closeOnClick: false,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: "light",
-						});
+						toast(data.message);
 
 						// Actualizar el estado sin recargar la página
 						const updatedProducts = products.filter((product) => product.id !== id);
@@ -173,7 +159,7 @@ const ProductsTable = ({ searchTerm }) => {
 					})
 					.catch((error) => {
 						console.error("Error al eliminar el producto:", error);
-						alert("Hubo un problema al eliminar el producto.");
+						toast.error("Hubo un Problema al eliminar el producto.");
 					});
 			}
 		});
@@ -186,7 +172,19 @@ const ProductsTable = ({ searchTerm }) => {
 
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='light'
+				transition={Flip}
+			/>
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mb-8 mt-5'
 				initial={{ opacity: 0, y: 20 }}

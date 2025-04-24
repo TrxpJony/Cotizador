@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { Flip, toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from 'prop-types'; // Importar PropTypes
@@ -71,7 +71,7 @@ const UsersTable = ({ searchTerm }) => {
 
 		// Validar que los campos no estén vacíos
 		if (!usuario || !contraseña || !id) {
-			alert("Usuario, contraseña e ID son requeridos.");
+			toast.warn("Usuario y contraseña son requeridos.");
 			return;
 		}
 
@@ -93,16 +93,7 @@ const UsersTable = ({ searchTerm }) => {
 				return response.json();
 			})
 			.then(() => {
-				toast('Usuario actualizado correctamente!', {
-					position: "bottom-center",
-					autoClose: 3000,
-					hideProgressBar: true,
-					closeOnClick: false,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: "light",
-				});
+				toast.success('Usuario actualizado correctamente!');
 
 				// Actualizar el estado de los usuarios sin necesidad de recargar la página
 				setUsers(users.map((user) => (user.id === id ? editedUser : user)));
@@ -111,7 +102,7 @@ const UsersTable = ({ searchTerm }) => {
 			})
 			.catch((error) => {
 				console.error("Error al actualizar el usuario:", error);
-				alert("Hubo un problema al actualizar el usuario.");
+				toast.error('Hubo un problema al actualizar el usuario.')
 			});
 	};
 
@@ -138,16 +129,7 @@ const UsersTable = ({ searchTerm }) => {
 						return response.json();
 					})
 					.then((data) => {
-						toast(data.message, {
-							position: "bottom-center",
-							autoClose: 3000,
-							hideProgressBar: true,
-							closeOnClick: false,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: "light",
-						});
+						toast.success(data.message);
 
 						// Actualizar el estado sin recargar la página
 						setUsers(users.filter((user) => user.id !== id)); // Elimina el usuario del estado
@@ -155,7 +137,7 @@ const UsersTable = ({ searchTerm }) => {
 					})
 					.catch((error) => {
 						console.error("Error al eliminar el usuario:", error);
-						alert("Hubo un problema al eliminar el usuario.");
+						toast.error("hubo un problema al eliminar el usuario");
 					});
 			}
 		});
@@ -169,7 +151,19 @@ const UsersTable = ({ searchTerm }) => {
 
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer 
+				position="bottom-center"
+				autoclose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+				transition={Flip}
+			/>
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-2xl p-6 border mb-8'
 				initial={{ opacity: 0, y: 20 }}

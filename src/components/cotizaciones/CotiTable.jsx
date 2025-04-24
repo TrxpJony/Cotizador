@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Trash2, Download } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { Flip, toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from "prop-types";
@@ -71,16 +71,7 @@ const CotiTable = ({ searchTerm }) => {
 						return response.json();
 					})
 					.then((data) => {
-						toast(data.message, {
-							position: "bottom-center",
-							autoClose: 3000,
-							hideProgressBar: true,
-							closeOnClick: false,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: "light",
-						});
+						toast.success(data.message);
 
 						// Actualizar el estado sin recargar la página
 						const updatedCotizaciones = cotizaciones.filter((cotizacion) => cotizacion.id !== id);
@@ -89,7 +80,7 @@ const CotiTable = ({ searchTerm }) => {
 					})
 					.catch((error) => {
 						console.error("Error al eliminar la cotización:", error);
-						alert("Hubo un problema al eliminar la cotización.");
+						toast.error('Hubo un problema al eliminar la cotizacio')
 					});
 			}
 		});
@@ -109,7 +100,19 @@ const CotiTable = ({ searchTerm }) => {
 
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+				transition={Flip}
+			/>
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mt-5 mb-8'
 				initial={{ opacity: 0, y: 20 }}
@@ -134,7 +137,7 @@ const CotiTable = ({ searchTerm }) => {
 									Email
 								</th>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Usuario
+									Cotizador
 								</th>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Fecha

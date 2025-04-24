@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Field, Label, Switch } from '@headlessui/react'
 import { motion } from 'framer-motion';
-import { ToastContainer, toast } from "react-toastify";
+import { Flip, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/send-question";
@@ -29,38 +29,14 @@ export default function FormContact() {
                 body: JSON.stringify(data),
             });
             if (res.ok) {
-                toast.success("Tu mensaje fue enviado con éxito. Pronto te contactaremos.", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    valueOftheme: "light"
-                });
+                toast.success("Tu mensaje fue enviado con éxito. Pronto te contactaremos.");
                 e.target.reset(); // Limpiar el formulario si fue exitoso
             } else {
-                toast.error("Hubo un problema al enviar tu mensaje.", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "light",
-                });
+                toast.error("Hubo un problema al enviar tu mensaje.");
             }
         } catch (err) {
             console.error("Error enviando mensaje:", err);
-            toast.error("Error de red al enviar tu mensaje.", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            });
+            toast.error("Error de red al enviar tu mensaje.");
         }
     };
 
@@ -217,7 +193,19 @@ export default function FormContact() {
                             </button>
                         </div>
                     </form>
-                    <ToastContainer />
+                    <ToastContainer 
+                        position="bottom-center"
+                        autoclose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme='light'
+                        transition={Flip}
+                    />
                 </div>
             </motion.div>
         </>
