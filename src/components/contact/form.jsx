@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Field, Label, Switch } from '@headlessui/react'
 import { motion } from 'framer-motion';
 import { Flip, ToastContainer, toast } from "react-toastify";
@@ -15,28 +14,89 @@ export default function FormContact() {
 
         const formData = new FormData(e.target);
         const data = {
-            nombre: formData.get("first-name"),
-            apellido: formData.get("last-name"),
-            email: formData.get("email"),
-            telefono: formData.get("phone-number"),
-            mensaje: formData.get("message"),
+            nombre: formData.get("first-name")?.trim(),
+            apellido: formData.get("last-name")?.trim(),
+            email: formData.get("email")?.trim(),
+            telefono: formData.get("phone-number")?.trim(),
+            mensaje: formData.get("message")?.trim(),
         };
 
+        // --- Validaciones ---
+
+        // 1. Todos los campos deben estar llenos
+        if (!data.nombre || !data.apellido || !data.email || !data.telefono || !data.mensaje) {
+            toast.warn("Por favor, completa todos los campos.");
+            return;
+        }
+
+        // 2. Nombre y apellido solo con letras y espacios
+        const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!nombreRegex.test(data.nombre)) {
+            toast.warn("El nombre solo debe contener letras.");
+            return;
+        }
+
+        if (!nombreRegex.test(data.apellido)) {
+            toast.warn("El apellido solo debe contener letras.");
+            return;
+        }
+
+        // 3. Email válido (formato básico)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            toast.warn("El correo electrónico no es válido.");
+            return;
+        }
+
+        // 4. Teléfono: exactamente 10 dígitos
+        const telefonoRegex = /^\d{10}$/;
+        if (!telefonoRegex.test(data.telefono)) {
+            toast.warn("El número telefónico debe tener exactamente 10 dígitos.");
+            return;
+        }
+
+        // 5. Mensaje mínimo 10 caracteres, máximo 3000
+        if (data.mensaje.length < 10) {
+            toast.warn("El mensaje debe tener al menos 10 caracteres.");
+            return;
+        }
+        if (data.mensaje.length > 3000) {
+            toast.warn("El mensaje no puede tener más de 3000 caracteres.");
+            return;
+        }
+
+        // 6. Aceptar la política de privacidad
+        if (!agreed) {
+            toast.info("Debes aceptar la política de privacidad.");
+            return;
+        }
+
+        // --- Enviar formulario ---
         try {
-            const res = await fetch(baseUrl, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-            if (res.ok) {
-                toast.success("Tu mensaje fue enviado con éxito. Pronto te contactaremos.");
-                e.target.reset(); // Limpiar el formulario si fue exitoso
-            } else {
-                toast.error("Hubo un problema al enviar tu mensaje.");
+            const response = await toast.promise(
+                fetch(baseUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                }),
+                {
+                    pending: "Enviando mensaje...",
+                    success: "Tu mensaje fue enviado con éxito. Pronto te contactaremos.",
+                    error: "Hubo un problema al enviar tu mensaje.",
+                }
+            );
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Error desconocido");
             }
+
+            e.target.reset();
+            setAgreed(false); // opcional: resetear el switch
+
         } catch (err) {
             console.error("Error enviando mensaje:", err);
-            toast.error("Error de red al enviar tu mensaje.");
+            // Ya se mostró un toast con el error arriba
         }
     };
 
@@ -122,27 +182,11 @@ export default function FormContact() {
                                 </label>
                                 <div className="mt-2.5">
                                     <div className="flex rounded-md bg-white outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-cyan-500">
-                                        <div className="grid shrink-0 grid-cols-1 focus-within:relative">
-                                            <select
-                                                id="country"
-                                                name="country"
-                                                autoComplete="country"
-                                                aria-label="Country"
-                                                className="col-start-1 row-start-1 w-full appearance-none rounded-md py-2 pl-3.5 pr-7 text-base text-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-500 sm:text-sm/6"
-                                            >
-                                                <option>+57</option>
-                                            </select>
-                                            <ChevronDownIcon
-                                                aria-hidden="true"
-                                                className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                                            />
-                                        </div>
                                         <input
                                             id="phone-number"
                                             name="phone-number"
-                                            type="text"
-                                            placeholder="123-456-7890"
-                                            className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-700 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                                            type="number"
+                                            className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-700 placeholder:text-gray-400 focus:outline rounded-xl focus:outline-0 sm:text-sm/6"
                                         />
                                     </div>
                                 </div>
@@ -193,7 +237,7 @@ export default function FormContact() {
                             </button>
                         </div>
                     </form>
-                    <ToastContainer 
+                    <ToastContainer
                         position="bottom-center"
                         autoclose={3000}
                         hideProgressBar={false}
