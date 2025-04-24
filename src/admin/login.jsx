@@ -5,7 +5,10 @@ import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
 import { Input, Form } from "@heroui/react";
-import { Icon } from "@iconify/react"
+import { Icon } from "@iconify/react";
+import { Flip, ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 const cookies = new Cookies();
 const baseUrl = import.meta.env.VITE_API_URL + "/api/vidrioalarte/login";
 const API_URL = import.meta.env.VITE_API_URL;
@@ -24,46 +27,40 @@ function Login() {
     e.preventDefault();
     setError('');
     try {
-      // Enviar solicitud POST con usuario y contraseña al backend
       const response = await fetch(baseUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ usuario, contraseña }),  // Enviar las credenciales en el cuerpo de la solicitud
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, contraseña }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
-      const data = await response.text();  // El backend solo retorna un mensaje de texto, no es necesario convertir a JSON
-      // Usar la variable de entorno
+      const data = await response.text();
       if (data === 'Login exitoso.') {
-        // Si el login es exitoso, obtener los datos del usuario
-        const userResponse = await fetch(`${API_URL}/api/usuarios/${usuario}`); // Endpoint para obtener los detalles del usuario
+        // Obtener datos de usuario primero
+        const userResponse = await fetch(`${API_URL}/api/usuarios/${usuario}`);
         const userData = await userResponse.json();
-
-        // Guardar datos en cookies
         cookies.set('id', userData.id, { path: '/' });
         cookies.set('usuario', userData.usuario, { path: '/' });
         cookies.set('rol', userData.rol, { path: '/' });
 
-        // Redirigir según el rol del usuario
-        if (userData.rol === 'administrador') {
-          navigate('/admin');
-        } else {
-          navigate('/');
-        }
-        window.location.reload();  // Reiniciar la página
+        // Toast de bienvenida con el nombre de usuario
+        toast.success(`¡Bienvenido, ${userData.usuario}! Login exitoso`, {
+          autoClose: 1700,
+          onClose: () => {
+            navigate(userData.rol === 'administrador' ? '/admin' : '/cotizar');
+            window.location.reload();
+          },
+        });
       } else {
-        setError('Usuario o contraseña incorrectos.');
+        toast.error('Usuario o contraseña incorrectos.');
       }
     } catch (err) {
       console.error('Error al conectarse a la API:', err);
-      setError('Usuario o contraseña incorrectos.');
+      toast.error('Usuario o contraseña incorrectos.');
     }
   };
+
 
   return (
     <>
@@ -74,6 +71,19 @@ function Login() {
             <h1 className='text-xl font-semibold text-gray-900 text-center'>Introduzca las credenciales</h1>
             <p className='text-sm text-default-500 text-center'>Para acceder al cotizador</p>
           </div>
+          <ToastContainer
+            position="bottom-center"
+            autoclose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='light'
+            transition={Flip}
+          />
 
           <Form className='mt-6 flex flex-col gap-8' onSubmit={handleLogin}>
             <Input
@@ -126,6 +136,7 @@ function Login() {
               Acceder
             </button>
           </Form>
+
         </div>
       </div>
     </>

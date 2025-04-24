@@ -5,7 +5,7 @@ import logo from '../../../src/img/logo.png';
 import 'jspdf-autotable';
 import axios from 'axios'; // Import axios
 import Cookies from 'universal-cookie'; // Import cookies
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import { Flip, ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { CircularProgress } from '@heroui/react';
@@ -189,16 +189,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            toast.success('Cotización almacenada con éxito', {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            toast.success('Cotización almacenada con éxito');
 
             // Send email with PDF
             const emailData = new FormData();
@@ -211,16 +202,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            toast.success('Correo de confirmación enviado', {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            toast.success('Correo de confirmación enviado');
         } catch (error) {
             console.error('Error al almacenar la cotización o enviar el correo:', error);
             toast.error('Error al almacenar la cotización o enviar el correo');
@@ -337,7 +319,19 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                     </div>
                 </div>
             )}
-            <ToastContainer /> {/* Add ToastContainer */}
+          <ToastContainer
+            position="bottom-center"
+            autoclose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='light'
+            transition={Flip}
+          />
         </>
     );
 };

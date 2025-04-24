@@ -28,7 +28,6 @@ export default function NavBarComponent({ userId, userRole, location }) {
 
   // Añadir "Admin" solo si el rol es "administrador"
   if (userRole === 'administrador') {
-    menuItems.push({ name: "Cotizador", path: "/cotizar" });
     menuItems.push({ name: "Admin", path: "/admin" });
   }
 
@@ -101,7 +100,7 @@ export default function NavBarComponent({ userId, userRole, location }) {
           </Link>
         </NavbarItem>
 
-        {(userRole === 'cotizador' || userRole === 'administrador') && (
+        {(userRole === 'cotizador') && (
           <NavbarItem>
             <Link className={`text-foreground hover:text-cyan-400 ${isActive("/cotizar") ? "text-cyan-600" : ""}`} href="/cotizar">
               Cotizar
