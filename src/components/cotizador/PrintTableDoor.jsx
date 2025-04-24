@@ -9,22 +9,31 @@ import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { CircularProgress } from '@heroui/react';
+import { MdCalendarMonth } from "react-icons/md"
+import { Calendar } from "@heroui/react";
+import { today } from '@internationalized/date';
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
+    const [selectedDate, setSelectedDate] = useState(today('UTC'));
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         cliente: '',   // Cambiado de 'client' a 'cliente'
-        projecto: '',  // Asegurar consistencia en los nombres
-        contacto: '',
         telefono: '',
-        direccion: '',
         email: '',
+        entrega: '',  // Asegurar consistencia en los nombres
         abono: ''
     });
     const [cotNumber, setCotNumber] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Add loading state
     const cookies = new Cookies();
     const usuarioId = cookies.get('id'); // Get user ID from cookies
+
+    const formatSelectedDate = (dateObj) => {
+        const jsDate = dateObj.toDate(); // convierte sin UTC
+        jsDate.setHours(12); // ajusta la hora al mediodía para evitar el desfase de zona horaria
+        return jsDate.toLocaleDateString();
+    };
 
     useEffect(() => {
         const generateUniqueCotNumber = () => {
@@ -68,28 +77,42 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
 
         // Add form data with lines
         doc.setTextColor('black');
-        doc.setFontSize(8);
+        doc.setFontSize(11);
         const formDataFields = [
-            { label: `CLIENTE: ${formData.cliente}`, x: 14, y: 50 },
-            { label: `PROYECTO: ${formData.projecto}`, x: 126, y: 50 },
-            { label: `CONTACTO: ${formData.contacto}`, x: 14, y: 57 },
-            { label: `TELEFONO: ${formData.telefono}`, x: 126, y: 57 },
-            { label: `DIRECCIÓN: ${formData.direccion}`, x: 14, y: 64 },
-            { label: `CORREO: ${formData.email}`, x: 126, y: 64 }
+            { label: `CLIENTE: ${formData.cliente}`, x: 14, y: 45 },
+            { label: `FECHA DE ENTREGA: ${selectedDate ? formatSelectedDate(selectedDate) : "Por confirmar"}`, x: 126, y: 45 },
+            { label: `TELEFONO: ${formData.telefono}`, x: 14, y: 52 },
+            { label: `CORREO: ${formData.email}`, x: 126, y: 52 },
+
         ];
 
-        formDataFields.forEach(field => {
-            doc.text(field.label, field.x, field.y - 2); // Adjust text position to be above the line
-            doc.setLineWidth(0.1); // Set line width to be thin
-            doc.line(field.x, field.y, field.x + 70, field.y); // Draw line below the text
+        const boxWidth = 88;
+        const boxHeight = 8;
+        const startY = 40;
+
+        formDataFields.forEach((field, index) => {
+            const y = startY + Math.floor(index / 2) * (boxHeight + 2);
+            const x = index % 2 === 0 ? 14 : 108;
+
+            // Solo dibuja la línea inferior ("piso")
+            doc.setLineWidth(0.1);
+            doc.setDrawColor(0);
+            doc.line(x, y + boxHeight, x + boxWidth, y + boxHeight); // solo línea de abajo
+
+            // Escribe el texto dentro
+            doc.setFontSize(8);
+            doc.setTextColor('gray');
+            doc.text(field.label.split(':')[0], x + 2, y + 3); // etiqueta en gris arriba
+            doc.setTextColor('black');
+            doc.setFontSize(10);
+            doc.text(field.label.split(':')[1]?.trim() || '', x + 2, y + 7); // valor en negro, encima del "piso"
         });
 
         // Add image
         if (image) {
             doc.setLineWidth(0.1); // Set line width to be thin
             doc.setDrawColor(0, 0, 0); // Set line color to black
-            doc.rect(14, 70, 182, 80); // Draw rectangle with thin border
-            doc.addImage(image, 'PNG', 14, 70, 182, 80); // Adjust image dimensions
+            doc.addImage(image, 'PNG', 14, 66, 182, 80); // Adjust image dimensions
         }
 
         const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "ANCHO x ALTO", "SUBTOTAL", "IVA", "TOTAL"];
@@ -112,8 +135,8 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY: 155, // Adjust startY to account for increased rectangle height
-            headStyles: { fillColor: lightGray },
+            startY: 153, // Adjust startY to account for increased rectangle height
+            headStyles: { fillColor: white, textColor: 'black' },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
         });
@@ -136,9 +159,9 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.autoTable({
             head: [summaryTableColumn],
             body: summaryTableRows,
-            startY: doc.previousAutoTable.finalY + 10,
+            startY: doc.previousAutoTable.finalY + 7,
             tableWidth: 'wrap',
-            headStyles: { fillColor: lightGray },
+            headStyles: { fillColor: white, textColor: 'black' },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
         });
@@ -239,45 +262,12 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label htmlFor="projecto" className="block text-gray-700 font-bold mb-2">Proyecto</label>
-                                        <input
-                                            id="projecto"
-                                            type="text"
-                                            name="projecto"
-                                            value={formData.projecto}
-                                            onChange={handleChange}
-                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="contacto" className="block text-gray-700 font-bold mb-2">Contacto</label>
-                                        <input
-                                            id="contacto"
-                                            type="text"
-                                            name="contacto"
-                                            value={formData.contacto}
-                                            onChange={handleChange}
-                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
                                         <label htmlFor="telefono" className="block text-gray-700 font-bold mb-2">Teléfono</label>
                                         <input
                                             id="telefono"
                                             type="text"
                                             name="telefono"
                                             value={formData.telefono}
-                                            onChange={handleChange}
-                                            className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="direccion" className="block text-gray-700 font-bold mb-2">Dirección</label>
-                                        <input
-                                            id="direccion"
-                                            type="text"
-                                            name="direccion"
-                                            value={formData.direccion}
                                             onChange={handleChange}
                                             className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                                         />
@@ -293,6 +283,28 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                             className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
                                         />
                                     </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="entrega" className="block text-gray-700 font-bold mb-2">Fecha de entrega</label>
+                                        <button
+                                            className='border border-black py-2 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:W-auto flex items-center justify-center'
+                                            onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                                        >
+                                            <MdCalendarMonth className='mr-2' />
+                                            {selectedDate ? formatSelectedDate(selectedDate) : 'Seleccionar fecha'}
+                                        </button>
+                                        {isCalendarOpen && (
+                                            <div>
+                                                <Calendar
+                                                    aria-label="Seleccionar fecha"
+                                                    value={selectedDate}
+                                                    onChange={(date) => {
+                                                        setSelectedDate(date);
+                                                        setIsCalendarOpen(false);
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                     <div className="flex flex-col sm:col-span-2">
                                         <label htmlFor="abono" className="block text-gray-700 font-bold mb-2">Abono</label>
                                         <input
@@ -305,7 +317,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                         />
                                     </div>
                                 </div>
-            
+
                                 {/* Botones */}
                                 <div className="flex flex-col sm:flex-row justify-end mt-6 gap-2">
                                     <button
