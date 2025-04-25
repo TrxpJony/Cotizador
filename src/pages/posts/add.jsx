@@ -4,7 +4,7 @@ import axios from "axios";
 import BackButton from "../../components/common/backButton";
 import Sidebar from "../../components/common/Sidebar";
 import PostFormAdd from "../../components/post/postFormAdd";
-
+import { Flip, ToastContainer, toast } from "react-toastify"
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
 const AddPost = () => {
@@ -12,21 +12,36 @@ const AddPost = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (formData) => {
+        const data = new FormData();
+        data.append("title", formData.title);
+        data.append("description", formData.description);
+        data.append("category", formData.category);
+        data.append("image", formData.image);
+
+        setIsSubmitting(true);
+
         try {
-            setIsSubmitting(true);
+            await toast.promise(
+                axios.post(`${baseUrl}/posts`, data, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }),
+                {
+                    pending: "Subiendo publicación...",
+                    success: {
+                        render() {
+                            return "¡Publicación subida con éxito!";
+                        },
+                        autoClose: 2000,
+                    },
+                    error: "Error al subir la publicación",
+                }
+            );
 
-            const data = new FormData();
-            data.append("title", formData.title);
-            data.append("description", formData.description);
-            data.append("category", formData.category); // Asegúrate de que sea solo la clave
-            data.append("image", formData.image);
+            // Espera para que el usuario vea el toast
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-            const response = await axios.post(`${baseUrl}/posts`, data, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            console.log("Post creado:", response.data);
             navigate("/editPost");
+
         } catch (error) {
             console.error("Error al subir el post:", error);
         } finally {
@@ -58,6 +73,19 @@ const AddPost = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='light'
+                    transition={Flip}
+                />
             </div>
         </>
     );

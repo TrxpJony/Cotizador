@@ -4,7 +4,7 @@ import axios from "axios";
 import BackButton from "../../components/common/backButton";
 import Sidebar from "../../components/common/Sidebar";
 import PostFormAdd from "../../components/post/postFormAdd";
-
+import { Flip, ToastContainer, toast } from "react-toastify"
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
 const EditPost = () => {
@@ -14,27 +14,42 @@ const EditPost = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (formData) => {
+        const data = new FormData();
+        data.append("title", formData.title);
+        data.append("description", formData.description);
+        data.append("category", formData.category);
+        if (formData.image) data.append("image", formData.image);
+
+        setIsSubmitting(true);
+
         try {
-            setIsSubmitting(true);
+            await toast.promise(
+                axios.put(`${baseUrl}/posts/${post.id}`, data, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }),
+                {
+                    pending: "Actualizando publicación...",
+                    success: {
+                        render() {
+                            return "¡Publicación actualizada con éxito!";
+                        },
+                        autoClose: 2000,
+                    },
+                    error: "Error al actualizar la publicación",
+                }
+            );
 
-            const data = new FormData();
-            data.append("title", formData.title);
-            data.append("description", formData.description);
-            data.append("category", formData.category);
-            if (formData.image) data.append("image", formData.image);
+            await new Promise(resolve => setTimeout(resolve, 2000)); // da tiempo a leer el toast
 
-            const response = await axios.put(`${baseUrl}/posts/${post.id}`, data, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            console.log("Post actualizado:", response.data);
             navigate("/editPost");
+
         } catch (error) {
             console.error("Error al actualizar el post:", error);
         } finally {
             setIsSubmitting(false);
         }
     };
+
 
     return (
         <>
@@ -60,6 +75,19 @@ const EditPost = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Flip}
+                />
             </div>
         </>
     );
