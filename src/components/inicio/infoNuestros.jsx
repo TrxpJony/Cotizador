@@ -50,7 +50,7 @@ export function NuestrosInfo() {
                                 <Divider orientation="vertical" />
                                 <div>
                                     <br />                   <a
-                                        href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0"
+                                        href="/contact"
                                         className="hover:text-cyan-600 "
                                     >
                                         Mas Información
