@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MdOutlineDensitySmall, MdCalendarMonth } from "react-icons/md";
 import { LuFolderPlus } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { Calendar } from "@heroui/react";
+import { Calendar, Pagination } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 
 const EditPostPage = () => {
@@ -12,6 +12,17 @@ const EditPostPage = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Estado para controlar la visibilidad del calendario
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
+
+    // Para filtrar y paginar los posts, necesitamos obtener la lista filtrada aqui
+    // Creamos un estado para guardar la cantidad total de posts filtrados
+    const [filteredCount, setFilteredCount] = useState(0);
+
+    // Handle para actualizar el número total de post filtrados desde PostVa
+    const handleFilteredCount = (count) => {
+        setFilteredCount(count);
+    };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
@@ -52,41 +63,36 @@ const EditPostPage = () => {
                         </div>
                         <div className="flex flex-col sm:flex-row py-4 justify-center gap-4 sm:gap-8">
                             <button
-                                className={`border border-black py-1 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
-                                    selectedCategory === "" && !selectedDate ? "bg-black text-white" : ""
-                                }`}
+                                className={`border border-black py-1 px-2 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${selectedCategory === "" && !selectedDate ? "bg-black text-white" : ""
+                                    }`}
                                 onClick={() => handleCategoryFilter("")}
                             >
                                 <MdOutlineDensitySmall />
                             </button>
                             <button
-                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
-                                    selectedCategory === "Regalos" ? "bg-black text-white" : ""
-                                }`}
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${selectedCategory === "Regalos" ? "bg-black text-white" : ""
+                                    }`}
                                 onClick={() => handleCategoryFilter("Regalos")}
                             >
                                 Regalos
                             </button>
                             <button
-                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
-                                    selectedCategory === "Eventos" ? "bg-black text-white" : ""
-                                }`}
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${selectedCategory === "Eventos" ? "bg-black text-white" : ""
+                                    }`}
                                 onClick={() => handleCategoryFilter("Eventos")}
                             >
                                 Eventos
                             </button>
                             <button
-                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
-                                    selectedCategory === "Salidas" ? "bg-black text-white" : ""
-                                }`}
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${selectedCategory === "Salidas" ? "bg-black text-white" : ""
+                                    }`}
                                 onClick={() => handleCategoryFilter("Salidas")}
                             >
                                 Salidas
                             </button>
                             <button
-                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${
-                                    selectedCategory === "Premios" ? "bg-black text-white" : ""
-                                }`}
+                                className={`border border-black py-1 px-4 sm:px-10 rounded-2xl hover:bg-black hover:text-white transition-all w-full sm:w-auto ${selectedCategory === "Premios" ? "bg-black text-white" : ""
+                                    }`}
                                 onClick={() => handleCategoryFilter("Premios")}
                             >
                                 Premios
@@ -124,7 +130,28 @@ const EditPostPage = () => {
                         </div>
                         {/*Tarjetas con mejor diseño */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                            <PostVa searchTerm={searchTerm} selectedCategory={selectedCategory} selectedDate={selectedDate} />
+                            <PostVa searchTerm={searchTerm} selectedCategory={selectedCategory} selectedDate={selectedDate} currentPage={currentPage} itemsPerPage={itemsPerPage} onFilteredCount={handleFilteredCount}/>
+                        </div>
+                        <div className="flex justify-center mt-6">
+                            <Pagination
+                                showControls
+                                classNames={{
+                                    base: "",
+                                    wrapper: "",
+                                    prev: "bg-white",
+                                    next: "bg-white",
+                                    item: "bg-transparent",
+                                    cursor: "bg-cyan-500"
+                                }}
+                                initialPage={1}
+                                page={currentPage}
+                                total={Math.ceil(filteredCount / itemsPerPage)}
+                                onChange={(page) => {
+                                    setCurrentPage(page);
+                                    window.scrollTo(0, 0);
+                                }}
+                                color="primary"
+                            />
                         </div>
                     </div>
                 </div>
