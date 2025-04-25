@@ -239,7 +239,7 @@ export default function FormContact() {
                     </form>
                     <ToastContainer
                         position="bottom-center"
-                        autoclose={3000}
+                        autoclose={2000}
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick={false}
