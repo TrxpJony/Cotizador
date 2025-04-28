@@ -26,7 +26,7 @@ const posts = [
     {
         id: 2,
         title: 'Accesorios',
-        href: '#',
+        href: 'cat008',
         description:
             'Encuentre una gran variedad de accesorios y herramientas versátiles y duraderas, perfectas para realizar cualquier tipo de proyecto con confianza.',
         category: { title: 'Ferretería', href: '#' },
@@ -41,7 +41,7 @@ const posts = [
     {
         id: 3,
         title: 'Espejos',
-        href: '#',
+        href: '/espejosinfo',
         description:
             'Ofrecemos espejos con diseños personalizados de sandblasting y luces LED integradas para darle un toque moderno y elegante a su espacio.',
         category: { title: 'Espejos', href: '#' },
@@ -52,6 +52,7 @@ const posts = [
             imageUrl: espejo,
         },
         videoUrl: '',
+        // prueba : https://www.youtube.com/embed/cW5PmVFZLfE
     },
     {
         id: 4,

@@ -87,6 +87,7 @@ import { All } from './pages/accesorios/all';
 import EditPost from './pages/posts/edit';
 import CotizadorEspejosRedondos from './pages/espejos/espejoRedondo/cotizadorespejosredondos';
 import ServiciosPage from './components/serviciosPage';
+import EspejosInfoPage from './pages/ServiciosInfo/espejosInfoPage';
 
 const cookies = new Cookies();
 
@@ -201,6 +202,7 @@ function App() {
           <Route path="cat007" element={<CocinasVista />} />
           <Route path="cat009" element={<Aluminark />} />
           <Route path='contact' element={<ContactPage />} />
+          <Route path='espejosinfo' element={<EspejosInfoPage />} />
           <Route path="p3" element={<ProtectedRoute element={<CocinasCotizador />} allowedRole="cotizador" />} />
         </Routes>
       </div>

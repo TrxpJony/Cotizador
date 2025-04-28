@@ -30,7 +30,7 @@ const imageGroups = [
 ];
 
 const ImageCarousel = ({ images }) => (
-    <Carousel showThumbs={false} showArrows={false} stopOnHover={false} autoPlay infiniteLoop interval={5000}>
+    <Carousel showThumbs={false} showArrows={false} showIndicators={false} showStatus={false} stopOnHover={false} autoPlay infiniteLoop interval={5000}>
         {images.map((img, index) => (
             <div key={index}>
                 <img className="rounded-2xl" src={img} alt={`Slide ${index}`} />
