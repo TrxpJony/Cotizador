@@ -10,7 +10,7 @@ import { Image } from "@heroui/react";
 const EspejosCarruselPage = () => {
     return (
         <>
-            <div className="max-w-5xl mx-auto px-6 mb-5">
+            <div className="max-w-5xl mx-auto px-6 sm:mb-3">
 
                 <Swiper
                     effect={'coverflow'}
