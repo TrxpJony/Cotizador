@@ -3,6 +3,11 @@ import ServiciosContact from "./serviciosPage/servicioscontact";
 import ServiciosText from "./serviciosPage/serviciostext";
 import { motion } from 'framer-motion';
 
+const variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 const ServiciosPage = () => {
     return (
         <>
@@ -17,7 +22,14 @@ const ServiciosPage = () => {
                     <Servicios />
                 </div>
             </motion.div>
-            <ServiciosContact />
+            <motion.div
+                variants={variants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+            >
+                <ServiciosContact />
+            </motion.div>
         </>
     );
 };

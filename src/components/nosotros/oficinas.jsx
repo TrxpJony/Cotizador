@@ -17,7 +17,7 @@ export function Oficinas() {
           </p>
           <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
             <motion.div
-              className="relative lg:row-span-2"
+              className="relative lg:row-span-2 rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -51,7 +51,7 @@ export function Oficinas() {
               <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
             </motion.div>
             <motion.div
-              className="relative max-lg:row-start-1"
+              className="relative max-lg:row-start-1 rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -79,7 +79,7 @@ export function Oficinas() {
               <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
             </motion.div>
             <motion.div
-              className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2"
+              className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2 rounded-[calc(theme(borderRadius.lg)+1px)]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -107,7 +107,7 @@ export function Oficinas() {
               <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5"></div>
             </motion.div>
             <motion.div
-              className="relative lg:row-span-2"
+              className="relative lg:row-span-2 rounded-lg max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -148,7 +148,7 @@ export function Oficinas() {
         <br />
         <br />
         <div>
-            <GoogleMap />
+          <GoogleMap />
         </div>
       </div>
     </>

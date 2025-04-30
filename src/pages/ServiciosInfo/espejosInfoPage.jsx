@@ -106,8 +106,8 @@ const EspejosInfoPage = () => {
                 }, {
                     href: "https://www.instagram.com/acervid/",
                     icon: <FaInstagram className="text-white rounded-full text-2xl" />,
-                    bg: "bg-pink-400",
-                    hover: "hover:bg-pink-600"
+                    bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]", // Degradado de Instagram
+                    hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]" // Degradado en hover
                 }].map((social, i) => (
                     <motion.a
                         key={i}

@@ -2,6 +2,7 @@ import '../css/colosal.css'; // Archivo CSS para estilos
 import { Mision } from './nosotros/mision';
 import { Oficinas } from './nosotros/oficinas';
 import { motion } from 'framer-motion';
+import ServiciosContact from './serviciosPage/servicioscontact';
 
 const variants = {
   hidden: { opacity: 0, y: 50 },
@@ -26,7 +27,14 @@ export function Nosotros() {
       >
         <Oficinas />
       </motion.div>
-
+      <motion.div
+        variants={variants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <ServiciosContact />
+      </motion.div>
     </>
   );
 }
