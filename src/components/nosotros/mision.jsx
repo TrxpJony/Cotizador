@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/effect-fade";
 import Organigrama from '../../img/img_nosotros/organigrama.jpg'
+
 const baseUrl = import.meta.env.VITE_API_URL + "/api/blog-images";
 
 const features = [
@@ -34,9 +35,9 @@ export function Mision() {
                 const response = await axios.get(baseUrl);
                 let fetchedImages = response.data.map(img => img.secure_url);
 
-                // Ensure at least two images for Swiper
+                // Se necesitan al menos 2 imagenes para que funcione
                 if (fetchedImages.length === 1) {
-                    fetchedImages = [...fetchedImages, ...fetchedImages];
+                    fetchedImages.push(fetchedImages[0]);
                 }
                 setImages(fetchedImages);
             } catch (error) {
@@ -81,20 +82,22 @@ export function Mision() {
                         <div className="lg:pr-4">
                             <div className="lg:max-w-lg">
                                 <p className="text-base/7 font-semibold text-cyan-500">Vidrio al Arte SAS</p>
-                                <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
-                                    CULTURA ORGANIZACIONAL
-                                </h1>
-                                <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-default-600 lg:max-w-none">
-                                    {features.map((feature) => (
-                                        <div key={feature.name} className="relative pl-9">
-                                            <dt className="inline font-semibold text-gray-700">
-                                                <feature.icon aria-hidden="true" className="absolute left-1 top-1 size-5 text-cyan-600" />
-                                                {feature.name}
-                                            </dt>{' '}
-                                            <dd className="inline">{feature.description}</dd>
-                                        </div>
-                                    ))}
-                                </dl>
+                                <section aria-labelledby='Mision-Visión'>
+                                    <h1 className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-700 sm:text-5xl">
+                                        CULTURA ORGANIZACIONAL
+                                    </h1>
+                                    <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-default-600 lg:max-w-none">
+                                        {features.map((feature) => (
+                                            <div key={feature.name} className="relative pl-9">
+                                                <dt className="inline font-semibold text-gray-700">
+                                                    <feature.icon aria-hidden="true" className="absolute left-1 top-1 size-5 text-cyan-600" />
+                                                    {feature.name}
+                                                </dt>{' '}
+                                                <dd className="inline">{feature.description}</dd>
+                                            </div>
+                                        ))}
+                                    </dl>
+                                </section>
 
                             </div>
                         </div>
@@ -114,7 +117,7 @@ export function Mision() {
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
                                         <img
-                                            alt={`Slide ${index + 1}`}
+                                            alt='imagenes carrusel de la empresa'
                                             src={image}
                                             className="w-full h-full object-cover rounded-xl"
                                         />
@@ -127,51 +130,53 @@ export function Mision() {
                     <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                         <div className="lg:pr-4">
                             <div className="max-w-xl text-base/7 text-gray-700 lg:max-w-lg">
-                                <h2 className="mt-2 text-pretty text-3xl font-semibold tracking-tight text-gray-700 sm:text-3xl">VALORES CORPORATIVOS</h2>
-                                <ul role="list" className="mt-8 space-y-8 text-gray-600">
-                                    <li className="flex gap-x-3">
-                                        <CubeTransparentIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Transparencia:</strong> Nuestra gestión la desarrollamos de forma equitativa, clara y verificable.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <HandRaisedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Honestidad:</strong> Actuamos con rectitud en cada una de las actividades que se emprenden y que se realizan dentro de la organización.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <HeartIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Respeto:</strong> Interactuamos reconociendo el tratamiento que debemos dar hacia nuestros superiores, hacia nuestros clientes internoss y externos; valorando relaciones interpersonales, laborales y comerciales.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <Cog8ToothIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Responsabilidad:</strong> Trabajamos cumpliendo con todos los parámetros y normas establecidas en la organización para lograr el desarrollo armónico de las labores.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <ShieldCheckIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Confianza:</strong> Cumplimos con lo prometido al ofrecer los mejores productos y servicios a un precio justo y razonable.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <UserGroupIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Trabajo en equipo:</strong> Con el aporte de todos los que intervienen en los diferentes procesos de la organización buscamos el logro de los objetivos organizacionales.
-                                        </span>
-                                    </li>
-                                    <li className="flex gap-x-3">
-                                        <PuzzlePieceIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
-                                        <span>
-                                            <strong className="font-semibold text-gray-900">Integridad:</strong> Aun los más graves errores tienen una solución si se les enfrenta con rapidez y uniendo todos los esfuerzos de las personas que estan a nuestro alrededor; uniendo las virtudes de cada uno y conociendo la verdad pasan a ser parte de la solución y no de un problema más grande.
-                                        </span>
-                                    </li>
-                                </ul>
+                                <section aria-labelledby='valores'>
+                                    <h2 className="mt-2 text-pretty text-3xl font-semibold tracking-tight text-gray-700 sm:text-3xl">VALORES CORPORATIVOS</h2>
+                                    <ul role="list" className="mt-8 space-y-8 text-gray-600">
+                                        <li className="flex gap-x-3">
+                                            <CubeTransparentIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Transparencia:</strong> Nuestra gestión la desarrollamos de forma equitativa, clara y verificable.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <HandRaisedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Honestidad:</strong> Actuamos con rectitud en cada una de las actividades que se emprenden y que se realizan dentro de la organización.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <HeartIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Respeto:</strong> Interactuamos reconociendo el tratamiento que debemos dar hacia nuestros superiores, hacia nuestros clientes internos y externos; valorando relaciones interpersonales, laborales y comerciales.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <Cog8ToothIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Responsabilidad:</strong> Trabajamos cumpliendo con todos los parámetros y normas establecidas en la organización para lograr el desarrollo armónico de las labores.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <ShieldCheckIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Confianza:</strong> Cumplimos con lo prometido al ofrecer los mejores productos y servicios a un precio justo y razonable.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <UserGroupIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Trabajo en equipo:</strong> Con el aporte de todos los que intervienen en los diferentes procesos de la organización buscamos el logro de los objetivos organizacionales.
+                                            </span>
+                                        </li>
+                                        <li className="flex gap-x-3">
+                                            <PuzzlePieceIcon aria-hidden="true" className="mt-1 size-5 flex-none text-cyan-600" />
+                                            <span>
+                                                <strong className="font-semibold text-gray-900">Integridad:</strong> Aun los más graves errores tienen una solución si se les enfrenta con rapidez y uniendo todos los esfuerzos de las personas que estan a nuestro alrededor; uniendo las virtudes de cada uno y conociendo la verdad pasan a ser parte de la solución y no de un problema más grande.
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </section>
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
