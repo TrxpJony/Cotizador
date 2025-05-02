@@ -16,9 +16,8 @@ export function Nosotros() {
       <Helmet>
         <title>Vidrio al Arte SAS | Conócenos</title>
         <meta
-          name="description"
-          content="Descubre quiénes somos en Vidrio al Arte SAS: conoce nuestra historia, valores, misión, visión, sedes y compromiso con la calidad en productos de vidrio y aluminio."
-        />
+          name="description" content="Descubre quiénes somos en Vidrio al Arte SAS: conoce nuestra historia, valores, misión, visión, sedes y compromiso con la calidad en productos de vidrio y aluminio."/>
+        <meta name="keywords" content="oficinas vidrio al arte, mision y vision vidrio al arte, vidrio al arte" />
       </Helmet>
       <motion.div
         variants={variants}

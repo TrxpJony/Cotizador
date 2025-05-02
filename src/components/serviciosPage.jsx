@@ -2,6 +2,7 @@ import Servicios from "./serviciosPage/servicios";
 import ServiciosContact from "./serviciosPage/servicioscontact";
 import ServiciosText from "./serviciosPage/serviciostext";
 import { motion } from 'framer-motion';
+import { Helmet } from "react-helmet";
 
 const variants = {
     hidden: { opacity: 0, y: 50 },
@@ -11,6 +12,11 @@ const variants = {
 const ServiciosPage = () => {
     return (
         <>
+            <Helmet>
+                <title>Vidrio al Arte SAS | Servicios</title>
+                <meta name="description" content="Descubre los servicios de Vidrio al Arte SAS: soluciones en vidrio, aluminio y acero para hogares y empresas en Colombia. Calidad, innovación y diseño a tu medida." />
+                <meta name="keywords" content="servicios vidrio, aluminio, acero, soluciones en vidrio, Vidrio al Arte SAS, proyectos personalizados, Colombia" />
+            </Helmet>
             <motion.div
                 className="mx-auto mt-10 max-w-7xl px-6 lg:px-8"
                 initial={{ opacity: 0 }}

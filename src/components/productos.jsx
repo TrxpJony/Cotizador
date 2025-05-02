@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
 import { Pagination } from "@heroui/react";
+import { Helmet } from "react-helmet";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 
@@ -82,6 +83,12 @@ export function Productos() {
 
   return (
     <>
+      <Helmet>
+        <title>Vidrio al Arte SAS | Productos</title>
+        <meta name="description" content="Explora el catálogo de productos de Vidrio al Arte SAS: accesorios de acero, divisiones de baño, diseños sandblasting, espejos personalizados y sistemas de aluminio. Soluciones innovadoras y de calidad para tu hogar o empresa en Colombia." />
+        <meta name="keywords" content="productos vidrio, accesorios de acero, divisiones de baño, diseños sandblasting, espejos personalizados, sistemas de aluminio, Vidrio al Arte SAS, catálogo, Colombia" />
+
+      </Helmet>
       <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
         <div className="px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left">
           <p className="py-2 text-pretty text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-700">

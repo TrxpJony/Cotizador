@@ -11,6 +11,7 @@ import { MdOutlineDensitySmall, MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { Pagination } from "@heroui/react";// Importa Pagination aquí
+import { Helmet } from "react-helmet";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/blog-images";
 
@@ -67,6 +68,11 @@ const Blog = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Vidrio al Arte SAS | Blog </title>
+                <meta name="description" content="Blog de Vidrio al Arte SAS: Inspírate con ideas, consejos y novedades sobre vidrio, aluminio y decoración. Descubre tendencias, proyectos, regalos personalizados y soluciones innovadoras para tu hogar o negocio en Colombia." />
+                <meta name="keywords" content="blog vidrio, blog aluminio, decoración, tendencias vidrio, regalos personalizados, proyectos vidrio, Vidrio al Arte SAS, Colombia" />
+            </Helmet>
             {/* Sección del encabezado con fondo dinámico */}
             <div className="relative w-full h-96 overflow-hidden">
                 <div className="absolute inset-0 z-0">
