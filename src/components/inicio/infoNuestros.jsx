@@ -35,7 +35,7 @@ export function NuestrosInfo() {
                                     <br />
                                     <a
                                         href="/Productos"
-                                        className=" hover:text-cyan-600  "
+                                        className=" hover:text-cyan-500  hover:underline"
                                     >
                                         Productos
                                     </a></div>
@@ -43,7 +43,7 @@ export function NuestrosInfo() {
                                 <div>
                                     <br />                   <a
                                         href="/servicios"
-                                        className="hover:text-cyan-600 "
+                                        className="hover:text-cyan-500 hover:underline"
                                     >
                                         Servicios
                                     </a></div>
@@ -51,7 +51,7 @@ export function NuestrosInfo() {
                                 <div>
                                     <br />                   <a
                                         href="/contact"
-                                        className="hover:text-cyan-600 "
+                                        className="hover:text-cyan-600 hover:underline"
                                     >
                                         Mas Información
                                     </a></div>

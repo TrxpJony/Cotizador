@@ -5,12 +5,11 @@ import { useRef } from "react";
 // Aumenta los delays y durations para que las animaciones sean más pausadas, similar a espejos header
 const cardVariants = {
     hidden: { opacity: 0, y: 60, scale: 0.97 },
-    visible: (i) => ({
+    visible: () => ({
         opacity: 1,
         y: 0,
         scale: 1,
         transition: {
-            delay: 0.7 + i * 0.35, // delay inicial mayor y escalonado más lento
             duration: 1.3,
             ease: "easeOut"
         }
@@ -27,12 +26,12 @@ const EspejosGalery = () => {
             ref={ref}
             initial={{ opacity: 0, y: 60 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.3, ease: "easeOut", delay: 0.5 }}
+            transition={{ duration: 1.3, ease: "easeOut", }}
         >
             <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.7, duration: 1.1, ease: "easeOut" }}
+                transition={{duration: 1.1, ease: "easeOut" }}
             >
                 <div className="mb-10">
                     <div>

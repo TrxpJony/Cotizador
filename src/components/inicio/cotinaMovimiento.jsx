@@ -26,7 +26,7 @@ export function CortinaMovimiento() {
             }}
         >
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <motion.h2
+                <motion.h1
                     className="text-5xl font-bold tracking-tight text-white sm:text-7xl"
                     animate={{
                         opacity: [1, 0.95, 1],
@@ -39,10 +39,10 @@ export function CortinaMovimiento() {
                     }}
                 >
                     Vidrio al Arte SAS
-                </motion.h2>
+                </motion.h1>
 
                 <p className="mt-6 text-lg text-gray-300 sm:text-xl">
-                    Especialistas en vidrios y espejos personalizados de alta calidad. ¡Confía en nosotros para todas tus necesidades!
+                    Expertos en soluciones de vidrio, aluminio y acero. Fabricamos divisiones de baño, ventanas, puertas y espejos personalizados con tecnología LED.
                 </p>
 
                 <div className="mt-10 flex justify-center gap-6">

@@ -51,28 +51,27 @@ const EspejosInfoPage = () => {
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-200px 0px" }}
+                    viewport={{ once: true, amount: 0.5 }} // Se activa cuando el 20% del elemento es visible
                 >
                     <EspejosHeaderInfo />
                 </motion.div>
 
                 <motion.div
-                    className="flex justify-center items-center flex-col mb-10 sm:mb-20"
+                    className="flex justify-center items-center flex-col sm:mb-20"
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-200px 0px" }}
+                    viewport={{ once: true, amount: 0.5 }} // Se activa cuando el 20% del elemento es visible
                 >
                     <EspejosDescription />
                 </motion.div>
 
                 <motion.div
                     className="flex justify-center items-center flex-col sm:mb-20"
-                    layout
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-150px 0px" }}
+                    viewport={{ once: true, amount: 0.4 }} // Se activa cuando el 20% del elemento es visible
                 >
                     <EspejosGalery />
                 </motion.div>
@@ -82,7 +81,7 @@ const EspejosInfoPage = () => {
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-200px 0px" }}
+                    viewport={{ once: true, amount: 0.5 }} // Se activa cuando el 20% del elemento es visible
                 >
                     <EspejosFaqs />
                 </motion.div>
@@ -104,7 +103,7 @@ const EspejosInfoPage = () => {
                     bg: "bg-green-500",
                     hover: "hover:bg-green-600"
                 }, {
-                    href: "https://www.instagram.com/acervid/",
+                    href: "https://www.instagram.com/acervid_/#",
                     icon: <FaInstagram className="text-white rounded-full text-2xl" />,
                     bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]", // Degradado de Instagram
                     hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]" // Degradado en hover
