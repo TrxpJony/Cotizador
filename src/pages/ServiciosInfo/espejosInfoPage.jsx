@@ -48,6 +48,7 @@ const EspejosInfoPage = () => {
 
                 <meta property="og:title" content="Espejos Personalizados | ACERVID" />
                 <meta property="og:description" content="Descubre nuestros hermosos espejos diseñados a medida" />
+                <meta property="og:url" content={window.location.href} />
             </Helmet>
             <main ref={mainDivRef} className="bg-gradient-to-b from-gray-800 to-black shadow-lg" aria-label="Información sobre espejos personalizados">
                 <motion.section
