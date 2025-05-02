@@ -3,7 +3,7 @@ import { Mision } from './nosotros/mision';
 import { Oficinas } from './nosotros/oficinas';
 import { motion } from 'framer-motion';
 import ServiciosContact from './serviciosPage/servicioscontact';
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet-async";
 
 const variants = {
   hidden: { opacity: 0, y: 50 },

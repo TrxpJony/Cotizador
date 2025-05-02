@@ -1,6 +1,6 @@
 import InfoContact from "../components/contact/info";
 import FormContact from "../components/contact/form";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const ContactPage = () => {
     return (

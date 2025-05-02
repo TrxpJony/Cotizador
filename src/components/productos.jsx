@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
 import { Pagination } from "@heroui/react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 

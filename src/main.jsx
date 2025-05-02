@@ -4,13 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import {HeroUIProvider} from "@heroui/react";
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <HeroUIProvider>
+      <HelmetProvider> 
+        <HeroUIProvider>
           <App />
-      </HeroUIProvider>
+        </HeroUIProvider>
+      </HelmetProvider>
     </BrowserRouter>
   </React.StrictMode>
 )

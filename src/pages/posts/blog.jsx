@@ -11,7 +11,7 @@ import { MdOutlineDensitySmall, MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
 import { parseDate } from "@internationalized/date";
 import { Pagination } from "@heroui/react";// Importa Pagination aquí
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/blog-images";
 

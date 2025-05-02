@@ -2,7 +2,7 @@ import Servicios from "./serviciosPage/servicios";
 import ServiciosContact from "./serviciosPage/servicioscontact";
 import ServiciosText from "./serviciosPage/serviciostext";
 import { motion } from 'framer-motion';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const variants = {
     hidden: { opacity: 0, y: 50 },

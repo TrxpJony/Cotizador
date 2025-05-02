@@ -6,7 +6,7 @@ import EspejosHeaderInfo from "../../components/serviciosPage/serviciosInfoPages
 import EspejosFaqs from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/FAQ";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const EspejosInfoPage = () => {
     const mainDivRef = useRef(null);
