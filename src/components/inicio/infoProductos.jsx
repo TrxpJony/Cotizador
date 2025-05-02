@@ -27,14 +27,14 @@ export function InfoProductos() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-700 sm:text-4xl">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-700 sm:text-6xl">
             Nuestros Productos
           </h2>
           <p className="mt-4 text-default-400">
             Vidrio al Arte SAS ofrece una amplia gama de productos de vidrio, Espejo y aluminio, diseñados para aportar elegancia y estilo a cualquier espacio. Desde puertas y ventanas de vidrio templado y aluminio hasta espejos personalizados con luz led, nuestros productos combinan calidad y diseño para satisfacer las necesidades de nuestros clientes.
           </p>
 
-          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-10 lg:gap-x-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.name}
@@ -43,8 +43,10 @@ export function InfoProductos() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="border-t border-gray-200 pt-4"
               >
-                <dt className="font-medium text-gray-700">{feature.name}</dt>
-                <dd className="mt-2 text-sm text-default-400">{feature.description}</dd>
+                <dt className="text-lg  font-semibold text-gray-700 sm:text-xl">
+                  <h3>{feature.name}</h3>
+                </dt>
+                <dd className="mt-2 text-default-400">{feature.description}</dd>
               </motion.div>
             ))}
           </dl>

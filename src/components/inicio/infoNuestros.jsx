@@ -17,9 +17,9 @@ export function NuestrosInfo() {
                 <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
                     <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
                         <div className="sm:max-w-lg">
-                            <h1 className="text-4xl font-bold tracking-tight text-gray-700 sm:text-6xl">
+                            <h2 className="text-4xl font-bold tracking-tight text-gray-700 sm:text-6xl">
                                 Nuestros Servicios
-                            </h1>
+                            </h2>
                             <p className="mt-4  text-default-400">
                                 En Vidrio al Arte transformamos tus ideas en realidad, tanto en interiores como en exteriores. Ofrecemos soluciones a medida en vidrio y acero, diseñadas para satisfacer tus necesidades con la más alta calidad y estilo. Confía en nosotros para llevar tus proyectos al siguiente nivel.
                             </p>
@@ -70,14 +70,14 @@ export function NuestrosInfo() {
                                             <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen puerta colosal"
                                                         src={colosal}
                                                         className="size-full object-cover"
                                                     />
                                                 </div>
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen puerta"
                                                         src={puerta}
                                                         className="size-full object-cover"
                                                     />
@@ -86,21 +86,21 @@ export function NuestrosInfo() {
                                             <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen espejo con forma"
                                                         src={espejo3}
                                                         className="size-full object-cover"
                                                     />
                                                 </div>
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen espejo redondo"
                                                         src={espejo}
                                                         className="size-full object-cover"
                                                     />
                                                 </div>
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen espejo elipse"
                                                         src={espejo2}
                                                         className="size-full object-cover"
                                                     />
@@ -109,14 +109,14 @@ export function NuestrosInfo() {
                                             <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen luces led cob blanca"
                                                         src={luces}
                                                         className="size-full object-cover"
                                                     />
                                                 </div>
                                                 <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                     <img
-                                                        alt=""
+                                                        alt="imagen luces led neutras"
                                                         src={luces2}
                                                         className="size-full object-cover"
                                                     />
