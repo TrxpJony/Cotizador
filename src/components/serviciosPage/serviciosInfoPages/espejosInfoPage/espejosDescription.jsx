@@ -8,11 +8,12 @@ export default function EspejosDescription(props) {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <motion.div
+        <motion.section
             ref={ref}
             initial={{ opacity: 0, y: 60 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: "easeOut" }}
+            aria-label="Descripción de espejos personalizados"
         >
             {/* Primer Card */}
             <motion.div
@@ -24,12 +25,12 @@ export default function EspejosDescription(props) {
                     <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
                         <Image
                             removeWrapper
-                            alt="Acme Creators"
+                            alt="Espejo personalizado con iluminación LED de ACERVID"
                             className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
                             src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745854239/carrusel/zpf983bzgtsneydi3q08.jpg"
                         />
                         <div className="px-6 py-8">
-                            <h3 className="text-2xl text-white font-medium">!Diseños Personalizados!</h3>
+                            <h2 className="text-2xl text-white font-medium">¡Diseños Personalizados de Espejos!</h2>
                             <div className="flex flex-col gap-4 pt-3 text-base text-default-400">
                                 <p>
                                     Personaliza tus espejos al gusto: elige tamaño, forma, iluminación y más para que se adapten perfectamente a tu estilo y espacio.
@@ -37,7 +38,7 @@ export default function EspejosDescription(props) {
                                 <p>¡Dale un toque único a tu hogar con los espejos iluminados de ACERVID!</p>
                             </div>
                             <div className="mt-6 text-center sm:text-left">
-                                <a href="https://api.whatsapp.com/send?phone=573223065256" target='_black' rel='noopener noreferrer'>
+                                <a href="https://api.whatsapp.com/send?phone=573223065256" target='_blank' rel='noopener noreferrer'>
                                     <button className="text-white px-3 py-1 rounded-2xl border border-white hover:bg-white hover:outline-none hover:text-black transition-all">¡COTIZA EL TUYO!</button>
                                 </a>
                             </div>
@@ -56,12 +57,12 @@ export default function EspejosDescription(props) {
                     <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
                         <Image
                             removeWrapper
-                            alt="Acme Creators"
+                            alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
                             className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
                             src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745857478/carrusel/lu5lzt58gxitmgfeihwu.jpg"
                         />
                         <div className="px-6 py-8 order-1 sm:order-none">
-                            <h3 className="text-2xl text-white font-medium">!Gran Variedad De Diseños!</h3>
+                            <h2 className="text-2xl text-white font-medium">¡Gran Variedad De Diseños de Espejos!</h2>
                             <div className="flex flex-col gap-4 pt-3 text-base text-default-400">
                                 <p>
                                     Descubre nuestra amplia colección de espejos diseñados para todos los gustos. Contamos con estilos modernos, clásicos y minimalistas, listos para embellecer cualquier espacio.
@@ -78,6 +79,6 @@ export default function EspejosDescription(props) {
                     </CardBody>
                 </Card>
             </motion.div>
-        </motion.div>
+        </motion.section>
     );
 }

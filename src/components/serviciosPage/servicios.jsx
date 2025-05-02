@@ -117,11 +117,11 @@ const Servicios = () => {
 
     return (
         <>
-            <section className=''>
+            <section aria-labelledby='servicios' className=''>
                 <div className='text-center'>
-                    <p className='text-2xl font-semibold text-gray-700'>
+                    <h2 className='text-2xl font-semibold text-gray-700'>
                         Nos especializamos en
-                    </p>
+                    </h2>
                 </div>
                 <div className='mx-auto mb-10 mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
                     {posts.map((post) => (
@@ -134,20 +134,20 @@ const Servicios = () => {
                         >
                             <motion.img
                                 src={post.author.imageUrl}
-                                alt=""
+                                alt={post.title} // Mejorar el alt para SEO
                                 className='w-full h-48 object-cover cursor-pointer'
                                 whileHover={{ scale: 1.1 }}
                                 onClick={() => openModal(post.videoUrl)} // Open modal only on image click
                             />
                             <div className='flex items-center gap-x-4 text-xs'>
                                 <div className='group relative p-6'>
-                                    <h3 className='mt-3 text-lg/6 font-semibold text-gray-800 group-hover:text-cyan-600 cursor-pointer'>
+                                    <h2 className='mt-3 text-lg/6 font-semibold text-gray-800 group-hover:text-cyan-600 cursor-pointer'>
                                         <a href={post.href}>
-                                            <span className=''>
+                                            <span>
                                                 {post.title}
                                             </span>
                                         </a>
-                                    </h3>
+                                    </h2>
                                     <p className='mt-5 text-sm/6 text-gray-800'>{post.description}</p>
                                 </div>
                             </div>

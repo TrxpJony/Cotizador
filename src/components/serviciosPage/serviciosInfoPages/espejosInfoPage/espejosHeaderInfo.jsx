@@ -3,11 +3,12 @@ import EspejosCarruselPage from "./epejoscarruselPage";
 
 const EspejosHeaderInfo = () => {
     return (
-        <motion.div
+        <motion.section
             className="text-center"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
+            aria-label="Encabezado principal de espejos personalizados"
         >
             {/* Cotización */}
             <motion.div
@@ -38,8 +39,9 @@ const EspejosHeaderInfo = () => {
                 transition={{ delay: 0.8, duration: 0.8 }}
             >
                 <h1 className="mt-2 text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white px-6">
-                    Descubre Nuestros Espejos
+                    Espejos Personalizados
                 </h1>
+                <h2 className="sr-only">Diseños únicos, tecnología LED y sensores inteligentes</h2>
             </motion.div>
 
             {/* Descripción */}
@@ -49,7 +51,7 @@ const EspejosHeaderInfo = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
             >
-                Descubre diseños de espejos elegantes y totalmente personalizados, creados para aportar luminosidad, amplitud y estilo a tus espacios. Refleja tu esencia y transforma cada ambiente en un lugar único y sofisticado con nuestras soluciones a medida.
+                Descubre diseños de espejos elegantes y totalmente personalizados, creados para aportar luminosidad, amplitud y estilo a tus espacios. Refleja tu esencia y transforma cada ambiente en un lugar único y sofisticado con nuestras soluciones a medida. Espejos con iluminación LED, sensores inteligentes y acabados de alta calidad.
             </motion.p>
 
             {/* Carrusel */}
@@ -77,7 +79,7 @@ const EspejosHeaderInfo = () => {
                     Explora más diseños <span aria-hidden="true">→</span>
                 </a>
             </motion.div>
-        </motion.div>
+        </motion.section>
     );
 };
 

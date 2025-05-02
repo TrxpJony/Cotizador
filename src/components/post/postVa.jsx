@@ -108,7 +108,9 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
                         {formatDate(post.fecha) + ' ' + formatTime(post.fecha)}
                     </div>
                     <div className='w-full text-2xl font-semibold text-gray-900 px-2 mt-2 truncate'>
-                        {post.title}
+                        <h2>
+                            {post.title}
+                        </h2>
                     </div>
                     <div className='w-full h-44 overflow-hidden text-base font-normal text-gray-900 px-2 mt-2'>
                         {truncate(post.description, 300)}
