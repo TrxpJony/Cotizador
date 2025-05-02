@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vidrioalartesas.vercel.app/sitemap.xml
