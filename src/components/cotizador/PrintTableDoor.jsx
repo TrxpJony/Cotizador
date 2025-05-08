@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { CircularProgress } from '@heroui/react';
 import { MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
+import { Download } from "lucide-react";
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [selectedDate, setSelectedDate] = useState('');
@@ -52,29 +53,28 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         }));
     };
 
-    const handlePrint = async () => {
-        setIsLoading(true); // Set loading to true
+    // Función única para generar el PDF y decidir la acción
+    const generateAndHandlePDF = async ({ saveOnly }) => {
         const doc = new jsPDF();
         const cyanBlue = '#00b5e2';
         const lightGray = '#d3d3d3';
         const white = '#ffffff';
-        const currentDate = new Date().toLocaleDateString();
+        const now = new Date();
+        const currentDate = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        // Add header
         doc.addImage(logo, 'PNG', 14, 10, 40, 20);
         doc.setFontSize(14);
         doc.setTextColor(cyanBlue);
         doc.setFontSize(8);
         doc.setTextColor('black');
-        doc.text(`COT. #: ${cotNumber}`, 75, 25);
-        doc.text(`Fecha de creación: ${currentDate}`, 160, 25);
+        doc.text(`COT. #: ${cotNumber}`, 70, 25);
+        doc.text(`Fecha de creación: ${currentDate}`, 145, 25);
         doc.setFillColor(lightGray);
         doc.rect(14, 30, 182, 8, 'F');
         doc.setTextColor('white');
         doc.setFontSize(10);
-        doc.text(`Detalle de la cotización: ${title}`, 70, 34); // Use title prop here
+        doc.text(`Detalle de la cotización: ${title}`, 70, 34);
 
-        // Add form data with lines
         doc.setTextColor('black');
         doc.setFontSize(11);
         const formDataFields = [
@@ -82,7 +82,6 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             { label: `FECHA DE ENTREGA: ${selectedDate ? formatSelectedDate(selectedDate) : "Por confirmar"}`, x: 126, y: 45 },
             { label: `TELEFONO: ${formData.telefono}`, x: 14, y: 52 },
             { label: `CORREO: ${formData.email}`, x: 126, y: 52 },
-
         ];
 
         const boxWidth = 88;
@@ -92,26 +91,21 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         formDataFields.forEach((field, index) => {
             const y = startY + Math.floor(index / 2) * (boxHeight + 2);
             const x = index % 2 === 0 ? 14 : 108;
-
-            // Solo dibuja la línea inferior ("piso")
             doc.setLineWidth(0.1);
             doc.setDrawColor(0);
-            doc.line(x, y + boxHeight, x + boxWidth, y + boxHeight); // solo línea de abajo
-
-            // Escribe el texto dentro
+            doc.line(x, y + boxHeight, x + boxWidth, y + boxHeight);
             doc.setFontSize(8);
             doc.setTextColor('gray');
-            doc.text(field.label.split(':')[0], x + 2, y + 3); // etiqueta en gris arriba
+            doc.text(field.label.split(':')[0], x + 2, y + 3);
             doc.setTextColor('black');
             doc.setFontSize(10);
-            doc.text(field.label.split(':')[1]?.trim() || '', x + 2, y + 7); // valor en negro, encima del "piso"
+            doc.text(field.label.split(':')[1]?.trim() || '', x + 2, y + 7);
         });
 
-        // Add image
         if (image) {
-            doc.setLineWidth(0.1); // Set line width to be thin
-            doc.setDrawColor(0, 0, 0); // Set line color to black
-            doc.addImage(image, 'PNG', 14, 66, 182, 80); // Adjust image dimensions
+            doc.setLineWidth(0.1);
+            doc.setDrawColor(0, 0, 0);
+            doc.addImage(image, 'PNG', 14, 66, 182, 80);
         }
 
         const tableColumn = ["DESCRIPCIÓN", "CANTIDAD", "ANCHO x ALTO", "SUBTOTAL", "IVA", "TOTAL"];
@@ -134,16 +128,14 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY: 153, // Adjust startY to account for increased rectangle height
+            startY: 153,
             headStyles: { fillColor: white, textColor: 'black' },
             alternateRowStyles: { fillColor: white },
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
         });
 
-        // Calculate total price from doors
         const totalPrice = doors.reduce((sum, door) => sum + (door.price * door.quantity), 0);
 
-        // Add summary table
         const summaryTableColumn = ["Total con IVA", "Abono", "Saldo"];
         const abono = parseFloat(formData.abono || 0);
         const saldo = totalPrice - abono;
@@ -165,7 +157,6 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             styles: { lineColor: [0, 0, 0], lineWidth: 0.1 }
         });
 
-        // Add footer information
         doc.setFontSize(8);
         doc.setTextColor('black');
         doc.text('Ventas: Calle 71 A # 75 - 36', 14, 285);
@@ -174,16 +165,24 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
         doc.text('Cel ventas: 3223065279 - 3204391328', 85, 290);
         doc.text('Nit: 900.260.389-9', 172, 287.5);
 
+        if (saveOnly) {
+            doc.save(`${cotNumber}_${currentDate}.pdf`);
+            return;
+        }
+
+        // ...enviar a backend y correo como antes...
         const pdfBlob = doc.output('blob');
         const formDataToSend = new FormData();
         formDataToSend.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
         formDataToSend.append('cotNumber', cotNumber);
         formDataToSend.append('client_name', formData.cliente);
-        formDataToSend.append('email', formData.email);
-        formDataToSend.append('total_precio', totalPrice.toFixed(2)); // Add totalPrice to form data
-        formDataToSend.append('usuario_id', usuarioId); // Use user ID from cookies
+        formDataToSend.append('email', formData.email || ''); // Siempre envía el campo, aunque esté vacío
+        formDataToSend.append('total_precio', totalPrice.toFixed(2));
+        formDataToSend.append('usuario_id', usuarioId);
+        formDataToSend.append('estado', selectedDate ? 'facturada' : 'pendiente');
 
         try {
+            // Siempre almacena la cotización, aunque el email esté vacío o no sea válido
             await axios.post(`${import.meta.env.VITE_API_URL}/api/cotizaciones`, formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -191,26 +190,45 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
             });
             toast.success('Cotización almacenada con éxito');
 
-            // Send email with PDF
-            const emailData = new FormData();
-            emailData.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
-            emailData.append('email', formData.email);
-            emailData.append('cotNumber', cotNumber);
+            // Solo intenta enviar el correo si el email tiene formato válido y no está vacío
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (formData.email && emailRegex.test(formData.email)) {
+                try {
+                    const emailData = new FormData();
+                    emailData.append('pdf', pdfBlob, `${cotNumber}_${currentDate}.pdf`);
+                    emailData.append('email', formData.email);
+                    emailData.append('cotNumber', cotNumber);
 
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/send-email`, emailData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                    await axios.post(`${import.meta.env.VITE_API_URL}/api/send-email`, emailData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+                    toast.success('Correo de confirmación enviado');
+                } catch (emailError) {
+                    console.error('Error al enviar el correo:', emailError);
+                    toast.error('Error al enviar el correo');
                 }
-            });
-            toast.success('Correo de confirmación enviado');
+            }
         } catch (error) {
-            console.error('Error al almacenar la cotización o enviar el correo:', error);
-            toast.error('Error al almacenar la cotización o enviar el correo');
+            console.error('Error al almacenar la cotización:', error);
+            toast.error('Error al almacenar la cotización');
         }
 
         doc.save(`${cotNumber}_${currentDate}.pdf`);
-        setIsLoading(false); // Set loading to false
+    };
+
+    // Botón Cotizar
+    const handlePrint = async () => {
+        setIsLoading(true);
+        await generateAndHandlePDF({ saveOnly: false });
+        setIsLoading(false);
         handleCloseModal();
+    };
+
+    // Botón Descargar PDF
+    const handleDownloadPDF = () => {
+        generateAndHandlePDF({ saveOnly: true });
     };
 
     return (
@@ -313,25 +331,31 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                     >
                                         Cotizar
                                     </button>
+                                    <button
+                                        onClick={handleDownloadPDF}
+                                        className="text-cyan-500 hover:text-cyan-400 mr-2"
+                                    >
+                                        <Download size={18} />
+                                    </button>
                                 </div>
                             </>
                         )}
                     </div>
                 </div>
             )}
-          <ToastContainer
-            position="bottom-center"
-            autoclose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='light'
-            transition={Flip}
-          />
+            <ToastContainer
+                position="bottom-center"
+                autoclose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+                transition={Flip}
+            />
         </>
     );
 };
