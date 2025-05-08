@@ -76,7 +76,13 @@ export function Productos() {
   };
 
   // Calcula los elementos visibles según la página actual
-  const paginatedList = filteredList.slice(
+  // Ordena alfabéticamente por título antes de paginar
+  const sortedList = [...filteredList].sort((a, b) => {
+    if (!a.title) return 1;
+    if (!b.title) return -1;
+    return a.title.localeCompare(b.title, 'es', { sensitivity: 'base' });
+  });
+  const paginatedList = sortedList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -138,7 +144,7 @@ export function Productos() {
               <Card
                 key={index}
                 isPressable
-                onPress={() => navigate(`/${item.id}`)} // Update the navigation path
+                onPress={() => navigate(`/${item.ruta}`)} // Update the navigation path
                 className="nextui-card"
               >
                 <CardBody className="overflow-hidden p-4">

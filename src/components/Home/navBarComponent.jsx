@@ -102,7 +102,7 @@ export default function NavBarComponent({ userId, userRole, location }) {
 
         {(userRole === 'cotizador') && (
           <NavbarItem>
-            <Link className={`text-foreground hover:text-cyan-400 ${isActive("/cotizar") ? "text-cyan-600" : ""}`} href="/cotizar">
+            <Link className={`text-foreground hover:text-cyan-400 ${isActive("/cotizar") ? "text-cyan-600" : ""}`} href="/cotizador">
               Cotizar
             </Link>
           </NavbarItem>

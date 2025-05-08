@@ -128,7 +128,7 @@ export function Kimbayapage() {
             <Card
               key={index}
               isPressable
-              onPress={() => navigate(`${item.id}`)}  // Redirige usando el ID
+              onPress={() => navigate(`${item.ruta}`)}  // Redirige usando el ID
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">

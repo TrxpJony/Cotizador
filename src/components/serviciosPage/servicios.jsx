@@ -26,7 +26,7 @@ const posts = [
     {
         id: 2,
         title: 'Accesorios',
-        href: 'cat008',
+        href: 'accesorios',
         description:
             'Encuentre una gran variedad de accesorios y herramientas versátiles y duraderas, perfectas para realizar cualquier tipo de proyecto con confianza.',
         category: { title: 'Ferretería', href: '#' },
@@ -41,7 +41,7 @@ const posts = [
     {
         id: 3,
         title: 'Espejos',
-        href: '/espejosinfo',
+        href: 'servicios/espejos-acervid',
         description:
             'Ofrecemos espejos con diseños personalizados de sandblasting y luces LED integradas para darle un toque moderno y elegante a su espacio.',
         category: { title: 'Espejos', href: '#' },

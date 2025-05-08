@@ -120,7 +120,7 @@ export function Cotizador() {
       <br />
       <div className="card-frame">
         <p className="text-gray-600 text-sm">
-          Mostrando {paginatedList.length} de {filteredList.length} accesorios disponibles.
+          Mostrando {paginatedList.length} de {filteredList.length} disponibles.
         </p>
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
@@ -130,7 +130,7 @@ export function Cotizador() {
               <Card
                 key={index}
                 isPressable
-                onPress={() => navigate(`/${item.id}`)} // Update the navigation path
+                onPress={() => navigate(`/${item.ruta}`)} // Update the navigation path
                 className="nextui-card"
               >
                 <CardBody className="overflow-hidden p-4">

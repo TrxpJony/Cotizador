@@ -48,7 +48,7 @@ function Login() {
         toast.success(`¡Bienvenido, ${userData.usuario}! Login exitoso`, {
           autoClose: 1700,
           onClose: () => {
-            navigate(userData.rol === 'administrador' ? '/admin' : '/cotizar');
+            navigate(userData.rol === 'administrador' ? '/admin' : '/cotizador');
             window.location.reload();
           },
         });

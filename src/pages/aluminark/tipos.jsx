@@ -123,7 +123,7 @@ export function Tiposaluminark() {
             <Card
               key={index}
               isPressable
-              onPress={() => navigate(`${item.id}`)}
+              onPress={() => navigate(`${item.ruta}`)}
               className="nextui-card"
             >
               <CardBody className="overflow-hidden p-4">

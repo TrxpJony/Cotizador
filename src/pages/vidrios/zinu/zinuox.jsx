@@ -42,7 +42,7 @@ const Zinuox = () => {
             <div className='w-full bg-white shadow-md p-4 flex flex-col mx-auto'>
                 <div className='px-4 sm:px-12 md:px-24 lg:px-48 text-center sm:text-left'>
                     <p className='py-2 text-pretty text-2xl sm:text-4xl font-semibold tracking-tight text-gray-700'>
-                        Sistema zinu OX
+                        Sistema zinu XO
                     </p>
                 </div>
             </div>
