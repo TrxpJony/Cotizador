@@ -123,6 +123,7 @@ function App() {
           <Route path='inicio' element={<Inicio />} />
           <Route path='nosotros' element={<Nosotros />} />
           <Route path='servicios' element={<ServiciosPage />} />
+          <Route path='servicios/espejos-acervid' element={<EspejosInfoPage />} />
           <Route path='contact' element={<ContactPage />} />
           <Route path='proyectos' element={<TestimonialsPage />} />
           <Route path='blog' element={<Blog />} />
@@ -174,7 +175,6 @@ function App() {
           <Route path='cotizador/espejos/cuadrado' element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole='cotizador' />} />
           <Route path='cotizador/espejos/forma' element={<ProtectedRoute element={<CotizadorEspejosconForma />} allowedRole='cotizador' />} />
           <Route path='cotizador/puertas-de-cocina' element={<ProtectedRoute element={<CocinasCotizador />} allowedRole='cotizador' />} />
-
           <Route path='productos' element={<Productos />} />
           <Route path='productos/diseños-de-espejos' element={<Espejos />} />
           <Route path='productos/accesorios' element={<All />} />
@@ -194,7 +194,6 @@ function App() {
           <Route path='productos/divisiones-de-baño/diseños' element={<DiseñoDivisionesBaño />} />
           <Route path='productos/vitrinas' element={<VitrinasVista />} />
           <Route path='productos/puertas-de-cocina' element={<CocinasVista />} />
-          <Route path='servicios/espejos-acervid' element={<EspejosInfoPage />} />
           <Route path='p4' element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
         </Routes>
       </div>
