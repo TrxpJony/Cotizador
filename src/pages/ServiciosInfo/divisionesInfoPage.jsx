@@ -7,10 +7,10 @@ import DivisionesHeader from "../../components/serviciosPage/serviciosInfoPages/
 const DivisionesInfoPage = () => {
     return (
         <>
-            <div className="sm:px-96">
+            <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-96">
                 <DivisionesHeader />
                 <DivisionesDescription />
-                <div className="flex">
+                <div className="flex flex-col md:flex-row">
                     <DivisionesGalery />
                 </div>
                 <DivisionesFaq />

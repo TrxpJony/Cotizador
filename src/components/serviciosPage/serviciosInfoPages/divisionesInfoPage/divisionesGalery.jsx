@@ -140,7 +140,7 @@ const DivisionesGalery = () => {
                                 </p>
                             </div>
                             <div className="mt-6 text-center sm:text-left">
-                                <a href="/productos/divisiones-de-baño/estilos">
+                                <a href="/productos/divisiones-de-baño/diseños">
                                     <button className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all">¡EXPLORAR CATALOGO!</button>
                                 </a>
                             </div>
@@ -172,7 +172,7 @@ const DivisionesGalery = () => {
                                 </p>
                             </div>
                             <div className="mt-6 text-center sm:text-left">
-                                <a href="" target="_blank" rel="noopener noreferrer">
+                                <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
                                     <button className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all">¡COTIZAR!</button>
                                 </a>
                             </div>

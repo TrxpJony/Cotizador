@@ -50,9 +50,11 @@ const DivisionesHeroSection = () => {
                 <p className="hero-subtitle text-lg md:text-xl mb-6 drop-shadow-md">
                     La mejor solución para tus necesidades
                 </p>
-                <button className="hero-button border-1 border-white bg-transparent hover:bg-cyan-500 hover:border-none  text-white font-semibold px-6 py-3 rounded-full shadow-lg z-20 transition-colors">
-                    Explorar Divisiones
-                </button>
+                <a href="/productos/divisiones-de-baño/estilos">
+                    <button className="hero-button border-1 border-white bg-transparent hover:bg-cyan-500 hover:border-none  text-white font-semibold px-6 py-3 rounded-full shadow-lg z-20 transition-colors">
+                        Explorar Divisiones
+                    </button>
+                </a>
             </div>
         </section>
     );

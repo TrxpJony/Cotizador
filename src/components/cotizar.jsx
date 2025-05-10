@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
 import { Pagination } from "@heroui/react";
+import gsap from "gsap";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 
@@ -22,6 +23,7 @@ export function Cotizador() {
   const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     fetch(baseUrl)
@@ -80,6 +82,20 @@ export function Cotizador() {
     currentPage * itemsPerPage
   );
 
+  useEffect(() => {
+    // Animar las cards cuando cambian las cards paginadas
+    if (cardRefs.current) {
+      gsap.set(cardRefs.current, { opacity: 0, y: 40 });
+      gsap.to(cardRefs.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+    }
+  }, [paginatedList]);
+
   return (
     <>
       <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
@@ -132,6 +148,7 @@ export function Cotizador() {
                 isPressable
                 onPress={() => navigate(`/${item.ruta}`)} // Update the navigation path
                 className="nextui-card"
+                ref={el => cardRefs.current[index] = el}
               >
                 <CardBody className="overflow-hidden p-4">
                   <Image
