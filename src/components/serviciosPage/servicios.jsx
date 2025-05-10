@@ -11,7 +11,7 @@ const posts = [
     {
         id: 1,
         title: 'Divisiones de baño',
-        href: '#',
+        href: 'servicios/divisiones-de-baño',
         description:
             'Ofrecemos divisiones de baño de alta calidad, diseñadas para brindar elegancia y funcionalidad a su espacio.',
         category: { title: 'Baño', href: '#' },

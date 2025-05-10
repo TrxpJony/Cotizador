@@ -84,6 +84,7 @@ import EditPost from './pages/posts/edit';
 import CotizadorEspejosRedondos from './pages/espejos/espejoRedondo/cotizadorespejosredondos';
 import ServiciosPage from './components/serviciosPage';
 import EspejosInfoPage from './pages/ServiciosInfo/espejosInfoPage';
+import DivisionesInfoPage from './pages/ServiciosInfo/divisionesInfoPage';
 
 const cookies = new Cookies();
 
@@ -124,6 +125,7 @@ function App() {
           <Route path='nosotros' element={<Nosotros />} />
           <Route path='servicios' element={<ServiciosPage />} />
           <Route path='servicios/espejos-acervid' element={<EspejosInfoPage />} />
+          <Route path='servicios/divisiones-de-baño' element={<DivisionesInfoPage />} />
           <Route path='contact' element={<ContactPage />} />
           <Route path='proyectos' element={<TestimonialsPage />} />
           <Route path='blog' element={<Blog />} />
