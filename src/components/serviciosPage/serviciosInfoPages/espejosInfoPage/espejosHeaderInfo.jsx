@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import EspejosCarruselPage from "./epejoscarruselPage";
+import PropTypes from "prop-types";
 
-const EspejosHeaderInfo = () => {
+const EspejosHeaderInfo = ({ onAnimationComplete }) => {
     return (
         <motion.section
             className="text-center"
@@ -9,6 +10,7 @@ const EspejosHeaderInfo = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             aria-label="Encabezado principal de espejos personalizados"
+            onAnimationComplete={onAnimationComplete}
         >
             {/* Cotización */}
             <motion.div
@@ -81,6 +83,9 @@ const EspejosHeaderInfo = () => {
             </motion.div>
         </motion.section>
     );
+};
+EspejosHeaderInfo.propTypes = {
+    onAnimationComplete: PropTypes.func,
 };
 
 export default EspejosHeaderInfo;

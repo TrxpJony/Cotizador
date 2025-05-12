@@ -8,6 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 const DivisionesFaq = () => {
 
     const faqRef = useRef(null);
+    const h2Ref = useRef(null);
+    const pRef = useRef(null);
+    const accordionRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -27,6 +30,37 @@ const DivisionesFaq = () => {
         }, faqRef);
 
         return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        let observer;
+        if (faqRef.current) {
+            observer = new window.IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(
+                                [h2Ref.current, pRef.current, accordionRef.current],
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.8,
+                                    ease: "power3.out",
+                                    stagger: 0.4,
+                                }
+                            );
+                            observer.disconnect();
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(faqRef.current);
+        }
+        if (h2Ref.current && pRef.current && accordionRef.current) {
+            gsap.set([h2Ref.current, pRef.current, accordionRef.current], { opacity: 0, y: 40 });
+        }
+        return () => observer && observer.disconnect();
     }, []);
 
     const Faqtext1 = (
@@ -52,29 +86,37 @@ const DivisionesFaq = () => {
     return (
         <>
             <div className="mb-20" ref={faqRef}>
-                <h2 className="text-3xl font-bold text-center text-black mb-2">
+                <h2
+                    className="text-3xl font-bold text-center text-black mb-2"
+                    ref={h2Ref}
+                >
                     Preguntas Frecuentes
                 </h2>
-                <p className="text-center text-default-600 mb-6">
+                <p
+                    className="text-center text-default-600 mb-6"
+                    ref={pRef}
+                >
                     Resuelve tus dudas sobre las divisiones de baño, diseños, instalación, garantía y más. Si tienes otra pregunta, contáctanos.
                 </p>
-                <Accordion>
-                    <AccordionItem key="1" aria-label="Acordion 1" title="¿Que sistemas manejan para las divisiones de baño?">
-                        {Faqtext1}
-                    </AccordionItem>
-                    <AccordionItem key="2" aria-label="Acordion 2" title="¿En que calibre de vidrio son las divisiones de baño?">
-                        {Faqtext2}
-                    </AccordionItem>
-                    <AccordionItem key="3" aria-label="Acordion 3" title="¿El vidrio templado es resistente?">
-                        {Faqtext3}
-                    </AccordionItem>
-                    <AccordionItem key="4" aria-label="Acordion 4" title="¿Se pueden personalizar las divisiones?">
-                        {Faqtext4}
-                    </AccordionItem>
-                    <AccordionItem key="5" aria-label="Acordion 5" title="¿Qué mantenimiento requieren?">
-                        {Faqtext5}
-                    </AccordionItem>
-                </Accordion>
+                <div ref={accordionRef}>
+                    <Accordion>
+                        <AccordionItem key="1" aria-label="Acordion 1" title="¿Que sistemas manejan para las divisiones de baño?">
+                            {Faqtext1}
+                        </AccordionItem>
+                        <AccordionItem key="2" aria-label="Acordion 2" title="¿En que calibre de vidrio son las divisiones de baño?">
+                            {Faqtext2}
+                        </AccordionItem>
+                        <AccordionItem key="3" aria-label="Acordion 3" title="¿El vidrio templado es resistente?">
+                            {Faqtext3}
+                        </AccordionItem>
+                        <AccordionItem key="4" aria-label="Acordion 4" title="¿Se pueden personalizar las divisiones?">
+                            {Faqtext4}
+                        </AccordionItem>
+                        <AccordionItem key="5" aria-label="Acordion 5" title="¿Qué mantenimiento requieren?">
+                            {Faqtext5}
+                        </AccordionItem>
+                    </Accordion>
+                </div>
             </div>
 
         </>

@@ -26,7 +26,7 @@ const posts = [
     {
         id: 2,
         title: 'Accesorios',
-        href: 'accesorios',
+        href: 'productos/accesorios',
         description:
             'Encuentre una gran variedad de accesorios y herramientas versátiles y duraderas, perfectas para realizar cualquier tipo de proyecto con confianza.',
         category: { title: 'Ferretería', href: '#' },

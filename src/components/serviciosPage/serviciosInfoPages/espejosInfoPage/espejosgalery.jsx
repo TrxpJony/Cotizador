@@ -1,49 +1,111 @@
 import { Card, CardHeader, CardFooter, Image } from "@heroui/react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-
-// Aumenta los delays y durations para que las animaciones sean más pausadas, similar a espejos header
-const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.97 },
-    visible: () => ({
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            duration: 1.3,
-            ease: "easeOut"
-        }
-    })
-    // hover removed
-};
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 const EspejosGalery = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const sectionRef = useRef(null);
+    const textRef = useRef(null);
+    const cardsRef = useRef([]);
+    // Nuevos refs para los textos principales
+    const acervidPRef = useRef(null);
+    const h2Ref = useRef(null);
+    const descPRef = useRef(null);
+
+    useEffect(() => {
+        let textObserver, cardsObserver;
+
+        // Animación secuencial para los textos principales
+        if (acervidPRef.current && h2Ref.current && descPRef.current) {
+            gsap.set([acervidPRef.current, h2Ref.current, descPRef.current], { opacity: 0, y: 40 });
+            textObserver = new window.IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            gsap.to(acervidPRef.current, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                ease: "power3.out"
+                            });
+                            gsap.to(h2Ref.current, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                delay: 0.3,
+                                ease: "power3.out"
+                            });
+                            gsap.to(descPRef.current, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                delay: 0.6,
+                                ease: "power3.out"
+                            });
+                            textObserver.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+            textObserver.observe(textRef.current);
+        }
+
+        // Cards
+        cardsRef.current.forEach(card => {
+            if (card) gsap.set(card, { opacity: 0, y: 60, scale: 0.97 });
+        });
+
+        cardsObserver = new window.IntersectionObserver(
+            (entries) => {
+                const visible = entries.filter(e => e.isIntersecting);
+                if (visible.length > 0) {
+                    gsap.to(cardsRef.current, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1.3,
+                        ease: "power2.out",
+                        stagger: 0.25
+                    });
+                    cardsRef.current.forEach(card => cardsObserver.unobserve(card));
+                }
+            },
+            { threshold: 0.2 }
+        );
+        cardsRef.current.forEach(card => {
+            if (card) cardsObserver.observe(card);
+        });
+
+        return () => {
+            if (textObserver) textObserver.disconnect();
+            if (cardsObserver) cardsObserver.disconnect();
+        };
+    }, []);
 
     return (
-        <motion.section
-            ref={ref}
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.3, ease: "easeOut", }}
+        <section
+            ref={sectionRef}
             aria-label="Galería de proyectos de espejos"
         >
-            <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{duration: 1.1, ease: "easeOut" }}
-                className="max-w-5xl px-6"
-            >
+            <div ref={textRef} className="max-w-5xl px-6">
                 <div className="mb-10">
                     <div>
-                        <p className="font-semibold text-cyan-500 px-6">Acervid</p>
-                        <h2 className="text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white px-6">
+                        <p
+                            className="font-semibold text-cyan-500 px-6"
+                            ref={acervidPRef}
+                        >Acervid</p>
+                        <h2
+                            className="text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white px-6"
+                            ref={h2Ref}
+                        >
                             Nuestros Proyectos de Espejos Personalizados
                         </h2>
                     </div>
                     <div className="w-full flex">
-                        <p className=" leading-[30px] px-6 flex flex-col gap-4 pt-3 text-base text-default-400">
+                        <p
+                            className=" leading-[30px] px-6 flex flex-col gap-4 pt-3 text-base text-default-400"
+                            ref={descPRef}
+                        >
                             En ACERVID llevamos la innovación a cada detalle de nuestros proyectos.
                             Diseñamos espejos únicos con iluminación LED integrada, estructuras flotantes
                             con elegantes perfiles de aluminio y una variedad de sensores inteligentes,
@@ -53,15 +115,12 @@ const EspejosGalery = () => {
                         </p>
                     </div>
                 </div>
-            </motion.div>
+            </div>
             <div className="max-w-5xl px-6 gap-2 grid grid-cols-12 grid-rows-2 mt-10 mb-10">
                 {/* Card 1 */}
-                <motion.div
+                <div
+                    ref={el => cardsRef.current[0] = el}
                     className="col-span-12 sm:col-span-4 h-[300px]"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={0}
                 >
                     <Card className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col !items-start">
@@ -75,14 +134,11 @@ const EspejosGalery = () => {
                             src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745872377/carrusel/zwik7ywxa5j8rahuuxzx.jpg"
                         />
                     </Card>
-                </motion.div>
+                </div>
                 {/* Card 2 */}
-                <motion.div
+                <div
+                    ref={el => cardsRef.current[1] = el}
                     className="col-span-12 sm:col-span-4 h-[300px]"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={1}
                 >
                     <Card className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col !items-start">
@@ -96,14 +152,11 @@ const EspejosGalery = () => {
                             src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745871950/carrusel/hns1twb2obbxltzeymti.png"
                         />
                     </Card>
-                </motion.div>
+                </div>
                 {/* Card 3 */}
-                <motion.div
+                <div
+                    ref={el => cardsRef.current[2] = el}
                     className="col-span-12 sm:col-span-4 h-[300px]"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={2}
                 >
                     <Card className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col !items-start">
@@ -117,14 +170,11 @@ const EspejosGalery = () => {
                             src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745870906/carrusel/onpyfjk7lottvtu4zzca.jpg"
                         />
                     </Card>
-                </motion.div>
+                </div>
                 {/* Card 4 */}
-                <motion.div
+                <div
+                    ref={el => cardsRef.current[3] = el}
                     className="w-full h-[300px] col-span-12 sm:col-span-5"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={3}
                 >
                     <Card isFooterBlurred className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col items-start">
@@ -147,14 +197,11 @@ const EspejosGalery = () => {
                             </button>
                         </CardFooter>
                     </Card>
-                </motion.div>
+                </div>
                 {/* Card 5 */}
-                <motion.div
+                <div
+                    ref={el => cardsRef.current[4] = el}
                     className="w-full h-[300px] col-span-12 sm:col-span-7"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={4}
                 >
                     <Card isFooterBlurred className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col items-start">
@@ -181,9 +228,9 @@ const EspejosGalery = () => {
                             </a>
                         </CardFooter>
                     </Card>
-                </motion.div>
+                </div>
             </div>
-        </motion.section>
+        </section>
     );
 };
 

@@ -1,4 +1,6 @@
 import { Accordion, AccordionItem } from "@heroui/react";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 const EspejosFaqs = () => {
     const FAQ1 =
@@ -15,103 +17,150 @@ const EspejosFaqs = () => {
         "Puedes enviarnos tu idea o diseño para que nuestro equipo lo revise. Te asesoraremos sobre su viabilidad y te informaremos sobre los materiales y procesos más adecuados para llevarlo a cabo."
     const FAQ7 =
         "Puedes contactarnos a través de nuestro correo electrónico, teléfono o visitándonos en nuestras instalaciones. Estaremos encantados de ayudarte con cualquier consulta que tengas.";
+
+    const h2Ref = useRef(null);
+    const pRef = useRef(null);
+    const sectionRef = useRef(null);
+    const accordionRef = useRef(null);
+
+    useEffect(() => {
+        let observer;
+        if (sectionRef.current) {
+            observer = new window.IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(
+                                [h2Ref.current, pRef.current, accordionRef.current],
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.8,
+                                    ease: "power3.out",
+                                    stagger: 0.4, // mismo tiempo entre apariciones
+                                }
+                            );
+                            observer.disconnect();
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+            observer.observe(sectionRef.current);
+        }
+        // Set initial state
+        if (h2Ref.current && pRef.current && accordionRef.current) {
+            gsap.set([h2Ref.current, pRef.current, accordionRef.current], { opacity: 0, y: 40 });
+        }
+        return () => observer && observer.disconnect();
+    }, []);
+
     return (
         <section
             className="max-w-5xl px-4 w-full"
             aria-label="Preguntas frecuentes sobre espejos personalizados"
+            ref={sectionRef}
         >
-            <h2 className="text-3xl font-bold text-center text-white mb-2">
+            <h2
+                className="text-3xl font-bold text-center text-white mb-2"
+                ref={h2Ref}
+            >
                 Preguntas Frecuentes
             </h2>
-            <p className="text-center text-default-400 mb-6">
+            <p
+                className="text-center text-default-400 mb-6"
+                ref={pRef}
+            >
                 Resuelve tus dudas sobre espejos a medida, sensores, instalación, garantía y más. Si tienes otra pregunta, contáctanos.
             </p>
-            <Accordion>
-                <AccordionItem
-                    key="1"
-                    aria-label="¿Manejan sensores a 110v?"
-                    title="¿Manejan sensores a 110v en los espejos personalizados?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ1}
-                </AccordionItem>
-                <AccordionItem
-                    key="2"
-                    aria-label="¿Puedo llevar mi propio diseño?"
-                    title="¿Puedo llevar mi propio diseño de espejo?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ2}
-                </AccordionItem>
-                <AccordionItem
-                    key="3"
-                    aria-label="¿Los espejos vienen con instalación?"
-                    title="¿Los espejos vienen con instalación incluida?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ3}
-                </AccordionItem>
-                <AccordionItem
-                    key="4"
-                    aria-label="¿Hacen envíos?"
-                    title="¿Hacen envíos de espejos personalizados?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ4}
-                </AccordionItem>
-                <AccordionItem
-                    key="5"
-                    aria-label="¿Tienen garantía los productos?"
-                    title="¿Tienen garantía los espejos personalizados?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ5}
-                </AccordionItem>
-                <AccordionItem
-                    key="6"
-                    aria-label="¿Cómo saber si el diseño es viable?"
-                    title="¿Cómo puedo saber si el diseño de espejo que quiero es viable?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ6}
-                </AccordionItem>
-                <AccordionItem
-                    key="7"
-                    aria-label="¿Cómo contactar para más detalles?"
-                    title="¿Cómo puedo contactar con ustedes para más detalles o dudas?"
-                    classNames={{
-                        title: "text-white",
-                        indicator: "text-white",
-                        content: "text-white",
-                    }}
-                >
-                    {FAQ7}
-                </AccordionItem>
-            </Accordion>
+            <div ref={accordionRef}>
+                <Accordion>
+                    <AccordionItem
+                        key="1"
+                        aria-label="¿Manejan sensores a 110v?"
+                        title="¿Manejan sensores a 110v en los espejos personalizados?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ1}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="2"
+                        aria-label="¿Puedo llevar mi propio diseño?"
+                        title="¿Puedo llevar mi propio diseño de espejo?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ2}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="3"
+                        aria-label="¿Los espejos vienen con instalación?"
+                        title="¿Los espejos vienen con instalación incluida?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ3}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="4"
+                        aria-label="¿Hacen envíos?"
+                        title="¿Hacen envíos de espejos personalizados?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ4}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="5"
+                        aria-label="¿Tienen garantía los productos?"
+                        title="¿Tienen garantía los espejos personalizados?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ5}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="6"
+                        aria-label="¿Cómo saber si el diseño es viable?"
+                        title="¿Cómo puedo saber si el diseño de espejo que quiero es viable?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ6}
+                    </AccordionItem>
+                    <AccordionItem
+                        key="7"
+                        aria-label="¿Cómo contactar para más detalles?"
+                        title="¿Cómo puedo contactar con ustedes para más detalles o dudas?"
+                        classNames={{
+                            title: "text-white",
+                            indicator: "text-white",
+                            content: "text-white",
+                        }}
+                    >
+                        {FAQ7}
+                    </AccordionItem>
+                </Accordion>
+            </div>
         </section>
     );
 };

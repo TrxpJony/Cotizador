@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import EspejosDescription from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosDescription";
 import EspejosGalery from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosgalery";
 import EspejosHeaderInfo from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosHeaderInfo";
@@ -11,6 +10,7 @@ import { Helmet } from "react-helmet-async";
 const EspejosInfoPage = () => {
     const mainDivRef = useRef(null);
     const [socialBottom, setSocialBottom] = useState(20);
+    const [showDescription, setShowDescription] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,12 +32,6 @@ const EspejosInfoPage = () => {
         };
     }, []);
 
-    // Variantes de animación
-    const fadeInUp = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 1.0 } },
-    };
-
     return (
         <>
             <Helmet>
@@ -46,49 +40,33 @@ const EspejosInfoPage = () => {
                 <meta name="keywords" content="espejos personalizados, espejos LED, espejos modernos, espejos a medida, espejos con sensores, espejos para baño, espejos decorativos, ACERVID, espejos Colombia" />
             </Helmet>
             <main ref={mainDivRef} className="bg-gradient-to-b from-gray-800 to-black shadow-lg" aria-label="Información sobre espejos personalizados">
-                <motion.section
+                <section
                     className="sm:h-auto flex flex-col mt-20 sm:mt-32 sm:justify-center sm:mb-20"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.5 }}
                     aria-label="Encabezado de espejos"
                 >
-                    <EspejosHeaderInfo />
-                </motion.section>
+                    <EspejosHeaderInfo onAnimationComplete={() => setShowDescription(true)} />
+                </section>
 
-                <motion.section
+                <section
                     className="flex justify-center items-center flex-col sm:mb-20"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.5 }}
                     aria-label="Descripción de espejos"
                 >
-                    <EspejosDescription />
-                </motion.section>
+                    {showDescription && <EspejosDescription />}
+                </section>
 
-                <motion.section
+                <section
                     className="flex justify-center items-center flex-col sm:mb-20"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.4 }}
                     aria-label="Galería de espejos"
                 >
                     <EspejosGalery />
-                </motion.section>
+                </section>
 
-                <motion.section
+                <section
                     className="flex justify-center items-center flex-col mt-5 mb-20"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.5 }}
                     aria-label="Preguntas frecuentes sobre espejos"
                 >
                     <EspejosFaqs />
-                </motion.section>
+                </section>
             </main>
 
             {/* Floating social media bar con efectos personalizados */}
@@ -113,21 +91,16 @@ const EspejosInfoPage = () => {
                     bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
                     hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]"
                 }].map((social, i) => (
-                    <motion.a
+                    <a
                         key={i}
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`${social.bg} text-white p-2 rounded-full shadow-lg ${social.hover}`}
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ type: "spring", stiffness: 200 }}
                         aria-label={`Ir a ${["Facebook", "WhatsApp", "Instagram"][i]}`}
                     >
                         {social.icon}
-                    </motion.a>
+                    </a>
                 ))}
             </nav>
         </>

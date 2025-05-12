@@ -21,9 +21,11 @@ const images = [
 const DivisionesGalery = () => {
     const galeryRef = useRef(null);
     const imageRefs = useRef([]);
-    // Referencias para los cards
-    const card1Ref = useRef(null);
-    const card2Ref = useRef(null);
+    // Referencias para los cards y sus elementos internos
+    const cardRefs = useRef([]);
+    const h2Refs = useRef([]);
+    const pRefs = useRef([[], []]);
+    const btnRefs = useRef([]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -39,37 +41,79 @@ const DivisionesGalery = () => {
                     toggleActions: "play none none none",
                 },
             });
-            // Animación para el primer card
-            if (card1Ref.current) {
-                gsap.from(card1Ref.current, {
-                    opacity: 0,
-                    y: 80,
-                    duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: card1Ref.current,
-                        start: "top 70%", // antes: "top 85%"
-                        toggleActions: "play none none none",
-                    },
-                });
-            }
-            // Animación para el segundo card
-            if (card2Ref.current) {
-                gsap.from(card2Ref.current, {
-                    opacity: 0,
-                    y: 80,
-                    duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: card2Ref.current,
-                        start: "top 70%", // antes: "top 85%"
-                        toggleActions: "play none none none",
-                    },
-                });
-            }
         }, galeryRef);
 
-        return () => ctx.revert();
+        // Animaciones tipo espejosDescription para los cards
+        let observer;
+        if (cardRefs.current.length) {
+            // Estado inicial
+            cardRefs.current.forEach(card => {
+                if (card) gsap.set(card, { opacity: 0, scale: 0.96 });
+            });
+            h2Refs.current.forEach(h2 => {
+                if (h2) gsap.set(h2, { opacity: 0, y: 40 });
+            });
+            pRefs.current.forEach(parrArr => {
+                parrArr.forEach(p => {
+                    if (p) gsap.set(p, { opacity: 0, y: 30 });
+                });
+            });
+            btnRefs.current.forEach(btn => {
+                if (btn) gsap.set(btn, { opacity: 0, y: 30, scale: 0.95 });
+            });
+
+            observer = new window.IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0.7) {
+                            const idx = cardRefs.current.indexOf(entry.target);
+                            // Card fade-in + scale
+                            gsap.to(entry.target, {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.7,
+                                ease: "power2.out"
+                            });
+                            // h2 animación elegante
+                            gsap.to(h2Refs.current[idx], {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                delay: 0.15,
+                                ease: "power3.out"
+                            });
+                            // p animación con stagger
+                            gsap.to(pRefs.current[idx], {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                delay: 0.35,
+                                stagger: 0.13,
+                                ease: "power2.out"
+                            });
+                            // botón con rebote
+                            gsap.to(btnRefs.current[idx], {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                duration: 0.7,
+                                delay: 0.65,
+                                ease: "back.out(1.7)"
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: [0, 0.7, 1] }
+            );
+            cardRefs.current.forEach(card => {
+                if (card) observer.observe(card);
+            });
+        }
+        return () => {
+            ctx.revert();
+            if (observer) observer.disconnect();
+        };
     }, []);
 
     return (
@@ -117,68 +161,82 @@ const DivisionesGalery = () => {
                 ))}
             </div>
             <div>
-                <Card
-                    ref={card1Ref}
-                    className="px-1 w-full mt-20 bg-transparent sm:mb-10"
-                    shadow="none"
-                >
-                    <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
-                        <Image
-                            removeWrapper
-                            alt="Espejo personalizado con iluminación LED de ACERVID"
-                            className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
-                            src={collage}
-                        />
-                        <div className="px-6 py-8">
-                            <h2 className="text-2xl text-black font-medium">¡Cenefa personalizable al gusto!</h2>
-                            <div className="flex flex-col gap-4 pt-3 text-base text-default-600">
-                                <p>
-                                    En Vidrio al Arte fabricamos divisiones de baño a medida con vidrio templado, combinando funcionalidad, seguridad y diseño moderno.
-                                </p>
-                                <p>
-                                    Personaliza tu división con diseños exclusivos de cenefa, eligiendo el estilo que mejor se adapte a tu espacio y gusto.
-                                </p>
+                <div ref={el => cardRefs.current[0] = el}>
+                    <Card
+                        className="px-1 w-full mt-20 bg-transparent sm:mb-10"
+                        shadow="none"
+                    >
+                        <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                            <Image
+                                removeWrapper
+                                alt="Espejo personalizado con iluminación LED de ACERVID"
+                                className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
+                                src={collage}
+                            />
+                            <div className="px-6 py-8">
+                                <h2
+                                    className="text-2xl text-black font-medium"
+                                    ref={el => h2Refs.current[0] = el}
+                                >¡Cenefa personalizable al gusto!</h2>
+                                <div className="flex flex-col gap-4 pt-3 text-base text-default-600">
+                                    <p ref={el => pRefs.current[0][0] = el}>
+                                        En Vidrio al Arte fabricamos divisiones de baño a medida con vidrio templado, combinando funcionalidad, seguridad y diseño moderno.
+                                    </p>
+                                    <p ref={el => pRefs.current[0][1] = el}>
+                                        Personaliza tu división con diseños exclusivos de cenefa, eligiendo el estilo que mejor se adapte a tu espacio y gusto.
+                                    </p>
+                                </div>
+                                <div className="mt-6 text-center sm:text-left">
+                                    <a href="/productos/divisiones-de-baño/diseños">
+                                        <button
+                                            className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all"
+                                            ref={el => btnRefs.current[0] = el}
+                                        >¡EXPLORAR CATALOGO!</button>
+                                    </a>
+                                </div>
                             </div>
-                            <div className="mt-6 text-center sm:text-left">
-                                <a href="/productos/divisiones-de-baño/diseños">
-                                    <button className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all">¡EXPLORAR CATALOGO!</button>
-                                </a>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
+                        </CardBody>
+                    </Card>
+                </div>
             </div>
             <div>
-                <Card
-                    ref={card2Ref}
-                    className="w-full bg-transparent mb-10 sm:mt-10 px-1"
-                    shadow="none"
-                >
-                    <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
-                        <Image
-                            removeWrapper
-                            alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
-                            className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
-                            src={vidrio}
-                        />
-                        <div className="px-6 py-8 order-1 sm:order-none">
-                            <h2 className="text-2xl text-black font-medium">¡Vidrio Templado de la Mejor Calidad!</h2>
-                            <div className="flex flex-col gap-4 pt-3 text-base text-default-600">
-                                <p>
-                                    Nuestras divisiones de baño están fabricadas en vidrio templado de alta resistencia, pensado para brindar seguridad, durabilidad y un acabado impecable.
-                                </p>
-                                <p>
-                                    En Vidrio al Arte garantizamos precisión en cada medida y un diseño que se adapta perfectamente a tu espacio.
-                                </p>
+                <div ref={el => cardRefs.current[1] = el}>
+                    <Card
+                        className="w-full bg-transparent mb-10 sm:mt-10 px-1"
+                        shadow="none"
+                    >
+                        <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                            <Image
+                                removeWrapper
+                                alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
+                                className="h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
+                                src={vidrio}
+                            />
+                            <div className="px-6 py-8 order-1 sm:order-none">
+                                <h2
+                                    className="text-2xl text-black font-medium"
+                                    ref={el => h2Refs.current[1] = el}
+                                >¡Vidrio Templado de la Mejor Calidad!</h2>
+                                <div className="flex flex-col gap-4 pt-3 text-base text-default-600">
+                                    <p ref={el => pRefs.current[1][0] = el}>
+                                        Nuestras divisiones de baño están fabricadas en vidrio templado de alta resistencia, pensado para brindar seguridad, durabilidad y un acabado impecable.
+                                    </p>
+                                    <p ref={el => pRefs.current[1][1] = el}>
+                                        En Vidrio al Arte garantizamos precisión en cada medida y un diseño que se adapta perfectamente a tu espacio.
+                                    </p>
+                                </div>
+                                <div className="mt-6 text-center sm:text-left">
+                                    <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
+                                        <button
+                                            className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all"
+                                            ref={el => btnRefs.current[1] = el}
+                                        >¡COTIZAR!</button>
+                                    </a>
+                                </div>
                             </div>
-                            <div className="mt-6 text-center sm:text-left">
-                                <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
-                                    <button className="text-black px-3 py-1 rounded-2xl border border-black hover:bg-black hover:outline-none hover:text-white transition-all">¡COTIZAR!</button>
-                                </a>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
+                        </CardBody>
+                    </Card>
+                </div>
             </div>
         </div>
     );
