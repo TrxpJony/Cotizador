@@ -1,5 +1,6 @@
-import CarruselesComponent from "../inicio/carrusel/carruseles.jsx"; // Import the CarruselesComponent
-
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import CarruselesComponent from "../inicio/carrusel/carruseles.jsx";
 import "../../css/colosal.css";
 
 const features = [
@@ -11,28 +12,66 @@ const features = [
   { name: "Detalles", description: "Las variaciones en textura, color y acabado son propias de los materiales utilizados en la fabricación." }
 ];
 
-// Elimina sectionVariants y animaciones internas, ya que el padre controla la animación
-
 export function InfoProductos() {
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const featuresRef = useRef([]);
+  const carruselRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      titleRef.current,
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      descRef.current,
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      featuresRef.current,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.15,
+        delay: 0.6,
+        ease: "power3.out"
+      }
+    );
+    gsap.fromTo(
+      carruselRef.current,
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.2, delay: 1.2, ease: "elastic.out(1, 0.6)" }
+    );
+  }, []);
+
   return (
     <div className="bg-white">
-      <div
-        className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
-      >
-        {/* Sección de texto sin animación interna */}
+      <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+        {/* Sección de texto con animaciones */}
         <div>
-          <h2 className="text-4xl font-bold tracking-tight text-gray-700 sm:text-6xl">
+          <h2
+            ref={titleRef}
+            className="text-4xl font-bold tracking-tight text-gray-700 sm:text-6xl"
+          >
             Nuestros Productos
           </h2>
-          <p className="mt-4 text-default-400">
+          <p
+            ref={descRef}
+            className="mt-4 text-default-400"
+          >
             Vidrio al Arte SAS ofrece una amplia gama de productos de vidrio, Espejo y aluminio, diseñados para aportar elegancia y estilo a cualquier espacio. Desde puertas y ventanas de vidrio templado y aluminio hasta espejos personalizados con luz led, nuestros productos combinan calidad y diseño para satisfacer las necesidades de nuestros clientes.
           </p>
 
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-10 lg:gap-x-8">
-            {features.map((feature) => (
+            {features.map((feature, idx) => (
               <div
                 key={feature.name}
                 className="border-t border-gray-200 pt-4"
+                ref={el => featuresRef.current[idx] = el}
               >
                 <dt className="text-lg  font-semibold text-gray-700 sm:text-xl">
                   <h3>{feature.name}</h3>
@@ -43,8 +82,10 @@ export function InfoProductos() {
           </dl>
         </div>
 
-        {/* Sección de imágenes reemplazada por el componente de carruseles */}
-        <CarruselesComponent />
+        {/* Carrusel animado */}
+        <div ref={carruselRef}>
+          <CarruselesComponent />
+        </div>
       </div>
     </div>
   );

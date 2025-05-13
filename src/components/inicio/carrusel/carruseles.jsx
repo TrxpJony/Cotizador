@@ -1,6 +1,8 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import PropTypes from 'prop-types';
+import { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
 
 const imageGroups = [
     [
@@ -40,11 +42,57 @@ const ImageCarousel = ({ images }) => (
 )
 
 const CarruselesComponent = () => {
+    const carruselRefs = useRef([]);
+    const gridRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new window.IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+        if (gridRef.current) {
+            observer.observe(gridRef.current);
+        }
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (isVisible) {
+            carruselRefs.current.forEach((el, i) => {
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.7,
+                        delay: i * 0.3,
+                        ease: "power2.out"
+                    }
+                );
+            });
+        }
+    }, [isVisible]);
+
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+                ref={gridRef}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
                 {imageGroups.map((images, index) => (
-                    <div key={index} className="shadow-md rounded-2xl">
+                    <div
+                        key={index}
+                        className="shadow-md rounded-2xl"
+                        ref={el => (carruselRefs.current[index] = el)}
+                        style={{ opacity: 0 }}
+                    >
                         <ImageCarousel images={images} />
                     </div>
                 ))}

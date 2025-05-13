@@ -5,9 +5,47 @@ import logo4 from '../../img/img_Principal/4.png';
 import logo5 from '../../img/img_Principal/5.png';
 import logo6 from '../../img/img_Principal/6.png'
 import '../../css/colosal.css'; // Archivo CSS para estilos
-
+import { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
 
 export function Colaboración() {
+  const logoRefs = useRef([]);
+  const gridRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      logoRefs.current.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            delay: i * 0.2,
+            ease: "power2.out"
+          }
+        );
+      });
+    }
+  }, [isVisible]);
 
   return (
     <>
@@ -16,7 +54,10 @@ export function Colaboración() {
           <h2 className="text-center text-lg/8 font-semibold text-gray-900">
             En colaboración con
           </h2>
-          <div className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6">
+          <div
+            className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6"
+            ref={gridRef}
+          >
             <a href="https://espejossas.com/" target="_blank" rel="noopener noreferrer">
               <img
                 alt="Espejos SAS"
@@ -24,6 +65,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[0] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
             <a href="https://www.vidrioandino.com" target='_blank' rel='noopener noreferrer'>
@@ -33,6 +76,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[1] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
             <a href='https://linktr.ee/Acervid1' target='_blank' rel='noopener noreferrer'>
@@ -42,6 +87,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[2] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
             <a href="https://vitral.com.co/" target='_blank' rel='noopener noreferrer'>
@@ -51,6 +98,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain sm:col-start-2 lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[3] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
             <a href="https://aluminark.com/" target='_black' rel='noopener noreferrer'>
@@ -60,6 +109,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[4] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
             <a href="https://vitelsa.com.co/" target='_black' rel='noopener noreferrer'>
@@ -69,6 +120,8 @@ export function Colaboración() {
                 width={158}
                 height={48}
                 className="col-span-2 max-h-40 w-full object-contain sm:col-start-2 lg:col-span-1 cursor-pointer"
+                ref={el => (logoRefs.current[5] = el)}
+                style={{ opacity: 0 }}
               />
             </a>
           </div>

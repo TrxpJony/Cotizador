@@ -38,7 +38,6 @@ export function Inicio() {
       >
         <ServiciosContact />
       </motion.div>
-
     </>
   );
 }
