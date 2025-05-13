@@ -50,7 +50,7 @@ export function CortinaMovimiento() {
                         <motion.a
                             key={link.name}
                             href={link.href}
-                            className="px-6 py-3 rounded-lg text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
+                            className="px-6 py-3 rounded-2xl text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
                             whileHover={{
                                 scale: 1.1,
                                 backgroundColor: "#22d3ee",

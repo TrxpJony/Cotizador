@@ -29,19 +29,19 @@ export default function FooterComponent() {
           <ul className="flex space-x-4">
             <li>
               <FaFacebookF className="text-blue-500" />{" "}
-              <a href="https://www.facebook.com/share/1AG3qHjqaf/?mibextid=wwXIfr" className="hover:underline text-gray-700">
+              <a href="https://www.facebook.com/share/1AG3qHjqaf/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:underline text-gray-700">
                 Facebook
               </a>
             </li>
             <li>
               <FaWhatsapp className="text-green-500" />
-              <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" className="hover:underline text-gray-700">
+              <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="hover:underline text-gray-700">
                 WhatsApp
               </a>
             </li>
             <li>
               <FaInstagram className="text-orange-500" />
-              <a href="https://www.instagram.com/vidrioalartesas?igsh=MXd5ODdlOGpnMmt6ag==" className="hover:underline text-gray-700">
+              <a href="https://www.instagram.com/vidrioalartesas?igsh=MXd5ODdlOGpnMmt6ag==" target="_blank" rel="noopener noreferrer" className="hover:underline text-gray-700">
                 Instagram
               </a>
             </li>
@@ -49,7 +49,7 @@ export default function FooterComponent() {
         </div>
       </div>
       <div className="border-t border-gray-600 pt-4 text-gray-700 text-center mt-6">
-        <p> © 2024 <a href="https://maps.app.goo.gl/cxr3YbuHojn8BX1R7" className="hover:underline">Vidrio al Arte SAS. Cl. 71A #75 36, Bogotá</a>. TODOS LOS DERECHOS RESERVADOS.</p>
+        <p> © 2024 <a href="https://maps.app.goo.gl/cxr3YbuHojn8BX1R7" target="_blank" rel="noopener noreferrer" className="hover:underline">Vidrio al Arte SAS. Cl. 71A #75 36, Bogotá</a>. TODOS LOS DERECHOS RESERVADOS.</p>
       </div>
     </footer>
   );

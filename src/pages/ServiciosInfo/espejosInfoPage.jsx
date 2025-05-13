@@ -71,23 +71,23 @@ const EspejosInfoPage = () => {
 
             {/* Floating social media bar con efectos personalizados */}
             <nav
-                className="fixed right-5 flex flex-col space-y-3 z-50"
+                className="fixed right-3 md:right-5 flex flex-col space-y-2 md:space-y-3 z-50"
                 style={{ bottom: socialBottom }}
                 aria-label="Redes sociales"
             >
                 {[{
                     href: "https://www.facebook.com/people/Acervid/61556144607224/?locale=es_LA",
-                    icon: <FaFacebookF className="text-white rounded-full text-2xl" aria-label="Facebook" />,
+                    icon: <FaFacebookF className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Facebook" />,
                     bg: "bg-blue-600",
                     hover: "hover:bg-blue-700"
                 }, {
                     href: "https://api.whatsapp.com/send?phone=573223065256",
-                    icon: <FaWhatsapp className="text-white rounded-full text-2xl" aria-label="WhatsApp" />,
+                    icon: <FaWhatsapp className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="WhatsApp" />,
                     bg: "bg-green-500",
                     hover: "hover:bg-green-600"
                 }, {
                     href: "https://www.instagram.com/acervid_/#",
-                    icon: <FaInstagram className="text-white rounded-full text-2xl" aria-label="Instagram" />,
+                    icon: <FaInstagram className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Instagram" />,
                     bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
                     hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]"
                 }].map((social, i) => (
@@ -96,7 +96,7 @@ const EspejosInfoPage = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`${social.bg} text-white p-2 rounded-full shadow-lg ${social.hover}`}
+                        className={`${social.bg} text-white p-1.5 md:p-2 lg:p-3 rounded-full shadow-lg ${social.hover}`}
                         aria-label={`Ir a ${["Facebook", "WhatsApp", "Instagram"][i]}`}
                     >
                         {social.icon}
