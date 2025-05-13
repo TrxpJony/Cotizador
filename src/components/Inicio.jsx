@@ -24,7 +24,7 @@ export function Inicio() {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }} // Se activa cuando el 20% del elemento es visible
+          viewport={{ once: true, amount: 0.15 }} // Cambiado de 0.5 a 0.15 para móviles/tablets
           style={{ marginBottom: '20px' }} // Espaciado entre secciones
         >
           <Component />
@@ -34,7 +34,7 @@ export function Inicio() {
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }} // Se activa cuando el 20% del elemento es visible
+        viewport={{ once: true, amount: 0.15 }} // Cambiado de 0.5 a 0.15
       >
         <ServiciosContact />
       </motion.div>
