@@ -23,7 +23,7 @@ export function Cotizador() {
   const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
-  const cardRefs = useRef([]);
+  const cardsContainerRef = useRef(null);
 
   useEffect(() => {
     fetch(baseUrl)
@@ -82,17 +82,20 @@ export function Cotizador() {
     currentPage * itemsPerPage
   );
 
+  // Animación GSAP para los cards
   useEffect(() => {
-    // Animar las cards cuando cambian las cards paginadas
-    if (cardRefs.current) {
-      gsap.set(cardRefs.current, { opacity: 0, y: 40 });
-      gsap.to(cardRefs.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
+    if (cardsContainerRef.current) {
+      gsap.fromTo(
+        cardsContainerRef.current.children,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power2.inOut"
+        }
+      );
     }
   }, [paginatedList]);
 
@@ -141,14 +144,16 @@ export function Cotizador() {
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
         ) : (
-          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div
+            className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5"
+            ref={cardsContainerRef}
+          >
             {paginatedList.map((item, index) => (
               <Card
                 key={index}
                 isPressable
                 onPress={() => navigate(`/${item.ruta}`)} // Update the navigation path
                 className="nextui-card"
-                ref={el => cardRefs.current[index] = el}
               >
                 <CardBody className="overflow-hidden p-4">
                   <Image

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@heroui/react";
 import BackButton from "../../components/common/backButton";
 import { Filter, Search } from "lucide-react";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import gsap from "gsap";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";
 
@@ -23,6 +24,7 @@ export function CatalogoSkylesd() {
   const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 15; // Elementos por página
   const navigate = useNavigate();
+  const cardsContainerRef = useRef(null);
 
   useEffect(() => {
     fetch(baseUrl)
@@ -78,6 +80,23 @@ export function CatalogoSkylesd() {
     currentPage * itemsPerPage
   );
 
+  // Animaciones GSAP para los cards
+  useEffect(() => {
+    if (cardsContainerRef.current) {
+      gsap.fromTo(
+        cardsContainerRef.current.children,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power2.inOut"
+        }
+      );
+    }
+  }, [paginatedList])
+
   return (
     <>
       <div className="w-full bg-white shadow-md p-4 flex flex-col mx-auto">
@@ -123,7 +142,10 @@ export function CatalogoSkylesd() {
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron resultados.</p>
         ) : (
-          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div
+            className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5"
+            ref={cardsContainerRef}
+          >
             {paginatedList.map((item, index) => (
               <Card
                 key={index}

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardBody, CardFooter, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 import BackButton from "../../components/common/backButton";
 import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
+import gsap from "gsap";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
@@ -23,6 +24,8 @@ export function Espejos() {
   const [selectedItem, setSelectedItem] = useState(null); // Elemento seleccionado para el modal
   const { isOpen, onOpen, onClose } = useDisclosure();
   const itemsPerPage = 15; // Elementos por página
+  const cardsContainerRef = useRef(null);
+  const lastAnimatedListRef = useRef([]);
 
   useEffect(() => {
     fetch(baseUrl)
@@ -88,6 +91,31 @@ export function Espejos() {
     onOpen();
   };
 
+  // Animaciones GSAP para los cards
+  useEffect(() => {
+    //solo animar si la lista de items cambia(no por el modal)
+    const currentIds = paginatedList.map(item => item.id || item.title);
+    const lastIds = lastAnimatedListRef.current;
+    const isDifferent =
+      currentIds.length !== lastIds.length ||
+      currentIds.some((id, i) => id !== lastIds[i]);
+    if (cardsContainerRef.current && isDifferent) {
+      gsap.fromTo(
+        cardsContainerRef.current.children,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power2.inOut"
+        }
+      ),
+        lastAnimatedListRef.current = currentIds
+    }
+  }, [paginatedList])
+
+
   return (
     <>
 
@@ -134,7 +162,10 @@ export function Espejos() {
         {filteredList.length === 0 ? (
           <p className="text-center text-gray-500 mt-4">No se encontraron accesorios.</p>
         ) : (
-          <div className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div
+            className="gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-5"
+            ref={cardsContainerRef}
+          >
             {paginatedList.map((item, index) => (
               <Card
                 key={index}
@@ -204,7 +235,7 @@ export function Espejos() {
                     src={selectedItem.img}
                     width="100%"
                     height="450px"
-                  />  
+                  />
                 </ModalBody>
                 <ModalFooter>
                   <Button variant="light" onPress={onClose}>

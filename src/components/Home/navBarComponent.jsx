@@ -36,7 +36,7 @@ export default function NavBarComponent({ userId, userRole, location }) {
   }
 
   if (userRole === 'cotizador') {
-    menuItems.push({ name: "Cotizador", path: "/cotizar" });
+    menuItems.push({ name: "Cotizador", path: "/cotizador" });
   }
 
 
