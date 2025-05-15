@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import "react-toastify/dist/ReactToastify.css";
 
-const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut }) => { // Accept selectedAccessories as a prop
+const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, selectedAlfajia }) => { // Accept selectedAccessories as a prop
     // Procesar dimensions para soportar Diameter o width/height
     const processedDimensions = (() => {
         if ('Diameter' in dimensions) {
@@ -27,8 +27,19 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
         height: processedDimensions.height,
         glassPrice: '' // Initialize the glass price
     });
-    const { totalPrice } = useCalculoPrecios(processedDimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut );
 
+    // Construir los argumentos dinámicamente, solo los definidos
+    const calculoArgs = [
+        processedDimensions,
+        selectedAccessories,
+        selectedGlass,
+        selectedCenefa,
+        selectedPerfil,
+        selectedCut,
+        selectedAlfajia
+    ].filter(arg => arg !== undefined);
+
+    const { totalPrice } = useCalculoPrecios(...calculoArgs);
 
     useEffect(() => {
         setFormData(prevData => ({
@@ -160,6 +171,7 @@ CotizadorAdd.propTypes = {
     selectedCenefa: PropTypes.string,
     selectedPerfil: PropTypes.string,
     selectedCut: PropTypes.string,
+    selectedAlfajia: PropTypes.string,
 };
 
 export default CotizadorAdd;

@@ -2,7 +2,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 
-const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => { // Add new props
+const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass, selectedAlfajia }) => { // Add new props
     const {
         totalWidth,
         doubleHeight,
@@ -24,6 +24,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         felpaPrice,
         totalFelpa,
         vidrioPrice,
+        AlfajiaPriceRaw,
         area,
     } = calculatedValues || {};
 
@@ -56,6 +57,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Jamba:</strong></TableCell>
                             <TableCell>{doubleHeight} mm (2)</TableCell>
                             <TableCell>${jamba744Price?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="5">
+                            <TableCell><strong>Alfajia:</strong></TableCell>
+                            <TableCell>{totalWidth} mm</TableCell>
+                            <TableCell>${AlfajiaPriceRaw?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -208,7 +214,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                     </TableBody>
                 </Table>
                 <br />
-                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} />
+                <CotizadorAdd dimensions={dimensions} onAddDoor={onAddDoor} useCalculoPrecios={useCalculoPrecios} selectedAccessories={selectedAccessories} selectedGlass={selectedGlass} selectedAlfajia={selectedAlfajia} />
             </div>
 
         </>
@@ -236,6 +242,7 @@ DetalleTablas.propTypes = {
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired,
     selectedGlass: PropTypes.string.isRequired,
+    selectedAlfajia: PropTypes.string.isRequired,
 };
 
 export default DetalleTablas;
