@@ -13,7 +13,7 @@ const Sistema744 = () => {
   const [doors, setDoors] = useState([]); // State to hold doors
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
   const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
-  const [selectedAlfajia, setselectedAlfajia] = useState('sinAlfajia')
+  const [selectedAlfajia, setselectedAlfajia] = useState('sinAlfajia');
   const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedAlfajia);
 
   const handleDimensionsChange = (newDimensions) => {
@@ -61,9 +61,9 @@ const Sistema744 = () => {
             </label>
             <EnviarDimensiones744 onDimensionsChange={handleDimensionsChange} />
           </div>
-          <div className='mb-5'>
+          <div className='mb-2'>
             <label className='text-gray-700 font-bold mb-2'>Tipo de Vidrio</label>
-            <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+            <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
               <option value="sinVidrio">Sin Vidrio</option>
               <option value="4mm744">Vidrio 4 mm</option>
               <option value="5mm744">Vidrio 5 mm</option>
@@ -72,7 +72,7 @@ const Sistema744 = () => {
           </div>
           <div className='mb-2'>
             <label className='text-gray-700 font-bold mb-2'>Alfajia</label>
-            <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold' value={selectedAlfajia} onChange={(e) => setselectedAlfajia(e.target.value)}>
+            <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200' value={selectedAlfajia} onChange={(e) => setselectedAlfajia(e.target.value)}>
               <option value="sinAlfajia">Sin alfajia</option>
               <option value="ALN0000">Con alfajia</option>
             </select>

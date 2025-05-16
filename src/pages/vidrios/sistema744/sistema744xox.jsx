@@ -13,7 +13,8 @@ const Sistema744xox = () => {
     const [doors, setDoors] = useState([]); // State to hold doors
     const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
     const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
+    const [selectedAlfajia, setselectedAlfajia] = useState('sinAlfajia');
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedAlfajia);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -36,6 +37,7 @@ const Sistema744xox = () => {
             }
         });
     };
+
     return (
         <>
 
@@ -60,16 +62,23 @@ const Sistema744xox = () => {
                         <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
                     </div>
                     <div className='mb-2'>
-                        <label className='text-gray-700 font-bold mb-2'> Tipo de Vidrio:</label>
+                        <label className='text-gray-700 font-bold mb-2'> Tipo de Vidrio</label>
                         <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
                             <option value="sinVidrio">Sin Vidrio</option>
                             <option value="4mm744">Vidrio 4 mm</option>
                             <option value="5mm744">Vidrio 5 mm</option>
                             <option value="vidriobronce">Vidrio Bronce</option>
                         </select>
-                        <h2 className='text-right text-xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                    </div>
+                    <div className='mb-2'>
+                        <label className='text-gray-700 font-bold mb-2'>Alfajia</label>
+                        <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200' value={selectedAlfajia} onChange={(e) => setselectedAlfajia(e.target.value)}>
+                            <option value="sinAlfajia">Sin alfajia</option>
+                            <option value="ALN0000">Con alfajia</option>
+                        </select>
                     </div>
                     <div>
+                        <h2 className='text-right text-xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                         <AddTableDoor doors={doors} onRemove={handleRemoveDoor} />
                     </div>
                     <div className='flex justify-between mb-6'>
@@ -85,6 +94,7 @@ const Sistema744xox = () => {
                     selectedAccessories={selectedAccessories}
                     useCalculoPrecios={useCalculoPrecios}
                     selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando
+                    selectedAlfajia={selectedAlfajia} // pass the selectedAlfajia state to DetalleTablas
                 />
             </div>
         </>

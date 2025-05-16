@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio') => {
+const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedAlfajia = 'sinAlfajia') => {
     const [dbPrices, setDbPrices] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [calculatedValues, setCalculatedValues] = useState({});
@@ -40,6 +40,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
         const area = (totalHeight / 1000) * (totalWidth / 1000);
         const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
+        const alfajiaPrice = selectedAlfajia === "sinAlfajia" ? 0 : (memoizedPrices[selectedAlfajia] || 0);
 
         const doubleHeight = totalHeight * 2;
         const cuadHeight = totalHeight * 4;
@@ -66,11 +67,13 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
         const accessoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
         const vidrioPrice = (glassUnitPrice * area);
+        const AlfajiaPriceRaw = alfajiaPrice * totalWidth / 1000;
+
         const total =
             cabezal744Price + sillar744Price + jamba744Price +
             horizontalInferior744Price + horizontalSuperior744Price +
             traslape744Price + enganche744Price + empaque744Price + felpaPrice +
-            tornillosPrice + siliconaPrice + vidrioPrice + accessoriosPrice;
+            tornillosPrice + siliconaPrice + vidrioPrice + accessoriosPrice + AlfajiaPriceRaw;
 
         setTotalPrice(total);
         setCalculatedValues({
@@ -96,11 +99,12 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
             totalFelpa,
             area,
             vidrioPrice,
+            AlfajiaPriceRaw,
             kitCierre744Price: memoizedPrices.kitCierre744 ? Number(memoizedPrices.kitCierre744) : 0,
             rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) * 4 : 0,
 
         });
-    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]);
+    }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedAlfajia]);
 
     return { totalPrice, calculatedValues };
 };
