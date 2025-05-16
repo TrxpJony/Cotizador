@@ -60,8 +60,13 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
     const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 60;
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
-
-    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+    
+    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+      if (acc === "rodamientoSimple70col" || acc === "rodamientoDoble140col") {
+        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 4 : 0);
+      }
+      return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+    }, 0);
 
     const total =
       cabezalcolPrice + sillarcolPrice + jambacolPrice +
@@ -95,8 +100,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
       kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number(memoizedPrices.kitCierrecol) : 0,
       kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol) : 0,
       cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
-      rodamientoSimple70colPrice: memoizedPrices.rodamientoSimple70col ? Number(memoizedPrices.rodamientoSimple70col) * 3 : 0,
-      rodamientoDoble140colPrice: memoizedPrices.rodamientoDoble140col ? Number(memoizedPrices.rodamientoDoble140col) * 3 : 0,
+      rodamientoSimple70colPrice: memoizedPrices.rodamientoSimple70col ? Number(memoizedPrices.rodamientoSimple70col) * 4 : 0,
+      rodamientoDoble140colPrice: memoizedPrices.rodamientoDoble140col ? Number(memoizedPrices.rodamientoDoble140col) * 4 : 0,
       cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
     });
   }, [width, height, memoizedPrices, memoizedAccessories]);

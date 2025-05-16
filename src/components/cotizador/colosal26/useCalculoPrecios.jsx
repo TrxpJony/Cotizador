@@ -61,7 +61,12 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
-    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+      if (acc === "rodamientoSimple70col" || acc === "rodamientoDoble140col") {
+        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 2 : 0);
+      }
+      return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+    }, 0);
 
     const total =
       cabezalcolPrice + sillarcolPrice + jambacolPrice +

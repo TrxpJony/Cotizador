@@ -63,7 +63,15 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
-    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+    const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+      if (acc === "rodamientoSimple70col" || acc === "rodamientoDoble140col") {
+        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 4 : 0);
+      }
+      if (acc === "kitCierrecol" || acc === "kitCierreConLlavecol") {
+        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 2 : 0);
+      }
+      return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+    }, 0);
 
     const total =
       cabezalcolPrice + sillarcolPrice + jambacolPrice +
@@ -95,8 +103,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
       felpaWidth,
       felpaPrice,
       totalFelpa,
-      kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number(memoizedPrices.kitCierrecol) : 0,
-      kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol) : 0,
+      kitCierrecolPrice: memoizedPrices.kitCierrecol ? Number(memoizedPrices.kitCierrecol) * 2 : 0,
+      kitCierreConLlavecolPrice: memoizedPrices.kitCierreConLlavecol ? Number(memoizedPrices.kitCierreConLlavecol) * 2 : 0,
       cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
       rodamientoSimple70colPrice: memoizedPrices.rodamientoSimple70col ? Number(memoizedPrices.rodamientoSimple70col) * 4 : 0,
       rodamientoDoble140colPrice: memoizedPrices.rodamientoDoble140col ? Number(memoizedPrices.rodamientoDoble140col) * 4 : 0,
