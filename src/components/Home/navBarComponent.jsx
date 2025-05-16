@@ -19,7 +19,7 @@ export default function NavBarComponent({ userId, userRole, location }) {
   const handleLogout = () => {
     cookies.remove('id');
     cookies.remove('rol');
-    toast.success("Sesión cerrada correctamente", {
+    toast("Sesión cerrada correctamente", {
       onClose: () => { window.location.href = '/'; }
     });
   };
@@ -209,8 +209,8 @@ export default function NavBarComponent({ userId, userRole, location }) {
       </Navbar>
       <ToastContainer
         position="bottom-center"
-        autoClose={1500}
-        hideProgressBar={false}
+        autoClose={500}
+        hideProgressBar
         newestOnTop={false}
         closeOnClick={false}
         rtl={false}

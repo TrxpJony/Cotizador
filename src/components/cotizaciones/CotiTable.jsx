@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Trash2, Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Flip, toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
@@ -13,18 +13,24 @@ const CotiTable = ({ searchTerm }) => {
 	const [filteredCotizaciones, setFilteredCotizaciones] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
+    const prevSearchTerm = useRef(searchTerm);
 
 	useEffect(() => {
-		// Filtrar productos cuando cambia el searchTerm o lo productos
 		const filtered = cotizaciones.filter(
-			(cotizaciones) =>
-				cotizaciones.client_name.toLowerCase().includes(searchTerm) ||
-				cotizaciones.nombre_usuario.toLowerCase().includes(searchTerm) ||
-				cotizaciones.cotNumber.toLowerCase().includes(searchTerm)
+			(cotizacion) =>
+				cotizacion.client_name.toLowerCase().includes(searchTerm) ||
+				cotizacion.nombre_usuario.toLowerCase().includes(searchTerm) ||
+				cotizacion.cotNumber.toLowerCase().includes(searchTerm)
 		);
 		setFilteredCotizaciones(filtered);
-		setCurrentPage(1);
-	}, [searchTerm, cotizaciones]);
+
+		// Solo resetea la página si cambió el searchTerm
+		if (prevSearchTerm.current !== searchTerm) {
+			setCurrentPage(1);
+			prevSearchTerm.current = searchTerm;
+		}
+	}, [cotizaciones, searchTerm]);
+
 
 	useEffect(() => {
 		fetch(baseUrl)
@@ -93,6 +99,33 @@ const CotiTable = ({ searchTerm }) => {
 		link.click();
 	};
 
+	const handleEstadoChange = (id, nuevoEstado) => {
+		fetch(`${baseUrl}/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ estado: nuevoEstado }),
+		})
+			.then((res) => {
+				if (!res.ok) throw new Error('Error actualizando el estado');
+				return res.json();
+			})
+			.then(() => {
+				toast.success('Estado actualizado correctamente');
+				const actualizadas = cotizaciones.map(coti =>
+					coti.id === id ? { ...coti, estado: nuevoEstado } : coti
+				);
+				setCotizaciones(actualizadas);
+				setFilteredCotizaciones(actualizadas);
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error('Error al actualizar el estado');
+			});
+	};
+
+
 	const paginatedCotizaciones = filteredCotizaciones.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
@@ -145,6 +178,9 @@ const CotiTable = ({ searchTerm }) => {
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Precio
 								</th>
+								<th className="text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider">
+									Estado
+								</th>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
 								</th>
@@ -178,6 +214,23 @@ const CotiTable = ({ searchTerm }) => {
 										{cotizacion.total_precio !== undefined && !isNaN(cotizacion.total_precio)
 											? `$${Number(cotizacion.total_precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 											: "N/A"}
+									</td>
+									<td>
+										<select
+											value={cotizacion.estado}
+											onChange={(e) => handleEstadoChange(cotizacion.id, e.target.value)}
+											className={`px-2 py-1 rounded-full text-xs font-semibold text-white outline-none border-none ${cotizacion.estado === 'pendiente'
+												? 'bg-yellow-500'
+												: cotizacion.estado === 'facturada'
+													? 'bg-green-600'
+													: 'bg-red-600'
+												}`}
+										>
+											<option value="facturada" className="bg-white text-black">Facturada</option>
+											<option value="pendiente" className="bg-white text-black">Pendiente</option>
+											<option value="cancelada" className="bg-white text-black">Cancelada</option>
+										</select>
+
 									</td>
 									<td className='px-6 py-4 text-xs sm:text-sm whitespace-nowrap text-gray-700'>
 										<button
