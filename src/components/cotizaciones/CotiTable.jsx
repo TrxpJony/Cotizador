@@ -13,7 +13,8 @@ const CotiTable = ({ searchTerm }) => {
 	const [filteredCotizaciones, setFilteredCotizaciones] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
-    const prevSearchTerm = useRef(searchTerm);
+	const prevSearchTerm = useRef(searchTerm);
+	const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
 	useEffect(() => {
 		const filtered = cotizaciones.filter(
@@ -125,8 +126,41 @@ const CotiTable = ({ searchTerm }) => {
 			});
 	};
 
+	const handleSort = (key) => {
+		let direction = 'asc';
+		if (sortConfig.key === key && sortConfig.direction === 'asc') {
+			direction = 'desc';
+		}
+		setSortConfig({ key, direction });
+		setCurrentPage(1); // <-- Esto te regresa a la primera página
+	};
 
-	const paginatedCotizaciones = filteredCotizaciones.slice(
+	let sortedCotizaciones = [...filteredCotizaciones];
+	
+	if (sortConfig.key) {
+		sortedCotizaciones.sort((a, b) => {
+			if (sortConfig.key === 'created_at') {
+				return sortConfig.direction === 'asc'
+					? new Date(a.created_at) - new Date(b.created_at)
+					: new Date(b.created_at) - new Date(a.created_at);
+			}
+			if (sortConfig.key === 'total_precio') {
+				const aPrecio = Number(a.total_precio) || 0;
+				const bPrecio = Number(b.total_precio) || 0;
+				return sortConfig.direction === 'asc'
+					? aPrecio - bPrecio
+					: bPrecio - aPrecio;
+			}
+			// Comparar strings de forma segura (email, nombre_usuario, etc)
+			const aValue = (a[sortConfig.key] || '').toString().toLowerCase();
+			const bValue = (b[sortConfig.key] || '').toString().toLowerCase();
+			if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+			if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+			return 0;
+		});
+	}
+
+	const paginatedCotizaciones = sortedCotizaciones.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
 	);
@@ -160,26 +194,47 @@ const CotiTable = ({ searchTerm }) => {
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Cotización #
+								<th
+									className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('cotNumber')}
+								>
+									Cotización {sortConfig.key === 'cotNumber' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Cliente
+								<th
+									className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('client_name')}
+								>
+									Cliente {sortConfig.key === 'client_name' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Email
+								<th
+									className='px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('email')}
+								>
+									Email {sortConfig.key === 'email' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Cotizador
+								<th
+									className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('nombre_usuario')}
+								>
+									Cotizador {sortConfig.key === 'nombre_usuario' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Fecha
+								<th
+									className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('created_at')}
+								>
+									Fecha {sortConfig.key === 'created_at' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Precio
+								<th
+									className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer'
+									onClick={() => handleSort('total_precio')}
+								>
+									Precio {sortConfig.key === 'total_precio' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
-								<th className="text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider">
-									Estado
+								<th
+									className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider hover:text-gray-400 cursor-pointer"
+									onClick={() => handleSort('estado')}
+								>
+									Estado {sortConfig.key === 'estado' ? (sortConfig.direction === 'asc' ? '▲' : '▼') : ''}
 								</th>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Actions
@@ -201,7 +256,7 @@ const CotiTable = ({ searchTerm }) => {
 									<td className='px-6 py-4 text-xs sm:text-sm text-gray-700'>
 										{cotizacion.client_name}
 									</td>
-									<td className='px-6 py-4 text-xs sm:text-sm text-gray-700'>
+									<td className='px-4 py-4 text-xs sm:text-sm text-gray-700'>
 										{cotizacion.email}
 									</td>
 									<td className='px-6 py-4 text-xs sm:text-sm whitespace-nowrap text-gray-700'>
