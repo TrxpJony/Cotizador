@@ -112,7 +112,7 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
                             {post.title}
                         </h2>
                     </div>
-                    <div className='w-full h-44 overflow-hidden text-base font-normal text-gray-900 px-2 mt-2'>
+                    <div className='w-full h-auto sm:h-44 lg:h-40 overflow-hidden text-base font-normal text-gray-900 px-2 mt-2'>
                         {truncate(post.description, 300)}
                     </div>
                     <div className='w-full h-[0.025em] bg-gray-400/90 mt-2'></div>
