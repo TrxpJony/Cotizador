@@ -57,7 +57,7 @@ const posts = [
     {
         id: 4,
         title: 'Productos de vidrio',
-        href: '#',
+        href: 'servicios/vidrios',
         description:
             'Proveemos productos de vidrio de alta calidad para diversas aplicaciones, desde ventanas hasta decoraciones.',
         category: { title: 'Vidrio', href: '#' },
