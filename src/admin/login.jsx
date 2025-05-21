@@ -1,11 +1,11 @@
-import React from 'react';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
 import { Input, Form } from "@heroui/react";
-import { Icon } from "@iconify/react";
+
 import { Flip, ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -18,8 +18,6 @@ function Login() {
   const [usuario, setUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
-  const [isVisible, setIsVisible] = React.useState(false);
-  const toggleVisibility = () => setIsVisible(!isVisible);
 
   const navigate = useNavigate();
 
@@ -103,27 +101,12 @@ function Login() {
                 inputWrapper: "group-data-[focus-visible=true]:ring-0 group-data-[focus-visible=true]:ring-offset-0",
               }}
               isRequired
-              endContent={
-                <button type="button" onClick={toggleVisibility}>
-                  {isVisible ? (
-                    <Icon
-                      className="pointer-events-none text-2xl text-default-400"
-                      icon="solar:eye-closed-linear"
-                    />
-                  ) : (
-                    <Icon
-                      className="pointer-events-none text-2xl text-default-400"
-                      icon="solar:eye-bold"
-                    />
-                  )}
-                </button>
-              }
               label="Contraseña"
               name='password'
               value={contraseña}
               onChange={(e) => setContraseña(e.target.value)}
               placeholder='Ingrese su contraseña'
-              type={isVisible ? "text" : "password"}
+              type={"password"}
             />
 
             {error && (

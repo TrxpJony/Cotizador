@@ -199,20 +199,23 @@ const ProductsTable = ({ searchTerm }) => {
 					<table className='min-w-full divide-y divide-gray-900'>
 						<thead>
 							<tr>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Title
+								<th className='px-6 py-3 text-left text-xs sm:text-sm tracking-wider'>
+									Referencia
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
+								<th className="px-6 py-3 text-left text-xs sm:text-sm tracking-wider">
+									Nombre
+								</th>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm tracking-wider'>
 									Precio
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm tracking-wider'>
 									Categoria
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm tracking-wider'>
 									Imagen
 								</th>
-								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Actions
+								<th className='px-6 py-3 text-left text-xs sm:text-sm tracking-wider'>
+									Acciones
 								</th>
 
 							</tr>
@@ -228,6 +231,9 @@ const ProductsTable = ({ searchTerm }) => {
 								>
 									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
 										{product.title}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600">
+										{product.description}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										${product.precio ? parseFloat(product.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}								</td>
