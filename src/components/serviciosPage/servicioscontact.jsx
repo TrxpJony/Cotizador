@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
@@ -87,7 +86,7 @@ const ServiciosContact = () => {
                     >
                         Estamos aquí para ayudarte con tus proyectos. No dudes en comunicarte con nosotros para obtener más información o resolver tus dudas.
                     </p>
-                    <Link to="/contact">
+                    <a href="/contact">
                         <button
                             ref={buttonRef}
                             className='mt-4 px-6 py-3 rounded-lg text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all'
@@ -95,7 +94,7 @@ const ServiciosContact = () => {
                         >
                             ¿Charlamos un momento?
                         </button>
-                    </Link>
+                    </a>
                 </div>
             </div>
         </>

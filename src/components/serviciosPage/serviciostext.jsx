@@ -13,7 +13,7 @@ const ServiciosText = () => {
     const ctx = gsap.context(() => {
       // Título con zoom + fade
       gsap.from(titleRef.current, {
-        scale: 0.8,
+        y: 40,
         opacity: 0,
         duration: 1,
         ease: 'back.out(1.7)',
@@ -54,7 +54,7 @@ const ServiciosText = () => {
       </p>
 
       <h1
-        className="mt-4 text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl"
+        className="mt-2 text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl"
         ref={titleRef}
       >
         Servicios
@@ -68,7 +68,7 @@ const ServiciosText = () => {
       </p>
 
       <p
-        className="mt-4 text-lg text-gray-600"
+        className="text-lg text-gray-600"
         ref={el => (paragraphsRef.current[2] = el)}
       >
         Cada detalle importa. Cada espacio cuenta.
