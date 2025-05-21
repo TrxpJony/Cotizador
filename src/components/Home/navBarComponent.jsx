@@ -49,7 +49,6 @@ export default function NavBarComponent({ userId, userRole, location }) {
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="sm:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)} // Alterna el estado
           />
           <NavbarBrand>
             <AcmeLogo />
@@ -81,14 +80,20 @@ export default function NavBarComponent({ userId, userRole, location }) {
                 className=""
                 key="nosotros"
                 description="Lideramos la transformación de vidrios y espejos."
-                onClick={() => navigate("/nosotros")}
+                onPress={() => {
+                  window.scrollTo(0, 0);
+                  navigate("/nosotros")
+                }}
               >
                 Misión y Visión
               </DropdownItem>
               <DropdownItem
                 key="blog"
                 description="Eventos, regalos y novedades de Vidrio al Arte."
-                onClick={() => navigate("/blog")}
+                onPress={() => {
+                  window.scrollTo(0, 0);
+                  navigate("/blog")
+                }}
               >
                 Blog
               </DropdownItem>
@@ -185,7 +190,8 @@ export default function NavBarComponent({ userId, userRole, location }) {
                 <DropdownItem
                   key="mision"
                   description="Lideramos la transformación de vidrios y espejos."
-                  onClick={() => {
+                  onPress={() => {
+                    window.scrollTo(0, 0);
                     navigate("/nosotros");
                     setIsMenuOpen(false); // Cerrar el menú después de la navegación
                   }}
@@ -195,7 +201,8 @@ export default function NavBarComponent({ userId, userRole, location }) {
                 <DropdownItem
                   key="blog"
                   description="Eventos, regalos y novedades de Vidrio al Arte."
-                  onClick={() => {
+                  onPress={() => {
+                    window.scrollTo(0, 0);
                     navigate("/blog");
                     setIsMenuOpen(false); // Cerrar el menú después de la navegación
                   }}
