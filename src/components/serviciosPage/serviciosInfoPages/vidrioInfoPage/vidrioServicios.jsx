@@ -2,7 +2,7 @@ import { IoMdCut } from "react-icons/io";
 import { FaWandMagicSparkles, FaSprayCan } from "react-icons/fa6";
 import { FaLayerGroup } from "react-icons/fa";
 import gsap from "gsap";
-import { animateVidrioServicios } from "../../../../utils/gsapAnimations";
+import { animateVidrioServicios } from "../../../../utils/gsapAnimationsVidrio";
 import { useLayoutEffect, useRef } from "react";
 
 const servicios = [

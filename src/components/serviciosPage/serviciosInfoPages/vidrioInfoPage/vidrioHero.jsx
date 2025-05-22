@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
-import { animateVidrioHero } from "../../../../utils/gsapAnimations";
+import { animateVidrioHero } from "../../../../utils/gsapAnimationsVidrio";
 import { FaRegFileLines } from "react-icons/fa6";
 import gsap from "gsap";
 

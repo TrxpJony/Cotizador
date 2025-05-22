@@ -20,7 +20,7 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [formData, setFormData] = useState({
         cliente: '',   // Cambiado de 'client' a 'cliente'
         telefono: '',
-        email: '',
+        email: 'X',
         entrega: '',  // Asegurar consistencia en los nombres
         abono: ''
     });
@@ -264,8 +264,9 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                         <label htmlFor="telefono" className="block text-gray-700 font-bold mb-2">Teléfono</label>
                                         <input
                                             id="telefono"
-                                            type="text"
+                                            type="number"
                                             name="telefono"
+                                            placeholder='123-456-7890'
                                             value={formData.telefono}
                                             onChange={handleChange}
                                             className="border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
@@ -292,7 +293,9 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                             {selectedDate ? formatSelectedDate(selectedDate) : 'Seleccionar fecha'}
                                         </button>
                                         {isCalendarOpen && (
-                                            <div>
+                                            <div
+                                                className='static sm:absolute mt-0 sm:mt-20'
+                                            >
                                                 <Calendar
                                                     aria-label="Seleccionar fecha"
                                                     value={selectedDate}

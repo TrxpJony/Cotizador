@@ -1,6 +1,6 @@
 import { useRef, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
-import { animateVidrioImagenes } from "../../../../utils/gsapAnimations";
+import { animateVidrioImagenes } from "../../../../utils/gsapAnimationsVidrio";
 
 const Imagenes = [
     {

@@ -153,6 +153,7 @@ export function animateVidrioImagenes(container) {
     });
 };
 
+// Imagenes Descripcion
 export function animateVidrioDescription(container) {
     gsap.from(".desc-title", {
         scrollTrigger: {
@@ -162,6 +163,7 @@ export function animateVidrioDescription(container) {
         },
         opacity: 0,
         x: 30,
+        delay: 0.5,
         duration: 1,
         ease: "power3.Out"
     });
@@ -173,7 +175,7 @@ export function animateVidrioDescription(container) {
         },
         opacity: 0,
         x: 30,
-        delay: 0.5,
+        delay: 0.8,
         duration: 1,
         ease: "power2.out",
     });
@@ -185,7 +187,6 @@ export function animateVidrioDescription(container) {
         },
         opacity: 0,
         x: -30,
-        delay: 0.8,
         duration: 1,
         ease: "power2.out",
     });
