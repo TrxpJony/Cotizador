@@ -2,7 +2,7 @@ import { GiCrackedGlass } from "react-icons/gi";
 import { GiShatter } from "react-icons/gi";
 import { useLayoutEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { animateVidrioDescription } from "../../../../utils/gsapAnimationsVidrio";
+import { animateVidrioDescription } from "../../../../utils/serviciosAnimations/gsapAnimationsVidrio";
 
 const mainImageSrc = "https://res.cloudinary.com/dtxmsbsjd/image/upload/v1747748882/vidrio_templado_y_laminado_yrqqey.png";
 

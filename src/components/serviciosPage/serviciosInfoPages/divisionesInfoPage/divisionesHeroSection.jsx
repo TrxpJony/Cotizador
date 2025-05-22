@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroImage from "../../../../img/img_nosotros/imagenherodivision.png";
+import { animateDivisionesHero } from "../../../../utils/serviciosAnimations/gsapAnimationsDivisiones";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,23 +11,7 @@ const DivisionesHeroSection = () => {
     const textRef = useRef(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".hero-title", { y: 50, opacity: 0, duration: 1, delay: 0.2 });
-            gsap.from(".hero-subtitle", { y: 50, opacity: 0, duration: 1, delay: 0.4 });
-            gsap.from(".hero-button", { y: 50, opacity: 0, duration: 1, delay: 0.6 });
-
-            gsap.to(textRef.current, {
-                y: -120,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
-            });
-        }, sectionRef);
-
+        const ctx = animateDivisionesHero(sectionRef, textRef);
         return () => ctx.revert();
     }, []);
 
