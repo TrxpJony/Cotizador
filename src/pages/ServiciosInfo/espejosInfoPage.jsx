@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import EspejosDescription from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosDescription";
 import EspejosGalery from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosgalery";
 import EspejosHeaderInfo from "../../components/serviciosPage/serviciosInfoPages/espejosInfoPage/espejosHeaderInfo";
@@ -6,11 +6,14 @@ import EspejosFaqs from "../../components/serviciosPage/serviciosInfoPages/espej
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
+import gsap from "gsap";
+import { animateDivisionesSocial } from "../../utils/serviciosAnimations/gsapAnimationsDivisiones";
 
 const EspejosInfoPage = () => {
+    const containerRef = useRef(null);
+
     const mainDivRef = useRef(null);
     const [socialBottom, setSocialBottom] = useState(20);
-    const [showDescription, setShowDescription] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,6 +35,13 @@ const EspejosInfoPage = () => {
         };
     }, []);
 
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            animateDivisionesSocial(containerRef.current); // <-- pasa la referencia aqui
+        }, containerRef);
+        return () => ctx.revert();
+    }, [])
+
     return (
         <>
             <Helmet>
@@ -44,14 +54,14 @@ const EspejosInfoPage = () => {
                     className="sm:h-auto flex flex-col mt-20 sm:mt-32 sm:justify-center sm:mb-20"
                     aria-label="Encabezado de espejos"
                 >
-                    <EspejosHeaderInfo onAnimationComplete={() => setShowDescription(true)} />
+                    <EspejosHeaderInfo />
                 </section>
 
                 <section
                     className="flex justify-center items-center flex-col sm:mb-20"
                     aria-label="Descripción de espejos"
                 >
-                    {showDescription && <EspejosDescription />}
+                    <EspejosDescription />
                 </section>
 
                 <section
@@ -70,39 +80,41 @@ const EspejosInfoPage = () => {
             </main>
 
             {/* Floating social media bar con efectos personalizados */}
-            <nav
-                className="fixed right-3 md:right-5 flex flex-col space-y-2 md:space-y-3 z-50"
-                style={{ bottom: socialBottom }}
-                aria-label="Redes sociales"
-            >
-                {[{
-                    href: "https://www.facebook.com/people/Acervid/61556144607224/?locale=es_LA",
-                    icon: <FaFacebookF className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Facebook" />,
-                    bg: "bg-blue-600",
-                    hover: "hover:bg-blue-700"
-                }, {
-                    href: "https://api.whatsapp.com/send?phone=573223065256",
-                    icon: <FaWhatsapp className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="WhatsApp" />,
-                    bg: "bg-green-500",
-                    hover: "hover:bg-green-600"
-                }, {
-                    href: "https://www.instagram.com/acervid_/#",
-                    icon: <FaInstagram className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Instagram" />,
-                    bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
-                    hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]"
-                }].map((social, i) => (
-                    <a
-                        key={i}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${social.bg} text-white p-1.5 md:p-2 lg:p-3 rounded-full shadow-lg ${social.hover}`}
-                        aria-label={`Ir a ${["Facebook", "WhatsApp", "Instagram"][i]}`}
-                    >
-                        {social.icon}
-                    </a>
-                ))}
-            </nav>
+            <div ref={containerRef}>
+                <nav
+                    className="fixed right-3 md:right-5 flex flex-col space-y-2 md:space-y-3 z-50"
+                    style={{ bottom: socialBottom }}
+                    aria-label="Redes sociales"
+                >
+                    {[{
+                        href: "https://www.facebook.com/people/Acervid/61556144607224/?locale=es_LA",
+                        icon: <FaFacebookF className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Facebook" />,
+                        bg: "bg-blue-600",
+                        hover: "hover:bg-blue-700"
+                    }, {
+                        href: "https://api.whatsapp.com/send?phone=573223065256",
+                        icon: <FaWhatsapp className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="WhatsApp" />,
+                        bg: "bg-green-500",
+                        hover: "hover:bg-green-600"
+                    }, {
+                        href: "https://www.instagram.com/acervid_/#",
+                        icon: <FaInstagram className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Instagram" />,
+                        bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
+                        hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]"
+                    }].map((social, i) => (
+                        <a
+                            key={i}
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${social.bg} social text-white p-1.5 md:p-2 lg:p-3 rounded-full shadow-lg ${social.hover}`}
+                            aria-label={`Ir a ${["Facebook", "WhatsApp", "Instagram"][i]}`}
+                        >
+                            {social.icon}
+                        </a>
+                    ))}
+                </nav>
+            </div>
         </>
     );
 };

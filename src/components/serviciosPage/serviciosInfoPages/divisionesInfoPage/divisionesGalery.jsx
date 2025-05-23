@@ -77,7 +77,7 @@ const DivisionesGalery = () => {
                             className="w-full bg-transparent mb-10 sm:mt-10 px-1"
                             shadow="none"
                         >
-                            <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                            <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap overflow-x-hidden">
                                 <Image
                                     removeWrapper
                                     alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
