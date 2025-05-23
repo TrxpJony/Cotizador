@@ -30,7 +30,7 @@ const DivisionesInfoPage = () => {
         handleScroll();
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll)
+            window.removeEventListener("resize", handleScroll);
         };
     }, []);
 
@@ -45,8 +45,8 @@ const DivisionesInfoPage = () => {
         <>
             <Helmet>
                 <title>Vidrio al Arte SAS | Divisiones de baño</title>
-                <meta name="description" content="" />
-                <meta name="keywords" content="" />
+                <meta name="description" content="Descubre nuestras divisiones de baño en vidrio templado: modernas, duraderas y fáciles de instalar, Sistemas elegantes y funcionales que transforman tu baño con estilo y calidad." />
+                <meta name="keywords" content="divisiones de baño, divisiones en vidrio templado, sistemas para baño, vidrio para baño, diseño moderno baño, instalación de divisiones de baño, Vidrio al Arte SAS" />
             </Helmet>
             <main ref={mainDivRef}>
                 <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-96">

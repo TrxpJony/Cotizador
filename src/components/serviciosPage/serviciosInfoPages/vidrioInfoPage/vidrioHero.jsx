@@ -27,7 +27,7 @@ const VidrioHero = () => {
                     <div className="relative flex flex-col items-center text-center lg:text-left lg:py-8 lg:items-start lg:max-w-none max-w-3xl mx-auto lg:mx-0 lg:flex-1 lg:w-1/2">
                         <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold">
                             Expertos en Vidrios Personalizados{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-gray-400 ml-2">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-black ml-2">
                                 Vidrio al Arte{" "}
                             </span>
                         </h1>
