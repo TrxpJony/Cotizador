@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ShieldCheck, Sparkles, Hammer, UserRoundCheck } from "lucide-react";
 import { animateDivisionesDescription } from "../../../../utils/serviciosAnimations/gsapAnimationsDivisiones";
 import div2 from "../../../../img/img_nosotros/division2.png";
@@ -32,7 +31,6 @@ const description = [
         description: "Proceso ágil, limpio y profesional en pocas horas.",
     },
 ]
-gsap.registerPlugin(ScrollTrigger);
 
 const DivisionesDescription = () => {
     const containerRef = useRef(null);
