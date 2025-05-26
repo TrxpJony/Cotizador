@@ -144,7 +144,6 @@ export const AnimateEspejosDescription = (container) => {
         opacity: 0,
         x: 50,
         duration: 1,
-        stagger: 0.2,
         ease: "power2.in",
         delay: 0.8
     });

@@ -107,8 +107,7 @@ export function animateDivisionesGalery(container) {
         opacity: 0,
         x: -50,
         duration: 1,
-        stagger: 0.2,
-        ease: "power2.out",
+        ease: "power2.in",
     });
     gsap.from(".galery-title", {
         scrollTrigger: {
@@ -158,9 +157,7 @@ export function animateDivisionesGalery(container) {
         opacity: 0,
         x: 50,
         duration: 1,
-        stagger: 0.2,
-        ease: "power2.out",
-        delay: 1
+        ease: "power2.in",
     });
     gsap.from(".galery-temp-title", {
         scrollTrigger: {

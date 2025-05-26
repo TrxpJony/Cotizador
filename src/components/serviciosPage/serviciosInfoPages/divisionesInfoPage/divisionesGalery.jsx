@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import { Card, Image, CardBody } from "@heroui/react";
+import { Card, CardBody } from "@heroui/react";
 
 import collage from "../../../../img/img_nosotros/collage.png";
 import vidrio from "../../../../img/img_nosotros/vidrio-templado.jpg";
@@ -41,8 +41,7 @@ const DivisionesGalery = () => {
                             shadow="none"
                         >
                             <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
-                                <Image
-                                    removeWrapper
+                                <img
                                     alt="Espejo personalizado con iluminación LED de ACERVID"
                                     className="galery-cards-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
                                     src={collage}
@@ -78,8 +77,7 @@ const DivisionesGalery = () => {
                             shadow="none"
                         >
                             <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap overflow-x-hidden">
-                                <Image
-                                    removeWrapper
+                                <img
                                     alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
                                     className="galery-temp-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
                                     src={vidrio}
