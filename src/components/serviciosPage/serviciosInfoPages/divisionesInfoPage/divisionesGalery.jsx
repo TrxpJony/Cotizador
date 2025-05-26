@@ -43,7 +43,7 @@ const DivisionesGalery = () => {
                             <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
                                 <img
                                     alt="Espejo personalizado con iluminación LED de ACERVID"
-                                    className="galery-cards-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
+                                    className="galery-cards-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 rounded-2xl"
                                     src={collage}
                                 />
                                 <div className="px-6 py-8">
@@ -79,7 +79,7 @@ const DivisionesGalery = () => {
                             <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap overflow-x-hidden">
                                 <img
                                     alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
-                                    className="galery-temp-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
+                                    className="galery-temp-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1 rounded-2xl"
                                     src={vidrio}
                                 />
                                 <div className="px-6 py-8 order-1 sm:order-none">
