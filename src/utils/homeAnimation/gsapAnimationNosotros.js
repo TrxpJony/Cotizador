@@ -133,5 +133,19 @@ export function AnimateNosotrosOficinas(container) {
         ease: "power2.inOut",
         stagger: 0.2,
         delay: 0.6,
-    })
+    });
+};
+
+export function GoogleMapAnimations (container) {
+    gsap.from(".google-map", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.in",
+    });
 }
