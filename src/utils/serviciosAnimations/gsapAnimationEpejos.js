@@ -87,7 +87,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-cards-img", {
         scrollTrigger: {
             trigger: container,
-            start: "top 70%",
+            start: "top 80%",
             toggleActions: "play none none none"
         },
         opacity: 0,
