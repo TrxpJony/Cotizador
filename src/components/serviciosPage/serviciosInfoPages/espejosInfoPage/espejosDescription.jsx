@@ -26,6 +26,7 @@ export default function EspejosDescription(props) {
                                 removeWrapper
                                 alt="Espejo personalizado con iluminación LED de ACERVID"
                                 className="desc-cards-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
+                                style={{ opacity: 1 }} // Fallback para asegurar visibilidad
                                 src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745854239/carrusel/zpf983bzgtsneydi3q08.jpg"
                             />
                             <div className="px-6 py-8">

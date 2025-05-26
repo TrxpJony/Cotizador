@@ -84,18 +84,24 @@ export const AnimateEspejosCarrusel = (container) => {
 };
 
 export const AnimateEspejosDescription = (container) => {
-    gsap.from(".desc-cards-img", {
-        scrollTrigger: {
-            trigger: container,
-            start: "top 70%",
-            toggleActions: "play none none none"
-        },
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power2.in",
-    });
+    // Solo animar en desktop
+    if (window.innerWidth > 768) {
+        gsap.from(".desc-cards-img", {
+            scrollTrigger: {
+                trigger: container,
+                start: "top 70%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.in",
+        });
+    } else {
+        // En móvil, asegurarse que la imagen sea visible
+        gsap.set(".desc-cards-img", { opacity: 1, x: 0 });
+    }
     gsap.from(".desc-title", {
         scrollTrigger: {
             trigger: container,
