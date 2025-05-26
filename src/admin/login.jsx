@@ -78,7 +78,7 @@ function Login() {
             rtl={false}
             pauseOnFocusLoss
             draggable
-            pauseOnHover
+            pauseOnHover={false}
             theme='light'
             transition={Flip}
           />

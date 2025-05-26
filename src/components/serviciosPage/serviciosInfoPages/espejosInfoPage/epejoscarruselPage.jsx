@@ -22,7 +22,7 @@ const EspejosCarruselPage = () => {
     return (
         <>
             <div ref={containerRef}>
-                <div className="hero-carrusel max-w-5xl mx-auto px-6 sm:mb-3">
+                <div className="hero-carrusel  mx-auto  sm:mb-3">
 
                     <Swiper
                         effect={'coverflow'}

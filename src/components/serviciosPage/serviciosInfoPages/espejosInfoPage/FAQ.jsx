@@ -57,7 +57,7 @@ const EspejosFaqs = () => {
 
     return (
         <section
-            className="max-w-5xl px-4 w-full"
+            className="w-full"
             aria-label="Preguntas frecuentes sobre espejos personalizados"
             ref={sectionRef}
         >

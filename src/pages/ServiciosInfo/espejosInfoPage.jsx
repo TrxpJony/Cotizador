@@ -50,33 +50,35 @@ const EspejosInfoPage = () => {
                 <meta name="keywords" content="espejos personalizados, espejos LED, espejos modernos, espejos a medida, espejos con sensores, espejos para baño, espejos decorativos, ACERVID, espejos Colombia" />
             </Helmet>
             <main ref={mainDivRef} className="bg-gradient-to-b from-gray-800 to-black shadow-lg" aria-label="Información sobre espejos personalizados">
-                <section
-                    className="sm:h-auto flex flex-col mt-20 sm:mt-32 sm:justify-center sm:mb-20"
-                    aria-label="Encabezado de espejos"
-                >
-                    <EspejosHeaderInfo />
-                </section>
+                <div className="mx-auto max-w-7xl w-full px-5 sm:px-8 md:px-14 lg:px-5 mb-16">
+                    <div
+                        className="mb-20 sm:mb-40"
+                        aria-label="Encabezado de espejos"
+                    >
+                        <EspejosHeaderInfo />
+                    </div>
 
-                <section
-                    className="flex justify-center items-center flex-col sm:mb-20"
-                    aria-label="Descripción de espejos"
-                >
-                    <EspejosDescription />
-                </section>
+                    <div
+                        className="mb-20 sm:mb-40"
+                        aria-label="Descripción de espejos"
+                    >
+                        <EspejosDescription />
+                    </div>
 
-                <section
-                    className="flex justify-center items-center flex-col sm:mb-20"
-                    aria-label="Galería de espejos"
-                >
-                    <EspejosGalery />
-                </section>
+                    <div
+                        className="mb-20 sm:mb-40"
+                        aria-label="Galería de espejos"
+                    >
+                        <EspejosGalery />
+                    </div>
 
-                <section
-                    className="flex justify-center items-center flex-col mt-5 mb-20"
-                    aria-label="Preguntas frecuentes sobre espejos"
-                >
-                    <EspejosFaqs />
-                </section>
+                    <div
+                        className="mb-20 sm:mb-40"
+                        aria-label="Preguntas frecuentes sobre espejos"
+                    >
+                        <EspejosFaqs />
+                    </div>
+                </div>
             </main>
 
             {/* Floating social media bar con efectos personalizados */}

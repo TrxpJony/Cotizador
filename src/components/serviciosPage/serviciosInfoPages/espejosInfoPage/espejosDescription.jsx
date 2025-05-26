@@ -20,7 +20,7 @@ export default function EspejosDescription(props) {
             >
                 {/* Primer Card */}
                 <div>
-                    <Card shadow="none" className="w-full max-w-5xl px-6 bg-transparent sm:mb-10" {...props}>
+                    <Card shadow="none" className="px-1 w-full bg-transparent sm:mb-10" {...props}>
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
                             <Image
                                 removeWrapper
@@ -56,7 +56,7 @@ export default function EspejosDescription(props) {
 
                 {/* Segundo Card */}
                 <div>
-                    <Card shadow="none" className="w-full max-w-5xl px-6 bg-transparent mb-10 sm:mt-10" {...props}>
+                    <Card shadow="none" className="w-full  px-6 bg-transparent mb-10 sm:mt-10" {...props}>
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap overflow-x-hidden">
                             <Image
                                 removeWrapper

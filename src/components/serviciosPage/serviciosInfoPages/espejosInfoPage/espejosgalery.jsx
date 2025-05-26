@@ -87,15 +87,15 @@ const EspejosGalery = () => {
             ref={sectionRef}
             aria-label="Galería de proyectos de espejos"
         >
-            <div ref={textRef} className="max-w-5xl px-6">
+            <div ref={textRef} className=" ">
                 <div className="mb-10">
                     <div>
                         <p
-                            className="font-semibold text-cyan-500 px-6"
+                            className="font-semibold text-cyan-500 text-center sm:text-left "
                             ref={acervidPRef}
                         >Acervid</p>
                         <h2
-                            className="text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white px-6"
+                            className="text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white text-center sm:text-left"
                             ref={h2Ref}
                         >
                             Nuestros Proyectos de Espejos Personalizados
@@ -103,7 +103,7 @@ const EspejosGalery = () => {
                     </div>
                     <div className="w-full flex">
                         <p
-                            className=" leading-[30px] px-6 flex flex-col gap-4 pt-3 text-base text-default-400"
+                            className=" leading-[30px]  flex flex-col gap-4 pt-3 text-base text-default-400 text-center sm:text-left"
                             ref={descPRef}
                         >
                             En ACERVID llevamos la innovación a cada detalle de nuestros proyectos.
@@ -116,7 +116,7 @@ const EspejosGalery = () => {
                     </div>
                 </div>
             </div>
-            <div className="max-w-5xl px-6 gap-2 grid grid-cols-12 grid-rows-2 mt-10 mb-10">
+            <div className="  gap-2 grid grid-cols-12 grid-rows-2 mt-10 mb-10">
                 {/* Card 1 */}
                 <div
                     ref={el => cardsRef.current[0] = el}

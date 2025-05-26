@@ -17,7 +17,7 @@ const EspejosHeaderInfo = () => {
     return (
         <div ref={containerRef}>
             <section
-                className="text-center"
+                className="text-center mt-20 sm:mt-40"
                 aria-label="Encabezado principal de espejos personalizados"
             >
                 {/* Cotización */}
@@ -52,7 +52,7 @@ const EspejosHeaderInfo = () => {
 
                 {/* Descripción */}
                 <p
-                    className="hero-desc max-w-5xl px-4 text-center text-base sm:text-lg leading-8 text-default-400 mx-auto"
+                    className="hero-desc  px-4 text-center text-base sm:text-lg leading-8 text-default-400 mx-auto"
                 >
                     Descubre diseños de espejos elegantes y totalmente personalizados, creados para aportar luminosidad, amplitud y estilo a tus espacios. Refleja tu esencia y transforma cada ambiente en un lugar único y sofisticado con nuestras soluciones a medida. Espejos con iluminación LED, sensores inteligentes y acabados de alta calidad.
                 </p>
