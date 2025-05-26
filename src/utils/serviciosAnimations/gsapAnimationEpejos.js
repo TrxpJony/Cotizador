@@ -87,7 +87,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-cards-img", {
         scrollTrigger: {
             trigger: container,
-            start: "top 80%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -99,7 +99,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-title", {
         scrollTrigger: {
             trigger: container,
-            start: "top 68%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -111,7 +111,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-desc", {
         scrollTrigger: {
             trigger: container,
-            start: "top 66%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -123,7 +123,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-button", {
         scrollTrigger: {
             trigger: container,
-            start: "top 66%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -152,7 +152,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-desg-title", {
         scrollTrigger: {
             trigger: container,
-            start: "top 68%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -164,7 +164,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-desg-desc", {
         scrollTrigger: {
             trigger: container,
-            start: "top 66%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
@@ -176,7 +176,7 @@ export const AnimateEspejosDescription = (container) => {
     gsap.from(".desc-desg-button", {
         scrollTrigger: {
             trigger: container,
-            start: "top 66%",
+            start: "top 70%",
             toggleActions: "play none none none"
         },
         opacity: 0,
