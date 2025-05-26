@@ -52,7 +52,7 @@ const EspejosInfoPage = () => {
             <main ref={mainDivRef} className="bg-gradient-to-b from-gray-800 to-black shadow-lg" aria-label="Información sobre espejos personalizados">
                 <div className="mx-auto max-w-7xl w-full px-5 sm:px-8 md:px-14 lg:px-5 mb-16">
                     <div
-                        className="mb-20 sm:mb-40"
+                        className="mb-24 sm:mb-40"
                         aria-label="Encabezado de espejos"
                     >
                         <EspejosHeaderInfo />
