@@ -1,4 +1,4 @@
-import { Card, Image, CardBody } from "@heroui/react";
+import { Card, CardBody } from "@heroui/react";
 import { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { AnimateEspejosDescription } from "../../../../utils/serviciosAnimations/gsapAnimationEpejos";
@@ -22,10 +22,10 @@ export default function EspejosDescription(props) {
                 <div>
                     <Card shadow="none" className="px-1 w-full bg-transparent sm:mb-10" {...props}>
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
-                            <Image
-                                removeWrapper
+                            <img
+
                                 alt="Espejo personalizado con iluminación LED de ACERVID"
-                                className="desc-cards-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
+                                className="desc-cards-img rounded-2xl h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96"
                                 src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745854239/carrusel/zpf983bzgtsneydi3q08.jpg"
                             />
                             <div className="px-6 py-8">
@@ -58,10 +58,9 @@ export default function EspejosDescription(props) {
                 <div>
                     <Card shadow="none" className="w-full  px-6 bg-transparent mb-10 sm:mt-10" {...props}>
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap overflow-x-hidden">
-                            <Image
-                                removeWrapper
+                            <img
                                 alt="Variedad de diseños de espejos modernos, clásicos y minimalistas"
-                                className="desc-desg-img h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
+                                className="desc-desg-img rounded-2xl h-auto w-full flex-none object-cover object-top md:w-64 lg:w-96 order-none sm:order-1"
                                 src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745857478/carrusel/lu5lzt58gxitmgfeihwu.jpg"
                             />
                             <div className="px-6 py-8 order-1 sm:order-none">
