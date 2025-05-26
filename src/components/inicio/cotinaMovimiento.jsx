@@ -99,7 +99,7 @@ export function CortinaMovimiento() {
                             key={link.name}
                             href={link.href}
                             ref={el => (btnRefs.current[idx] = el)}
-                            className="px-6 py-2 rounded-2xl text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
+                            className="px-6 py-2 rounded-2xl text-sm sm:text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
                             style={{ opacity: 0, transform: "scale(0.9)" }}
                             onMouseEnter={e => {
                                 gsap.to(e.currentTarget, {

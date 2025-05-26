@@ -49,22 +49,21 @@ export function Colaboración() {
 
   return (
     <>
-      <div className="bg-white  sm:py-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="bg-white sm:py-10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center items-center">
           <h2 className="text-center text-lg/8 font-semibold text-gray-900">
             En colaboración con
           </h2>
           <div
-            className="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6"
+            className="grid-cols-2 sm:grid-cols-3 mx-auto grid max-w-lg gap-x-4 sm:max-w-xl sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6 justify-items-center"
             ref={gridRef}
           >
             <a href="https://espejossas.com/" target="_blank" rel="noopener noreferrer">
               <img
                 alt="Espejos SAS"
                 src={logo1}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-38 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[0] = el)}
                 style={{ opacity: 0 }}
               />
@@ -73,9 +72,8 @@ export function Colaboración() {
               <img
                 alt="Vidrio Andino"
                 src={logo2}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-32 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[1] = el)}
                 style={{ opacity: 0 }}
               />
@@ -84,9 +82,8 @@ export function Colaboración() {
               <img
                 alt="Sky Leds"
                 src={logo3}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-32 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[2] = el)}
                 style={{ opacity: 0 }}
               />
@@ -95,9 +92,8 @@ export function Colaboración() {
               <img
                 alt="Vitral"
                 src={logo4}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain sm:col-start-2 lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-32 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[3] = el)}
                 style={{ opacity: 0 }}
               />
@@ -106,9 +102,8 @@ export function Colaboración() {
               <img
                 alt="Aluminark"
                 src={logo5}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-32 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[4] = el)}
                 style={{ opacity: 0 }}
               />
@@ -117,9 +112,8 @@ export function Colaboración() {
               <img
                 alt="Vitelsa"
                 src={logo6}
-                width={158}
-                height={48}
-                className="col-span-2 max-h-40 w-full object-contain sm:col-start-2 lg:col-span-1 cursor-pointer"
+                className=" w-32 sm:w-32 md:w-40 lg:w-full object-contain cursor-pointer"
+
                 ref={el => (logoRefs.current[5] = el)}
                 style={{ opacity: 0 }}
               />
