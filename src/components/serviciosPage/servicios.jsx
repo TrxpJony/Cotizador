@@ -87,7 +87,7 @@ const posts = [
     {
         id: 6,
         title: 'Perfileria en aluminio para crear puertas y ventanas',
-        href: '#',
+        href: 'servicios/aluminio',
         description:
             'Utilizamos perfiles en aluminio para la creación de puertas y ventanas de alta calidad, combinando durabilidad y diseño.',
         category: { title: 'Acero', href: '#' },

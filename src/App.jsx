@@ -86,6 +86,7 @@ import ServiciosPage from './components/serviciosPage';
 import EspejosInfoPage from './pages/ServiciosInfo/espejosInfoPage';
 import DivisionesInfoPage from './pages/ServiciosInfo/divisionesInfoPage';
 import VidrioInfoPage from './pages/ServiciosInfo/vidrioInfoPage';
+import AluminioInfoPage from './pages/ServiciosInfo/aluminioPage';
 
 const cookies = new Cookies();
 
@@ -128,6 +129,7 @@ function App() {
           <Route path='servicios/espejos-acervid' element={<EspejosInfoPage />} />
           <Route path='servicios/divisiones-de-baño' element={<DivisionesInfoPage />} />
           <Route path='servicios/vidrios' element={<VidrioInfoPage />} />
+          <Route path='servicios/aluminio' element={<AluminioInfoPage />} />
           <Route path='contact' element={<ContactPage />} />
           <Route path='proyectos' element={<TestimonialsPage />} />
           <Route path='blog' element={<Blog />} />
