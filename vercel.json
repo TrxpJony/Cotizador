@@ -1,15 +1,9 @@
 {
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://www.vidrioalarte.com/$1",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "/index.html"
-    }
-  ]
-}
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "destination": "/index.html"
+      }
+    ]
+  }
+  
