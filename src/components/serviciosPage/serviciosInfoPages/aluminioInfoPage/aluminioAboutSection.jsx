@@ -1,45 +1,80 @@
 import { FaRecycle, FaBolt, FaPalette } from "react-icons/fa";
+import gsap from "gsap";
+import { useLayoutEffect, useRef } from "react";
+import { animateAluminioAbout } from "../../../../utils/serviciosAnimations/gsapAnimationAluminio";
+import { Container } from "../../../common/tags";
 
 const AluminioAboutSection = () => {
+    const containerRef = useRef(null);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            animateAluminioAbout(containerRef.current);
+        }, containerRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section className="relative py-16 lg:py-32">
-            {/* Imagen decorativa pequeña */}
-            <div className="mx-auto lg:px-0 px-6 ">
-                <div className="text-center mb-12">
-                    <span className="uppercase tracking-widest text-cyan-500 font-bold text-sm">¿Por qué elegir aluminio?</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mt-2 mb-4">
-                        El material del futuro, hoy
-                    </h2>
-                    <p className="text-gray-600 max-w-2xl text-lg mx-auto">
-                        El aluminio destaca por su ligereza, resistencia y versatilidad. Descubre por qué es la mejor opción para tus proyectos arquitectónicos y de diseño.
-                    </p>
-                </div>
-                {/* Cards de ventajas */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition">
-                        <FaRecycle className="text-cyan-500 text-4xl mb-4" />
-                        <h3 className="font-bold text-lg mb-2 text-gray-800">100% Reciclable</h3>
-                        <p className="text-gray-600 text-center text-sm">
-                            El aluminio puede reciclarse infinitamente sin perder calidad, cuidando el planeta y tus proyectos.
-                        </p>
+        <div ref={containerRef}>
+            <section className="relative py-24 lg:py-36  overflow-hidden">
+                {/* Imagen decorativa sutil */}
+                <div className="absolute inset-0 bg-[url('/path-to-subtle-bg.jpg')] bg-cover bg-center opacity-5 pointer-events-none" />
+
+                <Container>
+                    <div className="relative z-10 mx-auto lg:px-0 px-6">
+                        <div className="text-center mb-16">
+                            <div className="aluminio-about-text inline-block bg-cyan-500 text-white font-semibold px-4 py-1 rounded-full mb-2 shadow-sm">
+                                Calidad Garantizada
+                            </div>
+                            <h2 className="aluminio-about-text text-3xl md:text-4xl font-extrabold text-gray-800 mt-2 mb-4">
+                                El material del futuro, hoy
+                            </h2>
+                            <p className="aluminio-about-text text-gray-600 max-w-2xl text-lg mx-auto">
+                                El aluminio destaca por su ligereza, resistencia y versatilidad. Descubre por qué es la mejor opción para tus proyectos arquitectónicos y de diseño.
+                            </p>
+                        </div>
+
+                        {/* Cards de ventajas */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div className="aluminio-card-container bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
+                                <FaRecycle className="aluminio-card-logo text-cyan-500 text-4xl mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-gray-800 aluminio-card-text">100% Reciclable</h3>
+                                <p className="text-gray-600 text-center text-sm aluminio-card-text">
+                                    El aluminio puede reciclarse infinitamente sin perder calidad, cuidando el planeta y tus proyectos.
+                                </p>
+                            </div>
+                            <div className="aluminio-card-container bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
+                                <FaBolt className="aluminio-card-logo text-cyan-500 text-4xl mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-gray-800 aluminio-card-text">Ligero y Resistente</h3>
+                                <p className="text-gray-600 text-center text-sm aluminio-card-text">
+                                    Su relación peso-resistencia lo hace ideal para estructuras modernas, seguras y duraderas.
+                                </p>
+                            </div>
+                            <div className="aluminio-card-container bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
+                                <FaPalette className="aluminio-card-logo text-cyan-500 text-4xl mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-gray-800 aluminio-card-text">Acabados Personalizables</h3>
+                                <p className="text-gray-600 text-center text-sm aluminio-card-text">
+                                    El aluminio permite una amplia gama de acabados y colores para adaptarse a cualquier estilo.
+                                </p>
+                            </div>
+                        </div>
+
+
+                        {/* CTA inferior */}
+                        <div className="aluminio-card-container text-center mt-8 bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
+                            <h3 className="text-2xl font-bold text-gray-800 mb-4 aluminio-card-text">¿Listo para construir con aluminio?</h3>
+                            <p className="text-gray-600 mb-6 max-w-xl mx-auto aluminio-card-text">
+                                Da el siguiente paso hacia un diseño moderno, eficiente y duradero. Nuestro equipo está listo para asesorarte.
+                            </p>
+                            <button className="aluminio-card-button inline-flex items-center gap-2 border-cyan-500 border bg-transparent text-cyan-500 hover:text-white px-6 py-2 rounded-2xl font-semibold hover:shadow-xl hover:bg-cyan-500 hover:border-transparent transition-shadow">
+                                Contactar Asesor
+                            </button>
+                        </div>
                     </div>
-                    <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition">
-                        <FaBolt className="text-cyan-500 text-4xl mb-4" />
-                        <h3 className="font-bold text-lg mb-2 text-gray-800">Ligero y Resistente</h3>
-                        <p className="text-gray-600 text-center text-sm">
-                            Su relación peso-resistencia lo hace ideal para estructuras modernas, seguras y duraderas.
-                        </p>
-                    </div>
-                    <div className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition">
-                        <FaPalette className="text-cyan-500 text-4xl mb-4" />
-                        <h3 className="font-bold text-lg mb-2 text-gray-800">Acabados Personalizables</h3>
-                        <p className="text-gray-600 text-center text-sm">
-                            El aluminio permite una amplia gama de acabados y colores para adaptarse a cualquier estilo.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </Container>
+            </section>
+        </div>
     );
 };
+
 export default AluminioAboutSection;

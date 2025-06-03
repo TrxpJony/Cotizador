@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import AluminioAboutSection from "../../components/serviciosPage/serviciosInfoPages/aluminioInfoPage/aluminioAboutSection";
-import AluminioContactSection from "../../components/serviciosPage/serviciosInfoPages/aluminioInfoPage/aluminioContactSection";
 import AluminioFaqSection from "../../components/serviciosPage/serviciosInfoPages/aluminioInfoPage/aluminioFAQSection";
 import AluminioGalerySection from "../../components/serviciosPage/serviciosInfoPages/aluminioInfoPage/aluminioGalerySection";
 import AluminioHeroSection from "../../components/serviciosPage/serviciosInfoPages/aluminioInfoPage/aluminioHeroSection";
@@ -43,13 +42,10 @@ const AluminioInfoPage = () => {
     return (
         <>
             <div ref={mainDivRef} >
-                <div className="mx-auto max-w-7xl w-full sm:px-8 md:px-14 lg:px-5">
                     <AluminioHeroSection />
                     <AluminioAboutSection />
                     <AluminioGalerySection />
-                    <AluminioContactSection />
                     <AluminioFaqSection />
-                </div>
             </div>
             {/* Redes sociales */}
             <div ref={containerRef}>

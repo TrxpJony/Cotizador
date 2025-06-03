@@ -1,4 +1,5 @@
 import { Accordion, AccordionItem } from "@heroui/react";
+import { Container } from "../../../common/tags";
 
 const AluminioFaqSection = () => {
     const Faqtext1 = "¿Tienes preguntas sobre nuestros servicios de aluminio? Aquí encontrarás respuestas a las preguntas más frecuentes que recibimos de nuestros clientes. Si no encuentras la información que buscas, no dudes en contactarnos directamente.";
@@ -8,6 +9,7 @@ const AluminioFaqSection = () => {
     return (
         <>
             <div className="w-full py-16 lg:pt-32  bg-white px-6">
+                <Container>
                     <h2
                         className="text-3xl font-bold text-center text-black mb-2"
                     >
@@ -16,19 +18,20 @@ const AluminioFaqSection = () => {
                     <p className="text-center text-default-600 mb-6 text-lg">
                         Aquí encontrarás respuestas a las preguntas más comunes sobre nuestros servicios de aluminio. Si tienes otra pregunta, contáctanos.
                     </p>
-                <div>
-                    <Accordion>
-                        <AccordionItem key="1" aria-label="Acordion 1" title="¿Qué servicios ofrecen en aluminio?">
-                            {Faqtext1}
-                        </AccordionItem>
-                        <AccordionItem key="2" aria-label="Acordion 2" title="¿Qué tipo de proyectos pueden realizar?">
-                            {Faqtext2}
-                        </AccordionItem>
-                        <AccordionItem key="3" aria-label="Acordion 3" title="¿Cuál es el tiempo de entrega para un proyecto?">
-                            {Faqtext3}
-                        </AccordionItem>
-                    </Accordion>
-                </div>
+                    <div>
+                        <Accordion>
+                            <AccordionItem key="1" aria-label="Acordion 1" title="¿Qué servicios ofrecen en aluminio?">
+                                {Faqtext1}
+                            </AccordionItem>
+                            <AccordionItem key="2" aria-label="Acordion 2" title="¿Qué tipo de proyectos pueden realizar?">
+                                {Faqtext2}
+                            </AccordionItem>
+                            <AccordionItem key="3" aria-label="Acordion 3" title="¿Cuál es el tiempo de entrega para un proyecto?">
+                                {Faqtext3}
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                </Container>
             </div>
         </>
     );
