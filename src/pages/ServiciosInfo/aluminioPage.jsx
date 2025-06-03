@@ -60,7 +60,7 @@ const AluminioInfoPage = () => {
                         bg: "bg-black",
                         hover: "hover:bg-blue-500",
                     }, {
-                        href: "",
+                        href: "https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0",
                         icon: <FaWhatsapp className="rounded-full text-lg md:text-xl lg:text-2xl text-white" aria-label="Whatsapp" />,
                         bg: "bg-black",
                         hover: "hover:bg-green-500",

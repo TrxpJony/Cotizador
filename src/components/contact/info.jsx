@@ -34,7 +34,7 @@ export default function InfoContact() {
                 <div className="flex flex-col items-start space-y-2">
                     <span className="text-gray-500 font-semibold">Síguenos:</span>
                     <div className="flex space-x-5">
-                        <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app:absent=0" target="_blank" rel="noopener noreferrer"
+                        <a href="https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer"
                             className="text-green-500 hover:text-green-600 transition-colors duration-150">
                             <FaWhatsapp size={32} />
                         </a>
