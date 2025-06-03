@@ -1,57 +1,70 @@
 import { FaWhatsapp, FaFacebook, FaInstagram } from "react-icons/fa";
-import { motion } from 'framer-motion';
 import GoogleMap from '../nosotros/direccion';
 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.2 } },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20},
-    visible: { opacity: 1, y: 0, trnasition: { diration: 0.3 } },
-}
 
 export default function InfoContact() {
     return (
-        <>
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="flex flex-col items-center justify-center space-y-8 text-geay-700 "
-            >
-                {/* Información de Contacto  */}
-                <motion.div variants={itemVariants} className="text-center space-y-1">
-                    <h2 className="text-3xl font-bold">Contáctanos</h2>
-                    <p className="text-lg">Télefonos: <span className="font-semibold">3204391328 - 3223065279</span></p>
-                    <p className="text-lg">Correo: <a href="mailto:ventas@vidrioalarte.com" className="text-cyan-500 font-semibold">ventas@vidrioalarte.com</a></p>
-                    <p className="text-lg">Direccion: <span className="font-semibold">Cl. 71A #75 36, Bogotá, Colombia</span></p>
-                </motion.div>
-                {/* Horarios de Atención */}
-                <motion.div variants={itemVariants} className="text-center space-y-1">
-                    <h3 className="text-2xl font-semibold">Horario de Entregas</h3>
-                    <p className="text-lg">Lunes a Viernes: <span className="font-semibold">8:00 AM - 12:00 AM / 1:30 PM - 4:00 PM</span></p>
-                    <p className="text-lg">Sábados: <span className="font-semibold">8:00 AM - 11:30 AM</span></p>
-                </motion.div>
+        <div className="w-full h-full flex py-10 sm:py-24 px-4 sm:px-8 items-center justify-center bg-white ">
+            <div className="w-full max-w-2xl  rounded-2xl p-8 ">
+                {/* Título principal */}
+                <div className="text-left">
+                    <h2 className="text-4xl font-extrabold text-gray-800 mb-2 tracking-tight">Contáctanos</h2>
+                    <div className="h-1 w-16 bg-cyan-500 rounded mb-4"></div>
+                    <p className="text-lg text-gray-600">Estamos listos para ayudarte. Puedes comunicarte con nosotros a través de los siguientes medios:</p>
+                </div>
+                {/* Información de Contacto */}
+                <div className="grid grid-cols-1 gap-4">
+                    <div className="flex items-center space-x-3">
+                        <span className="text-gray-500 font-semibold w-28">Teléfonos:</span>
+                        <span className="text-gray-800 font-bold">3204391328</span>
+                        <span className="text-gray-400">|</span>
+                        <span className="text-gray-800 font-bold">3223065279</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                        <span className="text-gray-500 font-semibold w-28">Correo:</span>
+                        <a href="mailto:ventas@vidrioalarte.com" className="text-cyan-600 font-bold hover:underline">ventas@vidrioalarte.com</a>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                        <span className="text-gray-500 font-semibold w-28">Dirección:</span>
+                        <span className="text-gray-800 font-bold">Cl. 71A #75 36, Bogotá, Colombia</span>
+                    </div>
+                </div>
 
                 {/* Redes Sociales */}
-                <motion.div variants={itemVariants} className="flex space-x-6 text-4xl">
-                    <motion.a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app:absent=0" target="_blanck" rel="noopener noreferrer" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9}}>
-                        <FaWhatsapp/>
-                    </motion.a>
-                    <motion.a href="https://www.facebook.com/vidrio.a.arte" target="_blanck" rel="noopener noreferrer" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} >
-                        <FaFacebook/>
-                    </motion.a>
-                    <motion.a href="https://www.instagram.com/vidrioalartesas" target="_blanck" rel="noopener noreferrer" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9}} >
-                        <FaInstagram/>
-                    </motion.a>
-                </motion.div>
+                <div className="flex flex-col items-start space-y-2">
+                    <span className="text-gray-500 font-semibold">Síguenos:</span>
+                    <div className="flex space-x-5">
+                        <a href="https://api.whatsapp.com/send/?phone=3223065256&text&type=phone_number&app:absent=0" target="_blank" rel="noopener noreferrer"
+                            className="text-green-500 hover:text-green-600 transition-colors duration-150">
+                            <FaWhatsapp size={32} />
+                        </a>
+                        <a href="https://www.facebook.com/vidrio.a.arte" target="_blank" rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-700 transition-colors duration-150">
+                            <FaFacebook size={32} />
+                        </a>
+                        <a href="https://www.instagram.com/vidrioalartesas" target="_blank" rel="noopener noreferrer"
+                            className="text-pink-500 hover:text-pink-600 transition-colors duration-150">
+                            <FaInstagram size={32} />
+                        </a>
+                    </div>
+                </div>
                 {/* Mapa */}
-                <motion.div variants={itemVariants} className="w-full mt-6">
-                    <GoogleMap/>
-                </motion.div>
-            </motion.div>
-        </>
+                <div className=" overflow-hidden mt-2">
+                    <GoogleMap />
+                </div>
+                {/* Horarios de Atención */}
+                <div className="bg-gray-50 rounded-lg p-4 mt-5">
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">Horario de Entregas</h3>
+                    <div className="flex flex-col space-y-1 text-gray-600">
+                        <div>
+                            <span className="font-semibold text-gray-800">Lunes a Viernes:</span> 8:00 AM - 12:00 PM / 1:30 PM - 4:00 PM
+                        </div>
+                        <div>
+                            <span className="font-semibold text-gray-800">Sábados:</span> 8:00 AM - 11:30 AM
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

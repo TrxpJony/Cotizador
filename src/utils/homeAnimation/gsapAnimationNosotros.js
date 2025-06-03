@@ -136,7 +136,7 @@ export function AnimateNosotrosOficinas(container) {
     });
 };
 
-export function GoogleMapAnimations (container) {
+export function GoogleMapAnimations(container) {
     gsap.from(".google-map", {
         scrollTrigger: {
             trigger: container,
@@ -147,5 +147,61 @@ export function GoogleMapAnimations (container) {
         y: 50,
         duration: 1,
         ease: "power2.in",
+    });
+};
+
+export function AnimationFormContact(container) {
+    gsap.from(".form-contact-text", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.inOut",
+        delay: 0.2,
+        stagger: 0.2,
+    });
+    gsap.from(".form-contact-label", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.in",
+        stagger: 0.2,
+        scale: 0.8,
+        delay: 0.4
+    });
+    gsap.from(".form-contact-inputs", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.in",
+        stagger: 0.2,
+        delay: 0.6
+    });
+    gsap.from(".form-contact-button", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        duration: 0.8,
+        ease: "power2.in",
+        delay: 1.8
     });
 }

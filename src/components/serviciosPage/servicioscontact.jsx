@@ -89,7 +89,7 @@ const ServiciosContact = () => {
                     <a href="/contact">
                         <button
                             ref={buttonRef}
-                            className='mt-4 px-6 py-3 rounded-lg text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all'
+                            className='mt-4 px-6 py-2 rounded-2xl text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all'
                             style={{ opacity: 0, transform: "scale(0.8)" }}
                         >
                             ¿Charlamos un momento?

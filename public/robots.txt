@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vidrioalartesas.vercel.app/sitemap.xml
+Sitemap: https://www.vidrioalarte.com/sitemap.xml
