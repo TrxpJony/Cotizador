@@ -3,8 +3,8 @@ import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 const links = [
-    { name: 'Productos', href: '/productos' },
-    { name: 'Acerca de nosotros', href: '/nosotros' },
+    { name: 'Productos', href: '/productos', px: 'px-10' },
+    { name: 'Acerca de nosotros', href: '/nosotros', px: 'px-4' },
 ];
 
 export function CortinaMovimiento() {
@@ -71,7 +71,7 @@ export function CortinaMovimiento() {
     return (
         <div
             ref={sectionRef}
-            className="relative isolate overflow-hidden py-24 sm:py-60 text-center"
+            className="relative isolate overflow-hidden py-24 sm:py-60"
             style={{
                 background: "linear-gradient(90deg, #22d3ee, #0891b2, #0891b2, #374151, #374151, #0891b2, #0891b2, #22d3ee, #0891b2)",
                 backgroundSize: "800% 800%",
@@ -81,30 +81,30 @@ export function CortinaMovimiento() {
             <img
                 alt=""
                 src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1748984838/peszlbcfdskolhuqxp4l_tgxmkc.jpg"
-                className="opacity-50 absolute inset-0 -z-10 size-full object-cover object-right md:object-center"
+                className="opacity-50 absolute inset-0 -z-10 size-full object-cover object-center"
             />
-            <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <h1
-                    ref={titleRef}
-                    className="text-5xl font-bold tracking-tight text-white sm:text-7xl"
-                    style={{ opacity: 0 }}
-                >
-                    Vidrio al Arte SAS
-                </h1>
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center sm:text-left"> {/*max-w-screen-2xl */}
                 <p
                     ref={textRef}
-                    className="mt-6 text-lg text-gray-300 sm:text-xl"
+                    className="text-lg text-gray-300 sm:text-2xl max-w-xl"
                     style={{ opacity: 0 }}
                 >
                     Expertos en soluciones de vidrio, aluminio y acero. Fabricamos divisiones de baño, ventanas, puertas y espejos personalizados con tecnología LED.
                 </p>
-                <div className="mt-10 flex justify-center gap-6">
+                <h1
+                    ref={titleRef}
+                    className="mt-6 text-5xl font-bold tracking-tight text-white sm:text-8xl max-w-xl"
+                    style={{ opacity: 0 }}
+                >
+                    Vidrio al Arte SAS
+                </h1>
+                <div className="mt-10 flex  gap-6">
                     {links.map((link, idx) => (
                         <a
                             key={link.name}
                             href={link.href}
                             ref={el => (btnRefs.current[idx] = el)}
-                            className="px-6 py-2 rounded-2xl text-sm sm:text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all"
+                            className={`${link.px} py-2 rounded-2xl text-sm sm:text-lg font-medium text-white bg-cyan-600 hover:bg-cyan-400 transition-all`}
                             style={{ opacity: 0, transform: "scale(0.9)" }}
                             onMouseEnter={e => {
                                 gsap.to(e.currentTarget, {
