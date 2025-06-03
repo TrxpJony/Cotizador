@@ -71,13 +71,18 @@ export function CortinaMovimiento() {
     return (
         <div
             ref={sectionRef}
-            className="relative isolate overflow-hidden py-24 sm:py-32 text-center"
+            className="relative isolate overflow-hidden py-24 sm:py-60 text-center"
             style={{
-                background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
+                background: "linear-gradient(90deg, #22d3ee, #0891b2, #0891b2, #374151, #374151, #0891b2, #0891b2, #22d3ee, #0891b2)",
                 backgroundSize: "800% 800%",
                 backgroundPosition: "0% 50%",
             }}
         >
+            <img
+                alt=""
+                src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1748984838/peszlbcfdskolhuqxp4l_tgxmkc.jpg"
+                className="opacity-50 absolute inset-0 -z-10 size-full object-cover object-right md:object-center"
+            />
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
                 <h1
                     ref={titleRef}
