@@ -68,10 +68,12 @@ const CocinasCotizador = () => {
               <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
               <option value="TRA_NOR">Vidrio transparente</option>
               <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>
+              <option value="COL_5MM">Vidrio bronce - gris 5 mm</option>
               <option value="COL_TEM">Vidrio bronce - gris templado 5 mm</option>
               <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
               <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
               <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
+              <option value="LAM_SEG">Vidrio laminado 3 + 3 blanco coco</option>
             </select>
             <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           </div>
