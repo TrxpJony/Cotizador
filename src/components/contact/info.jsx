@@ -4,8 +4,8 @@ import GoogleMap from '../nosotros/direccion';
 
 export default function InfoContact() {
     return (
-        <div className="w-full h-full flex py-10 sm:py-24 px-4 sm:px-8 items-center justify-center bg-white ">
-            <div className="w-full max-w-2xl  rounded-2xl p-8 ">
+        <div className="w-full h-full flex py-10 sm:py-24 px-6 sm:px-8 items-center justify-center bg-white ">
+            <div className="w-full max-w-2xl  rounded-2xl ">
                 {/* Título principal */}
                 <div className="text-left">
                     <h2 className="text-4xl font-extrabold text-gray-800 mb-2 tracking-tight">Contáctanos</h2>

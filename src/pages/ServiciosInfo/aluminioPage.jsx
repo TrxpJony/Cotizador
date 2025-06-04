@@ -6,6 +6,7 @@ import AluminioHeroSection from "../../components/serviciosPage/serviciosInfoPag
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa";
 import gsap from "gsap";
 import { animateDivisionesSocial } from "../../utils/serviciosAnimations/gsapAnimationsDivisiones";
+import { Helmet } from "react-helmet-async";
 
 const AluminioInfoPage = () => {
     const containerRef = useRef(null);
@@ -41,11 +42,16 @@ const AluminioInfoPage = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Vidrio al Arte SAS | Soluciones en aluminio</title>
+                <meta name="description" content="En Vidrio al Arte SAS, ofrecemos soluciones personalizadas en aluminio para tus proyectos. Nos especializamos en puertas, ventanas y sistemas con perfilería en aluminio. Nuestro equipo está listo para ayudarte a crear espacios únicos y funcionales."/>
+                <meta name="keywords" content="aluminio, puertas de aluminio, ventanas de aluminio, sistemas de aluminio, perfilería en aluminio, soluciones personalizadas, Vidrio al Arte SAS, carpintería de aluminio, proyectos en aluminio"/>
+            </Helmet>
             <div ref={mainDivRef} >
-                    <AluminioHeroSection />
-                    <AluminioAboutSection />
-                    <AluminioGalerySection />
-                    <AluminioFaqSection />
+                <AluminioHeroSection />
+                <AluminioAboutSection />
+                <AluminioGalerySection />
+                <AluminioFaqSection />
             </div>
             {/* Redes sociales */}
             <div ref={containerRef}>

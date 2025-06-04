@@ -27,11 +27,10 @@ const AluminioAboutSection = () => {
                                 Calidad Garantizada
                             </div>
                             <h2 className="aluminio-about-text text-3xl md:text-4xl font-extrabold text-gray-800 mt-2 mb-4">
-                                El material del futuro, hoy
+                                Aluminio: El Material del Futuro para Diseño Moderno
                             </h2>
                             <p className="aluminio-about-text text-gray-600 max-w-2xl text-lg mx-auto">
-                                El aluminio destaca por su ligereza, resistencia y versatilidad. Descubre por qué es la mejor opción para tus proyectos arquitectónicos y de diseño.
-                            </p>
+                                El aluminio es ideal para proyectos arquitectónicos y de diseño moderno por su resistencia, ligereza y capacidad de personalización. Es una solución eficiente y sustentable para puertas, ventanas y estructuras livianas. </p>
                         </div>
 
                         {/* Cards de ventajas */}
@@ -40,14 +39,14 @@ const AluminioAboutSection = () => {
                                 <FaRecycle className="aluminio-card-logo text-cyan-500 text-4xl mb-4" />
                                 <h3 className="font-bold text-lg mb-2 text-gray-800 aluminio-card-text">100% Reciclable</h3>
                                 <p className="text-gray-600 text-center text-sm aluminio-card-text">
-                                    El aluminio puede reciclarse infinitamente sin perder calidad, cuidando el planeta y tus proyectos.
+                                    El aluminio es un material 100% reciclable y ecológico, ideal para construcciones sostenibles sin comprometer la calidad.
                                 </p>
                             </div>
                             <div className="aluminio-card-container bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
                                 <FaBolt className="aluminio-card-logo text-cyan-500 text-4xl mb-4" />
                                 <h3 className="font-bold text-lg mb-2 text-gray-800 aluminio-card-text">Ligero y Resistente</h3>
                                 <p className="text-gray-600 text-center text-sm aluminio-card-text">
-                                    Su relación peso-resistencia lo hace ideal para estructuras modernas, seguras y duraderas.
+                                    Gracias a su ligereza y alta resistencia, el aluminio es perfecto para estructuras modernas en viviendas, oficinas y fachadas.
                                 </p>
                             </div>
                             <div className="aluminio-card-container bg-white rounded-2xl shadow-md p-8 flex flex-col items-center hover:shadow-xl transition-shadow">
@@ -66,9 +65,10 @@ const AluminioAboutSection = () => {
                             <p className="text-gray-600 mb-6 max-w-xl mx-auto aluminio-card-text">
                                 Da el siguiente paso hacia un diseño moderno, eficiente y duradero. Nuestro equipo está listo para asesorarte.
                             </p>
-                            <button className="aluminio-card-button inline-flex items-center gap-2 border-cyan-500 border bg-transparent text-cyan-500 hover:text-white px-6 py-2 rounded-2xl font-semibold hover:shadow-xl hover:bg-cyan-500 hover:border-transparent transition-shadow">
+                            <a href="" aria-label="Llamado a la acción" className="aluminio-card-button inline-flex items-center gap-2 border-cyan-500 border bg-transparent text-cyan-500 hover:text-white px-6 py-2 rounded-2xl font-semibold hover:shadow-xl hover:bg-cyan-500 hover:border-transparent transition-shadow">
                                 Contactar Asesor
-                            </button>
+                            </a>
+
                         </div>
                     </div>
                 </Container>
