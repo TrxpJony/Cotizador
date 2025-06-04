@@ -61,7 +61,7 @@ const AluminioInfoPage = () => {
                     aria-label="Redes sociales"
                 >
                     {[{
-                        href: "https://www.facebook.com/vidrio.a.arte",
+                        href: "https://www.facebook.com/p/Vidrios-Al-Arte-SAS-100069565487546/?locale=es_LA",
                         icon: <FaFacebookF className="rounded-full text-lg md:text-xl lg:text-2xl text-white" aria-label="Facebook" />,
                         bg: "bg-black",
                         hover: "hover:bg-blue-500",

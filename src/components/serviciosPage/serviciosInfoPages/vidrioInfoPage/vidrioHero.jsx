@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { animateVidrioHero } from "../../../../utils/serviciosAnimations/gsapAnimationsVidrio";
 import { FaRegFileLines } from "react-icons/fa6";
 import gsap from "gsap";
+import bienestar from "../../../../img/img_servicios/img_bienestar.png";
 
 const VidrioHero = () => {
     const containerRef = useRef(null);
@@ -57,7 +58,7 @@ const VidrioHero = () => {
                     {/* Imagen */}
                     <div className="hero-img flex flex-1 lg:w-1/2 lg:h-auto relative lg:max-w-non lg:mx-0 mx-auto max-w-3xl">
                         <img
-                            src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1747498377/Imagenes_utilizadas/uglr2vqorlheyof4e9gb.png"
+                            src={bienestar}
                             alt="vidrios personalizados"
                             width={2359}
                             height={2359}

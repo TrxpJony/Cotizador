@@ -29,7 +29,7 @@ export default function FooterComponent() {
           <ul className="flex space-x-4">
             <li>
               <FaFacebookF className="text-blue-500" />{" "}
-              <a href="https://www.facebook.com/share/1AG3qHjqaf/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:underline text-gray-700">
+              <a href="https://www.facebook.com/p/Vidrios-Al-Arte-SAS-100069565487546/?locale=es_LA" target="_blank" rel="noopener noreferrer" className="hover:underline text-gray-700">
                 Facebook
               </a>
             </li>
