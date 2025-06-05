@@ -93,7 +93,7 @@ const EspejosGalery = () => {
                         <p
                             className="font-semibold text-cyan-500 text-center sm:text-left "
                             ref={acervidPRef}
-                        >Acervid</p>
+                        >Espejos</p>
                         <h2
                             className="text-timberWolf font-black md:text-[60px] sm:text-[48px] xs:text-[40px] text-[30px] font-poppins text-white text-center sm:text-left"
                             ref={h2Ref}
@@ -106,7 +106,7 @@ const EspejosGalery = () => {
                             className=" leading-[30px]  flex flex-col gap-4 pt-3 text-base text-default-400 text-center sm:text-left"
                             ref={descPRef}
                         >
-                            En ACERVID llevamos la innovación a cada detalle de nuestros proyectos.
+                            Llevamos la innovación a cada detalle de nuestros proyectos.
                             Diseñamos espejos únicos con iluminación LED integrada, estructuras flotantes
                             con elegantes perfiles de aluminio y una variedad de sensores inteligentes,
                             como sensores touch, de proximidad y movimiento, para brindar una experiencia moderna
@@ -192,9 +192,9 @@ const EspejosGalery = () => {
                                 <p className="text-black text-tiny">Lleva la mejor iluminación a tu hogar.</p>
                                 <p className="text-black text-tiny">Dale a tu espacio el brillo que merece.</p>
                             </div>
-                            <button className="text-cyan-500 px-3 py-1 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:outline-none hover:text-white transition-all">
+                            <a href="https://www.canva.com/design/DAGP0f_nmzY/ke2SXTvvemap2y4EBAzXSw/view?utm_content=DAGP0f_nmzY&utm_campaign=designshare&utm_medium=link&utm_source=editor#1" target='_blank' rel='noopener noreferrer' className="text-cyan-500 px-3 py-1 rounded-2xl border border-cyan-500 hover:bg-cyan-500 hover:outline-none hover:text-white transition-all">
                                 Catálogo de luces
-                            </button>
+                            </a>
                         </CardFooter>
                     </Card>
                 </div>
@@ -205,14 +205,14 @@ const EspejosGalery = () => {
                 >
                     <Card isFooterBlurred className="h-full bg-gradient-to-br from-cyan-900/40 to-cyan-700/10 backdrop-blur-md shadow-lg transition-all duration-300">
                         <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                            <p className="text-tiny text-white/60 uppercase font-bold">ACERVID</p>
+                            <p className="text-tiny text-white/60 uppercase font-bold">Espejos</p>
                             <h3 className="text-white/90 font-medium text-xl">Elige el espejo perfecto para tu espacio</h3>
                         </CardHeader>
                         <Image
                             removeWrapper
                             alt="Espejo de alta calidad para decoración de interiores"
                             className="z-0 w-full h-full object-cover"
-                            src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1745873236/carrusel/lnkjwhnyu7g3dftwcyxi.jpg"
+                            src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1749143509/espejo_largo_fidam2.jpg"
                         />
                         <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
                             <div className="flex flex-grow gap-2 items-center">

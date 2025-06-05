@@ -26,7 +26,7 @@ const EspejosHeaderInfo = () => {
                 >
                     <div className="relative rounded-full px-3 py-1 text-sm/6 text-white ring-1 ring-white hover:ring-cyan-500 transition-all duration-300">
                         <div className="hero-acervidtx ">
-                            Solicita tu cotización personalizada&nbsp;
+                            Solicita tu cotización personalizada de&nbsp;
                             <a
                                 href="https://api.whatsapp.com/send?phone=573223065256"
                                 target="_blank"
@@ -34,7 +34,7 @@ const EspejosHeaderInfo = () => {
                                 className="font-semibold text-cyan-500 hover:underline"
                             >
                                 <span aria-hidden="true" className="absolute inset-0" />
-                                Acervid <span aria-hidden="true">&rarr;</span>
+                                Espejos <span aria-hidden="true">&rarr;</span>
                             </a>
                         </div>
                     </div>

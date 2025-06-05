@@ -200,7 +200,7 @@ function App() {
           <Route path='productos/divisiones-de-baño/diseños' element={<DiseñoDivisionesBaño />} />
           <Route path='productos/vitrinas' element={<VitrinasVista />} />
           <Route path='productos/puertas-de-cocina' element={<CocinasVista />} />
-          <Route path='p4' element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
+          <Route path='cotizador/skyleds' element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
         </Routes>
       </div>
       <FooterComponent />

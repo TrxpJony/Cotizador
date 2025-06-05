@@ -39,7 +39,7 @@ export default function EspejosDescription(props) {
                                         Personaliza tus espejos al gusto: elige tamaño, forma, iluminación y más para que se adapten perfectamente a tu estilo y espacio.
                                     </p>
                                     <p>
-                                        ¡Dale un toque único a tu hogar con los espejos iluminados de ACERVID!
+                                        ¡Dale un toque único a tu hogar con los espejos iluminados!
                                     </p>
                                 </div>
                                 <div className="mb-5 sm:mb-0 mt-6 text-center sm:text-left">
@@ -74,7 +74,7 @@ export default function EspejosDescription(props) {
                                         Descubre nuestra amplia colección de espejos diseñados para todos los gustos. Contamos con estilos modernos, clásicos y minimalistas, listos para embellecer cualquier espacio.
                                     </p>
                                     <p>
-                                        ¡Encuentra en ACERVID el espejo perfecto para tu hogar o negocio!
+                                        ¡Encuentra el espejo perfecto para tu hogar o negocio!
                                     </p>
                                 </div>
                                 <div className="mt-6 text-center sm:text-right">

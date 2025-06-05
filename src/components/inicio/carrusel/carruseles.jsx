@@ -49,7 +49,7 @@ const ImageCarousel = ({ images }) => {
         <div ref={sliderRef} className="keen-slider rounded-2xl">
             {images.map((img, index) => (
                 <div className="keen-slider__slide" key={index}>
-                    <img className="rounded-2xl w-full h-auto" src={img} alt={`Slide ${index}`} />
+                    <img className="mx-auto rounded-2xl w-full h-auto" src={img} alt={`Slide ${index}`} />
                 </div>
             ))}
         </div>

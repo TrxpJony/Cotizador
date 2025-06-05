@@ -45,11 +45,11 @@ const EspejosInfoPage = () => {
     return (
         <>
             <Helmet>
-                <title>Espejos Personalizados | ACERVID</title>
+                <title>Espejos Personalizados | Vidrio al Arte</title>
                 <meta name="description" content="Espejos personalizados en Colombia: diseños modernos, iluminación LED, sensores inteligentes y acabados de alta calidad. Transforma tus espacios con espejos a medida para hogar y negocio. Solicita tu cotización en ACERVID." />
                 <meta name="keywords" content="espejos personalizados, espejos LED, espejos modernos, espejos a medida, espejos con sensores, espejos para baño, espejos decorativos, ACERVID, espejos Colombia" />
             </Helmet>
-            <main ref={mainDivRef} className="bg-gradient-to-b from-gray-800 to-black shadow-lg" aria-label="Información sobre espejos personalizados">
+            <main ref={mainDivRef} className="bg-black shadow-lg" aria-label="Información sobre espejos personalizados">
                 <div className="mx-auto max-w-7xl w-full px-5 sm:px-8 md:px-14 lg:px-5 mb-16">
                     <div
                         className="mb-24 sm:mb-40"
