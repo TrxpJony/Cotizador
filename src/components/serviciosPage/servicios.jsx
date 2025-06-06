@@ -28,7 +28,7 @@ const posts = [
         title: 'Accesorios',
         href: 'productos/accesorios',
         description:
-            'Encuentre una gran variedad de accesorios y herramientas versátiles y duraderas, perfectas para realizar cualquier tipo de proyecto con confianza.',
+            'Encuentre una gran variedad de accesorios y herrages versátiles y duraderos, perfectos para realizar cualquier tipo de proyecto con confianza.',
         category: { title: 'Ferretería', href: '#' },
         author: {
             name: 'Vidrio al Arte SAS',

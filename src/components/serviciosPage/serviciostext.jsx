@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Asegúrate de tener instalado lucide-react para los íconos
+
 gsap.registerPlugin(ScrollTrigger);
 
 const ServiciosText = () => {
@@ -11,7 +13,6 @@ const ServiciosText = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Título con zoom + fade
       gsap.from(titleRef.current, {
         y: 40,
         opacity: 0,
@@ -23,7 +24,6 @@ const ServiciosText = () => {
         },
       });
 
-      // Párrafos con stagger (uno tras otro)
       gsap.from(paragraphsRef.current, {
         opacity: 0,
         y: 40,
@@ -37,13 +37,12 @@ const ServiciosText = () => {
       });
     }, containerRef);
 
-    return () => ctx.revert(); // Limpia animaciones al desmontar
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="p-8 text-center rounded-xl">
-      <div className="flex justify-center items-center">
-        {/* Aquí puedes poner una imagen si lo deseas */}
+    <div ref={containerRef} className="p-8 text-center bg-white rounded-xl shadow-lg">
+      <div className="flex justify-center items-center mb-4">
       </div>
 
       <p
@@ -61,14 +60,17 @@ const ServiciosText = () => {
       </h1>
 
       <p
-        className="mt-6 text-lg text-gray-600"
+        className="mt-6 text-lg text-gray-600 leading-relaxed"
         ref={el => (paragraphsRef.current[1] = el)}
       >
-        En Vidrio al Arte SAS convertimos ideas en espacios únicos. Nos apasiona crear soluciones funcionales y estéticas que se adapten a cada necesidad. Combinamos experiencia, compromiso y calidad para llevar cada proyecto al siguiente nivel.
+        En <strong className="text-cyan-600">Vidrio al Arte SAS</strong> convertimos ideas en espacios 
+        únicos. Nos apasiona crear soluciones 
+        funcionales y estéticas que se adapten a cada necesidad. Combinamos experiencia, 
+        compromiso y calidad para llevar cada proyecto al siguiente nivel.
       </p>
 
       <p
-        className="text-lg text-gray-600"
+        className="text-lg text-gray-800 font-semibold"
         ref={el => (paragraphsRef.current[2] = el)}
       >
         Cada detalle importa. Cada espacio cuenta.
