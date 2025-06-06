@@ -24,7 +24,7 @@ const features = [
     },
     {
         name: 'Visión.',
-        description: 'Para el año 2025 ser una empresa líder transformadora de vidrios y espejos, agregando nuevos servicios como el diseño creativo de estos cristales para el desarrollo de la construccion y decoracion de interiores.',
+        description: 'Para el año 2026 ser una empresa líder transformadora de vidrios y espejos, agregando nuevos servicios como el diseño creativo de estos cristales para el desarrollo de la construccion y decoracion de interiores.',
         icon: EyeIcon,
     },
 ];
