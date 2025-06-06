@@ -78,7 +78,7 @@ export function Colaboración() {
                 style={{ opacity: 0 }}
               />
             </a>
-            <a href='https://linktr.ee/Acervid1' target='_blank' rel='noopener noreferrer'>
+            <a href='https://linktr.ee/skyleds?utm_source=linktree_profile_share&ltsid=cced0ac7-6c44-426a-8007-15f389bcf4ab' target='_blank' rel='noopener noreferrer'>
               <img
                 alt="Sky Leds"
                 src={logo3}
