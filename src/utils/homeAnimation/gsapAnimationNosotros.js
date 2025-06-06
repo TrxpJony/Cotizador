@@ -204,4 +204,58 @@ export function AnimationFormContact(container) {
         ease: "power2.in",
         delay: 1.8
     });
+};
+
+export function AnimateInfoContact(container) {
+    gsap.from(".info-contact-title", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: 50,
+        duration: 1,
+        ease: "power2.inOut",
+        scale: 0.8
+    });
+    gsap.from(".info-contact-text", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: 40,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.inOut",
+        delay: 0.2
+    });
+    gsap.from(".info-contact-contact", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: 30,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        delay: 0.8
+    })
+    gsap.from(".info-contact-icons", {
+        scrollTrigger: {
+            trigger: container,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: 20,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.in",
+        delay: 1
+    });
 }

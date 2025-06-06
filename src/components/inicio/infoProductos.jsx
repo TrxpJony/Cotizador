@@ -4,8 +4,8 @@ import CarruselesComponent from "../inicio/carrusel/carruseles.jsx";
 import "../../css/colosal.css";
 
 const features = [
-  { name: "Origen", description: "Fabricado por Vidrio al Arte SAS en Bogotá, Colombia." },
-  { name: "Materiales", description: "Estructuras de vidrio, espejos o aluminio de alta calidad." },
+  { name: "Origen", description: "Fabricado o distribuido por Vidrio al Arte SAS en Bogotá, Colombia." },
+  { name: "Materiales", description: "productos de vidrio, espejo, acero o aluminio de alta calidad." },
   { name: "Dimensiones", description: "Personalizable en tamaño y diseño, según las especificaciones del cliente." },
   { name: "Personalización", description: "Fabricamos piezas en vidrio, espejos personalizados y sistemas de aluminio según tus necesidades." },
   { name: "Componentes", description: "Incluye herrajes y accesorios en acero inoxidable para una instalación segura y duradera." },
