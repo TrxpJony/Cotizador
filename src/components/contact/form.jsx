@@ -140,7 +140,7 @@ export default function FormContact() {
                             <div />
                         </div>
                         <div className="mx-auto max-w-2xl text-center">
-                            <h2 className="form-contact-text text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">¿Como podemos ayudarte?</h2>
+                            <h2 className="form-contact-text text-balance text-4xl info-contact-title font-extrabold  tracking-tight text-white sm:text-5xl">¿Como podemos ayudarte?</h2>
                             <p className="form-contact-text mt-2 text-lg/8 text-gray-300">Por favor, completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
                         </div>
                         <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20 px-4 sm:px-6">

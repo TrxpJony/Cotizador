@@ -15,36 +15,36 @@ export default function InfoContact() {
     }, []);
 
     return (
-        <div ref={containerRef} className="w-full h-full flex py-10 sm:py-24 px-6 sm:px-8 items-center justify-center bg-white ">
+        <div ref={containerRef} className="w-full h-full flex py-24 sm:py-36 px-6 sm:px-8 items-center justify-center bg-white ">
             <div className="w-full max-w-2xl  rounded-2xl ">
                 {/* Título principal */}
                 <div className="text-left">
-                    <h2 className="info-contact-title text-4xl font-extrabold text-gray-800 mb-2 tracking-tight">Contáctanos</h2>
+                    <h2 className="info-contact-title text-balance text-4xl info-contact-title font-extrabold  tracking-tight text-black mb-2 sm:text-5xl">Contáctanos</h2>
                     <div className="info-contact-text h-1 w-16 bg-cyan-500 rounded mb-4"></div>
-                    <p className="info-contact-text text-lg text-gray-600">Estamos listos para ayudarte. Puedes comunicarte con nosotros a través de los siguientes medios:</p>
+                    <p className="info-contact-text text-lg/8 text-gray-700">Estamos listos para ayudarte. Puedes comunicarte con nosotros a través de los siguientes medios:</p>
                 </div>
                 {/* Información de Contacto */}
                 <div className="grid grid-cols-1 gap-4 mb-4 mt-4">
                     <div className="flex items-center space-x-3">
-                        <span className="info-contact-text text-gray-500 font-semibold w-28">Teléfonos:</span>
+                        <span className="info-contact-text font-bold text-gray-600">Teléfonos:</span>
                         <span className="info-contact-contact text-gray-800 font-bold">3204391328</span>
                         <span className="info-contact-contact text-gray-400">|</span>
                         <span className="info-contact-contact text-gray-800 font-bold">3223065279</span>
                     </div>
                     <div className="flex items-center space-x-3">
-                        <span className="info-contact-text text-gray-500 font-semibold w-28">Correo:</span>
+                        <span className="info-contact-text font-bold text-gray-600">Correo:</span>
                         <a href="mailto:ventas@vidrioalarte.com" className="info-contact-contact text-cyan-600 font-bold hover:underline">ventas@vidrioalarte.com</a>
                     </div>
                     <div className="flex items-center space-x-3">
-                        <span className="info-contact-text text-gray-500 font-semibold w-28">Dirección:</span>
+                        <span className="info-contact-text font-bold text-gray-600">Dirección:</span>
                         <span className="info-contact-contact text-gray-800 font-bold">Cl. 71A #75 36, Bogotá, Colombia</span>
                     </div>
                 </div>
 
                 {/* Redes Sociales */}
                 <div className="flex flex-col items-start space-y-2">
-                    <span className="info-contact-text text-gray-500 font-semibold">Síguenos:</span>
-                    <div className="flex space-x-5">
+                    <span className="info-contact-text font-bold text-gray-600">Síguenos:</span>
+                    <div className="flex space-x-5 mt-2">
                         <a href="https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer"
                             className="info-contact-icons text-green-500 hover:text-green-600 transition-colors duration-150">
                             <FaWhatsapp size={32} />
@@ -64,7 +64,7 @@ export default function InfoContact() {
                     <GoogleMap />
                 </div>
                 {/* Horarios de Atención */}
-                <div className="info-contact-icons bg-gray-50 rounded-lg p-4 mt-5">
+                <div className="info-contact-icons bg-gray-50 rounded-2xl p-4 mt-2">
                     <h3 className="text-xl font-semibold text-gray-700 mb-2">Horario de Entregas</h3>
                     <div className="flex flex-col space-y-1 text-gray-600">
                         <div>
