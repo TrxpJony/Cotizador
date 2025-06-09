@@ -21,6 +21,18 @@ const ProductsTable = ({ searchTerm }) => {
 		description: '',
 		precio: ''
 	});
+	const [categories, setCategories] = useState([]); // Nuevo estado para categorías
+	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+	const [newProduct, setNewProduct] = useState({
+		id: '',
+		title: '',
+		description: '',
+		precio: '',
+		color: '',
+		categoria: '',
+		img: null
+	});
+
 
 	useEffect(() => {
 		// Filtrar productos cuando cambia el searchTerm o los productos
@@ -51,6 +63,12 @@ const ProductsTable = ({ searchTerm }) => {
 			});
 	}, []);
 
+	useEffect(() => {
+		fetch(import.meta.env.VITE_API_URL + "/api/detalleProductos/categorias")
+			.then((res) => res.json())
+			.then((data) => setCategories(data))
+			.catch((err) => console.error("Error al obtener categorías:", err));
+	}, []);
 
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -165,6 +183,70 @@ const ProductsTable = ({ searchTerm }) => {
 		});
 	};
 
+	const handleAddClick = () => {
+		setNewProduct({
+			id: '',
+			title: '',
+			description: '',
+			precio: '',
+			color: '',
+			categoria: '',
+			img: null
+		});
+		setIsAddModalOpen(true);
+	};
+
+	const handleAddInputChange = (e) => {
+		const { name, value } = e.target;
+		setNewProduct((prev) => ({
+			...prev,
+			[name]: value
+		}));
+	};
+
+	const handleAddModalClose = () => {
+		setIsAddModalOpen(false);
+	};
+
+	const handleAddSave = () => {
+		const { title, description, precio, color, categoria, img } = newProduct;
+		if (!title || !description || !precio || !color || !categoria || !img) {
+			alert("Todos los campos son requeridos.");
+			return;
+		}
+		const formData = new FormData();
+		formData.append("title", title);
+		formData.append("description", description);
+		formData.append("precio", precio);
+		formData.append("color", color);
+		formData.append("categoria", categoria);
+		formData.append("img", img);
+
+		fetch(import.meta.env.VITE_API_URL + "/api/detalleProductos", {
+			method: "POST",
+			body: formData,
+		})
+			.then((response) => {
+				if (!response.ok) throw new Error("Error al agregar el producto.");
+				return response.json();
+			})
+			.then(() => {
+				toast.success("Producto agregado correctamente!");
+				// Recargar productos
+				fetch(baseUrl)
+					.then((res) => res.json())
+					.then((data) => {
+						setProducts(data);
+						setFilteredProducts(data);
+					});
+				setIsAddModalOpen(false);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				toast.error("Hubo un problema al agregar el producto.");
+			});
+	};
+
 	const paginatedProducts = filteredProducts.slice(
 		(currentPage - 1) * itemsPerPage,
 		currentPage * itemsPerPage
@@ -193,6 +275,12 @@ const ProductsTable = ({ searchTerm }) => {
 			>
 				<div className='flex justify-between items-center mb-6'>
 					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de productos</h2>
+					<button
+						className='bg-cyan-500 text-white rounded-2xl px-4 py-2 hover:bg-cyan-600 transition-all text-xs sm:text-sm'
+						onClick={handleAddClick}
+					>
+						Agregar producto
+					</button>
 				</div>
 
 				<div className='overflow-x-auto'>
@@ -396,13 +484,17 @@ const ProductsTable = ({ searchTerm }) => {
 
 						<div className='mb-4'>
 							<label className='block text-gray-700 font-bold mb-2'>Categoria</label>
-							<input
-								type='text'
+							<select
 								name='categoria'
 								value={editedProduct.categoria}
 								onChange={handleInputChange}
 								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
-							/>
+							>
+								<option value="">Selecciona una categoría</option>
+								{categories.map((cat, idx) => (
+									<option key={idx} value={cat}>{cat}</option>
+								))}
+							</select>
 						</div>
 						<div className='flex justify-between'>
 							<button
@@ -414,6 +506,117 @@ const ProductsTable = ({ searchTerm }) => {
 							<button
 								onClick={handleSaveChanges}
 								className='flex border border-cyan-500 text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all '
+							>
+								Guardar
+							</button>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
+
+			{isAddModalOpen && (
+				<motion.div
+					className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4 sm:p-6 md:p-8'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
+					<motion.div
+						className='bg-white p-6 rounded-2xl shadow-lg w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto mt-16 sm:mt-20'
+						initial={{ scale: 0.8 }}
+						animate={{ scale: 1 }}
+						exit={{ scale: 0.8 }}
+					>
+						<h2 className='text-xl font-semibold mb-4'>Agregar Producto</h2>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Title</label>
+							<input
+								type='text'
+								name='title'
+								value={newProduct.title}
+								onChange={handleAddInputChange}
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Description</label>
+							<textarea
+								name='description'
+								value={newProduct.description}
+								onChange={handleAddInputChange}
+								className='py-2 px-3 text-gray-700 leading-700 leading-tight focus:outline-none focus:shadow-outline w-full p-2 border rounded-2xl h-32 hover:bg-default-200'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Color</label>
+							<input
+								type='text'
+								name='color'
+								value={newProduct.color}
+								onChange={handleAddInputChange}
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Precio</label>
+							<input
+								type='number'
+								name='precio'
+								value={newProduct.precio}
+								onChange={handleAddInputChange}
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
+							/>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Imagen</label>
+							<div className='relative w-full h-96 bg-black/20 mb-5 rounded-xl'>
+								<div className='absolute top-0 left-0 w-full h-full object-cover'>
+									<img
+										className='w-full h-full object-cover rounded-xl'
+										src={
+											newProduct.img
+												? (newProduct.img instanceof File ? URL.createObjectURL(newProduct.img) : newProduct.img)
+												: '/default-placeholder.png'
+										}
+										alt='Vista previa'
+									/>
+								</div>
+								<label className='absolute border border-black rounded-2xl hover:outline-black hover:bg-black hover:text-white bottom-5 right-5 text-black font-bold py-1 px-2 text-sm sm:text-base sm:py-2 sm:px-4 focus:outline-none focus:shadow-outline cursor-pointer transition-all'>
+									Seleccionar
+									<input
+										type='file'
+										name='img'
+										accept='image/*'
+										onChange={(e) => setNewProduct({ ...newProduct, img: e.target.files[0] })}
+										className='hidden'
+									/>
+								</label>
+							</div>
+						</div>
+						<div className='mb-4'>
+							<label className='block text-gray-700 font-bold mb-2'>Categoria</label>
+							<select
+								name='categoria'
+								value={newProduct.categoria}
+								onChange={handleAddInputChange}
+								className='border rounded-2xl w-full py-2 px-3 text-gray-700 mb-2 hover:bg-default-200 focus:outline-none'
+							>
+								<option value="">Selecciona una categoría</option>
+								{categories.map((cat, idx) => (
+									<option key={idx} value={cat}>{cat}</option>
+								))}
+							</select>
+						</div>
+						<div className='flex justify-between'>
+							<button
+								onClick={handleAddModalClose}
+								className='flex rounded-2xl text-gray-400 hover:text-black font-bold py-2 px-6 transition-all'
+							>
+								Cancelar
+							</button>
+							<button
+								onClick={handleAddSave}
+								className='flex border border-cyan-500 text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all'
 							>
 								Guardar
 							</button>
