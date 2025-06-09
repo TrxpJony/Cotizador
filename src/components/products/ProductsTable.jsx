@@ -276,7 +276,7 @@ const ProductsTable = ({ searchTerm }) => {
 				<div className='flex justify-between items-center mb-6'>
 					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de productos</h2>
 					<button
-						className='bg-cyan-500 text-white rounded-2xl px-4 py-2 hover:bg-cyan-600 transition-all text-xs sm:text-sm'
+						className='bg-transparent border border-cyan-500 text-cyan-500 rounded-2xl px-4 py-2 hover:bg-cyan-500 hover:text-white transition-all text-xs sm:text-sm'
 						onClick={handleAddClick}
 					>
 						Agregar producto
