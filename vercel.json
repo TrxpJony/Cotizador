@@ -2,6 +2,12 @@
   "redirects": [
     {
       "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vidrioalarte.com"
+        }
+      ],
       "destination": "https://www.vidrioalarte.com/$1",
       "permanent": true
     }
