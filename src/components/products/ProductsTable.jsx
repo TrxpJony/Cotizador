@@ -324,7 +324,8 @@ const ProductsTable = ({ searchTerm }) => {
 										{product.description}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
-										${product.precio ? parseFloat(product.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}								</td>
+										${product.precio ? parseFloat(product.precio).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''}
+									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-700'>
 										{product.categoria}
 									</td>
