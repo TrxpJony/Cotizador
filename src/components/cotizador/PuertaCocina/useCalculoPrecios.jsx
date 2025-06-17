@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio') => { // Asegúrate de agregar 'vidrioPrice' como prop
+const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selectedGlass = 'sinVidrio', selectedPerfil = 'sinPerfil') => { // Asegúrate de agregar 'vidrioPrice' como prop
   const [dbPrices, setDbPrices] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [calculatedValues, setCalculatedValues] = useState({});
@@ -40,6 +40,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
     const area = (totalHeight / 1000) * (totalWidth / 1000);
     const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
+    const perfilUnitPrice = selectedPerfil === "sinPerfil" ? 0 : (memoizedPrices[selectedPerfil] || 0);
 
 
     const felpaHeight = totalHeight * 6;
@@ -50,7 +51,6 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
     const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
-    const marcoCocinaPrice = getPrice("marcoCocina", marcoCocina);
     const felpaPrice = getPrice("felpacol", felpaHeight + felpaWidth);
     const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
     // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
@@ -61,6 +61,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
     }, 0);
     const vidrioPrice = (glassUnitPrice * area); // Si es "sinVidrio", será 0
+    const marcoPrice = (perfilUnitPrice * marcoCocina) / 1000;
 
     // Determinar el precio de mano de obra según el área
     let manoDeObra = 0;
@@ -71,12 +72,11 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     }
 
     // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-    const total = marcoCocinaPrice + accesoriosPrice + manoDeObra + vidrioPrice;
+    const total =  accesoriosPrice + manoDeObra + vidrioPrice + marcoPrice;
 
     setTotalPrice(total);
     setCalculatedValues({
       marcoCocina,
-      marcoCocinaPrice,
       siliconaPrice,
       felpaHeight,
       felpaWidth,
@@ -84,11 +84,12 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       totalFelpa,
       area,
       vidrioPrice,
+      marcoPrice,
       escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
       manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
 
     });
-  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass]); // Asegúrate de agregar vidrioPrice en las dependencias
+  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedPerfil]); // Asegúrate de agregar vidrioPrice en las dependencias
 
 
   return { totalPrice, calculatedValues };

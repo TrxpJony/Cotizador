@@ -2,14 +2,14 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import PropTypes from 'prop-types';
 import CotizadorAdd from '../../../components/cotizador/CotizadorAdd'; // Import CotizadorAdd
 
-const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass }) => {
+const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios, selectedGlass, selectedPerfil }) => {
 
     const {
-        marcoCocinaPrice,
         escuadrasCocinaPrice,
         manijaPuertaCocinaPrice,
         marcoCocina,
         vidrioPrice, // Agregamos el precio del vidrio
+        marcoPrice,
         area // Agregamos el área del vidrio
     } = calculatedValues || {};
 
@@ -34,7 +34,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                         <TableRow key="2">
                             <TableCell><strong>Marco:</strong></TableCell>
                             <TableCell>{marcoCocina} mm</TableCell>
-                            <TableCell>${marcoCocinaPrice?.toFixed(2)}</TableCell>
+                            <TableCell>${marcoPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -107,6 +107,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                     useCalculoPrecios={useCalculoPrecios}
                     selectedAccessories={selectedAccessories}
                     selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando a CotizadorAdd
+                    selectedPerfil={selectedPerfil}
                 />
             </div>
 
@@ -126,6 +127,7 @@ DetalleTablasCocinas.propTypes = {
     selectedAccessories: PropTypes.array.isRequired,
     useCalculoPrecios: PropTypes.func.isRequired,
     selectedGlass: PropTypes.string.isRequired,
+    selectedPerfil: PropTypes.string.isRequired,
 };
 
 export default DetalleTablasCocinas;

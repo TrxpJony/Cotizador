@@ -14,7 +14,8 @@ const CocinasCotizador = () => {
   const [selectedAccessories, setSelectedAccessories] = useState([]); // State to hold selected accessories
   const cocinaIMG = 'https://res.cloudinary.com/dils6fuig/image/upload/v1738787741/img_catalogo/producto_coci2_1738787740325.png'; // Importar la imagen
   const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
-  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
+  const [selectedPerfil, setSelectedPerfil] = useState('sinPerfil');
+  const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedPerfil);
 
 
   const handleDimensionsChange = (newDimensions) => {
@@ -63,6 +64,14 @@ const CocinasCotizador = () => {
             <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
           </div>
           <div className='mb-2'>
+            <label className='text-gray-700 font-bold mb-2'>Tipo de perfil de marco:</label>
+            <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg' value={selectedPerfil} onChange={(e) => setSelectedPerfil(e.target.value)}>
+              <option value="sinPerfil">Seleccionar</option>
+              <option value="MAR_PEQ">Perfil de aleta pequeña</option>
+              <option value="MAR_ACN">Perfil de aleta ancha</option>
+            </select>
+          </div>
+          <div className='mb-2'>
             <label className='text-gray-700 font-bold mb-2' >Tipo de vidrio:</label>
             <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
               <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
@@ -94,6 +103,7 @@ const CocinasCotizador = () => {
           selectedAccessories={selectedAccessories}
           useCalculoPrecios={useCalculoPrecios}
           selectedGlass={selectedGlass} // ✅ Ahora lo estamos pasando
+          selectedPerfil={selectedPerfil}
         />
         {/* Pass useCalculoPrecios as a prop */}
       </div>
