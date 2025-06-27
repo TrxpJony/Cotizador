@@ -94,10 +94,24 @@ const CotiTable = ({ searchTerm }) => {
 	};
 
 	const handleDownloadClick = (pdfPath) => {
+		// Si es de Cloudinary o externo, descarga normal
+		if (!pdfPath.includes('/uploads/cotizaciones/')) {
+			const link = document.createElement('a');
+			link.href = pdfPath;
+			link.download = pdfPath.split('/').pop();
+			link.click();
+			return;
+		}
+
+		// Si es local, usa el endpoint de descarga
+		const filename = pdfPath.split('/').pop();
+		const downloadUrl = `${import.meta.env.VITE_API_URL}/api/cotizaciones/download/${filename}`;
 		const link = document.createElement('a');
-		link.href = pdfPath;
-		link.download = pdfPath.split('/').pop();
+		link.href = downloadUrl;
+		link.download = filename;
+		document.body.appendChild(link);
 		link.click();
+		document.body.removeChild(link);
 	};
 
 	const handleEstadoChange = (id, nuevoEstado) => {
@@ -136,7 +150,7 @@ const CotiTable = ({ searchTerm }) => {
 	};
 
 	let sortedCotizaciones = [...filteredCotizaciones];
-	
+
 	if (sortConfig.key) {
 		sortedCotizaciones.sort((a, b) => {
 			if (sortConfig.key === 'created_at') {

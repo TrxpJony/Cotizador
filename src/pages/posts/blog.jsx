@@ -47,7 +47,7 @@ const Blog = () => {
         const fetchImages = async () => {
             try {
                 const response = await axios.get(baseUrl);
-                let fetchedImages = response.data.map(img => img.secure_url);
+                let fetchedImages = response.data;
 
                 // Si hay menos de 2 imágenes, duplicarlas para evitar el error de Swiper
                 if (fetchedImages.length === 1) {

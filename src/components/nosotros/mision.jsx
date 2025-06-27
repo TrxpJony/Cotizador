@@ -45,7 +45,7 @@ export function Mision() {
         const fetchImages = async () => {
             try {
                 const response = await axios.get(baseUrl);
-                let fetchedImages = response.data.map(img => img.secure_url);
+                let fetchedImages = response.data;
 
                 // Se necesitan al menos 2 imagenes para que funcione
                 if (fetchedImages.length === 1) {
