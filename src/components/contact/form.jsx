@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Field, Label, Switch } from '@headlessui/react'
 import { motion } from 'framer-motion';
-import { Flip, ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AnimationFormContact } from '../../utils/homeAnimation/gsapAnimationNosotros';
 import gsap from 'gsap';
@@ -249,19 +249,6 @@ export default function FormContact() {
                                 </button>
                             </div>
                         </form>
-                        <ToastContainer
-                            position="bottom-center"
-                            autoclose={2000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick={false}
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme='light'
-                            transition={Flip}
-                        />
                     </div>
                 </motion.div>
             </div>

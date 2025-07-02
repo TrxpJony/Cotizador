@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flip, ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importa los estilos de Toastify
 import { motion } from "framer-motion"; // Importar framer-motion
 
@@ -126,20 +126,6 @@ const UsersAdd = () => {
                 </div>
             )}
 
-            {/* Coloca el contenedor de Toasts aquí */}
-            <ToastContainer
-                position="bottom-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                transition={Flip}
-            />
         </>
     );
 };

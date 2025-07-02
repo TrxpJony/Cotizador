@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie'; // Importar universal-cookie
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { Flip, toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const cookies = new Cookies(); // Crear instancia de cookies
 
@@ -133,19 +133,6 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
                     )}
                 </div>
             ))}
-            <ToastContainer
-                position='bottom-center'
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='light'
-                transition={Flip}
-            />
         </>
     );
 };

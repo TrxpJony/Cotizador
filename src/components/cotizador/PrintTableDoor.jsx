@@ -5,7 +5,7 @@ import logo from '../../../src/img/logo.png';
 import 'jspdf-autotable';
 import axios from 'axios'; // Import axios
 import Cookies from 'universal-cookie'; // Import cookies
-import { Flip, ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import { toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import react-toastify CSS
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
 import { CircularProgress } from '@heroui/react';
@@ -346,19 +346,6 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                     </div>
                 </div>
             )}
-            <ToastContainer
-                position="bottom-center"
-                autoclose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='light'
-                transition={Flip}
-            />
         </>
     );
 };

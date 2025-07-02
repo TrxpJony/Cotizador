@@ -4,7 +4,7 @@ import axios from "axios";
 import BackButton from "../../components/common/backButton";
 import Sidebar from "../../components/common/Sidebar";
 import PostFormAdd from "../../components/post/postFormAdd";
-import { Flip, ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
 const EditPost = () => {
@@ -75,19 +75,6 @@ const EditPost = () => {
                         </div>
                     </div>
                 </div>
-                <ToastContainer
-                    position="bottom-center"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition={Flip}
-                />
             </div>
         </>
     );

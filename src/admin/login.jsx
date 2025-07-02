@@ -5,8 +5,7 @@ import '../App.css';
 import logo from '../../src/img/logo.png';
 import Cookies from 'universal-cookie';
 import { Input, Form } from "@heroui/react";
-
-import { Flip, ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 const cookies = new Cookies();
@@ -69,19 +68,6 @@ function Login() {
             <h1 className='text-xl font-semibold text-gray-900 text-center'>Introduzca las credenciales</h1>
             <p className='text-sm text-default-500 text-center'>Para acceder al cotizador</p>
           </div>
-          <ToastContainer
-            position="bottom-center"
-            autoclose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover={false}
-            theme='light'
-            transition={Flip}
-          />
 
           <Form className='mt-6 flex flex-col gap-8' onSubmit={handleLogin}>
             <Input

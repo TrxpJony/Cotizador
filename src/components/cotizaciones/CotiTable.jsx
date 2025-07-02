@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Trash2, Download } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { Flip, toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from "prop-types";
@@ -181,19 +181,6 @@ const CotiTable = ({ searchTerm }) => {
 
 	return (
 		<>
-			<ToastContainer
-				position="bottom-center"
-				autoClose={3000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick={false}
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-				transition={Flip}
-			/>
 			<motion.div
 				className='bg-white backdrop-blur-md shadow-lg rounded-xl p-6 border mt-5 mb-8'
 				initial={{ opacity: 0, y: 20 }}

@@ -1,4 +1,6 @@
 import './App.css'
+import { Flip, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Tipos } from './pages/tipos';
@@ -114,6 +116,19 @@ function App() {
 
   return (
     <>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme='light'
+        transition={Flip}
+      />
       <NavBarComponent userId={userId} userRole={userRole} location={location} />
       <div className='fondo  min-h-screen container-app'>
         <Routes>
