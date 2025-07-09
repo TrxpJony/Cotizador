@@ -89,6 +89,7 @@ import EspejosInfoPage from './pages/ServiciosInfo/espejosInfoPage';
 import DivisionesInfoPage from './pages/ServiciosInfo/divisionesInfoPage';
 import VidrioInfoPage from './pages/ServiciosInfo/vidrioInfoPage';
 import AluminioInfoPage from './pages/ServiciosInfo/aluminioPage';
+import SistemaProyectante from './pages/vidrios/sistemaProyectante/sistemaProyectante';
 
 const cookies = new Cookies();
 
@@ -191,6 +192,7 @@ function App() {
           <Route path='cotizador/sistemas-aluminark/sistema-744/xox' element={<ProtectedRoute element={<Sistema744xox />} allowedRole='cotizador' />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025' element={<ProtectedRoute element={<Sistema8025page />} allowedRole='cotizador' />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025/xo-ox' element={<ProtectedRoute element={<Sistema8025 />} allowedRole='cotizador' />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante' element={<ProtectedRoute element={<SistemaProyectante />} allowedRole='cotizador' />} />
           <Route path='cotizador/espejos' element={<TiposEspejos />} />
           <Route path='cotizador/espejos/redondo' element={<ProtectedRoute element={<CotizadorEspejosRedondos />} allowedRole='cotizador' />} />
           <Route path='cotizador/espejos/cuadrado' element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole='cotizador' />} />
