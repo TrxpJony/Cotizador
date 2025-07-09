@@ -83,6 +83,7 @@ const CocinasCotizador = () => {
               <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
               <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
               <option value="LAM_SEG">Vidrio laminado 3 + 3 blanco coco</option>
+              <option value="ESP_BRO">Espejo bronce reflectivo 4 mm</option>
             </select>
             <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           </div>
