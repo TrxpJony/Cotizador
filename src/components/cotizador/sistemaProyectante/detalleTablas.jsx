@@ -4,6 +4,7 @@ import CotizadorAdd from '../../../components/cotizador/CotizadorAdd';
 
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccessories, useCalculoPrecios, selectedGlass, selectedAlfajia }) => {
     const {
+        cant,
         ALK416_mm,
         ALK416Price,
         ALK292_mm,
@@ -13,10 +14,11 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
         ALK176_mm,
         ALK176Price,
         EmpaquePrice,
-        accesoriosPrice,
+        Empaque_mm,
         vidrioPrice,
         tornillosPrice,
-        siliconaPrice,
+        brazoPrice,
+        manijaPrice,
         area,
     } = calculatedValues || {};
 
@@ -52,7 +54,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                         </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Empaque</strong></TableCell>
-                            <TableCell>{ALK177_mm} mm</TableCell>
+                            <TableCell>{Empaque_mm} mm</TableCell>
                             <TableCell>${EmpaquePrice}</TableCell>
                         </TableRow>
                     </TableBody>
@@ -62,21 +64,23 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                     <TableHeader>
                         <TableColumn><h1>Accesorios</h1></TableColumn>
                         <TableColumn></TableColumn>
+                        <TableColumn></TableColumn>
                     </TableHeader>
                     <TableBody>
                         <TableRow key="1">
                             <TableCell><strong><h2>Pieza</h2></strong></TableCell>
+                            <TableCell><strong><h2>Cantidad</h2></strong></TableCell>
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
-                        {selectedAccessories.map(acc => (
-                            <TableRow key={acc}>
-                                <TableCell>{acc}</TableCell>
-                                <TableCell>${(calculatedValues[`${acc}Price`] || 0).toFixed(2)}</TableCell>
-                            </TableRow>
-                        ))}
-                        <TableRow key="totalAcc">
-                            <TableCell><strong>Total Accesorios</strong></TableCell>
-                            <TableCell>${accesoriosPrice?.toFixed(2)}</TableCell>
+                        <TableRow key="2">
+                            <TableCell><strong>Manija:</strong></TableCell>
+                            <TableCell>{cant}</TableCell>
+                            <TableCell>${manijaPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="3">
+                            <TableCell><strong>brazos:</strong></TableCell>
+                            <TableCell>{cant * 2}</TableCell>
+                            <TableCell>${brazoPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -110,10 +114,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                         <TableRow key="1">
                             <TableCell><strong>Tornillos:</strong></TableCell>
                             <TableCell>${tornillosPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="2">
-                            <TableCell><strong>Silicona:</strong></TableCell>
-                            <TableCell>${siliconaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

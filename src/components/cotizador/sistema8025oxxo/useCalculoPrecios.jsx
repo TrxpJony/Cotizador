@@ -59,7 +59,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
 
         const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
             if (acc === "rodamientoSimple8025" || acc === "rodamientoDoble8025") {
-                return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 2 : 0);
+                return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 4 : 0);
             }
             return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
         }, 0);

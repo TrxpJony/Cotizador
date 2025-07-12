@@ -60,7 +60,8 @@ const useCalculoPrecios = (
     const ALK176_mm = ((alto * 2) + (ancho2 * 2)) * cant;
     const ALK176Price = memoizedPrices.ALK176 ? (memoizedPrices.ALK176 * ALK176_mm) / 1000 : 0;
     // Precio del empaque contorno del pisavidrio
-    const EmpaquePrice = memoizedPrices.ALK_EPM ? (memoizedPrices.ALK_EPM * ALK177_mm) / 1000 : 0;
+    const Empaque_mm = (ALK177_mm + ALK176_mm + (ALK292_mm * 2));
+    const EmpaquePrice = memoizedPrices.ALK_EPM ? (memoizedPrices.ALK_EPM * Empaque_mm) / 1000 : 0;
     // Vidrio y Alfajia (opcional, si aplica)
     const area = (alto / 1000) * (ancho / 1000) * cant;
     const glassUnitPrice = selectedGlass === "sinVidrio" ? 0 : (memoizedPrices[selectedGlass] || 0);
@@ -74,8 +75,9 @@ const useCalculoPrecios = (
     }, 0);
 
     // Utilitarios (puedes ajustar si necesitas)
-    const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
-    const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
+    const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 20;
+    const manijaPrice = (memoizedPrices.ALK_MAN ? Number(memoizedPrices.ALK_MAN) : 0) * cant;
+    const brazoPrice = (memoizedPrices.ALK_BRA ? Number(memoizedPrices.ALK_BRA) : 0) * (cant * 2);
 
     const total =
       ALK416Price +
@@ -87,7 +89,8 @@ const useCalculoPrecios = (
       vidrioPrice +
       AlfajiaPriceRaw +
       tornillosPrice +
-      siliconaPrice;
+      brazoPrice +
+      manijaPrice;
 
     setTotalPrice(total);
     setCalculatedValues({
@@ -101,6 +104,7 @@ const useCalculoPrecios = (
       ALK292Price,
       ALK177_mm,
       EmpaquePrice,
+      Empaque_mm,
       ALK177Price,
       ALK176_mm,
       ALK176Price,
@@ -108,7 +112,8 @@ const useCalculoPrecios = (
       vidrioPrice,
       AlfajiaPriceRaw,
       tornillosPrice,
-      siliconaPrice,
+      brazoPrice,
+      manijaPrice,
       area,
     });
   }, [width, height, width2, cantidad, memoizedPrices, memoizedAccessories, selectedGlass, selectedAlfajia]);

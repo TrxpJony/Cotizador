@@ -57,7 +57,7 @@ const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
           name="width2"
           value={width2}
           onChange={handleChange}
-          placeholder="Ancho de nave (mm)"
+          placeholder="Ancho de puerta (mm)"
           className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
         />
 
@@ -67,7 +67,7 @@ const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
           min="1"
           value={cantidad}
           onChange={handleChange}
-          placeholder="Cantidad de naves"
+          placeholder="Cantidad de puertas"
           className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none"
         />
       </div>
