@@ -7,8 +7,6 @@ const EnviarDimensionesCocinas = ({ onDimensionsChange }) => {
   const [dimensions, setDimensions] = useState({
     width: '',
     height: '',
-    width2: '',
-    cantidad: 1,
   });
 
   const handleChange = (e) => {

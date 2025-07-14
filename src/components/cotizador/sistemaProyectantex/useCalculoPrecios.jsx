@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 
 const useCalculoPrecios = (
-  { width, height, width2, cantidad },
+  { width, height },
   selectedAccessories = [],
   selectedGlass = 'sinVidrio',
   selectedAlfajia = 'sinAlfajia'
@@ -47,14 +47,14 @@ const useCalculoPrecios = (
     const ALK416Price = memoizedPrices.ALK416 ? (memoizedPrices.ALK416 * ALK416_mm) / 1000 : 0;
 
     // ALK177: ((ALTO*CANTIDAD)*2)+(ALTO*2 +ANCHO*2)
-    const ALK177_mm = (alto * 2 + ancho * 2);
+    const ALK177_mm = (alto  * 2) + (alto * 2 + ancho * 2);
     const ALK177Price = memoizedPrices.ALK177 ? (memoizedPrices.ALK177 * ALK177_mm) / 1000 : 0;
 
     // ALK176: ((ALTO *2) + (ANCHO2 * 2))*CANTIDAD
     const ALK176_mm = ((alto * 2) + (ancho * 2));
     const ALK176Price = memoizedPrices.ALK176 ? (memoizedPrices.ALK176 * ALK176_mm) / 1000 : 0;
     // Precio del empaque contorno del pisavidrio
-    const Empaque_mm = (ALK177_mm + ALK176_mm + ALK416_mm);
+    const Empaque_mm = (ALK177_mm + ALK176_mm + (ALK416_mm * 2));
     const EmpaquePrice = memoizedPrices.ALK_EPM ? (memoizedPrices.ALK_EPM * Empaque_mm) / 1000 : 0;
     // Vidrio y Alfajia (opcional, si aplica)
     const area = (alto / 1000) * (ancho / 1000);
@@ -105,7 +105,7 @@ const useCalculoPrecios = (
       manijaPrice,
       area,
     });
-  }, [width, height, width2, cantidad, memoizedPrices, memoizedAccessories, selectedGlass, selectedAlfajia]);
+  }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedAlfajia]);
 
   return { totalPrice, calculatedValues };
 };

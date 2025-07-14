@@ -12,8 +12,8 @@ const Sistema8025oxxo = () => {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const [doors, setDoors] = useState([]);
     const [selectedAccessories, setSelectedAccessories] = useState([]);
-
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories);
+    const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -60,6 +60,16 @@ const Sistema8025oxxo = () => {
                         <EnviarDimensiones8025 onDimensionsChange={handleDimensionsChange} />
                     </div>
                     <div className='mb-2'>
+                        <label className='text-gray-700 font-bold mb-2'>Tipo de Vidrio</label>
+                        <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
+                            <option value="sinVidrio">Sin Vidrio</option>
+                            <option value="4mm744">Vidrio 4 mm</option>
+                            <option value="5mm744">Vidrio 5 mm</option>
+                            <option value="VID_L33">Vidrio laminado 3 + 3</option>
+                            <option value="vidriobronce">Vidrio Bronce</option>
+                        </select>
+                    </div>
+                    <div className='mb-2'>
                         <h2 className='text-right text-xl font-bold'>${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </h2>
                     </div>
                     <div>
@@ -76,6 +86,7 @@ const Sistema8025oxxo = () => {
                     onAddDoor={handleAddDoor}
                     onAccessoryChange={handleAccessoryChange}
                     selectedAccessories={selectedAccessories}
+                    selectedGlass={selectedGlass}
                     useCalculoPrecios={useCalculoPrecios}
                 />
             </div>

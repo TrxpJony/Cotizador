@@ -91,6 +91,8 @@ import VidrioInfoPage from './pages/ServiciosInfo/vidrioInfoPage';
 import AluminioInfoPage from './pages/ServiciosInfo/aluminioPage';
 import SistemaProyectante from './pages/vidrios/sistemaProyectante/sistemaProyectante';
 import Sistema8025oxxo from './pages/vidrios/sistema8025/sistema8025oxxo';
+import { SistemaProyectantepage } from './pages/categorias/sistemaProyectante';
+import SistemaProyectantex from './pages/vidrios/sistemaProyectante/sistemaProyectantex';
 
 const cookies = new Cookies();
 
@@ -194,7 +196,9 @@ function App() {
           <Route path='cotizador/sistemas-aluminark/sistema-8025' element={<ProtectedRoute element={<Sistema8025page />} allowedRole='cotizador' />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025/xo-ox' element={<ProtectedRoute element={<Sistema8025 />} allowedRole='cotizador' />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025/oxxo' element={<ProtectedRoute element={<Sistema8025oxxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-proyectante' element={<ProtectedRoute element={<SistemaProyectante />} allowedRole='cotizador' />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante' element={<ProtectedRoute element={<SistemaProyectantepage />} allowedRole='cotizador' />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/x' element={<ProtectedRoute element={<SistemaProyectantex />} allowedRole='cotizador' />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/xo' element={<ProtectedRoute element={<SistemaProyectante />} allowedRole='cotizador' />} />
           <Route path='cotizador/espejos' element={<TiposEspejos />} />
           <Route path='cotizador/espejos/redondo' element={<ProtectedRoute element={<CotizadorEspejosRedondos />} allowedRole='cotizador' />} />
           <Route path='cotizador/espejos/cuadrado' element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole='cotizador' />} />
