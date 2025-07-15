@@ -41,20 +41,26 @@ const useCalculoPrecios = (
 
     const alto = Number(height) || 0;
     const ancho = Number(width) || 0;
+    const ancho2 = Number(width2) || 0;
+    const cant = Number(cantidad) || 1;
 
     // ALK416: (ALTO *2 )+ (ANCHO*2)
     const ALK416_mm = (alto * 2) + (ancho * 2);
     const ALK416Price = memoizedPrices.ALK416 ? (memoizedPrices.ALK416 * ALK416_mm) / 1000 : 0;
 
+    // ALK292: ALTO * CANTIDAD
+    const ALK292_mm = alto * cant;
+    const ALK292Price = memoizedPrices.ALK292 ? (memoizedPrices.ALK292 * ALK292_mm) / 1000 : 0;
+
     // ALK177: ((ALTO*CANTIDAD)*2)+(ALTO*2 +ANCHO*2)
-    const ALK177_mm = (alto * 2 + ancho * 2);
+    const ALK177_mm = ((alto * cant) * 2) + (alto * 2 + ancho * 2);
     const ALK177Price = memoizedPrices.ALK177 ? (memoizedPrices.ALK177 * ALK177_mm) / 1000 : 0;
 
     // ALK176: ((ALTO *2) + (ANCHO2 * 2))*CANTIDAD
-    const ALK176_mm = ((alto * 2) + (ancho * 2));
+    const ALK176_mm = ((alto * 2) + (ancho2 * 2)) * cant;
     const ALK176Price = memoizedPrices.ALK176 ? (memoizedPrices.ALK176 * ALK176_mm) / 1000 : 0;
     // Precio del empaque contorno del pisavidrio
-    const Empaque_mm = (ALK177_mm + ALK176_mm + ALK416_mm);
+    const Empaque_mm = (ALK177_mm + ALK176_mm + (ALK292_mm * 2));
     const EmpaquePrice = memoizedPrices.ALK_EPM ? (memoizedPrices.ALK_EPM * Empaque_mm) / 1000 : 0;
     // Vidrio y Alfajia (opcional, si aplica)
     const area = (alto / 1000) * (ancho / 1000);
@@ -70,11 +76,12 @@ const useCalculoPrecios = (
 
     // Utilitarios (puedes ajustar si necesitas)
     const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 20;
-    const manijaPrice = (memoizedPrices.ALK_MAN ? Number(memoizedPrices.ALK_MAN) : 0) * 1;
-    const brazoPrice = (memoizedPrices.ALK_BRA ? Number(memoizedPrices.ALK_BRA) : 0) * 2;
+    const manijaPrice = (memoizedPrices.ALK_MAN ? Number(memoizedPrices.ALK_MAN) : 0) * cant;
+    const brazoPrice = (memoizedPrices.ALK_BRA ? Number(memoizedPrices.ALK_BRA) : 0) * (cant * 2);
 
     const total =
       ALK416Price +
+      ALK292Price +
       ALK177Price +
       ALK176Price +
       accesoriosPrice +
@@ -89,8 +96,12 @@ const useCalculoPrecios = (
     setCalculatedValues({
       alto,
       ancho,
+      ancho2,
+      cant,
       ALK416_mm,
       ALK416Price,
+      ALK292_mm,
+      ALK292Price,
       ALK177_mm,
       EmpaquePrice,
       Empaque_mm,
