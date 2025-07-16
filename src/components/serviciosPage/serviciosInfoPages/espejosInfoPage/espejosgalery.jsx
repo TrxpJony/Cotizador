@@ -221,7 +221,7 @@ const EspejosGalery = () => {
                                     <p className="text-tiny text-white/60">No te quedes sin el tuyo.</p>
                                 </div>
                             </div>
-                            <a href="https://api.whatsapp.com/send?phone=573223065256" target='_blank' rel='noopener noreferrer'>
+                            <a href="https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0" target='_blank' rel='noopener noreferrer'>
                                 <button className="text-white px-3 py-1 rounded-2xl border border-white hover:bg-white hover:outline-none hover:text-black transition-all">
                                     Cotiza el tuyo
                                 </button>

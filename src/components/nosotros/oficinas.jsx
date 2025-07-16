@@ -62,7 +62,7 @@ export function Oficinas() {
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
                   <h3 className="oficinas-titles mt-2 text-lg font-medium tracking-tight text-gray-700 max-lg:text-center">Nosotros</h3>
                   <p className="oficinas-text mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                    Fundada el 5 de enero de 2009, Vidrio al Arte SAS se dedica principalmente al comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipos y materiales de fontanería y calefacción.
+                    Vidrio al Arte SAS es una empresa dedicada principalmente al comercio al por mayor de sistemas de aluminio para puertas, ventanas y divisiones de baño, así como vidrio, espejos, herrajes, accesorios y otros insumos complementarios para su instalación y acabado.
                   </p>
                 </div>
                 <div className="flex flex-1 items-center justify-center [container-type:inline-size] max-lg:py-6 lg:pb-2">

@@ -67,8 +67,9 @@ const EspejosHeaderInfo = () => {
                 <div
                     className="hero-link mb-10 flex items-center justify-center gap-x-6"
                 >
+                    {/* https://drive.google.com/file/d/1ckkOc3OAFvWl-GOVH3BXEamDIDiP1xFA/view //<-- catalogo anterior*/}
                     <a
-                        href="https://drive.google.com/file/d/1ckkOc3OAFvWl-GOVH3BXEamDIDiP1xFA/view"
+                        href="/productos/diseños-de-espejos"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm/6 font-semibold text-cyan-500 hover:text-white hover:underline transition duration-300"

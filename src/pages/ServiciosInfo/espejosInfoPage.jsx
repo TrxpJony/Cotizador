@@ -89,17 +89,17 @@ const EspejosInfoPage = () => {
                     aria-label="Redes sociales"
                 >
                     {[{
-                        href: "https://www.facebook.com/people/Acervid/61556144607224/?locale=es_LA",
+                        href: "https://www.facebook.com/p/Vidrios-Al-Arte-SAS-100069565487546/?locale=es_LA",
                         icon: <FaFacebookF className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Facebook" />,
                         bg: "bg-blue-600",
                         hover: "hover:bg-blue-700"
                     }, {
-                        href: "https://api.whatsapp.com/send?phone=573223065256",
+                        href: "https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0",
                         icon: <FaWhatsapp className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="WhatsApp" />,
                         bg: "bg-green-500",
                         hover: "hover:bg-green-600"
                     }, {
-                        href: "https://www.instagram.com/acervid_/#",
+                        href: "https://www.instagram.com/vidrioalartesas?igsh=MXd5ODdlOGpnMmt6ag==",
                         icon: <FaInstagram className="text-white rounded-full text-lg md:text-xl lg:text-2xl" aria-label="Instagram" />,
                         bg: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
                         hover: "hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]"

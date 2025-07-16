@@ -43,7 +43,7 @@ export default function EspejosDescription(props) {
                                     </p>
                                 </div>
                                 <div className="mb-5 sm:mb-0 mt-6 text-center sm:text-left">
-                                    <a href="https://api.whatsapp.com/send?phone=573223065256" target='_blank' rel='noopener noreferrer'>
+                                    <a href="https://api.whatsapp.com/send/?phone=573223065279&text&type=phone_number&app_absent=0" target='_blank' rel='noopener noreferrer'>
                                         <button
                                             className="desc-button text-white px-3 py-1 rounded-2xl border border-white hover:bg-white hover:outline-none hover:text-black transition-all"
                                         >¡COTIZA EL TUYO!</button>
@@ -78,7 +78,7 @@ export default function EspejosDescription(props) {
                                     </p>
                                 </div>
                                 <div className="mt-6 text-center sm:text-right">
-                                    <a href="https://www.canva.com/design/DAGWfFjnEC8/YtzVi3d6LVzHV5XLNmUYvg/edit" target="_blank" rel="noopener noreferrer">
+                                    <a href="/productos/diseños-de-espejos" target="_blank" rel="noopener noreferrer">
                                         <button
                                             className="desc-desg-button text-white px-3 py-1 rounded-2xl border border-white hover:bg-white hover:outline-none hover:text-black transition-all"
                                         >¡EXPLORAR CATALOGO!</button>

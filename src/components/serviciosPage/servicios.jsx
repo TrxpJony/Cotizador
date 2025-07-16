@@ -2,7 +2,7 @@ import division from '../../img/img_servicios/division.png'
 import espejo from '../../img/img_servicios/espejo.png'
 import accesorios from '../../img/img_servicios/accesorios.png'
 import vidrio from '../../img/img_servicios/vidrio.png'
-import corte from '../../img/img_servicios/corte.png'
+//import corte from '../../img/img_servicios/corte.png' //<--se inactiva por el momento
 import puer from '../../img/img_servicios/puer.png'
 import { motion } from 'framer-motion';
 import { useState } from 'react'
@@ -69,21 +69,22 @@ const posts = [
         },
         videoUrl: '',
     },
-    {
-        id: 5,
-        title: 'Equipos para servicio',
-        href: '#',
-        description:
-            'Ofrecemos servicios especializados de biselado, mesa de corte, pulido, ademas de otros para sus proyectos de vidrio.',
-        category: { title: 'Servicios', href: '#' },
-        author: {
-            name: 'Vidrio al Arte SAS',
-            role: 'Proveedor',
-            href: '#',
-            imageUrl: corte,
-        },
-        videoUrl: '',
-    },
+    /*  {
+         id: 5,
+         title: 'Equipos para servicio',
+         href: '#',
+         description:
+             'Ofrecemos servicios especializados de biselado, mesa de corte, pulido, ademas de otros para sus proyectos de vidrio.',
+         category: { title: 'Servicios', href: '#' },
+         author: {
+             name: 'Vidrio al Arte SAS',
+             role: 'Proveedor',
+             href: '#',
+             imageUrl: corte,
+         },
+         videoUrl: '',
+     },
+     */
     {
         id: 6,
         title: 'Perfileria en aluminio para crear puertas y ventanas',
