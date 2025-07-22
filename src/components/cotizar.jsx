@@ -5,6 +5,7 @@ import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { Search, Filter } from "lucide-react"; // Import icons
 import { Pagination } from "@heroui/react";
 import gsap from "gsap";
+import BackButton from "./common/backButton";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/catalogo";// Cambia la URL base
 
@@ -173,6 +174,9 @@ export function Cotizador() {
             ))}
           </div>
         )}
+        <div className="flex justify-center mt-6">
+          <BackButton />
+        </div>
         <div className="flex items-center mt-6">
           <Pagination showControls
             classNames={{

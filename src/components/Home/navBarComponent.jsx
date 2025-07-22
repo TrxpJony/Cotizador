@@ -36,7 +36,7 @@ export default function NavBarComponent({ userId, userRole, location }) {
   }
 
   if (userRole === 'cotizador') {
-    menuItems.push({ name: "Cotizador", path: "/cotizador" });
+    menuItems.push({ name: "Cotizador", path: "/user-dashboard" });
   }
 
 
@@ -110,9 +110,9 @@ export default function NavBarComponent({ userId, userRole, location }) {
             </Link>
           </NavbarItem>
 
-          {(userRole === 'cotizador') && (
+          {(['cotizador', 'administrador'].includes(userRole)) && (
             <NavbarItem>
-              <Link className={`text-foreground hover:text-cyan-400 ${isActive("/cotizar") ? "text-cyan-600" : ""}`} href="/cotizador">
+              <Link className={`text-foreground hover:text-cyan-400 ${isActive("/cotizar") ? "text-cyan-600" : ""}`} href="/user-dashboard">
                 Cotizar
               </Link>
             </NavbarItem>

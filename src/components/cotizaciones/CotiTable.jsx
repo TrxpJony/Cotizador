@@ -8,7 +8,8 @@ import PropTypes from "prop-types";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/cotizaciones";// Cambia la URL base
 
-const CotiTable = ({ searchTerm }) => {
+const CotiTable = ({ searchTerm, usuarioActual, rolUsuario }) => {
+
 	const [cotizaciones, setCotizaciones] = useState([]);
 	const [filteredCotizaciones, setFilteredCotizaciones] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -38,8 +39,16 @@ const CotiTable = ({ searchTerm }) => {
 			.then((response) => response.json())
 			.then((data) => {
 				if (data && Array.isArray(data)) {
-					// Ordenar por created_at (suponiendo que es una fecha válida)
-					const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+					let filtered = data;
+
+					// Filtra solo si el rol es cotizador
+					if (rolUsuario === "cotizador" && usuarioActual) {
+						filtered = filtered.filter(coti => String(coti.nombre_usuario) === String(usuarioActual));
+					}
+					// Si es administrador, muestra todas
+
+					// Ordenamos por fecha descendente
+					const sortedData = filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 					setCotizaciones(sortedData);
 					setFilteredCotizaciones(sortedData);
 				} else {
@@ -49,7 +58,7 @@ const CotiTable = ({ searchTerm }) => {
 			.catch((error) => {
 				console.error('Error fetching data:', error);
 			});
-	}, []);
+	}, [usuarioActual, rolUsuario]); // 👈 incluye rolUsuario como dependencia
 
 
 	const handlePageChange = (pageNumber) => {
@@ -331,6 +340,8 @@ const CotiTable = ({ searchTerm }) => {
 	);
 };
 CotiTable.propTypes = {
-	searchTerm: PropTypes.string.isRequired // SearchTerm debe ser una cadena y es obligatotio
+	searchTerm: PropTypes.string.isRequired,
+	usuarioActual: PropTypes.string,
+	rolUsuario: PropTypes.string, // 👈 nuevo prop
 };
 export default CotiTable;

@@ -93,6 +93,8 @@ import SistemaProyectante from './pages/vidrios/sistemaProyectante/sistemaProyec
 import Sistema8025oxxo from './pages/vidrios/sistema8025/sistema8025oxxo';
 import { SistemaProyectantepage } from './pages/categorias/sistemaProyectante';
 import SistemaProyectantex from './pages/vidrios/sistemaProyectante/sistemaProyectantex';
+import UserDashboard from './admin/userDashboard';
+import CotiUser from './components/user-dashboard/cotitable';
 
 const cookies = new Cookies();
 
@@ -139,7 +141,7 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route
             path='cotizador'
-            element={<ProtectedRoute element={<Cotizador />} allowedRole='cotizador' />}
+            element={<ProtectedRoute element={<Cotizador />} allowedRole={['cotizador', 'administrador']} />}
           />
           <Route path='/' element={<Home />} />
           <Route path='inicio' element={<Inicio />} />
@@ -152,6 +154,8 @@ function App() {
           <Route path='contact' element={<ContactPage />} />
           <Route path='proyectos' element={<TestimonialsPage />} />
           <Route path='blog' element={<Blog />} />
+          <Route path='/user-dashboard' element={<ProtectedRoute element={<UserDashboard />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='/user-dashboard/cotizaciones' element={<ProtectedRoute element={<CotiUser />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='admin' element={<ProtectedRoute element={<AdmindPage />} allowedRole='administrador' />} />
           <Route path='/products' element={<ProtectedRoute element={<ProductsPage />} allowedRole='administrador' />} />
           <Route path='/precios' element={<ProtectedRoute element={<PricePage />} allowedRole='administrador' />} />
@@ -161,49 +165,49 @@ function App() {
           <Route path='/edit' element={<ProtectedRoute element={<EditPost />} allowedRole='administrador' />} />
           <Route path='/cotizaciones' element={<ProtectedRoute element={<CotiPage />} allowedRole='administrador' />} />
           <Route path='cotizador/sistemas-vitral' element={<Tipos />} />
-          <Route path='cotizador/sistemas-vitral/colosal-26' element={<ProtectedRoute element={<Colosalpage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/colosal-26/xo-ox' element={<ProtectedRoute element={<Colosal />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/colosal-26/xx' element={<ProtectedRoute element={<Colosalxx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/colosal-26/xxx' element={<ProtectedRoute element={<Colosalxxx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/colosal-26/oxxo' element={<ProtectedRoute element={<Colosaloxxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-20' element={<ProtectedRoute element={<Astral20page />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-20/xo-ox' element={<ProtectedRoute element={<Astral20 />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-20/xx' element={<ProtectedRoute element={<Astral20xx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-20/oxxo' element={<ProtectedRoute element={<Astral20oxxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-20/xox' element={<ProtectedRoute element={<Astral20xox />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-17' element={<ProtectedRoute element={<Astral17page />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-17/xo-ox' element={<ProtectedRoute element={<Astral17 />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/astral-17/xx' element={<ProtectedRoute element={<Astral17xx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/kimbaya' element={<ProtectedRoute element={<Kimbayapage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/kimbaya/xo-ox' element={<ProtectedRoute element={<Kymbaya />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/kimbaya/oxx-xxo-xxx' element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/kimbaya/oxxo' element={<ProtectedRoute element={<Kimbayaoxxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/sideral-24' element={<ProtectedRoute element={<Sideralpage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/sideral-24/x-plus' element={<ProtectedRoute element={<Sideralx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/sideral-24/xo-plus' element={<ProtectedRoute element={<Sideralxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/3890' element={<ProtectedRoute element={<Sistema3890page />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/3890/x' element={<ProtectedRoute element={<Sistema3890 />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/tairona' element={<ProtectedRoute element={<TaironaPage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/tairona/x' element={<ProtectedRoute element={<Taironax />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/tairona/xx' element={<ProtectedRoute element={<Taironaxx />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/zinu' element={<ProtectedRoute element={<Zinupage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/zinu/x' element={<ProtectedRoute element={<Zinux />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-vitral/zinu/xo' element={<ProtectedRoute element={<Zinuox />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark' element={<ProtectedRoute element={<Tiposaluminark />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-744' element={<ProtectedRoute element={<Sistema744page />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-744/xo-ox' element={<ProtectedRoute element={<Sistema744 />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-744/xox' element={<ProtectedRoute element={<Sistema744xox />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-8025' element={<ProtectedRoute element={<Sistema8025page />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-8025/xo-ox' element={<ProtectedRoute element={<Sistema8025 />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-8025/oxxo' element={<ProtectedRoute element={<Sistema8025oxxo />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-proyectante' element={<ProtectedRoute element={<SistemaProyectantepage />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/x' element={<ProtectedRoute element={<SistemaProyectantex />} allowedRole='cotizador' />} />
-          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/xo' element={<ProtectedRoute element={<SistemaProyectante />} allowedRole='cotizador' />} />
+          <Route path='cotizador/sistemas-vitral/colosal-26' element={<ProtectedRoute element={<Colosalpage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/colosal-26/xo-ox' element={<ProtectedRoute element={<Colosal />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/colosal-26/xx' element={<ProtectedRoute element={<Colosalxx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/colosal-26/xxx' element={<ProtectedRoute element={<Colosalxxx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/colosal-26/oxxo' element={<ProtectedRoute element={<Colosaloxxo />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-20' element={<ProtectedRoute element={<Astral20page />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-20/xo-ox' element={<ProtectedRoute element={<Astral20 />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-20/xx' element={<ProtectedRoute element={<Astral20xx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-20/oxxo' element={<ProtectedRoute element={<Astral20oxxo />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-20/xox' element={<ProtectedRoute element={<Astral20xox />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-17' element={<ProtectedRoute element={<Astral17page />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-17/xo-ox' element={<ProtectedRoute element={<Astral17 />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-17/xx' element={<ProtectedRoute element={<Astral17xx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/kimbaya' element={<ProtectedRoute element={<Kimbayapage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/kimbaya/xo-ox' element={<ProtectedRoute element={<Kymbaya />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/kimbaya/oxx-xxo-xxx' element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/kimbaya/oxxo' element={<ProtectedRoute element={<Kimbayaoxxo />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/sideral-24' element={<ProtectedRoute element={<Sideralpage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/sideral-24/x-plus' element={<ProtectedRoute element={<Sideralx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/sideral-24/xo-plus' element={<ProtectedRoute element={<Sideralxo />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/3890' element={<ProtectedRoute element={<Sistema3890page />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/3890/x' element={<ProtectedRoute element={<Sistema3890 />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/tairona' element={<ProtectedRoute element={<TaironaPage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/tairona/x' element={<ProtectedRoute element={<Taironax />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/tairona/xx' element={<ProtectedRoute element={<Taironaxx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/zinu' element={<ProtectedRoute element={<Zinupage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/zinu/x' element={<ProtectedRoute element={<Zinux />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/zinu/xo' element={<ProtectedRoute element={<Zinuox />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark' element={<ProtectedRoute element={<Tiposaluminark />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-744' element={<ProtectedRoute element={<Sistema744page />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-744/xo-ox' element={<ProtectedRoute element={<Sistema744 />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-744/xox' element={<ProtectedRoute element={<Sistema744xox />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-8025' element={<ProtectedRoute element={<Sistema8025page />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-8025/xo-ox' element={<ProtectedRoute element={<Sistema8025 />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-8025/oxxo' element={<ProtectedRoute element={<Sistema8025oxxo />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante' element={<ProtectedRoute element={<SistemaProyectantepage />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/x' element={<ProtectedRoute element={<SistemaProyectantex />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-proyectante/xo' element={<ProtectedRoute element={<SistemaProyectante />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/espejos' element={<TiposEspejos />} />
-          <Route path='cotizador/espejos/redondo' element={<ProtectedRoute element={<CotizadorEspejosRedondos />} allowedRole='cotizador' />} />
-          <Route path='cotizador/espejos/cuadrado' element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole='cotizador' />} />
-          <Route path='cotizador/espejos/forma' element={<ProtectedRoute element={<CotizadorEspejosconForma />} allowedRole='cotizador' />} />
-          <Route path='cotizador/puertas-de-cocina' element={<ProtectedRoute element={<CocinasCotizador />} allowedRole='cotizador' />} />
+          <Route path='cotizador/espejos/redondo' element={<ProtectedRoute element={<CotizadorEspejosRedondos />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/espejos/cuadrado' element={<ProtectedRoute element={<CotizadorEspejos />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/espejos/forma' element={<ProtectedRoute element={<CotizadorEspejosconForma />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/puertas-de-cocina' element={<ProtectedRoute element={<CocinasCotizador />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='productos' element={<Productos />} />
           <Route path='productos/diseños-de-espejos' element={<Espejos />} />
           <Route path='productos/accesorios' element={<All />} />
@@ -223,7 +227,7 @@ function App() {
           <Route path='productos/divisiones-de-baño/diseños' element={<DiseñoDivisionesBaño />} />
           <Route path='productos/vitrinas' element={<VitrinasVista />} />
           <Route path='productos/puertas-de-cocina' element={<CocinasVista />} />
-          <Route path='cotizador/skyleds' element={<ProtectedRoute element={<TiposSkylesd />} allowedRole='cotizador' />} />
+          <Route path='cotizador/skyleds' element={<ProtectedRoute element={<TiposSkylesd />} allowedRole={['cotizador', 'administrador']} />} />
         </Routes>
       </div>
       <FooterComponent />
