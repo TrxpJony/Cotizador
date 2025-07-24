@@ -64,7 +64,8 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const cenefaPriceRaw = cenefaUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for cenefa
         const perfilPriceRaw = perfilUnitPrice * mtrsLineal / 1000; // Adjusted to use the perimeter for perfil
 
-        // Apply minimum price logic for cenefa
+
+        // Apply minimum price logic for cenefa and round to nearest 5000
         let cenefaPrice = cenefaPriceRaw;
         if (selectedCenefa === "CEN_BOT") {
             cenefaPrice = memoizedPrices.CEN_BOT || 0; // directly use the database price for CEN_BOT
@@ -75,8 +76,11 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         } else if (selectedCenefa === "CEN_DIF") {
             cenefaPrice = Math.max(cenefaPriceRaw, 35000);
         }
+        // Redondear cenefaPrice a múltiplo de 5000
+        cenefaPrice = Math.ceil(cenefaPrice / 5000) * 5000;
 
-        const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.max(perfilPriceRaw, 25000);
+        // Redondear perfilPrice a múltiplo de 5000
+        const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.ceil(Math.max(perfilPriceRaw, 25000) / 5000) * 5000;
 
         const total = perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice + manoDeObra + cutPrice;
 

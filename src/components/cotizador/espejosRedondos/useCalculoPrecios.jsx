@@ -75,7 +75,11 @@ const useCalculoPrecios = ({ Diameter, width, height }, selectedAccessories = []
             cenefaPrice = Math.max(cenefaPriceRaw, 35000);
         }
 
-        const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.max(perfilPriceRaw, 25000);
+        // Redondear cenefaPrice a múltiplo de 5000
+        cenefaPrice = Math.ceil(cenefaPrice / 5000) * 5000;
+
+        // Redondear perfilPrice a múltiplo de 5000
+        const perfilPrice = selectedPerfil === "sinPerfil" ? 0 : Math.ceil(Math.max(perfilPriceRaw, 25000) / 5000) * 5000;
 
         const total = manoDeObra + perfilPrice + vidrioPrice + cenefaPrice + accessoriesPrice;
 
