@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FilePlus, FileText } from "lucide-react"; // Iconos modernos
+import { FaFileDownload } from "react-icons/fa";
 import logo from "../../src/img/logo.png"
 const UserDashboard = () => {
     const navigate = useNavigate();
@@ -79,12 +80,15 @@ const UserDashboard = () => {
                     <a
                         href="/manual_usuario.pdf"
                         download
-                        className="mt-4 border border-cyan-500  textsm:mt-0 inline-block px-6 py-2 rounded-2xl bg-transparent text-cyan-500 font-semibold shadow hover:bg-cyan-500 hover:text-white transition-colors"
+                        className="mt-4 border border-cyan-500 textsm:mt-0 inline-block px-6 py-2 rounded-2xl bg-transparent text-cyan-500 font-semibold shadow hover:bg-cyan-500 hover:text-white transition-colors"
                     >
-                        Descargar Manual de Usuario
+                        <span className="flex items-center gap-2">
+                            <FaFileDownload />
+                            Descargar Manual de Usuario
+                        </span>
                     </a>
                 </div>
-                
+
             </div>
 
         </>

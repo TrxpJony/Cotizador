@@ -12,6 +12,7 @@ import { CircularProgress } from '@heroui/react';
 import { MdCalendarMonth } from "react-icons/md"
 import { Calendar } from "@heroui/react";
 import { Download } from "lucide-react";
+import { FaPrint, FaAddressBook } from "react-icons/fa6";
 
 const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     const [selectedDate, setSelectedDate] = useState('');
@@ -234,7 +235,10 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
     return (
         <>
             <button onClick={handleOpenModal} className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all ">
-                Cotizar
+                <span className="flex items-center gap-2">
+                    <FaAddressBook />
+                    Cotizar
+                </span>
             </button>
 
             {isModalOpen && (
@@ -332,7 +336,9 @@ const PrintTableDoor = ({ doors, title, image }) => { // Remove totalPrice prop
                                         onClick={handlePrint}
                                         className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
                                     >
-                                        Cotizar
+                                        <span className="flex items-center gap-2">
+                                            <FaPrint /> Cotizar
+                                        </span>
                                     </button>
                                     <button
                                         onClick={handleDownloadPDF}

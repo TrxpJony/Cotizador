@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import "react-toastify/dist/ReactToastify.css";
+import { FaCartPlus, FaSave } from "react-icons/fa";
+import { IoCaretBackOutline } from "react-icons/io5";
 
 const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut, selectedAlfajia }) => { // Accept selectedAccessories as a prop
     // Procesar dimensions para soportar Diameter o width/height
@@ -83,7 +85,10 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
     return (
         <>
             <button onClick={handleOpenModal} className="mb-4 flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all ">
-                Agregar
+                <span className="flex items-center gap-2">
+                    <FaCartPlus />
+                    Agregar
+                </span>
             </button>
 
             {isModalOpen && (
@@ -146,14 +151,21 @@ const CotizadorAdd = ({ dimensions, onAddDoor, useCalculoPrecios, selectedAccess
                                 onClick={handleCloseModal}
                                 className="flex rounded-2xl text-gray-400 hover:text-black  font-bold py-2 px-6  transition-all"
                             >
-                                Cancelar
+                                <span className="flex items-center gap-2">
+                                    <IoCaretBackOutline /> Cancelar
+                                </span>
                             </button>
                             <button
                                 onClick={handleSave}
                                 className="flex border border-cyan-500  text-cyan-500 py-2 px-10 rounded-2xl hover:bg-cyan-500 hover:text-white transition-all "
                             >
-                                Guardar
+                                <span className="flex items-center gap-2">
+                                    <FaSave />
+                                    Guardar
+                                </span>
+
                             </button>
+
                         </div>
                     </div>
                 </div>
