@@ -291,9 +291,9 @@ const CotiTable = ({ searchTerm, usuarioActual, rolUsuario }) => {
 													: 'bg-red-600'
 												}`}
 										>
-											<option value="facturada" className="bg-white text-black">Facturada</option>
+											<option value="facturada" className="bg-white text-black">Cotizado</option>
 											<option value="pendiente" className="bg-white text-black">Pendiente</option>
-											<option value="cancelada" className="bg-white text-black">Cancelada</option>
+											<option value="cancelada" className="bg-white text-black">Cancelado</option>
 										</select>
 
 									</td>
