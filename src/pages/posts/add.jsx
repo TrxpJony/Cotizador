@@ -43,7 +43,7 @@ const AddPost = () => {
             navigate("/editPost");
 
         } catch (error) {
-            console.error("Error al subir el post:", error);
+            console.error("Error al subir la publicación:", error);
         } finally {
             setIsSubmitting(false);
         }
@@ -56,7 +56,7 @@ const AddPost = () => {
                 <div className="flex-1 overflow-auto relative z-10">
                     <header className="bg-white backdrop-blur-md shadow-lg border-b sticky top-0">
                         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            <h1 className="text-2xl font-semibold text-gray-700">Agregar Post</h1>
+                            <h1 className="text-2xl font-semibold text-gray-700">Agregar publicación</h1>
                         </div>
                     </header>
                     <div className="px-20">

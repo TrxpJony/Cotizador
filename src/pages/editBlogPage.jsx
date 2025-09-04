@@ -41,12 +41,12 @@ const EditPostPage = () => {
 
     return (
         <>
-            <div className="flex h-screen sm:h-screen overflow-hidden">
+            <div className="flex h-full overflow-hidden">
                 <Sidebar />
                 <div className="flex-1 overflow-auto relative z-10">
                     <header className="bg-white backdrop-blur-md shadow-lg border-b">
                         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-4 lg:px-8">
-                            <h1 className="text-2xl font-semibold text-gray-700">Post</h1>
+                            <h1 className="text-2xl font-semibold text-gray-700">Blog</h1>
                         </div>
                     </header>
 
@@ -55,7 +55,7 @@ const EditPostPage = () => {
                         <div className="mt-5 ">
                             <input
                                 type="text"
-                                placeholder="Buscar posts..."
+                                placeholder="Buscar publicación..."
                                 className="w-full p-3 border border-gray-300 rounded-2xl shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                                 value={searchTerm}
                                 onChange={handleSearchChange}

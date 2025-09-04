@@ -13,7 +13,7 @@ const UsersTable = ({ searchTerm }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 10;
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [editedUser, setEditedUser] = useState({ usuario: "", contraseña: "" });
+	const [editedUser, setEditedUser] = useState({ usuario: "", contraseña: "", rol: "" });
 
 	useEffect(() => {
 		// Filtrar productos cuando cambia el searchTerm o los productos
@@ -71,7 +71,7 @@ const UsersTable = ({ searchTerm }) => {
 
 		// Validar que los campos no estén vacíos
 		if (!usuario || !contraseña || !id) {
-			toast.warn("Usuario y contraseña son requeridos.");
+			toast.warn("Todos los campos son requeridos.");
 			return;
 		}
 
@@ -276,6 +276,19 @@ const UsersTable = ({ searchTerm }) => {
 								onChange={handleInputChange}
 								className='border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none'
 							/>
+						</div>
+						<div className="mb-4">
+							<label className="block text-gray-700 font-bold mb-2">Rol</label>
+							   <select
+                                name="rol"
+                                value={editedUser.rol}
+                                onChange={handleInputChange}
+                                className="border border-default-200 rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none"
+                            >
+								<option value="">Seleccionar</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="cotizador">Cotizador</option>
+                            </select>
 						</div>
 						<div className='flex justify-between'>
 							<button

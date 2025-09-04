@@ -123,7 +123,7 @@ const Blog = () => {
                         <div className="mt-10 blog-filter">
                             <input
                                 type="text"
-                                placeholder="Buscar posts..."
+                                placeholder="Buscar publicación..."
                                 className="w-full p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                                 value={searchTerm}
                                 onChange={handleSearchChange}

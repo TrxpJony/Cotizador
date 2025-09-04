@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'; // Importar SweetAlert2
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import PropTypes from 'prop-types'; // Importar PropTypes
+import { Button } from "@heroui/react";
+import { LuFolderPlus } from "react-icons/lu";
 
 const baseUrl = import.meta.env.VITE_API_URL + "/api/detalleProductos";
 
@@ -262,12 +264,13 @@ const ProductsTable = ({ searchTerm }) => {
 			>
 				<div className='flex justify-between items-center mb-6'>
 					<h2 className='text-sm sm:text-base md:text-xl font-semibold text-gray-700'>Lista de productos</h2>
-					<button
+					<Button
 						className='bg-transparent border border-cyan-500 text-cyan-500 rounded-2xl px-4 py-2 hover:bg-cyan-500 hover:text-white transition-all text-xs sm:text-sm'
-						onClick={handleAddClick}
+						onPress={handleAddClick}
+						endContent={<LuFolderPlus />}
 					>
 						Agregar producto
-					</button>
+					</Button>
 				</div>
 
 				<div className='overflow-x-auto'>

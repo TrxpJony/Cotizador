@@ -68,8 +68,8 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
                         setPosts(posts.filter((post) => post.id !== id));
                     })
                     .catch((error) => {
-                        console.error("Error al eliminar el post:", error);
-                        Swal.fire("Error", "Hubo un problema al eliminar el post.", "error");
+                        console.error("Error al eliminar la publicación:", error);
+                        Swal.fire("Error", "Hubo un problema al eliminar la publicación.", "error");
                     });
             }
         });
@@ -98,41 +98,47 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
 
     return (
         <>
-            {paginatedPosts.map((post) => (
-                <div key={post.id} className='w-full max-w-md mx-auto flex flex-col mt-4'>
-                    <div className='relative w-full h-48 bg-gray-300 rounded-xl transition duration-300 ease-in-out transform hover:scale-105'>
-                        <img className='absolute top-0 left-0 w-full h-full object-cover rounded-xl' src={post.image} alt='' />
-                        <span className='absolute top-3 right-3 bg-black/80 text-xs text-white font-normal px-2.5 py-2 rounded-xl'>{post.category || 'Uncategorized'}</span>
-                    </div>
-                    <div className='w-full text-xs font-light text-gray-500 px-2 mt-4'>
-                        {formatDate(post.fecha) + ' ' + formatTime(post.fecha)}
-                    </div>
-                    <div className='w-full text-2xl font-semibold text-gray-900 px-2 mt-2 truncate'>
-                        <h2>
-                            {post.title}
-                        </h2>
-                    </div>
-                    <div className='w-full h-auto sm:h-44 lg:h-40 overflow-hidden text-base font-normal text-gray-900 px-2 mt-2'>
-                        {truncate(post.description, 300)}
-                    </div>
-                    <div className='w-full h-[0.025em] bg-gray-400/90 mt-2'></div>
-
-                    {/* Mostrar botones solo si el rol es administrador */}
-                    {userRole === 'administrador' && (
-                        <div className='w-full flex flex-row justify-end px-2 mt-2'>
-                            <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/edit' state={{ post: post }}>
-                                Edit
-                            </Link>
-                            <button
-                                className='text-red-500 underline underline-offset-2'
-                                onClick={() => handleDeleteClick(post.id)}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
+            {paginatedPosts.length === 0 ? (
+                <div className="w-full text-center text-gray-500 py-8">
+                    No se encontraron resultados.
                 </div>
-            ))}
+            ) : (
+                paginatedPosts.map((post) => (
+                    <div key={post.id} className='w-full max-w-md mx-auto flex flex-col mt-4'>
+                        <div className='relative w-full h-48 bg-gray-300 rounded-xl transition duration-300 ease-in-out transform hover:scale-105'>
+                            <img className='absolute top-0 left-0 w-full h-full object-cover rounded-xl' src={post.image} alt='' />
+                            <span className='absolute top-3 right-3 bg-black/80 text-xs text-white font-normal px-2.5 py-2 rounded-xl'>{post.category || 'Uncategorized'}</span>
+                        </div>
+                        <div className='w-full text-xs font-light text-gray-500 px-2 mt-4'>
+                            {formatDate(post.fecha) + ' ' + formatTime(post.fecha)}
+                        </div>
+                        <div className='w-full text-2xl font-semibold text-gray-900 px-2 mt-2 truncate'>
+                            <h2>
+                                {post.title}
+                            </h2>
+                        </div>
+                        <div className='w-full h-auto sm:h-44 lg:h-40 overflow-hidden text-base font-normal text-gray-900 px-2 mt-2'>
+                            {truncate(post.description, 300)}
+                        </div>
+                        <div className='w-full h-[0.025em] bg-gray-400/90 mt-2'></div>
+
+                        {/* Mostrar botones solo si el rol es administrador */}
+                        {userRole === 'administrador' && (
+                            <div className='w-full flex flex-row justify-end px-2 mt-2'>
+                                <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/edit' state={{ post: post }}>
+                                    Editar
+                                </Link>
+                                <button
+                                    className='text-red-500 underline underline-offset-2'
+                                    onClick={() => handleDeleteClick(post.id)}
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ))
+            )}
         </>
     );
 };
