@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { MdPhotoSizeSelectActual } from "react-icons/md";
 
 const category = [
     { key: "Regalos", label: "Regalos" },
@@ -56,14 +57,16 @@ const PostFormAdd = ({ onSubmit, initialData }) => {
                 </label>
                 <div className="relative w-full h-96 bg-black/20 mb-5 rounded-xl">
                     <div className="absolute top-0 left-0 w-full h-full">
-                        <img 
-                            className="w-full h-full object-cover rounded-xl" 
+                        <img
+                            className="w-full h-full object-cover rounded-xl"
                             src={preview || "/default-placeholder.png"} // Cambiar a una imagen local o válida
-                            alt="Imagen" 
+                            alt="Imagen"
                         />
                     </div>
                     <label className="absolute outline rounded-2xl hover:outline-black hover:bg-black bottom-5 right-5 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline cursor-pointer transition-all">
-                        Seleccionar
+                        <span className="flex items-center gap-2">
+                            Seleccionar <MdPhotoSizeSelectActual size={18} />
+                        </span>
                         <input
                             type="file"
                             className="hidden"
@@ -108,7 +111,7 @@ const PostFormAdd = ({ onSubmit, initialData }) => {
                     <label className="block text-gray-700 font-bold mb-2">
                         Descripción
                     </label>
-                    <textarea 
+                    <textarea
                         name="description"
                         value={formData.description}
                         onChange={handleInputChange}

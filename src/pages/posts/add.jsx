@@ -5,6 +5,7 @@ import BackButton from "../../components/common/backButton";
 import Sidebar from "../../components/common/Sidebar";
 import PostFormAdd from "../../components/post/postFormAdd";
 import { toast } from "react-toastify"
+import { FaArrowUpFromBracket } from "react-icons/fa6";
 const baseUrl = import.meta.env.VITE_API_URL + "/api";
 
 const AddPost = () => {
@@ -68,7 +69,9 @@ const AddPost = () => {
                                 disabled={isSubmitting}
                                 className={`outline rounded-2xl outline-cyan-500 text-cyan-500 hover:text-white hover:bg-cyan-500 font-bold py-2 px-10 focus:outline-none focus:shadow-outline transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                {isSubmitting ? 'Subiendo...' : 'Subir'}
+                                <span className="flex items-center gap-2">
+                                    {isSubmitting ? 'Subiendo...' : 'Subir'} <FaArrowUpFromBracket size={18}/>
+                                </span>
                             </button>
                         </div>
                     </div>

@@ -106,11 +106,6 @@ const Servicios = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState(null);
 
-    const openModal = (videoUrl) => {
-        setSelectedVideo(videoUrl);
-        setIsModalOpen(true);
-    };
-
     const closeModal = () => {
         setSelectedVideo(null);
         setIsModalOpen(false);
@@ -126,33 +121,31 @@ const Servicios = () => {
                 </div>
                 <div className='mx-auto mb-10 mt-10 grid w-full max-w-2xl grid-cols-1 gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
                     {posts.map((post) => (
-                        <motion.article
-                            key={post.id}
-                            className='flex  flex-col items-start justify-between transform transition-transform hover:scale-105 bg-white shadow-lg rounded-lg overflow-hidden'
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: post.id * 0.2 }}
-                        >
-                            <motion.img
-                                src={post.author.imageUrl}
-                                alt={post.title} // Mejorar el alt para SEO
-                                className='w-full h-48 object-cover cursor-pointer'
-                                whileHover={{ scale: 1.1 }}
-                                onClick={() => openModal(post.videoUrl)} // Open modal only on image click
-                            />
-                            <div className='flex items-center gap-x-4 text-xs'>
-                                <div className='group relative p-6'>
-                                    <h2 className='mt-3 text-lg/6 font-semibold text-gray-800 group-hover:text-cyan-600 cursor-pointer'>
-                                        <a href={post.href}>
+                        <a key={post.id} href={post.href} className='no-underline' style={{ color: 'inherit' }}>
+                            <motion.article
+                                className='flex flex-col items-start justify-between transform transition-transform hover:scale-105 bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer'
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: post.id * 0.2 }}
+                            >
+                                <motion.img
+                                    src={post.author.imageUrl}
+                                    alt={post.title}
+                                    className='w-full h-48 object-cover'
+                                    whileHover={{ scale: 1.1 }}
+                                />
+                                <div className='flex items-center gap-x-4 text-xs'>
+                                    <div className='group relative p-6'>
+                                        <h2 className='mt-3 text-lg/6 font-semibold text-gray-800 group-hover:text-cyan-600'>
                                             <span>
                                                 {post.title}
                                             </span>
-                                        </a>
-                                    </h2>
-                                    <p className='mt-5 text-sm/6 text-gray-800'>{post.description}</p>
+                                        </h2>
+                                        <p className='mt-5 text-sm/6 text-gray-800'>{post.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.article>
+                            </motion.article>
+                        </a>
                     ))}
                 </div>
             </section>

@@ -1,6 +1,7 @@
 import '../../css/colosal.css';
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import portada from "../../img/portada.jpg";
 
 const links = [
     { name: 'Productos', href: '/productos', px: 'px-10' },
@@ -80,7 +81,7 @@ export function CortinaMovimiento() {
         >
             <img
                 alt=""
-                src="https://res.cloudinary.com/dtxmsbsjd/image/upload/v1748984838/peszlbcfdskolhuqxp4l_tgxmkc.jpg"
+                src={portada}
                 className="opacity-50 absolute inset-0 -z-10 size-full object-cover object-center"
             />
             <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center sm:text-left"> {/*max-w-screen-2xl */}

@@ -65,7 +65,16 @@ export default function InfoContact() {
                 </div>
                 {/* Horarios de Atención */}
                 <div className="info-contact-icons bg-gray-50 rounded-2xl p-4 mt-2">
-                    <h3 className="text-xl font-semibold text-gray-700 mb-2">Horario de Entregas</h3>
+                    <h3 className="text-xl font-semibold text-gray-700">Horario de Atención</h3>
+                    <div className="flex flex-col space-y-1 text-gray-600">
+                        <div>
+                            <span className="font-semibold text-gray-800">Lunes a Viernes:</span> 8:00 AM - 12:15 PM / 1:30 PM - 4:45 PM
+                        </div>
+                        <div>
+                            <span className="font-semibold text-gray-800">Sábados:</span> 8:00 AM - 11:45 AM
+                        </div>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-700 mt-2">Horario de Entregas</h3>
                     <div className="flex flex-col space-y-1 text-gray-600">
                         <div>
                             <span className="font-semibold text-gray-800">Lunes a Viernes:</span> 8:00 AM - 12:00 PM / 1:30 PM - 4:00 PM

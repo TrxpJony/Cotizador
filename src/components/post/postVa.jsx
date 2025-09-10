@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie'; // Importar universal-cookie
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { Edit, Trash2 } from 'lucide-react';
 
 const cookies = new Cookies(); // Crear instancia de cookies
 
@@ -126,14 +127,14 @@ const PostVa = ({ searchTerm, selectedCategory, selectedDate, currentPage = 1, i
                         {userRole === 'administrador' && (
                             <div className='w-full flex flex-row justify-end px-2 mt-2'>
                                 <Link className='text-cyan-500 underline underline-offset-2 mr-4' to='/edit' state={{ post: post }}>
-                                    Editar
+                                  <Edit size={18} />
                                 </Link>
                                 <button
                                     className='text-red-500 underline underline-offset-2'
                                     onClick={() => handleDeleteClick(post.id)}
                                 >
-                                    Eliminar
-                                </button>
+                                    <Trash2 size={18} />
+                                 </button>
                             </div>
                         )}
                     </div>

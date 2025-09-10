@@ -115,7 +115,7 @@ export default function FormContact() {
         <>
             <div ref={containerRef}>
                 <motion.div
-                    className="min-h-screen relative isolate overflow-hidden py-24 sm:py-36 text-center"
+                    className="min-h-full relative isolate overflow-hidden py-24 sm:py-36 text-center"
                     style={{
                         background: "linear-gradient(90deg, #22d3ee, #0891b2, #9ca3af, #374151, #374151, #9ca3af, #0891b2, #22d3ee, #0891b2)",
                         backgroundSize: "800% 800%", // Movimiento más fluido
