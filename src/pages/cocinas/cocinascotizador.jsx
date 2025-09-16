@@ -83,6 +83,7 @@ const CocinasCotizador = () => {
               <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
               <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
               <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>
+              <option value="VI4_ESM">Vidrio Esmerilado 4 mm</option>
               <option value="VI5_ESM">Vidrio Esmerilado 5 mm</option>
               <option value="LAM_SEG">Vidrio laminado 3 + 3 blanco coco</option>
               <option value="ESP_BRO">Espejo bronce reflectivo 4 mm</option>
