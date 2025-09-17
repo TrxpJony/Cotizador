@@ -69,6 +69,9 @@ const CocinasCotizador = () => {
               <option value="sinPerfil">Seleccionar</option>
               <option value="MAR_PEQ">Perfil de aleta pequeña</option>
               <option value="MAR_ACN">Perfil de aleta ancha</option>
+              <option value="MAR_N5M">Perfil 5103 mate</option>
+              <option value="MAR_N5N">Perfil 5103 negro</option>
+              <option value="MAR_N5C">Perfil 5103 champaña</option>
             </select>
           </div>
           <div className='mb-2'>
