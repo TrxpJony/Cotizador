@@ -46,12 +46,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const getPrice = (key, factor = 1) => (memoizedPrices[key] ? Number(memoizedPrices[key]) * factor / 1000 : 0);
 
         const cabezalastPrice = getPrice("cabezalast", totalWidth);
-        const sillarastPrice = getPrice("sillarast", totalWidth);
         const sillarAlfajiaastPrice = getPrice("sillarAlfajiaast", totalWidth);
         const jambaastPrice = getPrice("jambaast", doubleHeight);
         const horizontalSuperiorastPrice = getPrice("horizontalSuperiorast", doubleHalfWidth);
-        const horizontalInferiorFijaastPrice = getPrice("horizontalInferiorFijaast", halfWidth);
-        const horizontalInferiorMovilastPrice = getPrice("horizontalInferiorMovilast", halfWidth);
+        const horizontalInferiorFijaastPrice = getPrice("horizontalInferiorFijaast", totalWidth);
         const traslapeastPrice = getPrice("traslapeast", doubleHeight);
         const engancheastPrice = getPrice("engancheast", doubleHeight);
         const empaqueastPrice = getPrice("empaqueast", empaqueastHeight + empaqueastWidth);
@@ -60,12 +58,22 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 44;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
-        const accessoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
+        // Aquí permitimos que los accesorios se sumen sin importar si las dimensiones están establecidas
+        const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+            if (acc === "rodamiento40ast" || acc === "rodamiento40ast") {
+                return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 2 : 0);
+            }
+            if (acc === "kitCierreast" || acc === "kitCierreast") {
+                return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+            }
+            return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+        }, 0);
+
 
         const total =
-            cabezalastPrice + sillarastPrice + sillarAlfajiaastPrice + jambaastPrice +
-            horizontalSuperiorastPrice + horizontalInferiorFijaastPrice + horizontalInferiorMovilastPrice +
-            traslapeastPrice + engancheastPrice + empaqueastPrice + tornillosPrice + siliconaPrice + accessoriosPrice + felpaPrice;
+            cabezalastPrice + sillarAlfajiaastPrice + jambaastPrice +
+            horizontalSuperiorastPrice + horizontalInferiorFijaastPrice +
+            traslapeastPrice + engancheastPrice + empaqueastPrice + tornillosPrice + siliconaPrice + accesoriosPrice + felpaPrice;
 
         setTotalPrice(total);
         setCalculatedValues({
@@ -74,12 +82,10 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             halfWidth,
             doubleHalfWidth,
             cabezalastPrice,
-            sillarastPrice,
             jambaastPrice,
             sillarAlfajiaastPrice,
             horizontalSuperiorastPrice,
             horizontalInferiorFijaastPrice,
-            horizontalInferiorMovilastPrice,
             traslapeastPrice,
             engancheastPrice,
             empaqueastPrice,
@@ -92,12 +98,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = []) => {
             felpaPrice,
             totalFelpa,
             kitCierreastPrice: memoizedPrices.kitCierreast ? Number(memoizedPrices.kitCierreast) : 0,
-            cubetaAngeoPrice: memoizedPrices.cubetaAngeo ? Number(memoizedPrices.cubetaAngeo) : 0,
-            rodamiento80astPrice: memoizedPrices.rodamiento80ast ? Number(memoizedPrices.rodamiento80ast) : 0,
-            rodamiento40astPrice: memoizedPrices.rodamiento40ast ? Number(memoizedPrices.rodamiento40ast) : 0,
-            cajaDeflectoraPrice: memoizedPrices.cajaDeflectora ? Number(memoizedPrices.cajaDeflectora) : 0,
-            rodamientoNave22astPrice: memoizedPrices.rodamientoNave22ast ? Number(memoizedPrices.rodamientoNave22ast) : 0,
-            guiaSuperiorangeoPrice: memoizedPrices.guiaSuperiorangeo ? Number(memoizedPrices.guiaSuperiorangeo) : 0,
+            rodamiento40astPrice: memoizedPrices.rodamiento40ast ? Number(memoizedPrices.rodamiento40ast) * 2 : 0,
         });
     }, [width, height, memoizedPrices, memoizedAccessories]);
 
