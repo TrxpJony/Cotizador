@@ -16,7 +16,7 @@ const categorias = [
     { label: "Herramientas e insumos", key: "herramientas" },
     { label: "Brocas para vidrio", key: "brocas" },
     { label: "kit sistemas deslizantes", key: "deslizantes" },
-    { label: "Maquita", key: "maquina" },
+    { label: "Maquita", key: "maquita" },
     { label: "Bisagras pivotadas", key: "bisagras" },
     { label: "Cerraduras", key: "cerraduras" },
     { label: "Chupas", key: "chupas" },
@@ -48,7 +48,7 @@ export function All() {
                     // Filtrar los datos para que solo se muestren los de las categorías especificadas
                     const categoriasPermitidas = [
                         'batientes', 'divisiones', 'soportes', 'herramientas', 'brocas',
-                        'deslizantes', 'maquina', 'bisagras', 'cerraduras', 'chupas',
+                        'deslizantes', 'maquita', 'bisagras', 'cerraduras', 'chupas',
                         'discosv', 'fachadas', 'lijas', 'manijas', 'pasadores', 'adhesivos', 'fotocurados'
                     ];
                     const categoriaData = data.filter(item =>
