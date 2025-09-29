@@ -5,18 +5,17 @@ import CotizadorAdd from '../CotizadorAdd';
 const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryChange, selectedAccessories, useCalculoPrecios }) => {
     const {
         totalWidth,
-        totalHeight,
+       
         doubleHeight,
         doubleWidth,
         cuadHeight,
         cabezalastPrice,
-        sillarastPrice,
+     
         sillarAlfajiaastPrice,
         jambaastPrice,
         horizontalSuperiorastPrice,
         horizontalInferiorFijaastPrice,
-        horizontalInferiorMovilastPrice,
-        adaptadorReforzadoastPrice,
+ 
         traslapeastPrice,
         engancheastPrice,
         empaqueastPrice,
@@ -27,12 +26,9 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
         felpaPrice,
         totalFelpa,
         kitCierreastPrice,
-        cubetaAngeoPrice,
-        rodamiento80astPrice,
+    
         rodamiento40astPrice,
-        cajaDeflectoraPrice,
-        rodamientoNave22astPrice,
-        guiaSuperiorangeoPrice,
+    
     } = calculatedValues || {};
 
     return (
@@ -55,11 +51,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Cabezal:</strong></TableCell>
                             <TableCell>{totalWidth} mm</TableCell>
                             <TableCell>${cabezalastPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="3">
-                            <TableCell><strong>Sillar un Riel:</strong></TableCell>
-                            <TableCell>{totalWidth} mm</TableCell>
-                            <TableCell>${sillarastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                         <TableRow key="4">
                             <TableCell><strong>Sillar Alfajia un Riel:</strong></TableCell>
@@ -96,11 +87,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell>{totalWidth} mm (2)</TableCell>
                             <TableCell>${horizontalInferiorFijaastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow key="4">
-                            <TableCell><strong>Horizontal Inferior:</strong></TableCell>
-                            <TableCell>{totalWidth} mm (2)</TableCell>
-                            <TableCell>${horizontalInferiorMovilastPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
                         <TableRow key="5">
                             <TableCell><strong>Traslape:</strong></TableCell>
                             <TableCell>{cuadHeight} mm (4)</TableCell>
@@ -110,11 +96,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             <TableCell><strong>Enganche:</strong></TableCell>
                             <TableCell>{cuadHeight} mm (4)</TableCell>
                             <TableCell>${engancheastPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
-                            <TableCell><strong>Adaptador Reforzado:</strong></TableCell>
-                            <TableCell>{totalHeight} mm </TableCell>
-                            <TableCell>${adaptadorReforzadoastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -140,17 +121,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                             </TableCell>
                             <TableCell>${kitCierreastPrice?.toFixed(2)}</TableCell>
                         </TableRow>
-                        <TableRow key="3">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamiento80ast')}
-                                    onChange={() => onAccessoryChange('rodamiento80ast')}
-                                />
-                                <strong>Rodamiento 80 Kilos en Agujas</strong>
-                            </TableCell>
-                            <TableCell>${rodamiento80astPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
                         <TableRow key="4">
                             <TableCell>
                                 <input
@@ -161,50 +131,6 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, onAccessoryCha
                                 <strong>Rodamiento 40 kilos en Bolas</strong>
                             </TableCell>
                             <TableCell>${rodamiento40astPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="5">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('cubetaAngeo')}
-                                    onChange={() => onAccessoryChange('cubetaAngeo')}
-                                />
-                                <strong>Cubeta de Angeo Negra</strong>
-                            </TableCell>
-                            <TableCell>${cubetaAngeoPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="6">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('cajaDeflectora')}
-                                    onChange={() => onAccessoryChange('cajaDeflectora')}
-                                />
-                                <strong>Caja Deflectora</strong>
-                            </TableCell>
-                            <TableCell>${cajaDeflectoraPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="7">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('rodamientoNave22ast')}
-                                    onChange={() => onAccessoryChange('rodamientoNave22ast')}
-                                />
-                                <strong>Rodamiento 22 Kilos en Bolas Para Nave</strong>
-                            </TableCell>
-                            <TableCell>${rodamientoNave22astPrice?.toFixed(2)}</TableCell>
-                        </TableRow>
-                        <TableRow key="8">
-                            <TableCell>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedAccessories.includes('guiaSuperiorangeo')}
-                                    onChange={() => onAccessoryChange('guiaSuperiorangeo')}
-                                />
-                                <strong>Guia Superior Angeo Linea Universal</strong>
-                            </TableCell>
-                            <TableCell>${guiaSuperiorangeoPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

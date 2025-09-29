@@ -95,6 +95,8 @@ import { SistemaProyectantepage } from './pages/categorias/sistemaProyectante';
 import SistemaProyectantex from './pages/vidrios/sistemaProyectante/sistemaProyectantex';
 import UserDashboard from './admin/userDashboard';
 import CotiUser from './components/user-dashboard/cotitable';
+import Astral17xox from './pages/vidrios/astral17/astral17xox';
+import Astral17oxxo from './pages/vidrios/astral17/astral17oxxo';
 
 const cookies = new Cookies();
 
@@ -178,6 +180,8 @@ function App() {
           <Route path='cotizador/sistemas-vitral/astral-17' element={<ProtectedRoute element={<Astral17page />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-vitral/astral-17/xo-ox' element={<ProtectedRoute element={<Astral17 />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-vitral/astral-17/xx' element={<ProtectedRoute element={<Astral17xx />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-17/xox' element={<ProtectedRoute element={<Astral17xox />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-vitral/astral-17/oxxo' element={<ProtectedRoute element={<Astral17oxxo />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-vitral/kimbaya' element={<ProtectedRoute element={<Kimbayapage />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-vitral/kimbaya/xo-ox' element={<ProtectedRoute element={<Kymbaya />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-vitral/kimbaya/oxx-xxo-xxx' element={<ProtectedRoute element={<Kimbayaxxx />} allowedRole={['cotizador', 'administrador']} />} />

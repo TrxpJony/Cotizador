@@ -16,7 +16,7 @@ const ProductsPage = () => {
 				<div className='flex-1 overflow-auto sm:overscroll-none relative z-10'>
 					<header className='bg-white backdrop-blur-md shadow-lg border-b '>
 						<div className='max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8'>
-							<h1 className='text-2xl font-semibold text-gray-700'>Cotizaciones</h1>
+							<h1 className='text-2xl font-semibold text-gray-700'>Productos</h1>
 						</div>
 					</header>
 
