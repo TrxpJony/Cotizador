@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Card, CardBody, CardFooter, Image } from "@heroui/react";
+import { Card, CardBody, CardFooter } from "@heroui/react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@heroui/react";
 import BackButton from "../../components/common/backButton";
@@ -153,17 +153,33 @@ export function CatalogoSkylesd() {
                 onPress={() => navigate(`${item.ruta}`)}
                 className="nextui-card"
               >
-                <CardBody className="overflow-hidden p-4">
-                  <Image
-                    alt={item.title}
-                    className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
-                    radius="lg"
-                    shadow="sm"
-                    src={item.img}
-                    width="100%"
-                    height="auto"
-                  />
-                </CardBody>
+                 <CardBody className="overflow-hidden p-4">
+                                    {/* Imagen con formato 16:9, recortada sin deformar */}
+                                    <div 
+                                    className="shadow-md"
+                                        style={{
+                                            aspectRatio: "16/9",
+                                            width: "100%",
+                                            background: "#f3f3f3",
+                                            borderRadius: "0.5rem",
+                                            overflow: "hidden",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center"
+                                        }}
+                                    >
+                                        <img
+                                            src={item.img}
+                                            alt={item.title}
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                objectFit: "cover",
+                                                objectPosition: "center"
+                                            }}
+                                        />
+                                    </div>
+                                </CardBody>
                 <CardFooter className="text-lg md:text-base lg:text-sm justify-between p-2 px-4">
                   <b>{item.title}</b>
                 </CardFooter>

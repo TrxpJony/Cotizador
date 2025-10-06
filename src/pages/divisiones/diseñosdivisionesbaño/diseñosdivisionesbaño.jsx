@@ -164,15 +164,30 @@ export function DiseñoDivisionesBaño() {
                                 className="nextui-card"
                             >
                                 <CardBody className="overflow-hidden p-4">
-                                    <Image
-                                        alt={item.title}
-                                        className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover"
-                                        radius="lg"
-                                        shadow="sm"
-                                        src={item.img}
-                                        width="100%"
-                                        height="auto"
-                                    />
+                                    <div
+                                        className="shadow-md"
+                                        style={{
+                                            aspectRatio: '1 / 1',
+                                            width: '100%',
+                                            background: '#f3f3f3',
+                                            borderRadius: '1rem',
+                                            overflow: 'hidden',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <img
+                                            src={item.img}
+                                            alt={item.title}
+                                            style={{
+                                                width: '100%',
+                                                height: '100%',
+                                                objectFit: 'cover',
+                                                objectPosition: 'center',
+                                            }}
+                                        />
+                                    </div>
                                 </CardBody>
                                 <b className="overflow-hidden p-2">{item.title}</b>
                             </Card>
