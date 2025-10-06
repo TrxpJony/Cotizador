@@ -164,10 +164,10 @@ export function VitrinasVista() {
                                 onPress={() => handleCardPress(item)}
                                 className="nextui-card"
                             >
-                                      <CardBody className="overflow-hidden p-4">
+                                <CardBody className="overflow-hidden p-4">
                                     {/* Imagen con formato 16:9, recortada sin deformar */}
-                                    <div 
-                                    className="shadow-md"
+                                    <div
+                                        className="shadow-md"
                                         style={{
                                             aspectRatio: "16/9",
                                             width: "100%",

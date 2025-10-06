@@ -191,8 +191,8 @@ export function All() {
                             >
                                 <CardBody className="overflow-hidden p-4">
                                     {/* Imagen con formato 16:9, recortada sin deformar */}
-                                    <div 
-                                    className="shadow-md"
+                                    <div
+                                        className="shadow-md"
                                         style={{
                                             aspectRatio: "16/9",
                                             width: "100%",
