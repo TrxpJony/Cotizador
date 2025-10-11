@@ -6,6 +6,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
 
     const {
         escuadrasCocinaPrice,
+        PER_B5NPrice,
         manijaPuertaCocinaPrice,
         marcoCocina,
         vidrioPrice, // Agregamos el precio del vidrio
@@ -65,6 +66,19 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                         </TableRow>
                         <TableRow key="3">
                             <TableCell>
+                                  <input
+                                    type="checkbox"
+                                    checked={selectedAccessories.includes('PER_B5N')}
+                                    onChange={() => {
+                                        onAccessoryChange('PER_B5N');
+                                    }}
+                                />
+                                <strong>Perforacion especial para bisagra</strong>
+                            </TableCell>
+                             <TableCell>${PER_B5NPrice?.toFixed(2)}</TableCell>
+                        </TableRow>
+                        <TableRow key="4">
+                            <TableCell>
                                 <input
                                     type="checkbox"
                                     checked={selectedAccessories.includes('manijaPuertaCocina')}
@@ -72,7 +86,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                                         onAccessoryChange('manijaPuertaCocina');
                                     }}
                                 />
-                                <strong>Manija</strong>
+                                <strong>Perfil manija 4770</strong>
                             </TableCell>
                             <TableCell>${manijaPuertaCocinaPrice?.toFixed(2)}</TableCell>
                         </TableRow>
@@ -119,6 +133,7 @@ DetalleTablasCocinas.propTypes = {
     calculatedValues: PropTypes.shape({
         marcoCocinaPrice: PropTypes.number,
         escuadrasCocinaPrice: PropTypes.number,
+        PER_B5NPrice: PropTypes.number,
         perfilNegroCocinaPrice: PropTypes.number,
     }),
     dimensions: PropTypes.object.isRequired,

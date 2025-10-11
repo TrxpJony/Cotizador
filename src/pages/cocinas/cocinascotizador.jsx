@@ -67,11 +67,13 @@ const CocinasCotizador = () => {
             <label className='text-gray-700 font-bold mb-2'>Tipo de perfil de marco:</label>
             <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg' value={selectedPerfil} onChange={(e) => setSelectedPerfil(e.target.value)}>
               <option value="sinPerfil">Seleccionar</option>
-              <option value="MAR_PEQ">Perfil de aleta pequeña</option>
-              <option value="MAR_ACN">Perfil de aleta ancha</option>
+              <option value="MAR_PEQ">Perfil 4771 aleta pequeña</option>
+              <option value="MAR_ACN">Perfil 2798 aleta ancha</option>
               <option value="MAR_N5M">Perfil 5103 mate</option>
               <option value="MAR_N5N">Perfil 5103 negro</option>
-              <option value="MAR_N5C">Perfil 5103 champaña</option>
+              <option value="MAR_N5C">Perfil 5103 arena</option>
+              <option value="MAR_N5B">Perfil 5103 bronce</option>
+              <option value="MAR_N5D">Perfil 5103 dorado</option>
             </select>
           </div>
           <div className='mb-2'>
@@ -89,7 +91,7 @@ const CocinasCotizador = () => {
               <option value="VI4_ESM">Vidrio Esmerilado 4 mm</option>
               <option value="VI5_ESM">Vidrio Esmerilado 5 mm</option>
               <option value="LAM_SEG">Vidrio laminado 3 + 3 blanco coco</option>
-              <option value="ESP_BRO">Espejo bronce reflectivo 4 mm</option>
+              <option value="ESP_BRO">Espejo bronce 4 mm</option>
             </select>
             <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           </div>

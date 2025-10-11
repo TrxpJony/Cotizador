@@ -72,7 +72,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
     }
 
     // Se suma siempre el precio de los accesorios al total, aunque width y height sean 
-    const total =  accesoriosPrice + manoDeObra + vidrioPrice + marcoPrice;
+    const total = accesoriosPrice + manoDeObra + vidrioPrice + marcoPrice;
 
     setTotalPrice(total);
     setCalculatedValues({
@@ -85,6 +85,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       area,
       vidrioPrice,
       marcoPrice,
+      PER_B5NPrice: memoizedPrices.PER_B5N ? Number(memoizedPrices.PER_B5N) : 0,
       escuadrasCocinaPrice: memoizedPrices.escuadrasCocina ? Number(memoizedPrices.escuadrasCocina) : 0,
       manijaPuertaCocinaPrice: memoizedPrices.manijaPuertaCocina ? (Number(memoizedPrices.manijaPuertaCocina) * (totalHeight / 1000)) : 0,
 
