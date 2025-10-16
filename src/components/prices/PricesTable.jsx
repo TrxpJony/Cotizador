@@ -25,7 +25,8 @@ const PricesTable = ({ searchTerm }) => {
 		const filtered = prices.filter(
 			(prices) =>
 				prices.nombre.toLowerCase().includes(searchTerm) ||
-				prices.descripcion.toLowerCase().includes(searchTerm)
+				prices.descripcion.toLowerCase().includes(searchTerm) ||
+				prices.id.toString().includes(searchTerm)
 		);
 		setFilteredPrices(filtered);
 		setCurrentPage(1); // Resetear a la primera página al buscar
@@ -130,7 +131,10 @@ const PricesTable = ({ searchTerm }) => {
 						<thead>
 							<tr>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
-									Nombre
+									ID
+								</th>
+								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
+									Variable
 								</th>
 								<th className='px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wider'>
 									Descripción
@@ -152,6 +156,9 @@ const PricesTable = ({ searchTerm }) => {
 									animate={{ opacity: 1 }}
 									transition={{ duration: 0.3 }}
 								>
+									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
+										{price.id}
+									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-600'>
 										{price.nombre}
 									</td>
