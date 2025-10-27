@@ -170,9 +170,9 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
     return (
         <>
             <div className="parts-list">
-                <Table aria-label="Tabla Vidrio">
+                <Table aria-label="Tabla Espejo">
                     <TableHeader>
-                        <TableColumn><h1>Vidrio</h1></TableColumn>
+                        <TableColumn><h1>Espejo</h1></TableColumn>
                         <TableColumn></TableColumn>
                         <TableColumn></TableColumn>
                     </TableHeader>
@@ -183,7 +183,7 @@ const DetalleTablas = ({ calculatedValues, dimensions, onAddDoor, selectedAccess
                             <TableCell><strong><h2>Precio</h2></strong></TableCell>
                         </TableRow>
                         <TableRow key="2">
-                            <TableCell><strong>Vidrio:</strong></TableCell>
+                            <TableCell><strong>Espejo:</strong></TableCell>
                             <TableCell> {totalArea?.toFixed(2)} m²</TableCell>
                             <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>

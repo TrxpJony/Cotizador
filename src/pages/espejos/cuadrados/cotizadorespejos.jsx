@@ -79,9 +79,10 @@ const CotizadorEspejos = () => {
                         <EnviarDimensiones onDimensionsChange={handleDimensionsChange} />
                     </div>
                     <div className='mb-2'>
-                        <label className='text-gray-700 font-bold mb-2'>Tipo de vidrio</label>
+                        <label className='text-gray-700 font-bold mb-2'>Tipo de espejo</label>
                         <select className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  hover:bg-default-200 focus:outline-none" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
-                            <option value="sinVidrio">Sin Vidrio</option>
+                            <option value="sinVidrio">Sin espejo</option>
+                            <option value="Clear4mm">Clear 4 mm</option>
                             <option value="Orion4mm">Orion 4 mm</option>
                             <option value="Radiant4mm">Radiant 4 mm</option>
                             <option value="PaloRosa4mm">Palo Rosa 4 mm</option>
