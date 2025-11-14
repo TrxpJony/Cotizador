@@ -13,7 +13,7 @@ const CotizadorEspejos = () => {
     const [selectedGlass, setSelectedGlass] = useState('sinVidrio');
     const [selectedCenefa, setSelectedCenefa] = useState('sinCenefa');
     const [selectedPerfil, setselectedPerfil] = useState('sinPerfil'); // State for selected profile
-    const [selectedCut, setSelectedCut] = useState('alCorte')
+    const [selectedCut, setSelectedCut] = useState('alCorte');
 
     const [espejoImage, setEspejoImage] = useState("https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744034207/img_cotizadores/e14xp7uhsscn62incxkg.png");
 

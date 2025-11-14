@@ -65,6 +65,13 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const tornillosPrice = (memoizedPrices.tornillos ? Number(memoizedPrices.tornillos) : 0) * 60;
         const siliconaPrice = (memoizedPrices.silicona ? Number(memoizedPrices.silicona) : 0) * 1;
 
+        const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
+            if (acc === "rodamientoSimple744") {
+                return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 4 : 0);
+            }
+            return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
+        }, 0);
+
         const accessoriosPrice = memoizedAccessories.reduce((sum, acc) => sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0), 0);
         const vidrioPrice = (glassUnitPrice * area);
         const AlfajiaPriceRaw = alfajiaPrice * totalWidth / 1000;
@@ -72,7 +79,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
         const total =
             cabezal744Price + sillar744Price + jamba744Price +
             horizontalInferior744Price + horizontalSuperior744Price +
-            traslape744Price + enganche744Price + empaque744Price + felpaPrice +
+            traslape744Price + enganche744Price + empaque744Price + felpaPrice + accesoriosPrice +
             tornillosPrice + siliconaPrice + vidrioPrice + accessoriosPrice + AlfajiaPriceRaw;
 
         setTotalPrice(total);

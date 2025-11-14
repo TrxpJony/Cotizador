@@ -67,10 +67,13 @@ const CocinasCotizador = () => {
             <label className='text-gray-700 font-bold mb-2'>Tipo de perfil de marco:</label>
             <select className='mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg' value={selectedPerfil} onChange={(e) => setSelectedPerfil(e.target.value)}>
               <option value="sinPerfil">Seleccionar</option>
-              <option value="MAR_PEQ">Perfil 4771 aleta pequeña</option>
-              <option value="MAR_ACN">Perfil 2798 aleta ancha</option>
+              <option value="MAR_PEQ">Perfil 4771 negro / mate</option>
+              <option value="MAR_PED">Perfil 4771 dorado</option>
+              <option value="MAR_PEA">Perfil 4771 arena</option>
+              <option value="MAR_ACN">Perfil 2798 negro / mate</option>
               <option value="MAR_N5M">Perfil 5103 mate</option>
               <option value="MAR_N5N">Perfil 5103 negro</option>
+              <option value="MAR_N5B">Perfil 5103 blanco</option>
               <option value="MAR_N5C">Perfil 5103 arena</option>
               <option value="MAR_N5B">Perfil 5103 bronce</option>
               <option value="MAR_N5D">Perfil 5103 dorado</option>
@@ -82,9 +85,9 @@ const CocinasCotizador = () => {
               <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
               <option value="TRA_NOR">Vidrio incoloro 4 mm</option>
               <option value="VI5_INC">Vidrio incoloro templado 5 mm</option>
-              <option value="COL_NOR">Vidrio bronce - gris 4 mm</option>
-              <option value="COL_5MM">Vidrio bronce - gris 5 mm</option>
-              <option value="COL_TEM">Vidrio bronce - gris templado 5 mm</option>
+              <option value="COL_NOR">Vidrio bronce / gris 4 mm</option>
+              <option value="COL_5MM">Vidrio bronce / gris 5 mm</option>
+              <option value="COL_TEM">Vidrio bronce / gris templado 5 mm</option>
               <option value="BRO_REF">Vidrio bronce reflectivo 4 mm</option>
               <option value="BIE_NOR">Vidrio bienestar 5 mm</option>
               <option value="BIE_TEM">Vidrio bienestar templado 5 mm</option>

@@ -97,6 +97,7 @@ import UserDashboard from './admin/userDashboard';
 import CotiUser from './components/user-dashboard/cotitable';
 import Astral17xox from './pages/vidrios/astral17/astral17xox';
 import Astral17oxxo from './pages/vidrios/astral17/astral17oxxo';
+import Sistema744xx from './pages/vidrios/sistema744/sistema744xx';
 
 const cookies = new Cookies();
 
@@ -201,6 +202,7 @@ function App() {
           <Route path='cotizador/sistemas-aluminark/sistema-744' element={<ProtectedRoute element={<Sistema744page />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-aluminark/sistema-744/xo-ox' element={<ProtectedRoute element={<Sistema744 />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-aluminark/sistema-744/xox' element={<ProtectedRoute element={<Sistema744xox />} allowedRole={['cotizador', 'administrador']} />} />
+          <Route path='cotizador/sistemas-aluminark/sistema-744/xx' element={<ProtectedRoute element={<Sistema744xx />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025' element={<ProtectedRoute element={<Sistema8025page />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025/xo-ox' element={<ProtectedRoute element={<Sistema8025 />} allowedRole={['cotizador', 'administrador']} />} />
           <Route path='cotizador/sistemas-aluminark/sistema-8025/oxxo' element={<ProtectedRoute element={<Sistema8025oxxo />} allowedRole={['cotizador', 'administrador']} />} />

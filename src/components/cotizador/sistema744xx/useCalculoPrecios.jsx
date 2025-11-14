@@ -66,7 +66,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
 
     const accesoriosPrice = memoizedAccessories.reduce((sum, acc) => {
       if (acc === "rodamientoSimple744") {
-        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 4 : 0);
+        return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) * 2 : 0);
       }
       return sum + (memoizedPrices[acc] ? Number(memoizedPrices[acc]) : 0);
     }, 0);
@@ -105,7 +105,7 @@ const useCalculoPrecios = ({ width, height }, selectedAccessories = [], selected
       vidrioPrice,
       AlfajiaPriceRaw,
       kitCierre744Price: memoizedPrices.kitCierre744 ? Number(memoizedPrices.kitCierre744) : 0,
-      rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) * 4 : 0,
+      rodamientoSimple744Price: memoizedPrices.rodamientoSimple744 ? Number(memoizedPrices.rodamientoSimple744) * 2 : 0,
 
     });
   }, [width, height, memoizedPrices, memoizedAccessories, selectedGlass, selectedAlfajia]);
