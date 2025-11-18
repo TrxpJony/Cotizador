@@ -108,7 +108,7 @@ const DetalleTablasCocinas = ({ calculatedValues, dimensions, onAddDoor, onAcces
                         </TableRow>
                         <TableRow key="2">
                             <TableCell><strong>Vidrio:</strong></TableCell>
-                            <TableCell>{area?.toFixed(2)} m²</TableCell>
+                            <TableCell>{area?.toFixed(3)} m²</TableCell>
                             <TableCell>${vidrioPrice?.toFixed(2)}</TableCell>
                         </TableRow>
                     </TableBody>
