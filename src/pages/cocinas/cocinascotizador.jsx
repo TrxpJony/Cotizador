@@ -73,7 +73,7 @@ const CocinasCotizador = () => {
               <option value="MAR_ACN">Perfil 2798 negro / mate</option>
               <option value="MAR_N5M">Perfil 5103 mate</option>
               <option value="MAR_N5N">Perfil 5103 negro</option>
-              <option value="MAR_N5W">Perfil 5103 blanco</option>
+              <option value="MAR_M5W">Perfil 5103 blanco</option>
               <option value="MAR_N5C">Perfil 5103 arena</option>
               <option value="MAR_N5B">Perfil 5103 bronce</option>
               <option value="MAR_N5D">Perfil 5103 dorado</option>
