@@ -73,7 +73,7 @@ const CocinasCotizador = () => {
               <option value="MAR_ACN">Perfil 2798 negro / mate</option>
               <option value="MAR_N5M">Perfil 5103 mate</option>
               <option value="MAR_N5N">Perfil 5103 negro</option>
-              <option value="MAR_N5B">Perfil 5103 blanco</option>
+              <option value="MAR_N5W">Perfil 5103 blanco</option>
               <option value="MAR_N5C">Perfil 5103 arena</option>
               <option value="MAR_N5B">Perfil 5103 bronce</option>
               <option value="MAR_N5D">Perfil 5103 dorado</option>
@@ -95,6 +95,7 @@ const CocinasCotizador = () => {
               <option value="VI5_ESM">Vidrio Esmerilado 5 mm</option>
               <option value="LAM_SEG">Vidrio laminado 3 + 3 blanco coco</option>
               <option value="ESP_BRO">Espejo bronce 4 mm</option>
+              <option value="ESP_GRI">Espejo gris 4 mm</option>
             </select>
             <h2 className="text-right text-xl font-bold">${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
           </div>
