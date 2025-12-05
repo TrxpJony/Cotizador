@@ -84,7 +84,8 @@ const CocinasCotizador = () => {
             <select className="mt-2 border rounded-2xl w-full py-2 px-3 text-gray-700 font-semibold mb-2 hover:bg-default-200 focus:outline-none shadow-lg" value={selectedGlass} onChange={(e) => setSelectedGlass(e.target.value)}>
               <option value="sinVidrio">Sin Vidrio</option> {/* Nueva opción */}
               <option value="TRA_NOR">Vidrio incoloro 4 mm</option>
-              <option value="VI5_INC">Vidrio incoloro templado 5 mm</option>
+              <option value="VI5_INC">Vidrio incoloro 5 mm</option>
+              <option value="VIT_INC">Vidrio incoloro templado 5 mm</option>
               <option value="COL_NOR">Vidrio bronce / gris 4 mm</option>
               <option value="COL_5MM">Vidrio bronce / gris 5 mm</option>
               <option value="COL_TEM">Vidrio bronce / gris templado 5 mm</option>
