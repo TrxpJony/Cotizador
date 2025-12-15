@@ -15,9 +15,9 @@ const CotizadorEspejos = () => {
     const [selectedPerfil, setselectedPerfil] = useState('sinPerfil'); // State for selected profile
     const [selectedCut, setSelectedCut] = useState('alCorte');
 
-    const [espejoImage, setEspejoImage] = useState("https://res.cloudinary.com/dtxmsbsjd/image/upload/v1744124771/img_cotizadores/woqznzgsvqwczpelrylj.png");
+    const [espejoImage, setEspejoImage] = useState("../../img/conforma.jpg");
 
-    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil);
+    const { totalPrice, calculatedValues } = useCalculoPrecios(dimensions, selectedAccessories, selectedGlass, selectedCenefa, selectedPerfil, selectedCut);
 
     const handleDimensionsChange = (newDimensions) => {
         setDimensions(newDimensions);
@@ -97,6 +97,7 @@ const CotizadorEspejos = () => {
 
                         <select className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:ring-1 focus:ring-cyan-500 text-gray-700  mb-2 hover:bg-default-200 focus:outline-none" value={selectedCenefa} onChange={(e) => setSelectedCenefa(e.target.value)}>
                             <option value="sinCenefa">Sin cenefa</option>
+                            <option value="CEN_BOT">Boton</option>
                             <option value="CEN_FAC">Facil</option>
                             <option value="CEN_INT">Intermedia</option>
                             <option value="CEN_DIF">Dificil</option>
